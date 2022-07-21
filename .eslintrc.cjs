@@ -17,6 +17,11 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-
+    'unusedimport': "warn",
+    'no-console': import.meta.env.DEV ? 'warn' : 'off',
+    'no-debugger': import.meta.env.DEV ? 'warn' : 'off',
+    'no-unused-vars': 'warn',
+    'no-empty': 'warn',
+    'vue/multi-word-component-names': 'off',
   }
 }
