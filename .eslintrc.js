@@ -1,13 +1,6 @@
-/* eslint-env node */
-require("@rushstack/eslint-patch/modern-module-resolution");
-
 module.exports = {
-  "root": true,
-  "extends": [
-    "plugin:vue/vue3-essential",
-    "eslint:recommended",
-    "@vue/eslint-config-prettier"
-  ],
+  root: true,
+  extends: ['plugin:vue/vue3-essential', 'eslint:recommended', '@vue/eslint-config-prettier'],
   env: {
     browser: true,
     es2021: true,
@@ -17,11 +10,11 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'unusedimport': "warn",
+    unusedimport: 'warn',
     'no-console': import.meta.env.DEV ? 'warn' : 'off',
     'no-debugger': import.meta.env.DEV ? 'warn' : 'off',
     'no-unused-vars': 'warn',
     'no-empty': 'warn',
     'vue/multi-word-component-names': 'off',
-  }
-}
+  },
+};
