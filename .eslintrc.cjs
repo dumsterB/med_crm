@@ -7,5 +7,16 @@ module.exports = {
     "plugin:vue/vue3-essential",
     "eslint:recommended",
     "@vue/eslint-config-prettier"
-  ]
+  ],
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  rules: {
+
+  }
 }
