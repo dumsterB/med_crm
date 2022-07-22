@@ -6,7 +6,6 @@ import router from './router';
 import { ElSelect, ElOption } from 'element-plus';
 import 'element-plus/es/components/select/style/css';
 import 'element-plus/es/components/option/style/css';
-import './assets/main.css';
 
 import apiPlugin from '@/plugins/api.plugin.js';
 

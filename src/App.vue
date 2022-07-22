@@ -1,29 +1,15 @@
 <script>
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterView } from 'vue-router';
 import { ElConfigProvider } from 'element-plus';
-import HelloWorld from './components/HelloWorld.vue';
 
 export default {
   name: 'App',
-  components: { RouterLink, RouterView, ElConfigProvider, HelloWorld },
+  components: { RouterView, ElConfigProvider },
 };
 </script>
 
 <template>
   <ElConfigProvider>
-    <header>
-      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-      <div class="wrapper">
-        <HelloWorld msg="You did it!" />
-
-        <nav>
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
-        </nav>
-      </div>
-    </header>
-
     <RouterView />
   </ElConfigProvider>
 </template>
