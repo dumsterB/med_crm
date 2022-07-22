@@ -17,7 +17,11 @@ instance.removeToken = () => {
 
 instance.interceptors.request.use(
   config => {
-    return config;
+    // Удаляем лишние передние символы '/'
+    return {
+      ...config,
+      url: config.url.replace(/^\/*(.*)/gi, (str, path) => `/${path}`),
+    };
   },
   error => {
     return Promise.reject(error);
