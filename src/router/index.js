@@ -7,7 +7,6 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      // component: ,
       redirect: LOGIN_ROUTE.path,
     },
 
@@ -15,4 +14,4 @@ const router = createRouter({
   ],
 });
 
-export default router;
+export { router as Router };
