@@ -1,9 +1,10 @@
 <script>
+import { getFileNameByMetaUrl } from '@/utils/vite.util';
 import { RouterView } from 'vue-router';
 import { ElConfigProvider } from 'element-plus';
 
 export default {
-  name: 'App',
+  name: getFileNameByMetaUrl(import.meta.url),
   components: { RouterView, ElConfigProvider },
 };
 </script>
