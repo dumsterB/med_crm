@@ -7,11 +7,11 @@ import { ElSelect, ElOption } from 'element-plus';
 import 'element-plus/es/components/select/style/css';
 import 'element-plus/es/components/option/style/css';
 
-import apiPlugin from '@/plugins/api.plugin.js';
+import { ApiPlugin } from '@/plugins/api.plugin.js';
 
 createApp(App)
   .use(router)
-  .use(apiPlugin)
+  .use(ApiPlugin)
   .component('ElSelect', ElSelect)
   .component('ElOption', ElOption)
   .mount('#app');
