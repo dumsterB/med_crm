@@ -15,4 +15,14 @@ export default defineConfig({
     host: 'localhost',
     port: 3030,
   },
+
+  css: {
+    devSourcemap: true,
+    preprocessorOptions: {
+      scss: {
+        // Глобальные SCSS, переменная, миксины и т.д.
+        additionalData: '@import "./src/assets/styles/index.scss";',
+      },
+    },
+  },
 });
