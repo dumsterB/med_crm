@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import { Router } from './router';
+import { Store } from '@/store';
 
 // Импоритируем вручную, иначе выкидывает ошибку при использовании ElConfigProvider
 import { ElSelect, ElOption } from 'element-plus';
@@ -11,6 +12,7 @@ import { ApiPlugin } from '@/plugins/api.plugin.js';
 
 createApp(App)
   .use(Router)
+  .use(Store)
   .use(ApiPlugin)
   .component('ElSelect', ElSelect)
   .component('ElOption', ElOption)
