@@ -1,5 +1,5 @@
-import V_Login from '@/views/auth/V_Login/index.vue';
-import V_SignUp from '@/views/auth/V_SignUp/index.vue';
+import V_Login from '@/views/auth/VLogin/index.vue';
+import V_SignUp from '@/views/auth/VSignUp/index.vue';
 
 export const LOGIN_ROUTE = {
   name: 'AUTH_LOGIN',
