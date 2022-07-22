@@ -10,9 +10,8 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    unusedimport: 'warn',
-    'no-console': import.meta.env.DEV ? 'warn' : 'off',
-    'no-debugger': import.meta.env.DEV ? 'warn' : 'off',
+    'no-console': 'warn',
+    'no-debugger': 'warn',
     'no-unused-vars': 'warn',
     'no-empty': 'warn',
     'vue/multi-word-component-names': 'off',
