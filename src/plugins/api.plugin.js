@@ -1,4 +1,4 @@
-import ApiService from '@/services/api.service.js';
+import { ApiService } from '@/services/api.service.js';
 
 export const ApiPlugin = {
   install: app => {
