@@ -1,6 +1,7 @@
 import { ApiService } from '@/services/api.service';
 import { Router } from '@/router';
 import { LOGIN_ROUTE } from '@/router/auth.routes';
+import { parseJwt } from '@/utils/jwt.util';
 
 export default {
   namespaced: true,
@@ -26,7 +27,7 @@ export default {
   actions: {
     /**
      * @param commit
-     * @param {string} login
+     * @param {string} email
      * @param {string} password
      * @return {Promise<void>}
      */
@@ -38,11 +39,18 @@ export default {
       commit('LOGIN', { user: { id: 123, email: 'email' } });
     },
 
-    async checkAndSetUserFromClientStorage({ commit }) {
+    async checkAndSetUserAndTokenFromClientStorage({ commit }) {
       const access_token = localStorage.getItem('access_token');
-      if (access_token) ApiService.setToken(access_token);
+      if (!access_token) return;
 
-      // commit('LOGIN', {user: user})
+      if (access_token) {
+        const payload = parseJwt(access_token);
+
+        // Если осталось меньше 10 минут не логиним
+        if (payload.exp <= payload.iat + 1000 * 60 * 10) return;
+        ApiService.setToken(access_token);
+        commit('SET_IS_AUTHORIZED', true);
+      }
     },
 
     logout({ commit }) {
