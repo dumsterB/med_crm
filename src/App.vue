@@ -10,9 +10,11 @@ export default {
 </script>
 
 <template>
-  <ElConfigProvider>
-    <RouterView />
-  </ElConfigProvider>
+  <div class="app">
+    <ElConfigProvider>
+      <RouterView />
+    </ElConfigProvider>
+  </div>
 </template>
 
 <style src="./App.scss" lang="scss"></style>
