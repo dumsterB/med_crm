@@ -14,6 +14,12 @@ instance.setToken = token => {
 instance.removeToken = () => {
   delete instance.defaults.headers.common.Authorization;
 };
+instance.setLocale = locale => {
+  instance.defaults.headers.common.Lang = locale;
+};
+instance.removeLocale = () => {
+  delete instance.defaults.headers.common.Lang;
+};
 
 instance.interceptors.request.use(
   config => {
