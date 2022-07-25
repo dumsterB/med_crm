@@ -1,7 +1,7 @@
 import { ApiService } from '@/services/api.service';
 import { Router } from '@/router';
 import { LOGIN_ROUTE } from '@/router/auth.routes';
-import { parseJwt } from '@/utils/jwt.util';
+import { parseJwtToken } from '@/utils/jwt.util';
 
 export default {
   namespaced: true,
@@ -44,7 +44,7 @@ export default {
       if (!access_token) return;
 
       if (access_token) {
-        const payload = parseJwt(access_token);
+        const payload = parseJwtToken(access_token);
 
         // Если осталось меньше 10 минут не логиним
         if (payload.exp <= payload.iat + 1000 * 60 * 10) return;
