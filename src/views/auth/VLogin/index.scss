@@ -1,0 +1,15 @@
+.v-login {
+  flex: 1;
+  display: flex;
+  //flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  gap: 60px;
+  padding: 5vw;
+
+  &__image,
+  &__content {
+    flex: 1;
+    max-width: 50%;
+  }
+}

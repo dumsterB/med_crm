@@ -1,20 +1,20 @@
 <template>
   <LayoutAuth>
     <div class="v-login">
-      <div>{{ $t('Login') }}</div>
+      <img class="v-login__image" src="@/assets/images/doctors.png" alt="doctors" />
+      <LoginForm class="v-login__content" />
     </div>
   </LayoutAuth>
 </template>
-
 <style lang="scss" src="./index.scss" />
-<i18n src="./index.locales.json" />
 
 <script>
 import { getParentFolderNameByMetaUrl } from '@/utils/vite.util.js';
 import LayoutAuth from '@/components/layouts/LayoutAuth/index.vue';
+import LoginForm from '@/components/LoginForm/index.vue';
 
 export default {
   name: getParentFolderNameByMetaUrl(import.meta.url),
-  components: { LayoutAuth },
+  components: { LayoutAuth, LoginForm },
 };
 </script>
