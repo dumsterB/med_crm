@@ -1,5 +1,6 @@
 import { I18nPlugin } from '@/plugins/i18n.plugin';
 import { DEFAULT_LOCALE, LOCALES } from '@/config/i18n.config';
+import { ApiService } from '@/services/api.service';
 
 export class I18nService {
   static locales = Object.keys(LOCALES).map(key => LOCALES[key]);
@@ -26,7 +27,9 @@ export class I18nService {
       console.error(`${locale} - incorrect locale.\nSupported locales - ${this.locales.join(',')}`);
       locale = DEFAULT_LOCALE;
     }
+
     I18nPlugin.global.locale = locale;
+    ApiService.setLocale(locale);
   }
   static setLocaleFromStorage() {
     this.setLocale(localStorage.getItem(this.LOCALE_STORAGE_KEY) || DEFAULT_LOCALE);
