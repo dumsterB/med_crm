@@ -9,7 +9,7 @@
   </ElContainer>
 </template>
 
-<style lang="scss" src="index.scss" />
+<style lang="scss" src="./index.scss" />
 
 <script>
 import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
