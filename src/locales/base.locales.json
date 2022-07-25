@@ -1,0 +1,16 @@
+{
+  "ru": {
+    "Base": {
+      "Create": "Создать",
+      "Login": "Логин",
+      "Password": "Пароль"
+    }
+  },
+  "uz": {
+    "Base": {
+      "Create": "Yaratish",
+      "Login": "Login",
+      "Password": "Parol"
+    }
+  }
+}
