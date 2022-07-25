@@ -18,7 +18,7 @@ export default {
 
   mounted() {
     I18nService.setLocaleFromStorage();
-    this.$store.dispatch('auth/checkAndSetUserFromClientStorage');
+    this.$store.dispatch('auth/checkAndSetUserAndTokenFromClientStorage');
   },
 };
 </script>
