@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <ElConfigProvider>
+    <ElConfigProvider size="large">
       <RouterView />
     </ElConfigProvider>
   </div>
