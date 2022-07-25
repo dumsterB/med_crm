@@ -1,0 +1,10 @@
+{
+  "ru": {
+    "ForgotPassword": "Забыли пароль?",
+    "LogIn": "Войти"
+  },
+  "uz": {
+    "ForgotPassword": "Parolni unutdingizmi?",
+    "LogIn": "Kirish"
+  }
+}

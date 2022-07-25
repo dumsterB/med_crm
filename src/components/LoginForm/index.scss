@@ -1,0 +1,24 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  &__image {
+    margin-bottom: 10px;
+    max-width: 80%;
+    align-self: center;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    & > a {
+      display: flex;
+    }
+    .el-button {
+      flex: 1;
+    }
+  }
+}
