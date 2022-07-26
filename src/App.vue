@@ -3,18 +3,21 @@
     <ElConfigProvider size="large">
       <RouterView />
     </ElConfigProvider>
+
+    <SVG />
   </div>
 </template>
 
 <script>
 import { getFileNameByMetaUrl } from '@/utils/vite.util';
 import { RouterView } from 'vue-router';
-import { ElConfigProvider } from 'element-plus';
 import { I18nService } from '@/services/i18n.service';
+import { ElConfigProvider } from 'element-plus';
+import SVG from '@/components/SVG.vue';
 
 export default {
   name: getFileNameByMetaUrl(import.meta.url),
-  components: { RouterView, ElConfigProvider },
+  components: { RouterView, ElConfigProvider, SVG },
 
   mounted() {
     I18nService.setLocaleFromStorage();
