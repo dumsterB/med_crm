@@ -1,15 +1,42 @@
 .registry-menu {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: var(--padding-y); // form LayoutRegistry
   height: 100%;
-  padding: var(--padding-y) 0 var(--padding-y) var(--padding-x);
 
   &__logo {
-    max-width: 160px;
+    width: auto;
+    max-width: 50%;
+    height: auto;
+    max-height: 1.17em;
   }
 
   &__nav {
+    margin-top: var(--padding-y);
+  }
+  &-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      gap: 0.9em;
+      padding: 6px;
+      color: var(--text-secondary-color);
+      font-size: 1em;
+      font-weight: bold;
+      transition: 0.3s;
+
+      &:hover {
+        color: var(--primary-hover-color);
+      }
+    }
+    &__item.router-link-exact-active {
+      color: var(--primary-color);
+      border-right: 4px solid var(--primary-color);
+    }
   }
 
   &__actions {
