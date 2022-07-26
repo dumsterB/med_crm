@@ -1,9 +1,7 @@
 <template>
-  <LayoutAuth>
-    <div class="v-login">
-      <img class="v-login__image" src="@/assets/images/doctors.png" alt="doctors" />
-      <LoginForm class="v-login__content" />
-    </div>
+  <LayoutAuth content-class="v-login">
+    <img class="v-login__image" src="@/assets/images/doctors.png" alt="doctors" />
+    <LoginForm class="v-login__content" />
   </LayoutAuth>
 </template>
 <style lang="scss" src="./index.scss" />
