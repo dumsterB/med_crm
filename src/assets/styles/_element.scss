@@ -1,3 +1,22 @@
+html,
+body {
+  --el-color-primary: var(--primary-color);
+}
+.el-input {
+  --el-input-bg-color: var(--bg-inputs-color);
+}
+.el-button--primary {
+  &.is-plain {
+    --el-button-bg-color: var(--secondary-color);
+    --el-button-border-color: var(--secondary-color);
+  }
+
+  &:hover {
+    --el-button-hover-bg-color: var(--primary-hover-color);
+    --el-button-hover-border-color: var(--primary-hover-color);
+  }
+}
+
 .el-button + .el-button {
   margin-left: inherit;
 }
