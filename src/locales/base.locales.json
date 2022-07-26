@@ -3,6 +3,7 @@
     "Base": {
       "Create": "Создать",
       "Login": "Логин",
+      "Logout": "Выйти",
       "Password": "Пароль"
     }
   },
@@ -10,6 +11,7 @@
     "Base": {
       "Create": "Yaratish",
       "Login": "Login",
+      "Logout": "Chiqish",
       "Password": "Parol"
     }
   }
