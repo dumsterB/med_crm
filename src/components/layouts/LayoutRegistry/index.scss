@@ -1,0 +1,10 @@
+.layout-registry {
+  --padding-x: 25px;
+  --padding-y: 30px;
+  --padding-medium: var(--padding-y) var(--padding-x);
+
+  &__el-header {
+    padding: 0;
+    height: auto;
+  }
+}
