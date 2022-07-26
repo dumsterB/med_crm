@@ -11,7 +11,6 @@
     </div>
   </div>
 </template>
-<style lang="scss" src="./index.scss" />
 
 <script>
 import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
@@ -26,3 +25,5 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" src="./index.scss" />

@@ -7,7 +7,6 @@
       :value="locale.value" />
   </ElSelect>
 </template>
-<style lang="scss" src="./index.scss"></style>
 
 <script>
 import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
@@ -32,3 +31,5 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" src="./index.scss"></style>

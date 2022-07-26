@@ -4,9 +4,6 @@
     <ForgotPassword class="v-forgot-password__content" @action:prev="prevHandler" />
   </LayoutAuth>
 </template>
-<style lang="scss" src="./index.scss" />
-
-<i18n src="./index.locales.json" />
 
 <script>
 import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
@@ -24,3 +21,6 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" src="./index.scss" />
+<i18n src="./index.locales.json" />

@@ -20,10 +20,6 @@
     </div>
   </form>
 </template>
-<style lang="scss" src="./index.scss" />
-
-<i18n src="@/locales/base.locales.json" />
-<i18n src="./index.locales.json" />
 
 <script>
 import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
@@ -61,3 +57,7 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" src="./index.scss" />
+<i18n src="@/locales/base.locales.json" />
+<i18n src="./index.locales.json" />

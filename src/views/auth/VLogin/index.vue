@@ -4,7 +4,6 @@
     <LoginForm class="v-login__content" />
   </LayoutAuth>
 </template>
-<style lang="scss" src="./index.scss" />
 
 <script>
 import { getParentFolderNameByMetaUrl } from '@/utils/vite.util.js';
@@ -16,3 +15,5 @@ export default {
   components: { LayoutAuth, LoginForm },
 };
 </script>
+
+<style lang="scss" src="./index.scss" />
