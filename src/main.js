@@ -9,7 +9,6 @@ import { Store } from '@/store';
 import { ApiPlugin } from '@/plugins/api.plugin.js';
 import { I18nPlugin } from '@/plugins/i18n.plugin';
 
-import '@/assets/styles/element.scss';
-import '@/assets/styles/main.scss';
+import '@/assets/styles/index.scss';
 
 createApp(App).use(Router).use(Store).use(ApiPlugin).use(I18nPlugin).use(ElementPlus).mount('#app');
