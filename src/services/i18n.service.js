@@ -3,7 +3,7 @@ import { DEFAULT_LOCALE, LOCALES } from '@/config/i18n.config';
 import { ApiService } from '@/services/api.service';
 
 export class I18nService {
-  static locales = Object.keys(LOCALES).map(key => LOCALES[key]);
+  static locales = Object.keys(LOCALES).map((key) => LOCALES[key]);
   static LOCALE_STORAGE_KEY = 'LOCALE';
 
   static t(payload) {
@@ -19,6 +19,10 @@ export class I18nService {
     return I18nPlugin.global.tm(payload);
   }
 
+  /**
+   * возвращает язык из i18n экземпляра
+   * @return {Locale | WritableComputedRef<Locale>}
+   */
   static getLocale() {
     return I18nPlugin.global.locale;
   }
