@@ -1,14 +1,22 @@
 .v-login {
-  flex: 1;
+  position: relative;
+  top: -10px;
   display: flex;
-  //flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
   gap: 60px;
 
-  &__image,
+  &__image {
+    flex: 1;
+    max-width: 48%;
+    height: auto;
+
+    @include tablet {
+      display: none;
+    }
+  }
   &__content {
     flex: 1;
-    max-width: 50%;
+    max-width: 500px;
   }
 }
