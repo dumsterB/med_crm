@@ -1,12 +1,12 @@
 <template>
   <ElContainer class="layout-registry">
-    <ElAside> <RegistryMenu /> </ElAside>
+    <ElAside class="layout-registry__menu"> <RegistryMenu /> </ElAside>
 
     <ElContainer>
-      <ElHeader class="layout-registry__el-header">
+      <ElHeader class="layout-registry__header layout-registry__el-header">
         <RegistryHeader />
       </ElHeader>
-      <ElMain> <slot></slot> </ElMain>
+      <ElMain class="layout-registry__content"> <slot></slot> </ElMain>
     </ElContainer>
   </ElContainer>
 </template>

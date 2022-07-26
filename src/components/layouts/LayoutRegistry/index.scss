@@ -7,4 +7,17 @@
     padding: 0;
     height: auto;
   }
+
+  &__menu {
+    padding: var(--padding-y) 0 var(--padding-y) var(--padding-x);
+    background-color: var(--bg-color);
+  }
+  &__header {
+    padding: var(--padding-medium);
+    background-color: var(--bg-color);
+  }
+  &__content {
+    padding: var(--padding-medium);
+    background-color: var(--bg-container-color);
+  }
 }
