@@ -1,0 +1,24 @@
+.registry-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  height: 100%;
+  padding: var(--padding-y) 0 var(--padding-y) var(--padding-x);
+
+  &__logo {
+    max-width: 160px;
+  }
+
+  &__nav {
+  }
+
+  &__actions {
+    margin-top: auto;
+  }
+  &-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
