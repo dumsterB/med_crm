@@ -28,7 +28,7 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         // Глобальные SCSS, переменная, миксины и т.д.
-        additionalData: '@import "./src/assets/styles/index.scss";',
+        additionalData: '@import "./src/assets/styles/globals/index.scss";',
       },
     },
   },
