@@ -1,7 +1,28 @@
 .layout-auth {
   flex: 1;
   display: flex;
-  max-width: 1300px;
-  margin: 0 auto;
+  flex-direction: column;
+  gap: 10px;
   background-color: #faffff;
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    gap: 10px;
+
+    &__actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+  }
+  &__content {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 5vw 20px;
+  }
 }
