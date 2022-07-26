@@ -7,8 +7,8 @@
       :value="locale.value" />
   </ElSelect>
 </template>
-
 <style lang="scss" src="./index.scss"></style>
+
 <script>
 import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
 import { I18nService } from '@/services/i18n.service';
