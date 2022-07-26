@@ -2,9 +2,7 @@ import axios from 'axios';
 
 const instance = axios.create({
   mode: 'no-cors',
-  baseURL: 'http://stage.zordoc.uz/api/mis/',
-  // TODO: проблема с переменными окружения
-  // baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     'Content-Type': 'application/json;charset=utf-8',
   },
