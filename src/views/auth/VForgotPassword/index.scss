@@ -1,0 +1,21 @@
+.v-forgot-password {
+  position: relative;
+  top: -10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 40px;
+
+  &__image {
+    flex: 1;
+    max-width: 48%;
+
+    @include tablet {
+      display: none;
+    }
+  }
+  &__content {
+    max-width: 26em;
+  }
+}
