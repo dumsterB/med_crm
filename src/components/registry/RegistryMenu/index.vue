@@ -5,16 +5,24 @@
     <nav class="registry-menu__nav registry-menu-nav">Nav</nav>
 
     <div class="registry-menu__actions registry-menu-actions">
-      <ElButton link @click="logout"> {{ $t('Base.Logout') }} </ElButton>
+      <ElButton link @click="logout">
+        <template #icon>
+          <UiIcon :icon="$options.icons.LOGOUT" />
+        </template>
+
+        {{ $t('Base.Logout') }}
+      </ElButton>
     </div>
   </div>
 </template>
 
 <script>
 import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
+import * as icons from '@/enums/icons.enum.js';
 
 export default {
   name: getParentFolderNameByMetaUrl(import.meta.url),
+  icons: icons,
   methods: {
     logout() {
       this.$store.dispatch('auth/logout');

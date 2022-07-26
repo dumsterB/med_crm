@@ -1,5 +1,6 @@
-import VDashboard from '@/views/registry/VDashboard/index.vue';
 import { onlyLoggedInMiddleware } from '@/middlewares/onlyLoggedIn.middleware';
+import VDashboard from '@/views/registry/VDashboard/index.vue';
+import VPatients from '@/views/registry/VPatients/index.vue';
 
 export const REGISTRY_DASHBOARD_ROUTE = {
   name: 'REGISTRY_DASHBOARD',
@@ -7,5 +8,11 @@ export const REGISTRY_DASHBOARD_ROUTE = {
   component: VDashboard,
   beforeEnter: [onlyLoggedInMiddleware],
 };
+export const REGISTRY_PATIENTS_ROUTE = {
+  name: 'REGISTRY_PATIENTS',
+  path: '/registry/patients',
+  component: VPatients,
+  beforeEnter: [onlyLoggedInMiddleware],
+};
 
-export const routes = [REGISTRY_DASHBOARD_ROUTE];
+export const routes = [REGISTRY_DASHBOARD_ROUTE, REGISTRY_PATIENTS_ROUTE];
