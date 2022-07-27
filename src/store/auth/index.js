@@ -56,6 +56,7 @@ export default {
     logout({ commit }) {
       commit('LOGOUT');
       ApiService.removeToken();
+      localStorage.removeItem('access_token');
       Router.push(LOGIN_ROUTE);
     },
   },
