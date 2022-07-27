@@ -9,7 +9,7 @@ export class Patient extends User {
   static tableName = 'patients';
   constructor(payload) {
     super(payload);
-    this.childrens_count = payload?.childrens_count || 0;
-    this.parent_id = payload?.parent_id || null;
+    this.childrens_count = payload?.childrens_count ?? 0;
+    this.parent_id = payload?.parent_id ?? null;
   }
 }
