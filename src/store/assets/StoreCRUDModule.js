@@ -85,6 +85,10 @@ export class StoreCRUDModule {
         commit('SET_LOADING', false);
       },
 
+      setLoading({ commit }, value) {
+        commit('SET_LOADING', value);
+      },
+
       ...actions,
     };
   }
