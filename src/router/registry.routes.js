@@ -3,6 +3,7 @@ import VDashboard from '@/views/registry/VDashboard/index.vue';
 import VPatients from '@/views/registry/VPatients/index.vue';
 import VPatientsRecords from '@/views/registry/VPatientsRecords/index.vue';
 import VDoctorsSchedule from '@/views/registry/VDoctorsSchedule/index.vue';
+import { I18nService } from '@/services/i18n.service';
 
 export const REGISTRY_DASHBOARD_ROUTE = {
   name: 'REGISTRY_DASHBOARD',
@@ -10,7 +11,7 @@ export const REGISTRY_DASHBOARD_ROUTE = {
   component: VDashboard,
   beforeEnter: [onlyLoggedInMiddleware],
   meta: {
-    title: 'Dashboard',
+    title: I18nService.t('Base.Dashboard'),
   },
 };
 export const REGISTRY_PATIENTS_ROUTE = {
@@ -19,7 +20,7 @@ export const REGISTRY_PATIENTS_ROUTE = {
   component: VPatients,
   beforeEnter: [onlyLoggedInMiddleware],
   meta: {
-    title: 'Patients',
+    title: I18nService.t('Base.Patients'),
   },
 };
 export const REGISTRY_PATIENTS_RECORDS_ROUTE = {
@@ -28,7 +29,7 @@ export const REGISTRY_PATIENTS_RECORDS_ROUTE = {
   component: VPatientsRecords,
   beforeEnter: [onlyLoggedInMiddleware],
   meta: {
-    title: 'Patients Records',
+    title: I18nService.t('Base.PatientsRecords'),
   },
 };
 export const REGISTRY_DOCTORS_SCHEDULE_ROUTE = {
@@ -37,7 +38,7 @@ export const REGISTRY_DOCTORS_SCHEDULE_ROUTE = {
   component: VDoctorsSchedule,
   beforeEnter: [onlyLoggedInMiddleware],
   meta: {
-    title: 'Doctors Schedule',
+    title: I18nService.t('Base.DoctorsSchedule'),
   },
 };
 
