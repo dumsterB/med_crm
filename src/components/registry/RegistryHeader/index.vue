@@ -1,12 +1,14 @@
 <template>
-  <div class="registry-header">Header</div>
+  <div class="registry-header">Header <LangSelect /></div>
 </template>
 
 <script>
 import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
+import LangSelect from '@/components/LangSelect/index.vue';
 
 export default {
   name: getParentFolderNameByMetaUrl(import.meta.url),
+  components: { LangSelect },
 };
 </script>
 
