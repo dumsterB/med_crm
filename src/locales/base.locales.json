@@ -10,7 +10,8 @@
       "Logout": "Выйти",
       "Password": "Пароль",
       "Patients": "Пациенты",
-      "PatientsRecords": "Записи пациентов"
+      "PatientsRecords": "Записи пациентов",
+      "SignUp": "Регистрация"
     }
   },
   "uz": {
@@ -24,7 +25,8 @@
       "Logout": "Chiqish",
       "Password": "Parol",
       "Patients": "Bemorlar",
-      "PatientsRecords": "Bemorlar yozuvlari"
+      "PatientsRecords": "Bemorlar yozuvlari",
+      "SignUp": "Ro'yxatdan o'tish"
     }
   }
 }
