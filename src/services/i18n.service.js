@@ -34,6 +34,7 @@ export class I18nService {
 
     I18nPlugin.global.locale = locale;
     ApiService.setLocale(locale);
+    localStorage.setItem(this.LOCALE_STORAGE_KEY, locale);
   }
   static setLocaleFromStorage() {
     this.setLocale(localStorage.getItem(this.LOCALE_STORAGE_KEY) || DEFAULT_LOCALE);
