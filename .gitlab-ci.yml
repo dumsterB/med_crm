@@ -5,7 +5,7 @@ build front:
   stage: build
   image: node:16
   variables:
-    VITE_API_URL: $STAGE_SERVER
+    VITE_API_URL: $STAGE_PROTOCOL://$STAGE_SERVER
   only:
     - stage
   script:
