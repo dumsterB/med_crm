@@ -1,9 +1,9 @@
 import { onlyLoggedInMiddleware } from '@/middlewares/onlyLoggedIn.middleware';
+import { I18nService } from '@/services/i18n.service';
 import VDashboard from '@/views/registry/VDashboard/index.vue';
 import VPatients from '@/views/registry/VPatients/index.vue';
 import VPatientsRecords from '@/views/registry/VPatientsRecords/index.vue';
 import VDoctorsSchedule from '@/views/registry/VDoctorsSchedule/index.vue';
-import { I18nService } from '@/services/i18n.service';
 
 export const REGISTRY_DASHBOARD_ROUTE = {
   name: 'REGISTRY_DASHBOARD',
