@@ -9,7 +9,7 @@
         :key="route.path"
         :to="route.path">
         <UiIcon :icon="route.icon" />
-        <span>{{ route.meta.title }}</span>
+        <span>{{ route.title }}</span>
       </router-link>
     </nav>
 
@@ -53,8 +53,30 @@ export default {
         REGISTRY_DOCTORS_SCHEDULE_ROUTE,
       ].map((route) => ({
         ...route,
-        icon: icons.DASHBOARD,
+        title: this.routesOptionsByRouteName[route.name].text,
+        icon: this.routesOptionsByRouteName[route.name].icon,
       }));
+    },
+
+    routesOptionsByRouteName() {
+      return {
+        [REGISTRY_DASHBOARD_ROUTE.name]: {
+          icon: icons.DASHBOARD,
+          text: this.$t('Base.Dashboard'),
+        },
+        [REGISTRY_PATIENTS_ROUTE.name]: {
+          icon: icons.USER_TAG,
+          text: this.$t('Base.Patients'),
+        },
+        [REGISTRY_PATIENTS_RECORDS_ROUTE.name]: {
+          icon: icons.NOTE,
+          text: this.$t('Base.PatientsRecords'),
+        },
+        [REGISTRY_DOCTORS_SCHEDULE_ROUTE.name]: {
+          icon: icons.BOARD,
+          text: this.$t('Base.DoctorsSchedule'),
+        },
+      };
     },
   },
 };
