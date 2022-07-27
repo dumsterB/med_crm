@@ -3,6 +3,11 @@ import { Router } from '@/router';
 import { LOGIN_ROUTE } from '@/router/auth.routes';
 import { parseJwtToken } from '@/utils/jwt.util';
 
+const enums = {
+  ACCESS_TOKEN_KEY: 'access_token',
+  USER_KEY: 'user',
+};
+
 export default {
   namespaced: true,
   state() {
@@ -35,8 +40,9 @@ export default {
       const { data } = await ApiService.post('/auth/login', { email, password });
 
       ApiService.setToken(data.access_token);
-      localStorage.setItem('access_token', data.access_token);
-      commit('LOGIN', { user: { id: 123, email: 'email' } });
+      localStorage.setItem(enums.ACCESS_TOKEN_KEY, data.access_token);
+      localStorage.setItem(enums.USER_KEY, JSON.stringify(data.user));
+      commit('LOGIN', { user: data.user });
     },
 
     async checkAndSetUserAndTokenFromClientStorage({ commit }) {
@@ -45,10 +51,11 @@ export default {
 
       if (access_token) {
         const payload = parseJwtToken(access_token);
-
         // Если осталось меньше 10 минут не логиним
         if (payload.exp <= payload.iat + 1000 * 60 * 10) return;
+
         ApiService.setToken(access_token);
+        commit('SET_USER', JSON.parse(localStorage.getItem('user')));
         commit('SET_IS_AUTHORIZED', true);
       }
     },
@@ -56,7 +63,8 @@ export default {
     logout({ commit }) {
       commit('LOGOUT');
       ApiService.removeToken();
-      localStorage.removeItem('access_token');
+      localStorage.removeItem(enums.ACCESS_TOKEN_KEY);
+      localStorage.removeItem(enums.USER_KEY);
       Router.push(LOGIN_ROUTE);
     },
   },

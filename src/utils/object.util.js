@@ -1,10 +1,13 @@
-export function deleteUndefinedOrNullValueKeys(object) {
+export function deleteEmptyValueKeys(object) {
   const returnedObject = {};
 
-  Object.keys(object).forEach(key => {
-    return object[key] !== undefined && object[key] !== null
-      ? (returnedObject[key] = object[key])
-      : false;
+  Object.keys(object).forEach((key) => {
+    let isEmptyValue = false;
+
+    if (object[key] === undefined || object[key] === null) isEmptyValue = true;
+    if (typeof object[key] === 'string' && object[key].length === 0) isEmptyValue = true;
+
+    return !isEmptyValue ? (returnedObject[key] = object[key]) : false;
   });
 
   return returnedObject;
