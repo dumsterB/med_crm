@@ -7,7 +7,8 @@
       :placeholder="$t('Base.Password')"
       name="password"
       type="password"
-      required />
+      required
+      show-password />
 
     <div class="login-form__actions">
       <ElButton type="primary" :loading="loading" native-type="submit">
