@@ -11,6 +11,7 @@
       "Password": "Пароль",
       "Patients": "Пациенты",
       "PatientsRecords": "Записи пациентов",
+      "Search": "Поиск",
       "SignUp": "Регистрация"
     }
   },
@@ -26,6 +27,7 @@
       "Password": "Parol",
       "Patients": "Bemorlar",
       "PatientsRecords": "Bemorlar yozuvlari",
+      "Search": "Topish",
       "SignUp": "Ro'yxatdan o'tish"
     }
   }
