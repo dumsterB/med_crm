@@ -9,25 +9,28 @@ export class CRUDModel {
     this.id = payload?.id || null;
   }
 
-  // TODO: реализовать поиск по query
   /**
-   * @param { number } perPage
+   * @param { number } per_page
    * @param { number } page
-   * @param { string } [orderBy]
-   * @param { "asc"|"desc" } orderDirection
-   * @param { object } query
-   * @param { string } query.default search by all fields
-   * @param { string } query./a-zA-Z/
+   * @param { string } [order_by]
+   * @param { "asc"|"desc" } order_direction
+   * @param { string } query
+   * @param { string } query_field
+   * @param { string } query_type
+   * @param { string } search
    * @return { Promise<AxiosResponse<any>> }
    */
-  static find({ perPage, page, orderBy, orderDirection }) {
+  static find({ per_page, page, order_by, order_direction, query_field, query_type, search }) {
     const urlWithQuery = mergeOrCreateQuery({
       url: this.tableName,
       query: deleteUndefinedOrNullValueKeys({
-        perPage,
+        per_page,
         page,
-        orderBy,
-        orderDirection,
+        order_by,
+        order_direction,
+        query_field,
+        query_type,
+        search,
       }),
     });
 
