@@ -14,6 +14,15 @@ const router = createRouter({
     ...authRoutes,
     ...registryRoutes,
   ],
+  scrollBehavior(to, from, savedPosition) {
+    return { top: 0, behavior: 'smooth' };
+  },
+});
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || 'zordoc';
+
+  next();
 });
 
 export { router as Router };
