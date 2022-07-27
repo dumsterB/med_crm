@@ -1,18 +1,30 @@
 {
   "ru": {
     "Base": {
+      "Authorization": "Авторизация",
       "Create": "Создать",
+      "Dashboard": "Дашборд",
+      "DoctorsSchedule": "Расписание врачей",
+      "ForgotPassword": "Заблыи пароль?",
       "Login": "Логин",
       "Logout": "Выйти",
-      "Password": "Пароль"
+      "Password": "Пароль",
+      "Patients": "Пациенты",
+      "PatientsRecords": "Записи пациентов"
     }
   },
   "uz": {
     "Base": {
+      "Authorization": "Kirish",
       "Create": "Yaratish",
+      "Dashboard": "Dashboard",
+      "DoctorsSchedule": "Shifokorlar jadvali",
+      "ForgotPassword": "Parolni unutdingizmi?",
       "Login": "Login",
       "Logout": "Chiqish",
-      "Password": "Parol"
+      "Password": "Parol",
+      "Patients": "Bemorlar",
+      "PatientsRecords": "Bemorlar yozuvlari"
     }
   }
 }
