@@ -19,7 +19,7 @@ export class CRUDModel {
    * @param { string|Array<string> } query_field
    * @param { string } query_type
    * @param { string } search
-   * @return { Promise<AxiosResponse<any>> }
+   * @return { Promise<{ response: AxiosResponse<any>, data: any }> } data = response.data
    */
   static async find({
     per_page,
@@ -47,7 +47,10 @@ export class CRUDModel {
       }),
     });
 
-    return ApiService.get(urlWithQuery);
+    const response = await ApiService.get(urlWithQuery);
+    const data = response.data;
+
+    return { response, data };
   }
 
   /**
