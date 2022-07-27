@@ -1,6 +1,7 @@
 import { ApiService } from '@/services/api.service';
 import { mergeOrCreateQuery } from '@/utils/http.util';
-import { deleteUndefinedOrNullValueKeys } from '@/utils/object.util';
+import { deleteEmptyValueKeys } from '@/utils/object.util';
+import { QUERY_ARRAY_SEPARATOR } from '@/config/api.config';
 
 export class CRUDModel {
   static modelName = 'model';
@@ -15,15 +16,27 @@ export class CRUDModel {
    * @param { string } [order_by]
    * @param { "asc"|"desc" } order_direction
    * @param { string } query
-   * @param { string } query_field
+   * @param { string|Array<string> } query_field
    * @param { string } query_type
    * @param { string } search
    * @return { Promise<AxiosResponse<any>> }
    */
-  static find({ per_page, page, order_by, order_direction, query_field, query_type, search }) {
+  static async find({
+    per_page,
+    page,
+    order_by,
+    order_direction,
+    query_field,
+    query_type,
+    search,
+  }) {
+    if (query_field && query_field instanceof Array) {
+      query_field = query_field.join(QUERY_ARRAY_SEPARATOR);
+    }
+
     const urlWithQuery = mergeOrCreateQuery({
       url: this.tableName,
-      query: deleteUndefinedOrNullValueKeys({
+      query: deleteEmptyValueKeys({
         per_page,
         page,
         order_by,
