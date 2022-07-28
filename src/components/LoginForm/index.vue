@@ -16,7 +16,7 @@
       </ElButton>
 
       <router-link :to="FORGOT_PASSWORD_ROUTE.path">
-        <ElButton text> {{ $t('ForgotPassword') }} </ElButton>
+        <ElButton text> {{ $t('ForgotPassword') }}</ElButton>
       </router-link>
     </div>
   </form>
