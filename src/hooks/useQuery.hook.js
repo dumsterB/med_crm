@@ -1,12 +1,12 @@
-import { computed } from 'vue';
+import { computed, reactive } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 /**
- *
  * @param { string } field enum from @/enums/query.enum
- * @return {{reset: void, value: WritableComputedRef<string|LocationQueryValue[]|LocationQuery>}
+ * @param { number|string } defaultValue
+ * @return {string|LocationQueryValue[]|LocationQuery|UnwrapNestedRefs<{reset: reset, value: WritableComputedRef<string|LocationQueryValue[]|LocationQuery>}>|void|Promise<NavigationFailure | void | undefined>}
  */
-export function useQuery(field) {
+export function useQuery(field, defaultValue) {
   const router = useRouter();
   const route = useRoute();
 
@@ -16,27 +16,28 @@ export function useQuery(field) {
     router.replace({ ...route, query });
   };
 
-  return {
-    value: computed({
-      get() {
-        return field ? route.query[field] : route.query;
-      },
-      set(value) {
-        if (!field) {
-          return router.replace({
-            ...route,
-            query: { ...value },
-          });
-        }
-
-        if (!value || !value.length) return reset(field);
-        router.replace({
+  const value = computed({
+    get() {
+      return (field ? route.query[field] : route.query) ?? defaultValue;
+    },
+    set(value) {
+      if (!field) {
+        return router.replace({
           ...route,
-          query: { ...route.query, [field]: value },
+          query: { ...value },
         });
-      },
-    }),
+      }
 
+      if (!value || !value.length) return reset(field);
+      router.replace({
+        ...route,
+        query: { ...route.query, [field]: value },
+      });
+    },
+  });
+
+  return reactive({
+    value: value,
     reset: reset,
-  };
+  });
 }
