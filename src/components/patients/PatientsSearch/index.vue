@@ -93,7 +93,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.queryWord);
     this.throttleSearch = throttle(this.search, 350);
   },
 };
