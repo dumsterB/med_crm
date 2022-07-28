@@ -19,5 +19,9 @@
   &__content {
     padding: var(--padding-medium);
     background-color: var(--bg-container-color);
+
+    & > * {
+      @include container;
+    }
   }
 }
