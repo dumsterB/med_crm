@@ -1,0 +1,12 @@
+{
+  "ru": {
+    "Patients": {
+      "NoPatient": "Пациен не найден"
+    }
+  },
+  "uz": {
+    "Patients": {
+      "NoPatient": "Bemor topilmadi"
+    }
+  }
+}
