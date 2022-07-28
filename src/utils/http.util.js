@@ -14,5 +14,5 @@ export function mergeOrCreateQuery({ url, query }) {
     }`
   );
 
-  return `${urlExcludeQuery}?${decodeURIComponent(queries.toString())}`;
+  return `${urlExcludeQuery}?${queries.toString()}`;
 }
