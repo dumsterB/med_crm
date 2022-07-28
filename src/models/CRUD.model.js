@@ -6,6 +6,7 @@ import { QUERY_ARRAY_SEPARATOR } from '@/config/api.config';
 export class CRUDModel {
   static modelName = 'model';
   static tableName = 'models';
+
   constructor(payload) {
     this.id = payload?.id || null;
   }
@@ -15,6 +16,7 @@ export class CRUDModel {
    * @param { number } page
    * @param { string } [order_by]
    * @param { "asc"|"desc" } order_direction
+   * @param { "and"|"or" } order_operator
    * @param { string } query
    * @param { string|Array<string> } query_field
    * @param { string } query_type
@@ -26,6 +28,7 @@ export class CRUDModel {
     page,
     order_by,
     order_direction,
+    order_operator,
     query_field,
     query_type,
     search,
@@ -41,6 +44,7 @@ export class CRUDModel {
         page,
         order_by,
         order_direction,
+        order_operator,
         query_field,
         query_type,
         search,
@@ -62,6 +66,8 @@ export class CRUDModel {
   }
 
   static create(payload) {}
+
   static update(payload) {}
+
   static delete(payload) {}
 }
