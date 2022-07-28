@@ -15,11 +15,11 @@ export class CRUDModel {
    * @param { number } per_page
    * @param { number } page
    * @param { string } [order_by]
-   * @param { "asc"|"desc" } order_direction
-   * @param { "and"|"or" } order_operator
+   * @param { "ASC"|"DESC" } order_direction
+   * @param { "AND"|"OR" } order_operator
    * @param { string } query
    * @param { string|Array<string> } query_field
-   * @param { string } query_type
+   * @param { "ILIKE"|"EQUALS"|"IN" } query_type
    * @param { string } search
    * @return { Promise<{ response: AxiosResponse<any>, data: any }> } data = response.data
    */
