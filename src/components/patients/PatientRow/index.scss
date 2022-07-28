@@ -1,2 +1,17 @@
 .patient-row {
+  padding: 10px;
+  &:hover {
+    background-color: var(--bg-secondary-color);
+    cursor: pointer;
+  }
+
+  td {
+    padding: 20px 12px;
+  }
+
+  &__main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 }
