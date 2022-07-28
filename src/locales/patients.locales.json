@@ -1,0 +1,14 @@
+{
+  "ru": {
+    "Patients": {
+      "AddPatient": "Добавить пациента",
+      "NoPatient": "Пациен не найден"
+    }
+  },
+  "uz": {
+    "Patients": {
+      "AddPatient": "Bemorni yaratish",
+      "NoPatient": "Bemor topilmadi"
+    }
+  }
+}

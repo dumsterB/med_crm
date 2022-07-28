@@ -1,0 +1,26 @@
+.ui-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+
+  &__small {
+    width: 1.5em;
+    height: 1.5em;
+  }
+  &__medium {
+    width: 2em;
+    height: 2em;
+  }
+  &__large {
+    width: 2.5em;
+    height: 2.5em;
+  }
+
+  &__image {
+    width: 70%;
+    height: 70%;
+    object-fit: cover;
+  }
+}

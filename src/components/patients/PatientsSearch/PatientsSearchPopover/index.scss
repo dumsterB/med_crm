@@ -1,0 +1,30 @@
+.patients-search-popover {
+  max-height: 60vh;
+  background-color: var(--bg-color);
+  box-shadow: 0px 7px 14px rgba(84, 194, 182, 0.16);
+  border-radius: var(--border-radius-large);
+  overflow-y: auto;
+  z-index: 99;
+
+  &__no-data,
+  &__loading {
+    padding: 20px;
+  }
+  &-no-data {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    &__title {
+      font-weight: bold;
+    }
+    &__actions {
+      display: flex;
+      gap: 10px;
+    }
+  }
+
+  &-patients {
+    width: 100%;
+  }
+}
