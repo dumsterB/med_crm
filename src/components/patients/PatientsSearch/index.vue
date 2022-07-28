@@ -20,20 +20,24 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
 import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
-import { SEARCH } from '@/enums/icons.enum';
-import * as QueryEnum from '@/enums/query.enum';
-import { Patient } from '@/models/Patient.model';
-import PatientsSearchPopover from './PatientsSearchPopover/index.vue';
+import { mapState, mapActions } from 'vuex';
 import { throttle } from 'lodash';
+import { useQuery } from '@/hooks/useQuery.hook';
+import * as QueryEnums from '@/enums/query.enum.js';
+import { SEARCH } from '@/enums/icons.enum';
+import { Patient } from '@/models/Patient.model';
+
+import PatientsSearchPopover from './PatientsSearchPopover/index.vue';
 
 export default {
   name: getParentFolderNameByMetaUrl(import.meta.url),
   components: { PatientsSearchPopover },
-  icons: {
-    SEARCH,
-  },
+  icons: { SEARCH },
+
+  setup: () => ({
+    queryWord: useQuery(QueryEnums.SEARCH),
+  }),
   data() {
     return {
       isOpenPopover: false,
@@ -46,27 +50,6 @@ export default {
       total: (state) => state.patients.total,
       loading: (state) => state.patients.loading,
     }),
-
-    queryWord: {
-      get() {
-        return this.$route.query[QueryEnum.SEARCH];
-      },
-      set(value) {
-        if (!value || !value.length) {
-          const query = { ...this.$route.query };
-          delete query[QueryEnum.SEARCH];
-
-          this.$router.replace({ ...this.$route, query: query });
-        }
-
-        if (value) {
-          this.$router.replace({
-            ...this.$route,
-            query: { ...this.$route.query, [QueryEnum.SEARCH]: value },
-          });
-        }
-      },
-    },
   },
   watch: {
     queryWord(value) {
@@ -91,8 +74,9 @@ export default {
           page: 1,
           per_page: 100,
           search: this.queryWord,
-          query_field: ['name'],
+          query_field: ['name', 'phone'],
           query_type: 'ILIKE',
+          order_operator: 'or',
         });
         this.setData({
           items: data.data,
@@ -110,6 +94,7 @@ export default {
     },
   },
   mounted() {
+    console.log(this.queryWord);
     this.throttleSearch = throttle(this.search, 350);
   },
 };
