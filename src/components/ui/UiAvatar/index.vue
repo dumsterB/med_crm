@@ -16,7 +16,8 @@
 
 <script>
 import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
-import { getRandomAvatarBg, getRandomAvatarUrl } from '@/utils/avatar.util';
+import { AvatarService } from '@/services/avatar.sevice';
+import { User } from '@/models/User.model';
 
 export default {
   name: getParentFolderNameByMetaUrl(import.meta.url),
@@ -33,6 +34,11 @@ export default {
       default: 'medium',
       validator: (val) => ['small', 'medium', 'large'].includes(val),
     },
+
+    /**
+     * @param { User.gender } gender
+     */
+    gender: String,
   },
   data() {
     return {
@@ -64,8 +70,10 @@ export default {
   },
 
   mounted() {
-    this.avatar.url = getRandomAvatarUrl();
-    this.avatar.bg = getRandomAvatarBg();
+    this.avatar.url = AvatarService.getRandomAvatarUrl({
+      gender: this.gender || User.enum.genders.MAN,
+    });
+    this.avatar.bg = AvatarService.getRandomAvatarBg();
   },
 };
 </script>
