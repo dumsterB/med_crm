@@ -23,8 +23,7 @@
 import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
 import { mapState, mapActions } from 'vuex';
 import { throttle } from 'lodash';
-import { useQuery } from '@/hooks/useQuery.hook';
-import * as QueryEnums from '@/enums/query.enum.js';
+import { useSearch } from '@/hooks/query/useSearch';
 import { SEARCH } from '@/enums/icons.enum';
 import { Patient } from '@/models/Patient.model';
 
@@ -36,7 +35,7 @@ export default {
   icons: { SEARCH },
 
   setup: () => ({
-    queryWord: useQuery(QueryEnums.SEARCH),
+    queryWord: useSearch(),
   }),
   data() {
     return {
