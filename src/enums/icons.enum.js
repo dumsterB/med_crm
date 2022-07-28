@@ -7,3 +7,4 @@ export const SEARCH = 'SEARCH';
 export const BELL = 'BELL';
 export const FILTER = 'FILTER';
 export const CHEVRON_DOWN = 'CHEVRON_DOWN';
+export const PLUS = 'PLUS';
