@@ -35,7 +35,7 @@ export default {
   icons: { SEARCH },
 
   setup: () => ({
-    queryWord: useSearch(),
+    queryWord: useSearch().value,
   }),
   data() {
     return {
