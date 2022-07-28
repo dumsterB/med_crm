@@ -1,7 +1,7 @@
 <template>
   <div class="patients-search">
     <form class="patients-search__form" @submit.prevent="throttleSearch">
-      <ElInput v-model.trim="queryWord">
+      <ElInput v-model.trim="queryWord.value">
         <template #append>
           <ElButton type="primary" native-type="submit" :loading="loading">
             {{ $t('Base.Search') }}
@@ -13,7 +13,7 @@
     <PatientsSearchPopover
       v-show="isOpenPopover"
       class="patients-search__popover"
-      :search="queryWord"
+      :search="queryWord.value"
       :patients="items"
       :loading="loading" />
   </div>
@@ -35,7 +35,7 @@ export default {
   icons: { SEARCH },
 
   setup: () => ({
-    queryWord: useSearch().value,
+    queryWord: useSearch(),
   }),
   data() {
     return {
@@ -51,10 +51,12 @@ export default {
     }),
   },
   watch: {
-    queryWord(value) {
-      if (value && value.length) this.throttleSearch();
-      if (value && !this.isOpenPopover) this.isOpenPopover = true;
-      if ((!value || !value.length) && this.isOpenPopover) this.isOpenPopover = false;
+    'queryWord.value': {
+      handler(value) {
+        if (value && value.length) this.throttleSearch();
+        if (value && !this.isOpenPopover) this.isOpenPopover = true;
+        if ((!value || !value.length) && this.isOpenPopover) this.isOpenPopover = false;
+      },
     },
   },
 
@@ -72,10 +74,10 @@ export default {
         const { data } = await Patient.find({
           page: 1,
           per_page: 100,
-          search: this.queryWord,
+          search: this.queryWord.value,
           query_field: ['name', 'phone'],
           query_type: 'ILIKE',
-          order_operator: 'or',
+          order_operator: 'OR',
         });
         this.setData({
           items: data.data,
@@ -93,7 +95,7 @@ export default {
     },
   },
   mounted() {
-    this.throttleSearch = throttle(this.search, 350);
+    this.throttleSearch = throttle(this.search, 150);
   },
 };
 </script>
