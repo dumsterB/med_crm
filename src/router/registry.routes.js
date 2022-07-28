@@ -4,6 +4,7 @@ import VDashboard from '@/views/registry/VDashboard/index.vue';
 import VPatients from '@/views/registry/VPatients/index.vue';
 import VPatientsRecords from '@/views/registry/VPatientsRecords/index.vue';
 import VDoctorsSchedule from '@/views/registry/VDoctorsSchedule/index.vue';
+import VPatient from '@/views/registry/VPatient/index.vue';
 
 export const REGISTRY_DASHBOARD_ROUTE = {
   name: 'REGISTRY_DASHBOARD',
@@ -21,6 +22,16 @@ export const REGISTRY_PATIENTS_ROUTE = {
   beforeEnter: [onlyLoggedInMiddleware],
   meta: {
     title: I18nService.t('Base.Patients'),
+  },
+};
+export const REGISTRY_PATIENT_ROUTE = {
+  name: 'REGISTRY_PATIENT',
+  path: '/registry/patients/:id',
+  component: VPatient,
+  meta: {
+    title: {
+      get: () => I18nService.t('Base.Patient'),
+    },
   },
 };
 export const REGISTRY_PATIENTS_RECORDS_ROUTE = {
@@ -45,6 +56,7 @@ export const REGISTRY_DOCTORS_SCHEDULE_ROUTE = {
 export const routes = [
   REGISTRY_DASHBOARD_ROUTE,
   REGISTRY_PATIENTS_ROUTE,
+  REGISTRY_PATIENT_ROUTE,
   REGISTRY_PATIENTS_RECORDS_ROUTE,
   REGISTRY_DOCTORS_SCHEDULE_ROUTE,
 ];
