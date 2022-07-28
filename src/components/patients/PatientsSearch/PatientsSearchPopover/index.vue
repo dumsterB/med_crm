@@ -17,6 +17,8 @@
         <PatientRow v-for="patient in patients" :key="patient.id" :patient="patient" />
       </tbody>
     </table>
+
+    <div v-show="loading" class="patients-search-popover__loading">{{ $t('Base.Loading') }}</div>
   </div>
 </template>
 
