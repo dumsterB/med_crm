@@ -23,7 +23,7 @@
 import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
 import { mapState, mapActions } from 'vuex';
 import { throttle } from 'lodash';
-import { useSearch } from '@/hooks/query/useSearch';
+import { useSearch } from '@/hooks/query';
 import { SEARCH } from '@/enums/icons.enum';
 import { Patient } from '@/models/Patient.model';
 
