@@ -9,6 +9,7 @@ import { ApiPlugin } from '@/plugins/api.plugin.js';
 import { I18nPlugin } from '@/plugins/i18n.plugin';
 
 import UiIcon from '@/components/ui/UiIcon/index.vue';
+import UiAvatar from '@/components/ui/UiAvatar/index.vue';
 
 import '@/assets/styles/index.scss';
 
@@ -19,4 +20,5 @@ createApp(App)
   .use(I18nPlugin)
   .use(ElementPlus)
   .component('UiIcon', UiIcon)
+  .component('UiAvatar', UiAvatar)
   .mount('#app');
