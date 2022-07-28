@@ -23,6 +23,7 @@
 import { mapState, mapActions } from 'vuex';
 import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
 import { SEARCH } from '@/enums/icons.enum';
+import * as QueryEnum from '@/enums/query.enum';
 import { Patient } from '@/models/Patient.model';
 import PatientsSearchPopover from './PatientsSearchPopover/index.vue';
 import { throttle } from 'lodash';
@@ -35,7 +36,6 @@ export default {
   },
   data() {
     return {
-      queryWord: null,
       isOpenPopover: false,
       throttleSearch: null, // void
     };
@@ -46,6 +46,27 @@ export default {
       total: (state) => state.patients.total,
       loading: (state) => state.patients.loading,
     }),
+
+    queryWord: {
+      get() {
+        return this.$route.query[QueryEnum.SEARCH];
+      },
+      set(value) {
+        if (!value || !value.length) {
+          const query = { ...this.$route.query };
+          delete query[QueryEnum.SEARCH];
+
+          this.$router.replace({ ...this.$route, query: query });
+        }
+
+        if (value) {
+          this.$router.replace({
+            ...this.$route,
+            query: { ...this.$route.query, [QueryEnum.SEARCH]: value },
+          });
+        }
+      },
+    },
   },
   watch: {
     queryWord(value) {
