@@ -1,4 +1,18 @@
 .patients-search {
-  .el-input-group__append button.el-button {
+  position: relative;
+
+  &__form {
+    .el-input {
+      border-radius: var(--border-radius-large) !important;
+    }
+  }
+
+  &__popover {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    transform: translateY(calc(100% + 10px));
   }
 }
