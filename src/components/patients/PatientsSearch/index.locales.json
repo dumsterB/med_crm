@@ -1,8 +1,8 @@
 {
   "ru": {
-    "PatientsSearch": "Поиск поциентов"
+    "InputLabel": "Поиск поциентов..."
   },
   "uz": {
-    "PatientsSearch": "Bemorlarni topish"
+    "InputLabel": "Bemorlarni topish..."
   }
 }
