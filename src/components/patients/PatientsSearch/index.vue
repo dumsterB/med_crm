@@ -77,7 +77,7 @@ export default {
           search: this.queryWord.value,
           query_field: ['name', 'phone'],
           query_type: 'ILIKE',
-          order_operator: 'OR',
+          query_operator: 'OR',
         });
         this.setData({
           items: data.data,
