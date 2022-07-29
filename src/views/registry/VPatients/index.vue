@@ -1,6 +1,7 @@
 <template>
-  <LayoutRegistry>
+  <LayoutRegistry main-class="v-patients-main">
     <PatientsTable
+      class="v-patients-content__table"
       :items="items"
       :loading="loading"
       v-model:page="page.value"
