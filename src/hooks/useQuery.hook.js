@@ -10,7 +10,7 @@ export function useQuery(field, defaultValue) {
   const router = useRouter();
   const route = useRoute();
 
-  const reset = function (field) {
+  const reset = function () {
     const query = { ...route.query };
     delete query[field];
     router.replace({ ...route, query });
@@ -28,7 +28,7 @@ export function useQuery(field, defaultValue) {
         });
       }
 
-      if (!value || !value.length) return reset(field);
+      if (!value || !value.length) return reset();
       router.replace({
         ...route,
         query: { ...route.query, [field]: value },
