@@ -1,57 +1,58 @@
 <template>
-  <ElTable class="patients-table" :data="items" @row-click="goToPatient">
-    <template #empty> {{ loading ? $t('Base.Loading') : $t('Base.NoData') }} </template>
+  <div class="patients-table-wrapper">
+    <ElTable
+      class="patients-table"
+      :data="items"
+      ref="elTable"
+      v-loading="loading"
+      @row-click="goToPatient">
+      <template #empty> {{ $t('Base.NoData') }} </template>
 
-    <ElTableColumn prop="name" :label="$t('User.FullName')">
-      <template #default="{ row }">
-        <div class="patients-table__name-avatar">
-          <UiAvatar :image="row.avatar" />
-          <span> {{ row.name }} </span>
-        </div>
-      </template>
-    </ElTableColumn>
+      <ElTableColumn prop="name" :label="$t('User.FullName')">
+        <template #default="{ row }">
+          <div class="patients-table__name-avatar">
+            <UiAvatar :image="row.avatar" />
+            <span> {{ row.name }} </span>
+          </div>
+        </template>
+      </ElTableColumn>
 
-    <ElTableColumn prop="gender" :label="$t('User.Gender')"></ElTableColumn>
-    <ElTableColumn prop="phone" :label="$t('User.Phone')"></ElTableColumn>
-    <ElTableColumn prop="age" :label="$t('User.Age')"> </ElTableColumn>
-    <ElTableColumn prop="childrens_count" :label="$t('User.Children')">
-      <template #default="{ row }">
-        <span v-if="!!row.childrens_count"> {{ row.childrens_count }} </span>
-        <ElButton v-else type="primary" plain>
-          <UiIcon :icon="$options.icons.PLUS" />
-        </ElButton>
-      </template>
-    </ElTableColumn>
-
-    <ElTableColumn prop="actions" :label="$t('Base.Actions')">
-      <template #default="{ row }">
-        <div class="patients-table-actions">
-          <ElButton type="primary" @click="makeAppointment(row)">
-            {{ $t('Base.MakeAppointment') }}
+      <ElTableColumn prop="gender" :label="$t('User.Gender')"></ElTableColumn>
+      <ElTableColumn prop="phone" :label="$t('User.Phone')"></ElTableColumn>
+      <ElTableColumn prop="age" :label="$t('User.Age')"> </ElTableColumn>
+      <ElTableColumn prop="childrens_count" :label="$t('User.Children')">
+        <template #default="{ row }">
+          <span v-if="!!row.childrens_count"> {{ row.childrens_count }} </span>
+          <ElButton v-else type="primary" plain>
+            <UiIcon :icon="$options.icons.PLUS" />
           </ElButton>
-        </div>
-      </template>
-    </ElTableColumn>
+        </template>
+      </ElTableColumn>
 
-    <template #append>
-      <div class="patients-table__append patients-table-append">
-        <div v-show="loading && hasItems" class="patients-table-append__loading">
-          {{ $t('Base.Loading') }}
-        </div>
-        <ElPagination
-          :current-page="page"
-          :page-count="pageCount"
-          :page-size="perPage"
-          :page-sizes="pageSizes"
-          :total="total"
-          background
-          hide-on-single-page
-          layout="prev, pager, next, sizes"
-          @update:current-page="$emit('update:page', $event)"
-          @update:page-size="$emit('update:perPage', $event)" />
-      </div>
-    </template>
-  </ElTable>
+      <ElTableColumn prop="actions" :label="$t('Base.Actions')">
+        <template #default="{ row }">
+          <div class="patients-table-actions">
+            <ElButton type="primary" @click="makeAppointment(row)">
+              {{ $t('Base.MakeAppointment') }}
+            </ElButton>
+          </div>
+        </template>
+      </ElTableColumn>
+    </ElTable>
+
+    <ElPagination
+      class="patients-table-pagination"
+      :current-page="page"
+      :page-count="pageCount"
+      :page-size="perPage"
+      :page-sizes="pageSizes"
+      :total="total"
+      background
+      hide-on-single-page
+      layout="prev, pager, next, sizes"
+      @update:current-page="$emit('update:page', $event)"
+      @update:page-size="$emit('update:perPage', $event)" />
+  </div>
 </template>
 
 <script>
@@ -74,7 +75,6 @@ export default {
     loading: Boolean,
   },
   icons: icons,
-
   computed: {
     hasItems() {
       return !!this.items.length;
@@ -84,6 +84,11 @@ export default {
     },
     pageSizes() {
       return PAGE_SIZES;
+    },
+  },
+  watch: {
+    loading() {
+      this.$refs.elTable.scrollTo({ top: 0, behavior: 'smooth' });
     },
   },
 

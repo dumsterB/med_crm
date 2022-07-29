@@ -1,3 +1,12 @@
+.patients-table-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  gap: 20px;
+}
+
 .patients-table {
   tr:hover {
     cursor: pointer;
@@ -13,19 +22,8 @@
     display: flex;
     gap: 6px;
   }
+}
 
-  &-append {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 10px;
-
-    & > * {
-      padding: 14px;
-    }
-    &__loading {
-      align-self: center;
-      margin: 10px 0;
-    }
-  }
+.patients-table-pagination {
+  align-self: flex-end;
 }
