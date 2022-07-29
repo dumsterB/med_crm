@@ -1,6 +1,7 @@
 {
   "ru": {
     "Base": {
+      "Actions": "Действия",
       "Authorization": "Авторизация",
       "Create": "Создать",
       "Dashboard": "Дашборд",
@@ -22,6 +23,7 @@
   },
   "uz": {
     "Base": {
+      "Actions": "??Actions??",
       "Authorization": "Kirish",
       "Create": "Yaratish",
       "Dashboard": "Dashboard",
