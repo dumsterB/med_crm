@@ -1,47 +1,50 @@
 <template>
   <div class="patients-table-wrapper">
-    <ElTable
-      class="patients-table"
-      :data="items"
-      ref="elTable"
-      v-loading="loading"
-      @row-click="goToPatient">
-      <template #empty> {{ $t('Base.NoData') }} </template>
+    <ElScrollbar class="patients-table-wrapper__scrollbar">
+      <ElTable
+        class="patients-table"
+        :data="items"
+        v-loading="loading"
+        fixed
+        ref="elTable"
+        @row-click="goToPatient">
+        <template #empty> {{ $t('Base.NoData') }} </template>
 
-      <ElTableColumn prop="name" :label="$t('User.FullName')">
-        <template #default="{ row }">
-          <div class="patients-table__name-avatar">
-            <UiAvatar :image="row.avatar" />
-            <span> {{ row.name }} </span>
-          </div>
-        </template>
-      </ElTableColumn>
+        <ElTableColumn prop="name" :label="$t('User.FullName')">
+          <template #default="{ row }">
+            <div class="patients-table__name-avatar">
+              <UiAvatar :image="row.avatar" />
+              <span> {{ row.name }} </span>
+            </div>
+          </template>
+        </ElTableColumn>
 
-      <ElTableColumn prop="gender" :label="$t('User.Gender')"></ElTableColumn>
-      <ElTableColumn prop="phone" :label="$t('User.Phone')"></ElTableColumn>
-      <ElTableColumn prop="age" :label="$t('User.Age')"> </ElTableColumn>
-      <ElTableColumn prop="childrens_count" :label="$t('User.Children')">
-        <template #default="{ row }">
-          <span v-if="!!row.childrens_count"> {{ row.childrens_count }} </span>
-          <ElButton v-else type="primary" plain>
-            <UiIcon :icon="$options.icons.PLUS" />
-          </ElButton>
-        </template>
-      </ElTableColumn>
-
-      <ElTableColumn prop="actions" :label="$t('Base.Actions')">
-        <template #default="{ row }">
-          <div class="patients-table-actions">
-            <ElButton type="primary" @click="makeAppointment(row)">
-              {{ $t('Base.MakeAppointment') }}
+        <ElTableColumn prop="gender" :label="$t('User.Gender')"></ElTableColumn>
+        <ElTableColumn prop="phone" :label="$t('User.Phone')"></ElTableColumn>
+        <ElTableColumn prop="age" :label="$t('User.Age')"> </ElTableColumn>
+        <ElTableColumn prop="childrens_count" :label="$t('User.Children')">
+          <template #default="{ row }">
+            <span v-if="!!row.childrens_count"> {{ row.childrens_count }} </span>
+            <ElButton v-else type="primary" plain>
+              <UiIcon :icon="$options.icons.PLUS" />
             </ElButton>
-          </div>
-        </template>
-      </ElTableColumn>
-    </ElTable>
+          </template>
+        </ElTableColumn>
+
+        <ElTableColumn prop="actions" :label="$t('Base.Actions')">
+          <template #default="{ row }">
+            <div class="patients-table-actions">
+              <ElButton type="primary" @click="makeAppointment(row)">
+                {{ $t('Base.MakeAppointment') }}
+              </ElButton>
+            </div>
+          </template>
+        </ElTableColumn>
+      </ElTable>
+    </ElScrollbar>
 
     <ElPagination
-      class="patients-table-pagination"
+      class="patients-table-wrapper__pagination"
       :current-page="page"
       :page-count="pageCount"
       :page-size="perPage"
