@@ -3,14 +3,15 @@ import { useRouter, useRoute } from 'vue-router';
 
 /**
  * @param { string } field enum from @/enums/query.enum
- * @param { number|string } defaultValue
+ * @param { number|string|null } [defaultValue]
+ * @param { boolean } [valueIsNumber = false]
  * @return {string|LocationQueryValue[]|LocationQuery|UnwrapNestedRefs<{reset: reset, value: WritableComputedRef<string|LocationQueryValue[]|LocationQuery>}>|void|Promise<NavigationFailure | void | undefined>}
  */
-export function useQuery(field, defaultValue) {
+export function useQuery({ field, defaultValue = null, valueIsNumber = false }) {
   const router = useRouter();
   const route = useRoute();
 
-  const reset = function (field) {
+  const reset = function () {
     const query = { ...route.query };
     delete query[field];
     router.replace({ ...route, query });
@@ -18,7 +19,8 @@ export function useQuery(field, defaultValue) {
 
   const value = computed({
     get() {
-      return (field ? route.query[field] : route.query) ?? defaultValue;
+      const value = (field ? route.query[field] : route.query) ?? defaultValue;
+      return valueIsNumber ? +value : value;
     },
     set(value) {
       if (!field) {
@@ -28,7 +30,9 @@ export function useQuery(field, defaultValue) {
         });
       }
 
-      if (!value || !value.length) return reset(field);
+      value = value?.toString();
+      if (!value && !value.length) return reset();
+
       router.replace({
         ...route,
         query: { ...route.query, [field]: value },

@@ -1,7 +1,7 @@
 <template>
   <div class="patients-search">
     <form class="patients-search__form" @submit.prevent="throttleSearch">
-      <ElInput v-model.trim="queryWord.value">
+      <ElInput v-model.trim="queryWord.value" :placeholder="$t('InputLabel')">
         <template #append>
           <ElButton type="primary" native-type="submit" :loading="loading">
             {{ $t('Base.Search') }}
@@ -26,6 +26,7 @@ import { throttle } from 'lodash';
 import { useSearch } from '@/hooks/query';
 import { SEARCH } from '@/enums/icons.enum';
 import { Patient } from '@/models/Patient.model';
+import { REGISTRY_PATIENTS_ROUTE } from '@/router/registry.routes';
 
 import PatientsSearchPopover from './PatientsSearchPopover/index.vue';
 
@@ -49,10 +50,16 @@ export default {
       total: (state) => state.patients.total,
       loading: (state) => state.patients.loading,
     }),
+
+    isDisabledByPatientsPages() {
+      return this.$route.name === REGISTRY_PATIENTS_ROUTE.name;
+    },
   },
   watch: {
     'queryWord.value': {
       handler(value) {
+        if (this.isDisabledByPatientsPages) return;
+
         if (value && value.length) this.throttleSearch();
         if (value && !this.isOpenPopover) this.isOpenPopover = true;
         if ((!value || !value.length) && this.isOpenPopover) this.isOpenPopover = false;
@@ -67,7 +74,7 @@ export default {
     }),
 
     async search() {
-      if (this.loading) return;
+      if (this.isDisabledByPatientsPages || this.loading) return;
       this.setLoading(true);
 
       try {
@@ -77,7 +84,7 @@ export default {
           search: this.queryWord.value,
           query_field: ['name', 'phone'],
           query_type: 'ILIKE',
-          order_operator: 'OR',
+          query_operator: 'OR',
         });
         this.setData({
           items: data.data,

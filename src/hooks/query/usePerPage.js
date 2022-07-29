@@ -3,5 +3,9 @@ import { useQuery } from '@/hooks/useQuery.hook';
 import { DEFAULT_PER_PAGE } from '@/config/api.config';
 
 export function usePerPage(defaultValue) {
-  return useQuery(PER_PAGE, defaultValue ?? DEFAULT_PER_PAGE);
+  return useQuery({
+    field: PER_PAGE,
+    defaultValue: defaultValue ?? DEFAULT_PER_PAGE,
+    valueIsNumber: true,
+  });
 }

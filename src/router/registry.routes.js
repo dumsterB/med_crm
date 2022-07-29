@@ -29,9 +29,7 @@ export const REGISTRY_PATIENT_ROUTE = {
   path: '/registry/patients/:id',
   component: VPatient,
   meta: {
-    title: {
-      get: () => I18nService.t('Base.Patient'),
-    },
+    title: I18nService.t('Base.Patient'),
   },
 };
 export const REGISTRY_PATIENTS_RECORDS_ROUTE = {

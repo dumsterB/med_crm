@@ -16,10 +16,10 @@ export class CRUDModel {
    * @param { number } page
    * @param { string } [order_by]
    * @param { "ASC"|"DESC" } order_direction
-   * @param { "AND"|"OR" } order_operator
    * @param { string } query
    * @param { string|Array<string> } query_field
    * @param { "ILIKE"|"EQUALS"|"IN" } query_type
+   * @param { "AND"|"OR" } query_operator
    * @param { string } search
    * @return { Promise<{ response: AxiosResponse<any>, data: any }> } data = response.data
    */
@@ -28,9 +28,9 @@ export class CRUDModel {
     page,
     order_by,
     order_direction,
-    order_operator,
     query_field,
     query_type,
+    query_operator,
     search,
   }) {
     if (query_field && query_field instanceof Array) {
@@ -44,9 +44,9 @@ export class CRUDModel {
         page,
         order_by,
         order_direction,
-        order_operator,
         query_field,
         query_type,
+        query_operator,
         search,
       }),
     });

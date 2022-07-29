@@ -1,0 +1,20 @@
+{
+  "ru": {
+    "User": {
+      "Age": "Возраст",
+      "Children": "Дети",
+      "FullName": "ФИО",
+      "Gender": "Пол",
+      "Phone": "Телефон"
+    }
+  },
+  "uz": {
+    "User": {
+      "Age": "Yosh",
+      "Children": "Bolalar",
+      "FullName": "FIO",
+      "Gender": "Jinsi",
+      "Phone": "Telefon"
+    }
+  }
+}
