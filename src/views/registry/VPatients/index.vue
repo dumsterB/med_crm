@@ -1,6 +1,11 @@
 <template>
   <LayoutRegistry>
-    <PatientsTable :items="items" :loading="loading" />
+    <PatientsTable
+      :items="items"
+      :loading="loading"
+      v-model:page="page.value"
+      v-model:per-page="perPage.value"
+      :total="total" />
   </LayoutRegistry>
 </template>
 
@@ -19,8 +24,8 @@ export default {
 
   setup: () => ({
     perPage: usePerPage(),
-    perPageValue: usePerPage(),
     page: usePage(),
+    search: useSearch(),
   }),
   computed: {
     ...mapState({
@@ -29,14 +34,18 @@ export default {
       total: (state) => state.patients.total,
     }),
 
-    watchers() {
-      return [this.perPage, this.page];
+    queryWatchers() {
+      return {
+        perPage: this.perPage.value,
+        page: this.page.value,
+        search: this.search.value,
+      };
     },
   },
   watch: {
-    watchers: {
-      handler() {
-        this.getPatients();
+    queryWatchers: {
+      handler(value, oldValue) {
+        this.queryWatchersHandler(value, oldValue);
       },
       immediate: true,
       deep: true,
@@ -48,14 +57,18 @@ export default {
       setLoading: 'patients/setLoading',
       setData: 'patients/setData',
     }),
+
     async getPatients() {
-      if (this.loading) return;
       this.setLoading(true);
 
       try {
         const { data } = await Patient.find({
           per_page: this.perPage.value,
           page: this.page.value,
+          search: this.search.value,
+          query_type: 'ILIKE',
+          query_operator: 'OR',
+          query_field: ['name', 'phone'],
         });
         this.setData({
           items: data.data,
@@ -68,6 +81,22 @@ export default {
       }
 
       this.setLoading(false);
+    },
+
+    queryWatchersHandler(value, oldValue) {
+      if (
+        value &&
+        oldValue &&
+        (value.perPage !== oldValue.perPage || value.search !== oldValue.search)
+      ) {
+        this.resetPage();
+        return setTimeout(() => this.getPatients());
+      }
+
+      this.getPatients();
+    },
+    resetPage() {
+      this.page.reset();
     },
   },
 };
