@@ -5,8 +5,7 @@
       class="patients-search-popover__no-data patients-search-popover-no-data">
       <div class="patients-search-popover-no-data__title">{{ $t('Patients.NoPatient') }}</div>
       <div class="patients-search-popover-no-data__actions">
-        <ElButton type="primary" plain> {{ $t('Patients.AddPatient') }} </ElButton>
-        <ElButton type="primary"> {{ $t('Base.InviteByNumber') }} </ElButton>
+        <ElButton type="primary" @click="addPatient"> {{ $t('Patients.AddPatient') }} </ElButton>
       </div>
     </div>
 
@@ -25,6 +24,7 @@
 <script>
 import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
 import PatientRow from '@/components/patients/PatientRow/index.vue';
+import CreatePatientDrawer from '@/components/patients/CreatePatientDrawer/index.vue';
 
 export default {
   name: getParentFolderNameByMetaUrl(import.meta.url),
@@ -40,6 +40,15 @@ export default {
   computed: {
     hasPatients() {
       return !!this.patients.length;
+    },
+  },
+
+  methods: {
+    addPatient() {
+      this.$store.dispatch('modalAndDrawer/openDrawer', {
+        component: CreatePatientDrawer,
+        nameOrPhone: this.search,
+      });
     },
   },
 };
