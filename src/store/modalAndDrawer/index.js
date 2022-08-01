@@ -1,3 +1,4 @@
+import { markRaw } from 'vue';
 import { EmitterService } from '@/services/emitter.service';
 import {
   GLOBAL_MODAL_ACTION,
@@ -25,12 +26,12 @@ const store = {
   state() {
     return {
       modal: {
-        name: '',
+        component: null,
         payload: {},
         isOpen: null,
       },
       drawer: {
-        name: '',
+        component: null,
         payload: {},
         isOpen: null,
       },
@@ -40,18 +41,18 @@ const store = {
     /**
      * @param state
      * @param {"modal"|"drawer"} type
-     * @param {string} name
+     * @param {VueComponent} component
      * @param {object} payload
      * @constructor
      */
-    OPEN(state, { type, name, payload = {} }) {
-      state[type].name = name;
+    OPEN(state, { type, component, payload = {} }) {
+      state[type].component = markRaw(component);
       state[type].payload = payload;
       state[type].isOpen = true;
     },
 
     CLOSE(state, { type }) {
-      state[type].name = '';
+      state[type].component = null;
       state[type].payload = {};
       state[type].isOpen = false;
     },
@@ -59,37 +60,40 @@ const store = {
   actions: {
     /**
      * @param dispatch
-     * @param {string|object} optionsOrName
-     * @param {string} optionsOrName.name
-     * @param {object} optionsOrName.payload
+     * @param {VueComponent|object} optionsOrComponent
+     * @param {VueComponent} optionsOrComponent.component
+     * @param {object} optionsOrComponent.payload
      * @return {Promise<*>}
      */
-    async openModal({ dispatch }, optionsOrName) {
-      return dispatch('_open', { type: 'modal', payload: optionsOrName });
+    async openModal({ dispatch }, optionsOrComponent) {
+      return dispatch('_open', { type: 'modal', payload: optionsOrComponent });
     },
 
     /**
      * @param dispatch
-     * @param {string|object} optionsOrName
-     * @param {string} optionsOrName.name
-     * @param {object} optionsOrName.payload
+     * @param {VueComponent|object} optionsOrComponent
+     * @param {VueComponent} optionsOrComponent.component
+     * @param {object} optionsOrComponent.payload
      * @return {Promise<*>}
      */
-    async openDrawer({ dispatch }, optionsOrName) {
-      return dispatch('_open', { type: 'drawer', optionsOrName });
+    async openDrawer({ dispatch }, optionsOrComponent) {
+      return dispatch('_open', { type: 'drawer', optionsOrComponent });
     },
 
     /**
      * @param commit
      * @param {"modal"|"drawer"} type
-     * @param {string|object} optionsOrName
-     * @param {string} optionsOrName.name
-     * @param {object} optionsOrName.payload
+     * @param {VueComponent|object} optionsOrComponent
+     * @param {VueComponent} optionsOrComponent.component
+     * @param {object} optionsOrComponent.payload
      * @return {Promise<*>}
      */
-    async _open({ commit }, { type, optionsOrName }) {
-      const payload = typeof optionsOrName !== 'string' ? payload : { name: payload };
-      commit('OPEN', { type: 'payload', ...payload });
+    async _open({ commit }, { type, optionsOrComponent }) {
+      const payload = optionsOrComponent?.component
+        ? optionsOrComponent
+        : { component: optionsOrComponent };
+
+      commit('OPEN', { type: type, ...payload });
 
       return new Promise((resolve, reject) => {
         promises[type].resolve = resolve;

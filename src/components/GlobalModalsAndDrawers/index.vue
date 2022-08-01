@@ -1,16 +1,17 @@
 <template>
   <component
     v-if="isModalOpen"
-    :is="modalName"
+    :is="modalComponent"
     v-model="modalModel"
     v-bind="modalPayload"
     @action="modalActionHandler" />
 
   <component
     v-if="isDrawerOpen"
-    :is="drawerName"
+    :is="drawerComponent"
     v-model="drawerModel"
     v-bind="drawerPayload"
+    :direction="$options.DRAWER_DEFAULT_DIRECTION"
     @action="drawerActionHandler" />
 </template>
 
@@ -26,16 +27,18 @@ import {
 } from '@/enums/modalAndDrawer.enum';
 import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
+import { DRAWER_DEFAULT_DIRECTION } from '@/config/ui.config';
 
 export default {
   name: getParentFolderNameByMetaUrl(import.meta.url),
+  DRAWER_DEFAULT_DIRECTION: DRAWER_DEFAULT_DIRECTION,
   computed: {
     ...mapState({
-      modalName: (state) => state.modalAndDrawer.modal.name,
+      modalComponent: (state) => state.modalAndDrawer.modal.component,
       modalPayload: (state) => state.modalAndDrawer.modal.payload,
       isModalOpen: (state) => state.modalAndDrawer.modal.isOpen,
 
-      drawerName: (state) => state.modalAndDrawer.drawer.name,
+      drawerComponent: (state) => state.modalAndDrawer.drawer.component,
       drawerPayload: (state) => state.modalAndDrawer.drawer.payload,
       isDrawerOpen: (state) => state.modalAndDrawer.drawer.isOpen,
     }),
