@@ -1,17 +1,27 @@
 .patient-row {
-  padding: 10px;
   &:hover {
     background-color: var(--bg-secondary-color);
     cursor: pointer;
   }
 
   td {
-    padding: 20px 12px;
+    padding: 14px 12px;
+  }
+  &_has-child {
+    td {
+      padding-bottom: 4px;
+    }
   }
 
   &__main {
     display: flex;
     align-items: center;
     gap: 10px;
+  }
+  &__childrens {
+    padding-left: 25px;
+    table {
+      width: 100%;
+    }
   }
 }

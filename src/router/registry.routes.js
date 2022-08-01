@@ -28,6 +28,7 @@ export const REGISTRY_PATIENT_ROUTE = {
   name: 'REGISTRY_PATIENT',
   path: '/registry/patients/:id',
   component: VPatient,
+  beforeEnter: [onlyLoggedInMiddleware],
   meta: {
     title: I18nService.t('Base.Patient'),
   },

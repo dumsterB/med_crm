@@ -1,6 +1,7 @@
 import { createStore } from 'vuex';
-import auth from './auth';
+import auth from '@/store/auth';
 import patients from '@/store/patients';
+import modalAndDrawer from '@/store/modalAndDrawer';
 
 export const Store = createStore({
   state: {},
@@ -11,5 +12,6 @@ export const Store = createStore({
   modules: {
     auth,
     patients,
+    modalAndDrawer,
   },
 });

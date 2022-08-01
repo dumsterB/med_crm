@@ -8,3 +8,5 @@ export const PAGE_SIZES = [
   DEFAULT_PER_PAGE + PAGE_SIZE_STEP * 2,
   DEFAULT_PER_PAGE + PAGE_SIZE_STEP * 3,
 ];
+
+export const DRAWER_DEFAULT_DIRECTION = 'rtl';

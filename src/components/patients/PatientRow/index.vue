@@ -1,5 +1,7 @@
 <template>
-  <tr class="patient-row" @click="goToPatient">
+  <tr
+    :class="['patient-row', { 'patient-row_has-child': patient.childrens_count }]"
+    @click="goToPatient">
     <td>
       <div class="patient-row__main">
         <UiAvatar :img="patient.avatar" />
@@ -7,6 +9,14 @@
       </div>
     </td>
     <td>{{ patient.phone }}</td>
+  </tr>
+
+  <tr v-if="patient.childrens_count">
+    <td class="patient-row__childrens" colspan="2">
+      <table>
+        <PatientRow v-for="children in patient.childrens" :key="children.id" :patient="children" />
+      </table>
+    </td>
   </tr>
 </template>
 

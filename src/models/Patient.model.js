@@ -7,9 +7,12 @@ import { User } from '@/models/User.model';
 export class Patient extends User {
   static modelName = 'patient';
   static tableName = 'patients';
+
   constructor(payload) {
     super(payload);
     this.childrens_count = payload?.childrens_count ?? 0;
+    this.childrens = payload?.childrens ?? [];
     this.parent_id = payload?.parent_id ?? null;
+    this.parent = payload?.parent ?? null;
   }
 }
