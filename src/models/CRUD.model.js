@@ -3,10 +3,17 @@ import { mergeOrCreateQuery } from '@/utils/http.util';
 import { deleteEmptyValueKeys } from '@/utils/object.util';
 import { QUERY_ARRAY_SEPARATOR } from '@/config/api.config';
 
+/**
+ * @class CRUDModel
+ */
 export class CRUDModel {
   static modelName = 'model';
   static tableName = 'models';
 
+  /**
+   * @param {object} [payload]
+   * @param {number} payload.id
+   */
   constructor(payload) {
     this.id = payload?.id || null;
   }
@@ -52,9 +59,7 @@ export class CRUDModel {
     });
 
     const response = await ApiService.get(urlWithQuery);
-    const data = response.data;
-
-    return { response, data };
+    return { response, data: response.data };
   }
 
   /**
@@ -65,7 +70,17 @@ export class CRUDModel {
     return ApiService.get(`${this.tableName}/${id}`);
   }
 
-  static create(payload) {}
+  /**
+   * @param {object} payload
+   * @return {Promise<{data: any, response: AxiosResponse<any>}>} data = response.data
+   */
+  static async create(payload) {
+    const response = await ApiService.post(`${this.tableName}/create`, payload);
+    return {
+      response,
+      data: response.data,
+    };
+  }
 
   static update(payload) {}
 
