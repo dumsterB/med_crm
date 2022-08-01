@@ -8,6 +8,14 @@
     </td>
     <td>{{ patient.phone }}</td>
   </tr>
+
+  <tr v-if="patient.childrens_count">
+    <td class="patient-row__childrens" colspan="2">
+      <table>
+        <PatientRow v-for="children in patient.childrens" :key="children.id" :patient="patient" />
+      </table>
+    </td>
+  </tr>
 </template>
 
 <script>
