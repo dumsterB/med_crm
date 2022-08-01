@@ -2,6 +2,7 @@
   <div class="app">
     <ElConfigProvider size="large">
       <RouterView />
+      <GlobalModalsAndDrawers />
     </ElConfigProvider>
 
     <SVG />
@@ -14,10 +15,11 @@ import { RouterView } from 'vue-router';
 import { I18nService } from '@/services/i18n.service';
 import { ElConfigProvider } from 'element-plus';
 import SVG from '@/components/SVG.vue';
+import GlobalModalsAndDrawers from '@/components/GlobalModalsAndDrawers/index.vue';
 
 export default {
   name: getFileNameByMetaUrl(import.meta.url),
-  components: { RouterView, ElConfigProvider, SVG },
+  components: { RouterView, ElConfigProvider, SVG, GlobalModalsAndDrawers },
 
   mounted() {
     I18nService.setLocaleFromStorage();
