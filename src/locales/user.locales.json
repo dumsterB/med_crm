@@ -2,6 +2,7 @@
   "ru": {
     "User": {
       "Age": "Возраст",
+      "Birthdate": "Дата рождения",
       "Children": "Дети",
       "FullName": "ФИО",
       "Gender": "Пол",
@@ -17,6 +18,7 @@
   "uz": {
     "User": {
       "Age": "Yosh",
+      "Birthdate": "Togilgan sanasi",
       "Children": "Bolalar",
       "FullName": "FIO",
       "Gender": "Jinsi",
