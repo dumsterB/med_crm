@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { getFileNameByMetaUrl } from '@/utils/vite.util';
+import { getFileNameByPath } from '@/utils/vite.util';
 import { RouterView } from 'vue-router';
 import { I18nService } from '@/services/i18n.service';
 import { ElConfigProvider } from 'element-plus';
@@ -18,7 +18,7 @@ import SVG from '@/components/SVG.vue';
 import GlobalModalsAndDrawers from '@/components/GlobalModalsAndDrawers/index.vue';
 
 export default {
-  name: getFileNameByMetaUrl(import.meta.url),
+  name: getFileNameByPath(import.meta.url),
   components: { RouterView, ElConfigProvider, SVG, GlobalModalsAndDrawers },
 
   mounted() {
