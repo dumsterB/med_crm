@@ -2,7 +2,12 @@
   <ElContainer class="layout-registry">
     <ElAside class="layout-registry__menu"> <RegistryMenu /> </ElAside>
 
-    <ElContainer :class="['layout-registry__main', mainClass]">
+    <ElContainer
+      :class="[
+        'layout-registry__main',
+        { 'layout-registry__main_fix-height': fixHeight },
+        mainClass,
+      ]">
       <ElHeader class="layout-registry__header layout-registry__el-header">
         <RegistryHeader />
       </ElHeader>
@@ -20,6 +25,7 @@ export default {
   name: getParentFolderNameByMetaUrl(import.meta.url),
   components: { RegistryHeader, RegistryMenu },
   props: {
+    fixHeight: Boolean,
     contentClass: String,
     mainClass: String,
   },
