@@ -1,5 +1,5 @@
 <template>
-  <LayoutRegistry main-class="v-patients-main">
+  <LayoutRegistry main-class="v-patients-main" fixHeight>
     <PatientsTable
       class="v-patients-content__table"
       :items="items"
