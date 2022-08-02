@@ -10,6 +10,7 @@
         "Woman": "Женщина"
       },
       "IsChildren": "Ребёнок",
+      "Parent": "Родитель",
       "Phone": "Телефон"
     }
   },
@@ -24,6 +25,7 @@
         "Woman": "Ayol"
       },
       "IsChildren": "Yosh bola",
+      "Parent": "Otonasi",
       "Phone": "Telefon"
     }
   }
