@@ -15,6 +15,7 @@ const app = createApp(App).use(Router).use(Store).use(ApiPlugin).use(I18nPlugin)
 const UiComponents = import.meta.glob('./components/ui/**/*.vue', { eager: true });
 for (let key in UiComponents) {
   const component = UiComponents[key].default;
+  console.log('NEW_VERSION');
   console.log(component);
   app.component(component.name, component);
 }
