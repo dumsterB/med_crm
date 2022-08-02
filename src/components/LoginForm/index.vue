@@ -23,12 +23,12 @@
 </template>
 
 <script>
-import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
+import { getParentFolderNameByPath } from '@/utils/vite.util';
 import { FORGOT_PASSWORD_ROUTE } from '@/router/auth.routes';
 import { REGISTRY_DASHBOARD_ROUTE } from '@/router/registry.routes';
 
 export default {
-  name: getParentFolderNameByMetaUrl(import.meta.url),
+  name: getParentFolderNameByPath(import.meta.url),
   data() {
     return {
       loading: false,

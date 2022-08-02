@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
+import { getParentFolderNameByPath } from '@/utils/vite.util';
 import LayoutAuth from '@/components/layouts/LayoutAuth/index.vue';
 import ForgotPassword from '@/components/ForgotPassword/index.vue';
 
 export default {
-  name: getParentFolderNameByMetaUrl(import.meta.url),
+  name: getParentFolderNameByPath(import.meta.url),
   components: { LayoutAuth, ForgotPassword },
 
   methods: {

@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
+import { getParentFolderNameByPath } from '@/utils/vite.util';
 
 export default {
-  name: getParentFolderNameByMetaUrl(import.meta.url),
+  name: getParentFolderNameByPath(import.meta.url),
   props: {
     modelValue: String,
   },

@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
+import { getParentFolderNameByPath } from '@/utils/vite.util';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 
@@ -15,8 +16,7 @@ const app = createApp(App).use(Router).use(Store).use(ApiPlugin).use(I18nPlugin)
 const UiComponents = import.meta.glob('./components/ui/**/*.vue', { eager: true });
 for (let key in UiComponents) {
   const component = UiComponents[key].default;
-  console.log(component);
-  app.component(component.name, component);
+  app.component(getParentFolderNameByPath(component.__file), component);
 }
 
 app.mount('#app');

@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
+import { getParentFolderNameByPath } from '@/utils/vite.util';
 import { mapState, mapActions } from 'vuex';
 import { throttle } from 'lodash';
 import { useSearch } from '@/hooks/query';
@@ -31,7 +31,7 @@ import { REGISTRY_PATIENTS_ROUTE } from '@/router/registry.routes';
 import PatientsSearchPopover from './PatientsSearchPopover/index.vue';
 
 export default {
-  name: getParentFolderNameByMetaUrl(import.meta.url),
+  name: getParentFolderNameByPath(import.meta.url),
   components: { PatientsSearchPopover },
   icons: { SEARCH },
 

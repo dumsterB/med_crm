@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
+import { getParentFolderNameByPath } from '@/utils/vite.util';
 import RegistryHeader from '@/components/registry/RegistryHeader/index.vue';
 import RegistryMenu from '@/components/registry/RegistryMenu/index.vue';
 
 export default {
-  name: getParentFolderNameByMetaUrl(import.meta.url),
+  name: getParentFolderNameByPath(import.meta.url),
   components: { RegistryHeader, RegistryMenu },
   props: {
     fixHeight: Boolean,

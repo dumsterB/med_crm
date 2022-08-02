@@ -19,13 +19,13 @@
 </template>
 
 <script>
-import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
+import { getParentFolderNameByPath } from '@/utils/vite.util';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
 import { Appointment } from '@/models/Appointment.model';
 
 export default {
-  name: getParentFolderNameByMetaUrl(import.meta.url),
+  name: getParentFolderNameByPath(import.meta.url),
   props: {
     modelValue: Boolean,
     patient: [Patient, User, Object],

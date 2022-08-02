@@ -2,9 +2,8 @@
  * @param { string } url значение import.meta.url
  * @return { string } возвращает название родительской папки
  */
-export function getParentFolderNameByMetaUrl(url) {
-  console.log(url);
-  const paths = new URL(url).pathname.split('/');
+export function getParentFolderNameByPath(url) {
+  const paths = url.split('/');
   return paths[paths.length - 2];
 }
 

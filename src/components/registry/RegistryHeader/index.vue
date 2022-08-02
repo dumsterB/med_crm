@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
+import { getParentFolderNameByPath } from '@/utils/vite.util';
 import LangSelect from '@/components/LangSelect/index.vue';
 import PatientsSearch from '@/components/patients/PatientsSearch/index.vue';
 
 export default {
-  name: getParentFolderNameByMetaUrl(import.meta.url),
+  name: getParentFolderNameByPath(import.meta.url),
   components: { LangSelect, PatientsSearch },
 };
 </script>
