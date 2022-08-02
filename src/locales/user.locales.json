@@ -5,6 +5,11 @@
       "Children": "Дети",
       "FullName": "ФИО",
       "Gender": "Пол",
+      "Genders": {
+        "Man": "Мужчина",
+        "Woman": "Женщина"
+      },
+      "IsChildren": "Ребёнок",
       "Phone": "Телефон"
     }
   },
@@ -14,6 +19,11 @@
       "Children": "Bolalar",
       "FullName": "FIO",
       "Gender": "Jinsi",
+      "Genders": {
+        "Man": "Erkak",
+        "Woman": "Ayol"
+      },
+      "IsChildren": "Yosh bola",
       "Phone": "Telefon"
     }
   }
