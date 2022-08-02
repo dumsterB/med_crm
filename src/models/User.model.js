@@ -9,7 +9,7 @@ export class User extends CRUDModel {
     this.name = payload?.name ?? null;
     this.email = payload?.email ?? null;
     this.phone = payload?.phone ?? null;
-    this.birhdate = payload?.birhdate ?? null;
+    this.birthdate = payload?.birthdate ?? null;
     this.gender = payload?.gender ?? User.enum.genders.MAN;
     this.role = payload?.role ?? null;
     this.created_at = payload?.created_at ?? null;
@@ -27,4 +27,11 @@ export class User extends CRUDModel {
       Manager: 'manager',
     },
   };
+
+  static create(payload) {
+    return super.create({
+      ...payload,
+      birthdate: new Date(payload.birthdate).toISOString(),
+    });
+  }
 }
