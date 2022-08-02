@@ -6,7 +6,8 @@
       :loading="loading"
       v-model:page="page.value"
       v-model:per-page="perPage.value"
-      :total="total" />
+      :total="total"
+      :search="search.value" />
   </LayoutRegistry>
 </template>
 
