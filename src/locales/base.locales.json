@@ -17,6 +17,7 @@
       "Patient": "Пациент",
       "Patients": "Пациенты",
       "PatientsRecords": "Записи пациентов",
+      "PleaseInput": "Пожалуйста, введите",
       "Search": "Поиск",
       "SignUp": "Регистрация"
     }
@@ -39,6 +40,7 @@
       "Patient": "Bemor",
       "Patients": "Bemorlar",
       "PatientsRecords": "Bemorlar yozuvlari",
+      "PleaseInput": "Iltimos, kiriting",
       "Search": "Topish",
       "SignUp": "Ro'yxatdan o'tish"
     }
