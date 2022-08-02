@@ -10,11 +10,11 @@
       @error="errorHandler"
       @load="loadHandler" />
 
-    <img
+    <!--    <img
       v-if="error"
       class="ui-image__image"
       src="@/images/assets/image-error.png"
-      :alt="image?.alt" />
+      :alt="image?.alt" />-->
   </div>
 </template>
 
