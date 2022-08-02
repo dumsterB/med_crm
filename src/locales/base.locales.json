@@ -19,6 +19,7 @@
       "PatientsRecords": "Записи пациентов",
       "PleaseInput": "Пожалуйста, введите",
       "Search": "Поиск",
+      "SelectDate": "Выберите дату",
       "SignUp": "Регистрация"
     }
   },
@@ -42,6 +43,7 @@
       "PatientsRecords": "Bemorlar yozuvlari",
       "PleaseInput": "Iltimos, kiriting",
       "Search": "Topish",
+      "SelectDate": "Sanani tanlang",
       "SignUp": "Ro'yxatdan o'tish"
     }
   }
