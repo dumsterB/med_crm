@@ -1,2 +1,26 @@
 .v-patients {
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 10px;
+
+      &-actions {
+        display: flex;
+        margin-left: auto;
+        gap: 6px;
+      }
+    }
+
+    &__table {
+      height: 400px;
+    }
+  }
 }
