@@ -21,11 +21,15 @@ export default {
       return this.modelValue?.replace(/^\+*/, '');
     },
   },
-
   methods: {
     updateModelValue(value) {
       this.$emit('update:modelValue', `+${value}`.replace(/^\+*/, '+'));
     },
+  },
+
+  mounted() {
+    // На всякий случай, если изначально было без плюса
+    this.updateModelValue(this.modelValue);
   },
 };
 </script>
