@@ -1,10 +1,12 @@
 {
   "ru": {
     "Notifications": {
-      "Error": "Ошибка"
+      "Error": "Ошибка",
+      "SuccessCreated": "Успешно создано"
     }
   },
   "uz": {
-    "Error": "Xato"
+    "Error": "Xato",
+    "SuccessCreated": "Muvaffaqiyatli yaratildi"
   }
 }

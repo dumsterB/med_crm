@@ -79,6 +79,7 @@ export class CRUDModel {
     return {
       response,
       data: response.data,
+      [this.modelName]: response.data.data,
     };
   }
 

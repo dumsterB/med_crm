@@ -5,10 +5,16 @@
         class="patients-table"
         :data="items"
         v-loading="loading"
-        fixed
         ref="elTable"
         @row-click="goToPatient">
-        <template #empty> {{ $t('Base.NoData') }} </template>
+        <template #empty>
+          <div class="patients-table__empty patients-table-empty">
+            <span>{{ $t('Base.NoData') }}</span>
+            <ElButton type="primary" @click="addPatient">
+              {{ $t('Patients.AddPatient') }}
+            </ElButton>
+          </div>
+        </template>
 
         <ElTableColumn prop="name" :label="$t('User.FullName')">
           <template #default="{ row }">
@@ -64,6 +70,7 @@ import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
 import CreateAppointmentDrawer from '@/components/appointments/CreateAppointmentDrawer/index.vue';
+import CreatePatientDrawer from '@/components/patients/CreatePatientDrawer/index.vue';
 
 export default {
   name: getParentFolderNameByMetaUrl(import.meta.url),
@@ -72,11 +79,12 @@ export default {
     /**
      * @param { Array<Patient|object> } items
      */
+    loading: Boolean,
     items: Array,
     page: Number,
     perPage: Number,
     total: Number,
-    loading: Boolean,
+    search: String,
   },
   icons: icons,
   computed: {
@@ -112,6 +120,14 @@ export default {
         },
       });
     },
+    addPatient() {
+      this.$store.dispatch('modalAndDrawer/openDrawer', {
+        component: CreatePatientDrawer,
+        payload: {
+          nameOrPhone: this.search,
+        },
+      });
+    },
   },
 };
 </script>
@@ -119,3 +135,4 @@ export default {
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/base.locales.json" />
 <i18n src="@/locales/user.locales.json" />
+<i18n src="@/locales/patients.locales.json" />

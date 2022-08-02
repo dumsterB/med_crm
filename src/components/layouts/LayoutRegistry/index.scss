@@ -12,6 +12,12 @@
     padding: var(--padding-y) 0 var(--padding-y) var(--padding-x);
     background-color: var(--bg-color);
   }
+
+  &__main {
+    &_fix-height {
+      height: 100vh;
+    }
+  }
   &__header {
     padding: var(--padding-medium);
     background-color: var(--bg-color);

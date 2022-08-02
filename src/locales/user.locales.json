@@ -2,18 +2,32 @@
   "ru": {
     "User": {
       "Age": "Возраст",
+      "Birthdate": "Дата рождения",
       "Children": "Дети",
       "FullName": "ФИО",
       "Gender": "Пол",
+      "Genders": {
+        "Man": "Мужчина",
+        "Woman": "Женщина"
+      },
+      "IsChildren": "Ребёнок",
+      "Parent": "Родитель",
       "Phone": "Телефон"
     }
   },
   "uz": {
     "User": {
       "Age": "Yosh",
+      "Birthdate": "Togilgan sanasi",
       "Children": "Bolalar",
       "FullName": "FIO",
       "Gender": "Jinsi",
+      "Genders": {
+        "Man": "Erkak",
+        "Woman": "Ayol"
+      },
+      "IsChildren": "Yosh bola",
+      "Parent": "Otonasi",
       "Phone": "Telefon"
     }
   }

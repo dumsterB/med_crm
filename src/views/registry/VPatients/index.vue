@@ -1,12 +1,19 @@
 <template>
-  <LayoutRegistry main-class="v-patients-main">
+  <LayoutRegistry content-class="v-patients-content" fixHeight>
+    <div class="v-patients-content__header v-patients-content-header">
+      <div class="v-patients-content-header-actions">
+        <ElButton type="primary" @click="createPatient"> {{ $t('Patients.AddPatient') }} </ElButton>
+      </div>
+    </div>
+
     <PatientsTable
       class="v-patients-content__table"
       :items="items"
       :loading="loading"
       v-model:page="page.value"
       v-model:per-page="perPage.value"
-      :total="total" />
+      :total="total"
+      :search="search.value" />
   </LayoutRegistry>
 </template>
 
@@ -18,6 +25,7 @@ import { Patient } from '@/models/Patient.model';
 
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
+import CreatePatientDrawer from '@/components/patients/CreatePatientDrawer/index.vue';
 
 export default {
   name: getParentFolderNameByMetaUrl(import.meta.url),
@@ -99,9 +107,14 @@ export default {
     resetPage() {
       this.page.reset();
     },
+
+    createPatient() {
+      this.$store.dispatch('modalAndDrawer/openDrawer', CreatePatientDrawer);
+    },
   },
 };
 </script>
 
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/notifications.locales.json" />
+<i18n src="@/locales/patients.locales.json" />

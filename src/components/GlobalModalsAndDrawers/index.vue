@@ -12,6 +12,7 @@
     v-model="drawerModel"
     v-bind="drawerPayload"
     :direction="$options.DRAWER_DEFAULT_DIRECTION"
+    :size="$options.DRAWER_DEFAULT_SIZE"
     @action="drawerActionHandler" />
 </template>
 
@@ -27,11 +28,12 @@ import {
 } from '@/enums/modalAndDrawer.enum';
 import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
-import { DRAWER_DEFAULT_DIRECTION } from '@/config/ui.config';
+import { DRAWER_DEFAULT_DIRECTION, DRAWER_DEFAULT_SIZE } from '@/config/ui.config';
 
 export default {
   name: getParentFolderNameByMetaUrl(import.meta.url),
   DRAWER_DEFAULT_DIRECTION: DRAWER_DEFAULT_DIRECTION,
+  DRAWER_DEFAULT_SIZE: DRAWER_DEFAULT_SIZE,
   computed: {
     ...mapState({
       modalComponent: (state) => state.modalAndDrawer.modal.component,
@@ -74,9 +76,11 @@ export default {
 
     modalActionHandler(action) {
       EmitterService.emit(GLOBAL_MODAL_ACTION, action);
+      this.closeModal();
     },
     drawerActionHandler(action) {
       EmitterService.emit(GLOBAL_DRAWER_ACTION, action);
+      this.closeDrawer();
     },
   },
 };
