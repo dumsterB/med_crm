@@ -19,13 +19,12 @@
 </template>
 
 <script>
-import { getParentFolderNameByPath } from '@/utils/vite.util';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
 import { Appointment } from '@/models/Appointment.model';
 
 export default {
-  name: getParentFolderNameByPath(import.meta.url),
+  name: 'CreateAppointmentDrawer',
   props: {
     modelValue: Boolean,
     patient: [Patient, User, Object],

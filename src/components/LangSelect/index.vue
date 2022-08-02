@@ -9,12 +9,11 @@
 </template>
 
 <script>
-import { getParentFolderNameByPath } from '@/utils/vite.util';
 import { I18nService } from '@/services/i18n.service';
 import { LOCALES } from '@/config/i18n.config';
 
 export default {
-  name: getParentFolderNameByPath(import.meta.url),
+  name: 'LangSelect',
   computed: {
     lang: {
       get() {

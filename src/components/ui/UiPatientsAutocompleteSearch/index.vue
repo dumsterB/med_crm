@@ -11,11 +11,10 @@
 </template>
 
 <script>
-import { getParentFolderNameByPath } from '@/utils/vite.util';
 import { Patient } from '@/models/Patient.model';
 
 export default {
-  name: getParentFolderNameByPath(import.meta.url),
+  name: 'UiPatientsAutocompleteSearch',
   props: {
     modelValue: Number,
   },

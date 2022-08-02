@@ -6,12 +6,11 @@
 </template>
 
 <script>
-import { getParentFolderNameByPath } from '@/utils/vite.util';
 import LangSelect from '@/components/LangSelect/index.vue';
 import PatientsSearch from '@/components/patients/PatientsSearch/index.vue';
 
 export default {
-  name: getParentFolderNameByPath(import.meta.url),
+  name: 'RegistryHeader',
   components: { LangSelect, PatientsSearch },
 };
 </script>

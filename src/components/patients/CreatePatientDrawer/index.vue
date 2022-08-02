@@ -47,12 +47,11 @@
 </template>
 
 <script>
-import { getParentFolderNameByPath } from '@/utils/vite.util';
 import { Patient } from '@/models/Patient.model';
 import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
 
 export default {
-  name: getParentFolderNameByPath(import.meta.url),
+  name: 'CreatePatientDrawer',
   emits: ['update:modelValue', 'action'],
   props: {
     modelValue: Boolean,

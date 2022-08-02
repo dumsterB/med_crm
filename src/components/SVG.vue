@@ -222,11 +222,10 @@
 </template>
 
 <script>
-import { getFileNameByPath } from '@/utils/vite.util';
 import * as icons from '@/enums/icons.enum';
 
 export default {
-  name: getFileNameByPath(import.meta.url),
+  name: 'SVG',
   icons: icons,
 };
 </script>

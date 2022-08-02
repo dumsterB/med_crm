@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import { getParentFolderNameByPath } from '@/utils/vite.util';
 import * as icons from '@/enums/icons.enum.js';
 import {
   REGISTRY_DASHBOARD_ROUTE,
@@ -36,7 +35,7 @@ import {
 } from '@/router/registry.routes';
 
 export default {
-  name: getParentFolderNameByPath(import.meta.url),
+  name: 'RegistryMenu',
   icons: icons,
   methods: {
     logout() {

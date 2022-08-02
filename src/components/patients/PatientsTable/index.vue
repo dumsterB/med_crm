@@ -65,7 +65,6 @@
 </template>
 
 <script>
-import { getParentFolderNameByPath } from '@/utils/vite.util';
 import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
@@ -73,7 +72,7 @@ import CreateAppointmentDrawer from '@/components/appointments/CreateAppointment
 import CreatePatientDrawer from '@/components/patients/CreatePatientDrawer/index.vue';
 
 export default {
-  name: getParentFolderNameByPath(import.meta.url),
+  name: 'PatientsTable',
   emits: ['update:perPage', 'update:page'],
   props: {
     /**

@@ -13,12 +13,11 @@
 </template>
 
 <script>
-import { getParentFolderNameByPath } from '@/utils/vite.util';
 import { User } from '@/models/User.model.js';
 import { capitalize } from 'lodash';
 
 export default {
-  name: getParentFolderNameByPath(import.meta.url),
+  name: 'UiGenderSelect',
   props: {
     modelValue: String,
   },

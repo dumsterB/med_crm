@@ -13,11 +13,10 @@
 </template>
 
 <script>
-import { getParentFolderNameByPath } from '@/utils/vite.util';
 import LangSelect from '@/components/LangSelect/index.vue';
 
 export default {
-  name: getParentFolderNameByPath(import.meta.url),
+  name: 'LayoutAuth',
   components: { LangSelect },
   props: {
     contentClass: String,

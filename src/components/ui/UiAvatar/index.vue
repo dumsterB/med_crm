@@ -15,12 +15,11 @@
 </template>
 
 <script>
-import { getParentFolderNameByPath } from '@/utils/vite.util';
 import { AvatarService } from '@/services/avatar.sevice';
 import { User } from '@/models/User.model';
 
 export default {
-  name: getParentFolderNameByPath(import.meta.url),
+  name: 'UiAvatar',
   props: {
     /**
      * @param { Object } image

@@ -23,12 +23,11 @@
 </template>
 
 <script>
-import { getParentFolderNameByPath } from '@/utils/vite.util';
 import { FORGOT_PASSWORD_ROUTE } from '@/router/auth.routes';
 import { REGISTRY_DASHBOARD_ROUTE } from '@/router/registry.routes';
 
 export default {
-  name: getParentFolderNameByPath(import.meta.url),
+  name: 'LoginForm',
   data() {
     return {
       loading: false,
