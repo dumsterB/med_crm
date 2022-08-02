@@ -5,7 +5,6 @@
         class="patients-table"
         :data="items"
         v-loading="loading"
-        fixed
         ref="elTable"
         @row-click="goToPatient">
         <template #empty>
