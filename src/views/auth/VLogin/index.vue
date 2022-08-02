@@ -6,12 +6,11 @@
 </template>
 
 <script>
-import { getParentFolderNameByMetaUrl } from '@/utils/vite.util.js';
 import LayoutAuth from '@/components/layouts/LayoutAuth/index.vue';
 import LoginForm from '@/components/LoginForm/index.vue';
 
 export default {
-  name: getParentFolderNameByMetaUrl(import.meta.url),
+  name: 'VLogin',
   components: { LayoutAuth, LoginForm },
 };
 </script>

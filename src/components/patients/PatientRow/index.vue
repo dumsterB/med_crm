@@ -21,12 +21,11 @@
 </template>
 
 <script>
-import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
 import { Patient } from '@/models/Patient.model';
 import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
 
 export default {
-  name: getParentFolderNameByMetaUrl(import.meta.url),
+  name: 'PatientRow',
   props: {
     patient: [Patient, Object],
   },

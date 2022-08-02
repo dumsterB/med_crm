@@ -12,7 +12,7 @@ import '@/assets/styles/index.scss';
 
 const app = createApp(App).use(Router).use(Store).use(ApiPlugin).use(I18nPlugin).use(ElementPlus);
 
-const UiComponents = import.meta.globEager('@/components/ui/**/*.vue');
+const UiComponents = import.meta.glob('./components/ui/**/*.vue', { eager: true });
 for (let key in UiComponents) {
   const component = UiComponents[key].default;
   app.component(component.name, component);

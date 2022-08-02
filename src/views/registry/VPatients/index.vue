@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
 import { mapState, mapActions } from 'vuex';
 import { usePerPage, usePage, useSearch } from '@/hooks/query';
 import { Patient } from '@/models/Patient.model';
@@ -28,7 +27,7 @@ import PatientsTable from '@/components/patients/PatientsTable/index.vue';
 import CreatePatientDrawer from '@/components/patients/CreatePatientDrawer/index.vue';
 
 export default {
-  name: getParentFolderNameByMetaUrl(import.meta.url),
+  name: 'VPatients',
   components: { LayoutRegistry, PatientsTable },
 
   setup: () => ({

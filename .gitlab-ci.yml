@@ -1,0 +1,29 @@
+default:
+    image: alpine
+
+build front:
+  stage: build
+  image: node:16
+  variables:
+    VITE_API_URL: $STAGE_PROTOCOL://$STAGE_SERVER/api/mis
+  only:
+    - stage
+  script:
+    - npm install --progress=false
+    - npm run build:dev
+  artifacts:
+    expire_in: 1 week
+    paths:
+       - dist
+
+stage_deploy:
+    stage: deploy
+    only:
+      - stage
+    script:
+      - apk add --no-cache openssh rsync
+      - mkdir -p ~/.ssh
+      - echo "$STAGE_KEY" >> ~/.ssh/id_rsa
+      - chmod 600 ~/.ssh/id_rsa
+      - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+      - rsync -rav --delete dist/ $STAGE_USER@$STAGE_SERVER:/var/www/mis

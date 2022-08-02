@@ -18,7 +18,6 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
 import { EmitterService } from '@/services/emitter.service';
 import {
   GLOBAL_DRAWER_ACTION,
@@ -31,7 +30,7 @@ import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDr
 import { DRAWER_DEFAULT_DIRECTION, DRAWER_DEFAULT_SIZE } from '@/config/ui.config';
 
 export default {
-  name: getParentFolderNameByMetaUrl(import.meta.url),
+  name: 'GlobalModalsAndDrawers',
   DRAWER_DEFAULT_DIRECTION: DRAWER_DEFAULT_DIRECTION,
   DRAWER_DEFAULT_SIZE: DRAWER_DEFAULT_SIZE,
   computed: {

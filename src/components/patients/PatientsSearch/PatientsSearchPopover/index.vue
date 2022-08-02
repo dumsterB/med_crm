@@ -22,12 +22,11 @@
 </template>
 
 <script>
-import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
 import PatientRow from '@/components/patients/PatientRow/index.vue';
 import CreatePatientDrawer from '@/components/patients/CreatePatientDrawer/index.vue';
 
 export default {
-  name: getParentFolderNameByMetaUrl(import.meta.url),
+  name: 'PatientsSearchPopover',
   components: { PatientRow },
   props: {
     /**

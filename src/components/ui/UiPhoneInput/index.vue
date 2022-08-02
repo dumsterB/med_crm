@@ -9,10 +9,8 @@
 </template>
 
 <script>
-import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
-
 export default {
-  name: getParentFolderNameByMetaUrl(import.meta.url),
+  name: 'UiPhoneInput',
   props: {
     modelValue: String,
   },

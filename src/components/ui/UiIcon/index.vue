@@ -7,10 +7,8 @@
 </template>
 
 <script>
-import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
-
 export default {
-  name: getParentFolderNameByMetaUrl(import.meta.url),
+  name: 'UiIcon',
   props: {
     icon: String, // id символов из SVG
   },

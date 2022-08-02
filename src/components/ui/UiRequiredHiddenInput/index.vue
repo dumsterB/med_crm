@@ -3,10 +3,8 @@
 </template>
 
 <script>
-import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
-
 export default {
-  name: getParentFolderNameByMetaUrl(import.meta.url),
+  name: 'UiRequiredHiddenInput',
   props: ['modelValue'],
 };
 </script>
