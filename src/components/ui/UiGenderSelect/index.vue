@@ -14,7 +14,7 @@
 
 <script>
 import { getParentFolderNameByMetaUrl } from '@/utils/vite.util';
-import { User } from '@/models/user.model.js';
+import { User } from '@/models/User.model.js';
 import { capitalize } from 'lodash';
 
 export default {
