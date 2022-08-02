@@ -8,17 +8,14 @@ import { Store } from '@/store';
 import { ApiPlugin } from '@/plugins/api.plugin.js';
 import { I18nPlugin } from '@/plugins/i18n.plugin';
 
-import UiIcon from '@/components/ui/UiIcon/index.vue';
-import UiAvatar from '@/components/ui/UiAvatar/index.vue';
-
 import '@/assets/styles/index.scss';
 
-createApp(App)
-  .use(Router)
-  .use(Store)
-  .use(ApiPlugin)
-  .use(I18nPlugin)
-  .use(ElementPlus)
-  .component('UiIcon', UiIcon)
-  .component('UiAvatar', UiAvatar)
-  .mount('#app');
+const app = createApp(App).use(Router).use(Store).use(ApiPlugin).use(I18nPlugin).use(ElementPlus);
+
+const UiComponents = import.meta.globEager('@/components/ui/**/*.vue');
+for (let key in UiComponents) {
+  const component = UiComponents[key].default;
+  app.component(component.name, component);
+}
+
+app.mount('#app');
