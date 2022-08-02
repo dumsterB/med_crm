@@ -5,7 +5,8 @@
     :placeholder="$t('Base.PleaseInput')"
     :fetch-suggestions="getPatients"
     :debounce="250"
-    @select="selectHandler">
+    @select="selectHandler"
+    v-bind="$attrs">
   </ElAutocomplete>
 </template>
 
