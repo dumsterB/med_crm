@@ -76,9 +76,11 @@ export default {
 
     modalActionHandler(action) {
       EmitterService.emit(GLOBAL_MODAL_ACTION, action);
+      this.closeModal();
     },
     drawerActionHandler(action) {
       EmitterService.emit(GLOBAL_DRAWER_ACTION, action);
+      this.closeDrawer();
     },
   },
 };
