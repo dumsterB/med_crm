@@ -10,7 +10,7 @@ export class User extends CRUDModel {
     this.email = payload?.email ?? null;
     this.phone = payload?.phone ?? null;
     this.birhdate = payload?.birhdate ?? null;
-    this.gender = payload?.gender ?? null;
+    this.gender = payload?.gender ?? User.enum.genders.MAN;
     this.role = payload?.role ?? null;
     this.created_at = payload?.created_at ?? null;
   }
@@ -19,6 +19,12 @@ export class User extends CRUDModel {
     genders: {
       MAN: 'man',
       Woman: 'woman',
+    },
+    roles: {
+      SuperAdmin: 'super-admin',
+      Admin: 'admin',
+      Patient: 'patient',
+      Manager: 'manager',
     },
   };
 }
