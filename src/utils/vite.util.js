@@ -3,6 +3,7 @@
  * @return { string } возвращает название родительской папки
  */
 export function getParentFolderNameByPath(url) {
+  console.log(url);
   const paths = url.split('/');
   return paths[paths.length - 2];
 }
