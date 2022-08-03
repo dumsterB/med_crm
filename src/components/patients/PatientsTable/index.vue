@@ -27,7 +27,7 @@
 
         <ElTableColumn prop="gender" :label="$t('User.Gender')">
           <template #default="{ row }">
-            {{ $t(`User.Genders.${row.gender}`) }}
+            {{ row.gender ? $t(`User.Genders.${row.gender}`) : '' }}
           </template>
         </ElTableColumn>
 
