@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     updateModelValue(value) {
-      this.$emit('update:modelValue', `+${value}`.replace(/^\+*/, '+'));
+      this.$emit('update:modelValue', `+${value || ''}`.replace(/^\+*/, '+'));
     },
   },
 
