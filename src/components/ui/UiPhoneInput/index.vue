@@ -1,7 +1,9 @@
 <template>
   <ElInput
+    class="ui-phone-input"
     :model-value="phone"
     type="number"
+    min="0"
     v-bind="$attrs"
     @update:model-value="updateModelValue">
     <template #prefix> + </template>
@@ -31,3 +33,5 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" src="./index.scss" />
