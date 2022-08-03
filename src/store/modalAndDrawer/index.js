@@ -108,11 +108,15 @@ const store = {
       commit('CLOSE', { type: 'drawer' });
     },
 
-    forceCloseModal() {
+    forceCloseModal({ state, dispatch }) {
+      if (!state.modal.isOpen) return;
       EmitterService.emit(GLOBAL_MODAL_CLOSE, new GlobalModalCloseAction());
+      dispatch('closeModal');
     },
-    forceCloseDrawer() {
+    forceCloseDrawer({ state, dispatch }) {
+      if (!state.drawer.isOpen) return;
       EmitterService.emit(GLOBAL_DRAWER_CLOSE, new GlobalDrawerCloseAction());
+      dispatch('closeDrawer');
     },
   },
 };
