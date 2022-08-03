@@ -3,6 +3,7 @@
     "Base": {
       "Actions": "Действия",
       "Authorization": "Авторизация",
+      "Cancel": "Отменить",
       "Create": "Создать",
       "Dashboard": "Дашборд",
       "DoctorsSchedule": "Расписание врачей",
@@ -18,6 +19,7 @@
       "Patients": "Пациенты",
       "PatientsRecords": "Записи пациентов",
       "PleaseInput": "Пожалуйста, введите",
+      "SaveChanges": "Сохранить изменения",
       "Search": "Поиск",
       "SelectDate": "Выберите дату",
       "SignUp": "Регистрация"
@@ -27,6 +29,7 @@
     "Base": {
       "Actions": "??Actions??",
       "Authorization": "Kirish",
+      "Cancel": "Qaytish",
       "Create": "Yaratish",
       "Dashboard": "Dashboard",
       "DoctorsSchedule": "Shifokorlar jadvali",
@@ -42,6 +45,7 @@
       "Patients": "Bemorlar",
       "PatientsRecords": "Bemorlar yozuvlari",
       "PleaseInput": "Iltimos, kiriting",
+      "SaveChanges": "O'zgarishlarni saqlash",
       "Search": "Topish",
       "SelectDate": "Sanani tanlang",
       "SignUp": "Ro'yxatdan o'tish"
