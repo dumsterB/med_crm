@@ -2,6 +2,7 @@
   "ru": {
     "Base": {
       "Actions": "Действия",
+      "Attach": "Привязать",
       "Authorization": "Авторизация",
       "Cancel": "Отменить",
       "Create": "Создать",
@@ -28,6 +29,7 @@
   "uz": {
     "Base": {
       "Actions": "??Actions??",
+      "Attach": "Attach",
       "Authorization": "Kirish",
       "Cancel": "Qaytish",
       "Create": "Yaratish",
