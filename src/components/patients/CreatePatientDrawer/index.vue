@@ -5,10 +5,6 @@
     v-bind="$attrs"
     @update:model-value="$emit('update:modelValue', $event)">
     <ElForm class="create-patient-drawer-form" label-position="top" @submit.prevent="createPatient">
-      <ElFormItem :label="$t('User.FullName')">
-        <ElInput v-model="patient.name" required />
-      </ElFormItem>
-
       <ElFormItem>
         <ElSwitch :active-text="$t('User.IsChildren')" v-model="isChildren" />
       </ElFormItem>
@@ -21,8 +17,12 @@
         <UiPatientsAutocompleteSearch v-model="patient.parent_id" required />
       </ElFormItem>
 
+      <ElFormItem :label="$t('User.FullName')">
+        <ElInput v-model="patient.name" required :disabled="isDisabledSecondaryInputs" />
+      </ElFormItem>
+
       <ElFormItem :label="$t('User.Gender')">
-        <UiGenderSelect v-model="patient.gender" required />
+        <UiGenderSelect v-model="patient.gender" required :disabled="isDisabledSecondaryInputs" />
       </ElFormItem>
 
       <ElFormItem :label="$t('User.Birthdate')">
@@ -30,7 +30,8 @@
           v-model="patient.birthdate"
           type="date"
           :placeholder="$t('Base.SelectDate')"
-          required />
+          required
+          :disabled="isDisabledSecondaryInputs" />
 
         <UiRequiredHiddenInput :modelValue="patient.birthdate" />
       </ElFormItem>
@@ -67,6 +68,13 @@ export default {
       loading: false,
       isChildren: false,
     };
+  },
+  computed: {
+    isDisabledSecondaryInputs() {
+      return this.isChildren
+        ? !this.patient.parent_id
+        : this.patient.phone && !this.patient.phone.replace(/^\+*/gm, '')?.length;
+    },
   },
 
   watch: {
@@ -107,6 +115,8 @@ export default {
     },
 
     nameOrPhoneWatcherHandler() {
+      if (!this.nameOrPhone) return;
+
       const isName = /[a-zA-Zа-яА-Я]/gim.test(this.nameOrPhone);
       isName ? (this.patient.name = this.nameOrPhone) : (this.patient.phone = this.nameOrPhone);
     },
