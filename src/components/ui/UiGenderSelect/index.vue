@@ -14,7 +14,6 @@
 
 <script>
 import { User } from '@/models/User.model.js';
-import { capitalize } from 'lodash';
 
 export default {
   name: 'UiGenderSelect',
@@ -25,7 +24,7 @@ export default {
   computed: {
     genders() {
       return Object.keys(User.enum.genders).map((key) => ({
-        label: this.$t(`User.Genders.${capitalize(User.enum.genders[key])}`),
+        label: this.$t(`User.Genders.${User.enum.genders[key]}`),
         value: User.enum.genders[key],
       }));
     },

@@ -7,8 +7,8 @@
       "FullName": "ФИО",
       "Gender": "Пол",
       "Genders": {
-        "Man": "Мужчина",
-        "Woman": "Женщина"
+        "man": "Мужчина",
+        "woman": "Женщина"
       },
       "IsChildren": "Ребёнок",
       "Parent": "Родитель",
@@ -23,8 +23,8 @@
       "FullName": "FIO",
       "Gender": "Jinsi",
       "Genders": {
-        "Man": "Erkak",
-        "Woman": "Ayol"
+        "man": "Erkak",
+        "woman": "Ayol"
       },
       "IsChildren": "Yosh bola",
       "Parent": "Otonasi",
