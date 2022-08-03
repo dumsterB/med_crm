@@ -20,12 +20,13 @@ export default {
   },
   data() {
     return {
-      query: null,
+      query: '',
     };
   },
 
   methods: {
     async getPatients(query, cb) {
+      this.query = '';
       this.$emit('update:modelValue', null);
 
       const { data } = await Patient.find({
