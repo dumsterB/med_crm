@@ -25,7 +25,12 @@
           </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="gender" :label="$t('User.Gender')"></ElTableColumn>
+        <ElTableColumn prop="gender" :label="$t('User.Gender')">
+          <template #default="{ row }">
+            {{ $t(`User.Genders.${row.gender}`) }}
+          </template>
+        </ElTableColumn>
+
         <ElTableColumn prop="phone" :label="$t('User.Phone')"></ElTableColumn>
         <ElTableColumn prop="age" :label="$t('User.Age')"> </ElTableColumn>
         <ElTableColumn prop="childrens_count" :label="$t('User.Children')">
