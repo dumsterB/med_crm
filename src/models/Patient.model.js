@@ -1,4 +1,5 @@
 import { User } from '@/models/User.model';
+import { ApiService } from '@/services/api.service';
 
 /**
  * @class Patient
@@ -23,5 +24,31 @@ export class Patient extends User {
     this.childrens = payload?.childrens ?? [];
     this.parent_id = payload?.parent_id ?? null;
     this.parent = payload?.parent ?? null;
+  }
+
+  /**
+   * Проверяет существование пациента
+   * @param {string} phone
+   * @return {Promise<|{data: any, response: AxiosResponse<any>, patient: Patient, attach_clinic: boolean}>}
+   */
+  static async checkPatient({ phone }) {
+    try {
+      const response = await ApiService.post('patients/check', { phone });
+      return {
+        response: response,
+        data: response.data,
+        patient: response.data.data.user,
+        attach_clinic: response.data.data.attach_clinic,
+      };
+    } catch (err) {
+      if (err.response?.status !== 404) throw new Error(err);
+
+      return {
+        response: null,
+        data: null,
+        patient: null,
+        attach_clinic: false,
+      };
+    }
   }
 }
