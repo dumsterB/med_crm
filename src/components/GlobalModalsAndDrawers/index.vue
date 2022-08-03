@@ -67,10 +67,19 @@ export default {
       },
     },
   },
+  watch: {
+    '$route.name'() {
+      this.forceCloseModal();
+      this.forceCloseDrawer();
+    },
+  },
+
   methods: {
     ...mapActions({
       closeModal: 'modalAndDrawer/closeModal',
+      forceCloseModal: 'modalAndDrawer/forceCloseModal',
       closeDrawer: 'modalAndDrawer/closeDrawer',
+      forceCloseDrawer: 'modalAndDrawer/forceCloseDrawer',
     }),
 
     modalActionHandler(action) {
