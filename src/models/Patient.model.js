@@ -33,7 +33,7 @@ export class Patient extends User {
    */
   static async checkPatient({ phone }) {
     try {
-      const response = await ApiService.post('patients/check', { phone });
+      const response = await ApiService.post(`${Patient.tableName}/check`, { phone });
       return {
         response: response,
         data: response.data,
@@ -50,5 +50,19 @@ export class Patient extends User {
         attach_clinic: false,
       };
     }
+  }
+
+  /**
+   * Привязка пациента к нашей клинике
+   * @param {string} patient_id
+   * @return {Promise<{data: any, response: AxiosResponse<any>, patient: Patient}>}
+   */
+  static async attachPatient({ patient_id }) {
+    const response = await ApiService.post(`${Patient.tableName}/${patient_id}/attach`);
+    return {
+      response: response,
+      data: response.data,
+      patient: response.data.data,
+    };
   }
 }
