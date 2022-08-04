@@ -85,7 +85,19 @@ export class CRUDModel {
     };
   }
 
-  static update(payload) {}
+  /**
+   * @param {number} id
+   * @param {object} payload
+   * @return {Promise<{response: AxiosResponse<any>, data: response.data}>}
+   */
+  static async update({ id, payload }) {
+    delete payload.id;
+    const response = await ApiService.put(`${this.tableName}/${id}/update`, payload);
+    return {
+      response: response,
+      data: response.data,
+    };
+  }
 
   static delete(payload) {}
 }
