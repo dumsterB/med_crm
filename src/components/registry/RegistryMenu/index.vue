@@ -1,6 +1,6 @@
 <template>
   <div class="registry-menu">
-    <img class="registry-menu__logo" src="@/assets/images/logo_medium.png" alt="logo" />
+    <img class="registry-menu__logo" src="@/assets/images/logo.svg" alt="logo" />
 
     <nav class="registry-menu__nav registry-menu-nav">
       <router-link

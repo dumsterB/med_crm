@@ -1,6 +1,6 @@
 <template>
   <form class="login-form" @submit.prevent="submitHandler">
-    <img class="login-form__image" src="@/assets/images/logo_medium.png" alt="logo" />
+    <img class="login-form__image" src="@/assets/images/logo.svg" alt="logo" />
     <ElInput v-model="email" :placeholder="$t('Base.Login')" name="email" type="email" required />
     <ElInput
       v-model="password"
