@@ -8,12 +8,14 @@
         <ElInput v-model="code" required />
       </ElFormItem>
 
-      <ElButton type="primary" native-type="submit" :loading="loading">Submit</ElButton>
+      <ElButton type="primary" native-type="submit" :loading="loading.check">Submit</ElButton>
     </ElForm>
   </ElDialog>
 </template>
 
 <script>
+import { Patient } from '@/models/Patient.model';
+
 export default {
   name: 'PhoneConfirmModal',
   emits: ['update:modelValue', 'action'],
@@ -24,14 +26,43 @@ export default {
   data() {
     return {
       code: null,
-      loading: false,
+      loading: {
+        send: false,
+        check: false,
+      },
     };
+  },
+  watch: {
+    phone: {
+      handler(value) {
+        if (value) this.sendCode();
+      },
+      immediate: true,
+    },
   },
 
   methods: {
+    async sendCode() {
+      if (this.loading.send) return;
+      this.loading.send = true;
+
+      try {
+        const { response } = await Patient.sendCodeOnPhone({ phone: this.phone });
+      } catch (err) {
+        console.log(err);
+        this.$notify({
+          type: 'error',
+          title: err?.response?.data?.message || this.$t('Notifications.Error'),
+        });
+      }
+
+      this.loading.send = false;
+    },
+
     checkCode() {
-      if (this.loading) return;
-      this.loading = true;
+      if (this.loading.check) return;
+      this.loading.check = true;
+
       try {
         console.log('check');
       } catch (err) {
@@ -42,7 +73,7 @@ export default {
         });
       }
 
-      this.loading = false;
+      this.loading.check = false;
     },
   },
 };
