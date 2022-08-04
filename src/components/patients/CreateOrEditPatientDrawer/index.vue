@@ -79,7 +79,7 @@ import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerA
 import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
 
 export default {
-  name: 'CreatePatientDrawer',
+  name: 'CreateOrEditPatientDrawer',
   emits: ['update:modelValue', 'action'],
   props: {
     modelValue: Boolean,

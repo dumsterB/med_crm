@@ -74,7 +74,7 @@ import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
 import CreateAppointmentDrawer from '@/components/appointments/CreateAppointmentDrawer/index.vue';
-import CreatePatientDrawer from '@/components/patients/CreatePatientDrawer/index.vue';
+import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 
 export default {
   name: 'PatientsTable',
@@ -126,7 +126,7 @@ export default {
     },
     addPatient() {
       this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreatePatientDrawer,
+        component: CreateOrEditPatientDrawer,
         payload: {
           nameOrPhone: this.search,
         },
