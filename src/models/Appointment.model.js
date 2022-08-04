@@ -33,4 +33,11 @@ export class Appointment extends CRUDModel {
     this.cancel_reason = payload?.cancel_reason ?? null;
     this.cancel_description = payload?.cancel_description ?? null;
   }
+
+  static enum = {
+    types: {
+      Doctor: 'doctor',
+      Service: 'service',
+    },
+  };
 }
