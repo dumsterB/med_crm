@@ -1,7 +1,7 @@
 <template>
   <ElDrawer
     :model-value="modelValue"
-    :title="$t('Patients.AddPatient')"
+    :title="data && data.id ? $t('Patients.EditPatient') : $t('Patients.AddPatient')"
     v-bind="$attrs"
     @update:model-value="$emit('update:modelValue', $event)">
     <ElForm class="create-patient-drawer-form" label-position="top" @submit.prevent="submitHandler">
@@ -36,7 +36,7 @@
         <UiRequiredHiddenInput :modelValue="patient.birthdate" />
       </ElFormItem>
 
-      <ElFormItem v-if="hasPatient">
+      <ElFormItem v-if="!data && hasPatient">
         <div class="create-patient-drawer-patient">
           <div class="create-patient-drawer-patient__title">Пациент уже существует</div>
 
@@ -56,7 +56,7 @@
             type="primary"
             native-type="submit"
             :loading="loading.form">
-            {{ $t(hasPatient ? 'Base.SaveChanges' : 'Patients.AddPatient') }}
+            {{ $t(data || hasPatient ? 'Base.SaveChanges' : 'Patients.AddPatient') }}
           </ElButton>
 
           <ElButton
@@ -77,6 +77,8 @@ import { throttle } from 'lodash';
 import { Patient } from '@/models/Patient.model';
 import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
 import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
+import { PHONE_CONFIRM_MODAL_CONFIRMED_ACTION } from '@/components/PhoneConfirmModal/actions.enum';
+import PhoneConfirmModal from '@/components/PhoneConfirmModal/index.vue';
 
 export default {
   name: 'CreateOrEditPatientDrawer',
@@ -84,7 +86,7 @@ export default {
   props: {
     modelValue: Boolean,
     nameOrPhone: String,
-    patientProp: [Patient, Object],
+    data: [Patient, Object],
   },
   data() {
     return {
@@ -115,7 +117,7 @@ export default {
   watch: {
     'modelValue': {
       handler() {
-        this.patient = new Patient(this.patientProp || {});
+        this.patient = new Patient(this.data || {});
       },
       immediate: true,
     },
@@ -136,7 +138,7 @@ export default {
       this.loading.form = true;
 
       try {
-        this.hasPatient ? await this.editPatient() : await this.createPatient();
+        this.data || this.hasPatient ? await this.editPatient() : await this.createPatient();
       } catch (err) {
         console.log(err);
         this.$notify({
@@ -147,6 +149,7 @@ export default {
 
       this.loading.form = false;
     },
+
     async createPatient() {
       const { patient } = await Patient.create(this.patient);
 
@@ -154,7 +157,19 @@ export default {
       this.$emit('action', new GlobalDrawerAction({ name: 'created', data: { patient } }));
       this.goToPatient({ patientId: patient.id });
     },
-    editPatient() {},
+    async editPatient() {
+      if (this.data && this.data.phone !== this.patient.phone) {
+        const action = await this.$store.dispatch('modalAndDrawer/openModal', {
+          component: PhoneConfirmModal,
+          payload: {
+            phone: this.patient.phone,
+          },
+        });
+        if (action.name !== PHONE_CONFIRM_MODAL_CONFIRMED_ACTION) return;
+
+        // code
+      }
+    },
 
     async attachPatient() {
       if (this.loading.attach) return;
@@ -177,15 +192,6 @@ export default {
       this.loading.attach = false;
     },
 
-    goToPatient({ patientId }) {
-      this.$router.push({
-        name: REGISTRY_PATIENT_ROUTE.name,
-        params: {
-          id: patientId || this.patient.id,
-        },
-      });
-    },
-
     async checkHasPatient() {
       this.resetHasPatient();
       const { patient, attach_clinic } = await Patient.checkPatient({ phone: this.patient.phone });
@@ -198,6 +204,15 @@ export default {
     resetHasPatient() {
       this.hasPatient = false;
       this.hasPatientFromOtherClinic = false;
+    },
+
+    goToPatient({ patientId }) {
+      this.$router.push({
+        name: REGISTRY_PATIENT_ROUTE.name,
+        params: {
+          id: patientId || this.patient.id,
+        },
+      });
     },
 
     nameOrPhoneWatcherHandler() {
