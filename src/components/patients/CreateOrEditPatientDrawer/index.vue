@@ -39,6 +39,7 @@
       <ElFormItem v-if="!data && hasPatient">
         <div class="create-patient-drawer-patient">
           <div class="create-patient-drawer-patient__title">Пациент уже существует</div>
+          <ElButton type="primary" @click="checkPhoneForRebinding">Отвязать</ElButton>
 
           <ElButton v-if="!hasPatientFromOtherClinic" @click="goToPatient">
             go to patient
@@ -102,6 +103,9 @@ export default {
       hasPatient: false,
       hasPatientFromOtherClinic: false,
 
+      isRebinding: false, // если пользователь был найден и мы успешно подтвердили код - можем создать новый акк
+      code: null, // для хранения кода подтверждения при rebinding
+
       throttleCheckHasPatient: null,
     };
   },
@@ -151,12 +155,29 @@ export default {
     },
 
     async createPatient() {
-      const { patient } = await Patient.create(this.patient);
+      const { patient } = this.isRebinding
+        ? await Patient.rebinding({ patient: this.patient, code: this.code })
+        : await Patient.create(this.patient);
 
       this.$notify({ type: 'success', title: this.$t('Notifications.SuccessCreated') });
       this.$emit('action', new GlobalDrawerAction({ name: 'created', data: { patient } }));
       this.goToPatient({ patientId: patient.id });
     },
+    async checkPhoneForRebinding() {
+      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
+        component: PhoneConfirmModal,
+        payload: {
+          phone: this.patient.phone,
+        },
+      });
+      if (action.name !== PHONE_CONFIRM_MODAL_CONFIRMED_ACTION) return;
+
+      this.resetHasPatient();
+      this.isRebinding = true;
+      this.code = action.data.code;
+      this.patient = new Patient({ phone: this.patient.phone });
+    },
+
     async editPatient() {
       if (this.hasPatient)
         return this.$notify({ type: 'error', title: this.$t('Notifications.NumberIsBusy') });
@@ -179,16 +200,12 @@ export default {
       });
 
       if (action.name !== PHONE_CONFIRM_MODAL_CONFIRMED_ACTION) return;
-      const { data } = await Patient.rebindingPhone({
-        patient: this.patient,
-        code: action.data.code,
-      });
 
-      this.$emit(
-        'action',
-        new GlobalDrawerAction({ name: 'updated', data: { patient: data.data } })
-      );
-      this.$notify({ type: 'success', title: this.$t('Notifications.SuccessUpdated') });
+      // this.$emit(
+      //   'action',
+      //   new GlobalDrawerAction({ name: 'updated', data: { patient: data.data } })
+      // );
+      // this.$notify({ type: 'success', title: this.$t('Notifications.SuccessUpdated') });
     },
 
     async attachPatient() {
@@ -222,6 +239,7 @@ export default {
       this.hasPatientFromOtherClinic = !attach_clinic;
     },
     resetHasPatient() {
+      this.isRebinding = false;
       this.hasPatient = false;
       this.hasPatientFromOtherClinic = false;
     },
