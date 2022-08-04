@@ -2,12 +2,14 @@
   "ru": {
     "Patients": {
       "AddPatient": "Добавить пациента",
+      "EditPatient": "Изменить данные паиценты",
       "NoPatient": "Пациен не найден"
     }
   },
   "uz": {
     "Patients": {
       "AddPatient": "Bemorni yaratish",
+      "EditPatient": "Bemor ma'lumotlarini o'zgartirish",
       "NoPatient": "Bemor topilmadi"
     }
   }
