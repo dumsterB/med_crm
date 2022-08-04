@@ -6,7 +6,7 @@ export class GlobalDrawerAction extends GlobalModalOrDrawerAction {
    * @param {object} data
    * @param {any} event
    */
-  constructor() {
-    super({ type: 'drawer' });
+  constructor({ name, data, event }) {
+    super({ type: 'drawer', name, data, event });
   }
 }
