@@ -11,8 +11,8 @@
 <script>
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import { Patient } from '@/models/Patient.model';
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
+import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 
 export default {
   name: 'VPatient',
