@@ -176,7 +176,18 @@ export default {
           phone: this.patient.phone,
         },
       });
+
       if (action.name !== PHONE_CONFIRM_MODAL_CONFIRMED_ACTION) return;
+      const { data } = await Patient.rebindingPhone({
+        patient: this.patient,
+        code: action.data.code,
+      });
+
+      this.$emit(
+        'action',
+        new GlobalDrawerAction({ name: 'updated', data: { patient: data.data } })
+      );
+      this.$notify({ type: 'success', title: this.$t('Notifications.SuccessUpdated') });
     },
 
     async attachPatient() {
