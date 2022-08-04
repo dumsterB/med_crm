@@ -5,7 +5,7 @@
     @update:model-value="$emit('update:modelValue', $event)">
     <ElForm label-position="top" @submit.prevent="checkCode">
       <ElFormItem :label="phone">
-        <ElInput v-model="code" required />
+        <ElInput v-model="code" autocomplete="one-time-code" type="number" required />
       </ElFormItem>
 
       <ElButton type="primary" native-type="submit" :loading="loading.check">Submit</ElButton>
@@ -15,6 +15,8 @@
 
 <script>
 import { Patient } from '@/models/Patient.model';
+import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
+import { PHONE_CONFIRM_MODAL_CONFIRMED_ACTION } from '@/components/PhoneConfirmModal/index.enum';
 
 export default {
   name: 'PhoneConfirmModal',
@@ -47,7 +49,7 @@ export default {
       this.loading.send = true;
 
       try {
-        const { response } = await Patient.sendCodeOnPhone({ phone: this.phone });
+        await Patient.sendCodeOnPhone({ phone: this.phone });
       } catch (err) {
         console.log(err);
         this.$notify({
@@ -59,12 +61,19 @@ export default {
       this.loading.send = false;
     },
 
-    checkCode() {
+    async checkCode() {
       if (this.loading.check) return;
       this.loading.check = true;
 
       try {
-        console.log('check');
+        await Patient.checkCodeFromPhone({ phone: this.phone, code: this.code });
+        this.$emit(
+          'action',
+          new GlobalModalAction({
+            name: PHONE_CONFIRM_MODAL_CONFIRMED_ACTION,
+            data: { code: this.code },
+          })
+        );
       } catch (err) {
         console.log(err);
         this.$notify({
