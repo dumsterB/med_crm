@@ -2,6 +2,7 @@
   "ru": {
     "Notifications": {
       "Error": "Ошибка",
+      "NumberIsBusy": "Этот номер занят",
       "SuccessAttached": "Успешно привязано",
       "SuccessCreated": "Успешно создано",
       "SuccessUpdated": "Успешно обновлено"
@@ -9,6 +10,7 @@
   },
   "uz": {
     "Error": "Xato",
+    "NumberIsBusy": "Ushbu nomber band",
     "SuccessCreated": "Muvaffaqiyatli yaratildi",
     "SuccessAttached": "Muvaffaqiyatli ulandi",
     "SuccessUpdate": "Muvaffaqiyatli ozgarildi"
