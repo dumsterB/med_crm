@@ -12,6 +12,7 @@
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import { Patient } from '@/models/Patient.model';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 
 export default {
   name: 'VPatient',
@@ -48,10 +49,13 @@ export default {
     },
 
     async editPatient() {
-      this.$store.dispatch('modalAndDrawer/openDrawer', {
+      const action = await this.$store.dispatch('modalAndDrawer/openDrawer', {
         component: CreateOrEditPatientDrawer,
         payload: { data: this.patient },
       });
+
+      if (action instanceof GlobalDrawerCloseAction) return;
+      this.patient = action.data.patient;
     },
   },
 };
