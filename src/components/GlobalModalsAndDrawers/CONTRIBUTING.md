@@ -9,3 +9,9 @@ const drawerPayload: GlobalDrawerAction|GlobalDrawerCloseAction = await this.$st
 ```
 
 ```modalAndDrawer``` vuex модуль позаботится о удалении реактивности передаваемых компонентов
+
+
+### Соглашение по неймингу общих action
+* 'created' - создано
+* 'updated' - обновлено
+* 'deleted' - удалено
