@@ -1,9 +1,10 @@
 <template>
-  <LayoutRegistry> Patient </LayoutRegistry>
+  <LayoutRegistry> Patient {{ patient.name }} </LayoutRegistry>
 </template>
 
 <script>
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
+import { Patient } from '@/models/Patient.model';
 
 export default {
   name: 'VPatient',
@@ -11,13 +12,32 @@ export default {
   props: {
     id: [Number, String],
   },
-
+  data() {
+    return {
+      /**
+       * @type Patient
+       */
+      patient: null,
+      loading: false,
+    };
+  },
   watch: {
     id: {
-      handler(value) {
-        // this.getUser()
+      handler() {
+        this.getUser();
       },
       immediate: true,
+    },
+  },
+
+  methods: {
+    async getUser() {
+      this.loading = true;
+
+      const { data } = await Patient.findOneById(this.id);
+      this.patient = data.data;
+
+      this.loading = false;
     },
   },
 };
