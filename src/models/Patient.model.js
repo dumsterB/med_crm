@@ -67,11 +67,15 @@ export class Patient extends User {
   }
 
   /**
-   * @param {...Patient, code: string} payload
+   * @param {Patient} patient
+   * @param {string} code
    * @return {Promise<{data: any, response: AxiosResponse<any>}>}
    */
-  static async rebindingPhone(payload) {
-    const response = await ApiService.post(`${this.tableName}/phone/rebinding`, payload);
+  static async rebindingPhone({ patient, code }) {
+    const response = await ApiService.post(`${this.tableName}/phone/rebinding`, {
+      code,
+      ...patient,
+    });
     return {
       response: response,
       data: response.data,
