@@ -2,13 +2,15 @@
   "ru": {
     "Notifications": {
       "Error": "Ошибка",
+      "SuccessAttached": "Успешно привязано",
       "SuccessCreated": "Успешно создано",
-      "SuccessAttached": "Успешно привязано"
+      "SuccessUpdated": "Успешно обновлено"
     }
   },
   "uz": {
     "Error": "Xato",
     "SuccessCreated": "Muvaffaqiyatli yaratildi",
-    "SuccessAttached": "Muvaffaqiyatli ulandi"
+    "SuccessAttached": "Muvaffaqiyatli ulandi",
+    "SuccessUpdate": "Muvaffaqiyatli ozgarildi"
   }
 }
