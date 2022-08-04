@@ -66,7 +66,7 @@ const store = {
      * @return {Promise<*>}
      */
     async openModal({ dispatch }, optionsOrComponent) {
-      return dispatch('_open', { type: 'modal', payload: optionsOrComponent });
+      return dispatch('_open', { type: 'modal', optionsOrComponent });
     },
 
     /**
