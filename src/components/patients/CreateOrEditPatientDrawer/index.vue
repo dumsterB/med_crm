@@ -160,8 +160,7 @@ export default {
     async editPatient() {
       if (this.hasPatient)
         return this.$notify({ type: 'error', title: this.$t('Notifications.NumberIsBusy') });
-      if (this.data && this.data.phone !== this.patient.phone)
-        return this.checkThenEditPatientByPhone();
+      if (this.data.phone !== this.patient.phone) return this.checkThenEditPatientByPhone();
 
       const { data } = await Patient.update({ id: this.patient.id, payload: this.patient });
 
