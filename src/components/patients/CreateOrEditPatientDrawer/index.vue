@@ -77,7 +77,7 @@ import { throttle } from 'lodash';
 import { Patient } from '@/models/Patient.model';
 import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
 import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
-import { PHONE_CONFIRM_MODAL_CONFIRMED_ACTION } from '@/components/PhoneConfirmModal/actions.enum';
+import { PHONE_CONFIRM_MODAL_CONFIRMED_ACTION } from '@/components/PhoneConfirmModal/index.enum';
 import PhoneConfirmModal from '@/components/PhoneConfirmModal/index.vue';
 
 export default {
@@ -158,6 +158,8 @@ export default {
       this.goToPatient({ patientId: patient.id });
     },
     async editPatient() {
+      if (this.hasPatient)
+        return this.$notify({ type: 'error', title: this.$t('Notifications.NumberIsBusy') });
       if (this.data && this.data.phone !== this.patient.phone)
         return this.checkThenEditPatientByPhone();
 
