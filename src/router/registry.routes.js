@@ -32,6 +32,7 @@ export const REGISTRY_PATIENT_ROUTE = {
   meta: {
     title: I18nService.t('Base.Patient'),
   },
+  props: true,
 };
 export const REGISTRY_PATIENTS_RECORDS_ROUTE = {
   name: 'REGISTRY_PATIENTS_RECORDS',
