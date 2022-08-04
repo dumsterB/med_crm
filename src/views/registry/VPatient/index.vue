@@ -1,10 +1,17 @@
 <template>
-  <LayoutRegistry> Patient {{ patient.name }} </LayoutRegistry>
+  <LayoutRegistry>
+    <div v-if="patient">
+      Patient {{ patient.name }}
+
+      <ElButton type="primary" @click="editPatient">Edit</ElButton>
+    </div>
+  </LayoutRegistry>
 </template>
 
 <script>
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import { Patient } from '@/models/Patient.model';
+import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 
 export default {
   name: 'VPatient',
@@ -38,6 +45,13 @@ export default {
       this.patient = data.data;
 
       this.loading = false;
+    },
+
+    async editPatient() {
+      this.$store.dispatch('modalAndDrawer/openDrawer', {
+        component: CreateOrEditPatientDrawer,
+        payload: { data: this.patient },
+      });
     },
   },
 };
