@@ -158,17 +158,25 @@ export default {
       this.goToPatient({ patientId: patient.id });
     },
     async editPatient() {
-      if (this.data && this.data.phone !== this.patient.phone) {
-        const action = await this.$store.dispatch('modalAndDrawer/openModal', {
-          component: PhoneConfirmModal,
-          payload: {
-            phone: this.patient.phone,
-          },
-        });
-        if (action.name !== PHONE_CONFIRM_MODAL_CONFIRMED_ACTION) return;
+      if (this.data && this.data.phone !== this.patient.phone)
+        return this.checkThenEditPatientByPhone();
 
-        // code
-      }
+      const { data } = await Patient.update({ id: this.patient.id, payload: this.patient });
+
+      this.$emit(
+        'action',
+        new GlobalDrawerAction({ name: 'updated', data: { patient: data.data } })
+      );
+      this.$notify({ type: 'success', title: this.$t('Notifications.SuccessUpdated') });
+    },
+    async checkThenEditPatientByPhone() {
+      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
+        component: PhoneConfirmModal,
+        payload: {
+          phone: this.patient.phone,
+        },
+      });
+      if (action.name !== PHONE_CONFIRM_MODAL_CONFIRMED_ACTION) return;
     },
 
     async attachPatient() {
