@@ -1,14 +1,18 @@
 {
   "ru": {
-    "AppointmentTypes": {
-      "doctors": "Врач",
-      "service": "Услуга"
+    "Appointments": {
+      "Types": {
+        "doctor": "Врач",
+        "service": "Услуга"
+      }
     }
   },
   "uz": {
-    "AppointmentTypes": {
-      "doctors": "Shifokor",
-      "service": "Ximat"
+    "Appointments": {
+      "Types": {
+        "doctor": "Shifokor",
+        "service": "Ximat"
+      }
     }
   }
 }
