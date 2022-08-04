@@ -28,7 +28,7 @@ export class CRUDModel {
    * @param { "ILIKE"|"EQUALS"|"IN" } query_type
    * @param { "AND"|"OR" } query_operator
    * @param { string } search
-   * @return { Promise<{ response: AxiosResponse<any>, data: any }> } data = response.data
+   * @return { Promise<{ response: AxiosResponse<any>, data: response.data }> } data = response.data
    */
   static async find({
     per_page,
@@ -64,10 +64,12 @@ export class CRUDModel {
 
   /**
    * @param { number } id
-   * @return { Promise<AxiosResponse<any>> }
+   * @return { Promise<{ response: AxiosResponse<any>, data: response.data }> }
    */
-  static findOneById(id) {
-    return ApiService.get(`${this.tableName}/${id}`);
+  static async findOneById(id) {
+    const response = await ApiService.get(`${this.tableName}/${id}`);
+
+    return { response, data: response.data };
   }
 
   /**
