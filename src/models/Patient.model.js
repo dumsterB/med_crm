@@ -67,6 +67,15 @@ export class Patient extends User {
   }
 
   /**
+   * @param {string} phone
+   * @return {Promise<{response: AxiosResponse<any>, data: response.data}>}
+   */
+  static async sendCodeOnPhone({ phone }) {
+    const response = await ApiService.post(`${this.tableName}/phone/code`, { phone: phone });
+    return { response: response, data: response.data };
+  }
+
+  /**
    * @param {Patient} patient
    * @param {string} code
    * @return {Promise<{data: any, response: AxiosResponse<any>}>}
