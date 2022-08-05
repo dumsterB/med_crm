@@ -1,17 +1,25 @@
 <template>
   <ElDrawer
+    custom-class="create-appointment-drawer"
     :model-value="modelValue"
     :title="$t('Title')"
     @update:model-value="$emit('update:modelValue', $event)">
-    <ElForm label-position="top" @submit.prevent="createAppointment">
-      <ElFormItem label="patient">
-        <UiPatientsAutocompleteSearch
+    <ElForm
+      class="create-appointment-drawer-form"
+      label-position="top"
+      @submit.prevent="createAppointment">
+      <!--  Patient  -->
+      <ElFormItem label="patient" :style="{ order: this.appointmentFieldsFlexOrder.patient }">
+        <UiModelsAutocompleteSearch
           v-model="appointment.patient_id"
-          :defaultPatient="patient"
-          :disabled="!!patient" />
+          :modelForUse="Patient"
+          :defaultItem="patient"
+          :disabled="!!patient"
+          required />
       </ElFormItem>
 
-      <ElFormItem label="select type">
+      <!--  Type  -->
+      <ElFormItem label="select type" :style="{ order: this.appointmentFieldsFlexOrder.type }">
         <ElRadioGroup v-model="appointmentType">
           <ElRadio :label="appointmentTypesEnum.Doctor">
             {{ $t(`Appointments.Types.${appointmentTypesEnum.Doctor}`) }}</ElRadio
@@ -21,52 +29,59 @@
           >
         </ElRadioGroup>
       </ElFormItem>
+
+      <!--  Specialty  -->
+      <ElFormItem label="speciality" :style="{ order: this.appointmentFieldsFlexOrder.specialty }">
+        <SpecialtiesSelect v-model="appointment.specialty_id" />
+      </ElFormItem>
+
+      <!--  Doctor  -->
+      <ElFormItem label="doctor" :style="{ order: this.appointmentFieldsFlexOrder.doctor }">
+        <UiModelsAutocompleteSearch
+          v-model="appointment.doctor_id"
+          :modelForUse="Doctor"
+          :searchQuery="doctorsSearchQuery"
+          :disabled="doctorsIsDisabled"
+          required />
+      </ElFormItem>
+
+      <!--  Service  -->
+      <ElFormItem label="service" :style="{ order: this.appointmentFieldsFlexOrder.service }">
+        <UiModelsAutocompleteSearch
+          v-model="appointment.service_id"
+          :modelForUse="Service"
+          :searchQuery="servicesSearchQuery"
+          label="title"
+          :disabled="servicesIsDisabled"
+          required />
+      </ElFormItem>
+
+      <!--  Date  -->
+      <!--      <ElFormItem label="date" :style="{ order: this.appointmentFieldsFlexOrder.date }">-->
+      <!--        <ElPopover placement="top" :width="200" title="title" :visible="true">-->
+      <!--          <template #reference>-->
+      <!--            qwe-->
+      <!--            &lt;!&ndash;            <ElDatePicker v-model="appointment.start_at" type="date">-->
+      <!--              <template #default="payload">-->
+      <!--                <span @click.stop="checkPayload(payload)">123</span>-->
+      <!--              </template>-->
+      <!--            </ElDatePicker>&ndash;&gt;-->
+      <!--          </template>-->
+      <!--        </ElPopover>-->
+      <!--      </ElFormItem>-->
+
+      <!--  Actions  -->
+      <ElFormItem :style="{ order: this.appointmentFieldsFlexOrder.actions }">
+        <div class="create-appointment-drawer-form-actions">
+          <ElButton text> Cancel </ElButton>
+          <ElButton type="primary" native-type="submit"> Create </ElButton>
+        </div>
+      </ElFormItem>
     </ElForm>
   </ElDrawer>
 </template>
 
-<script>
-import { Patient } from '@/models/Patient.model';
-import { User } from '@/models/User.model';
-import { Appointment } from '@/models/Appointment.model';
-
-export default {
-  name: 'CreateAppointmentDrawer',
-  emits: ['update:modelValue', 'action'],
-  props: {
-    modelValue: Boolean,
-    patient: [Patient, User, Object],
-  },
-  data() {
-    return {
-      /**
-       * @type Appointment
-       */
-      appointment: null,
-      appointmentType: Appointment.enum.types.Doctor,
-    };
-  },
-  computed: {
-    appointmentTypesEnum: () => Appointment.enum.types,
-    watchersForResetAppointment() {
-      return [this.modelValue, this.appointmentType];
-    },
-  },
-  watch: {
-    watchersForResetAppointment: {
-      handler() {
-        this.appointment = new Appointment({ patient_id: this.patient.id });
-      },
-      immediate: true,
-      deep: true,
-    },
-  },
-
-  methods: {
-    createAppointment() {},
-  },
-};
-</script>
+<script src="./index.js"></script>
 
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/base.locales.json" />

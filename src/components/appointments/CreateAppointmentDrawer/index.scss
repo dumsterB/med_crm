@@ -1,0 +1,22 @@
+.create-appointment-drawer {
+  &-form {
+    display: flex;
+    flex-direction: column;
+
+    &-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      width: 100%;
+
+      & > * {
+        min-width: 8em;
+      }
+    }
+  }
+
+  .el-form-item__content,
+  .el-form-item__content > * {
+    width: 100% !important;
+  }
+}
