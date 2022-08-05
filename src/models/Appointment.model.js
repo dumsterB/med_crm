@@ -16,7 +16,7 @@ export class Appointment extends CRUDModel {
    * @param {number} payload.user_id synonym for payload.patient_id
    * @param {Date|string} payload.start_at
    * @param {Date|string} payload.end_at
-   * @param {Speciality} payload.speciality
+   * @param {Specialty} payload.speciality
    * @param {string} payload.status
    * @param {string} payload.cancel_reason
    * @param {string} payload.cancel_description

@@ -1,11 +1,11 @@
 import { CRUDModel } from '@/models/CRUD.model';
 
 /**
- * @class Speciality
+ * @class Specialty
  * @extends CRUDModel
  */
-export class Speciality extends CRUDModel {
-  static modelName = 'speciality';
+export class Specialty extends CRUDModel {
+  static modelName = 'specialty';
   static tableName = 'specialties';
 
   /**
