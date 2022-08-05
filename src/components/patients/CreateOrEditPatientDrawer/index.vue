@@ -16,8 +16,9 @@
       <ElFormItem v-if="isChildren" :label="$t('User.Parent')">
         <UiModelsAutocompleteSearch
           v-model="patient.parent_id"
-          required
-          :modelForUse="$options.Patient" />
+          :modelForUse="$options.Patient"
+          :searchQuery="{ query_field: ['name', 'phone'] }"
+          required />
       </ElFormItem>
 
       <ElFormItem :label="$t('User.FullName')">
