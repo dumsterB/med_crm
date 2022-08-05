@@ -2,6 +2,7 @@
   <ElAutocomplete
     class="ui-patients-autocomplete-search"
     v-model="query"
+    value-key="name"
     :placeholder="$t('Base.PleaseInput')"
     :fetch-suggestions="getPatients"
     :debounce="250"
@@ -17,6 +18,7 @@ export default {
   name: 'UiPatientsAutocompleteSearch',
   props: {
     modelValue: Number,
+    defaultPatient: [Patient, Object],
   },
   data() {
     return {
@@ -26,7 +28,6 @@ export default {
 
   methods: {
     async getPatients(query, cb) {
-      this.query = '';
       this.$emit('update:modelValue', null);
 
       const { data } = await Patient.find({
@@ -38,12 +39,16 @@ export default {
         search: query,
       });
 
-      cb(data.data.map((patient) => ({ value: patient.name, patient: patient })));
+      cb(data.data);
     },
 
     selectHandler(payload) {
-      this.$emit('update:modelValue', payload.patient.id);
+      this.$emit('update:modelValue', payload.id);
     },
+  },
+
+  mounted() {
+    if (this.defaultPatient) this.query = this.defaultPatient.name;
   },
 };
 </script>
