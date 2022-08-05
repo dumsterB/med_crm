@@ -28,7 +28,7 @@ export class Appointment extends CRUDModel {
     this.patient_id = payload?.patient_id ?? payload?.user_id ?? null;
     this.start_at = payload?.start_at ?? null;
     this.end_at = payload?.end_at ?? null;
-    this.speciality = payload?.speciality ?? null;
+    this.specialty_id = payload?.speciality ?? null;
     this.status = payload?.status ?? null;
     this.cancel_reason = payload?.cancel_reason ?? null;
     this.cancel_description = payload?.cancel_description ?? null;
