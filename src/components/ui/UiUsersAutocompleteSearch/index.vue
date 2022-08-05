@@ -1,31 +1,28 @@
 <template>
   <ElAutocomplete
     class="ui-patients-autocomplete-search"
-    v-model="query"
     value-key="name"
+    v-model="query"
     :placeholder="$t('Base.PleaseInput')"
-    :fetch-suggestions="getPatients"
+    :fetch-suggestions="getUsers"
     :debounce="250"
-    @select="selectHandler"
-    v-bind="$attrs">
+    :required="required"
+    @select="selectHandler">
   </ElAutocomplete>
 </template>
 
 <script>
 import { CRUDModel } from '@/models/CRUD.model';
-import { User } from '@/models/User.model';
 
 export default {
   name: 'UiUsersAutocompleteSearch',
   props: {
     modelValue: Number,
-    defaultUser: {
-      type: [CRUDModel, Object],
-      default: User,
-    },
+    defaultUser: [CRUDModel, Object],
     // принимает все классы расширяющий CRUDModel
     modelForUse: [CRUDModel, Function],
     searchQuery: Object,
+    required: Boolean,
   },
   data() {
     return {
@@ -34,7 +31,7 @@ export default {
   },
 
   methods: {
-    async getPatients(query, cb) {
+    async getUsers(query, cb) {
       this.$emit('update:modelValue', null);
 
       const { data } = await this.modelForUse.find({
