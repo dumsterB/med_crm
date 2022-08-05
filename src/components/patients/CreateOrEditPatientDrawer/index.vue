@@ -14,7 +14,10 @@
       </ElFormItem>
 
       <ElFormItem v-if="isChildren" :label="$t('User.Parent')">
-        <UiPatientsAutocompleteSearch v-model="patient.parent_id" required />
+        <UiUsersAutocompleteSearch
+          v-model="patient.parent_id"
+          required
+          :modelForUse="$options.Patient" />
       </ElFormItem>
 
       <ElFormItem :label="$t('User.FullName')">
@@ -84,6 +87,7 @@ import PhoneConfirmModal from '@/components/PhoneConfirmModal/index.vue';
 export default {
   name: 'CreateOrEditPatientDrawer',
   emits: ['update:modelValue', 'action'],
+  Patient: Patient,
   props: {
     modelValue: Boolean,
     nameOrPhone: String,
