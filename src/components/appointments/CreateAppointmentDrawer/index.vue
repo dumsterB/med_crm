@@ -4,28 +4,23 @@
     :title="$t('Title')"
     @update:model-value="$emit('update:modelValue', $event)">
     <ElForm label-position="top" @submit.prevent="createAppointment">
-      <ElTabs v-model="appointmentType">
-        <ElTabPane
-          :label="$t(`Appointments.Types.${appointmentTypesEnum.Doctor}`)"
-          :name="appointmentTypesEnum.Doctor">
-          <ElFormItem label="patient">
-            <ElSelect v-model="appointment.user_id">
-              <ElOption
-                v-for="user in [patient]"
-                :key="user.id"
-                :label="user.name"
-                :value="user.id"
-                disabled />
-            </ElSelect>
-          </ElFormItem>
-        </ElTabPane>
+      <ElFormItem label="patient">
+        <UiPatientsAutocompleteSearch
+          v-model="appointment.patient_id"
+          :defaultPatient="patient"
+          :disabled="!!patient" />
+      </ElFormItem>
 
-        <ElTabPane
-          :label="$t(`Appointments.Types.${appointmentTypesEnum.Service}`)"
-          :name="appointmentTypesEnum.Service">
-          Service
-        </ElTabPane>
-      </ElTabs>
+      <ElFormItem label="select type">
+        <ElRadioGroup v-model="appointmentType">
+          <ElRadio :label="appointmentTypesEnum.Doctor">
+            {{ $t(`Appointments.Types.${appointmentTypesEnum.Doctor}`) }}</ElRadio
+          >
+          <ElRadio :label="appointmentTypesEnum.Service">
+            {{ $t(`Appointments.Types.${appointmentTypesEnum.Service}`) }}</ElRadio
+          >
+        </ElRadioGroup>
+      </ElFormItem>
     </ElForm>
   </ElDrawer>
 </template>
