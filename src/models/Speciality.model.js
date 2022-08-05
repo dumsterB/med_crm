@@ -5,6 +5,9 @@ import { CRUDModel } from '@/models/CRUD.model';
  * @extends CRUDModel
  */
 export class Speciality extends CRUDModel {
+  static modelName = 'speciality';
+  static tableName = 'specialties';
+
   /**
    * @param {object} [payload]
    * @param {number} payload.id
