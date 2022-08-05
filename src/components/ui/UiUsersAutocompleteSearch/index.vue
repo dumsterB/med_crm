@@ -7,6 +7,7 @@
     :fetch-suggestions="getUsers"
     :debounce="250"
     :required="required"
+    :disabled="disabled"
     @select="selectHandler">
   </ElAutocomplete>
 </template>
@@ -23,6 +24,7 @@ export default {
     modelForUse: [CRUDModel, Function],
     searchQuery: Object,
     required: Boolean,
+    disabled: Boolean,
   },
   data() {
     return {
