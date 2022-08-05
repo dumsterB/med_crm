@@ -13,6 +13,7 @@ export class CRUDModel {
   /**
    * @param {object} [payload]
    * @param {number} payload.id
+   * @param {any} payload[key]
    */
   constructor(payload) {
     this.id = payload?.id || null;
