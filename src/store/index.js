@@ -3,6 +3,7 @@ import modalAndDrawer from '@/store/modalAndDrawer';
 import auth from '@/store/auth';
 import patients from '@/store/patients';
 import doctors from '@/store/doctors';
+import specialties from '@/store/specialties';
 
 export const Store = createStore({
   state: {},
@@ -15,5 +16,6 @@ export const Store = createStore({
     auth,
     patients,
     doctors,
+    specialties,
   },
 });
