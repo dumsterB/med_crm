@@ -1,10 +1,10 @@
 <template>
   <ElAutocomplete
     class="ui-patients-autocomplete-search"
-    value-key="name"
+    :value-key="label"
     v-model="query"
     :placeholder="$t('Base.PleaseInput')"
-    :fetch-suggestions="getUsers"
+    :fetch-suggestions="getItems"
     :debounce="250"
     :required="required"
     :disabled="disabled"
@@ -53,7 +53,7 @@ export default {
   },
 
   methods: {
-    async getUsers(query, cb) {
+    async getItems(query, cb) {
       this.$emit('update:modelValue', null);
 
       const { data } = await this.modelForUse.find({
