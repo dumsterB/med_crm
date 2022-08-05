@@ -31,6 +31,14 @@ export default {
       query: '',
     };
   },
+  watch: {
+    modelValue: {
+      handler(value) {
+        if (!value) this.query = '';
+      },
+      immediate: true,
+    },
+  },
 
   methods: {
     async getUsers(query, cb) {
