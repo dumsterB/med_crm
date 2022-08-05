@@ -16,7 +16,7 @@
 import { CRUDModel } from '@/models/CRUD.model';
 
 export default {
-  name: 'UiUsersAutocompleteSearch',
+  name: 'UiModelsAutocompleteSearch',
   props: {
     modelValue: Number,
     defaultUser: [CRUDModel, Object],

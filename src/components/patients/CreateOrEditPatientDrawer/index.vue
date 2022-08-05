@@ -14,7 +14,7 @@
       </ElFormItem>
 
       <ElFormItem v-if="isChildren" :label="$t('User.Parent')">
-        <UiUsersAutocompleteSearch
+        <UiModelsAutocompleteSearch
           v-model="patient.parent_id"
           required
           :modelForUse="$options.Patient" />
