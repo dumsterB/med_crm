@@ -8,6 +8,7 @@
  */
 export class StoreCRUDModule {
   constructor({ state, getters, mutations, actions }) {
+    this.isCRUDModule = true;
     this.namespaced = true;
     this.state = () => ({
       data: [],
