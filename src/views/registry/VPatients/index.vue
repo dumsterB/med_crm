@@ -21,6 +21,7 @@
 import { mapState, mapActions } from 'vuex';
 import { usePerPage, usePage, useSearch } from '@/hooks/query';
 import { Patient } from '@/models/Patient.model';
+import { REGISTRY_PATIENTS_ROUTE } from '@/router/registry.routes';
 
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
@@ -92,6 +93,9 @@ export default {
     },
 
     queryWatchersHandler(value, oldValue) {
+      // почему-то срабатывает после логаута
+      if (this.$route.name !== REGISTRY_PATIENTS_ROUTE.name) return;
+
       if (
         value &&
         oldValue &&
