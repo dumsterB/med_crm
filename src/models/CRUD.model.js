@@ -20,6 +20,7 @@ export class CRUDModel {
   }
 
   /**
+   * @param { string } _url
    * @param { number } per_page
    * @param { number } page
    * @param { string } [order_by]
@@ -32,6 +33,7 @@ export class CRUDModel {
    * @return { Promise<{ response: AxiosResponse<any>, data: response.data }> } data = response.data
    */
   static async find({
+    _url,
     per_page,
     page,
     order_by,
@@ -46,7 +48,7 @@ export class CRUDModel {
     }
 
     const urlWithQuery = mergeOrCreateQuery({
-      url: this.tableName,
+      url: _url || this.tableName,
       query: deleteEmptyValueKeys({
         per_page,
         page,
