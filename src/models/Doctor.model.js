@@ -4,7 +4,7 @@ import { CRUDModel } from '@/models/CRUD.model';
  * @class Doctors
  * @extends CRUDModel
  */
-export class Doctors extends CRUDModel {
+export class Doctor extends CRUDModel {
   static modelName = 'doctor';
   static tableName = 'doctors';
 
