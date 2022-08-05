@@ -16,7 +16,7 @@ import { CRUDModel } from '@/models/CRUD.model';
 import { User } from '@/models/User.model';
 
 export default {
-  name: 'UiPatientsAutocompleteSearch',
+  name: 'UiUsersAutocompleteSearch',
   props: {
     modelValue: Number,
     defaultUser: {
@@ -25,7 +25,7 @@ export default {
     },
     // принимает все классы расширяющий CRUDModel
     modelForUse: [CRUDModel, Function],
-    query: Object,
+    searchQuery: Object,
   },
   data() {
     return {
@@ -45,7 +45,7 @@ export default {
         query_operator: 'OR',
         search: query,
 
-        ...(query || {}),
+        ...(this.searchQuery || {}),
       });
 
       cb(data.data);
