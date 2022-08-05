@@ -19,10 +19,22 @@ export default {
   name: 'UiModelsAutocompleteSearch',
   props: {
     modelValue: Number,
-    defaultUser: [CRUDModel, Object],
     // принимает все классы расширяющий CRUDModel
     modelForUse: [CRUDModel, Function],
+
+    defaultItem: [CRUDModel, Object],
     searchQuery: Object,
+    label: {
+      // поле для показа
+      type: String,
+      default: 'name',
+    },
+    value: {
+      // поле для значения
+      type: [Number, String],
+      default: 'id',
+    },
+
     required: Boolean,
     disabled: Boolean,
   },
@@ -47,8 +59,8 @@ export default {
       const { data } = await this.modelForUse.find({
         page: 1,
         per_page: 100,
-        query_field: ['name', 'phone'],
         query_type: 'ILIKE',
+        query_field: ['name'],
         query_operator: 'OR',
         search: query,
 
@@ -59,12 +71,12 @@ export default {
     },
 
     selectHandler(payload) {
-      this.$emit('update:modelValue', payload.id);
+      this.$emit('update:modelValue', payload[this.value]);
     },
   },
 
   mounted() {
-    if (this.defaultUser) this.query = this.defaultUser.name;
+    if (this.defaultItem) this.query = this.defaultItem[this.label];
   },
 };
 </script>
