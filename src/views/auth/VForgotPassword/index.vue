@@ -7,7 +7,7 @@
 
 <script>
 import LayoutAuth from '@/components/layouts/LayoutAuth/index.vue';
-import ForgotPassword from '@/components/ForgotPassword/index.vue';
+import ForgotPassword from '@/components/auth/ForgotPassword/index.vue';
 
 export default {
   name: 'VForgotPassword',

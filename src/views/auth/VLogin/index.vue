@@ -7,7 +7,7 @@
 
 <script>
 import LayoutAuth from '@/components/layouts/LayoutAuth/index.vue';
-import LoginForm from '@/components/LoginForm/index.vue';
+import LoginForm from '@/components/auth/LoginForm/index.vue';
 
 export default {
   name: 'VLogin',
