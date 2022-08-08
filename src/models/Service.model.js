@@ -48,8 +48,12 @@ export class Service extends CRUDModel {
    * @return {Promise<{response: AxiosResponse<*>, data: response.data}>}
    */
   static async find(payload) {
+    const url = payload.doctorId
+      ? `${this.tableName}/${payload.doctorId}`
+      : `${this.tableName}/group/list`;
+
     return super.find({
-      _url: `${this.tableName}/${payload.doctorId}`,
+      _url: url,
       ...payload,
     });
   }
