@@ -3,7 +3,7 @@
     <ElDatePicker
       class="schedule-slots-select__date"
       v-model="date"
-      placeholder="select date"
+      :placeholder="$t('DateAndTime.SelectDate')"
       :disabled="disabled"
       :value-format="DATE_FORMAT">
     </ElDatePicker>
@@ -13,7 +13,8 @@
       v-model="slot"
       value-key="start_at"
       :disabled="disabled"
-      :loading="loading">
+      :loading="loading"
+      :placeholder="$t('DateAndTime.Time')">
       <ElOption
         v-for="slot in slotsForSelect"
         :key="slot.label"
@@ -121,3 +122,4 @@ export default {
 </script>
 
 <style lang="scss" src="./index.scss" />
+<i18n src="@/locales/dateAndTime.locales.json" />
