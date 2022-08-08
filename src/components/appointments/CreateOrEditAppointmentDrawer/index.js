@@ -1,13 +1,14 @@
 import { markRaw } from 'vue';
+import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
 import { Appointment } from '@/models/Appointment.model';
 import { User } from '@/models/User.model';
 import { Patient } from '@/models/Patient.model';
 import { Doctor } from '@/models/Doctor.model';
 import { Service } from '@/models/Service.model';
+import { ServiceGroup } from '@/models/ServiceGroup';
 
 import SpecialtiesSelect from '@/components/specialties/SpecialtiesSelect/index.vue';
 import ScheduleSlotsSelect from '@/components/appointments/ScheduleSlotsSelect/index.vue';
-import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
 
 export default {
   name: 'CreateOrEditAppointmentDrawer',
@@ -60,6 +61,9 @@ export default {
       };
     },
 
+    servicesModelForUse() {
+      return this.appointmentType === this.appointmentTypesEnum.Doctor ? Service : ServiceGroup;
+    },
     servicesIsDisabled() {
       return this.appointmentType === this.appointmentTypesEnum.Doctor
         ? !this.appointment.doctor_id
@@ -175,6 +179,7 @@ export default {
     Patient: markRaw(Patient),
     Doctor: markRaw(Doctor),
     Service: markRaw(Service),
+    ServiceGroup: markRaw(ServiceGroup),
     appointmentTypesEnum: markRaw(Appointment.enum.types),
   }),
 };

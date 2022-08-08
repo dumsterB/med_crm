@@ -63,7 +63,7 @@
         :style="{ order: this.appointmentFieldsFlexOrder.service }">
         <UiModelsAutocompleteSearch
           v-model="appointment.service_id"
-          :modelForUse="Service"
+          :modelForUse="servicesModelForUse"
           :searchQuery="servicesSearchQuery"
           label="title"
           :disabled="servicesIsDisabled"
