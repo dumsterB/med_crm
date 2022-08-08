@@ -10,6 +10,10 @@ body {
     --el-button-bg-color: var(--secondary-color);
     --el-button-border-color: var(--secondary-color);
   }
+  &.is-disabled {
+    --el-button-disabled-bg-color: var(--primary-disabled-color);
+    --el-button-disabled-border-color: var(--primary-disabled-color);
+  }
 
   &:hover {
     --el-button-hover-bg-color: var(--primary-hover-color);
