@@ -10,7 +10,7 @@ import ScheduleSlotsSelect from '@/components/appointments/ScheduleSlotsSelect/i
 import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
 
 export default {
-  name: 'CreateAppointmentDrawer',
+  name: 'CreateOrEditAppointmentDrawer',
   components: { SpecialtiesSelect, ScheduleSlotsSelect },
   emits: ['update:modelValue', 'action'],
   props: {

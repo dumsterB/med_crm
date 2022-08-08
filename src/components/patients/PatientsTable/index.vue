@@ -73,7 +73,7 @@
 import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
-import CreateAppointmentDrawer from '@/components/appointments/CreateAppointmentDrawer/index.vue';
+import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 
 export default {
@@ -118,7 +118,7 @@ export default {
 
     makeAppointment(payload) {
       this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreateAppointmentDrawer,
+        component: CreateOrEditAppointmentDrawer,
         payload: {
           patient: payload,
         },
