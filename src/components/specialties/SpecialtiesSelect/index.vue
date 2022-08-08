@@ -3,6 +3,7 @@
     class="specialties-select"
     :model-value="modelValue"
     :disabled="disabled"
+    :placeholder="$t('Base.PleaseSelect')"
     @update:model-value="$emit('update:modelValue', $event)">
     <ElOption
       v-for="speciality in data"
@@ -67,3 +68,4 @@ export default {
 </script>
 
 <style lang="scss" src="./index.scss" />
+<i18n src="@/locales/base.locales.json" />
