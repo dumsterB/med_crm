@@ -1,11 +1,9 @@
 <template>
-  <LayoutRegistry content-class="v-patient-content">
-    {{ PatientRecord }}
-  </LayoutRegistry>
+  <LayoutRegistry content-class="v-patient-content"> PatientRecord </LayoutRegistry>
 </template>
 
 <script>
-import LayoutRegistry from '@/components/layouts/LayoutRegistry';
+import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 
 export default {
   name: 'VPatientRecord',
@@ -17,5 +15,5 @@ export default {
 </script>
 
 <style lang="scss" src="./index.scss" />
-<i18n src="@/base.locales.json" />
+<i18n src="@/locales/base.locales.json" />
 <i18n src="./index.locales.json" />
