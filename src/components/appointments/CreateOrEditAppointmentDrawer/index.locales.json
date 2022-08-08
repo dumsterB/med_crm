@@ -1,22 +1,22 @@
 {
   "ru": {
+    "SelectDoctor": "Выберите доктора",
+    "SelectService": "Выберите услугу",
+    "SelectSpecialty": "Выберите специальность",
+    "SelectType": "Выберите тип записи"
     "Title": {
       "Create": "Записать на услугу",
       "Edit": "Редактировать запись"
-    },
-    "SelectType": "Выберите тип записи",
-    "SelectSpecialty": "Выберите специальность",
-    "SelectService": "Выберите услугу",
-    "SelectDoctor": "Выберите доктора"
+    }
   },
   "uz": {
+    "SelectDoctor": "Shifokorni tanlang",
+    "SelectService": "Xizmatni tanlang",
+    "SelectSpecialty": "Mutaxassislikni tanlang",
+    "SelectType": "Xabar turini tanlang",
     "Title": {
       "Create": "Xizmatga ro'yxatdan o'tkazish",
       "Edit": "Xabarni ozgartirish"
-    },
-    "SelectType": "Xabar turini tanlang",
-    "SelectSpecialty": "Mutaxassislikni tanlang",
-    "SelectService": "Xizmatni tanlang",
-    "SelectDoctor": "Shifokorni tanlang"
+    }
   }
 }
