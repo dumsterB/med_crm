@@ -16,6 +16,7 @@ export default {
   props: {
     modelValue: Boolean,
     patient: [Patient, User, Object],
+    data: [Appointment, Object],
   },
   data() {
     return {

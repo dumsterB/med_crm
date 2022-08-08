@@ -2,14 +2,16 @@
   <ElDrawer
     custom-class="create-appointment-drawer"
     :model-value="modelValue"
-    :title="$t('Title')"
+    :title="$t(`Title.${data ? 'Edit' : 'Create'}`)"
     @update:model-value="$emit('update:modelValue', $event)">
     <ElForm
       class="create-appointment-drawer-form"
       label-position="top"
       @submit.prevent="createAppointment">
       <!--  Patient  -->
-      <ElFormItem label="patient" :style="{ order: this.appointmentFieldsFlexOrder.patient }">
+      <ElFormItem
+        :label="$t('Base.Patient')"
+        :style="{ order: this.appointmentFieldsFlexOrder.patient }">
         <UiModelsAutocompleteSearch
           v-model="appointment.patient_id"
           :modelForUse="Patient"
@@ -19,7 +21,9 @@
       </ElFormItem>
 
       <!--  Type  -->
-      <ElFormItem label="select type" :style="{ order: this.appointmentFieldsFlexOrder.type }">
+      <ElFormItem
+        :label="$t('SelectType')"
+        :style="{ order: this.appointmentFieldsFlexOrder.type }">
         <ElRadioGroup v-model="appointmentType">
           <ElRadio :label="appointmentTypesEnum.Doctor">
             {{ $t(`Appointments.Types.${appointmentTypesEnum.Doctor}`) }}</ElRadio
@@ -33,7 +37,7 @@
       <!--  Specialty  -->
       <ElFormItem
         v-show="appointmentType === appointmentTypesEnum.Doctor"
-        label="speciality"
+        :label="$t('SelectSpecialty')"
         :style="{ order: this.appointmentFieldsFlexOrder.specialty }">
         <SpecialtiesSelect
           v-model="appointment.specialty_id"
@@ -42,7 +46,9 @@
       </ElFormItem>
 
       <!--  Doctor  -->
-      <ElFormItem label="doctor" :style="{ order: this.appointmentFieldsFlexOrder.doctor }">
+      <ElFormItem
+        :label="$t('SelectDoctor')"
+        :style="{ order: this.appointmentFieldsFlexOrder.doctor }">
         <UiModelsAutocompleteSearch
           v-model="appointment.doctor_id"
           :modelForUse="Doctor"
@@ -52,7 +58,9 @@
       </ElFormItem>
 
       <!--  Service  -->
-      <ElFormItem label="service" :style="{ order: this.appointmentFieldsFlexOrder.service }">
+      <ElFormItem
+        :label="$t('SelectService')"
+        :style="{ order: this.appointmentFieldsFlexOrder.service }">
         <UiModelsAutocompleteSearch
           v-model="appointment.service_id"
           :modelForUse="Service"
@@ -63,7 +71,9 @@
       </ElFormItem>
 
       <!--  Date  -->
-      <ElFormItem label="date" :style="{ order: this.appointmentFieldsFlexOrder.date }">
+      <ElFormItem
+        :label="$t('DateAndTime.SelectDate')"
+        :style="{ order: this.appointmentFieldsFlexOrder.date }">
         <ScheduleSlotsSelect
           v-model:start-at="appointment.start_at"
           v-model:end-at="appointment.end_at"
@@ -88,4 +98,5 @@
 <i18n src="@/locales/base.locales.json" />
 <i18n src="@/locales/notifications.locales.json" />
 <i18n src="@/locales/appointments.locales.json" />
+<i18n src="@/locales/dateAndTime.locales.json" />
 <i18n src="./index.locales.json" />
