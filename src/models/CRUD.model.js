@@ -77,10 +77,11 @@ export class CRUDModel {
 
   /**
    * @param {object} payload
+   * @param {string} url
    * @return {Promise<{data: any, response: AxiosResponse<any>}>} data = response.data
    */
-  static async create(payload) {
-    const response = await ApiService.post(`${this.tableName}/create`, payload);
+  static async create(payload, { url }) {
+    const response = await ApiService.post(`${url || this.tableName + '/create'}`, payload);
     return {
       response,
       data: response.data,
