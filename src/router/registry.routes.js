@@ -5,6 +5,7 @@ import VPatients from '@/views/registry/VPatients/index.vue';
 import VPatientsRecords from '@/views/registry/VPatientsRecords/index.vue';
 import VDoctorsSchedule from '@/views/registry/VDoctorsSchedule/index.vue';
 import VPatient from '@/views/registry/VPatient/index.vue';
+import VPatientRecord from '@/views/registry/VPatientRecord/index.vue';
 
 export const REGISTRY_DASHBOARD_ROUTE = {
   name: 'REGISTRY_DASHBOARD',
@@ -15,6 +16,7 @@ export const REGISTRY_DASHBOARD_ROUTE = {
     title: I18nService.t('Base.Dashboard'),
   },
 };
+
 export const REGISTRY_PATIENTS_ROUTE = {
   name: 'REGISTRY_PATIENTS',
   path: '/registry/patients',
@@ -34,6 +36,17 @@ export const REGISTRY_PATIENT_ROUTE = {
   },
   props: true,
 };
+export const REGISTRY_PATIENT_RECORD_ROUTE = {
+  name: 'REGISTRY_PATIENT_RECORD',
+  path: '/registry/patients/:patientId/records/:id',
+  component: VPatientRecord,
+  beforeEnter: [onlyLoggedInMiddleware],
+  meta: {
+    title: I18nService.t('Base.PatientRecord'),
+  },
+  props: true,
+};
+
 export const REGISTRY_PATIENTS_RECORDS_ROUTE = {
   name: 'REGISTRY_PATIENTS_RECORDS',
   path: '/registry/patients-records',
@@ -43,6 +56,7 @@ export const REGISTRY_PATIENTS_RECORDS_ROUTE = {
     title: I18nService.t('Base.PatientsRecords'),
   },
 };
+
 export const REGISTRY_DOCTORS_SCHEDULE_ROUTE = {
   name: 'REGISTRY_DOCTORS_SCHEDULE',
   path: '/registry/doctors-schedule',
@@ -57,6 +71,7 @@ export const routes = [
   REGISTRY_DASHBOARD_ROUTE,
   REGISTRY_PATIENTS_ROUTE,
   REGISTRY_PATIENT_ROUTE,
+  REGISTRY_PATIENT_RECORD_ROUTE,
   REGISTRY_PATIENTS_RECORDS_ROUTE,
   REGISTRY_DOCTORS_SCHEDULE_ROUTE,
 ];
