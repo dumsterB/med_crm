@@ -31,7 +31,6 @@ import {
   REGISTRY_DASHBOARD_ROUTE,
   REGISTRY_PATIENTS_ROUTE,
   REGISTRY_PATIENTS_RECORDS_ROUTE,
-  REGISTRY_DOCTORS_SCHEDULE_ROUTE,
 } from '@/router/registry.routes';
 
 export default {
@@ -49,7 +48,6 @@ export default {
         REGISTRY_DASHBOARD_ROUTE,
         REGISTRY_PATIENTS_ROUTE,
         REGISTRY_PATIENTS_RECORDS_ROUTE,
-        REGISTRY_DOCTORS_SCHEDULE_ROUTE,
       ].map((route) => ({
         ...route,
         title: this.routesOptionsByRouteName[route.name].text,
@@ -70,10 +68,6 @@ export default {
         [REGISTRY_PATIENTS_RECORDS_ROUTE.name]: {
           icon: icons.NOTE,
           text: this.$t('Base.PatientsRecords'),
-        },
-        [REGISTRY_DOCTORS_SCHEDULE_ROUTE.name]: {
-          icon: icons.BOARD,
-          text: this.$t('Base.DoctorsSchedule'),
         },
       };
     },
