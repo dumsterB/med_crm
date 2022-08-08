@@ -6,10 +6,11 @@ import { Doctor } from '@/models/Doctor.model';
 import { Service } from '@/models/Service.model';
 
 import SpecialtiesSelect from '@/components/specialties/SpecialtiesSelect/index.vue';
+import ScheduleSlotsSelect from '@/components/appointments/ScheduleSlotsSelect/index.vue';
 
 export default {
   name: 'CreateAppointmentDrawer',
-  components: { SpecialtiesSelect },
+  components: { SpecialtiesSelect, ScheduleSlotsSelect },
   emits: ['update:modelValue', 'action'],
   props: {
     modelValue: Boolean,
@@ -62,6 +63,12 @@ export default {
         query_type: null,
         query_operator: null,
       };
+    },
+
+    slotsIsDisabled() {
+      return this.appointmentType === this.appointmentTypesEnum.Doctor
+        ? !this.appointment.service_id
+        : !this.appointment.doctor_id;
     },
   },
 

@@ -57,18 +57,9 @@
       </ElFormItem>
 
       <!--  Date  -->
-      <!--      <ElFormItem label="date" :style="{ order: this.appointmentFieldsFlexOrder.date }">-->
-      <!--        <ElPopover placement="top" :width="200" title="title" :visible="true">-->
-      <!--          <template #reference>-->
-      <!--            qwe-->
-      <!--            &lt;!&ndash;            <ElDatePicker v-model="appointment.start_at" type="date">-->
-      <!--              <template #default="payload">-->
-      <!--                <span @click.stop="checkPayload(payload)">123</span>-->
-      <!--              </template>-->
-      <!--            </ElDatePicker>&ndash;&gt;-->
-      <!--          </template>-->
-      <!--        </ElPopover>-->
-      <!--      </ElFormItem>-->
+      <ElFormItem label="date" :style="{ order: this.appointmentFieldsFlexOrder.date }">
+        <ScheduleSlotsSelect :disabled="slotsIsDisabled" :service-id="appointment.service_id" />
+      </ElFormItem>
 
       <!--  Actions  -->
       <ElFormItem :style="{ order: this.appointmentFieldsFlexOrder.actions }">
