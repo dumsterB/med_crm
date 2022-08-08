@@ -1,0 +1,11 @@
+.schedule-slots-select {
+  display: flex;
+  gap: 10px;
+
+  &__date {
+    flex: 0.65;
+  }
+  &__time {
+    flex: 0.35;
+  }
+}
