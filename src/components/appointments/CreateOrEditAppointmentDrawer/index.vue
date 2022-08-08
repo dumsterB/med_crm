@@ -85,7 +85,9 @@
       <!--  Actions  -->
       <ElFormItem :style="{ order: this.appointmentFieldsFlexOrder.actions }">
         <div class="create-appointment-drawer-form-actions">
-          <ElButton type="primary" native-type="submit" :loading="loading.form"> Create </ElButton>
+          <ElButton type="primary" native-type="submit" :loading="loading.form">
+            {{ $t(`Base.${data ? 'Edit' : 'Create'}`) }}
+          </ElButton>
         </div>
       </ElFormItem>
     </ElForm>
