@@ -55,9 +55,6 @@
 
       <ElFormItem>
         <div class="create-patient-drawer-form-actions">
-          <ElButton type="danger" plain @click="$emit('update:modelValue', false)">
-            {{ $t('Base.Cancel') }}
-          </ElButton>
           <ElButton
             v-show="!hasPatientFromOtherClinic"
             type="primary"
