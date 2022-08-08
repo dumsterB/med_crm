@@ -3,7 +3,6 @@ import { I18nService } from '@/services/i18n.service';
 import VDashboard from '@/views/registry/VDashboard/index.vue';
 import VPatients from '@/views/registry/VPatients/index.vue';
 import VPatientsRecords from '@/views/registry/VPatientsRecords/index.vue';
-import VDoctorsSchedule from '@/views/registry/VDoctorsSchedule/index.vue';
 import VPatient from '@/views/registry/VPatient/index.vue';
 import VPatientRecord from '@/views/registry/VPatientRecord/index.vue';
 
@@ -57,21 +56,10 @@ export const REGISTRY_PATIENTS_RECORDS_ROUTE = {
   },
 };
 
-export const REGISTRY_DOCTORS_SCHEDULE_ROUTE = {
-  name: 'REGISTRY_DOCTORS_SCHEDULE',
-  path: '/registry/doctors-schedule',
-  component: VDoctorsSchedule,
-  beforeEnter: [onlyLoggedInMiddleware],
-  meta: {
-    title: I18nService.t('Base.DoctorsSchedule'),
-  },
-};
-
 export const routes = [
   REGISTRY_DASHBOARD_ROUTE,
   REGISTRY_PATIENTS_ROUTE,
   REGISTRY_PATIENT_ROUTE,
   REGISTRY_PATIENT_RECORD_ROUTE,
   REGISTRY_PATIENTS_RECORDS_ROUTE,
-  REGISTRY_DOCTORS_SCHEDULE_ROUTE,
 ];
