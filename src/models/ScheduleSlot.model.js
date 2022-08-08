@@ -1,6 +1,11 @@
 import { CRUDModel } from '@/models/CRUD.model';
 import { ApiService } from '@/services/api.service';
+import { mergeOrCreateQuery } from '@/utils/http.util';
 
+/**
+ * @class ScheduleSlot
+ * @extends CRUDModel
+ */
 export class ScheduleSlot extends CRUDModel {
   static modelName = 'scheduleSlot';
   /**
@@ -23,12 +28,17 @@ export class ScheduleSlot extends CRUDModel {
    * @return {Promise<{response: AxiosResponse<*>, data: response.data}>}
    */
   static async getSlotsByServiceId({ serviceId, from, to }) {
-    return super.find({
-      _url: 'schedule/slots',
-      service_id: serviceId,
-      from,
-      to,
+    const urlWithQuery = mergeOrCreateQuery({
+      url: 'schedule/slots',
+      query: {
+        service_id: serviceId,
+        from,
+        to,
+      },
     });
+
+    const response = await ApiService.get(urlWithQuery);
+    return { response, data: response.data };
   }
 
   /**
@@ -38,11 +48,16 @@ export class ScheduleSlot extends CRUDModel {
    * @return {Promise<{response: AxiosResponse<*>, data: response.data}>}
    */
   static async getSlotsByGroupServiceId({ groupServiceId, from, to }) {
-    return super.find({
-      _url: 'schedule/slots/byGroup',
-      group_service_id: groupServiceId,
-      from,
-      to,
+    const urlWithQuery = mergeOrCreateQuery({
+      url: 'schedule/slots',
+      query: {
+        group_service_id: groupServiceId,
+        from,
+        to,
+      },
     });
+
+    const response = await ApiService.get(urlWithQuery);
+    return { response, data: response.data };
   }
 }
