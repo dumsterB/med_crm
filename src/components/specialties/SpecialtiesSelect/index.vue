@@ -2,6 +2,7 @@
   <ElSelect
     class="specialties-select"
     :model-value="modelValue"
+    :disabled="disabled"
     @update:model-value="$emit('update:modelValue', $event)">
     <ElOption
       v-for="speciality in data"
@@ -22,6 +23,7 @@ export default {
   props: {
     modelValue: Number,
     required: Boolean,
+    disabled: Boolean,
   },
   data() {
     return {
