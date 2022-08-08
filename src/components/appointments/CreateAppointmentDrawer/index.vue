@@ -31,8 +31,14 @@
       </ElFormItem>
 
       <!--  Specialty  -->
-      <ElFormItem label="speciality" :style="{ order: this.appointmentFieldsFlexOrder.specialty }">
-        <SpecialtiesSelect v-model="appointment.specialty_id" />
+      <ElFormItem
+        v-show="appointmentType === appointmentTypesEnum.Doctor"
+        label="speciality"
+        :style="{ order: this.appointmentFieldsFlexOrder.specialty }">
+        <SpecialtiesSelect
+          v-model="appointment.specialty_id"
+          :disabled="specialtiesIsDisabled"
+          :required="appointmentType === appointmentTypesEnum.Doctor" />
       </ElFormItem>
 
       <!--  Doctor  -->
@@ -58,14 +64,18 @@
 
       <!--  Date  -->
       <ElFormItem label="date" :style="{ order: this.appointmentFieldsFlexOrder.date }">
-        <ScheduleSlotsSelect :disabled="slotsIsDisabled" :service-id="appointment.service_id" />
+        <ScheduleSlotsSelect
+          v-model:start-at="appointment.start_at"
+          v-model:end-at="appointment.end_at"
+          :disabled="slotsIsDisabled"
+          :service-id="appointment.service_id"
+          required />
       </ElFormItem>
 
       <!--  Actions  -->
       <ElFormItem :style="{ order: this.appointmentFieldsFlexOrder.actions }">
         <div class="create-appointment-drawer-form-actions">
-          <ElButton text> Cancel </ElButton>
-          <ElButton type="primary" native-type="submit"> Create </ElButton>
+          <ElButton type="primary" native-type="submit" :loading="loading.form"> Create </ElButton>
         </div>
       </ElFormItem>
     </ElForm>
@@ -76,5 +86,6 @@
 
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/base.locales.json" />
+<i18n src="@/locales/notifications.locales.json" />
 <i18n src="@/locales/appointments.locales.json" />
 <i18n src="./index.locales.json" />

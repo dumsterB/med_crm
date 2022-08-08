@@ -7,6 +7,7 @@ import { Service } from '@/models/Service.model';
 
 import SpecialtiesSelect from '@/components/specialties/SpecialtiesSelect/index.vue';
 import ScheduleSlotsSelect from '@/components/appointments/ScheduleSlotsSelect/index.vue';
+import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
 
 export default {
   name: 'CreateAppointmentDrawer',
@@ -21,6 +22,9 @@ export default {
       /** @type Appointment */
       appointment: null,
       appointmentType: Appointment.enum.types.Doctor,
+      loading: {
+        form: false,
+      },
     };
   },
   computed: {
@@ -39,6 +43,10 @@ export default {
       };
     },
 
+    specialtiesIsDisabled() {
+      return !this.appointment.patient_id;
+    },
+
     doctorsIsDisabled() {
       return this.appointmentType === this.appointmentTypesEnum.Doctor
         ? !this.appointment.specialty_id
@@ -54,7 +62,7 @@ export default {
     servicesIsDisabled() {
       return this.appointmentType === this.appointmentTypesEnum.Doctor
         ? !this.appointment.doctor_id
-        : !this.appointment.specialty_id;
+        : !this.appointment.patient_id;
     },
     servicesSearchQuery() {
       return {
@@ -82,11 +90,13 @@ export default {
     },
 
     'appointmentType': {
-      handler() {
+      handler(value) {
         if (this.appointment.service_id) this.appointment.service_id = null;
         if (this.appointment.doctor_id) this.appointment.doctor_id = null;
         if (this.appointment.start_at) this.appointment.type.start_at = null;
         if (this.appointment.end_at) this.appointment.end_at = null;
+
+        if (value === this.appointmentTypesEnum.Service) this.getGroupsService();
       },
     },
     'appointment.specialty_id': {
@@ -109,7 +119,28 @@ export default {
   },
 
   methods: {
-    createAppointment() {},
+    async createAppointment() {
+      if (this.loading.form) return;
+      this.loading.form = true;
+
+      try {
+        const { data } = await Appointment.create(this.appointment);
+
+        this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessCreated') });
+        this.$emit(
+          'action',
+          new GlobalDrawerAction({ name: 'created', data: { appointment: data.data } })
+        );
+      } catch (err) {
+        console.log(err);
+        this.$notify({
+          type: 'error',
+          title: err?.response?.data?.message || this.$t('Notifications.Error'),
+        });
+      }
+
+      this.loading.form = false;
+    },
 
     appointmentWatcherHandler({ field, value, oldValue }) {
       if (value === oldValue) return;
@@ -130,6 +161,8 @@ export default {
         }
       }
     },
+
+    async getGroupsService() {},
 
     checkPayload(payload) {
       console.log(payload);
