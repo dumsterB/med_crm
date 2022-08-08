@@ -1,0 +1,14 @@
+{
+  "ru": {
+    "DateAndTime": {
+      "SelectDate": "Выберите дату",
+      "Time": "Время"
+    }
+  },
+  "uz": {
+    "DateAndTime": {
+      "SelectDate": "Sanani tanlang",
+      "Time": "Vaqt"
+    }
+  }
+}
