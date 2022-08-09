@@ -68,7 +68,7 @@ export default {
     },
   },
   watch: {
-    '$route.name'() {
+    '$route.path'() {
       this.forceCloseModal();
       this.forceCloseDrawer();
     },
