@@ -4,7 +4,6 @@
       <ElTable
         class="patients-table"
         :data="items"
-        style="width: 2200px;overflow-x: scroll"
         v-loading="loading"
         ref="elTable"
         @row-click="goToPatient">
@@ -35,13 +34,13 @@
           </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="doctor_name" :label="$t('Appointments.Types.doctor')">
+        <ElTableColumn width="200" prop="doctor_name" :label="$t('Appointments.Types.doctor')">
           <template #default="{ row }">
             {{ row.doctor.name }}
           </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="patient" :label="$t('Base.Patient')">
+        <ElTableColumn width="200" prop="patient" :label="$t('Base.Patient')">
           <template #default="{ row }">
             {{ row.patient.name }}
           </template>
@@ -57,7 +56,7 @@
           <template #default="{ row }">
             <div class="patients-records-table-status">
               <span v-if="row.status === 'approved'">
-                <el-button size="small" type="success" round>
+                <el-button size="small" class="success-status" type="success" round>
                   <UiIcon :icon="$options.icons.DOUBLE_CHECKER" />
                   <span class="patients-records-table-status">{{
                     $t(`Appointments.Types.${row.status}`)
@@ -65,7 +64,7 @@
                 </el-button>
               </span>
               <span v-if="row.status === 'canceled'">
-                <el-button size="small" type="danger" round>
+                <el-button size="small" class="canceled-status" type="danger" round>
                   <UiIcon :icon="$options.icons.CANCELED" />
                   <span class="patients-records-table-status">{{
                     $t(`Appointments.Types.${row.status}`)
@@ -73,7 +72,7 @@
                 </el-button>
               </span>
               <span v-if="row.status === 'provided'">
-                <el-button size="small" type="warning" round>
+                <el-button size="small" class="provided-status" type="warning" round>
                   <UiIcon :icon="$options.icons.PROVIDED" />
                   <span class="patients-records-table-status">{{
                     $t(`Appointments.Types.${row.status}`)
@@ -90,7 +89,7 @@
           </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="phone_patient" :label="$t('DateAndTime.CreatedAt')">
+        <ElTableColumn width="180" prop="phone_patient" :label="$t('DateAndTime.CreatedAt')">
           <template #default="{ row }">
             {{ row.clinic.published_at }}
           </template>

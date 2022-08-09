@@ -6,6 +6,30 @@
 .patients-records-table-status{
   margin-left: 5px;
 }
+.success-status{
+  background: #73D451;
+  border-radius: 40px;
+  padding: 2px 16px 2px 8px;
+  gap: 4px;
+  width: 120px;
+  height: 28px;
+}
+.canceled-status{
+  background: #BA0B0B;
+  border-radius: 40px;
+  padding: 2px 8px;
+  gap: 4px;
+  width: 77px;
+  height: 28px;
+}
+.provided-status{
+  background: #FFBA34;
+  border-radius: 40px;
+  padding: 2px 8px;
+  gap: 4px;
+  width: 85px;
+  height: 28px;
+}
 
 .el-input__wrapper{
   background: #FFFFFF;
