@@ -5,14 +5,17 @@
     v-bind="$attrs"
     @update:model-value="$emit('update:modelValue', $event)">
     <ElForm class="create-patient-drawer-form" label-position="top" @submit.prevent="submitHandler">
+      <!--  Is Children  -->
       <ElFormItem>
         <ElSwitch :active-text="$t('User.IsChildren')" v-model="isChildren" />
       </ElFormItem>
 
+      <!--  Phone  -->
       <ElFormItem v-if="!isChildren" :label="$t('User.Phone')">
         <UiPhoneInput v-model="patient.phone" required />
       </ElFormItem>
 
+      <!--  Parent  -->
       <ElFormItem v-if="isChildren" :label="$t('User.Parent')">
         <UiModelsAutocompleteSearch
           v-model="patient.parent_id"
@@ -21,42 +24,48 @@
           required />
       </ElFormItem>
 
-      <ElFormItem :label="$t('User.FullName')">
-        <ElInput v-model="patient.name" required :disabled="isDisabledSecondaryInputs" />
-      </ElFormItem>
+      <div v-show="isChildren || (hasPhoneNumber && !hasPatient)">
+        <!--  FullName  -->
+        <ElFormItem :label="$t('User.FullName')">
+          <ElInput v-model="patient.name" required :disabled="isDisabledSecondaryInputs" />
+        </ElFormItem>
 
-      <ElFormItem :label="$t('User.Gender')">
-        <UiGenderSelect v-model="patient.gender" required :disabled="isDisabledSecondaryInputs" />
-      </ElFormItem>
+        <!--  Gender  -->
+        <ElFormItem :label="$t('User.Gender')">
+          <UiGenderSelect v-model="patient.gender" required :disabled="isDisabledSecondaryInputs" />
+        </ElFormItem>
 
-      <ElFormItem :label="$t('User.Birthdate')">
-        <ElDatePicker
-          v-model="patient.birthdate"
-          type="date"
-          :placeholder="$t('Base.SelectDate')"
-          required
-          :disabled="isDisabledSecondaryInputs" />
+        <!--  Birthdate  -->
+        <ElFormItem :label="$t('User.Birthdate')">
+          <ElDatePicker
+            v-model="patient.birthdate"
+            type="date"
+            :placeholder="$t('Base.SelectDate')"
+            required
+            :disabled="isDisabledSecondaryInputs" />
 
-        <UiRequiredHiddenInput :modelValue="patient.birthdate" />
-      </ElFormItem>
+          <UiRequiredHiddenInput :modelValue="patient.birthdate" />
+        </ElFormItem>
+      </div>
 
-      <ElFormItem v-if="hasPatient">
+      <!--  OldPatient  -->
+      <ElFormItem v-show="hasPatient">
         <div class="create-patient-drawer-patient">
-          <div class="create-patient-drawer-patient__title">
-            Пациент на этом номере уже существует
-          </div>
-          <ElButton type="primary" @click="checkPhoneForRebinding">Отвязать</ElButton>
-
-          <ElButton v-if="!hasPatientFromOtherClinic" @click="goToPatient">
-            go to patient
-          </ElButton>
+          <div class="create-patient-drawer-patient__title">Пациент есть в системе</div>
+          <router-link
+            v-show="!hasPatientFromOtherClinic"
+            class="create-patient-drawer-patient__name"
+            :to="oldPatientPageUrl">
+            {{ oldPatient?.name }}
+          </router-link>
         </div>
       </ElFormItem>
 
+      <!--  Actions  -->
       <ElFormItem>
         <div class="create-patient-drawer-form-actions">
           <ElButton
-            v-show="!hasPatientFromOtherClinic"
+            v-show="!hasPatient"
             type="primary"
             native-type="submit"
             :loading="loading.form"
@@ -64,8 +73,19 @@
             {{ $t(data ? 'Base.SaveChanges' : 'Patients.AddPatient') }}
           </ElButton>
 
+          <!--  hasPatient && !hasPatientFromOtherClinic  -->
+          <router-link v-show="hasPatient && !hasPatientFromOtherClinic" :to="oldPatientPageUrl">
+            <ElButton type="primary" plain>{{ $t('GoToPatient') }} </ElButton>
+          </router-link>
           <ElButton
-            v-show="hasPatientFromOtherClinic"
+            v-show="data ? hasPatient : hasPatient && !hasPatientFromOtherClinic"
+            type="primary"
+            @click="checkPhoneForRebinding">
+            {{ $t(data ? 'RebindPhone' : 'CreateNewPatient') }}
+          </ElButton>
+
+          <ElButton
+            v-show="hasPatientFromOtherClinic && !data"
             type="primary"
             :loading="loading.attach"
             @click="attachPatient">

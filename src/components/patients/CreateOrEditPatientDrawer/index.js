@@ -1,4 +1,5 @@
 import { throttle } from 'lodash';
+import { insertRouteParams } from '@/utils/router.utils';
 import { Patient } from '@/models/Patient.model';
 import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
 import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
@@ -15,20 +16,20 @@ export default {
   },
   data() {
     return {
-      /**
-       * @type Patient
-       */
-      patient: null,
       loading: {
         form: false,
         attach: false,
       },
       isChildren: false,
+      /** @type Patient */
+      patient: null,
+      /** @type Patient */
+      oldPatient: null,
       hasPatient: false,
       hasPatientFromOtherClinic: false,
 
       isRebinding: false, // если пользователь был найден и мы успешно подтвердили код - можем создать новый акк
-      code: null, // для хранения кода подтверждения при rebinding
+      code: null, // для хранения кода подтверждения при rebinding или смене номера
 
       throttleCheckHasPatient: null,
     };
@@ -39,6 +40,13 @@ export default {
     },
     isDisabledSecondaryInputs() {
       return this.isChildren ? !this.patient.parent_id : !this.hasPhoneNumber;
+    },
+
+    oldPatientPageUrl() {
+      return insertRouteParams({
+        path: REGISTRY_PATIENT_ROUTE.path,
+        params: { id: this.oldPatient?.id },
+      });
     },
   },
 
@@ -68,7 +76,7 @@ export default {
       this.loading.form = true;
 
       try {
-        this.data || this.hasPatient ? await this.editPatient() : await this.createPatient();
+        this.data ? await this.editPatient() : await this.createPatient();
       } catch (err) {
         console.log(err);
         this.$notify({
@@ -89,6 +97,8 @@ export default {
       this.$emit('action', new GlobalDrawerAction({ name: 'created', data: { patient } }));
       this.goToPatient({ patientId: patient.id });
     },
+
+    // проверку телефона для создания нового пациента или смены текущего номера
     async checkPhoneForRebinding() {
       const action = await this.$store.dispatch('modalAndDrawer/openModal', {
         component: PhoneConfirmModal,
@@ -101,13 +111,17 @@ export default {
       this.resetHasPatient();
       this.isRebinding = true;
       this.code = action.data.code;
-      this.patient = new Patient({ phone: this.patient.phone });
+      this.patient = new Patient({ ...(this.data || {}), phone: this.patient.phone });
     },
 
     async editPatient() {
-      if (this.data.phone !== this.patient.phone) return this.checkThenEditPatientByPhone();
+      if (this.data.phone !== this.patient.phone && !this.isRebinding)
+        return this.checkPhoneForRebinding();
 
-      const { data } = await Patient.update({ id: this.patient.id, payload: this.patient });
+      const { data } = await Patient.update({
+        id: this.patient.id,
+        payload: this.isRebinding ? { ...this.patient, code: this.code } : this.patient,
+      });
 
       this.$emit(
         'action',
@@ -115,33 +129,18 @@ export default {
       );
       this.$notify({ type: 'success', title: this.$t('Notifications.SuccessUpdated') });
     },
-    async checkThenEditPatientByPhone() {
-      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
-        component: PhoneConfirmModal,
-        payload: {
-          phone: this.patient.phone,
-        },
-      });
 
-      if (action.name !== PHONE_CONFIRM_MODAL_CONFIRMED_ACTION) return;
-
-      // this.$emit(
-      //   'action',
-      //   new GlobalDrawerAction({ name: 'updated', data: { patient: data.data } })
-      // );
-      // this.$notify({ type: 'success', title: this.$t('Notifications.SuccessUpdated') });
-    },
-
+    // привязать к нашей клинике
     async attachPatient() {
       if (this.loading.attach) return;
       this.loading.attach = true;
 
       try {
-        const { patient } = await Patient.attachPatient({ patient_id: this.patient.id });
+        const { patient } = await Patient.attachPatient({ patient_id: this.oldPatient.id });
 
         this.$notify({ type: 'success', title: this.$t('Notifications.SuccessAttached') });
         this.$emit('action', new GlobalDrawerAction({ name: 'attached', data: { patient } }));
-        this.goToPatient(patient);
+        this.goToPatient({ patientId: patient.id });
       } catch (err) {
         console.log(err);
         this.$notify({
@@ -158,12 +157,13 @@ export default {
       const { patient, attach_clinic } = await Patient.checkPatient({ phone: this.patient.phone });
       if (!patient) return;
 
+      this.oldPatient = patient;
       this.hasPatient = true;
       this.hasPatientFromOtherClinic = !attach_clinic;
-      if (!this.data) this.patient = new Patient(patient);
     },
     resetHasPatient() {
       this.isRebinding = false;
+      this.oldPatient = null;
       this.hasPatient = false;
       this.hasPatientFromOtherClinic = false;
     },

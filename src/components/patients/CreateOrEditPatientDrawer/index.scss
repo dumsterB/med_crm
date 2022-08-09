@@ -14,4 +14,15 @@
       gap: 10px;
     }
   }
+
+  &-patient {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+
+    &__name {
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+  }
 }

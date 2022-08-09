@@ -17,6 +17,7 @@ import { CRUDModel } from '@/models/CRUD.model';
 
 export default {
   name: 'UiModelsAutocompleteSearch',
+  emits: ['update:modelValue', 'update:data'],
   props: {
     modelValue: Number,
     // принимает все классы расширяющий CRUDModel
@@ -68,6 +69,7 @@ export default {
       });
 
       cb(data.data);
+      this.$emit('update:data', data.data);
     },
 
     selectHandler(payload) {
