@@ -3,7 +3,13 @@
     "Appointments": {
       "Types": {
         "doctor": "Врач",
-        "service": "Услуга"
+        "service": "Услуга",
+        "phonePatient": "Телефон пациента",
+        "Status": "Статус",
+        "approved": "Подтвержден",
+        "provided": "Ожидает",
+        "canceled": "Отмена",
+        "RecordingSource": "Источник записи"
       }
     }
   },
@@ -11,7 +17,11 @@
     "Appointments": {
       "Types": {
         "doctor": "Shifokor",
-        "service": "Ximat"
+        "service": "Ximat",
+        "phonePatient": "Bemorning telefoni",
+        "Status": "Holat",
+        "RecordingSource": "Yozib olish manbai"
+
       }
     }
   }
