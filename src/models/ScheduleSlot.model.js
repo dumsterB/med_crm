@@ -49,7 +49,7 @@ export class ScheduleSlot extends CRUDModel {
    */
   static async getSlotsByGroupServiceId({ groupServiceId, from, to }) {
     const urlWithQuery = mergeOrCreateQuery({
-      url: 'schedule/slots',
+      url: 'schedule/slots/byGroup',
       query: {
         group_service_id: groupServiceId,
         from,
