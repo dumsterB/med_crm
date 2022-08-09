@@ -7,7 +7,7 @@ build front:
   variables:
     VITE_API_URL: $STAGE_PROTOCOL://$STAGE_SERVER/api/mis
   only:
-    - stage
+    - dev
   script:
     - npm install --progress=false
     - npm run build:dev
@@ -19,7 +19,7 @@ build front:
 stage_deploy:
     stage: deploy
     only:
-      - stage
+      - dev
     script:
       - apk add --no-cache openssh rsync
       - mkdir -p ~/.ssh
