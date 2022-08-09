@@ -1,10 +1,12 @@
 {
   "ru": {
+    "CreateNewPatient": "Создать нового пациента",
     "GoToPatient": "Перейти к карте пациента",
-    "CreateNewPatient": "Создать нового пациента"
+    "RebindPhone": "Отвязать от этого аккаунта"
   },
   "uz": {
     "CreateNewPatient": "Yangi bemormi yaratish",
-    "GoToPatient": "Bemor kartasiga utish"
+    "GoToPatient": "Bemor kartasiga utish",
+    "RebindPhone": "Shu akkuntdan uzish"
   }
 }

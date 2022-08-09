@@ -76,7 +76,7 @@ export default {
       this.loading.form = true;
 
       try {
-        this.data || this.hasPatient ? await this.editPatient() : await this.createPatient();
+        this.data ? await this.editPatient() : await this.createPatient();
       } catch (err) {
         console.log(err);
         this.$notify({
@@ -97,6 +97,8 @@ export default {
       this.$emit('action', new GlobalDrawerAction({ name: 'created', data: { patient } }));
       this.goToPatient({ patientId: patient.id });
     },
+
+    // проверку телефона для создания нового пациента или смены текущего номера
     async checkPhoneForRebinding() {
       const action = await this.$store.dispatch('modalAndDrawer/openModal', {
         component: PhoneConfirmModal,
@@ -109,35 +111,23 @@ export default {
       this.resetHasPatient();
       this.isRebinding = true;
       this.code = action.data.code;
-      this.patient = new Patient({ phone: this.patient.phone });
+      this.patient = new Patient({ ...(this.data || {}), phone: this.patient.phone });
     },
 
     async editPatient() {
-      if (this.data.phone !== this.patient.phone) return this.checkThenEditPatientByPhone();
+      if (this.data.phone !== this.patient.phone && !this.isRebinding)
+        return this.checkPhoneForRebinding();
 
-      const { data } = await Patient.update({ id: this.patient.id, payload: this.patient });
+      const { data } = await Patient.update({
+        id: this.patient.id,
+        payload: this.isRebinding ? { ...this.patient, code: this.code } : this.patient,
+      });
 
       this.$emit(
         'action',
         new GlobalDrawerAction({ name: 'updated', data: { patient: data.data } })
       );
       this.$notify({ type: 'success', title: this.$t('Notifications.SuccessUpdated') });
-    },
-    async checkThenEditPatientByPhone() {
-      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
-        component: PhoneConfirmModal,
-        payload: {
-          phone: this.patient.phone,
-        },
-      });
-
-      if (action.name !== PHONE_CONFIRM_MODAL_CONFIRMED_ACTION) return;
-
-      // this.$emit(
-      //   'action',
-      //   new GlobalDrawerAction({ name: 'updated', data: { patient: data.data } })
-      // );
-      // this.$notify({ type: 'success', title: this.$t('Notifications.SuccessUpdated') });
     },
 
     // привязать к нашей клинике

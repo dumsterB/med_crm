@@ -24,7 +24,7 @@
           required />
       </ElFormItem>
 
-      <div v-show="data || isChildren || (hasPhoneNumber && !hasPatient)">
+      <div v-show="isChildren || (hasPhoneNumber && !hasPatient)">
         <!--  FullName  -->
         <ElFormItem :label="$t('User.FullName')">
           <ElInput v-model="patient.name" required :disabled="isDisabledSecondaryInputs" />
@@ -52,7 +52,10 @@
       <ElFormItem v-show="hasPatient">
         <div class="create-patient-drawer-patient">
           <div class="create-patient-drawer-patient__title">Пациент есть в системе</div>
-          <router-link class="create-patient-drawer-patient__name" :to="oldPatientPageUrl">
+          <router-link
+            v-show="!hasPatientFromOtherClinic"
+            class="create-patient-drawer-patient__name"
+            :to="oldPatientPageUrl">
             {{ oldPatient?.name }}
           </router-link>
         </div>
@@ -72,17 +75,17 @@
 
           <!--  hasPatient && !hasPatientFromOtherClinic  -->
           <router-link v-show="hasPatient && !hasPatientFromOtherClinic" :to="oldPatientPageUrl">
-            <ElButton type="primary">{{ $t('GoToPatient') }} </ElButton>
+            <ElButton type="primary" plain>{{ $t('GoToPatient') }} </ElButton>
           </router-link>
           <ElButton
-            v-show="hasPatient && !hasPatientFromOtherClinic"
+            v-show="data ? hasPatient : hasPatient && !hasPatientFromOtherClinic"
             type="primary"
             @click="checkPhoneForRebinding">
-            {{ $t('CreateNewPatient') }}
+            {{ $t(data ? 'RebindPhone' : 'CreateNewPatient') }}
           </ElButton>
 
           <ElButton
-            v-show="hasPatientFromOtherClinic"
+            v-show="hasPatientFromOtherClinic && !data"
             type="primary"
             :loading="loading.attach"
             @click="attachPatient">
