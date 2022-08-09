@@ -9,7 +9,10 @@
         "approved": "Подтвержден",
         "provided": "Ожидает",
         "canceled": "Отмена",
-        "RecordingSource": "Источник записи"
+        "RecordingSource": "Источник записи",
+        "Open": "Открыть",
+        "selectDoctor": "Выбрать доктора",
+        "selectStatus": "Выберите статус"
       }
     }
   },
@@ -20,8 +23,10 @@
         "service": "Ximat",
         "phonePatient": "Bemorning telefoni",
         "Status": "Holat",
-        "RecordingSource": "Yozib olish manbai"
-
+        "RecordingSource": "Yozib olish manbai",
+        "Open": "Ochish",
+        "selectDoctor": "Shifokorni tanlang",
+        "selectStatus": "Holatni tanlang"
       }
     }
   }

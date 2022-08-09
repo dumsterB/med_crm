@@ -4,6 +4,7 @@
       <ElTable
         class="patients-table"
         :data="items"
+        style="width: 2200px;overflow-x: scroll"
         v-loading="loading"
         ref="elTable"
         @row-click="goToPatient">
@@ -16,19 +17,19 @@
           </div>
         </template>
 
-        <ElTableColumn prop="id" label="ID">
+        <ElTableColumn width="60" prop="id" label="ID">
           <template #default="{ row }">
             {{ row.id }}
           </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="start_at" :label="$t('DateAndTime.StartAt')">
+        <ElTableColumn width="130" prop="start_at" :label="$t('DateAndTime.StartAt')">
           <template #default="{ row }">
             {{ row.start_at }}
           </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="end_at" :label="$t('DateAndTime.EndAt')">
+        <ElTableColumn width="130" prop="end_at" :label="$t('DateAndTime.EndAt')">
           <template #default="{ row }">
             {{ row.end_at }}
           </template>
@@ -57,32 +58,49 @@
             <div class="patients-records-table-status">
               <span v-if="row.status === 'approved'">
                 <el-button size="small" type="success" round>
-                     <UiIcon :icon="$options.icons.DOUBLE_CHECKER" />
-                 <span class="patients-records-table-status">{{ $t(`Appointments.Types.${row.status}`) }}</span>
+                  <UiIcon :icon="$options.icons.DOUBLE_CHECKER" />
+                  <span class="patients-records-table-status">{{
+                    $t(`Appointments.Types.${row.status}`)
+                  }}</span>
                 </el-button>
               </span>
               <span v-if="row.status === 'canceled'">
                 <el-button size="small" type="danger" round>
                   <UiIcon :icon="$options.icons.CANCELED" />
-                 <span class="patients-records-table-status">{{ $t(`Appointments.Types.${row.status}`) }}</span>
+                  <span class="patients-records-table-status">{{
+                    $t(`Appointments.Types.${row.status}`)
+                  }}</span>
                 </el-button>
               </span>
               <span v-if="row.status === 'provided'">
                 <el-button size="small" type="warning" round>
-                <UiIcon :icon="$options.icons.PROVIDED" />
-                 <span class="patients-records-table-status">{{ $t(`Appointments.Types.${row.status}`) }}</span>
+                  <UiIcon :icon="$options.icons.PROVIDED" />
+                  <span class="patients-records-table-status">{{
+                    $t(`Appointments.Types.${row.status}`)
+                  }}</span>
                 </el-button>
               </span>
             </div>
           </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="phone_patient" :label="$t('Appointments.Types.phonePatient')">
+        <ElTableColumn prop="phone_patient" :label="$t('Appointments.Types.RecordingSource')">
           <template #default="{ row }">
             {{ row.patient.phone }}
           </template>
         </ElTableColumn>
 
+        <ElTableColumn prop="phone_patient" :label="$t('DateAndTime.CreatedAt')">
+          <template #default="{ row }">
+            {{ row.clinic.published_at }}
+          </template>
+        </ElTableColumn>
+
+        <ElTableColumn width="120" prop="phone_patient" :label="$t('DateAndTime.Look')">
+          <template #default="{ row }">
+            {{ $t('Appointments.Types.Open') }}
+          </template>
+        </ElTableColumn>
       </ElTable>
     </ElScrollbar>
     <ElPagination
@@ -111,8 +129,8 @@ import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatient
 export default {
   name: 'PatientsTable',
   emits: ['update:perPage', 'update:page'],
-  components:{
-    Check
+  components: {
+    Check,
   },
   props: {
     /**

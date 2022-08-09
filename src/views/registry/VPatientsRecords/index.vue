@@ -1,6 +1,24 @@
 <template>
-  <LayoutRegistry>
+  <LayoutRegistry content-class="v-patients-content" fixHeight fixWidth>
     <div class="v-patients-content__header v-patients-content-header">
+      <div class="v-patients-content-header-filters">
+        <el-select v-model="value" class="v-patients-content-header-filters__field" :placeholder="$t('Appointments.Types.selectDoctor')" size="large">
+          <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+          />
+        </el-select>
+        <el-select v-model="value" class="v-patients-content-header-filters__field2" :placeholder="$t('Appointments.Types.selectStatus')" size="large">
+          <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+          />
+        </el-select>
+      </div>
       <div class="v-patients-content-header-actions">
         <ElButton type="primary" @click="createRecord"> {{ $t('Patients.AddPatient') }} </ElButton>
       </div>
@@ -21,6 +39,7 @@ import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import patientsRecordsTable from '@/components/patientsRecords/patientsRecordsTable/index.vue';
 import { usePage, usePerPage, useSearch } from '@/hooks/query';
 import { Appointment } from '@/models/Appointment.model.js';
+import CreateOrEditPatientDrawer from "@/components/patients/CreateOrEditPatientDrawer/index.vue";
 export default {
   name: 'VPatientsRecords',
   components: { LayoutRegistry, patientsRecordsTable },
@@ -75,11 +94,14 @@ export default {
 
       this.setLoading(false);
     },
-    createRecord() {},
+    createRecord() {
+      this.$store.dispatch('modalAndDrawer/openDrawer', CreateOrEditPatientDrawer);
+    },
   },
 };
 </script>
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/notifications.locales.json" />
 <i18n src="@/locales/patients.locales.json" />
+<i18n src="@/locales/appointments.locales.json" />
 

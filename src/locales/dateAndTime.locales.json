@@ -4,7 +4,9 @@
       "SelectDate": "Выберите дату",
       "Time": "Время",
       "StartAt": "Начало в",
-      "EndAt": "Конец в"
+      "EndAt": "Конец в",
+      "CreatedAt": "Создана",
+      "Look": "Посмотреть"
     }
   },
   "uz": {
@@ -12,7 +14,9 @@
       "SelectDate": "Sanani tanlang",
       "Time": "Vaqt",
       "StartAt": "Boshlanish",
-      "EndAt": "Tugashi"
+      "EndAt": "Tugashi",
+      "CreatedAt": "Yaratilgan",
+      "Look": "Korish"
     }
   }
 }

@@ -1,9 +1,47 @@
 .v-patients-records-content__table {
-  margin-top: 20px;
   flex-direction: column;
   gap: 20px;
   overflow-y: auto;
 }
 .patients-records-table-status{
   margin-left: 5px;
+}
+
+.el-input__wrapper{
+  background: #FFFFFF;
+  border: 1px solid #54C2B6;
+  border-radius: 8px;
+}
+
+.v-patients-content-header-filters__field2{
+  margin-left: 20px;
+}
+.v-patients {
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 10px;
+
+      &-actions {
+        display: flex;
+        margin-left: auto;
+        gap: 6px;
+      }
+    }
+
+    &__table {
+      height: 400px;
+      flex-direction: column;
+      gap: 20px;
+      overflow-y: auto;
+    }
+  }
 }
