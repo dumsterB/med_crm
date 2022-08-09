@@ -1,8 +1,10 @@
 {
   "ru": {
-
+    "GoToPatient": "Перейти к карте пациента",
+    "CreateNewPatient": "Создать нового пациента"
   },
   "uz": {
-
+    "CreateNewPatient": "Yangi bemormi yaratish",
+    "GoToPatient": "Bemor kartasiga utish"
   }
 }
