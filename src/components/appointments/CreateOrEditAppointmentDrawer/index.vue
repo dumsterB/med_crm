@@ -56,11 +56,23 @@
           label="title"
           :searchQuery="groupServicesSearchQuery"
           :disabled="groupServiceIsDisabled"
-          :required="appointmentType === appointmentTypesEnum.Service" />
+          :required="appointmentType === appointmentTypesEnum.Service"
+          @update:data="groupServices = $event" />
+      </ElFormItem>
+
+      <!--  Doctor and Service when has GroupService  -->
+      <ElFormItem
+        v-show="appointmentType === appointmentTypesEnum.Service"
+        :label="$t('SelectDoctor')"
+        :style="{ order: this.appointmentFieldsFlexOrder.doctor }">
+        <DoctorsSelectByGroupService
+          v-model:appointment="appointment"
+          :service-group="currentGroupService" />
       </ElFormItem>
 
       <!--  Doctor  -->
       <ElFormItem
+        v-show="appointmentType === appointmentTypesEnum.Doctor"
         :label="$t('SelectDoctor')"
         :style="{ order: this.appointmentFieldsFlexOrder.doctor }">
         <UiModelsAutocompleteSearch

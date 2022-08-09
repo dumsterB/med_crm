@@ -9,11 +9,12 @@ import { Service } from '@/models/Service.model';
 import { ServiceGroup } from '@/models/ServiceGroup';
 
 import SpecialtiesSelect from '@/components/specialties/SpecialtiesSelect/index.vue';
+import DoctorsSelectByGroupService from './DoctorsSelectByGroupService/index.vue';
 import ScheduleSlotsSelect from '@/components/appointments/ScheduleSlotsSelect/index.vue';
 
 export default {
   name: 'CreateOrEditAppointmentDrawer',
-  components: { SpecialtiesSelect, ScheduleSlotsSelect },
+  components: { SpecialtiesSelect, DoctorsSelectByGroupService, ScheduleSlotsSelect },
   emits: ['update:modelValue', 'action'],
   props: {
     modelValue: Boolean,
@@ -25,6 +26,8 @@ export default {
       /** @type Appointment */
       appointment: null,
       appointmentType: Appointment.enum.types.Doctor,
+      /** @type {Array<ServiceGroup>} */
+      groupServices: [],
       loading: {
         form: false,
       },
@@ -62,6 +65,9 @@ export default {
         query_type: null,
         query_operator: null,
       };
+    },
+    currentGroupService() {
+      return this.groupServices.find((elem) => elem.id === this.appointment.group_service_id);
     },
 
     doctorsIsDisabled() {
@@ -182,10 +188,18 @@ export default {
         }
         case 'group_service_id': {
           if (this.appointment.doctor_id) this.appointment.doctor_id = null;
+          if (this.appointment.start_at) this.appointment.type.start_at = null;
+          if (this.appointment.end_at) this.appointment.end_at = null;
           break;
         }
         case 'doctor_id': {
-          if (this.appointment.service_id) this.appointment.service_id = null;
+          // appointment.type === Service используется компонент которые сразу обновляет два поля doctor_id, service_id
+          if (
+            this.appointmentType !== this.appointmentTypesEnum.Service &&
+            this.appointment.service_id
+          )
+            this.appointment.service_id = null;
+
           if (this.appointment.start_at) this.appointment.type.start_at = null;
           if (this.appointment.end_at) this.appointment.end_at = null;
           break;
