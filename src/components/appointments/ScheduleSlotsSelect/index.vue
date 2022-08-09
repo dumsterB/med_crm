@@ -109,9 +109,10 @@ export default {
     async getSlotsByGroupService() {
       const { data } = await ScheduleSlot.getSlotsByGroupServiceId({
         groupServiceId: this.groupServiceId,
-        from: this.from,
-        to: this.to,
+        from: `${this.date} 00:00`,
+        to: `${this.date} 23:59`,
       });
+      this.slots = data.data;
     },
   },
 

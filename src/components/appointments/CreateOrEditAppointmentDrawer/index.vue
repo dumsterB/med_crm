@@ -45,8 +45,34 @@
           :required="appointmentType === appointmentTypesEnum.Doctor" />
       </ElFormItem>
 
+      <!--  GroupService  -->
+      <ElFormItem
+        v-show="appointmentType === appointmentTypesEnum.Service"
+        :label="$t('SelectService')"
+        :style="{ order: this.appointmentFieldsFlexOrder.groupService }">
+        <UiModelsAutocompleteSearch
+          v-model="appointment.group_service_id"
+          :modelForUse="ServiceGroup"
+          label="title"
+          :searchQuery="groupServicesSearchQuery"
+          :disabled="groupServiceIsDisabled"
+          :required="appointmentType === appointmentTypesEnum.Service"
+          @update:data="groupServices = $event" />
+      </ElFormItem>
+
+      <!--  Doctor and Service when has GroupService  -->
+      <ElFormItem
+        v-show="appointmentType === appointmentTypesEnum.Service"
+        :label="$t('SelectDoctor')"
+        :style="{ order: this.appointmentFieldsFlexOrder.doctor }">
+        <DoctorsSelectByGroupService
+          v-model:appointment="appointment"
+          :service-group="currentGroupService" />
+      </ElFormItem>
+
       <!--  Doctor  -->
       <ElFormItem
+        v-show="appointmentType === appointmentTypesEnum.Doctor"
         :label="$t('SelectDoctor')"
         :style="{ order: this.appointmentFieldsFlexOrder.doctor }">
         <UiModelsAutocompleteSearch
@@ -54,20 +80,21 @@
           :modelForUse="Doctor"
           :searchQuery="doctorsSearchQuery"
           :disabled="doctorsIsDisabled"
-          required />
+          :required="appointmentType === appointmentTypesEnum.Doctor" />
       </ElFormItem>
 
       <!--  Service  -->
       <ElFormItem
+        v-show="appointmentType === appointmentTypesEnum.Doctor"
         :label="$t('SelectService')"
         :style="{ order: this.appointmentFieldsFlexOrder.service }">
         <UiModelsAutocompleteSearch
           v-model="appointment.service_id"
-          :modelForUse="servicesModelForUse"
+          :modelForUse="Service"
           :searchQuery="servicesSearchQuery"
           label="title"
           :disabled="servicesIsDisabled"
-          required />
+          :required="appointmentType === appointmentTypesEnum.Doctor" />
       </ElFormItem>
 
       <!--  Date  -->
@@ -79,6 +106,7 @@
           v-model:end-at="appointment.end_at"
           :disabled="slotsIsDisabled"
           :service-id="appointment.service_id"
+          :group-service-id="appointment.group_service_id"
           required />
       </ElFormItem>
 

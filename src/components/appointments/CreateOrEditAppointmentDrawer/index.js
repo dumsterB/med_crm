@@ -9,11 +9,12 @@ import { Service } from '@/models/Service.model';
 import { ServiceGroup } from '@/models/ServiceGroup';
 
 import SpecialtiesSelect from '@/components/specialties/SpecialtiesSelect/index.vue';
+import DoctorsSelectByGroupService from './DoctorsSelectByGroupService/index.vue';
 import ScheduleSlotsSelect from '@/components/appointments/ScheduleSlotsSelect/index.vue';
 
 export default {
   name: 'CreateOrEditAppointmentDrawer',
-  components: { SpecialtiesSelect, ScheduleSlotsSelect },
+  components: { SpecialtiesSelect, DoctorsSelectByGroupService, ScheduleSlotsSelect },
   emits: ['update:modelValue', 'action'],
   props: {
     modelValue: Boolean,
@@ -25,6 +26,8 @@ export default {
       /** @type Appointment */
       appointment: null,
       appointmentType: Appointment.enum.types.Doctor,
+      /** @type {Array<ServiceGroup>} */
+      groupServices: [],
       loading: {
         form: false,
       },
@@ -39,10 +42,11 @@ export default {
         patient: 1,
         type: 2,
         specialty: 3,
-        doctor: this.appointmentType === this.appointmentTypesEnum.Doctor ? 4 : 5,
-        service: this.appointmentType !== this.appointmentTypesEnum.Doctor ? 4 : 5,
-        date: 6,
-        actions: 7,
+        groupService: 4,
+        doctor: 5,
+        service: 6,
+        date: 7,
+        actions: 8,
       };
     },
 
@@ -50,10 +54,26 @@ export default {
       return !this.appointment.patient_id;
     },
 
+    groupServiceIsDisabled() {
+      return this.appointmentType === this.appointmentTypesEnum.Service
+        ? !this.appointment.patient_id
+        : true;
+    },
+    groupServicesSearchQuery() {
+      return {
+        query_field: null,
+        query_type: null,
+        query_operator: null,
+      };
+    },
+    currentGroupService() {
+      return this.groupServices.find((elem) => elem.id === this.appointment.group_service_id);
+    },
+
     doctorsIsDisabled() {
       return this.appointmentType === this.appointmentTypesEnum.Doctor
         ? !this.appointment.specialty_id
-        : !this.appointment.service_id;
+        : !this.appointment.group_service_id;
     },
     doctorsSearchQuery() {
       return {
@@ -62,13 +82,10 @@ export default {
       };
     },
 
-    servicesModelForUse() {
-      return this.appointmentType === this.appointmentTypesEnum.Doctor ? Service : ServiceGroup;
-    },
     servicesIsDisabled() {
       return this.appointmentType === this.appointmentTypesEnum.Doctor
         ? !this.appointment.doctor_id
-        : !this.appointment.patient_id;
+        : true;
     },
     servicesSearchQuery() {
       return {
@@ -82,7 +99,7 @@ export default {
     slotsIsDisabled() {
       return this.appointmentType === this.appointmentTypesEnum.Doctor
         ? !this.appointment.service_id
-        : !this.appointment.doctor_id;
+        : !this.appointment.group_service_id;
     },
   },
 
@@ -108,6 +125,12 @@ export default {
     'appointment.specialty_id': {
       handler(value, oldValue) {
         this.appointmentWatcherHandler({ field: 'specialty_id', value, oldValue });
+      },
+      immediate: true,
+    },
+    'appointment.group_service_id': {
+      handler(value, oldValue) {
+        this.appointmentWatcherHandler({ field: 'group_service_id', value, oldValue });
       },
       immediate: true,
     },
@@ -163,8 +186,22 @@ export default {
           if (this.appointment.doctor_id) this.appointment.doctor_id = null;
           break;
         }
+        case 'group_service_id': {
+          if (this.appointment.doctor_id) this.appointment.doctor_id = null;
+          if (this.appointment.start_at) this.appointment.type.start_at = null;
+          if (this.appointment.end_at) this.appointment.end_at = null;
+          break;
+        }
         case 'doctor_id': {
-          if (this.appointment.service_id) this.appointment.service_id = null;
+          // appointment.type === Service используется компонент которые сразу обновляет два поля doctor_id, service_id
+          if (
+            this.appointmentType !== this.appointmentTypesEnum.Service &&
+            this.appointment.service_id
+          )
+            this.appointment.service_id = null;
+
+          if (this.appointment.start_at) this.appointment.type.start_at = null;
+          if (this.appointment.end_at) this.appointment.end_at = null;
           break;
         }
         case 'service_id': {
