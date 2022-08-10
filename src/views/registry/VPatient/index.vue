@@ -1,9 +1,12 @@
 <template>
-  <LayoutRegistry>
-    <div v-if="patient">
-      Patient {{ patient.name }}
-
-      <ElButton type="primary" @click="editPatient">Edit</ElButton>
+  <LayoutRegistry content-class="v-patients-profile-content" fixHeight>
+    <div class="v-patients-profile-content__header v-patients-profile-content-header">
+      <div class="v-patients-profile-content-header-info">
+        <p class="v-patients-profile-content-header__text">{{$t('PatientInfo')}}</p>
+      </div>
+      <div class="v-patients-profile-content-header-actions">
+        <ElButton type="primary" @click="editPatient"> {{ $t('Patients.EditPatient') }} </ElButton>
+      </div>
     </div>
   </LayoutRegistry>
 </template>

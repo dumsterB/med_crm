@@ -122,7 +122,7 @@ import { REGISTRY_PATIENT_RECORD_ROUTE } from '@/router/registry.routes';
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
 import { Check } from '@element-plus/icons-vue';
-import {Appointment} from "@/models/Appointment.model";
+import { Appointment } from "@/models/Appointment.model";
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 
 export default {

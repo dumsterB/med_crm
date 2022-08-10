@@ -1,8 +1,9 @@
 {
   "ru": {
+    "PatientInfo": "Информация о пациенте"
 
   },
   "uz": {
-
+    "PatientInfo": "Bemor haqida ma'lumot"
   }
 }

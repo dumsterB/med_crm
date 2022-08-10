@@ -1,0 +1,33 @@
+.v-patients-profile {
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 10px;
+
+      &-actions {
+        display: flex;
+        margin-left: auto;
+        gap: 6px;
+      }
+      &__text{
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 30px;
+        color: #404040;
+      }
+    }
+
+    &__table {
+      height: 400px;
+    }
+
+  }
+}
