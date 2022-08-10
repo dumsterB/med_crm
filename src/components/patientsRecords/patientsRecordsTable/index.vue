@@ -6,7 +6,7 @@
         :data="items"
         v-loading="loading"
         ref="elTable"
-        @row-click="VAppointment">
+        @row-click="goToAppointment">
         <template #empty>
           <div class="patients-records-table__empty patients-records-table-empty">
             <span>{{ $t('Base.NoData') }}</span>
@@ -56,28 +56,28 @@
           <template #default="{ row }">
             <div class="patients-records-table-status">
               <span v-if="row.status === Appointment.enum.statuses.Approved">
-                <el-button size="small" class="success-status" type="success" round>
+                <ELButton size="small" class="success-status" type="success" round>
                   <UiIcon :icon="$options.icons.DOUBLE_CHECKER" />
                   <span class="patients-records-table-status">{{
                     $t(`Appointments.Statuses.${row.status}`)
                   }}</span>
-                </el-button>
+                </ELButton>
               </span>
               <span v-if="row.status === Appointment.enum.statuses.Canceled">
-                <el-button size="small" class="canceled-status" type="danger" round>
-                  <UiIcon :icon="$options.icons.CANCELED" />
+                <ElButton size="small" class="canceled-status" type="danger" round>
+                  <UiIcon :icon="$options.icons.CANCELED_ROUND" />
                   <span class="patients-records-table-status">{{
                     $t(`Appointments.Statuses.${row.status}`)
                   }}</span>
-                </el-button>
+                </ElButton>
               </span>
               <span v-if="row.status === Appointment.enum.statuses.Provided">
-                <el-button size="small" class="provided-status" type="warning" round>
+                <ElButton size="small" class="provided-status" type="warning" round>
                   <UiIcon :icon="$options.icons.PROVIDED" />
                   <span class="patients-records-table-status">{{
                     $t(`Appointments.Statuses.${row.status}`)
                   }}</span>
-                </el-button>
+                </ElButton>
               </span>
             </div>
           </template>
@@ -121,16 +121,13 @@
 import { REGISTRY_PATIENT_RECORD_ROUTE } from '@/router/registry.routes';
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
-import { Check } from '@element-plus/icons-vue';
-import {Appointment} from "@/models/Appointment.model";
+import { Appointment } from "@/models/Appointment.model";
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 
 export default {
   name: 'PatientsTable',
   emits: ['update:perPage', 'update:page'],
-  components: {
-    Check,
-  },
+  components: {},
   props: {
     /**
      * @param { Array<Patient|object> } items
@@ -158,7 +155,7 @@ export default {
   },
 
   methods: {
-    VAppointment(payload) {
+    goToAppointment(payload) {
       this.$router.push({
         name: REGISTRY_PATIENT_RECORD_ROUTE.name,
         params: {patientId: payload.patient_id , id: payload.id },

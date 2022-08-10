@@ -231,7 +231,7 @@
         fill="currentColor" />
     </symbol>
 
-    <symbol :id="$options.icons.CANCELED" viewBox="0 0 12 12" fill="none">
+    <symbol :id="$options.icons.CANCELED_ROUND" viewBox="0 0 12 12" fill="none">
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"

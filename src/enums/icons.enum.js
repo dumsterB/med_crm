@@ -10,4 +10,4 @@ export const CHEVRON_DOWN = 'CHEVRON_DOWN';
 export const PLUS = 'PLUS';
 export const DOUBLE_CHECKER = 'DOUBLE_CHECKER';
 export const PROVIDED = 'PROVIDED';
-export const CANCELED = 'CANCELED';
+export const CANCELED_ROUND = 'CANCELED';
