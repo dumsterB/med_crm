@@ -2,7 +2,7 @@
   <LayoutRegistry content-class="v-patients-records-content" fixHeight >
     <div class="v-patients-records-content__header v-patients-records-content-header">
       <div class="v-patients-records-content-header-filters">
-        <ElSelect v-model="value" class="v-patients-records-content-header-filters__field" :placeholder="$t('Appointments.SelectDoctor')" size="large">
+        <ElSelect v-model="value" class="v-patients-records-content-header-filters__field" :placeholder="$t('Appointments.SelectDoctor')">
           <ElOption
               v-for="item in options"
               :key="item.value"
@@ -10,7 +10,7 @@
               :value="item.value"
           />
         </ElSelect>
-        <ElSelect v-model="value" class="v-patients-records-content-header-filters__field2" :placeholder="$t('Appointments.SelectStatus')" size="large">
+        <ElSelect v-model="value" class="v-patients-records-content-header-filters__field2" :placeholder="$t('Appointments.SelectStatus')">
           <ElOption
               v-for="item in options"
               :key="item.value"
@@ -40,6 +40,7 @@ import PatientsRecordsTable from '@/components/patientsRecords/patientsRecordsTa
 import { usePage, usePerPage, useSearch } from '@/hooks/query';
 import { Appointment } from '@/models/Appointment.model.js';
 import CreateOrEditAppointmentDrawer from "@/components/appointments/CreateOrEditAppointmentDrawer";
+
 export default {
   name: 'VPatientsRecords',
   components: { LayoutRegistry, PatientsRecordsTable },
@@ -100,6 +101,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/notifications.locales.json" />
 <i18n src="@/locales/patients.locales.json" />

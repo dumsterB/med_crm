@@ -2,10 +2,29 @@
   <LayoutRegistry content-class="v-patients-profile-content" fixHeight>
     <div class="v-patients-profile-content__header v-patients-profile-content-header">
       <div class="v-patients-profile-content-header-info">
-        <p class="v-patients-profile-content-header__text">{{$t('PatientInfo')}}</p>
+        <p class="v-patients-profile-content-header__text">{{ $t('PatientInfo') }}</p>
       </div>
       <div class="v-patients-profile-content-header-actions">
         <ElButton type="primary" @click="editPatient"> {{ $t('Patients.EditPatient') }} </ElButton>
+      </div>
+    </div>
+    <pre> {{ patient }}</pre>
+
+    <div class="v-patients-profile-content-card" v-if="patient">
+      <div class="v-patients-profile-content-card_item">
+        <ElAvatar :size="108" :src="circleUrl" />
+        <div class="v-patients-profile-content-card_info">
+          <div>
+            <button class="v-patients-profile-content-card_info__button">{{ $t('Base.Patient') }}</button>
+          </div>
+          <div class="v-patients-profile-content-card_info__strong">
+            {{ patient.name }}
+          </div>
+          <div class="v-patients-profile-content-card_info__numbers">
+            {{ patient.birthdate }}
+          </div>
+        </div>
+        <div class="v-patients-profile-content-card_item__divider"></div>
       </div>
     </div>
   </LayoutRegistry>
