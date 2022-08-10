@@ -31,16 +31,10 @@
   height: 28px;
 }
 
-.el-input__wrapper{
-  background: #FFFFFF;
-  border: 1px solid #54C2B6;
-  border-radius: 8px;
-}
-
-.v-patients-content-header-filters__field2{
+.v-patients-records-content-header-filters__field2{
   margin-left: 20px;
 }
-.v-patients {
+.v-patients-records {
   &-content {
     display: flex;
     flex-direction: column;

@@ -1,25 +1,25 @@
 <template>
-  <LayoutRegistry content-class="v-patients-content" fixHeight fixWidth>
-    <div class="v-patients-content__header v-patients-content-header">
-      <div class="v-patients-content-header-filters">
-        <el-select v-model="value" class="v-patients-content-header-filters__field" :placeholder="$t('Appointments.Types.selectDoctor')" size="large">
-          <el-option
+  <LayoutRegistry content-class="v-patients-records-content" fixHeight >
+    <div class="v-patients-records-content__header v-patients-records-content-header">
+      <div class="v-patients-records-content-header-filters">
+        <elSelect v-model="value" class="v-patients-records-content-header-filters__field" :placeholder="$t('Appointments.SelectDoctor')" size="large">
+          <elOption
               v-for="item in options"
               :key="item.value"
               :label="item.label"
               :value="item.value"
           />
-        </el-select>
-        <el-select v-model="value" class="v-patients-content-header-filters__field2" :placeholder="$t('Appointments.Types.selectStatus')" size="large">
-          <el-option
+        </elSelect>
+        <elSelect v-model="value" class="v-patients-records-content-header-filters__field2" :placeholder="$t('Appointments.SelectStatus')" size="large">
+          <elOption
               v-for="item in options"
               :key="item.value"
               :label="item.label"
               :value="item.value"
           />
-        </el-select>
+        </elSelect>
       </div>
-      <div class="v-patients-content-header-actions">
+      <div class="v-patients-records-content-header-actions">
         <ElButton type="primary" @click="createRecord"> {{ $t('Patients.AddPatient') }} </ElButton>
       </div>
     </div>
@@ -39,7 +39,7 @@ import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import patientsRecordsTable from '@/components/patientsRecords/patientsRecordsTable/index.vue';
 import { usePage, usePerPage, useSearch } from '@/hooks/query';
 import { Appointment } from '@/models/Appointment.model.js';
-import CreateOrEditPatientDrawer from "@/components/patients/CreateOrEditPatientDrawer/index.vue";
+import CreateOrEditAppointmentDrawer from "@/components/appointments/CreateOrEditAppointmentDrawer";
 export default {
   name: 'VPatientsRecords',
   components: { LayoutRegistry, patientsRecordsTable },
@@ -84,7 +84,7 @@ export default {
         });
         this.setData({
           items: data.data,
-          total: +data.meta.total,
+          total: + data.meta.total,
           overwriteDataState: true,
         });
       } catch (err) {
@@ -95,7 +95,7 @@ export default {
       this.setLoading(false);
     },
     createRecord() {
-      this.$store.dispatch('modalAndDrawer/openDrawer', CreateOrEditPatientDrawer);
+      this.$store.dispatch('modalAndDrawer/openDrawer', CreateOrEditAppointmentDrawer);
     },
   },
 };

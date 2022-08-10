@@ -1,16 +1,16 @@
 <template>
-  <div class="patients-table-wrapper">
-    <ElScrollbar class="patients-table-wrapper__scrollbar">
+  <div class="patients-records-table-wrapper">
+    <ElScrollbar class="patients-records-table-wrapper__scrollbar">
       <ElTable
-        class="patients-table"
+        class="patients-records-table"
         :data="items"
         v-loading="loading"
         ref="elTable"
-        @row-click="goToPatient">
+        @row-click="VAppointment">
         <template #empty>
-          <div class="patients-table__empty patients-table-empty">
+          <div class="patients-records-table__empty patients-records-table-empty">
             <span>{{ $t('Base.NoData') }}</span>
-            <ElButton type="primary" @click="addPatient">
+            <ElButton type="primary" @click="addAppointment">
               {{ $t('Patients.AddPatient') }}
             </ElButton>
           </div>
@@ -34,48 +34,48 @@
           </template>
         </ElTableColumn>
 
-        <ElTableColumn width="200" prop="doctor_name" :label="$t('Appointments.Types.doctor')">
+        <ElTableColumn width="240" prop="doctor_name" :label="$t('Appointments.Types.Doctor')">
           <template #default="{ row }">
             {{ row.doctor.name }}
           </template>
         </ElTableColumn>
 
-        <ElTableColumn width="200" prop="patient" :label="$t('Base.Patient')">
+        <ElTableColumn width="220" prop="patient" :label="$t('Base.Patient')">
           <template #default="{ row }">
             {{ row.patient.name }}
           </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="phone_patient" :label="$t('Appointments.Types.phonePatient')">
+        <ElTableColumn width="180" prop="phone_patient" :label="$t('Appointments.PhonePatient')">
           <template #default="{ row }">
             {{ row.patient.phone }}
           </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="status" :label="$t('Appointments.Types.Status')">
+        <ElTableColumn prop="status" :label="$t('Appointments.Statuses.Status')">
           <template #default="{ row }">
             <div class="patients-records-table-status">
-              <span v-if="row.status === 'approved'">
+              <span v-if="row.status === Appointment.enum.statuses.Approved">
                 <el-button size="small" class="success-status" type="success" round>
                   <UiIcon :icon="$options.icons.DOUBLE_CHECKER" />
                   <span class="patients-records-table-status">{{
-                    $t(`Appointments.Types.${row.status}`)
+                    $t(`Appointments.Statuses.${row.status}`)
                   }}</span>
                 </el-button>
               </span>
-              <span v-if="row.status === 'canceled'">
+              <span v-if="row.status === Appointment.enum.statuses.Canceled">
                 <el-button size="small" class="canceled-status" type="danger" round>
                   <UiIcon :icon="$options.icons.CANCELED" />
                   <span class="patients-records-table-status">{{
-                    $t(`Appointments.Types.${row.status}`)
+                    $t(`Appointments.Statuses.${row.status}`)
                   }}</span>
                 </el-button>
               </span>
-              <span v-if="row.status === 'provided'">
+              <span v-if="row.status === Appointment.enum.statuses.Provided">
                 <el-button size="small" class="provided-status" type="warning" round>
                   <UiIcon :icon="$options.icons.PROVIDED" />
                   <span class="patients-records-table-status">{{
-                    $t(`Appointments.Types.${row.status}`)
+                    $t(`Appointments.Statuses.${row.status}`)
                   }}</span>
                 </el-button>
               </span>
@@ -83,7 +83,7 @@
           </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="phone_patient" :label="$t('Appointments.Types.RecordingSource')">
+        <ElTableColumn width="160" prop="phone_patient" :label="$t('Appointments.RecordingSource')">
           <template #default="{ row }">
             {{ row.patient.phone }}
           </template>
@@ -97,13 +97,13 @@
 
         <ElTableColumn width="120" prop="phone_patient" :label="$t('DateAndTime.Look')">
           <template #default="{ row }">
-            {{ $t('Appointments.Types.Open') }}
+            {{ $t('Appointments.Open') }}
           </template>
         </ElTableColumn>
       </ElTable>
     </ElScrollbar>
     <ElPagination
-      class="patients-table-wrapper__pagination"
+      class="patients-records-table-wrapper__pagination"
       :current-page="page"
       :page-count="pageCount"
       :page-size="perPage"
@@ -118,12 +118,12 @@
 </template>
 
 <script>
-import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
+import { REGISTRY_PATIENT_RECORD_ROUTE } from '@/router/registry.routes';
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
 import { Check } from '@element-plus/icons-vue';
+import {Appointment} from "@/models/Appointment.model";
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 
 export default {
   name: 'PatientsTable',
@@ -144,9 +144,6 @@ export default {
   },
   icons: icons,
   computed: {
-    hasItems() {
-      return !!this.items.length;
-    },
     pageCount() {
       return Math.ceil(this.total / this.perPage);
     },
@@ -161,30 +158,24 @@ export default {
   },
 
   methods: {
-    goToPatient(payload) {
+    VAppointment(payload) {
       this.$router.push({
-        name: REGISTRY_PATIENT_ROUTE.name,
-        params: { id: payload.id },
+        name: REGISTRY_PATIENT_RECORD_ROUTE.name,
+        params: {patientId: payload.patient_id , id: payload.id },
       });
     },
-
-    makeAppointment(payload) {
+    addAppointment() {
       this.$store.dispatch('modalAndDrawer/openDrawer', {
         component: CreateOrEditAppointmentDrawer,
-        payload: {
-          patient: payload,
-        },
-      });
-    },
-    addPatient() {
-      this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreateOrEditPatientDrawer,
         payload: {
           nameOrPhone: this.search,
         },
       });
     },
   },
+  setup: () => ({
+    Appointment,
+  })
 };
 </script>
 

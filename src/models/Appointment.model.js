@@ -53,5 +53,10 @@ export class Appointment extends CRUDModel {
       Doctor: 'doctor',
       Service: 'service',
     },
+    statuses:{
+      Approved: 'approved',
+      Canceled: 'canceled',
+      Provided: 'provided'
+    }
   };
 }

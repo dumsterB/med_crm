@@ -2,31 +2,39 @@
   "ru": {
     "Appointments": {
       "Types": {
-        "doctor": "Врач",
-        "service": "Услуга",
-        "phonePatient": "Телефон пациента",
-        "Status": "Статус",
+        "Doctor": "Врач",
+        "Service": "Услуга"
+      },
+      "PhonePatient": "Телефон пациента",
+      "RecordingSource": "Источник записи",
+      "Open": "Открыть",
+      "SelectDoctor": "Выбрать доктора",
+      "SelectStatus": "Выберите статус",
+      "Statuses": {
         "approved": "Подтвержден",
         "provided": "Ожидает",
         "canceled": "Отмена",
-        "RecordingSource": "Источник записи",
-        "Open": "Открыть",
-        "selectDoctor": "Выбрать доктора",
-        "selectStatus": "Выберите статус"
+        "Status": "Статусы"
       }
     }
   },
   "uz": {
     "Appointments": {
       "Types": {
-        "doctor": "Shifokor",
-        "service": "Ximat",
-        "phonePatient": "Bemorning telefoni",
-        "Status": "Holat",
-        "RecordingSource": "Yozib olish manbai",
-        "Open": "Ochish",
-        "selectDoctor": "Shifokorni tanlang",
-        "selectStatus": "Holatni tanlang"
+        "Doctor": "Shifokor",
+        "Service": "Xizmat"
+      },
+      "PhonePatient": "Bemorning telefoni",
+      "Status": "Holat",
+      "RecordingSource": "Yozib olish manbai",
+      "Open": "Ochish",
+      "SelectDoctor": "Shifokorni tanlang",
+      "SelectStatus": "Holatni tanlang",
+      "Statuses": {
+        "approved": "Tasdiqlangan",
+        "provided": "Kutilmoqda",
+        "canceled": "Bekor qilish",
+        "Status": "Holat"
       }
     }
   }
