@@ -165,12 +165,7 @@ export default {
       });
     },
     addAppointment() {
-      this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreateOrEditAppointmentDrawer,
-        payload: {
-          nameOrPhone: this.search,
-        },
-      });
+      this.$store.dispatch("modalAndDrawer/openDrawer", CreateOrEditAppointmentDrawer)
     },
   },
   setup: () => ({
