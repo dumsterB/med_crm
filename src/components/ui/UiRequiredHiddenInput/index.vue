@@ -1,11 +1,21 @@
 <template>
-  <ElInput class="ui-required-hidden-input" :model-value="modelValue" required v-bind="$attrs" />
+  <ElInput
+    class="ui-required-hidden-input"
+    :model-value="modelValue"
+    :required="required"
+    v-bind="$attrs" />
 </template>
 
 <script>
 export default {
   name: 'UiRequiredHiddenInput',
-  props: ['modelValue'],
+  props: {
+    modelValue: [Number, String],
+    required: {
+      type: Boolean,
+      default: true,
+    },
+  },
 };
 </script>
 
