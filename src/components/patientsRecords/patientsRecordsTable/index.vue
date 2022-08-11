@@ -40,7 +40,7 @@
           </template>
         </ElTableColumn>
 
-        <ElTableColumn width="220" prop="patient" :label="$t('Base.Patient')">
+        <ElTableColumn width="220" prop="patient_name" :label="$t('Base.Patient')">
           <template #default="{ row }">
             {{ row.patient.name }}
           </template>
@@ -83,19 +83,19 @@
           </template>
         </ElTableColumn>
 
-        <ElTableColumn width="160" prop="phone_patient" :label="$t('Appointments.RecordingSource')">
+        <ElTableColumn width="160" prop="phone" :label="$t('Appointments.RecordingSource')">
           <template #default="{ row }">
             {{ row.patient.phone }}
           </template>
         </ElTableColumn>
 
-        <ElTableColumn width="180" prop="phone_patient" :label="$t('DateAndTime.CreatedAt')">
+        <ElTableColumn width="180" prop="published_at" :label="$t('DateAndTime.CreatedAt')">
           <template #default="{ row }">
             {{ row.clinic.published_at }}
           </template>
         </ElTableColumn>
 
-        <ElTableColumn width="120" prop="phone_patient" :label="$t('DateAndTime.Look')">
+        <ElTableColumn width="120" prop="action" :label="$t('DateAndTime.Look')">
           <template #default="{ row }">
             {{ $t('Appointments.Open') }}
           </template>
@@ -131,6 +131,11 @@ export default {
   props: {
     /**
      * @param { Array<Patient|object> } items
+     * @param { Boolean } loading
+     * @param { Number } page
+     * @param { Number } perPage
+     * @param { Number } total
+     * @param { String } search
      */
     loading: Boolean,
     items: Array,

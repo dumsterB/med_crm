@@ -10,6 +10,7 @@
       "Open": "Открыть",
       "SelectDoctor": "Выбрать доктора",
       "SelectStatus": "Выберите статус",
+      "AddRecord": "Добавить запись",
       "Statuses": {
         "approved": "Подтвержден",
         "provided": "Ожидает",
@@ -30,6 +31,7 @@
       "Open": "Ochish",
       "SelectDoctor": "Shifokorni tanlang",
       "SelectStatus": "Holatni tanlang",
+      "AddRecord": "Eslatma qo'shing",
       "Statuses": {
         "approved": "Tasdiqlangan",
         "provided": "Kutilmoqda",
