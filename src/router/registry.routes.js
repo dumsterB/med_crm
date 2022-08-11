@@ -35,7 +35,7 @@ export const REGISTRY_PATIENT_ROUTE = {
   },
   props: true,
 };
-export const REGISTRY_PATIENT_RECORD_ROUTE = {
+export const REGISTRY_APPOINTMENT_ROUTE = {
   name: 'REGISTRY_PATIENT_RECORD',
   path: '/registry/patients/:patientId/records/:id',
   component: VPatientRecord,
@@ -60,6 +60,6 @@ export const routes = [
   REGISTRY_DASHBOARD_ROUTE,
   REGISTRY_PATIENTS_ROUTE,
   REGISTRY_PATIENT_ROUTE,
-  REGISTRY_PATIENT_RECORD_ROUTE,
+  REGISTRY_APPOINTMENT_ROUTE,
   REGISTRY_APPOINTMENTS_ROUTE,
 ];
