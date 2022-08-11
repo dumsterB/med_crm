@@ -4,7 +4,7 @@
       "CreateAppointment": "Создать запись",
       "PhonePatient": "Телефон пациента",
       "RecordingSource": "Источник записи",
-      "SelectDoctor": "Выбрать доктора",
+      "SelectDoctor": "Выберите доктора",
       "SelectStatus": "Выберите статус",
       "Statuses": {
         "approved": "Подтвержден",
