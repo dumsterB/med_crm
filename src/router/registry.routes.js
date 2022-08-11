@@ -46,9 +46,9 @@ export const REGISTRY_PATIENT_RECORD_ROUTE = {
   props: true,
 };
 
-export const REGISTRY_PATIENTS_RECORDS_ROUTE = {
+export const REGISTRY_APPOINTMENTS_ROUTE = {
   name: 'REGISTRY_PATIENTS_RECORDS',
-  path: '/registry/patients-records',
+  path: '/registry/appointments',
   component: VAppointments,
   beforeEnter: [onlyLoggedInMiddleware],
   meta: {
@@ -61,5 +61,5 @@ export const routes = [
   REGISTRY_PATIENTS_ROUTE,
   REGISTRY_PATIENT_ROUTE,
   REGISTRY_PATIENT_RECORD_ROUTE,
-  REGISTRY_PATIENTS_RECORDS_ROUTE,
+  REGISTRY_APPOINTMENTS_ROUTE,
 ];

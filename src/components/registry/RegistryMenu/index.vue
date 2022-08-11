@@ -30,7 +30,7 @@ import * as icons from '@/enums/icons.enum.js';
 import {
   REGISTRY_DASHBOARD_ROUTE,
   REGISTRY_PATIENTS_ROUTE,
-  REGISTRY_PATIENTS_RECORDS_ROUTE,
+  REGISTRY_APPOINTMENTS_ROUTE,
 } from '@/router/registry.routes';
 
 export default {
@@ -44,15 +44,13 @@ export default {
 
   computed: {
     navigation() {
-      return [
-        REGISTRY_DASHBOARD_ROUTE,
-        REGISTRY_PATIENTS_ROUTE,
-        REGISTRY_PATIENTS_RECORDS_ROUTE,
-      ].map((route) => ({
-        ...route,
-        title: this.routesOptionsByRouteName[route.name].text,
-        icon: this.routesOptionsByRouteName[route.name].icon,
-      }));
+      return [REGISTRY_DASHBOARD_ROUTE, REGISTRY_PATIENTS_ROUTE, REGISTRY_APPOINTMENTS_ROUTE].map(
+        (route) => ({
+          ...route,
+          title: this.routesOptionsByRouteName[route.name].text,
+          icon: this.routesOptionsByRouteName[route.name].icon,
+        })
+      );
     },
 
     routesOptionsByRouteName() {
@@ -65,7 +63,7 @@ export default {
           icon: icons.USER_TAG,
           text: this.$t('Base.Patients'),
         },
-        [REGISTRY_PATIENTS_RECORDS_ROUTE.name]: {
+        [REGISTRY_APPOINTMENTS_ROUTE.name]: {
           icon: icons.NOTE,
           text: this.$t('Base.PatientsRecords'),
         },

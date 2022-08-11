@@ -46,7 +46,7 @@
 import { mapState, mapActions } from 'vuex';
 import { usePage, usePerPage, useSearch } from '@/hooks/query';
 import { Appointment } from '@/models/Appointment.model.js';
-import { REGISTRY_PATIENTS_RECORDS_ROUTE } from '@/router/registry.routes';
+import { REGISTRY_APPOINTMENTS_ROUTE } from '@/router/registry.routes';
 
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
@@ -115,7 +115,7 @@ export default {
     // TODO: вынести чтобы не дублировать
     queryWatchersHandler(value, oldValue) {
       // почему-то срабатывает после логаута
-      if (this.$route.name !== REGISTRY_PATIENTS_RECORDS_ROUTE.name) return;
+      if (this.$route.name !== REGISTRY_APPOINTMENTS_ROUTE.name) return;
 
       if (
         value &&
