@@ -15,7 +15,7 @@
 
 .patients-table {
   height: 100%;
-  min-width: calc(var(--container-width) / 2);
+  min-width: calc(var(--container-width) / 1.6);
 
   tr:hover {
     cursor: pointer;
