@@ -35,6 +35,7 @@
     <AppointmentsTable
       class="v-patients-records-content__table"
       :items="items"
+      :loading="loading"
       v-model:page="page.value"
       v-model:per-page="perPage.value"
       :total="total"
