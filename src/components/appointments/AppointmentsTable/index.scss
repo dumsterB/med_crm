@@ -19,6 +19,10 @@
   min-width: calc(var(--container-width) / 1.4);
   overflow-x: auto;
 
+  tr:hover {
+    cursor: pointer;
+  }
+
   &__empty {
     display: flex;
     flex-direction: column;
