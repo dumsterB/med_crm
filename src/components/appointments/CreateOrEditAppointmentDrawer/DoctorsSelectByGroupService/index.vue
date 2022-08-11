@@ -1,11 +1,16 @@
 <template>
-  <ElSelect :model-value="appointment.service_id" @update:model-value="selectHandler">
+  <ElSelect
+    :model-value="appointment.service_id"
+    :placeholder="$t('Appointments.SelectDoctor')"
+    @update:model-value="selectHandler">
     <ElOption
       v-for="service in services"
       :key="service.id"
       :label="service.doctor.name"
       :value="service.id" />
   </ElSelect>
+
+  <UiRequiredHiddenInput :model-value="appointment.service_id" />
 </template>
 
 <script>
@@ -18,6 +23,7 @@ export default {
   props: {
     appointment: [Appointment, Object],
     serviceGroup: [ServiceGroup, Object],
+    required: Boolean,
   },
   computed: {
     services() {
@@ -37,3 +43,5 @@ export default {
   },
 };
 </script>
+
+<i18n src="@/locales/appointments.locales.json" />
