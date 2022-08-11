@@ -1,4 +1,4 @@
-.patients-records-table-wrapper {
+.appointments-table-wrapper {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -13,29 +13,17 @@
   }
 }
 
-.patients-records-table {
+.appointments-table {
+  width: auto;
   height: 100%;
-  min-width: 1600px;
+  min-width: calc(var(--container-width) / 1.4);
   overflow-x: auto;
 
-  tr:hover {
-    cursor: pointer;
-  }
   &__empty {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-bottom: 1.5em;
-  }
-
-  &__name-avatar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  &-actions {
-    display: flex;
-    gap: 6px;
   }
 }
