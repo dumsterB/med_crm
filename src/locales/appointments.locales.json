@@ -21,20 +21,20 @@
   "uz": {
     "Appointments": {
       "CreateAppointment": "???Создать запись???",
-      "Types": {
-        "doctor": "Shifokor",
-        "service": "Xizmat"
-      },
       "PhonePatient": "Bemorning telefoni",
-      "Status": "Holat",
       "RecordingSource": "Yozib olish manbai",
       "SelectDoctor": "Shifokorni tanlang",
       "SelectStatus": "Holatni tanlang",
+      "Status": "Holat",
       "Statuses": {
         "approved": "Tasdiqlangan",
         "provided": "Kutilmoqda",
         "canceled": "Bekor qilish",
         "Status": "Holat"
+      },
+      "Types": {
+        "doctor": "Shifokor",
+        "service": "Xizmat"
       }
     }
   }
