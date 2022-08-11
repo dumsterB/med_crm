@@ -6,7 +6,7 @@
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 
 export default {
-  name: 'VPatientRecord',
+  name: 'VAppointment',
   components: { LayoutRegistry },
   props: {
     id: [Number, String],

@@ -4,7 +4,7 @@ import VDashboard from '@/views/registry/VDashboard/index.vue';
 import VPatients from '@/views/registry/VPatients/index.vue';
 import VAppointments from '@/views/registry/VAppointments/index.vue';
 import VPatient from '@/views/registry/VPatient/index.vue';
-import VPatientRecord from '@/views/registry/VPatientRecord/index.vue';
+import VPatientRecord from '@/views/registry/VAppointment/index.vue';
 
 export const REGISTRY_DASHBOARD_ROUTE = {
   name: 'REGISTRY_DASHBOARD',
