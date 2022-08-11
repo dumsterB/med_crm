@@ -1,20 +1,20 @@
 {
   "ru": {
     "DateAndTime": {
-      "SelectDate": "Выберите дату",
-      "Time": "Время",
-      "StartAt": "Начало в",
+      "CreatedAt": "Создана",
       "EndAt": "Конец в",
-      "CreatedAt": "Создана"
+      "SelectDate": "Выберите дату",
+      "StartAt": "Начало в",
+      "Time": "Время"
     }
   },
   "uz": {
     "DateAndTime": {
-      "SelectDate": "Sanani tanlang",
-      "Time": "Vaqt",
-      "StartAt": "Boshlanish",
+      "CreatedAt": "Yaratilgan",
       "EndAt": "Tugashi",
-      "CreatedAt": "Yaratilgan"
+      "SelectDate": "Sanani tanlang",
+      "StartAt": "Boshlanish",
+      "Time": "Vaqt"
     }
   }
 }
