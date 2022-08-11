@@ -92,6 +92,7 @@ export default {
       this.setLoading(false);
     },
 
+    // TODO: вынести чтобы не дублировать
     queryWatchersHandler(value, oldValue) {
       // почему-то срабатывает после логаута
       if (this.$route.name !== REGISTRY_PATIENTS_ROUTE.name) return;
