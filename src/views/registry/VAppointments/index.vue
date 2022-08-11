@@ -53,7 +53,7 @@ import AppointmentsTable from '@/components/appointments/AppointmentsTable/index
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 
 export default {
-  name: 'VPatientsRecords',
+  name: 'VAppointments',
   components: { LayoutRegistry, AppointmentsTable },
 
   setup: () => ({

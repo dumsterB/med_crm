@@ -2,7 +2,7 @@ import { onlyLoggedInMiddleware } from '@/middlewares/onlyLoggedIn.middleware';
 import { I18nService } from '@/services/i18n.service';
 import VDashboard from '@/views/registry/VDashboard/index.vue';
 import VPatients from '@/views/registry/VPatients/index.vue';
-import VPatientsRecords from '@/views/registry/VPatientsRecords/index.vue';
+import VAppointments from '@/views/registry/VAppointments/index.vue';
 import VPatient from '@/views/registry/VPatient/index.vue';
 import VPatientRecord from '@/views/registry/VPatientRecord/index.vue';
 
@@ -49,7 +49,7 @@ export const REGISTRY_PATIENT_RECORD_ROUTE = {
 export const REGISTRY_PATIENTS_RECORDS_ROUTE = {
   name: 'REGISTRY_PATIENTS_RECORDS',
   path: '/registry/patients-records',
-  component: VPatientsRecords,
+  component: VAppointments,
   beforeEnter: [onlyLoggedInMiddleware],
   meta: {
     title: I18nService.t('Base.PatientsRecords'),
