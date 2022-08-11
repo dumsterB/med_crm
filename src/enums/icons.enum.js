@@ -11,3 +11,4 @@ export const PLUS = 'PLUS';
 export const DOUBLE_CHECKER = 'DOUBLE_CHECKER';
 export const PROVIDED = 'PROVIDED';
 export const CANCELED_ROUND = 'CANCELED';
+export const TRASH = 'TRASH'
