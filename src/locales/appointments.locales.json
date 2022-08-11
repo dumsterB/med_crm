@@ -2,8 +2,8 @@
   "ru": {
     "Appointments": {
       "Types": {
-        "Doctor": "Врач",
-        "Service": "Услуга"
+        "doctor": "Врач",
+        "service": "Услуга"
       },
       "PhonePatient": "Телефон пациента",
       "RecordingSource": "Источник записи",
@@ -21,8 +21,8 @@
   "uz": {
     "Appointments": {
       "Types": {
-        "Doctor": "Shifokor",
-        "Service": "Xizmat"
+        "doctor": "Shifokor",
+        "service": "Xizmat"
       },
       "PhonePatient": "Bemorning telefoni",
       "Status": "Holat",
