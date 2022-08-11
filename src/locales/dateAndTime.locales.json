@@ -5,8 +5,7 @@
       "Time": "Время",
       "StartAt": "Начало в",
       "EndAt": "Конец в",
-      "CreatedAt": "Создана",
-      "Look": "Посмотреть"
+      "CreatedAt": "Создана"
     }
   },
   "uz": {
@@ -15,8 +14,7 @@
       "Time": "Vaqt",
       "StartAt": "Boshlanish",
       "EndAt": "Tugashi",
-      "CreatedAt": "Yaratilgan",
-      "Look": "Korish"
+      "CreatedAt": "Yaratilgan"
     }
   }
 }
