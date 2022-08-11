@@ -10,7 +10,7 @@
       :value="service.id" />
   </ElSelect>
 
-  <UiRequiredHiddenInput :model-value="appointment.service_id" />
+  <UiRequiredHiddenInput :model-value="appointment.service_id" :required="required" />
 </template>
 
 <script>
