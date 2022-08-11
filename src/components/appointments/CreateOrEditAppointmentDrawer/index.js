@@ -12,6 +12,7 @@ import SpecialtiesSelect from '@/components/specialties/SpecialtiesSelect/index.
 import DoctorsSelectByGroupService from './DoctorsSelectByGroupService/index.vue';
 import ScheduleSlotsSelect from '@/components/appointments/ScheduleSlotsSelect/index.vue';
 
+// TODO: написать документацию по бизнес логике
 export default {
   name: 'CreateOrEditAppointmentDrawer',
   components: { SpecialtiesSelect, DoctorsSelectByGroupService, ScheduleSlotsSelect },
@@ -50,63 +51,87 @@ export default {
       };
     },
 
-    specialtiesIsDisabled() {
-      return !this.appointment.patient_id;
+    specialtiesOptions() {
+      return {
+        isShow:
+          this.appointmentType === this.appointmentTypesEnum.Doctor &&
+          (!this.data || !!this.data?.specialty_id),
+        isDisabled: !this.appointment.patient_id,
+        isRequired:
+          this.appointmentType === this.appointmentTypesEnum.Doctor &&
+          (!this.data || !!this.data?.specialty_id),
+      };
     },
 
-    groupServiceIsDisabled() {
-      return this.appointmentType === this.appointmentTypesEnum.Service
-        ? !this.appointment.patient_id
-        : true;
-    },
-    groupServicesSearchQuery() {
+    groupServicesOptions() {
       return {
-        query_field: null,
-        query_type: null,
-        query_operator: null,
+        isShow: this.appointmentType === this.appointmentTypesEnum.Service,
+        isDisabled:
+          this.appointmentType === this.appointmentTypesEnum.Service
+            ? !this.appointment.patient_id
+            : true,
+        searchQuery: {
+          query_field: null,
+          query_type: null,
+          query_operator: null,
+        },
       };
     },
     currentGroupService() {
       return this.groupServices.find((elem) => elem.id === this.appointment.group_service_id);
     },
 
-    doctorsIsDisabled() {
-      return this.appointmentType === this.appointmentTypesEnum.Doctor
-        ? !this.appointment.specialty_id
-        : !this.appointment.group_service_id;
-    },
-    doctorsSearchQuery() {
+    doctorsAndServicesOptions() {
       return {
-        specialties_id: [this.appointment.specialty_id],
-        query_field: ['name'],
+        isShow: this.appointmentType === this.appointmentTypesEnum.Service,
+        isRequired: this.appointmentType === this.appointmentTypesEnum.Service,
       };
     },
 
-    servicesIsDisabled() {
-      return this.appointmentType === this.appointmentTypesEnum.Doctor
-        ? !this.appointment.doctor_id
-        : true;
-    },
-    servicesSearchQuery() {
+    doctorsOptions() {
       return {
-        doctorId: this.appointment.doctor_id,
-        query_field: null,
-        query_type: null,
-        query_operator: null,
+        isShow: this.appointmentType === this.appointmentTypesEnum.Doctor,
+        isDisabled:
+          this.appointmentType === this.appointmentTypesEnum.Doctor
+            ? !this.appointment.specialty_id
+            : !this.appointment.group_service_id,
+        isRequired: this.appointmentType === this.appointmentTypesEnum.Doctor,
+        searchQuery: {
+          specialties_id: [this.appointment.specialty_id],
+          query_field: ['name'],
+        },
       };
     },
 
-    slotsIsDisabled() {
-      return this.appointmentType === this.appointmentTypesEnum.Doctor
-        ? !this.appointment.service_id
-        : !this.appointment.group_service_id;
+    servicesOptions() {
+      return {
+        isShow: this.appointmentType === this.appointmentTypesEnum.Doctor,
+        isDisabled:
+          this.appointmentType === this.appointmentTypesEnum.Doctor && !this.appointment.doctor_id,
+        isRequired: this.appointmentType === this.appointmentTypesEnum.Doctor,
+        searchQuery: {
+          doctorId: this.appointment.doctor_id,
+          query_field: null,
+          query_type: null,
+          query_operator: null,
+        },
+      };
+    },
+
+    slotsOptions() {
+      return {
+        isDisabled:
+          this.appointmentType === this.appointmentTypesEnum.Doctor
+            ? !this.appointment.service_id
+            : !this.appointment.group_service_id,
+      };
     },
   },
 
   watch: {
     'modelValue': {
       handler() {
-        this.appointment = new Appointment({ patient_id: this.patient?.id || null });
+        this.appointment = new Appointment(this.data || { patient_id: this.patient?.id || null });
       },
       immediate: true,
       deep: true,
@@ -126,19 +151,16 @@ export default {
       handler(value, oldValue) {
         this.appointmentWatcherHandler({ field: 'specialty_id', value, oldValue });
       },
-      immediate: true,
     },
     'appointment.group_service_id': {
       handler(value, oldValue) {
         this.appointmentWatcherHandler({ field: 'group_service_id', value, oldValue });
       },
-      immediate: true,
     },
     'appointment.doctor_id': {
       handler(value, oldValue) {
         this.appointmentWatcherHandler({ field: 'doctor_id', value, oldValue });
       },
-      immediate: true,
     },
     'appointment.service_id': {
       handler(value, oldValue) {
@@ -188,7 +210,7 @@ export default {
         }
         case 'group_service_id': {
           if (this.appointment.doctor_id) this.appointment.doctor_id = null;
-          if (this.appointment.start_at) this.appointment.type.start_at = null;
+          if (this.appointment.start_at) this.appointment.start_at = null;
           if (this.appointment.end_at) this.appointment.end_at = null;
           break;
         }
@@ -200,12 +222,12 @@ export default {
           )
             this.appointment.service_id = null;
 
-          if (this.appointment.start_at) this.appointment.type.start_at = null;
+          if (this.appointment.start_at) this.appointment.start_at = null;
           if (this.appointment.end_at) this.appointment.end_at = null;
           break;
         }
         case 'service_id': {
-          if (this.appointment.start_at) this.appointment.type.start_at = null;
+          if (this.appointment.start_at) this.appointment.start_at = null;
           if (this.appointment.end_at) this.appointment.end_at = null;
           break;
         }
