@@ -1,10 +1,7 @@
 {
   "ru": {
     "Appointments": {
-      "Types": {
-        "doctor": "Врач",
-        "service": "Услуга"
-      },
+      "CreateAppointment": "Создать запись",
       "PhonePatient": "Телефон пациента",
       "RecordingSource": "Источник записи",
       "SelectDoctor": "Выбрать доктора",
@@ -14,11 +11,16 @@
         "provided": "Ожидает",
         "canceled": "Отмена",
         "Status": "Статусы"
+      },
+      "Types": {
+        "doctor": "Врач",
+        "service": "Услуга"
       }
     }
   },
   "uz": {
     "Appointments": {
+      "CreateAppointment": "???Создать запись???",
       "Types": {
         "doctor": "Shifokor",
         "service": "Xizmat"
