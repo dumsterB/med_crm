@@ -11,7 +11,7 @@
           <div class="appointments-table__empty appointments-table-empty">
             <span>{{ $t('Base.NoData') }}</span>
             <ElButton type="primary" @click="addAppointment">
-              {{ $t('Patients.AddPatient') }}
+              {{ $t('Appointments.CreateAppointment') }}
             </ElButton>
           </div>
         </template>

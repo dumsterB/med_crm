@@ -27,7 +27,7 @@
 
       <div class="v-patients-records-content-header__actions">
         <ElButton type="primary" @click="createAppointment">
-          {{ $t('Patients.AddPatient') }}
+          {{ $t('Appointments.CreateAppointment') }}
         </ElButton>
       </div>
     </div>
