@@ -1,29 +1,38 @@
 <template>
-  <LayoutRegistry content-class="v-patients-records-content" fixHeight >
+  <LayoutRegistry content-class="v-patients-records-content" fixHeight>
     <div class="v-patients-records-content__header v-patients-records-content-header">
-      <div class="v-patients-records-content-header-filters">
-        <ElSelect v-model="value" class="v-patients-records-content-header-filters__field" :placeholder="$t('Appointments.SelectDoctor')" size="large">
+      <div class="v-patients-records-content-header__filters">
+        <!--        <ElSelect
+          v-model="value"
+          :placeholder="$t('Appointments.SelectDoctor')"
+          size="large">
           <ElOption
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-          />
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value" />
         </ElSelect>
-        <ElSelect v-model="value" class="v-patients-records-content-header-filters__field2" :placeholder="$t('Appointments.SelectStatus')" size="large">
+
+        <ElSelect
+          v-model="value"
+          :placeholder="$t('Appointments.SelectStatus')"
+          size="large">
           <ElOption
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-          />
-        </ElSelect>
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value" />
+        </ElSelect>-->
       </div>
-      <div class="v-patients-records-content-header-actions">
-        <ElButton type="primary" @click="createRecord"> {{ $t('Patients.AddPatient') }} </ElButton>
+
+      <div class="v-patients-records-content-header__actions">
+        <ElButton type="primary" @click="createAppointment">
+          {{ $t('Patients.AddPatient') }}
+        </ElButton>
       </div>
     </div>
-    <PatientsRecordsTable
+
+    <AppointmentsTable
       class="v-patients-records-content__table"
       :items="items"
       v-model:page="page.value"
@@ -35,14 +44,17 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
-import PatientsRecordsTable from '@/components/patientsRecords/patientsRecordsTable/index.vue';
 import { usePage, usePerPage, useSearch } from '@/hooks/query';
 import { Appointment } from '@/models/Appointment.model.js';
-import CreateOrEditAppointmentDrawer from "@/components/appointments/CreateOrEditAppointmentDrawer";
+import { REGISTRY_PATIENTS_RECORDS_ROUTE } from '@/router/registry.routes';
+
+import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
+import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
+import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
+
 export default {
   name: 'VPatientsRecords',
-  components: { LayoutRegistry, PatientsRecordsTable },
+  components: { LayoutRegistry, AppointmentsTable },
 
   setup: () => ({
     perPage: usePerPage(),
@@ -51,15 +63,23 @@ export default {
   }),
   computed: {
     ...mapState({
-      loading: (state) => state.patients.loading,
-      items: (state) => state.patients.data,
-      total: (state) => state.patients.total,
+      loading: (state) => state.appointments.loading,
+      items: (state) => state.appointments.data,
+      total: (state) => state.appointments.total,
     }),
+
+    queryWatchers() {
+      return {
+        perPage: this.perPage.value,
+        page: this.page.value,
+        search: this.search.value,
+      };
+    },
   },
   watch: {
     queryWatchers: {
       handler(value, oldValue) {
-        this.getPatientsRecords();
+        this.queryWatchersHandler(value, oldValue);
       },
       immediate: true,
       deep: true,
@@ -67,24 +87,21 @@ export default {
   },
   methods: {
     ...mapActions({
-      setLoading: 'patients/setLoading',
-      setData: 'patients/setData',
+      setLoading: 'appointments/setLoading',
+      setData: 'appointments/setData',
     }),
 
-    async getPatientsRecords() {
+    async getAppointments() {
       this.setLoading(true);
+
       try {
         const { data } = await Appointment.find({
           per_page: this.perPage.value,
           page: this.page.value,
-          search: this.search.value,
-          query_type: 'ILIKE',
-          query_operator: 'OR',
-          query_field: ['name', 'phone'],
         });
         this.setData({
           items: data.data,
-          total: + data.meta.total,
+          total: +data.meta.total,
           overwriteDataState: true,
         });
       } catch (err) {
@@ -94,14 +111,35 @@ export default {
 
       this.setLoading(false);
     },
-    createRecord() {
+
+    // TODO: вынести чтобы не дублировать
+    queryWatchersHandler(value, oldValue) {
+      // почему-то срабатывает после логаута
+      if (this.$route.name !== REGISTRY_PATIENTS_RECORDS_ROUTE.name) return;
+
+      if (
+        value &&
+        oldValue &&
+        (value.perPage !== oldValue.perPage || value.search !== oldValue.search)
+      ) {
+        this.resetPage();
+        return setTimeout(() => this.getAppointments());
+      }
+
+      this.getAppointments();
+    },
+    resetPage() {
+      this.page.reset();
+    },
+
+    createAppointment() {
       this.$store.dispatch('modalAndDrawer/openDrawer', CreateOrEditAppointmentDrawer);
     },
   },
 };
 </script>
+
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/notifications.locales.json" />
 <i18n src="@/locales/patients.locales.json" />
 <i18n src="@/locales/appointments.locales.json" />
-
