@@ -106,7 +106,7 @@ export default {
   watch: {
     'modelValue': {
       handler() {
-        this.appointment = new Appointment({ patient_id: this.patient.id });
+        this.appointment = new Appointment({ patient_id: this.patient?.id || null });
       },
       immediate: true,
       deep: true,
