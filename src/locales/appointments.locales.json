@@ -7,7 +7,6 @@
       },
       "PhonePatient": "Телефон пациента",
       "RecordingSource": "Источник записи",
-      "Open": "Открыть",
       "SelectDoctor": "Выбрать доктора",
       "SelectStatus": "Выберите статус",
       "Statuses": {
@@ -27,7 +26,6 @@
       "PhonePatient": "Bemorning telefoni",
       "Status": "Holat",
       "RecordingSource": "Yozib olish manbai",
-      "Open": "Ochish",
       "SelectDoctor": "Shifokorni tanlang",
       "SelectStatus": "Holatni tanlang",
       "Statuses": {
