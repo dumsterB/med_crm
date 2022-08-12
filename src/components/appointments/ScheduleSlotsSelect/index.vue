@@ -1,26 +1,31 @@
 <template>
   <div class="schedule-slots-select">
-    <ElDatePicker
-      class="schedule-slots-select__date"
-      v-model="date"
-      :placeholder="$t('DateAndTime.SelectDate')"
-      :disabled="disabled"
-      :value-format="DATE_FORMAT">
-    </ElDatePicker>
+    <div class="schedule-slots-select__date">
+      <ElDatePicker
+        v-model="date"
+        :placeholder="$t('DateAndTime.SelectDate')"
+        :disabled="disabled"
+        :value-format="DATE_FORMAT">
+      </ElDatePicker>
+      <UiRequiredHiddenInput :model-value="date" :required="required" />
+    </div>
 
-    <ElSelect
-      class="schedule-slots-select__time"
-      v-model="slot"
-      value-key="start_at"
-      :disabled="disabled"
-      :loading="loading"
-      :placeholder="$t('DateAndTime.Time')">
-      <ElOption
-        v-for="slot in slotsForSelect"
-        :key="slot.label"
-        :label="slot.label"
-        :value="slot.value" />
-    </ElSelect>
+    <div class="schedule-slots-select__time">
+      <ElSelect
+        v-model="slot"
+        value-key="start_at"
+        :disabled="disabled"
+        :loading="loading"
+        :placeholder="$t('DateAndTime.Time')">
+        <ElOption
+          v-for="slot in slotsForSelect"
+          :key="slot.label"
+          :label="slot.label"
+          :value="slot.value" />
+      </ElSelect>
+
+      <UiRequiredHiddenInput :model-value="slot.start_at" :required="required" />
+    </div>
   </div>
 </template>
 
@@ -38,6 +43,7 @@ export default {
     serviceId: [Number, String],
     groupServiceId: [Number, String],
     disabled: Boolean,
+    required: Boolean,
   },
   data() {
     return {

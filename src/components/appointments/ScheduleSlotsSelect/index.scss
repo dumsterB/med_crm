@@ -8,4 +8,10 @@
   &__time {
     flex: 0.35;
   }
+  &__date > *,
+  &__time > * {
+    display: flex;
+    flex-direction: column;
+    width: 100% !important;
+  }
 }
