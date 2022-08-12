@@ -14,7 +14,7 @@
       <ElSelect
         v-model="slot"
         value-key="start_at"
-        :disabled="disabled"
+        :disabled="disabled || !date"
         :loading="loading"
         :placeholder="$t('DateAndTime.Time')">
         <ElOption
@@ -39,11 +39,14 @@ export default {
   emits: ['update:startAt', 'update:endAt'],
   props: {
     startAt: [Date, String],
+    defaultStartAt: [Date, String],
+    defaultEndAt: [Date, String],
     endAt: [Date, String],
     serviceId: [Number, String],
     groupServiceId: [Number, String],
     disabled: Boolean,
     required: Boolean,
+    dependencies: [Array, Object], // при изменении сбрасываем startAt, endAt
   },
   data() {
     return {
@@ -64,12 +67,7 @@ export default {
 
     /** @type {Array<{label: string, value: {startAt: string, endAt: string}}>} */
     slotsForSelect() {
-      const slots = [
-        ...(this.slot.start_at && this.slot.end_at ? [this.slot] : []),
-        ...this.availableSlots,
-      ];
-
-      return slots.map((elem) => {
+      return this.availableSlots.map((elem) => {
         return {
           label: `${excludeDate(elem.start_at)} - ${excludeDate(elem.end_at)}`,
           value: {
@@ -82,21 +80,28 @@ export default {
   },
   watch: {
     date: {
-      handler(value) {
+      handler(value, oldValue) {
+        if (oldValue !== undefined) {
+          // this.slots = [];
+          this.slot.start_at = null;
+          this.slot.end_at = null;
+        }
         if (value) this.getSlots();
       },
       immediate: true,
     },
 
-    slot(value) {
-      if (!value) return;
-      this.$emit('update:startAt', value.start_at);
-      this.$emit('update:endAt', value.end_at);
+    slot: {
+      handler(value) {
+        this.$emit('update:startAt', value.start_at);
+        this.$emit('update:endAt', value.end_at);
+      },
+      deep: true,
     },
     startAt: {
       handler(value) {
         if (this.slot.start_at !== value) {
-          this.date = value?.split(' ')[0];
+          if (value) this.date = value?.split(' ')[0];
           this.slot.start_at = value;
         }
       },
@@ -105,11 +110,20 @@ export default {
     endAt: {
       handler(value) {
         if (this.slot.end_at !== value) {
-          this.date = value?.split(' ')[0];
+          if (value) this.date = value?.split(' ')[0];
           this.slot.end_at = value;
         }
       },
       immediate: true,
+    },
+
+    dependencies: {
+      handler() {
+        this.slot.start_at = null;
+        this.slot.end_at = null;
+        this.date = null;
+      },
+      deep: true,
     },
   },
 
@@ -136,6 +150,18 @@ export default {
       });
       this.slots = data.data;
     },
+  },
+
+  mounted() {
+    if (this.defaultStartAt && this.defaultEndAt) {
+      this.slot.start_at = this.defaultStartAt;
+      this.slot.end_at = this.defaultEndAt;
+      this.slots.push({
+        start_at: this.defaultStartAt,
+        end_at: this.defaultEndAt,
+        available: true,
+      });
+    }
   },
 
   setup: () => ({
