@@ -1,8 +1,8 @@
 <template>
   <ElAutocomplete
     class="ui-patients-autocomplete-search"
-    :value-key="label"
     v-model="query"
+    :value-key="label"
     :placeholder="$t('Base.PleaseInput')"
     :fetch-suggestions="getItems"
     :debounce="250"
@@ -25,13 +25,13 @@ export default {
 
     defaultItem: [CRUDModel, Object],
     searchQuery: Object,
+    // поле для показа
     label: {
-      // поле для показа
       type: String,
       default: 'name',
     },
+    // поле для значения
     value: {
-      // поле для значения
       type: [Number, String],
       default: 'id',
     },
@@ -46,14 +46,15 @@ export default {
   },
   watch: {
     modelValue: {
-      handler(value) {},
-      immediate: true,
+      handler(value) {
+        if (!value) this.query = '';
+      },
     },
   },
 
   methods: {
     async getItems(query, cb) {
-      this.$emit('update:modelValue', null);
+      if (!query.length) this.$emit('update:modelValue', null);
 
       const { data } = await this.modelForUse.find({
         page: 1,
