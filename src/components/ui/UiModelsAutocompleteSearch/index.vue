@@ -46,9 +46,7 @@ export default {
   },
   watch: {
     modelValue: {
-      handler(value) {
-        if (!value) this.query = '';
-      },
+      handler(value) {},
       immediate: true,
     },
   },
