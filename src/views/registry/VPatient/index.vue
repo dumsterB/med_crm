@@ -63,11 +63,7 @@
         </ElCol>
       </ElRow>
     </div>
-    <p
-      class="v-patients-profile-content-description__title"
-      v-if="patient && patient.childrens.length > 0">
-      {{ $t('Children') }}
-    </p>
+
     <div
       class="v-patients-profile-content-card"
       v-for="child of patient.childrens"
@@ -141,23 +137,50 @@
       {{ $t('Appointments') }}
     </p>
     <div class="v-patients-profile-appointments-content">
-     <ElRow gutter="20">
-       <ElCol v-for="appointment of appointments" :key="appointment.id" class="grid-content v-patients-profile-appointments-content__col"  :span="8">
-        <div class="v-patients-profile-appointments-content_card">
-           <div class="v-patients-profile-appointments-content_profile">
-             <ElAvatar :size="108" :src="appointment.doctor.avatar.link" />
-             <div class="v-patients-profile-appointments-content_profile_info">
-                <button class="v-patients-profile-appointments-content_profile__danger-button">{{ $t('Appointment') }}</button>
-                <p class="v-patients-profile-appointments-content_profile__title">{{appointment.doctor.name}}</p>
-               <p v-for="specialties of appointment.doctor.specialties" :key="specialties">
-                 {{specialties.title}}
-               </p>
-             </div>
-           </div>
-          <hr class="v-patients-profile-appointments-content_card__divider">
-        </div>
-       </ElCol>
-     </ElRow>
+      <ElRow gutter="20">
+        <ElCol
+          v-for="appointment of appointments"
+          :key="appointment.id"
+          class="grid-content v-patients-profile-appointments-content__col"
+          :xs="24" :sm="24" :md="12" :lg="8" :xl="8" >
+          <div class="v-patients-profile-appointments-content_card">
+            <div class="v-patients-profile-appointments-content_profile">
+              <ElAvatar :size="108" :src="appointment.doctor.avatar.link" />
+              <div class="v-patients-profile-appointments-content_profile_info">
+                <button class="v-patients-profile-appointments-content_profile__danger-button">
+                  {{ $t('Appointment') }}
+                </button>
+                <p class="v-patients-profile-appointments-content_profile__title">
+                  {{ appointment.doctor.name }}
+                </p>
+                <p
+                  class="v-patients-profile-appointments-content_profile__text"
+                  v-for="specialties of appointment.doctor.specialties"
+                  :key="specialties">
+                  {{ specialties.title }}
+                </p>
+              </div>
+            </div>
+            <hr class="v-patients-profile-appointments-content_card__divider" />
+            <div class="v-patients-profile-appointments-content_profile">
+              <div class="v-patients-profile-appointments-content_info">
+              <p class="v-patients-profile-appointments-content_profile__title">
+                {{ $t('DateAndTine') }}
+              </p>
+              <p class="v-patients-profile-appointments-content_profile__text">
+                6 агуста 14:00
+              </p>
+              <p class="v-patients-profile-appointments-content_profile__title">
+                {{ $t('Price') }}
+              </p>
+              <p class="v-patients-profile-appointments-content_profile__text">
+                125 000 сум
+              </p>
+              </div>
+            </div>
+          </div>
+        </ElCol>
+      </ElRow>
     </div>
   </LayoutRegistry>
 </template>
@@ -188,8 +211,8 @@ export default {
   },
   watch: {
     id: {
-    async  handler() {
-      await  this.getUser();
+      async handler() {
+        await this.getUser();
         this.getAppointments();
       },
       immediate: true,

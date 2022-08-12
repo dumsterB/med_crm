@@ -1,20 +1,25 @@
 {
   "ru": {
-    "PatientInfo": "Информация о пациенте",
-    "Children": "Дети",
     "Appointments": "Записи",
     "Appointment": "Запись",
+    "PatientInfo": "Информация о пациенте",
+    "Children": "Дети",
     "ChildrenText": "Ребенок",
     "Parents": "Родитель",
-    "Gender": "Пол"
+    "Gender": "Пол",
+    "DateAndTine": "Время и дата приема",
+    "Price": "Цена"
 
   },
   "uz": {
+    "Appointments": "Yozuvlar",
+    "Appointment": "Yozuv",
     "PatientInfo": "Bemor haqida ma'lumot",
     "Children": "Bolalar",
-    "Appointments": "Yozuvlar",
     "ChildrenText": "Bola",
     "Parents": "Ota-ona",
-    "Gender": "Jins"
+    "Gender": "Jins",
+    "DateAndTine": "Qabul qilish vaqti va sanasi",
+    "Price": "Narxi"
   }
 }
