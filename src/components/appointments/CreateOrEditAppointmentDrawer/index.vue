@@ -7,7 +7,7 @@
     <ElForm
       class="create-appointment-drawer-form"
       label-position="top"
-      @submit.prevent="createAppointment">
+      @submit.prevent="submitHandler">
       <!--  Patient  -->
       <ElFormItem
         :label="$t('Base.Patient')"
@@ -22,7 +22,7 @@
 
       <!--  Type  -->
       <ElFormItem
-        v-show="!data"
+        v-show="!data?.id"
         :label="$t('SelectType')"
         :style="{ order: this.appointmentFieldsFlexOrder.type }">
         <ElRadioGroup v-model="appointmentType">
@@ -108,9 +108,12 @@
         <ScheduleSlotsSelect
           v-model:start-at="appointment.start_at"
           v-model:end-at="appointment.end_at"
+          :default-start-at="data?.start_at"
+          :default-end-at="data?.end_at"
           :disabled="slotsOptions.isDisabled"
           :service-id="appointment.service_id"
           :group-service-id="appointment.group_service_id"
+          :dependencies="slotsOptions.dependencies"
           required />
       </ElFormItem>
 
@@ -118,7 +121,7 @@
       <ElFormItem :style="{ order: this.appointmentFieldsFlexOrder.actions }">
         <div class="create-appointment-drawer-form-actions">
           <ElButton type="primary" native-type="submit" :loading="loading.form">
-            {{ $t(`Base.${data ? 'Edit' : 'Create'}`) }}
+            {{ $t(`Base.${data?.id ? 'Edit' : 'Create'}`) }}
           </ElButton>
         </div>
       </ElFormItem>

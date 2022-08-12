@@ -53,13 +53,9 @@ export default {
 
     specialtiesOptions() {
       return {
-        isShow:
-          this.appointmentType === this.appointmentTypesEnum.Doctor &&
-          (!this.data || !!this.data?.specialty_id),
+        isShow: this.appointmentType === this.appointmentTypesEnum.Doctor && !this.data,
         isDisabled: !this.appointment.patient_id,
-        isRequired:
-          this.appointmentType === this.appointmentTypesEnum.Doctor &&
-          (!this.data || !!this.data?.specialty_id),
+        isRequired: this.appointmentType === this.appointmentTypesEnum.Doctor && !this.data,
       };
     },
 
@@ -93,12 +89,13 @@ export default {
         isShow: this.appointmentType === this.appointmentTypesEnum.Doctor,
         isDisabled:
           this.appointmentType === this.appointmentTypesEnum.Doctor
-            ? !this.appointment.specialty_id
-            : !this.appointment.group_service_id,
+            ? this.data
+              ? !this.appointment.patient_id
+              : !this.appointment.specialty_id
+            : false,
         isRequired: this.appointmentType === this.appointmentTypesEnum.Doctor,
         searchQuery: {
           specialties_id: [this.appointment.specialty_id],
-          query_field: ['name'],
         },
       };
     },
@@ -124,6 +121,11 @@ export default {
           this.appointmentType === this.appointmentTypesEnum.Doctor
             ? !this.appointment.service_id
             : !this.appointment.group_service_id,
+        dependencies: {
+          type: this.appointmentType,
+          serviceId: this.appointment.service_id,
+          doctorId: this.appointment.doctor_id,
+        },
       };
     },
   },
@@ -141,10 +143,8 @@ export default {
       handler(value) {
         if (this.appointment.service_id) this.appointment.service_id = null;
         if (this.appointment.doctor_id) this.appointment.doctor_id = null;
-        if (this.appointment.start_at) this.appointment.type.start_at = null;
+        if (this.appointment.start_at) this.appointment.start_at = null;
         if (this.appointment.end_at) this.appointment.end_at = null;
-
-        if (value === this.appointmentTypesEnum.Service) this.getGroupsService();
       },
     },
     'appointment.specialty_id': {
@@ -170,25 +170,12 @@ export default {
   },
 
   methods: {
-    async createAppointment() {
+    async submitHandler() {
       if (this.loading.form) return;
       this.loading.form = true;
 
       try {
-        const { data } = await Appointment.create(this.appointment);
-
-        this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessCreated') });
-        this.$emit(
-          'action',
-          new GlobalDrawerAction({ name: 'created', data: { appointment: data.data } })
-        );
-        this.$router.push({
-          name: REGISTRY_APPOINTMENT_ROUTE.name,
-          params: {
-            patientId: data.data.patient_id,
-            id: data.data.id,
-          },
-        });
+        this.data?.id ? await this.editAppointment() : await this.createAppointment();
       } catch (err) {
         console.log(err);
         this.$notify({
@@ -198,6 +185,43 @@ export default {
       }
 
       this.loading.form = false;
+    },
+
+    async createAppointment() {
+      const { data } = await Appointment.create(this.appointment);
+
+      this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessCreated') });
+      this.$emit(
+        'action',
+        new GlobalDrawerAction({ name: 'created', data: { appointment: data.data } })
+      );
+      this.$router.push({
+        name: REGISTRY_APPOINTMENT_ROUTE.name,
+        params: {
+          patientId: data.data.patient_id,
+          id: data.data.id,
+        },
+      });
+    },
+
+    async editAppointment() {
+      const { data } = await Appointment.update({
+        id: this.appointment.id,
+        payload: this.appointment,
+      });
+
+      this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
+      this.$emit(
+        'action',
+        new GlobalDrawerAction({ name: 'edited', data: { appointment: data.data } })
+      );
+      this.$router.push({
+        name: REGISTRY_APPOINTMENT_ROUTE.name,
+        params: {
+          patientId: data.data.patient_id,
+          id: data.data.id,
+        },
+      });
     },
 
     appointmentWatcherHandler({ field, value, oldValue }) {
@@ -219,8 +243,9 @@ export default {
           if (
             this.appointmentType !== this.appointmentTypesEnum.Service &&
             this.appointment.service_id
-          )
+          ) {
             this.appointment.service_id = null;
+          }
 
           if (this.appointment.start_at) this.appointment.start_at = null;
           if (this.appointment.end_at) this.appointment.end_at = null;
@@ -232,12 +257,6 @@ export default {
           break;
         }
       }
-    },
-
-    async getGroupsService() {},
-
-    checkPayload(payload) {
-      console.log(payload);
     },
   },
 
