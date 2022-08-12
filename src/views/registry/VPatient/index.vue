@@ -63,7 +63,9 @@
         </ElCol>
       </ElRow>
     </div>
-
+    <p class="v-patients-profile-content-description__title">
+      {{ $t('Children') }}
+    </p>
     <div
       class="v-patients-profile-content-card"
       v-for="child of patient.childrens"
