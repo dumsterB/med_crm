@@ -27,7 +27,9 @@
       "SaveChanges": "Сохранить изменения",
       "Search": "Поиск",
       "SelectDate": "Выберите дату",
-      "SignUp": "Регистрация"
+      "SignUp": "Регистрация",
+      "Edit": "Редактировать",
+      "Delete": "Удалить"
     }
   },
   "uz": {
@@ -58,7 +60,9 @@
       "SaveChanges": "O'zgarishlarni saqlash",
       "Search": "Topish",
       "SelectDate": "Sanani tanlang",
-      "SignUp": "Ro'yxatdan o'tish"
+      "SignUp": "Ro'yxatdan o'tish",
+      "Edit": "Tahrirlash",
+      "Delete": "Oʻchirish"
     }
   }
 }
