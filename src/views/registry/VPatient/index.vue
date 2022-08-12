@@ -105,7 +105,7 @@
                 {{ $t('Gender') }}
               </div>
               <div class="v-patients-profile-content-card_info__numbers">
-                {{ child.gender }}
+               Мужской  {{child.gender}}
               </div>
             </div>
           </div>
@@ -142,7 +142,11 @@
           v-for="appointment of appointments"
           :key="appointment.id"
           class="grid-content v-patients-profile-appointments-content__col"
-          :xs="24" :sm="24" :md="12" :lg="8" :xl="8" >
+          :xs="24"
+          :sm="24"
+          :md="12"
+          :lg="8"
+          :xl="8">
           <div class="v-patients-profile-appointments-content_card">
             <div class="v-patients-profile-appointments-content_profile">
               <ElAvatar :size="108" :src="appointment.doctor.avatar.link" />
@@ -164,18 +168,14 @@
             <hr class="v-patients-profile-appointments-content_card__divider" />
             <div class="v-patients-profile-appointments-content_profile">
               <div class="v-patients-profile-appointments-content_info">
-              <p class="v-patients-profile-appointments-content_profile__title">
-                {{ $t('DateAndTine') }}
-              </p>
-              <p class="v-patients-profile-appointments-content_profile__text">
-                6 агуста 14:00
-              </p>
-              <p class="v-patients-profile-appointments-content_profile__title">
-                {{ $t('Price') }}
-              </p>
-              <p class="v-patients-profile-appointments-content_profile__text">
-                125 000 сум
-              </p>
+                <p class="v-patients-profile-appointments-content_profile__title">
+                  {{ $t('DateAndTine') }}
+                </p>
+                <p class="v-patients-profile-appointments-content_profile__text">6 агуста 14:00</p>
+                <p class="v-patients-profile-appointments-content_profile__title">
+                  {{ $t('Price') }}
+                </p>
+                <p class="v-patients-profile-appointments-content_profile__text">125 000 сум</p>
               </div>
             </div>
           </div>
