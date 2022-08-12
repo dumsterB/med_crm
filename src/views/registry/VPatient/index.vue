@@ -12,7 +12,7 @@
       <ElRow>
         <ElCol :span="8">
           <div class="v-patients-profile-content-card_item">
-            <ElAvatar :size="108" :src="circleUrl" />
+            <UiAvatar rounded size="120" class="avatar"  />
             <div class="v-patients-profile-content-card_info">
               <div>
                 <button class="v-patients-profile-content-card_info__button">
@@ -74,7 +74,7 @@
       <ElRow>
         <ElCol :span="8">
           <div class="v-patients-profile-content-card_item">
-            <ElAvatar :size="108" :src="child.src" />
+            <UiAvatar rounded size="120" class="avatar" :size="108" src="https://cdn1.flamp.ru/b77c219dbd37075d47b5e5ebeb84630c.jpg" />
             <div class="v-patients-profile-content-card_info">
               <div>
                 <button class="v-patients-profile-content-card_info__button">
@@ -151,7 +151,7 @@
           :xl="8">
           <div class="v-patients-profile-appointments-content_card">
             <div class="v-patients-profile-appointments-content_profile">
-              <ElAvatar :size="108" :src="appointment.doctor.avatar.link" />
+              <UiAvatar rounded size="120" class="avatar" :img="appointment.doctor.avatar.link"/>
               <div class="v-patients-profile-appointments-content_profile_info">
                 <button class="v-patients-profile-appointments-content_profile__danger-button">
                   {{ $t('Appointment') }}
