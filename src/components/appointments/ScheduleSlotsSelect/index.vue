@@ -27,7 +27,7 @@
 <script>
 import { DATE_FORMAT } from '@/config/dateAndTime.config';
 import { ScheduleSlot } from '@/models/ScheduleSlot.model';
-import { excludeDate } from '@/utils/dateAndTime.utils';
+import { excludeDate, getCurrentDate } from '@/utils/dateAndTime.utils';
 
 export default {
   name: 'ScheduleSlotsSelect',
@@ -72,7 +72,6 @@ export default {
   watch: {
     date: {
       handler(value) {
-        this.slot = null;
         if (value) this.getSlots();
       },
       immediate: true,
@@ -83,11 +82,23 @@ export default {
       this.$emit('update:startAt', value.start_at);
       this.$emit('update:endAt', value.end_at);
     },
-    startAt(value) {
-      if (this.slot.start_at !== value) this.slot.start_at = value;
+    startAt: {
+      handler(value) {
+        if (this.slot.start_at !== value) {
+          this.date = getCurrentDate();
+          this.slot.start_at = value;
+        }
+      },
+      immediate: true,
     },
-    endAt(value) {
-      if (this.slot.end_at !== value) this.slot.end_at = value;
+    endAt: {
+      handler(value) {
+        if (this.slot.end_at !== value) {
+          this.date = getCurrentDate();
+          this.slot.end_at = value;
+        }
+      },
+      immediate: true,
     },
   },
 
