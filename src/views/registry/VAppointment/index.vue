@@ -7,6 +7,7 @@
 
 <script>
 import { Appointment } from '@/models/Appointment.model';
+import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
@@ -50,7 +51,9 @@ export default {
           data: this.appointment,
         },
       });
-      console.log(action);
+
+      if (action instanceof GlobalDrawerCloseAction) return;
+      this.appointment = action.data.appointment;
     },
   },
 };
