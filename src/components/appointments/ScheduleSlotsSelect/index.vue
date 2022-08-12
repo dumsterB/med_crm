@@ -64,7 +64,12 @@ export default {
 
     /** @type {Array<{label: string, value: {startAt: string, endAt: string}}>} */
     slotsForSelect() {
-      return this.availableSlots.map((elem) => {
+      const slots = [
+        ...(this.slot.start_at && this.slot.end_at ? [this.slot] : []),
+        ...this.availableSlots,
+      ];
+
+      return slots.map((elem) => {
         return {
           label: `${excludeDate(elem.start_at)} - ${excludeDate(elem.end_at)}`,
           value: {
@@ -91,7 +96,7 @@ export default {
     startAt: {
       handler(value) {
         if (this.slot.start_at !== value) {
-          this.date = getCurrentDate();
+          this.date = value?.split(' ')[0];
           this.slot.start_at = value;
         }
       },
@@ -100,7 +105,7 @@ export default {
     endAt: {
       handler(value) {
         if (this.slot.end_at !== value) {
-          this.date = getCurrentDate();
+          this.date = value?.split(' ')[0];
           this.slot.end_at = value;
         }
       },
