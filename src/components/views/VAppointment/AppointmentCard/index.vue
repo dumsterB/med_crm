@@ -22,6 +22,13 @@
         <div class="appointment-card-body-item__value">{{ item.value }}</div>
       </div>
     </div>
+
+    <ElDivider />
+
+    <div class="appointment-card-actions">
+      <ElButton type="danger" plain> Test button </ElButton>
+      <ElButton type="primary"> Test button </ElButton>
+    </div>
   </ElCard>
 </template>
 
