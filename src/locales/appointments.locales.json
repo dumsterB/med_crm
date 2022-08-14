@@ -6,6 +6,8 @@
       "RecordingSource": "Источник записи",
       "SelectDoctor": "Выберите доктора",
       "SelectStatus": "Выберите статус",
+      "StartDate": "Дата приёма",
+      "StartTime": "Время приёма",
       "Statuses": {
         "approved": "Подтвержден",
         "provided": "Ожидает",
@@ -25,7 +27,8 @@
       "RecordingSource": "Yozib olish manbai",
       "SelectDoctor": "Shifokorni tanlang",
       "SelectStatus": "Holatni tanlang",
-      "Status": "Holat",
+      "StartDate": "Qabul kuni",
+      "StartTime": "Qabul vaqti",
       "Statuses": {
         "approved": "Tasdiqlangan",
         "provided": "Kutilmoqda",
