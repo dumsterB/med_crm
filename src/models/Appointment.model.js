@@ -70,7 +70,7 @@ export class Appointment extends CRUDModel {
    * @param {string} date format - DD.MM.YY hh:mm
    * @return {Date|string}
    */
-  static getStartTine(date) {
+  static getStartTime(date) {
     return date.split(' ')[1];
   }
 
