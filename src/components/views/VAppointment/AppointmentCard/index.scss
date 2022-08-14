@@ -1,0 +1,50 @@
+.appointment-card {
+  .el-card__header {
+    &:hover {
+      cursor: pointer;
+      background-color: var(--bg-secondary-color);
+    }
+  }
+  &-header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    &-user {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      &__name {
+        font-weight: bold;
+        font-size: 1.4em;
+      }
+      &__phone {
+        color: var(--text-secondary-color);
+      }
+    }
+    &__status {
+      margin-left: auto;
+    }
+  }
+
+  &-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    &-item {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+
+      &__title {
+        font-weight: 600;
+        font-size: 1.1em;
+        min-width: 4em;
+      }
+      &__value {
+      }
+    }
+  }
+}
