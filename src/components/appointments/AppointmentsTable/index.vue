@@ -4,7 +4,7 @@
       <ElTable
         v-loading="loading"
         class="appointments-table"
-        :data="itemsWithPayload"
+        :data="items"
         ref="elTable"
         @row-click="goToAppointment">
         <template #empty>
@@ -25,9 +25,7 @@
 
         <ElTableColumn width="120" prop="status" :label="$t('Appointments.Statuses.Status')">
           <template #default="{ row }">
-            <ElTag :type="row.statusTag.type" effect="dark" round>
-              {{ row.statusTag.label }}
-            </ElTag>
+            <AppointmentStatusTag :status="row.status" />
           </template>
         </ElTableColumn>
 
@@ -58,9 +56,11 @@ import { PAGE_SIZES } from '@/config/ui.config';
 import { Appointment } from '@/models/Appointment.model';
 
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
+import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 
 export default {
   name: 'AppointmentsTable',
+  components: { AppointmentStatusTag },
   emits: ['update:perPage', 'update:page'],
   props: {
     /** @property { Array<Appointment|object> } items */
@@ -74,29 +74,6 @@ export default {
   icons: icons,
 
   computed: {
-    itemsWithPayload() {
-      return this.items.map((appointment) => {
-        let statusTagType = 'success';
-        if (appointment.status === Appointment.enum.statuses.Canceled) statusTagType = 'danger';
-        if (appointment.status === Appointment.enum.statuses.Provided) statusTagType = 'warning';
-
-        let statusTagIcon = icons.DOUBLE_CHECKER;
-        if (appointment.status === Appointment.enum.statuses.Canceled)
-          statusTagIcon = icons.CANCELED_ROUND;
-        if (appointment.status === Appointment.enum.statuses.Provided)
-          statusTagIcon = icons.PROVIDED;
-
-        return {
-          ...appointment,
-          statusTag: {
-            label: this.$t(`Appointments.Statuses.${appointment.status}`),
-            type: statusTagType,
-            icon: statusTagIcon,
-          },
-        };
-      });
-    },
-
     pageCount() {
       return Math.ceil(this.total / this.perPage);
     },
