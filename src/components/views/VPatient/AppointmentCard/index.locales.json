@@ -1,0 +1,27 @@
+{
+  "ru": {
+    "Appointments": "Записи",
+    "Appointment": "Запись",
+    "AddRecord": "Добавить запись",
+    "PatientInfo": "Информация о пациенте",
+    "Children": "Дети",
+    "ChildrenText": "Ребенок",
+    "Parents": "Родитель",
+    "Gender": "Пол",
+    "DateAndTine": "Время и дата приема",
+    "Price": "Цена"
+
+  },
+  "uz": {
+    "Appointments": "Yozuvlar",
+    "Appointment": "Yozuv",
+    "AddRecord": "Eslatma qo'shing",
+    "PatientInfo": "Bemor haqida ma'lumot",
+    "Children": "Bolalar",
+    "ChildrenText": "Bola",
+    "Parents": "Ota-ona",
+    "Gender": "Jins",
+    "DateAndTine": "Qabul qilish vaqti va sanasi",
+    "Price": "Narxi"
+  }
+}

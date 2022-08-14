@@ -1,4 +1,4 @@
-.v-patients-profile {
+.v-patients {
   &-content {
     display: flex;
     flex-direction: column;
@@ -30,12 +30,12 @@
     }
   }
 }
-.v-patients-profile-content{
+.v-patients-content{
   width: 100%;
   padding-left: 10px;
   padding-right: 10px;
 }
-.v-patients-profile-content-card {
+.v-patients-content-card {
   background: #ffffff;
   border-radius: 16px;
   width: 100%;
@@ -48,7 +48,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  &_item {
+  &__item {
     display: flex;
     height: 200px;
     position: relative;
@@ -79,7 +79,7 @@
       gap: 4px;
       width: 97px;
       height: 34px;
-      margin-left: -10px;
+      padding-left: 20px;
       background: #54c2b6;
       border-radius: 40px;
       color: white;
@@ -98,18 +98,7 @@
       color: #404040;
       margin-top: 5px;
     }
-    &_create {
-      color: white;
-      gap: 10px;
-      height: 62px;
-      width: 320px;
-      background: #54c2b6;
-      border-radius: 12px;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+
     &_edit {
       align-items: center;
       width: 320px;
@@ -134,14 +123,14 @@
     }
   }
 }
-.v-patients-profile-content-description__title {
+.v-patients-content-description__title {
   margin: 0;
   font-weight: 700;
   font-size: 18px;
   line-height: 30px;
   color: #404040;
 }
-.v-patients-profile-content-card_info__icon {
+.v-patients-content-card__info__icon {
   position: absolute;
   right: 50px;
   color: #BA0B0B;
@@ -151,7 +140,7 @@
   height: 110px;
   width: 110px;
 }
-.v-patients-profile-appointments-content {
+.v-patients-appointments-content {
   margin-right: 0;
   margin-left: 0;
   &_info{
