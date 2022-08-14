@@ -1,6 +1,6 @@
 import { DEFAULT_PRICE_DELIMITER } from '@/config/ui.config';
 
-export default class PriceService {
+export class PriceService {
   /**
    * Вернёт отформатированную дату
    * @example formatPrice({price: 10000, delimiter: '.'}): '10.000'
