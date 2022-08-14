@@ -22,7 +22,7 @@ export class Appointment extends CRUDModel {
    * @param {number} payload.group_service_id
    * @param {ServiceGroup} payload.group_service
    * @param {number} payload.user_id synonym for payload.patient_id
-   * @param {Date|string} payload.start_at
+   * @param {Date|string} payload.start_at - format DD.MM.YY hh:mm
    * @param {Date|string} payload.end_at
    * @param {string} payload.status
    * @param {string} payload.cancel_reason
@@ -56,6 +56,22 @@ export class Appointment extends CRUDModel {
     return super.create(payload, {
       url: !payload.service_id ? `${this.tableName}/create/byGroup` : null,
     });
+  }
+
+  /**
+   * @param {string} date format - DD.MM.YY hh:mm
+   * @return {Date|string}
+   */
+  static getStartDate(date) {
+    return date.split(' ')[0];
+  }
+
+  /**
+   * @param {string} date format - DD.MM.YY hh:mm
+   * @return {Date|string}
+   */
+  static getStartTine(date) {
+    return date.split(' ')[1];
   }
 
   static enum = {
