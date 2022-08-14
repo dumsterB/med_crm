@@ -1,7 +1,6 @@
 <template>
-  <LayoutRegistry content-class="v-patient-content">
-    PatientRecord
-    <ElButton type="primary" @click="editAppointment"> Edit </ElButton>
+  <LayoutRegistry content-class="v-appointment-content">
+    <AppointmentCard class="v-appointment-content__card" v-if="appointment" :data="appointment" />
   </LayoutRegistry>
 </template>
 
@@ -10,11 +9,12 @@ import { Appointment } from '@/models/Appointment.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
+import AppointmentCard from '@/components/views/VAppointment/AppointmentCard/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 
 export default {
   name: 'VAppointment',
-  components: { LayoutRegistry },
+  components: { AppointmentCard, LayoutRegistry },
   props: {
     id: [Number, String],
     patientId: [Number, String],
