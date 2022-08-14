@@ -24,7 +24,7 @@ export default {
           break;
         }
         case Appointment.enum.statuses.Approved: {
-          statusTagType = 'primary';
+          statusTagType = '';
           break;
         }
         case Appointment.enum.statuses.Waiting: {
