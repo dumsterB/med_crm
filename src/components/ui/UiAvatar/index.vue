@@ -1,5 +1,5 @@
 <template>
-  <div :class="['ui-avatar', `ui-avatar__${size}`]" :style="{ backgroundColor: avatar.bg }">
+  <div :class="['ui-avatar', `ui-avatar_${size}`]" :style="{ backgroundColor: avatar.bg }">
     <img
       v-if="!error"
       class="ui-avatar__image"
@@ -31,7 +31,7 @@ export default {
     size: {
       type: String,
       default: 'medium',
-      validator: (val) => ['small', 'medium', 'large'].includes(val),
+      validator: (val) => ['small', 'medium', 'large', 'super-large'].includes(val),
     },
 
     /**

@@ -5,23 +5,29 @@
   border-radius: 50%;
   overflow: hidden;
 
-  &__small {
+  &_small {
     width: 1.7em;
     min-width: 1.7em;
     height: 1.7em;
     min-height: 1.7em;
   }
-  &__medium {
+  &_medium {
     width: 2.2em;
     min-width: 2.2em;
     height: 2.2em;
     min-height: 2.2em;
   }
-  &__large {
+  &_large {
     width: 3em;
     min-width: 3em;
     height: 3em;
     min-height: 3em;
+  }
+  &_super-large {
+    width: 5em;
+    min-width: 5em;
+    height: 5em;
+    min-height: 5em;
   }
 
   &__image {
