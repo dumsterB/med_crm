@@ -15,16 +15,34 @@ export default {
   },
   computed: {
     options() {
-      let statusTagType = 'success';
-      let statusTagIcon = icons.DOUBLE_CHECKER;
+      let statusTagType = null;
+      let statusTagIcon = null;
 
-      if (this.status === Appointment.enum.statuses.Canceled) {
-        statusTagType = 'danger';
-        statusTagIcon = icons.CANCELED_ROUND;
-      }
-      if (this.status === Appointment.enum.statuses.Provided) {
-        statusTagType = 'warning';
-        statusTagIcon = icons.PROVIDED;
+      switch (this.status) {
+        case Appointment.enum.statuses.Created: {
+          statusTagType = 'info';
+          break;
+        }
+        case Appointment.enum.statuses.Approved: {
+          statusTagType = 'primary';
+          break;
+        }
+        case Appointment.enum.statuses.Waiting: {
+          statusTagType = 'warning';
+          break;
+        }
+        case Appointment.enum.statuses.InProgress: {
+          statusTagType = '';
+          break;
+        }
+        case Appointment.enum.statuses.Provided: {
+          statusTagType = 'success';
+          break;
+        }
+        case Appointment.enum.statuses.Canceled: {
+          statusTagType = 'danger';
+          break;
+        }
       }
 
       return {
