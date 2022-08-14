@@ -7,6 +7,7 @@
       "Cancel": "Отменить",
       "Create": "Создать",
       "Dashboard": "Дашборд",
+      "Delete": "Удалить",
       "DoctorsSchedule": "Расписание врачей",
       "Edit": "Редактировать",
       "ForgotPassword": "Заблыи пароль?",
@@ -28,8 +29,7 @@
       "Search": "Поиск",
       "SelectDate": "Выберите дату",
       "SignUp": "Регистрация",
-      "Edit": "Редактировать",
-      "Delete": "Удалить"
+      "Sum": "Сум"
     }
   },
   "uz": {
@@ -37,11 +37,12 @@
       "Actions": "??Actions??",
       "Attach": "Attach",
       "Authorization": "Kirish",
-      "Edit": "Ozgartirish",
       "Cancel": "Qaytish",
       "Create": "Yaratish",
       "Dashboard": "Dashboard",
+      "Delete": "Oʻchirish",
       "DoctorsSchedule": "Shifokorlar jadvali",
+      "Edit": "Tahrirlash",
       "ForgotPassword": "Parolni unutdingizmi?",
       "InviteByNumber": "Telefondan ulash",
       "Loading": "Yuklanmoqda...",
@@ -61,8 +62,7 @@
       "Search": "Topish",
       "SelectDate": "Sanani tanlang",
       "SignUp": "Ro'yxatdan o'tish",
-      "Edit": "Tahrirlash",
-      "Delete": "Oʻchirish"
+      "Sum": "Som"
     }
   }
 }
