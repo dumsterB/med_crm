@@ -8,181 +8,192 @@
         <ElButton type="primary" @click="editPatient"> {{ $t('Patients.EditPatient') }} </ElButton>
       </div>
     </div>
-    <div class="v-patients-profile-content-card" v-if="patient">
-      <ElRow>
-        <ElCol :span="8">
-          <div class="v-patients-profile-content-card_item">
-            <UiAvatar rounded size="120" class="avatar"  />
-            <div class="v-patients-profile-content-card_info">
-              <div>
-                <button class="v-patients-profile-content-card_info__button">
-                  {{ $t('Base.Patient') }}
-                </button>
-              </div>
-              <div class="v-patients-profile-content-card_info__strong">
-                {{ patient.name }}
-              </div>
-              <div class="v-patients-profile-content-card_info__numbers">
-                {{ patient.birthdate }}
-              </div>
-            </div>
-          </div>
-        </ElCol>
-        <ElCol :span="8">
-          <div class="v-patients-profile-content-card_item">
-            <div class="v-patients-profile-content-card_info">
-              <div class="v-patients-profile-content-card_info__strong">
-                {{ $t('User.Phone') }}
-              </div>
-              <div class="v-patients-profile-content-card_info__numbers">
-                {{ patient.phone }}
+      <div v-loading="loading" v-if="patient" class="v-patients-profile-content">
+      <div class="v-patients-profile-content-card">
+        <ElRow>
+          <ElCol :span="8">
+            <div class="v-patients-profile-content-card_item">
+              <UiAvatar rounded size="120" class="avatar" />
+              <div class="v-patients-profile-content-card_info">
+                <div>
+                  <button class="v-patients-profile-content-card_info__button">
+                    {{ $t('Base.Patient') }}
+                  </button>
+                </div>
+                <div class="v-patients-profile-content-card_info__strong">
+                  {{ patient.name }}
+                </div>
+                <div class="v-patients-profile-content-card_info__numbers">
+                  {{ patient.birthdate }}
+                </div>
               </div>
             </div>
-          </div>
-        </ElCol>
-        <ElCol :span="8">
-          <div class="v-patients-profile-content-card_item__last">
-            <div class="v-patients-profile-content-card_info_actions">
-              <div>
-                <button class="v-patients-profile-content-card_info_create">
-                  <UiIcon :icon="$options.icons.PLUS" /> {{ $t('Appointments.AddRecord') }}
-                </button>
-              </div>
-              <div>
-                <button class="v-patients-profile-content-card_info_edit">
-                  {{ $t('Base.Edit') }}
-                </button>
-              </div>
-              <div>
-                <button class="v-patients-profile-content-card_info_delete">
-                  {{ $t('Base.Delete') }}
-                </button>
+          </ElCol>
+          <ElCol :span="8">
+            <div class="v-patients-profile-content-card_item">
+              <div class="v-patients-profile-content-card_info">
+                <div class="v-patients-profile-content-card_info__strong">
+                  {{ $t('User.Phone') }}
+                </div>
+                <div class="v-patients-profile-content-card_info__numbers">
+                  {{ patient.phone }}
+                </div>
               </div>
             </div>
-          </div>
-        </ElCol>
-      </ElRow>
-    </div>
-    <p class="v-patients-profile-content-description__title" v-if="patient.childrens">
-      {{ $t('Children') }}
-    </p>
-    <div
-      class="v-patients-profile-content-card"
-      v-for="child of patient.childrens"
-      :key="child.id"
-      v-if="patient">
-      <ElRow>
-        <ElCol :span="8">
-          <div class="v-patients-profile-content-card_item">
-            <UiAvatar rounded size="120" class="avatar" :size="108" src="https://cdn1.flamp.ru/b77c219dbd37075d47b5e5ebeb84630c.jpg" />
-            <div class="v-patients-profile-content-card_info">
-              <div>
-                <button class="v-patients-profile-content-card_info__button">
-                  {{ $t('ChildrenText') }}
-                </button>
-              </div>
-              <div class="v-patients-profile-content-card_info__strong">
-                {{ child.name }}
-              </div>
-              <div class="v-patients-profile-content-card_info__numbers">
-                {{ child.birthdate }}
+          </ElCol>
+          <ElCol :span="8">
+            <div class="v-patients-profile-content-card_item__last">
+              <div class="v-patients-profile-content-card_info_actions">
+                <div>
+                  <button class="v-patients-profile-content-card_info_create">
+                    <UiIcon :icon="$options.icons.PLUS" /> {{ $t('AddRecord') }}
+                  </button>
+                </div>
+                <div>
+                  <button class="v-patients-profile-content-card_info_edit">
+                    {{ $t('Base.Edit') }}
+                  </button>
+                </div>
+                <div>
+                  <button class="v-patients-profile-content-card_info_delete">
+                    {{ $t('Base.Delete') }}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </ElCol>
-        <ElCol :span="8">
-          <div class="v-patients-profile-content-card_item">
-            <div class="v-patients-profile-content-card_info">
-              <div class="v-patients-profile-content-card_info__strong">
-                {{ $t('Parents') }}
+          </ElCol>
+        </ElRow>
+      </div>
+      <p class="v-patients-profile-content-description__title" v-if="patient.childrens.length > 1">
+        {{ $t('Children') }} {{patient.childrens}}
+      </p>
+      <div v-if="patient.childrens">
+        <div
+          class="v-patients-profile-content-card"
+          v-for="child of patient.childrens"
+          :key="child.id"
+          v-if="patient">
+          <ElRow>
+            <ElCol :span="8">
+              <div class="v-patients-profile-content-card_item">
+                <UiAvatar
+                  rounded
+                  size="120"
+                  class="avatar"
+                  :size="108"
+                  src="https://cdn1.flamp.ru/b77c219dbd37075d47b5e5ebeb84630c.jpg" />
+                <div class="v-patients-profile-content-card_info">
+                  <div>
+                    <button class="v-patients-profile-content-card_info__button">
+                      {{ $t('ChildrenText') }}
+                    </button>
+                  </div>
+                  <div class="v-patients-profile-content-card_info__strong">
+                    {{ child.name }}
+                  </div>
+                  <div class="v-patients-profile-content-card_info__numbers">
+                    {{ child.birthdate }}
+                  </div>
+                </div>
               </div>
-              <div class="v-patients-profile-content-card_info__numbers">
-                {{ patient.name }}
-                <UiIcon
-                  class="v-patients-profile-content-card_info__icon"
-                  :icon="$options.icons.TRASH" />
+            </ElCol>
+            <ElCol :span="8">
+              <div class="v-patients-profile-content-card_item">
+                <div class="v-patients-profile-content-card_info">
+                  <div class="v-patients-profile-content-card_info__strong">
+                    {{ $t('Parents') }}
+                  </div>
+                  <div class="v-patients-profile-content-card_info__numbers">
+                    {{ patient.name }}
+                    <UiIcon
+                      class="v-patients-profile-content-card_info__icon"
+                      :icon="$options.icons.TRASH" />
+                  </div>
+                  <br />
+                  <div class="v-patients-profile-content-card_info__strong">
+                    {{ $t('Gender') }}
+                  </div>
+                  <div class="v-patients-profile-content-card_info__numbers">
+                    Мужской {{ child.gender }}
+                  </div>
+                </div>
               </div>
-              <br />
-              <div class="v-patients-profile-content-card_info__strong">
-                {{ $t('Gender') }}
+            </ElCol>
+            <ElCol :span="8">
+              <div class="v-patients-profile-content-card_item__last">
+                <div class="v-patients-profile-content-card_info_actions">
+                  <div>
+                    <button class="v-patients-profile-content-card_info_create">
+                      <UiIcon :icon="$options.icons.PLUS" /> {{ $t('AddRecord') }}
+                    </button>
+                  </div>
+                  <div>
+                    <button class="v-patients-profile-content-card_info_edit">
+                      {{ $t('Base.Edit') }}
+                    </button>
+                  </div>
+                  <div>
+                    <button class="v-patients-profile-content-card_info_delete">
+                      {{ $t('Base.Delete') }}
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div class="v-patients-profile-content-card_info__numbers">
-               Мужской  {{child.gender}}
+            </ElCol>
+          </ElRow>
+        </div>
+      </div>
+      <p class="v-patients-profile-content-description__title">
+        {{ $t('Appointments') }}
+      </p>
+      <div class="v-patients-profile-appointments-content">
+        <ElRow gutter="20">
+          <ElCol
+            v-for="appointment of appointments"
+            :key="appointment.id"
+            class="grid-content v-patients-profile-appointments-content__col"
+            :xs="24"
+            :sm="24"
+            :md="12"
+            :lg="8"
+            :xl="8">
+            <div class="v-patients-profile-appointments-content_card">
+              <div class="v-patients-profile-appointments-content_profile">
+                <UiAvatar rounded size="120" class="avatar" :img="appointment.doctor.avatar.link" />
+                <div class="v-patients-profile-appointments-content_profile_info">
+                  <button class="v-patients-profile-appointments-content_profile__danger-button">
+                    {{ $t('Appointment') }}
+                  </button>
+                  <p class="v-patients-profile-appointments-content_profile__title">
+                    {{ appointment.doctor.name }}
+                  </p>
+                  <p
+                    class="v-patients-profile-appointments-content_profile__text"
+                    v-for="specialties of appointment.doctor.specialties"
+                    :key="specialties">
+                    {{ specialties.title }}
+                  </p>
+                </div>
+              </div>
+              <hr class="v-patients-profile-appointments-content_card__divider" />
+              <div class="v-patients-profile-appointments-content_profile">
+                <div class="v-patients-profile-appointments-content_info">
+                  <p class="v-patients-profile-appointments-content_profile__title">
+                    {{ $t('DateAndTine') }}
+                  </p>
+                  <p class="v-patients-profile-appointments-content_profile__text">
+                    6 агуста 14:00
+                  </p>
+                  <p class="v-patients-profile-appointments-content_profile__title">
+                    {{ $t('Price') }}
+                  </p>
+                  <p class="v-patients-profile-appointments-content_profile__text">125 000 сум</p>
+                </div>
               </div>
             </div>
-          </div>
-        </ElCol>
-        <ElCol :span="8">
-          <div class="v-patients-profile-content-card_item__last">
-            <div class="v-patients-profile-content-card_info_actions">
-              <div>
-                <button class="v-patients-profile-content-card_info_create">
-                  <UiIcon :icon="$options.icons.PLUS" /> {{ $t('Appointments.AddRecord') }}
-                </button>
-              </div>
-              <div>
-                <button class="v-patients-profile-content-card_info_edit">
-                  {{ $t('Base.Edit') }}
-                </button>
-              </div>
-              <div>
-                <button class="v-patients-profile-content-card_info_delete">
-                  {{ $t('Base.Delete') }}
-                </button>
-              </div>
-            </div>
-          </div>
-        </ElCol>
-      </ElRow>
-    </div>
-    <p class="v-patients-profile-content-description__title">
-      {{ $t('Appointments') }}
-    </p>
-    <div class="v-patients-profile-appointments-content">
-      <ElRow gutter="20">
-        <ElCol
-          v-for="appointment of appointments"
-          :key="appointment.id"
-          class="grid-content v-patients-profile-appointments-content__col"
-          :xs="24"
-          :sm="24"
-          :md="12"
-          :lg="8"
-          :xl="8">
-          <div class="v-patients-profile-appointments-content_card">
-            <div class="v-patients-profile-appointments-content_profile">
-              <UiAvatar rounded size="120" class="avatar" :img="appointment.doctor.avatar.link"/>
-              <div class="v-patients-profile-appointments-content_profile_info">
-                <button class="v-patients-profile-appointments-content_profile__danger-button">
-                  {{ $t('Appointment') }}
-                </button>
-                <p class="v-patients-profile-appointments-content_profile__title">
-                  {{ appointment.doctor.name }}
-                </p>
-                <p
-                  class="v-patients-profile-appointments-content_profile__text"
-                  v-for="specialties of appointment.doctor.specialties"
-                  :key="specialties">
-                  {{ specialties.title }}
-                </p>
-              </div>
-            </div>
-            <hr class="v-patients-profile-appointments-content_card__divider" />
-            <div class="v-patients-profile-appointments-content_profile">
-              <div class="v-patients-profile-appointments-content_info">
-                <p class="v-patients-profile-appointments-content_profile__title">
-                  {{ $t('DateAndTine') }}
-                </p>
-                <p class="v-patients-profile-appointments-content_profile__text">6 агуста 14:00</p>
-                <p class="v-patients-profile-appointments-content_profile__title">
-                  {{ $t('Price') }}
-                </p>
-                <p class="v-patients-profile-appointments-content_profile__text">125 000 сум</p>
-              </div>
-            </div>
-          </div>
-        </ElCol>
-      </ElRow>
+          </ElCol>
+        </ElRow>
+      </div>
     </div>
   </LayoutRegistry>
 </template>
@@ -249,6 +260,7 @@ export default {
     },
 
     async editPatient() {
+      this.loading = true
       const action = await this.$store.dispatch('modalAndDrawer/openDrawer', {
         component: CreateOrEditPatientDrawer,
         payload: { data: this.patient },
@@ -256,6 +268,7 @@ export default {
 
       if (action instanceof GlobalDrawerCloseAction) return;
       this.patient = action.data.patient;
+      this.loading = false;
     },
   },
 };

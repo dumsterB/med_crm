@@ -2,6 +2,7 @@
   "ru": {
     "Appointments": "Записи",
     "Appointment": "Запись",
+    "AddRecord": "Добавить запись",
     "PatientInfo": "Информация о пациенте",
     "Children": "Дети",
     "ChildrenText": "Ребенок",
@@ -14,6 +15,7 @@
   "uz": {
     "Appointments": "Yozuvlar",
     "Appointment": "Yozuv",
+    "AddRecord": "Eslatma qo'shing",
     "PatientInfo": "Bemor haqida ma'lumot",
     "Children": "Bolalar",
     "ChildrenText": "Bola",
