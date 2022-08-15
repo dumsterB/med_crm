@@ -29,7 +29,10 @@
           </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="patient.phone" :label="$t('Appointments.RecordingSource')" />
+        <ElTableColumn prop="appointment.resource" :label="$t('Appointments.RecordingSource')">
+          {{ $t('Base.NoData') }}
+        </ElTableColumn>
+
         <ElTableColumn prop="clinic.published_at" :label="$t('DateAndTime.CreatedAt')" />
       </ElTable>
     </ElScrollbar>
