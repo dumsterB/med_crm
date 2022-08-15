@@ -1,6 +1,5 @@
-<template #header>
+<template>
   <ElCard class="v-patients-content-card">
-
     <div class="v-patients-content-card__item">
       <UiAvatar size="super-large" />
       <div class="v-patients-content-card__item__profile">
@@ -30,8 +29,75 @@
     <div class="v-patients-content-card__item last__item">
       <div class="v-patients-content-card__item__actions">
         <div>
+          <ElButton class="v-patients-content-card__item__actions__create">
+            <UiIcon :icon="$options.icons.PLUS" />
+            {{ $t('AddRecord') }}
+          </ElButton>
+        </div>
+        <div>
+          <ElButton class="v-patients-content-card__item__actions__edit">
+            {{ $t('Base.Edit') }}
+          </ElButton>
+        </div>
+        <div>
+          <ElButton class="v-patients-content-card__item__actions__delete">
+            {{ $t('Base.Delete') }}
+          </ElButton>
+        </div>
+      </div>
+    </div>
+  </ElCard>
+
+  <!--  TODO: убрать -->
+  <p class="v-patients-content-description__title" v-if="data.childrens.length > 1">
+    {{ $t('Children') }}
+  </p>
+
+  <ElCard class="v-patients-content-card" v-for="child of data.childrens" :key="child.id">
+    <div class="v-patients-content-card__item">
+      <UiAvatar size="super-large" />
+      <div class="v-patients-content-card__item__children">
+        <div>
+          <ElTag class="v-patients-content-card__item__children__button">
+            {{ $t('ChildrenText') }}
+          </ElTag>
+        </div>
+        <div class="v-patients-content-card__item__children__name">
+          {{ child.name }}
+        </div>
+        <div class="v-patients-content-card__item__children__birthdate">
+          {{ child.birthdate }}
+        </div>
+      </div>
+    </div>
+
+    <div class="v-patients-content-card__item">
+      <div class="v-patients-content-card__item__children">
+        <div class="v-patients-content-card__item__children__parent-label">
+          {{ $t('Parents') }}
+        </div>
+        <div class="v-patients-content-card__item__children__parent">
+          {{ data.name }}
+          <UiIcon
+            class="v-patients-content-card__item__children__icon"
+            :icon="$options.icons.TRASH" />
+        </div>
+        <br />
+        <div class="v-patients-content-card__item__children__gender-label">
+          {{ $t('Gender') }}
+        </div>
+        <div class="v-patients-content-card__item__children__gender">
+          {{ child.gender }}
+        </div>
+      </div>
+    </div>
+
+    <div class="v-patients-content-card__item last__item">
+      <div class="v-patients-content-card__item__actions">
+        <div>
           <ElTag class="v-patients-content-card__item__actions__create">
-            <UiIcon :icon="$options.icons.PLUS" /> {{ $t('AddRecord') }}
+            <UiIcon :icon="$options.icons.PLUS" />
+            {{ $t('AddRecord') }}
           </ElTag>
         </div>
         <div>
@@ -46,80 +112,13 @@
         </div>
       </div>
     </div>
-
-  </ElCard>
-
-  <p class="v-patients-content-description__title" v-if="data.childrens.length > 1">
-    {{ $t('Children') }}
-  </p>
-
-  <ElCard class="v-patients-content-card" v-for="child of data.childrens" :key="child.id">
-
-        <div class="v-patients-content-card__item">
-          <UiAvatar size="super-large" />
-          <div class="v-patients-content-card__item__children">
-            <div>
-              <ElTag class="v-patients-content-card__item__children__button">
-                {{ $t('ChildrenText') }}
-              </ElTag>
-            </div>
-            <div class="v-patients-content-card__item__children__name">
-              {{ child.name }}
-            </div>
-            <div class="v-patients-content-card__item__children__birthdate">
-              {{ child.birthdate }}
-            </div>
-          </div>
-        </div>
-
-        <div class="v-patients-content-card__item">
-          <div class="v-patients-content-card__item__children">
-            <div class="v-patients-content-card__item__children__parent-label">
-              {{ $t('Parents') }}
-            </div>
-            <div class="v-patients-content-card__item__children__parent">
-              {{ data.name }}
-              <UiIcon
-                class="v-patients-content-card__item__children__icon"
-                :icon="$options.icons.TRASH" />
-            </div>
-            <br />
-            <div class="v-patients-content-card__item__children__gender-label">
-              {{ $t('Gender') }}
-            </div>
-            <div class="v-patients-content-card__item__children__gender">
-               {{ child.gender }}
-            </div>
-          </div>
-        </div>
-
-        <div class="v-patients-content-card__item last__item">
-          <div class="v-patients-content-card__item__actions">
-            <div>
-              <ElTag class="v-patients-content-card__item__actions__create">
-                <UiIcon :icon="$options.icons.PLUS" /> {{ $t('AddRecord') }}
-              </ElTag>
-            </div>
-            <div>
-              <ElTag class="v-patients-content-card__item__actions__edit">
-                {{ $t('Base.Edit') }}
-              </ElTag>
-            </div>
-            <div>
-              <ElTag class="v-patients-content-card__item__actions__delete">
-                {{ $t('Base.Delete') }}
-              </ElTag>
-            </div>
-          </div>
-        </div>
-
   </ElCard>
 </template>
 
 <script>
 import * as icons from '@/enums/icons.enum.js';
-import {Patient} from "@/models/Patient.model";
-import {User} from "@/models/User.model";
+import { Patient } from '@/models/Patient.model';
+import { User } from '@/models/User.model';
 
 export default {
   name: 'VPatientProfileCard',
@@ -128,10 +127,6 @@ export default {
       type: [User, Patient, Object],
       required: true,
     },
-    profile:{
-      type: [User, Patient, Object],
-      required: true,
-    }
   },
   icons: icons,
 };
