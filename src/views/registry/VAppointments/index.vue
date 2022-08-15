@@ -115,9 +115,6 @@ export default {
 
     // TODO: вынести чтобы не дублировать
     queryWatchersHandler(value, oldValue) {
-      // почему-то срабатывает после логаута
-      if (this.$route.name !== REGISTRY_APPOINTMENTS_ROUTE.name) return;
-
       if (
         value &&
         oldValue &&

@@ -86,7 +86,10 @@ export default {
         });
       } catch (err) {
         console.log(err);
-        this.$notify({ title: err?.response?.data?.message || this.$t('Notifications.Error') });
+        this.$notify({
+          type: 'error',
+          title: err?.response?.data?.message || this.$t('Notifications.Error'),
+        });
       }
 
       this.setLoading(false);
@@ -94,9 +97,6 @@ export default {
 
     // TODO: вынести чтобы не дублировать
     queryWatchersHandler(value, oldValue) {
-      // почему-то срабатывает после логаута
-      if (this.$route.name !== REGISTRY_PATIENTS_ROUTE.name) return;
-
       if (
         value &&
         oldValue &&
