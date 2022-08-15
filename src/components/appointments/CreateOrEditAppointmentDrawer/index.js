@@ -80,7 +80,8 @@ export default {
     doctorsAndServicesOptions() {
       return {
         isShow: this.appointmentType === this.appointmentTypesEnum.Service,
-        isRequired: this.appointmentType === this.appointmentTypesEnum.Service,
+        // isRequired: this.appointmentType === this.appointmentTypesEnum.Service,
+        isRequired: false,
       };
     },
 
