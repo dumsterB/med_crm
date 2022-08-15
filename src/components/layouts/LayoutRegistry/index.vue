@@ -11,7 +11,9 @@
       <ElHeader class="layout-registry__header layout-registry__el-header">
         <RegistryHeader />
       </ElHeader>
-      <ElMain :class="['layout-registry__content', contentClass]"> <slot></slot> </ElMain>
+      <ElMain :class="['layout-registry__content', contentClass]" v-loading="loading">
+        <slot></slot>
+      </ElMain>
     </ElContainer>
   </ElContainer>
 </template>
@@ -27,6 +29,7 @@ export default {
     fixHeight: Boolean,
     contentClass: String,
     mainClass: String,
+    loading: Boolean,
   },
 };
 </script>

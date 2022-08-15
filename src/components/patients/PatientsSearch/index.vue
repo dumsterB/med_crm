@@ -1,7 +1,7 @@
 <template>
   <div class="patients-search">
     <form class="patients-search__form" @submit.prevent="throttleSearch">
-      <ElInput v-model.trim="queryWord.value" :placeholder="$t('InputLabel')">
+      <ElInput v-model="queryWord.value" :placeholder="$t('InputLabel')">
         <template #append>
           <ElButton type="primary" native-type="submit" :loading="loading">
             {{ $t('Base.Search') }}
