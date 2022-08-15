@@ -11,7 +11,17 @@ export const Store = createStore({
   getters: {},
 
   mutations: {},
-  actions: {},
+  actions: {
+    // сбрасываем чтобы при смене аккаунта не было старых данных
+    resetGlobalDataFromModules({ dispatch }) {
+      const modules = [];
+      for (let key in Store._modulesNamespaceMap) {
+        if (Store._modulesNamespaceMap[key]._rawModule.isCRUDModule) modules.push(key);
+      }
+
+      return Promise.all(modules.map((module) => dispatch(`${module}clearAllData`)));
+    },
+  },
   modules: {
     modalAndDrawer,
     auth,
