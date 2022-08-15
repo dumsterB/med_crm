@@ -1,5 +1,5 @@
 <template>
-  <LayoutRegistry :loading="loading.profile" content-class="v-patients-content">
+  <LayoutRegistry :loading="loading.profile" content-class="v-patient-content">
     <div class="v-patients-content__header v-patients-content-header">
       <div class="v-patients-content-header-info">
         <p class="v-patients-content-header__text">{{ $t('PatientInfo') }}</p>
@@ -8,10 +8,12 @@
         <ElButton type="primary" @click="editPatient"> {{ $t('Patients.EditPatient') }} </ElButton>
       </div>
     </div>
+
     <div v-if="patient" class="v-patients-content">
-      <div class="v-patients-content-profile">
-        <ProfileCard :data="patient"></ProfileCard>
-      </div>
+      <ProfileCard :data="patient"></ProfileCard>
+
+      <!--      <ProfileCard v-for="children in patient.childrens" :key="children.id" :data="children" />-->
+      <div class="v-patients-content-profile"></div>
       <p class="v-patients-content-description__title">{{ $t('Appointments') }}</p>
       <div class="v-patients-content-appointments">
         <AppointmentCard :data="appointments"></AppointmentCard>
@@ -30,7 +32,6 @@ import { Appointment } from '@/models/Appointment.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 import * as icons from '@/enums/icons.enum.js';
 
-
 export default {
   name: 'VPatient',
   components: { LayoutRegistry, ProfileCard, AppointmentCard },
@@ -40,11 +41,9 @@ export default {
   },
   data() {
     return {
-      /**
-       * @type Patient
-       * @type Appointment
-       */
+      /** @type Array<Appointment> */
       appointments: null,
+      /** Patient */
       patient: null,
       loading: {
         profile: false,
@@ -90,7 +89,6 @@ export default {
     },
 
     async editPatient() {
-      this.loading.profile = true;
       const action = await this.$store.dispatch('modalAndDrawer/openDrawer', {
         component: CreateOrEditPatientDrawer,
         payload: { data: this.patient },
@@ -98,7 +96,6 @@ export default {
 
       if (action instanceof GlobalDrawerCloseAction) return;
       this.patient = action.data.patient;
-      this.loading.profile = false;
     },
   },
 };
