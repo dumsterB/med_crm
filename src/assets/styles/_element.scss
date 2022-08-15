@@ -1,5 +1,6 @@
 html,
 body {
+  --_el-color-primay: #409eff;
   --el-color-primary: var(--primary-color);
 }
 .el-input {
@@ -39,4 +40,8 @@ body {
 
 .el-drawer {
   min-width: 320px !important;
+}
+
+.el-tag {
+  --el-color-primary: var(--_el-color-primay);
 }

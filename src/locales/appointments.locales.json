@@ -6,10 +6,15 @@
       "RecordingSource": "Источник записи",
       "SelectDoctor": "Выберите доктора",
       "SelectStatus": "Выберите статус",
+      "StartDate": "Дата приёма",
+      "StartTime": "Время приёма",
       "Statuses": {
+        "created": "Создан",
         "approved": "Подтвержден",
-        "provided": "Ожидает",
-        "canceled": "Отмена",
+        "waiting": "Ожидает",
+        "in_progress": "В процессе",
+        "provided": "Закончен",
+        "canceled": "Отменён",
         "Status": "Статусы"
       },
       "Types": {
@@ -25,7 +30,8 @@
       "RecordingSource": "Yozib olish manbai",
       "SelectDoctor": "Shifokorni tanlang",
       "SelectStatus": "Holatni tanlang",
-      "Status": "Holat",
+      "StartDate": "Qabul kuni",
+      "StartTime": "Qabul vaqti",
       "Statuses": {
         "approved": "Tasdiqlangan",
         "provided": "Kutilmoqda",

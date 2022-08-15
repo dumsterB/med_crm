@@ -22,7 +22,7 @@ export class Appointment extends CRUDModel {
    * @param {number} payload.group_service_id
    * @param {ServiceGroup} payload.group_service
    * @param {number} payload.user_id synonym for payload.patient_id
-   * @param {Date|string} payload.start_at
+   * @param {Date|string} payload.start_at - format DD.MM.YY hh:mm
    * @param {Date|string} payload.end_at
    * @param {string} payload.status
    * @param {string} payload.cancel_reason
@@ -58,15 +58,34 @@ export class Appointment extends CRUDModel {
     });
   }
 
+  /**
+   * @param {string} date format - DD.MM.YY hh:mm
+   * @return {Date|string}
+   */
+  static getStartDate(date) {
+    return date.split(' ')[0];
+  }
+
+  /**
+   * @param {string} date format - DD.MM.YY hh:mm
+   * @return {Date|string}
+   */
+  static getStartTime(date) {
+    return date.split(' ')[1];
+  }
+
   static enum = {
     types: {
       Doctor: 'doctor',
       Service: 'service',
     },
     statuses: {
+      Created: 'created',
       Approved: 'approved',
-      Canceled: 'canceled',
+      Waiting: 'waiting',
+      InProgress: 'in_progress',
       Provided: 'provided',
+      Canceled: 'canceled',
     },
   };
 }
