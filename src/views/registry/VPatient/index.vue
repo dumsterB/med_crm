@@ -1,5 +1,5 @@
 <template>
-  <LayoutRegistry :loading="loading.profile" content-class="v-patients-content">
+  <LayoutRegistry :loading="loading.profile && loading.appointment" content-class="v-patients-content">
     <div class="v-patients-content__header v-patients-content-header">
       <div class="v-patients-content-header-info">
         <p class="v-patients-content-header__text">{{ $t('PatientInfo') }}</p>
@@ -23,7 +23,7 @@
 <script>
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
-import ProfileCard from '@/components/views/VPatient/ProfileCard/index.vue';
+import ProfileCard from '@/components/views/VPatient/PatientCard/index.vue';
 import AppointmentCard from '@/components/views/VPatient/AppointmentCard/index.vue';
 import { Patient } from '@/models/Patient.model';
 import { Appointment } from '@/models/Appointment.model';

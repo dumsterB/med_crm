@@ -35,7 +35,7 @@
   padding-left: 10px;
   padding-right: 10px;
 }
-.v-patients-content-card {
+.v-patient-profile-card {
   background: #ffffff;
   border-radius: 16px;
   width: 100%;
@@ -123,14 +123,14 @@
     }
   }
 }
-.v-patients-content-description__title {
+.v-patient-profile-description__title {
   margin: 0;
   font-weight: 700;
   font-size: 18px;
   line-height: 30px;
   color: #404040;
 }
-.v-patients-content-card__info__icon {
+.v-patient-profile-card__info__icon {
   position: absolute;
   right: 50px;
   color: #ba0b0b;

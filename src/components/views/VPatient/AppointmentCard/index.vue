@@ -1,8 +1,7 @@
-<template #header>
+<template>
   <ElCard
     class="v-patient-appointment-card"
     v-for="appointment of data"
-    #header
     :key="appointment.id">
 
     <div class="v-patient-appointment-content-profile">

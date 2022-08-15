@@ -1,8 +1,8 @@
-.v-patient-appointment__card{
+.v-patient-appointment-card{
   display: flex;
   flex-wrap: wrap;
   min-width: 350px;
-  border-radius: 16px;
+  border-radius: 16px!important;
 }
 .v-patient-appointment-content {
   margin-right: 0;

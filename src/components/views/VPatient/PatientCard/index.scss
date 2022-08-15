@@ -1,9 +1,9 @@
-.v-patients-content-card .el-card__body{
+.v-patient-profile-card .el-card__body {
   grid-template-columns: auto auto auto;
   display: grid;
   align-items: start;
 }
-.v-patients-content-card__item {
+.v-patient-profile-card__item {
   &__profile {
     margin-left: 15px !important;
     width: 270px;
@@ -36,11 +36,11 @@
       }
     }
   }
-  &__children{
+  &__children {
     margin-left: 15px !important;
     display: block;
     width: 270px;
-    &__button{
+    &__button {
       margin-bottom: 10px;
       width: 97px;
       height: 34px;
@@ -48,11 +48,11 @@
       border-radius: 40px;
       color: white;
     }
-    &__parent{
+    &__parent {
       display: flex;
-      justify-content: space-between;
+      justify-profile: space-between;
       margin-top: 8px;
-      &-label{
+      &-label {
         font-weight: 700;
         font-size: 18px;
         line-height: 24px;
@@ -61,16 +61,16 @@
         letter-spacing: 0.75px;
         color: #404040;
       }
-      .ui-icon__content {
+      .ui-icon__profile {
         margin-left: 15px;
         margin-top: -2px;
         position: absolute;
         right: 10px;
       }
     }
-    &__gender{
+    &__gender {
       margin-top: 8px;
-      &-label{
+      &-label {
         font-weight: 700;
         font-size: 18px;
         line-height: 24px;
@@ -84,7 +84,7 @@
       display: block;
       height: 200px;
       border-left: none;
-      justify-content: center;
+      justify-profile: center;
       margin: auto;
       align-items: center;
       text-align: center;
@@ -99,7 +99,7 @@
         border-radius: 12px;
         margin-top: 10px;
         cursor: pointer;
-        justify-content: center;
+        justify-profile: center;
         font-size: 18px;
       }
       &__delete {
@@ -118,12 +118,12 @@
         width: 314px;
         cursor: pointer;
         height: 62px;
-        background: #54C2B6;
+        background: #54c2b6;
         border-radius: 12px;
         color: white;
         font-size: 18px;
       }
-      &__create .ui-icon__content {
+      &__create .ui-icon__profile {
         margin-bottom: -4px;
       }
     }
@@ -132,7 +132,7 @@
     display: block;
     height: 200px;
     border-left: none;
-    justify-content: center;
+    justify-profile: center;
     margin: auto;
     align-items: center;
     text-align: center;
@@ -143,12 +143,12 @@
       gap: 10px;
       height: 62px;
       background: white;
-      color:#54c2b6;
+      color: #54c2b6;
       border: 1px solid #54c2b6;
       border-radius: 12px;
       margin-top: 10px;
       cursor: pointer;
-      justify-content: center;
+      justify-profile: center;
       font-size: 18px;
     }
     &__delete {
@@ -172,11 +172,141 @@
       color: white;
       font-size: 18px;
     }
-    &__create .ui-icon__content {
+    &__create .ui-icon__profile {
       margin-bottom: -4px;
     }
   }
 }
 .last__item {
-  border-right: none!important;
+  border-right: none !important;
+}
+
+.v-patient-profile-appointment-content {
+  grid-template-columns: auto auto auto;
+  display: grid;
+  align-items: start;
+  gap: 10px;
+}
+.v-patient-profile-appointment-card {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 350px;
+  border-radius: 16px !important;
+  .el-card__body {
+    width: 100%;
+  }
+  &-info {
+    display: flex;
+    &-content {
+      margin-left: 20px;
+      &__button {
+        gap: 4px;
+        width: 95px;
+        height: 34px;
+        background: #e69d7d;
+        border-radius: 40px;
+        color: white;
+      }
+      &__name {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 30px;
+        color: #404040;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      &__parent{
+        &-label{
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 30px;
+          color: #404040;
+          margin-top: 20px;
+          margin-bottom: 10px;
+        }
+      }
+      &__gender{
+        margin-bottom: 4px;
+        &-label{
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 30px;
+          color: #404040;
+        }
+      }
+    }
+    &-actions{
+      margin: auto;
+      &-create{
+        padding: 13px 88px;
+        gap: 10px;
+        width: 314px;
+        height: 62px;
+        background: #54C2B6;
+        border-radius: 12px;
+        color: white;
+      }
+      &-edit {
+        align-items: center;
+        width: 314px;
+        gap: 10px;
+        height: 62px;
+        background: white;
+        color: #54c2b6;
+        border: 1px solid #54c2b6;
+        border-radius: 12px;
+        margin-top: 10px;
+        cursor: pointer;
+        font-size: 18px;
+      }
+      &-delete {
+        line-height: 36px;
+        color: #ff6c63;
+        background: white;
+        margin: auto;
+        display: flex;
+        border: none;
+        margin-top: 10px;
+        cursor: pointer;
+        font-size: 18px;
+      }
+    }
+    &__danger-button {
+      gap: 4px;
+      color: white;
+      width: 80px;
+      height: 30px;
+      background: #db6868;
+      border-radius: 40px;
+    }
+    &__title {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 30px;
+      color: #404040;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    &__text {
+      margin-top: 2px;
+      margin-bottom: 4px;
+    }
+    &__avatar {
+      margin-top: 30px;
+    }
+  }
+  &-info {
+    &__title {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 30px;
+      color: #404040;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    &__text {
+      margin-top: 2px;
+      margin-bottom: 4px;
+    }
+  }
 }
