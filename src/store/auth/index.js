@@ -60,12 +60,13 @@ export default {
       }
     },
 
-    logout({ commit }) {
+    async logout({ commit, dispatch }) {
       commit('LOGOUT');
+      await Router.push(LOGIN_ROUTE);
       ApiService.removeToken();
       localStorage.removeItem(enums.ACCESS_TOKEN_KEY);
       localStorage.removeItem(enums.USER_KEY);
-      Router.push(LOGIN_ROUTE);
+      dispatch('resetGlobalDataFromModules', {}, { root: true });
     },
   },
 };
