@@ -1,5 +1,5 @@
 <template>
-  <LayoutRegistry content-class="v-patients-content" fixHeight>
+  <LayoutRegistry :loading="loading.profile" content-class="v-patients-content" fixHeight>
     <div class="v-patients-content__header v-patients-content-header">
       <div class="v-patients-content-header-info">
         <p class="v-patients-content-header__text">{{ $t('PatientInfo') }}</p>
@@ -10,14 +10,10 @@
     </div>
     <div v-if="patient" class="v-patients-content">
       <div class="v-patients-content-profile">
-        <ProfileCard :loading="loading.profile" :data="patient"></ProfileCard>
+        <ProfileCard :data="patient"></ProfileCard>
       </div>
-      <div class="v-patients-content-children">
-        <p class="v-patients-content-description__title" v-if="patient.childrens.length > 1">{{ $t('Children') }}</p>
-        <ChildrenCard :parentName="patient.name" :data="patient.childrens"></ChildrenCard>
-      </div>
+      <p class="v-patients-content-description__title">{{ $t('Appointments') }}</p>
       <div class="v-patients-content-appointments">
-        <p class="v-patients-content-description__title">{{ $t('Appointments') }}</p>
         <AppointmentCard :data="appointments"></AppointmentCard>
       </div>
     </div>
@@ -32,11 +28,10 @@ import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDr
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 import * as icons from '@/enums/icons.enum.js';
 import ProfileCard from '@/components/views/VPatient/ProfileCard/index.vue';
-import ChildrenCard from '@/components/views/VPatient/ChildrenCard/index.vue';
 import AppointmentCard from '@/components/views/VPatient/AppointmentCard/index.vue';
 export default {
   name: 'VPatient',
-  components: { LayoutRegistry, ProfileCard, ChildrenCard, AppointmentCard },
+  components: { LayoutRegistry, ProfileCard, AppointmentCard },
   icons: icons,
   props: {
     id: [Number, String],

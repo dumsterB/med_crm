@@ -54,7 +54,7 @@
     position: relative;
     border-right: 2px solid #54c2b6;
     align-items: center;
-    padding-left: 10px;
+    margin-top: -25px;
     &__divider {
       margin-left: 50px;
       height: 100%;
@@ -156,8 +156,6 @@
     &__divider{
       border-bottom: 2px solid #54c2b6;
       margin-top: 25px;
-      margin-left: 20px;
-      margin-right: 20px;
     }
   }
   &__col {
@@ -189,5 +187,14 @@
       margin-top: 2px;
       margin-bottom: 4px;
     }
+    &__avatar{
+      margin-top: 30px;
+    }
   }
+}
+.v-patients-content-appointments{
+  grid-template-columns: auto auto auto;
+  display: grid;
+  align-items: start;
+  gap: 10px;
 }
