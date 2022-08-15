@@ -1,6 +1,67 @@
-.v-patients-appointments-content__card{
+.v-patient-appointment__card{
   display: flex;
   flex-wrap: wrap;
   min-width: 350px;
   border-radius: 16px;
+}
+.v-patient-appointment-content {
+  margin-right: 0;
+  margin-left: 0;
+  &-card {
+    background: white;
+    width: 100%;
+    height: 380px;
+    border-radius: 16px;
+    padding-top: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    &__divider {
+      border-bottom: 2px solid #54c2b6;
+      margin-top: 25px;
+    }
+  }
+
+  &-profile {
+    padding-left: 20px;
+    display: flex;
+    &-info {
+      margin-left: 20px;
+    }
+    &__danger-button {
+      gap: 4px;
+      color: white;
+      width: 80px;
+      height: 30px;
+      background: #db6868;
+      border-radius: 40px;
+    }
+    &__title {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 30px;
+      color: #404040;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    &__text {
+      margin-top: 2px;
+      margin-bottom: 4px;
+    }
+    &__avatar {
+      margin-top: 30px;
+    }
+  }
+  &-info{
+    &__title {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 30px;
+      color: #404040;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    &__text {
+      margin-top: 2px;
+      margin-bottom: 4px;
+    }
+  }
 }

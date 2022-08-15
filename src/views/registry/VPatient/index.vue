@@ -1,5 +1,5 @@
 <template>
-  <LayoutRegistry :loading="loading.profile" content-class="v-patients-content" fixHeight>
+  <LayoutRegistry :loading="loading.profile" content-class="v-patients-content">
     <div class="v-patients-content__header v-patients-content-header">
       <div class="v-patients-content-header-info">
         <p class="v-patients-content-header__text">{{ $t('PatientInfo') }}</p>
@@ -22,13 +22,15 @@
 
 <script>
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
+import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import ProfileCard from '@/components/views/VPatient/ProfileCard/index.vue';
+import AppointmentCard from '@/components/views/VPatient/AppointmentCard/index.vue';
 import { Patient } from '@/models/Patient.model';
 import { Appointment } from '@/models/Appointment.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 import * as icons from '@/enums/icons.enum.js';
-import ProfileCard from '@/components/views/VPatient/ProfileCard/index.vue';
-import AppointmentCard from '@/components/views/VPatient/AppointmentCard/index.vue';
+
+
 export default {
   name: 'VPatient',
   components: { LayoutRegistry, ProfileCard, AppointmentCard },
@@ -62,12 +64,12 @@ export default {
 
   methods: {
     async getUser() {
-      this.loading.prfile = true;
+      this.loading.profile = true;
 
       const { data } = await Patient.findOneById(this.id);
       this.patient = data.data;
 
-      this.loading.prfile = false;
+      this.loading.profile = false;
     },
 
     async getAppointments() {

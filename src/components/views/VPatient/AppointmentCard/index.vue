@@ -1,16 +1,17 @@
-<template>
+<template #header>
   <ElCard
-    class="v-patients-appointments-content__card"
+    class="v-patient-appointment-card"
     v-for="appointment of data"
+    #header
     :key="appointment.id">
-    <div>
-    <div class="v-patients-appointments-content_profile">
-      <UiAvatar size="super-large" class="v-patients-appointments-content_profile__avatar" :img="appointment.doctor.avatar.link" />
-      <div class="v-patients-appointments-content_profile_info">
-        <ElTag class="v-patients-appointments-content_profile__danger-button">
+
+    <div class="v-patient-appointment-content-profile">
+      <UiAvatar size="super-large" class="v-patient-appointment-profile__avatar" :img="appointment.doctor.avatar.link" />
+      <div class="v-patient-appointment-content-profile-info">
+        <ElTag class="v-patient-appointment-content-profile__danger-button">
           {{ $t('Appointment') }}
         </ElTag>
-        <p class="v-patients-appointments-content_profile__title">
+        <p class="v-patient-appointment-content-profile__title">
           {{ appointment.doctor.name }}
         </p>
         <p
@@ -21,24 +22,24 @@
         </p>
       </div>
     </div>
-    <el-divider class="v-patients-appointments-content_card__divider" />
-    <div class="v-patients-appointments-content_profile">
-      <div class="v-patients-appointments-content_info">
-        <p class="v-patients-appointments-content_profile__title">
+
+    <ElDivider class="v-patient-appointment-content__divider" />
+
+    <div class="v-patient-appointment-content-info">
+        <p class="v-patient-appointment-content-info__title">
           {{ $t('DateAndTine') }}
         </p>
-        <p class="v-patients-appointments-content_profile__text">
-          {{ dateFormatter(appointment.start_at) }}
+        <p class="v-patients-appointments-content-info__text">
+          {{appointment.start_at}}
         </p>
-        <p class="v-patients-appointments-content_profile__title">
+        <p class="v-patient-appointment-content-info__title">
           {{ $t('Price') }}
         </p>
-        <p class="v-patients-appointments-content_profile__text">
-          {{ appointment.service.price }}
+        <p class="v-patient-appointment-content-info__text">
+          {{  appointment.service.price }} сум
         </p>
-      </div>
     </div>
-    </div>
+
   </ElCard>
 </template>
 
@@ -46,21 +47,14 @@
 import * as icons from '@/enums/icons.enum';
 import { Appointment } from '@/models/Appointment.model';
 export default {
-  name: 'AppointmentCard',
+  name: 'VPatientAppointmentCard',
   props: {
     data: {
       type: Array,
       required: true,
-      default: [],
     },
   },
   icons: icons,
-  computed: {},
-  methods: {
-    dateFormatter(value) {
-      return Appointment.getStartDate(value);
-    },
-  },
 };
 </script>
 

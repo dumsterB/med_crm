@@ -1,5 +1,6 @@
-<template>
+<template #header>
   <ElCard class="v-patients-content-card">
+
     <div class="v-patients-content-card__item">
       <UiAvatar size="super-large" />
       <div class="v-patients-content-card__item__profile">
@@ -14,6 +15,7 @@
         </div>
       </div>
     </div>
+
     <div class="v-patients-content-card__item">
       <div class="v-patients-content-card__item__profile">
         <div class="v-patients-content-card__item__profile__phone-label">
@@ -24,6 +26,7 @@
         </div>
       </div>
     </div>
+
     <div class="v-patients-content-card__item last__item">
       <div class="v-patients-content-card__item__actions">
         <div>
@@ -43,11 +46,15 @@
         </div>
       </div>
     </div>
+
   </ElCard>
+
   <p class="v-patients-content-description__title" v-if="data.childrens.length > 1">
     {{ $t('Children') }}
   </p>
+
   <ElCard class="v-patients-content-card" v-for="child of data.childrens" :key="child.id">
+
         <div class="v-patients-content-card__item">
           <UiAvatar size="super-large" />
           <div class="v-patients-content-card__item__children">
@@ -64,6 +71,7 @@
             </div>
           </div>
         </div>
+
         <div class="v-patients-content-card__item">
           <div class="v-patients-content-card__item__children">
             <div class="v-patients-content-card__item__children__parent-label">
@@ -80,10 +88,11 @@
               {{ $t('Gender') }}
             </div>
             <div class="v-patients-content-card__item__children__gender">
-              Мужской {{ child.gender }}
+               {{ child.gender }}
             </div>
           </div>
         </div>
+
         <div class="v-patients-content-card__item last__item">
           <div class="v-patients-content-card__item__actions">
             <div>
@@ -103,24 +112,26 @@
             </div>
           </div>
         </div>
+
   </ElCard>
 </template>
 
 <script>
 import * as icons from '@/enums/icons.enum.js';
+import {Patient} from "@/models/Patient.model";
+import {User} from "@/models/User.model";
+
 export default {
-  name: 'ProfileCard',
+  name: 'VPatientProfileCard',
   props: {
     data: {
-      type: Object,
+      type: [User, Patient, Object],
       required: true,
-      default: {},
     },
-    loading: {
-      type: Boolean,
-      require: true,
-      default: {},
-    },
+    profile:{
+      type: [User, Patient, Object],
+      required: true,
+    }
   },
   icons: icons,
 };
