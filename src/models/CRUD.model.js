@@ -30,6 +30,7 @@ export class CRUDModel {
    * @param { "ILIKE"|"EQUALS"|"IN" } query_type
    * @param { "AND"|"OR" } query_operator
    * @param { string } search
+   * @param { object } args
    * @return { Promise<{ response: AxiosResponse<any>, data: response.data }> } data = response.data
    */
   static async find({
@@ -42,11 +43,8 @@ export class CRUDModel {
     query_type,
     query_operator,
     search,
+    ...args
   }) {
-    if (query_field && query_field instanceof Array) {
-      query_field = query_field.join(QUERY_ARRAY_SEPARATOR);
-    }
-
     const urlWithQuery = mergeOrCreateQuery({
       url: _url || this.tableName,
       query: deleteEmptyValueKeys({
@@ -58,6 +56,7 @@ export class CRUDModel {
         query_type,
         query_operator,
         search,
+        ...args,
       }),
     });
 
