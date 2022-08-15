@@ -237,14 +237,19 @@
     }
     &-actions{
       margin: auto;
-      &-create{
+      &-create {
         padding: 13px 88px;
         gap: 10px;
         width: 314px;
+        cursor: pointer;
         height: 62px;
-        background: #54C2B6;
+        background: #54c2b6;
         border-radius: 12px;
         color: white;
+        font-size: 18px;
+      }
+      &-create .ui-icon__profile {
+        margin-bottom: -4px;
       }
       &-edit {
         align-items: center;
