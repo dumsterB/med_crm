@@ -1,9 +1,11 @@
 {
   "ru": {
     "User": {
+      "AddChildren": "Добавить ребёнка",
       "Age": "Возраст",
       "Birthdate": "Дата рождения",
       "Children": "Дети",
+      "Email": "Почта",
       "FullName": "ФИО",
       "Gender": "Пол",
       "Genders": {
@@ -17,6 +19,7 @@
   },
   "uz": {
     "User": {
+      "AddChildren": "??Добавить ребёнка??",
       "Age": "Yosh",
       "Birthdate": "Togilgan sanasi",
       "Children": "Bolalar",
@@ -28,7 +31,8 @@
       },
       "IsChildren": "Yosh bola",
       "Parent": "Otonasi",
-      "Phone": "Telefon"
+      "Phone": "Telefon",
+      "Email": "Email"
     }
   }
 }

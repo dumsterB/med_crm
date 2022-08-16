@@ -1,0 +1,73 @@
+.v-patient-profile-card {
+  display: flex;
+
+  &_vertical {
+    flex-direction: column;
+
+    .el-card__body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+    }
+  }
+  &_horizontal {
+    .el-card__header {
+      justify-content: center;
+      min-width: 320px;
+      border-bottom: none;
+      border-right: 1px solid var(--el-card-border-color);
+    }
+    .el-card__body {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+  }
+
+  .el-card__header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &-user {
+    display: flex;
+    flex-direction: column;
+
+    &__name {
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    &__birthdate {
+      color: var(--text-secondary-color);
+      font-size: 0.9em;
+    }
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  &-data {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    &__title {
+      font-weight: bold;
+    }
+  }
+
+  &-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}

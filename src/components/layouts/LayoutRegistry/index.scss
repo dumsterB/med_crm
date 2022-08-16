@@ -14,8 +14,11 @@
   }
 
   &__main {
+    height: 100vh;
+    overflow-y: auto;
+
     &_fix-height {
-      height: 100vh;
+      overflow-y: hidden;
     }
   }
   &__header {

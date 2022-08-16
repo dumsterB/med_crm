@@ -1,12 +1,14 @@
 {
   "ru": {
     "Appointments": {
+      "Appointments": "Записи",
       "CreateAppointment": "Создать запись",
       "PhonePatient": "Телефон пациента",
       "RecordingSource": "Источник записи",
       "SelectDoctor": "Выберите доктора",
       "SelectStatus": "Выберите статус",
       "StartDate": "Дата приёма",
+      "StartDateAndTime": "Время и дата приёма",
       "StartTime": "Время приёма",
       "Statuses": {
         "created": "Создан",
@@ -25,12 +27,14 @@
   },
   "uz": {
     "Appointments": {
-      "CreateAppointment": "???Создать запись???",
+      "Appointments": "??Записи??",
+      "CreateAppointment": "Kirish yaratish",
       "PhonePatient": "Bemorning telefoni",
       "RecordingSource": "Yozib olish manbai",
       "SelectDoctor": "Shifokorni tanlang",
       "SelectStatus": "Holatni tanlang",
       "StartDate": "Qabul kuni",
+      "StartDateAndTime": "Qabul kuni va vaqti",
       "StartTime": "Qabul vaqti",
       "Statuses": {
         "approved": "Tasdiqlangan",
