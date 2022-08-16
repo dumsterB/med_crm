@@ -1,5 +1,7 @@
 <template>
-  <LayoutRegistry :loading="loading.profile" content-class="v-patient-content">
+  <LayoutRegistry
+    :loading="loading.profile || loading.appointment"
+    content-class="v-patient-content">
     <template v-if="patient">
       <div class="v-patient-content__item v-patient-content-item">
         <div class="v-patient-content-item__header v-patient-content-item-header">
