@@ -26,6 +26,11 @@ export class Patient extends User {
     this.parent = payload?.parent ?? null;
   }
 
+  static async create(payload) {
+    const url = payload?.parent_id ? `${this.tableName}/child` : null;
+    return super.create(payload, { url });
+  }
+
   /**
    * Проверяет существование пациента
    * @param {string} phone
