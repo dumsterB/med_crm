@@ -8,6 +8,7 @@
       "SelectDoctor": "Выберите доктора",
       "SelectStatus": "Выберите статус",
       "StartDate": "Дата приёма",
+      "StartDateAndTime": "Время и дата приёма",
       "StartTime": "Время приёма",
       "Statuses": {
         "created": "Создан",
@@ -33,6 +34,7 @@
       "SelectDoctor": "Shifokorni tanlang",
       "SelectStatus": "Holatni tanlang",
       "StartDate": "Qabul kuni",
+      "StartDateAndTime": "Qabul kuni va vaqti",
       "StartTime": "Qabul vaqti",
       "Statuses": {
         "approved": "Tasdiqlangan",
