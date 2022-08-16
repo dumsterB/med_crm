@@ -6,7 +6,7 @@
     @update:model-value="$emit('update:modelValue', $event)">
     <ElForm class="create-patient-drawer-form" label-position="top" @submit.prevent="submitHandler">
       <!--  Is Children  -->
-      <ElFormItem>
+      <ElFormItem v-show="!isChildrenSwitchIsDisabled">
         <ElSwitch :active-text="$t('User.IsChildren')" v-model="isChildren" />
       </ElFormItem>
 
@@ -71,7 +71,7 @@
             native-type="submit"
             :loading="loading.form"
             :disabled="hasPatient">
-            {{ $t(data ? 'Base.SaveChanges' : 'Patients.AddPatient') }}
+            {{ $t(data?.id ? 'Base.SaveChanges' : 'Patients.AddPatient') }}
           </ElButton>
 
           <!--  hasPatient && !hasPatientFromOtherClinic  -->
@@ -79,7 +79,7 @@
             <ElButton type="primary" plain>{{ $t('GoToPatient') }} </ElButton>
           </router-link>
           <ElButton
-            v-show="data ? hasPatient : hasPatient && !hasPatientFromOtherClinic"
+            v-show="data?.id ? hasPatient : hasPatient && !hasPatientFromOtherClinic"
             type="primary"
             @click="checkPhoneForRebinding">
             {{ $t(data ? 'RebindPhone' : 'CreateNewPatient') }}

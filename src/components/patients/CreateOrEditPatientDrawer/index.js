@@ -48,6 +48,9 @@ export default {
         params: { id: this.oldPatient?.id },
       });
     },
+    isChildrenSwitchIsDisabled() {
+      return !!this.data?.id || !!this.data?.parent_id;
+    },
   },
 
   watch: {
@@ -77,7 +80,7 @@ export default {
       this.loading.form = true;
 
       try {
-        this.data ? await this.editPatient() : await this.createPatient();
+        this.data?.id ? await this.editPatient() : await this.createPatient();
       } catch (err) {
         console.log(err);
         this.$notify({
