@@ -1,139 +1,109 @@
-<template #header>
-  <ElCard class="v-patient-profile-card">
-    <div class="v-patient-profile-card__item">
+<template>
+  <ElCard
+    :class="[
+      'v-patient-profile-card',
+      `v-patient-profile-card_${type}`,
+      { 'v-patient-profile-card_children': isChildren },
+    ]"
+    shadow="hover"
+    @click="goToPatient">
+    <template #header>
       <UiAvatar size="super-large" />
-      <div class="v-patient-profile-card__item__profile">
-        <ElTag class="v-patient-profile-card__item__profile__button">
-          {{ $t('Base.Patient') }}
-        </ElTag>
-        <div class="v-patient-profile-card__item__profile__name">
+
+      <div class="v-patient-profile-card__user v-patient-profile-card-user">
+        <div class="v-patient-profile-card-user__name">
           {{ data.name }}
         </div>
-        <div class="v-patient-profile-card__item__profile__birthday">
+        <div class="v-patient-profile-card-user__birthdate">
           {{ data.birthdate }}
         </div>
       </div>
-    </div>
+    </template>
 
-    <div class="v-patient-profile-card__item">
-      <div class="v-patient-profile-card__item__profile">
-        <div class="v-patient-profile-card__item__profile__phone-label">
-          {{ $t('User.Phone') }}
-        </div>
-        <div class="v-patient-profile-card__item__profile__phone">
-          {{ data.phone }}
-        </div>
+    <div class="v-patient-profile-card__content v-patient-profile-card-content">
+      <div class="v-patient-profile-card-data" v-for="item in infoItems" :key="item.value">
+        <div class="v-patient-profile-card-data__title">{{ item.label }}</div>
+        <div class="v-patient-profile-card-data__value">{{ item.value }}</div>
       </div>
     </div>
 
-    <div class="v-patient-profile-card__item last__item">
-      <div class="v-patient-profile-card__item__actions">
-        <div>
-          <ElTag class="v-patient-profile-card__item__actions__create">
-            <UiIcon :icon="$options.icons.PLUS" /> {{ $t('AddRecord') }}
-          </ElTag>
-        </div>
-        <div>
-          <ElTag class="v-patient-profile-card__item__actions__edit">
-            {{ $t('Base.Edit') }}
-          </ElTag>
-        </div>
-        <div>
-          <ElTag class="v-patient-profile-card__item__actions__delete">
-            {{ $t('Base.Delete') }}
-          </ElTag>
-        </div>
-      </div>
+    <div class="v-patient-profile-card__actions v-patient-profile-card-actions">
+      <ElButton type="primary" @click.stop="createAppointment">
+        <template #icon>
+          <UiIcon :icon="$options.icons.PLUS" />
+        </template>
+        {{ $t('Appointments.CreateAppointment') }}
+      </ElButton>
+
+      <ElButton type="primary" plain @click.stop="editPatient">
+        {{ $t('Base.Edit') }}
+      </ElButton>
+
+      <ElButton type="danger" text @click.stop="deletePatient">
+        {{ $t('Base.Delete') }}
+      </ElButton>
     </div>
   </ElCard>
-  <p class="v-patient-profile-appointment-description__title" v-if="data.childrens.length > 1">
-    {{ $t('Children') }}
-  </p>
-  <div class="v-patient-profile-appointment-content">
-    <ElCard class="v-patient-profile-appointment-card" v-for="child of data.childrens" :key="child.id">
-      <div class="v-patient-profile-appointment-card-info">
-        <UiAvatar size="super-large" />
-        <div class="v-patient-profile-appointment-card-info-content">
-          <div>
-            <ElTag class="v-patient-profile-appointment-card-info-content__button">
-              {{ $t('ChildrenText') }}
-            </ElTag>
-          </div>
-          <div class="v-patient-profile-appointment-card-info-content__name">
-            {{ child.name }}
-          </div>
-          <div class="v-patient-profile-appointment-card-info-content__birthdate">
-            {{ child.birthdate ?  child.birthdate : '10.08.1977' }}
-          </div>
-        </div>
-      </div>
-
-      <ElDivider></ElDivider>
-
-      <div class="v-patient-profile-appointment-card-info">
-        <div class="v-patient-profile-appointment-card-info-content">
-          <div class="v-patient-profile-appointment-card-info-content__parent-label">
-            {{ $t('Parents') }}
-          </div>
-          <div class="v-patient-profile-appointment-card-info-content__parent">
-            {{ data.name }}
-<!--            <UiIcon-->
-<!--              class="v-patient-profile-appointment-card__item__children__icon"-->
-<!--              :icon="$options.icons.TRASH" />-->
-          </div>
-          <br />
-          <div class="v-patient-profile-appointment-card-info-content__gender-label">
-            {{ $t('Gender') }}
-          </div>
-          <div class="v-patient-profile-appointment-card-info-content__gender">
-            {{ child.gender}}
-          </div>
-        </div>
-      </div>
-
-      <ElDivider></ElDivider>
-
-      <div class="v-patient-profile-appointment-card-info">
-        <div class="v-patient-profile-appointment-card-info-actions">
-          <div>
-            <ElButton class="v-patient-profile-appointment-card-info-actions-create">
-              <UiIcon :icon="$options.icons.PLUS" /> {{ $t('AddRecord') }}
-            </ElButton>
-          </div>
-          <div>
-            <ElButton class="v-patient-profile-appointment-card-info-actions-edit">
-              {{ $t('Base.Edit') }}
-            </ElButton>
-          </div>
-          <div>
-            <ElButton class="v-patient-profile-appointment-card-info-actions-delete">
-              {{ $t('Base.Delete') }}
-            </ElButton>
-          </div>
-        </div>
-      </div>
-    </ElCard>
-  </div>
 </template>
 
 <script>
 import * as icons from '@/enums/icons.enum.js';
+import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
 
 export default {
   name: 'VPatientProfileCard',
+  icons: icons,
   props: {
     data: {
       type: [User, Patient, Object],
       required: true,
     },
-    profile: {
-      type: [User, Patient, Object],
-      required: true,
+    type: {
+      type: String,
+      validator: (val) => ['vertical', 'horizontal'].includes(val),
+      default: 'vertical',
     },
   },
-  icons: icons,
+  data() {
+    return {};
+  },
+  computed: {
+    isChildren() {
+      return !!this.data.parent_id;
+    },
+
+    infoItems() {
+      return [
+        {
+          label: this.isChildren ? this.$t('User.Parent') : this.$t('User.Phone'),
+          value: this.isChildren ? this.data.parent?.name : this.data.phone,
+        },
+        {
+          label: this.$t('User.Gender'),
+          value: this.data.gender,
+        },
+        {
+          label: this.$t('User.Email'),
+          value: this.data.email,
+        },
+      ];
+    },
+  },
+
+  methods: {
+    goToPatient() {
+      this.$router.push({
+        ...REGISTRY_PATIENT_ROUTE,
+        params: { id: this.data.id },
+      });
+    },
+
+    createAppointment() {},
+    editPatient() {},
+    deletePatient() {},
+  },
 };
 </script>
 

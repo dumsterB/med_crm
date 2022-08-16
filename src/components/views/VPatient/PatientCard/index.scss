@@ -1,317 +1,74 @@
-.v-patient-profile-card .el-card__body {
-  grid-template-columns: auto auto auto;
-  display: grid;
-  align-items: start;
-}
-.v-patient-profile-card__item {
-  &__profile {
-    margin-left: 15px !important;
-    width: 270px;
-    &__name {
-      font-weight: 700;
-      font-size: 18px;
-      line-height: 30px;
-      color: #404040;
-    }
-    &__birthday {
-      margin-top: 5px;
-    }
-    &__button {
-      margin-bottom: 10px;
-      width: 97px;
-      height: 34px;
-      background: #4cb1a6;
-      border-radius: 40px;
-      color: white;
-    }
-    &__phone {
-      &-label {
-        font-weight: 700;
-        font-size: 18px;
-        line-height: 24px;
-        display: flex;
-        align-items: center;
-        letter-spacing: 0.75px;
-        color: #404040;
-      }
-    }
-  }
-  &__children {
-    margin-left: 15px !important;
-    display: block;
-    width: 270px;
-    &__button {
-      margin-bottom: 10px;
-      width: 97px;
-      height: 34px;
-      background: #4cb1a6;
-      border-radius: 40px;
-      color: white;
-    }
-    &__parent {
-      display: flex;
-      justify-profile: space-between;
-      margin-top: 8px;
-      &-label {
-        font-weight: 700;
-        font-size: 18px;
-        line-height: 24px;
-        display: flex;
-        align-items: center;
-        letter-spacing: 0.75px;
-        color: #404040;
-      }
-      .ui-icon__profile {
-        margin-left: 15px;
-        margin-top: -2px;
-        position: absolute;
-        right: 10px;
-      }
-    }
-    &__gender {
-      margin-top: 8px;
-      &-label {
-        font-weight: 700;
-        font-size: 18px;
-        line-height: 24px;
-        display: flex;
-        align-items: center;
-        letter-spacing: 0.75px;
-        color: #404040;
-      }
-    }
-    &__actions {
-      display: block;
-      height: 200px;
-      border-left: none;
-      justify-profile: center;
-      margin: auto;
-      align-items: center;
-      text-align: center;
-      margin-top: 20px;
-      &__edit {
-        align-items: center;
-        width: 314px;
-        gap: 10px;
-        height: 62px;
-        background: white;
-        border: 1px solid #54c2b6;
-        border-radius: 12px;
-        margin-top: 10px;
-        cursor: pointer;
-        justify-profile: center;
-        font-size: 18px;
-      }
-      &__delete {
-        line-height: 36px;
-        text-align: center;
-        color: #ff6c63;
-        background: white;
-        border: none;
-        margin-top: 10px;
-        cursor: pointer;
-        font-size: 18px;
-      }
-      &__create {
-        padding: 13px 88px;
-        gap: 10px;
-        width: 314px;
-        cursor: pointer;
-        height: 62px;
-        background: #54c2b6;
-        border-radius: 12px;
-        color: white;
-        font-size: 18px;
-      }
-      &__create .ui-icon__profile {
-        margin-bottom: -4px;
-      }
-    }
-  }
-  &__actions {
-    display: block;
-    height: 200px;
-    border-left: none;
-    justify-profile: center;
-    margin: auto;
-    align-items: center;
-    text-align: center;
-    margin-top: 20px;
-    &__edit {
-      align-items: center;
-      width: 314px;
-      gap: 10px;
-      height: 62px;
-      background: white;
-      color: #54c2b6;
-      border: 1px solid #54c2b6;
-      border-radius: 12px;
-      margin-top: 10px;
-      cursor: pointer;
-      justify-profile: center;
-      font-size: 18px;
-    }
-    &__delete {
-      line-height: 36px;
-      text-align: center;
-      color: #ff6c63;
-      background: white;
-      border: none;
-      margin-top: 10px;
-      cursor: pointer;
-      font-size: 18px;
-    }
-    &__create {
-      padding: 13px 88px;
-      gap: 10px;
-      width: 314px;
-      cursor: pointer;
-      height: 62px;
-      background: #54c2b6;
-      border-radius: 12px;
-      color: white;
-      font-size: 18px;
-    }
-    &__create .ui-icon__profile {
-      margin-bottom: -4px;
-    }
-  }
-}
-.last__item {
-  border-right: none !important;
-}
-
-.v-patient-profile-appointment-content {
-  grid-template-columns: auto auto auto;
-  display: grid;
-  align-items: start;
-  gap: 10px;
-}
-.v-patient-profile-appointment-card {
+.v-patient-profile-card {
   display: flex;
-  flex-wrap: wrap;
-  min-width: 350px;
-  border-radius: 16px !important;
-  .el-card__body {
-    width: 100%;
+
+  &_vertical {
+    flex-direction: column;
+
+    .el-card__body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+    }
   }
-  &-info {
+  &_horizontal {
+    .el-card__header {
+      justify-content: center;
+      min-width: 320px;
+      border-bottom: none;
+      border-right: 1px solid var(--el-card-border-color);
+    }
+    .el-card__body {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+    }
+  }
+  &:hover {
+    cursor: pointer;
+  }
+
+  .el-card__header {
     display: flex;
-    &-content {
-      margin-left: 20px;
-      &__button {
-        gap: 4px;
-        width: 95px;
-        height: 34px;
-        background: #e69d7d;
-        border-radius: 40px;
-        color: white;
-      }
-      &__name {
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 30px;
-        color: #404040;
-        margin-top: 10px;
-        margin-bottom: 10px;
-      }
-      &__parent{
-        &-label{
-          font-weight: 600;
-          font-size: 16px;
-          line-height: 30px;
-          color: #404040;
-          margin-top: 20px;
-          margin-bottom: 10px;
-        }
-      }
-      &__gender{
-        margin-bottom: 4px;
-        &-label{
-          font-weight: 600;
-          font-size: 16px;
-          line-height: 30px;
-          color: #404040;
-        }
-      }
+    align-items: center;
+    gap: 20px;
+  }
+
+  &-user {
+    display: flex;
+    flex-direction: column;
+
+    &__name {
+      font-weight: bold;
+      font-size: 1.2em;
     }
-    &-actions{
-      margin: auto;
-      &-create {
-        padding: 13px 88px;
-        gap: 10px;
-        width: 314px;
-        cursor: pointer;
-        height: 62px;
-        background: #54c2b6;
-        border-radius: 12px;
-        color: white;
-        font-size: 18px;
-      }
-      &-create .ui-icon__profile {
-        margin-bottom: -4px;
-      }
-      &-edit {
-        align-items: center;
-        width: 314px;
-        gap: 10px;
-        height: 62px;
-        background: white;
-        color: #54c2b6;
-        border: 1px solid #54c2b6;
-        border-radius: 12px;
-        margin-top: 10px;
-        cursor: pointer;
-        font-size: 18px;
-      }
-      &-delete {
-        line-height: 36px;
-        color: #ff6c63;
-        background: white;
-        margin: auto;
-        display: flex;
-        border: none;
-        margin-top: 10px;
-        cursor: pointer;
-        font-size: 18px;
-      }
-    }
-    &__danger-button {
-      gap: 4px;
-      color: white;
-      width: 80px;
-      height: 30px;
-      background: #db6868;
-      border-radius: 40px;
-    }
-    &__title {
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 30px;
-      color: #404040;
-      margin-top: 20px;
-      margin-bottom: 10px;
-    }
-    &__text {
-      margin-top: 2px;
-      margin-bottom: 4px;
-    }
-    &__avatar {
-      margin-top: 30px;
+    &__birthdate {
+      color: var(--text-secondary-color);
+      font-size: 0.9em;
     }
   }
-  &-info {
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 15px;
+  }
+  &-data {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
     &__title {
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 30px;
-      color: #404040;
-      margin-top: 20px;
-      margin-bottom: 10px;
+      font-weight: bold;
     }
-    &__text {
-      margin-top: 2px;
-      margin-bottom: 4px;
-    }
+  }
+
+  &-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 }
