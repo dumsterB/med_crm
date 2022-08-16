@@ -56,9 +56,10 @@
 
 <script>
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 import PatientCard from '@/components/views/VPatient/PatientCard/index.vue';
 import AppointmentCard from '@/components/views/VPatient/AppointmentCard/index.vue';
+import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 import { Patient } from '@/models/Patient.model';
 import { Appointment } from '@/models/Appointment.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
@@ -119,7 +120,14 @@ export default {
 
       this.loading.appointment = false;
     },
-    createAppointment() {},
+    createAppointment() {
+      this.$store.dispatch('modalAndDrawer/openDrawer', {
+        component: CreateOrEditAppointmentDrawer,
+        payload: {
+          patient: this.patient,
+        },
+      });
+    },
 
     async editPatient() {
       const action = await this.$store.dispatch('modalAndDrawer/openDrawer', {
