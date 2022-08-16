@@ -1,6 +1,9 @@
 <template>
   <LayoutRegistry content-class="v-appointment-content" :loading="loading">
-    <AppointmentCard class="v-appointment-content__card" v-if="appointment" :data="appointment" />
+    <AppointmentCard
+      class="v-appointment-content__card"
+      v-if="appointment"
+      v-model:data="appointment" />
   </LayoutRegistry>
 </template>
 

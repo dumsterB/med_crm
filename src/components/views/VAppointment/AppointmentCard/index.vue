@@ -27,7 +27,7 @@
 
     <div class="appointment-card-actions">
       <ElButton type="danger" plain> Test button </ElButton>
-      <ElButton type="primary"> Test button </ElButton>
+      <ElButton type="primary" @click="editAppointment"> Edit </ElButton>
     </div>
   </ElCard>
 </template>
@@ -37,8 +37,10 @@ import { insertRouteParams } from '@/utils/router.utils';
 import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
 import { Appointment } from '@/models/Appointment.model';
 import { PriceService } from '@/services/price.service';
+import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
+import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 
 export default {
   name: 'AppointmentCard',
@@ -81,6 +83,20 @@ export default {
             this.$t('Base.Sum'),
         },
       ];
+    },
+  },
+
+  methods: {
+    async editAppointment() {
+      const action = await this.$store.dispatch('modalAndDrawer/openDrawer', {
+        component: CreateOrEditAppointmentDrawer,
+        payload: {
+          data: this.data,
+        },
+      });
+
+      if (action instanceof GlobalDrawerCloseAction) return;
+      this.$emit('update:data', action.data.appointment);
     },
   },
 };
