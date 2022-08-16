@@ -70,6 +70,7 @@ export default {
           query_field: null,
           query_type: null,
           query_operator: null,
+          some_services: true,
         },
       };
     },
