@@ -3,6 +3,7 @@
     :loading="loading.profile || loading.appointment"
     content-class="v-patient-content">
     <template v-if="patient">
+      <!--  Patient  -->
       <div class="v-patient-content__item v-patient-content-item">
         <div class="v-patient-content-item__header v-patient-content-item-header">
           <div class="v-patient-content__title">{{ $t('Title') }}</div>
@@ -16,7 +17,8 @@
         </div>
       </div>
 
-      <div class="v-patient-content-item">
+      <!--  Children  -->
+      <div v-show="!isChildren" class="v-patient-content-item">
         <div class="v-patient-content-item__header v-patient-content-item-header">
           <div class="v-patient-content__title">{{ $t('User.Children') }}</div>
           <ElButton type="primary" @click="createChildren"> {{ $t('User.AddChildren') }} </ElButton>
@@ -29,10 +31,11 @@
             v-for="children in patient.childrens || []"
             :key="children.id"
             type="vertical"
-            :data="{ ...children, parent: patient }" />
+            :data="{ ...children, parent: patient, parent_id: patient.id }" />
         </div>
       </div>
 
+      <!--  Appointments  -->
       <div class="v-patient-content-item">
         <div class="v-patient-content-item__header v-patient-content-item-header">
           <div class="v-patient-content__title">{{ $t('Appointments.Appointments') }}</div>
@@ -85,6 +88,11 @@ export default {
         appointment: false,
       },
     };
+  },
+  computed: {
+    isChildren() {
+      return !!this.patient.parent_id;
+    },
   },
   watch: {
     id: {
@@ -141,7 +149,14 @@ export default {
       this.patient = action.data.patient;
     },
 
-    createChildren() {},
+    createChildren() {
+      this.$store.dispatch('modalAndDrawer/openDrawer', {
+        component: CreateOrEditPatientDrawer,
+        payload: {
+          data: new Patient({ parent: this.patient, parent_id: this.patient.id }),
+        },
+      });
+    },
   },
 
   setup: () => ({
