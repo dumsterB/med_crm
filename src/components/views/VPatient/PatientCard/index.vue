@@ -107,7 +107,14 @@ export default {
         },
       });
     },
-    editPatient() {},
+    editPatient() {
+      this.$store.dispatch('modalAndDrawer/openDrawer', {
+        component: CreateOrEditPatientDrawer,
+        payload: {
+          data: this.data,
+        },
+      });
+    },
     deletePatient() {},
   },
 };
