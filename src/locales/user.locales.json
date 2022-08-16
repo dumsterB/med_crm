@@ -4,6 +4,7 @@
       "Age": "Возраст",
       "Birthdate": "Дата рождения",
       "Children": "Дети",
+      "Email": "Почта",
       "FullName": "ФИО",
       "Gender": "Пол",
       "Genders": {
@@ -28,7 +29,8 @@
       },
       "IsChildren": "Yosh bola",
       "Parent": "Otonasi",
-      "Phone": "Telefon"
+      "Phone": "Telefon",
+      "Email": "Email"
     }
   }
 }
