@@ -21,6 +21,7 @@
           v-model="patient.parent_id"
           :modelForUse="Patient"
           :searchQuery="{ query_field: ['name', 'phone'] }"
+          :defaultItem="data?.parent"
           required />
       </ElFormItem>
 

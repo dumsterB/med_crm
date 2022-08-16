@@ -54,6 +54,7 @@ export default {
     'modelValue': {
       handler() {
         this.patient = new Patient(this.data || {});
+        if (this.data?.parent_id) this.isChildren = true;
       },
       immediate: true,
     },
