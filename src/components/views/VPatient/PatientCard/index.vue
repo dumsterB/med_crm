@@ -47,6 +47,7 @@ import * as icons from '@/enums/icons.enum.js';
 import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
+import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
@@ -107,13 +108,16 @@ export default {
         },
       });
     },
-    editPatient() {
-      this.$store.dispatch('modalAndDrawer/openDrawer', {
+    async editPatient() {
+      const action = await this.$store.dispatch('modalAndDrawer/openDrawer', {
         component: CreateOrEditPatientDrawer,
         payload: {
           data: this.data,
         },
       });
+
+      if (action instanceof GlobalDrawerCloseAction) return;
+      this.$emit('update:data', action.data.patient);
     },
     deletePatient() {},
   },
