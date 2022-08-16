@@ -1,6 +1,7 @@
 {
   "ru": {
     "User": {
+      "AddChildren": "Добавить ребёнка",
       "Age": "Возраст",
       "Birthdate": "Дата рождения",
       "Children": "Дети",
@@ -18,6 +19,7 @@
   },
   "uz": {
     "User": {
+      "AddChildren": "??Добавить ребёнка??",
       "Age": "Yosh",
       "Birthdate": "Togilgan sanasi",
       "Children": "Bolalar",
