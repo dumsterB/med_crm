@@ -36,7 +36,7 @@
         <ElTableColumn prop="childrens_count" :label="$t('User.Children')">
           <template #default="{ row }">
             <span v-if="!!row.childrens_count"> {{ row.childrens_count }} </span>
-            <ElButton v-else type="primary" plain>
+            <ElButton v-else type="primary" plain @click.stop="addChildren(row)">
               <UiIcon :icon="$options.icons.PLUS" />
             </ElButton>
           </template>
@@ -73,6 +73,8 @@
 import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
+import { Patient } from '@/models/Patient.model';
+
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 
@@ -129,6 +131,15 @@ export default {
         component: CreateOrEditPatientDrawer,
         payload: {
           nameOrPhone: this.search,
+        },
+      });
+    },
+
+    addChildren(payload) {
+      this.$store.dispatch('modalAndDrawer/openDrawer', {
+        component: CreateOrEditPatientDrawer,
+        payload: {
+          data: new Patient({ parent: payload, parent_id: payload.id }),
         },
       });
     },
