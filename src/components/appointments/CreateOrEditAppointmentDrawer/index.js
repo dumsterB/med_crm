@@ -96,7 +96,7 @@ export default {
             : false,
         isRequired: this.appointmentType === this.appointmentTypesEnum.Doctor,
         searchQuery: {
-          specialties_id: [this.appointment.specialty_id],
+          specialties_id: this.appointment.specialty_id ? [this.appointment.specialty_id] : null,
         },
       };
     },
