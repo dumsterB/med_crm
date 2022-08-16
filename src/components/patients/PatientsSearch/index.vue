@@ -21,7 +21,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import { throttle } from 'lodash';
+import { throttle, debounce } from 'lodash';
 import { useSearch } from '@/hooks/query';
 import { SEARCH } from '@/enums/icons.enum';
 import { Patient } from '@/models/Patient.model';
@@ -101,7 +101,7 @@ export default {
     },
   },
   mounted() {
-    this.throttleSearch = throttle(this.search, 150);
+    this.throttleSearch = debounce(this.search, 100);
   },
 };
 </script>
