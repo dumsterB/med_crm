@@ -1,7 +1,5 @@
 <template>
-  <LayoutRegistry
-    :loading="loading.profile && loading.appointment"
-    content-class="v-patient-content">
+  <LayoutRegistry :loading="loading.profile" content-class="v-patient-content">
     <template v-if="patient">
       <div class="v-patient-content__item v-patient-content-item">
         <div class="v-patient-content-item__header v-patient-content-item-header">
@@ -22,6 +20,7 @@
           <ElButton type="primary" @click="createChildren"> {{ $t('User.AddChildren') }} </ElButton>
         </div>
 
+        <ElEmpty v-show="!patient.childrens?.length" :description="$t('Base.NoData')" />
         <div
           class="v-patient-content-item__body v-patient-content-item-body v-patient-content-item-body_grid">
           <PatientCard
@@ -39,6 +38,10 @@
             {{ $t('Appointments.CreateAppointment') }}
           </ElButton>
         </div>
+
+        <ElEmpty
+          v-show="!appointments?.length && !loading.appointment"
+          :description="$t('Base.NoData')" />
         <div
           class="v-patient-content-item__body v-patient-content-item-body v-patient-content-item-body_grid">
           <AppointmentCard
@@ -130,6 +133,10 @@ export default {
 
     createChildren() {},
   },
+
+  setup: () => ({
+    emptyAppointment: new Appointment(),
+  }),
 };
 </script>
 
