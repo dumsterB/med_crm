@@ -13,7 +13,7 @@
         </div>
 
         <div class="v-patient-content-item__body">
-          <PatientCard :data="patient" type="horizontal" />
+          <PatientCard v-model:data="patient" type="horizontal" />
         </div>
       </div>
 
