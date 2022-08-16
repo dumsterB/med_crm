@@ -38,10 +38,6 @@
       <ElButton type="primary" plain @click.stop="editPatient">
         {{ $t('Base.Edit') }}
       </ElButton>
-
-      <ElButton type="danger" text @click.stop="deletePatient">
-        {{ $t('Base.Delete') }}
-      </ElButton>
     </div>
   </ElCard>
 </template>
@@ -51,6 +47,9 @@ import * as icons from '@/enums/icons.enum.js';
 import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
+
+import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 
 export default {
   name: 'VPatientProfileCard',
@@ -100,7 +99,14 @@ export default {
       });
     },
 
-    createAppointment() {},
+    createAppointment() {
+      this.$store.dispatch('modalAndDrawer/openDrawer', {
+        component: CreateOrEditAppointmentDrawer,
+        payload: {
+          patient: this.data,
+        },
+      });
+    },
     editPatient() {},
     deletePatient() {},
   },
