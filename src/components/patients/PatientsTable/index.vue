@@ -35,10 +35,16 @@
         <ElTableColumn prop="age" :label="$t('User.Age')"> </ElTableColumn>
         <ElTableColumn prop="childrens_count" :label="$t('User.Children')">
           <template #default="{ row }">
-            <span v-if="!!row.childrens_count"> {{ row.childrens_count }} </span>
-            <ElButton v-else type="primary" plain @click.stop="addChildren(row)">
-              <UiIcon :icon="$options.icons.PLUS" />
-            </ElButton>
+            <template v-if="!row.parent_id">
+              <span v-show="!!row.childrens_count"> {{ row.childrens_count }} </span>
+              <ElButton
+                v-show="!row.childrens_count"
+                type="primary"
+                plain
+                @click.stop="addChildren(row)">
+                <UiIcon :icon="$options.icons.PLUS" />
+              </ElButton>
+            </template>
           </template>
         </ElTableColumn>
 
