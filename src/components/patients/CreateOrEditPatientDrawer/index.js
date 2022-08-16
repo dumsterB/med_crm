@@ -4,6 +4,7 @@ import { Patient } from '@/models/Patient.model';
 import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
 import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
 import { PHONE_CONFIRM_MODAL_CONFIRMED_ACTION } from '@/components/PhoneConfirmModal/index.enum';
+import { FULL_DATE_FORMAT } from '@/config/dateAndTime.config';
 import PhoneConfirmModal from '@/components/PhoneConfirmModal/index.vue';
 
 export default {
@@ -200,6 +201,7 @@ export default {
   },
 
   setup: () => ({
+    FULL_DATE_FORMAT: FULL_DATE_FORMAT,
     Patient,
   }),
 };

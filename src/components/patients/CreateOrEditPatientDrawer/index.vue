@@ -42,6 +42,7 @@
             v-model="patient.birthdate"
             type="date"
             :placeholder="$t('Base.SelectDate')"
+            :value-format="FULL_DATE_FORMAT"
             required
             :disabled="isDisabledSecondaryInputs" />
 
