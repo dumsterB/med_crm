@@ -1,4 +1,10 @@
 .phone-confirm-modal{
+  input::placeholder {
+    font-size: 15px;
+    text-align: center;
+    color: #54C2B6;
+    font-weight: 600;
+  }
   &-form{
     text-align: center;
     margin: auto;
@@ -71,10 +77,4 @@
 .otp-input::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-input::placeholder {
-  font-size: 15px;
-  text-align: center;
-  color: #54C2B6;
-  font-weight: 600;
 }

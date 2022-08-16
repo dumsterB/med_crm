@@ -1,10 +1,10 @@
 <template>
   <ElDialog :model-value="modelValue">
-    <ElForm class="phone-confirm-modal-form" label-position="top" @submit.prevent="checkCode">
-      <p class="phone-confirm-modal__title">Введите код</p>
-      <p class="phone-confirm-modal__text">Пациенту выслан код подтверждения</p>
+    <ElForm class="phone-confirm-modal-form" label-position="top">
+      <p class="phone-confirm-modal__title">{{ $t('WriteCode') }}</p>
+      <p class="phone-confirm-modal__text">{{ $t('SendedCode') }}</p>
       <div class="phone-confirm-modal-code">
-        <v-otp-input
+        <VOtpInput
           ref="otpInput"
           input-classes="otp-input"
           :num-inputs="4"
@@ -22,9 +22,6 @@
         <UiIcon class="phone-confirm-modal-codeRepeat__icon" :icon="$options.icons.RELOAD" />
         {{ $t('CodeRepeat') }}
       </p>
-      <ElButton type="primary" @click="GoToAppointments" class="phone-confirm-modal__submit">{{
-        $t('GoToAppointments')
-      }}</ElButton>
       <br />
       <ElButton class="phone-confirm-modal__cancel" @click="closeModal">{{
         $t('Base.Cancel')
@@ -40,7 +37,7 @@ import { PHONE_CONFIRM_MODAL_CONFIRMED_ACTION } from '@/components/PhoneConfirmM
 import * as icons from '@/enums/icons.enum.js';
 import { REGISTRY_APPOINTMENTS_ROUTE } from '@/router/registry.routes.js';
 import VOtpInput from 'vue3-otp-input';
-
+let interval;
 export default {
   name: 'PhoneConfirmModal',
   emits: ['update:modelValue', 'action'],
@@ -60,7 +57,9 @@ export default {
         check: false,
       },
       timerEnabled: true,
-      timerCount: 30,
+      timerCount: 10,
+      intervalTime: 10,
+      interval: null,
     };
   },
   watch: {
@@ -70,29 +69,26 @@ export default {
       },
       immediate: true,
     },
-
-    timerEnabled(value) {
-      if (value) {
-        setTimeout(() => {
-          this.timerCount--;
-        }, 1000);
-      }
-    },
-    timerCount: {
-      handler(value) {
-        if (value > 0 && this.timerEnabled) {
-          setTimeout(() => {
-            this.timerCount--;
-          }, 1000);
-        } else {
-          this.timerEnabled = false;
-        }
-      },
-      immediate: true, // This ensures the watcher is triggered upon creation
-    },
   },
 
   methods: {
+    createInterval() {
+      this.timerCount = this.intervalTime;
+      this.timerEnabled = true;
+      this.interval = setInterval(() => {
+        console.log(this.timerCount,'on')
+        if (this.timerCount == 0) {
+          console.log(this.timerCount,'before')
+          this.interval =  clearInterval(this.interval);
+          setTimeout(()=>{
+            this.timerEnabled = false;
+          },)
+          console.log(this.timerCount,'after clear')
+          return;
+        }
+        this.timerCount--;
+      }, 1000);
+    },
     async handleOnComplete(value) {
       this.code = value;
       if (this.loading.check) return;
@@ -123,9 +119,6 @@ export default {
       this.loading.check = false;
     },
     async sendCode() {
-      this.timerCount = 30;
-      this.timerEnabled = true;
-
       if (this.loading.send) return;
       this.loading.send = true;
       try {
@@ -137,11 +130,12 @@ export default {
           title: err?.response?.data?.message || this.$t('Notifications.Error'),
         });
       }
+      this.createInterval();
 
       this.loading.send = false;
     },
-    GoToAppointments() {
-      this.$router.push({ name: REGISTRY_APPOINTMENTS_ROUTE.name });
+    closeModal() {
+      this.$emit('update:modelValue');
     },
   },
 };
