@@ -1,4 +1,5 @@
 import { onlyLoggedInMiddleware } from '@/middlewares/onlyLoggedIn.middleware';
+import { onlyManagerMiddleware } from '@/middlewares/onlyManager.middleware';
 import { I18nService } from '@/services/i18n.service';
 import VDashboard from '@/views/registry/VDashboard/index.vue';
 import VPatients from '@/views/registry/VPatients/index.vue';
@@ -10,7 +11,7 @@ export const REGISTRY_DASHBOARD_ROUTE = {
   name: 'REGISTRY_DASHBOARD',
   path: '/registry/dashboard',
   component: VDashboard,
-  beforeEnter: [onlyLoggedInMiddleware],
+  beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
   meta: {
     title: I18nService.t('Base.Dashboard'),
   },
@@ -20,7 +21,7 @@ export const REGISTRY_PATIENTS_ROUTE = {
   name: 'REGISTRY_PATIENTS',
   path: '/registry/patients',
   component: VPatients,
-  beforeEnter: [onlyLoggedInMiddleware],
+  beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
   meta: {
     title: I18nService.t('Base.Patients'),
   },
@@ -29,7 +30,7 @@ export const REGISTRY_PATIENT_ROUTE = {
   name: 'REGISTRY_PATIENT',
   path: '/registry/patients/:id',
   component: VPatient,
-  beforeEnter: [onlyLoggedInMiddleware],
+  beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
   meta: {
     title: I18nService.t('Base.Patient'),
   },
@@ -39,7 +40,7 @@ export const REGISTRY_APPOINTMENT_ROUTE = {
   name: 'REGISTRY_PATIENT_RECORD',
   path: '/registry/patients/:patientId/records/:id',
   component: VPatientRecord,
-  beforeEnter: [onlyLoggedInMiddleware],
+  beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
   meta: {
     title: I18nService.t('Base.PatientRecord'),
   },
@@ -50,7 +51,7 @@ export const REGISTRY_APPOINTMENTS_ROUTE = {
   name: 'REGISTRY_PATIENTS_RECORDS',
   path: '/registry/appointments',
   component: VAppointments,
-  beforeEnter: [onlyLoggedInMiddleware],
+  beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
   meta: {
     title: I18nService.t('Base.PatientsRecords'),
   },
