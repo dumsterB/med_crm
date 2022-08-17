@@ -5,6 +5,7 @@ import {
   REGISTRY_DASHBOARD_ROUTE,
   REGISTRY_PATIENTS_ROUTE,
 } from './registry.routes';
+import { DOCTORS_QUEUE_ROUTE, routes as doctorsRoutes } from './doctors.routes';
 import { onlyLoggedInMiddleware } from '@/middlewares/onlyLoggedIn.middleware';
 import { Store } from '@/store';
 import { User } from '@/models/User.model';
@@ -20,6 +21,7 @@ const router = createRouter({
 
     ...authRoutes,
     ...registryRoutes,
+    ...doctorsRoutes,
   ],
   scrollBehavior(to, from, savedPosition) {
     return { top: 0, behavior: 'smooth' };
@@ -38,7 +40,7 @@ function _redirectCurrentPageByUserRole(to, from, next) {
     case User.enum.roles.Manager:
       return next(REGISTRY_DASHBOARD_ROUTE.path);
     case User.enum.roles.Doctor:
-      return next('/404');
+      return next(DOCTORS_QUEUE_ROUTE);
     // return next(REGISTRY_PATIENTS_ROUTE.path);
   }
 }
