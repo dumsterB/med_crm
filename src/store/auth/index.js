@@ -12,6 +12,7 @@ export default {
   namespaced: true,
   state() {
     return {
+      /** @type User */
       user: {},
       isAuthorized: false,
     };
