@@ -35,7 +35,6 @@ import { Patient } from '@/models/Patient.model';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
 import { PHONE_CONFIRM_MODAL_CONFIRMED_ACTION } from '@/components/PhoneConfirmModal/index.enum';
 import * as icons from '@/enums/icons.enum.js';
-import { REGISTRY_APPOINTMENTS_ROUTE } from '@/router/registry.routes.js';
 import VOtpInput from 'vue3-otp-input';
 let interval;
 export default {
