@@ -1,8 +1,12 @@
 <template>
-  <ElDialog :model-value="modelValue">
+  <ElDialog
+    :model-value="modelValue"
+    custom-class="phone-confirm-modal"
+    @update:modelValue="$emit('update:modelValue')">
     <ElForm class="phone-confirm-modal-form" label-position="top">
       <p class="phone-confirm-modal__title">{{ $t('WriteCode') }}</p>
       <p class="phone-confirm-modal__text">{{ $t('SendedCode') }}</p>
+
       <div class="phone-confirm-modal-code">
         <VOtpInput
           ref="otpInput"
@@ -15,17 +19,17 @@
           :placeholder="['-', '-', '-', '-']"
           @on-complete="handleOnComplete" />
       </div>
-      <p class="phone-confirm-modal-codeRepeat" v-if="timerCount > 0">
+      <p v-show="timerCount > 0" class="phone-confirm-modal-codeRepeat">
         {{ $t('Waiting') }} {{ timerCount }}
       </p>
-      <p class="phone-confirm-modal-codeRepeat" @click="sendCode" v-else>
+      <p v-show="timerCount <= 0" class="phone-confirm-modal-codeRepeat" @click="sendCode">
         <UiIcon class="phone-confirm-modal-codeRepeat__icon" :icon="$options.icons.RELOAD" />
         {{ $t('CodeRepeat') }}
       </p>
-      <br />
-      <ElButton class="phone-confirm-modal__cancel" @click="closeModal">{{
-        $t('Base.Cancel')
-      }}</ElButton>
+
+      <ElButton class="phone-confirm-modal__cancel" @click="closeModal">
+        {{ $t('Base.Cancel') }}
+      </ElButton>
     </ElForm>
   </ElDialog>
 </template>
@@ -36,14 +40,12 @@ import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAct
 import { PHONE_CONFIRM_MODAL_CONFIRMED_ACTION } from '@/components/PhoneConfirmModal/index.enum';
 import * as icons from '@/enums/icons.enum.js';
 import VOtpInput from 'vue3-otp-input';
-let interval;
+
 export default {
   name: 'PhoneConfirmModal',
   emits: ['update:modelValue', 'action'],
   icons: icons,
-  components: {
-    VOtpInput,
-  },
+  components: { VOtpInput },
   props: {
     modelValue: Boolean,
     phone: String,
@@ -55,7 +57,6 @@ export default {
         send: false,
         check: false,
       },
-      timerEnabled: true,
       timerCount: 10,
       intervalTime: 10,
       interval: null,
@@ -73,19 +74,15 @@ export default {
   methods: {
     createInterval() {
       this.timerCount = this.intervalTime;
-      this.timerEnabled = true;
       this.interval = setInterval(() => {
         if (this.timerCount === 0) {
           clearInterval(this.interval);
-          this.interval = null
-          setTimeout(()=>{
-            this.timerEnabled = false;
-          },)
-          return;
+          return (this.interval = null);
         }
         this.timerCount--;
       }, 1000);
     },
+
     async handleOnComplete(value) {
       this.code = value;
       if (this.loading.check) return;
@@ -93,7 +90,6 @@ export default {
 
       try {
         await Patient.checkCodeFromPhone({ phone: this.phone, code: this.code });
-        console.log('toast');
         this.$notify({
           type: 'success',
           title: this.$t('Success'),
@@ -118,6 +114,7 @@ export default {
     async sendCode() {
       if (this.loading.send) return;
       this.loading.send = true;
+
       try {
         await Patient.sendCodeOnPhone({ phone: this.phone });
       } catch (err) {
