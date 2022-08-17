@@ -8,7 +8,7 @@ export class User extends CRUDModel {
     super(payload);
     this.name = payload?.name ?? null;
     // TODO: убрать
-    this.email = payload?.email ?? 'test@gmail.com';
+    this.email = payload?.email ?? null;
     this.phone = payload?.phone ?? null;
     this.birthdate = payload?.birthdate ?? null;
     this.gender = payload?.gender ?? User.enum.genders.MAN;
@@ -26,6 +26,7 @@ export class User extends CRUDModel {
       Admin: 'admin',
       Patient: 'patient',
       Manager: 'manager',
+      Doctor: 'doctor',
     },
   };
 
