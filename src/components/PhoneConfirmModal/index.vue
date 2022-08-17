@@ -15,7 +15,7 @@
           :placeholder="['-', '-', '-', '-']"
           @on-complete="handleOnComplete" />
       </div>
-      <p class="phone-confirm-modal-codeRepeat" v-if="timerCount > 1">
+      <p class="phone-confirm-modal-codeRepeat" v-if="timerCount > 0">
         {{ $t('Waiting') }} {{ timerCount }}
       </p>
       <p class="phone-confirm-modal-codeRepeat" @click="sendCode" v-else>
@@ -76,14 +76,12 @@ export default {
       this.timerCount = this.intervalTime;
       this.timerEnabled = true;
       this.interval = setInterval(() => {
-        console.log(this.timerCount,'on')
-        if (this.timerCount == 0) {
-          console.log(this.timerCount,'before')
-          this.interval =  clearInterval(this.interval);
+        if (this.timerCount === 0) {
+          clearInterval(this.interval);
+          this.interval = null
           setTimeout(()=>{
             this.timerEnabled = false;
           },)
-          console.log(this.timerCount,'after clear')
           return;
         }
         this.timerCount--;
