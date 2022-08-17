@@ -1,6 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { routes as authRoutes, LOGIN_ROUTE } from './auth.routes.js';
-import { routes as registryRoutes } from './registry.routes';
+import { routes as authRoutes } from './auth.routes.js';
+import {
+  routes as registryRoutes,
+  REGISTRY_DASHBOARD_ROUTE,
+  REGISTRY_PATIENTS_ROUTE,
+} from './registry.routes';
+import { onlyLoggedInMiddleware } from '@/middlewares/onlyLoggedIn.middleware';
+import { Store } from '@/store';
+import { User } from '@/models/User.model';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,7 +15,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      redirect: LOGIN_ROUTE.path,
+      beforeEnter: [onlyLoggedInMiddleware, _redirectCurrentPageByUserRole],
     },
 
     ...authRoutes,
@@ -24,5 +31,13 @@ router.beforeEach((to, from, next) => {
 
   next();
 });
-
 export { router as Router };
+
+function _redirectCurrentPageByUserRole(to, from, next) {
+  switch (Store.state.auth.user.role) {
+    case User.enum.roles.Manager:
+      return next(REGISTRY_DASHBOARD_ROUTE.path);
+    case User.enum.roles.Doctor:
+      return next(REGISTRY_PATIENTS_ROUTE.path);
+  }
+}
