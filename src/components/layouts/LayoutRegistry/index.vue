@@ -7,6 +7,10 @@
     <template #menu>
       <RegistryMenu />
     </template>
+
+    <template #default>
+      <slot></slot>
+    </template>
   </LayoutDefault>
 </template>
 
