@@ -38,6 +38,15 @@ body {
   }
 }
 
+.el-overlay-dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .el-dialog {
+    margin: 0;
+  }
+}
 .el-drawer {
   min-width: 320px !important;
 }
