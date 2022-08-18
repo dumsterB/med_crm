@@ -1,0 +1,42 @@
+.event-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  padding: 20px;
+  background-color: var(--bg-color);
+  height: 100%;
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-picker,
+    &-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    &-picker {
+      gap: 20px;
+    }
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &-hidden-picker-label {
+    .el-date-editor {
+      width: 0px !important;
+      height: 0px !important;
+      overflow: hidden;
+    }
+    &__title {
+      font-weight: bold;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+  }
+}
