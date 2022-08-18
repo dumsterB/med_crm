@@ -61,6 +61,15 @@ export function getDaysInMonth({ year, month }) {
 }
 
 /**
+ * @example 2022-09-30T19:02:00.000Z -> 2022-09-30T00:00:00.000Z
+ * @param {string} date ISO format
+ * @return {string}
+ */
+export function deleteTimeFromISOString({ date }) {
+  return date.replace(/T\d\d:\d\d:\d\d\.\d\d\dZ/gm, 'T00:00:00.000Z');
+}
+
+/**
  * Добавляет ноль если длина строки или число имеет один символов
  * @param {string|number} value
  * @return {string|number}
