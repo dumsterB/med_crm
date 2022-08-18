@@ -14,3 +14,4 @@ export const CANCELED_ROUND = 'CANCELED';
 export const TRASH = 'TRASH';
 export const RELOAD = 'RELOAD';
 export const DOCTORS_QUEUE = 'DOCTORS_QUEUE';
+export const BACK_ARROW = 'BACK_ARROW';

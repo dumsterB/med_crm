@@ -1,4 +1,5 @@
 import { CRUDModel } from '@/models/CRUD.model';
+import { ApiService } from '@/services/api.service';
 
 /**
  * @class Appointment
@@ -56,6 +57,15 @@ export class Appointment extends CRUDModel {
     return super.create(payload, {
       url: !payload.service_id ? `${this.tableName}/create/byGroup` : null,
     });
+  }
+
+  /**
+   * @param {string,number} doctorId
+   * @return {Promise<{data: response.data, response: AxiosResponse<*>}>}
+   */
+  static async findByDoctor({ doctorId }) {
+    const response = await ApiService.get(`${this.tableName}/${doctorId}/queues`);
+    return { response, data: response.data };
   }
 
   /**
