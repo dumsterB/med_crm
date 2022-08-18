@@ -2,10 +2,12 @@
   "ru": {
     "Base": {
       "Actions": "Действия",
+      "FullName": "ФИО",
       "Attach": "Привязать",
       "Authorization": "Авторизация",
       "Cancel": "Отменить",
       "Back": "Назад",
+      "Time": "Время",
       "Create": "Создать",
       "Dashboard": "Дашборд",
       "Queue": "Очередь",
@@ -48,6 +50,7 @@
       "Dashboard": "Dashboard",
       "Delete": "Oʻchirish",
       "Doctor": "Shifokor",
+      "Time": "Vaqt",
       "DoctorsSchedule": "Shifokorlar jadvali",
       "Edit": "Tahrirlash",
       "ForgotPassword": "Parolni unutdingizmi?",

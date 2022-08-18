@@ -8,7 +8,6 @@
         </ElButton>
         <div class="v-doctors-queue-content-header__name">
           <p>Сардорбек Максудов</p>
-          {{user}}
         </div>
 
         <!--        <ElSelect
@@ -34,7 +33,8 @@
         </ElSelect>-->
       </div>
     </div>
-    <QueueTable> </QueueTable>
+    <QueueTable class="v-doctors-queue-content__table" :items="queues" :loading="loading">
+    </QueueTable>
   </LayoutDoctors>
 </template>
 <script>
@@ -71,16 +71,16 @@ export default {
   methods: {
     async getQueus() {
       this.loading = true;
-      if(this.user){
-        const { data } = await Appointment.findByDoctor({ doctorId: this.user });
-        console.log(data)
-      }
+
+      const { data } = await Appointment.findByDoctor({ doctorId: this.user.doctor_id });
+      this.queues = data.data;
+
       this.loading = false;
     },
   },
   computed: {
     ...mapState({
-      user: (state) => state.auth.user.id,
+      user: (state) => state.auth.user,
     }),
   },
 };
