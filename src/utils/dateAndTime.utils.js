@@ -65,8 +65,17 @@ export function getDaysInMonth({ year, month }) {
  * @param {string} date ISO format
  * @return {string}
  */
-export function resetTimeInISOString({ date }) {
+export function resetTimeInISOString(date) {
   return date.replace(/T\d\d:\d\d:\d\d\.\d\d\dZ/gm, 'T00:00:00.000Z');
+}
+
+/**
+ * @example 2022-09-30T00:00:00.000Z -> 2022-09-01T00:00:00.000Z
+ * @param {string} date ISO format
+ * @return {string}
+ */
+export function resetDaysInISOString(date) {
+  return date.replace(/\d\dT/gm, '01T');
 }
 
 /**
