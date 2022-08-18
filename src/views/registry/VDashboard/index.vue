@@ -17,6 +17,7 @@ import EventCalendar from '@/components/EventCalendar/index.vue';
 import { EVENT_CALENDAR_TYPES } from '@/components/EventCalendar/index.enum';
 import { useQuery } from '@/hooks/useQuery.hook';
 import { Doctor } from '@/models/Doctor.model';
+import { deleteTimeFromISOString } from '@/utils/dateAndTime.utils';
 
 export default {
   name: 'VDashboard',
@@ -30,8 +31,8 @@ export default {
   setup: () => ({
     date: useQuery({
       field: 'calendar_date',
-      defaultValue: new Date().toISOString(),
-      formatter: (val) => new Date(val).toISOString(),
+      defaultValue: deleteTimeFromISOString({ date: new Date().toISOString() }),
+      formatter: (val) => deleteTimeFromISOString({ date: new Date(val).toISOString() }),
     }),
     type: useQuery({
       field: 'calendar_type',
