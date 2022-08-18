@@ -48,6 +48,19 @@ export function getCurrentMinutes() {
 }
 
 /**
+ * @param {string|number} [year]
+ * @param {string|number} [month] counting starts from 0
+ * @return {number}
+ */
+export function getDaysInMonth({ year, month }) {
+  let currentYear = year || new Date().getFullYear();
+  let fullYear = currentYear.toString().length === 2 ? `20${currentYear}` : currentYear;
+  let currentMonth = month || new Date().getMonth();
+
+  return 33 - new Date(+fullYear, +currentMonth, 33).getDate();
+}
+
+/**
  * Добавляет ноль если длина строки или число имеет один символов
  * @param {string|number} value
  * @return {string|number}
