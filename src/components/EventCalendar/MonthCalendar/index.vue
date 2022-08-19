@@ -1,6 +1,8 @@
 <template>
   <div class="ec-month-calendar">
     <ElCalendar v-model="dateModel" ref="calendar">
+      <template #header> <div></div> </template>
+
       <template #dateCell="payload">
         <slot name="dateCell" :payload="payload" :day="getDay(payload.data.day)">
           <div class="ec-month-calendar-cell">
@@ -9,6 +11,7 @@
             </div>
 
             <EventCalendarEvent
+              class="ec-month-calendar-cell__event"
               v-for="(item, index) in data[payload.data.day]"
               :key="item.id || index"
               :data="item" />

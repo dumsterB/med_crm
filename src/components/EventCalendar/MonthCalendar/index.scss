@@ -1,12 +1,14 @@
 .ec-month-calendar {
-  height: 100%;
+  width: 100%;
+  overflow-x: auto;
 
   .el-calendar {
+    --el-calendar-cell-width: 100%;
+
     display: flex;
     flex-direction: column;
     height: 100%;
-
-    --el-calendar-cell-width: 100%;
+    min-width: 1100px;
 
     &__body {
       flex: 1;
@@ -21,13 +23,16 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    min-height: 50px;
     gap: 8px;
 
     &__day {
       margin-bottom: 10px;
       text-align: center;
       font-weight: bold;
-      font-size: 1.2em;
+    }
+    &__event {
+      font-size: 0.8em;
     }
   }
 }
