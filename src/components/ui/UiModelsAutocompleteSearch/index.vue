@@ -50,6 +50,11 @@ export default {
         if (!value) this.query = '';
       },
     },
+    defaultItem: {
+      handler() {
+        if (this.defaultItem) this.query = this.defaultItem[this.label];
+      },
+    },
   },
 
   methods: {
@@ -74,10 +79,6 @@ export default {
     selectHandler(payload) {
       this.$emit('update:modelValue', payload[this.value]);
     },
-  },
-
-  mounted() {
-    if (this.defaultItem) this.query = this.defaultItem[this.label];
   },
 };
 </script>
