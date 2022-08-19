@@ -33,6 +33,7 @@
       <MonthCalendar
         v-if="type === EVENT_CALENDAR_TYPES.MONTH"
         :date="date"
+        :data="monthData"
         @update:date="$emit('update:date', $event)" />
       <DayCalendar v-if="type === EVENT_CALENDAR_TYPES.DAY" />
     </div>

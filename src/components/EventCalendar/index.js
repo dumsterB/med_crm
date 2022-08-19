@@ -15,8 +15,14 @@ export default {
       default: 'month',
       validator: (val) => [EVENT_CALENDAR_TYPES.MONTH, EVENT_CALENDAR_TYPES.DAY].includes(val),
     },
-
     date: String, // ISO format
+
+    /**
+     * @property {object} monthData
+     * @property {Array<object>} monthData[key] key = YYYY-MM-DD
+     * @property {string} monthData[key][].title
+     */
+    monthData: Object,
   },
   computed: {
     month() {
