@@ -1,3 +1,5 @@
+import {DATE_DELIMITER} from '@/config/dateAndTime.config';
+
 /**
  * @param {string} date format - DD.MM.YY hh:mm
  */
@@ -48,6 +50,27 @@ export function getCurrentMinutes() {
 }
 
 /**
+ * @param {string} date ISO
+ * @param {object} [options]
+ * @param {boolean} [options.withTime = false]
+ * @param {boolean} [options.fullYear = false]
+ */
+export function formatDateToDefaultFormat(date, options) {
+  const _date = new Date(date);
+
+  const year = _date.getFullYear();
+  const month = _date.getMonth() + 1;
+  const day = _date.getDate();
+  const hours = _date.getHours();
+  const minutes = _date.getMinutes();
+
+  // TODO: добавить обработку с аргументами из options
+  return `${_addZeroPrefix(day)}${DATE_DELIMITER}${_addZeroPrefix(month)}${DATE_DELIMITER}${year
+    .toString()
+    .slice(2)}`;
+}
+
+/**
  * @param {string} date ISO format
  * @return {number}
  */
@@ -79,13 +102,13 @@ export function resetDaysInISOString(date) {
 /**
  * @example 2022-09-30T00:00:00.000Z  ->  2022-08-30T00:00:00.000Z || 2022-10-30T00:00:00.000Z
  * @param {string} date ISO format
- * @param {object} [payload]
- * @param {"next"|"prev"} payload.type = "next"
+ * @param {object} [options]
+ * @param {"next"|"prev"} options.type = "next"
  * @return {string}
  */
-export function prevOrNextMonthByISOString(date, payload = { type: 'next' }) {
+export function prevOrNextMonthByISOString(date, options = {type: 'next'}) {
   return date.replace(/(\d\d\d\d)-(\d\d)-(\d\d)T/gm, (val, year, month, days) => {
-    const newMonth = _addZeroPrefix(payload.type === 'next' ? +month + 1 : +month - 1);
+    const newMonth = _addZeroPrefix(options.type === 'next' ? +month + 1 : +month - 1);
 
     return `${year}-${newMonth}-${days}T`;
   });
