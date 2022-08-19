@@ -59,6 +59,17 @@ export class Appointment extends CRUDModel {
     });
   }
 
+  static async getStatistic({ startAt, endAt, doctorsId }) {
+    const response = await ApiService.get(
+      mergeOrCreateQuery({
+        url: `/${this.tableName}/month`,
+        query: deleteEmptyValueKeys({ start_at: startAt, end_at: endAt, doctors_id: doctorsId }),
+      })
+    );
+
+    return { response, data: response.data };
+  }
+
   /**
    * @param {string,number} doctorId
    * @return {Promise<{data: response.data, response: AxiosResponse<*>}>}
