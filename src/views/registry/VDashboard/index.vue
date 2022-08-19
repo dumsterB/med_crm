@@ -31,8 +31,8 @@ export default {
   setup: () => ({
     date: useQuery({
       field: 'calendar_date',
-      defaultValue: resetDaysInISOString(resetTimeInISOString(new Date().toISOString())),
-      formatter: (val) => resetDaysInISOString(resetTimeInISOString(new Date(val).toISOString())),
+      defaultValue: new Date().toISOString(),
+      formatter: (val) => new Date(val).toISOString(),
     }),
     type: useQuery({
       field: 'calendar_type',

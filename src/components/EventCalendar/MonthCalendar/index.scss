@@ -1,0 +1,21 @@
+.ec-month-calendar {
+  height: 100%;
+
+  .el-calendar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    &__body {
+      flex: 1;
+
+      .el-calendar-table {
+        height: 100%;
+      }
+
+      .el-calendar-day {
+        height: 100%;
+      }
+    }
+  }
+}

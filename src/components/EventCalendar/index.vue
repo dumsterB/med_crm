@@ -2,7 +2,7 @@
   <div class="event-calendar">
     <div class="event-calendar__header event-calendar-header">
       <div class="event-calendar-header-picker">
-        <ElButton text class="event-calendar-header-picker__prev">prev</ElButton>
+        <ElButton text class="event-calendar-header-picker__prev" @click="prevMonth">prev</ElButton>
 
         <label class="event-calendar-hidden-picker-label">
           <span class="event-calendar-hidden-picker-label__title">
@@ -14,7 +14,7 @@
             @update:model-value="$emit('update:date', $event)" />
         </label>
 
-        <ElButton text class="event-calendar-header-picker__next">next</ElButton>
+        <ElButton text class="event-calendar-header-picker__next" @click="nextMonth">next</ElButton>
       </div>
 
       <div class="event-calendar-header-actions">
@@ -26,7 +26,10 @@
     </div>
 
     <div class="event-calendar__content event-calendar-content" v-loading="loading">
-      <MonthCalendar v-if="type === EVENT_CALENDAR_TYPES.MONTH" />
+      <MonthCalendar
+        v-if="type === EVENT_CALENDAR_TYPES.MONTH"
+        :date="date"
+        @update:date="$emit('update:date', $event)" />
       <DayCalendar v-if="type === EVENT_CALENDAR_TYPES.DAY" />
     </div>
   </div>
