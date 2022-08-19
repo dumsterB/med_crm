@@ -34,7 +34,7 @@ export function useQuery({ field, defaultValue = null, formatter = null, valueIs
       if (field) {
         value = formatter ? formatter(value) : value;
         value = value?.toString();
-        if (!value && !value.length) return reset();
+        if (!value && !value?.length) return reset();
 
         router.replace({
           ...route,
