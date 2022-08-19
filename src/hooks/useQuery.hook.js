@@ -15,7 +15,7 @@ export function useQuery({ field, defaultValue = null, formatter = null, valueIs
   const reset = function () {
     const query = { ...route.query };
     delete query[field];
-    router.replace({ ...route, query });
+    router.push({ ...route, query });
   };
 
   const value = computed({
@@ -25,7 +25,7 @@ export function useQuery({ field, defaultValue = null, formatter = null, valueIs
     },
     set(value) {
       if (!field) {
-        router.replace({
+        router.push({
           ...route,
           query: { ...value },
         });
@@ -36,7 +36,7 @@ export function useQuery({ field, defaultValue = null, formatter = null, valueIs
         value = value?.toString();
         if (!value && !value?.length) return reset();
 
-        router.replace({
+        router.push({
           ...route,
           query: { ...route.query, [field]: value },
         });
