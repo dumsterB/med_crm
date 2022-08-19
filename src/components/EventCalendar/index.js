@@ -1,5 +1,6 @@
 import MonthCalendar from '@/components/EventCalendar/MonthCalendar/index.vue';
 import DayCalendar from '@/components/EventCalendar/DayCalendar/index.vue';
+import * as icons from '@/enums/icons.enum.js';
 import { EVENT_CALENDAR_TYPES } from '@/components/EventCalendar/index.enum';
 import { prevOrNextMonthByISOString } from '@/utils/dateAndTime.utils';
 
@@ -35,5 +36,6 @@ export default {
   setup: () => ({
     types: Object.keys(EVENT_CALENDAR_TYPES).map((key) => EVENT_CALENDAR_TYPES[key]),
     EVENT_CALENDAR_TYPES,
+    icons,
   }),
 };

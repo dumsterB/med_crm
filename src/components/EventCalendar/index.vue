@@ -2,7 +2,9 @@
   <div class="event-calendar">
     <div class="event-calendar__header event-calendar-header">
       <div class="event-calendar-header-picker">
-        <ElButton text class="event-calendar-header-picker__prev" @click="prevMonth">prev</ElButton>
+        <ElButton text class="event-calendar-header-picker__prev" @click="prevMonth">
+          <UiIcon :icon="icons.CHEVRON_LEFT" />
+        </ElButton>
 
         <label class="event-calendar-hidden-picker-label">
           <span class="event-calendar-hidden-picker-label__title">
@@ -14,7 +16,9 @@
             @update:model-value="$emit('update:date', $event)" />
         </label>
 
-        <ElButton text class="event-calendar-header-picker__next" @click="nextMonth">next</ElButton>
+        <ElButton text class="event-calendar-header-picker__next" @click="nextMonth">
+          <UiIcon :icon="icons.CHEVRON_RIGHT" />
+        </ElButton>
       </div>
 
       <div class="event-calendar-header-actions">
