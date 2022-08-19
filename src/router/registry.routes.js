@@ -3,9 +3,9 @@ import { onlyManagerMiddleware } from '@/middlewares/onlyManager.middleware';
 import { I18nService } from '@/services/i18n.service';
 import VDashboard from '@/views/registry/VDashboard/index.vue';
 import VPatients from '@/views/registry/VPatients/index.vue';
-import VAppointments from '@/views/registry/VAppointments/index.vue';
+import VAppointments from '@/views/appointments/VAppointments/index.vue';
 import VPatient from '@/views/registry/VPatient/index.vue';
-import VPatientRecord from '@/views/registry/VAppointment/index.vue';
+import VPatientRecord from '@/views/appointments/VAppointment/index.vue';
 
 export const REGISTRY_DASHBOARD_ROUTE = {
   name: 'REGISTRY_DASHBOARD',
@@ -38,7 +38,7 @@ export const REGISTRY_PATIENT_ROUTE = {
 };
 export const REGISTRY_APPOINTMENT_ROUTE = {
   name: 'REGISTRY_PATIENT_RECORD',
-  path: '/registry/patients/:patientId/records/:id',
+  path: '/appointments/:patientId/records/:id',
   component: VPatientRecord,
   beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
   meta: {
@@ -49,7 +49,7 @@ export const REGISTRY_APPOINTMENT_ROUTE = {
 
 export const REGISTRY_APPOINTMENTS_ROUTE = {
   name: 'REGISTRY_PATIENTS_RECORDS',
-  path: '/registry/appointments',
+  path: '/appointments',
   component: VAppointments,
   beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
   meta: {

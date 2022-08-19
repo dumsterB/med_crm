@@ -1,18 +1,10 @@
 <template>
   <div class="queues-table-wrapper">
     <ElScrollbar class="queues-table-wrapper__scrollbar">
-      <ElTable
-        :row-class-name="tableRowClassName"
-        class="queues-table"
-        ref="elTable"
-        :data="items"
-        v-loading="loading">
+      <ElTable class="queues-table" ref="elTable" :data="items" v-loading="loading">
         <template #empty>
           <div class="queues-table__empty queues-table-empty">
             <span>{{ $t('Base.NoData') }}</span>
-<!--            <ElButton type="primary">-->
-<!--              {{ $t('Base.NoData') }}-->
-<!--            </ElButton>-->
           </div>
         </template>
         <ElTableColumn prop="name" :label="$t('Base.FullName')">
@@ -49,8 +41,13 @@
         </ElTableColumn>
         <ElTableColumn prop="name" width="200" :label="$t('Base.Actions')">
           <template #default="{ row }">
-            <div v-if="row.status == status" class="queues-table-actions">
-              <ElButton type="primary" @click="progressReception">{{
+            <!--            <div v-if="row.status == status" class="queues-table-actions">-->
+            <!--              <ElButton type="primary" @click="progressReception">{{-->
+            <!--                $t('Base.CallToReception')-->
+            <!--              }}</ElButton>-->
+            <!--            </div>-->
+            <div class="queues-table-actions">
+              <ElButton type="primary" @click="callToReception(row)">{{
                 $t('Base.CallToReception')
               }}</ElButton>
             </div>
@@ -84,10 +81,8 @@ export default {
     },
   },
   methods: {
-    openQueue() {},
-    progressReception() {},
-    tableRowClassName(row, index) {
-      return console.log(row, index);
+    callToReception(value) {
+      console.log(JSON.parse(JSON.stringify(value)))
     },
   },
 };
