@@ -2,6 +2,7 @@
   "ru": {
     "Appointments": {
       "Appointments": "Записи",
+      "AppointmentsTc": "{n} записей | {n} запись | {n} записей",
       "CreateAppointment": "Создать запись",
       "PhonePatient": "Телефон пациента",
       "RecordingSource": "Источник записи",
@@ -28,6 +29,7 @@
   "uz": {
     "Appointments": {
       "Appointments": "??Записи??",
+      "AppointmentsTc": "??{n} записей | {n} запись | {n} записей??",
       "CreateAppointment": "Kirish yaratish",
       "PhonePatient": "Bemorning telefoni",
       "RecordingSource": "Yozib olish manbai",

@@ -3,6 +3,56 @@
     "DateAndTime": {
       "CreatedAt": "Создана",
       "EndAt": "Конец в",
+      "Months": {
+        "0": {
+          "Full": "Январь",
+          "Short": "Янв"
+        },
+        "1": {
+          "Full": "Февраль",
+          "Short": "Фев"
+        },
+        "2": {
+          "Full": "Март",
+          "Short": "Март"
+        },
+        "3": {
+          "Full": "Апрель",
+          "Short": "Апр"
+        },
+        "4": {
+          "Full": "Май",
+          "Short": "Май"
+        },
+        "5": {
+          "Full": "Июнь",
+          "Short": "Июнь"
+        },
+        "6": {
+          "Full": "Июль",
+          "Short": "Июль"
+        },
+        "7": {
+          "Full": "Август",
+          "Short": "Авг"
+        },
+        "8": {
+          "Full": "Сентябрь",
+          "Short": "Сен"
+        },
+        "9": {
+          "Full": "Октябрь",
+          "Short": "Окт"
+        },
+        "10": {
+          "Full": "Ноябрь",
+          "Short": "Нояб"
+        },
+        "11": {
+          "Full": "Декабрь",
+          "Short": "Дек"
+        }
+      },
       "SelectDate": "Выберите дату",
       "StartAt": "Начало в",
       "Time": "Время"
@@ -12,6 +62,56 @@
     "DateAndTime": {
       "CreatedAt": "Yaratilgan",
       "EndAt": "Tugashi",
+      "Months": {
+        "0": {
+          "Full": "Yanvar",
+          "Short": "Yan"
+        },
+        "1": {
+          "Full": "Fevral",
+          "Short": "Fev"
+        },
+        "2": {
+          "Full": "Mart",
+          "Short": "Mart"
+        },
+        "3": {
+          "Full": "Aprel",
+          "Short": "Apr"
+        },
+        "4": {
+          "Full": "May",
+          "Short": "May"
+        },
+        "5": {
+          "Full": "Iyun",
+          "Short": "Iyun"
+        },
+        "6": {
+          "Full": "Iyul",
+          "Short": "Iyul"
+        },
+        "7": {
+          "Full": "Avgust",
+          "Short": "Avg"
+        },
+        "8": {
+          "Full": "Sentabr",
+          "Short": "Sen"
+        },
+        "9": {
+          "Full": "Oktyabr",
+          "Short": "Okt"
+        },
+        "10": {
+          "Full": "Noyabr",
+          "Short": "Noy"
+        },
+        "11": {
+          "Full": "Dekaber",
+          "Short": "Dek"
+        }
+      },
       "SelectDate": "Sanani tanlang",
       "StartAt": "Boshlanish",
       "Time": "Vaqt"

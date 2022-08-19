@@ -38,6 +38,7 @@ function _redirectCurrentPageByUserRole(to, from, next) {
     case User.enum.roles.Manager:
       return next(REGISTRY_DASHBOARD_ROUTE.path);
     case User.enum.roles.Doctor:
-      return next(REGISTRY_PATIENTS_ROUTE.path);
+      return next('/404');
+    // return next(REGISTRY_PATIENTS_ROUTE.path);
   }
 }

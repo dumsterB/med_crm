@@ -1,0 +1,10 @@
+.ec-day-calendar {
+  display: flex;
+  flex-direction: column;
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+}
