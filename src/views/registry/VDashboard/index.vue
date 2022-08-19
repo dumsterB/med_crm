@@ -95,7 +95,7 @@ export default {
       this.dataForMonth = {};
       Object.keys(data.data).forEach((date) => {
         this.dataForMonth[dateAppFormatToISOString(date).split('T')[0]] = [
-          { title: `${data.data[date].count} records` },
+          { title: this.$tc('Appointments.AppointmentsTc', data.data[date].count) },
         ];
       });
     },
@@ -120,6 +120,7 @@ export default {
     type: useQuery({
       field: 'calendar_type',
       defaultValue: EVENT_CALENDAR_TYPES.MONTH,
+      routerPush: true,
     }),
     date: useQuery({
       field: 'calendar_date',
