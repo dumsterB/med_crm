@@ -1,14 +1,33 @@
 <template>
   <div class="ec-month-calendar">
-    <ElCalendar v-model="dateModel" ref="calendar"></ElCalendar>
+    <ElCalendar v-model="dateModel" ref="calendar">
+      <template #dateCell="payload">
+        <slot name="dateCell" :payload="payload" :day="getDay(payload.data.day)">
+          <div class="ec-month-calendar-cell">
+            <div class="ec-month-calendar-cell__day">
+              {{ getDay(payload.data.day) }}
+            </div>
+
+            <EventCalendarEvent
+              v-for="(item, index) in data[payload.data.day]"
+              :key="item.id || index"
+              :data="item" />
+          </div>
+        </slot>
+      </template>
+    </ElCalendar>
   </div>
 </template>
 
 <script>
+import EventCalendarEvent from '@/components/EventCalendar/Event/index.vue';
+
 export default {
   name: 'EventCalendarMonthCalendar',
+  components: { EventCalendarEvent },
   props: {
-    date: String, // ISO format
+    date: String, // ISO format,
+    data: Object, // key = yyyy-mm-dd
   },
   computed: {
     dateModel: {
@@ -18,6 +37,12 @@ export default {
       set(value) {
         this.$emit('update:date', value.toISOString());
       },
+    },
+  },
+
+  methods: {
+    getDay(date) {
+      return +date.split('-')[2];
     },
   },
 };

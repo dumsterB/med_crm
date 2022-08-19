@@ -16,4 +16,18 @@
       }
     }
   }
+
+  &-cell {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 8px;
+
+    &__day {
+      margin-bottom: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+  }
 }
