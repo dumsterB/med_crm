@@ -6,31 +6,6 @@
           <UiIcon class="v-doctors-queue-content-header__icon" :icon="$options.icons.BACK_ARROW" />
           {{ $t('Base.Back') }}
         </ElButton>
-        <div class="v-doctors-queue-content-header__name">
-          <p>Сардорбек Максудов</p>
-        </div>
-
-        <!--        <ElSelect
-          v-model="value"
-          :placeholder="$t('Appointments.SelectDoctor')"
-          size="large">
-          <ElOption
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value" />
-        </ElSelect>
-
-        <ElSelect
-          v-model="value"
-          :placeholder="$t('Appointments.SelectStatus')"
-          size="large">
-          <ElOption
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value" />
-        </ElSelect>-->
       </div>
     </div>
     <QueueTable class="v-doctors-queue-content__table" :items="queues" :loading="loading">

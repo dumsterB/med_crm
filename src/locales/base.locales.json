@@ -36,7 +36,8 @@
       "SelectDate": "Выберите дату",
       "Service": "Услуга",
       "SignUp": "Регистрация",
-      "Sum": "сум"
+      "Sum": "сум",
+      "CallToReception": "Вызвать на прием"
     }
   },
   "uz": {
@@ -74,7 +75,8 @@
       "SelectDate": "Sanani tanlang",
       "Service": "Xizmat",
       "SignUp": "Ro'yxatdan o'tish",
-      "Sum": "som"
+      "Sum": "som",
+      "CallToReception": "Uchrashuvga qo'ng'iroq qiling"
     }
   }
 }

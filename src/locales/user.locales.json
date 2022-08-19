@@ -10,7 +10,8 @@
       "Gender": "Пол",
       "Genders": {
         "man": "Мужчина",
-        "woman": "Женщина"
+        "woman": "Женщина",
+        "null": ""
       },
       "IsChildren": "Ребёнок",
       "Parent": "Родитель",
@@ -27,7 +28,8 @@
       "Gender": "Jinsi",
       "Genders": {
         "man": "Erkak",
-        "woman": "Ayol"
+        "woman": "Ayol",
+        "null": ""
       },
       "IsChildren": "Yosh bola",
       "Parent": "Otonasi",
