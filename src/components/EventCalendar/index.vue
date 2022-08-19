@@ -6,7 +6,7 @@
 
         <label class="event-calendar-hidden-picker-label">
           <span class="event-calendar-hidden-picker-label__title">
-            {{ $t(`DateAndTime.Months.${month}`) }}
+            {{ $t(`DateAndTime.Months.${month}.Full`) }}
           </span>
           <ElDatePicker
             :model-value="date"
