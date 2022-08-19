@@ -63,7 +63,7 @@ export default {
       return {
         type: this.type.value,
         date: this.date.value,
-        doctorId: this.doctorId,
+        doctorId: this.doctorId.value,
       };
     },
   },
@@ -105,8 +105,8 @@ export default {
     async getDefaultDoctor() {
       this.loading.doctor = true;
 
-      // const { data } = await Doctor.findOneById(this.doctorId);
-      // this.doctor = data.data;
+      const { data } = await Doctor.findOneById(this.doctorId.value);
+      this.doctor = data.data;
 
       this.loading.doctor = false;
     },
