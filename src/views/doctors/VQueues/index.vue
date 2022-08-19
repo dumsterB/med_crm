@@ -2,7 +2,7 @@
   <LayoutDoctors>
     <div class="v-doctors-queue-content__header v-doctors-queue-content-header">
       <div class="v-doctors-queue-content-header__actions">
-        <ElButton type="primary" @click="createAppointment">
+        <ElButton type="primary">
           <UiIcon class="v-doctors-queue-content-header__icon" :icon="$options.icons.BACK_ARROW" />
           {{ $t('Base.Back') }}
         </ElButton>

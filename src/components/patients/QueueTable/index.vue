@@ -61,6 +61,8 @@
 <script>
 import * as icons from '@/enums/icons.enum.js';
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
+import { REGISTRY_APPOINTMENT_ROUTE } from '@/router/registry.routes';
+import { Appointment } from '@/models/Appointment.model';
 
 export default {
   name: 'QueueTable',
@@ -81,8 +83,21 @@ export default {
     },
   },
   methods: {
-    callToReception(value) {
-      console.log(JSON.parse(JSON.stringify(value)))
+    async callToReception(payload) {
+      const { data } = await Appointment.updateStatus({
+        id: payload.id,
+        status: Appointment.enum.statuses.Approved
+      });
+
+      this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
+
+      this.$router.push({
+        name: REGISTRY_APPOINTMENT_ROUTE.name,
+        params: {
+          patientId: payload.patient_id,
+          id: payload.id,
+        },
+      });
     },
   },
 };

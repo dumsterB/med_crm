@@ -69,6 +69,18 @@ export class Appointment extends CRUDModel {
   }
 
   /**
+   * @param {string,number} id
+   * @param {string} status
+   * @return {Promise<{data: response.data, response: AxiosResponse<*>}>}
+   */
+  static async updateStatus({ id, status }) {
+    const response = await ApiService.put(`${this.tableName}/${id}/${status}`);
+    return {
+      response: response,
+      data: response.data,
+    };
+  }
+  /**
    * @param {string} date format - DD.MM.YY hh:mm
    * @return {Date|string}
    */
