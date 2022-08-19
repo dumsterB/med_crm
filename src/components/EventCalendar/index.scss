@@ -6,6 +6,10 @@
   background-color: var(--bg-color);
   height: 100%;
 
+  &__type-select {
+    width: 10em;
+  }
+
   &-header {
     display: flex;
     justify-content: space-between;

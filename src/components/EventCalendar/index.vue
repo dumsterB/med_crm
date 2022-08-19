@@ -23,7 +23,10 @@
 
       <div class="event-calendar-header-actions">
         <slot name="actions"></slot>
-        <ElSelect :model-value="type" @update:model-value="$emit('update:type', $event)">
+        <ElSelect
+          class="event-calendar__type-select"
+          :model-value="type"
+          @update:model-value="$emit('update:type', $event)">
           <ElOption v-for="type in types" :key="type" :label="$t(`Types.${type}`)" :value="type" />
         </ElSelect>
       </div>
