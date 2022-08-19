@@ -1,7 +1,6 @@
 .event-calendar {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   width: 100%;
   padding: 20px;
   background-color: var(--bg-color);
@@ -25,7 +24,12 @@
   }
 
   &__content {
+    display: flex;
     flex: 1;
+
+    & > * {
+      height: 100%;
+    }
   }
 
   &-hidden-picker-label {
