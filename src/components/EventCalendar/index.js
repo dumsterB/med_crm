@@ -12,7 +12,7 @@ export default {
     loading: Boolean,
     type: {
       type: String,
-      default: 'month',
+      default: EVENT_CALENDAR_TYPES.MONTH,
       validator: (val) => [EVENT_CALENDAR_TYPES.MONTH, EVENT_CALENDAR_TYPES.DAY].includes(val),
     },
     date: String, // ISO format
@@ -36,6 +36,10 @@ export default {
     },
     nextMonth() {
       this.$emit('update:date', prevOrNextMonthByISOString(this.date, { type: 'next' }));
+    },
+    setDayTypeAndDate(date) {
+      this.$emit('update:type', EVENT_CALENDAR_TYPES.DAY);
+      setTimeout(() => this.$emit('update:date', date));
     },
   },
 

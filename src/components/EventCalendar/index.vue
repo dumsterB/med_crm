@@ -34,7 +34,7 @@
         v-if="type === EVENT_CALENDAR_TYPES.MONTH"
         :date="date"
         :data="monthData"
-        @update:date="$emit('update:date', $event)" />
+        @update:date="setDayTypeAndDate" />
       <DayCalendar v-if="type === EVENT_CALENDAR_TYPES.DAY" />
     </div>
   </div>
