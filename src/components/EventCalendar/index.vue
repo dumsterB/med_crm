@@ -24,7 +24,7 @@
       <div class="event-calendar-header-actions">
         <slot name="actions"></slot>
         <ElSelect :model-value="type" @update:model-value="$emit('update:type', $event)">
-          <ElOption v-for="type in types" :key="type" :title="type" :value="type" />
+          <ElOption v-for="type in types" :key="type" :label="$t(`Types.${type}`)" :value="type" />
         </ElSelect>
       </div>
     </div>
@@ -43,3 +43,4 @@
 <script src="./index.js"></script>
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/dateAndTime.locales.json" />
+<i18n src="./index.locales.json" />
