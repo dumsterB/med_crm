@@ -79,6 +79,21 @@ export function resetDaysInISOString(date) {
 }
 
 /**
+ * @example 2022-09-30T00:00:00.000Z  ->  2022-08-30T00:00:00.000Z || 2022-10-30T00:00:00.000Z
+ * @param {string} date ISO format
+ * @param {object} [payload]
+ * @param {"next"|"prev"} payload.type = "next"
+ * @return {string}
+ */
+export function prevOrNextMonthByISOString(date, payload = { type: 'next' }) {
+  return date.replace(/(\d\d\d\d)-(\d\d)-(\d\d)T/gm, (val, year, month, days) => {
+    const newMonth = _addZeroPrefix(payload.type === 'next' ? +month + 1 : +month - 1);
+
+    return `${year}-${newMonth}-${days}T`;
+  });
+}
+
+/**
  * Добавляет ноль если длина строки или число имеет один символов
  * @param {string|number} value
  * @return {string|number}
