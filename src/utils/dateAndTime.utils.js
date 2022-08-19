@@ -22,6 +22,19 @@ export function ISOStringToDateAppFormat(date, options) {
 }
 
 /**
+ * @param {string} date DD.MM.YY hh:mm | DD.MM.YYYY hh:mm
+ * @return {string} ISO
+ */
+export function dateAppFormatToISOString(date) {
+  const [onlyDate, onlyTime] = date.split(' ');
+  let [hours, minutes] = onlyTime?.split(':') || [0, 0];
+  let [day, month, year] = onlyDate.split('.');
+  year = year.length === 2 ? `20${year}` : year;
+
+  return new Date(+year, +month - 1, +day, +hours, +minutes).toISOString();
+}
+
+/**
  * @param {string} date format - DD.MM.YY hh:mm
  */
 export function excludeDate(date) {
