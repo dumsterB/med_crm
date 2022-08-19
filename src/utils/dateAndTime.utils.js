@@ -48,16 +48,14 @@ export function getCurrentMinutes() {
 }
 
 /**
- * @param {string|number} [year]
- * @param {string|number} [month] counting starts from 0
+ * @param {string} date ISO format
  * @return {number}
  */
-export function getDaysInMonth({ year, month }) {
-  let currentYear = year || new Date().getFullYear();
-  let fullYear = currentYear.toString().length === 2 ? `20${currentYear}` : currentYear;
-  let currentMonth = month || new Date().getMonth();
+export function getDaysInMonth(date) {
+  const year = date.match(/^\d\d\d\d/)[0];
+  const month = date.match(/^(\d\d\d\d)-(\d\d)/)[2] - 1;
 
-  return 33 - new Date(+fullYear, +currentMonth, 33).getDate();
+  return 33 - new Date(+year, +month, 33).getDate();
 }
 
 /**
