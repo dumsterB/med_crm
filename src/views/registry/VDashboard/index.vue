@@ -21,14 +21,15 @@ import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import EventCalendar from '@/components/EventCalendar/index.vue';
 import { EVENT_CALENDAR_TYPES } from '@/components/EventCalendar/index.enum';
 import { useQuery } from '@/hooks/useQuery.hook';
-import { Doctor } from '@/models/Doctor.model';
-import { Appointment } from '@/models/Appointment.model';
 import {
   ISOStringToDateAppFormat,
   getDaysInMonth,
   resetDaysInISOString,
   dateAppFormatToISOString,
 } from '@/utils/dateAndTime.utils';
+import { Doctor } from '@/models/Doctor.model';
+import { Appointment } from '@/models/Appointment.model';
+import { I18nService } from '@/services/i18n.service';
 
 export default {
   name: 'VDashboard',
@@ -85,6 +86,7 @@ export default {
   },
 
   methods: {
+    // использую I18nService - почему-то при переходе на другую страницу watcher всё равно отрабатывает до демонтирования компонента
     async getDataForMonthType() {
       const { data } = await Appointment.getStatistic({
         startAt: ISOStringToDateAppFormat(this.startAt, { withTime: false, fullYear: false }),
@@ -95,7 +97,7 @@ export default {
       this.dataForMonth = {};
       Object.keys(data.data).forEach((date) => {
         this.dataForMonth[dateAppFormatToISOString(date).split('T')[0]] = [
-          { title: this.$tc('Appointments.AppointmentsTc', data.data[date].count) },
+          { title: I18nService.tc('Appointments.AppointmentsTc', data.data[date].count) },
         ];
       });
     },
