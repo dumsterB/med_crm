@@ -47,8 +47,6 @@
 import { mapState, mapActions } from 'vuex';
 import { usePage, usePerPage, useSearch } from '@/hooks/query';
 import { Appointment } from '@/models/Appointment.model.js';
-import { APPOINTMENTS_ROUTE } from '@/router/registry.routes';
-
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';

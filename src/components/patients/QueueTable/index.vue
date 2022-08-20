@@ -61,7 +61,7 @@
 <script>
 import * as icons from '@/enums/icons.enum.js';
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
-import { APPOINTMENT_ROUTE } from '@/router/registry.routes';
+import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import { Appointment } from '@/models/Appointment.model';
 
 export default {
@@ -94,7 +94,6 @@ export default {
       this.$router.push({
         name: APPOINTMENT_ROUTE.name,
         params: {
-          patientId: payload.patient_id,
           id: payload.id,
         },
       });

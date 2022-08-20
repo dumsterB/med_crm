@@ -11,11 +11,8 @@
 
 <script>
 import * as icons from '@/enums/icons.enum.js';
-import {
-  REGISTRY_DASHBOARD_ROUTE,
-  REGISTRY_PATIENTS_ROUTE,
-  APPOINTMENTS_ROUTE,
-} from '@/router/registry.routes';
+import { REGISTRY_DASHBOARD_ROUTE, REGISTRY_PATIENTS_ROUTE } from '@/router/registry.routes';
+import { APPOINTMENTS_ROUTE } from '@/router/appointments.routes';
 import DefaultMenu from '@/components/DefaultMenu/index.vue';
 
 export default {

@@ -1,6 +1,6 @@
 import { markRaw } from 'vue';
 import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
-import { APPOINTMENT_ROUTE } from '@/router/registry.routes';
+import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import { Appointment } from '@/models/Appointment.model';
 import { User } from '@/models/User.model';
 import { Patient } from '@/models/Patient.model';
@@ -200,7 +200,6 @@ export default {
       this.$router.push({
         name: APPOINTMENT_ROUTE.name,
         params: {
-          patientId: data.data.patient_id,
           id: data.data.id,
         },
       });
@@ -220,7 +219,6 @@ export default {
       this.$router.push({
         name: APPOINTMENT_ROUTE.name,
         params: {
-          patientId: data.data.patient_id,
           id: data.data.id,
         },
       });

@@ -29,7 +29,7 @@
 import * as icons from '@/enums/icons.enum';
 import { Appointment } from '@/models/Appointment.model';
 import { PriceService } from '@/services/price.service';
-import { APPOINTMENT_ROUTE } from '@/router/registry.routes';
+import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 
 export default {
   name: 'VPatientAppointmentCard',

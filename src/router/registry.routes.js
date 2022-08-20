@@ -3,9 +3,7 @@ import { onlyManagerMiddleware } from '@/middlewares/onlyManager.middleware';
 import { I18nService } from '@/services/i18n.service';
 import VDashboard from '@/views/registry/VDashboard/index.vue';
 import VPatients from '@/views/registry/VPatients/index.vue';
-import VAppointments from '@/views/appointments/VAppointments/index.vue';
 import VPatient from '@/views/registry/VPatient/index.vue';
-import VPatientRecord from '@/views/appointments/VAppointment/index.vue';
 
 export const REGISTRY_DASHBOARD_ROUTE = {
   name: 'REGISTRY_DASHBOARD',
@@ -36,31 +34,5 @@ export const REGISTRY_PATIENT_ROUTE = {
   },
   props: true,
 };
-export const APPOINTMENT_ROUTE = {
-  name: 'APPOINTMENT_ROUTE',
-  path: '/appointments/:id',
-  component: VPatientRecord,
-  beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
-  meta: {
-    title: I18nService.t('Base.PatientRecord'),
-  },
-  props: true,
-};
 
-export const APPOINTMENTS_ROUTE = {
-  name: 'APPOINTMENTS_ROUTE',
-  path: '/appointments',
-  component: VAppointments,
-  beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
-  meta: {
-    title: I18nService.t('Base.PatientsRecords'),
-  },
-};
-
-export const routes = [
-  REGISTRY_DASHBOARD_ROUTE,
-  REGISTRY_PATIENTS_ROUTE,
-  REGISTRY_PATIENT_ROUTE,
-  APPOINTMENT_ROUTE,
-  APPOINTMENTS_ROUTE,
-];
+export const routes = [REGISTRY_DASHBOARD_ROUTE, REGISTRY_PATIENTS_ROUTE, REGISTRY_PATIENT_ROUTE];

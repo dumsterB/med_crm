@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { APPOINTMENT_ROUTE } from '@/router/registry.routes';
+import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
 import { Appointment } from '@/models/Appointment.model';
@@ -94,7 +94,7 @@ export default {
     goToAppointment(payload) {
       this.$router.push({
         name: APPOINTMENT_ROUTE.name,
-        params: { patientId: payload.patient_id, id: payload.id },
+        params: { id: payload.id },
       });
     },
     addAppointment() {

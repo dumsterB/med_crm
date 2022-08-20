@@ -6,6 +6,7 @@ import {
   REGISTRY_PATIENTS_ROUTE,
 } from './registry.routes';
 import { DOCTORS_QUEUE_ROUTE, routes as doctorsRoutes } from './doctors.routes';
+import { routes as appointmentsRoutes } from './appointments.routes';
 import { onlyLoggedInMiddleware } from '@/middlewares/onlyLoggedIn.middleware';
 import { Store } from '@/store';
 import { User } from '@/models/User.model';
@@ -22,6 +23,7 @@ const router = createRouter({
     ...authRoutes,
     ...registryRoutes,
     ...doctorsRoutes,
+    ...appointmentsRoutes,
   ],
   scrollBehavior(to, from, savedPosition) {
     return { top: 0, behavior: 'smooth' };
