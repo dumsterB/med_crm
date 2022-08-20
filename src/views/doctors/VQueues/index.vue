@@ -1,50 +1,39 @@
 <template>
-  <LayoutDoctors>
-    <div class="v-doctors-queue-content__header v-doctors-queue-content-header">
-      <div class="v-doctors-queue-content-header__actions">
-        <ElButton type="primary">
-          <UiIcon class="v-doctors-queue-content-header__icon" :icon="$options.icons.BACK_ARROW" />
-          {{ $t('Base.Back') }}
-        </ElButton>
-      </div>
-    </div>
-    <QueueTable class="v-doctors-queue-content__table" :items="queues" :loading="loading">
-    </QueueTable>
+  <LayoutDoctors fixHeight>
+    <QueueTable class="v-doctors-queue-content__table" :items="queues" :loading="loading" />
   </LayoutDoctors>
 </template>
+
 <script>
+import { mapState } from 'vuex';
 import LayoutDoctors from '@/components/layouts/layoutDoctor/index.vue';
 import QueueTable from '@/components/patients/QueueTable/index.vue';
 import * as icons from '@/enums/icons.enum.js';
 import { Appointment } from '@/models/Appointment.model';
-import { mapState } from 'vuex';
 
 export default {
   name: 'DoctorsQueue',
   icons: icons,
+  components: { LayoutDoctors, QueueTable },
   props: {
     id: [Number, String],
   },
-  components: {
-    LayoutDoctors,
-    QueueTable,
-  },
   data() {
     return {
-      queues: null,
+      queues: [],
       loading: false,
     };
   },
   watch: {
     id: {
       handler() {
-        this.getQueus();
+        this.getQueues();
       },
       immediate: true,
     },
   },
   methods: {
-    async getQueus() {
+    async getQueues() {
       this.loading = true;
 
       const { data } = await Appointment.findByDoctor({ doctorId: this.user.doctor_id });

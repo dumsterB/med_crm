@@ -1,5 +1,7 @@
 import { CRUDModel } from '@/models/CRUD.model';
 import { ApiService } from '@/services/api.service';
+import { mergeOrCreateQuery } from '@/utils/http.util';
+import { deleteEmptyValueKeys } from '@/utils/object.util';
 
 /**
  * @class Appointment
@@ -57,6 +59,17 @@ export class Appointment extends CRUDModel {
     return super.create(payload, {
       url: !payload.service_id ? `${this.tableName}/create/byGroup` : null,
     });
+  }
+
+  static async getStatistic({ startAt, endAt, doctorsId }) {
+    const response = await ApiService.get(
+      mergeOrCreateQuery({
+        url: `/${this.tableName}/month`,
+        query: deleteEmptyValueKeys({ start_at: startAt, end_at: endAt, doctors_id: doctorsId }),
+      })
+    );
+
+    return { response, data: response.data };
   }
 
   /**

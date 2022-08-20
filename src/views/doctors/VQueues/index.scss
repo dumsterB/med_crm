@@ -2,41 +2,10 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  overflow-y: auto;
-
-  &-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    gap: 10px;
-
-    &__actions {
-      display: flex;
-      gap: 10px;
-    }
-    &__icon{
-      .ui-icon__content {
-        width: 0.7em;
-        height: 0.7em;
-        margin-top: 1px;
-        margin-right: 5px;
-      }
-    }
-    &__name{
-      margin: auto;
-      color: #404040;
-      font-weight: 500;
-      font-size: 18px;
-      line-height: 24px;
-    }
-  }
 
   &__table {
-    height: 400px;
     flex-direction: column;
+    height: 100%;
     gap: 20px;
-    margin-top: 20px;
-    overflow-y: auto;
   }
 }
