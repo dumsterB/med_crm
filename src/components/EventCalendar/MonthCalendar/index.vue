@@ -14,7 +14,7 @@
               class="ec-month-calendar-cell__event"
               v-for="(item, index) in data[payload.data.day]"
               :key="item.id || index"
-              :data="item" />
+              :event="item" />
           </div>
         </slot>
       </template>
