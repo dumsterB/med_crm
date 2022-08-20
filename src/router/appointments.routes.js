@@ -6,7 +6,7 @@ export const APPOINTMENT_ROUTE = {
   name: 'APPOINTMENT_ROUTE',
   path: '/appointments/:id',
   component: 'VAppointment',
-  beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
+  beforeEnter: [onlyLoggedInMiddleware],
   meta: {
     title: I18nService.t('Base.PatientRecord'),
   },

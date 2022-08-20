@@ -93,6 +93,7 @@ export class Appointment extends CRUDModel {
       data: response.data,
     };
   }
+
   /**
    * @param {string} date format - DD.MM.YY hh:mm
    * @return {Date|string}
@@ -116,11 +117,11 @@ export class Appointment extends CRUDModel {
     },
     statuses: {
       Created: 'created',
-      Approved: 'approved',
+      Approved: 'approve',
       Waiting: 'waiting',
       InProgress: 'in_progress',
       Provided: 'provided',
-      Canceled: 'canceled',
+      Canceled: 'cancel',
     },
   };
 }
