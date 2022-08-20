@@ -5,14 +5,12 @@
 </template>
 
 <script>
+import { EventCalendarEvent } from '@/components/EventCalendar/Event/EventCalendarEvent.model';
+
 export default {
   name: 'EventCalendarEvent',
   props: {
-    /**
-     * @property {object} data
-     * @property {string} data.title
-     */
-    data: Object,
+    event: [EventCalendarEvent, Object],
   },
 };
 </script>
