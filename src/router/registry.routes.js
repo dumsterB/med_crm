@@ -36,9 +36,9 @@ export const REGISTRY_PATIENT_ROUTE = {
   },
   props: true,
 };
-export const REGISTRY_APPOINTMENT_ROUTE = {
-  name: 'REGISTRY_PATIENT_RECORD',
-  path: '/appointments/:patientId/records/:id',
+export const APPOINTMENT_ROUTE = {
+  name: 'APPOINTMENT_ROUTE',
+  path: '/appointments/:id',
   component: VPatientRecord,
   beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
   meta: {
@@ -47,8 +47,8 @@ export const REGISTRY_APPOINTMENT_ROUTE = {
   props: true,
 };
 
-export const REGISTRY_APPOINTMENTS_ROUTE = {
-  name: 'REGISTRY_PATIENTS_RECORDS',
+export const APPOINTMENTS_ROUTE = {
+  name: 'APPOINTMENTS_ROUTE',
   path: '/appointments',
   component: VAppointments,
   beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
@@ -61,6 +61,6 @@ export const routes = [
   REGISTRY_DASHBOARD_ROUTE,
   REGISTRY_PATIENTS_ROUTE,
   REGISTRY_PATIENT_ROUTE,
-  REGISTRY_APPOINTMENT_ROUTE,
-  REGISTRY_APPOINTMENTS_ROUTE,
+  APPOINTMENT_ROUTE,
+  APPOINTMENTS_ROUTE,
 ];

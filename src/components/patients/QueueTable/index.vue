@@ -61,7 +61,7 @@
 <script>
 import * as icons from '@/enums/icons.enum.js';
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
-import { REGISTRY_APPOINTMENT_ROUTE } from '@/router/registry.routes';
+import { APPOINTMENT_ROUTE } from '@/router/registry.routes';
 import { Appointment } from '@/models/Appointment.model';
 
 export default {
@@ -92,7 +92,7 @@ export default {
       this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
 
       this.$router.push({
-        name: REGISTRY_APPOINTMENT_ROUTE.name,
+        name: APPOINTMENT_ROUTE.name,
         params: {
           patientId: payload.patient_id,
           id: payload.id,

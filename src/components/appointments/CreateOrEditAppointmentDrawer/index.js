@@ -1,6 +1,6 @@
 import { markRaw } from 'vue';
 import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
-import { REGISTRY_APPOINTMENT_ROUTE } from '@/router/registry.routes';
+import { APPOINTMENT_ROUTE } from '@/router/registry.routes';
 import { Appointment } from '@/models/Appointment.model';
 import { User } from '@/models/User.model';
 import { Patient } from '@/models/Patient.model';
@@ -198,7 +198,7 @@ export default {
         new GlobalDrawerAction({ name: 'created', data: { appointment: data.data } })
       );
       this.$router.push({
-        name: REGISTRY_APPOINTMENT_ROUTE.name,
+        name: APPOINTMENT_ROUTE.name,
         params: {
           patientId: data.data.patient_id,
           id: data.data.id,
@@ -218,7 +218,7 @@ export default {
         new GlobalDrawerAction({ name: 'edited', data: { appointment: data.data } })
       );
       this.$router.push({
-        name: REGISTRY_APPOINTMENT_ROUTE.name,
+        name: APPOINTMENT_ROUTE.name,
         params: {
           patientId: data.data.patient_id,
           id: data.data.id,

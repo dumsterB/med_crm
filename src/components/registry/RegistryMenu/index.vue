@@ -14,7 +14,7 @@ import * as icons from '@/enums/icons.enum.js';
 import {
   REGISTRY_DASHBOARD_ROUTE,
   REGISTRY_PATIENTS_ROUTE,
-  REGISTRY_APPOINTMENTS_ROUTE,
+  APPOINTMENTS_ROUTE,
 } from '@/router/registry.routes';
 import DefaultMenu from '@/components/DefaultMenu/index.vue';
 
@@ -23,7 +23,7 @@ export default {
   components: { DefaultMenu },
   computed: {
     navigation() {
-      return [REGISTRY_DASHBOARD_ROUTE, REGISTRY_PATIENTS_ROUTE, REGISTRY_APPOINTMENTS_ROUTE].map(
+      return [REGISTRY_DASHBOARD_ROUTE, REGISTRY_PATIENTS_ROUTE, APPOINTMENTS_ROUTE].map(
         (route) => ({
           ...route,
           title: this.routesOptionsByRouteName[route.name].text,
@@ -42,7 +42,7 @@ export default {
           icon: icons.USER_TAG,
           text: this.$t('Base.Patients'),
         },
-        [REGISTRY_APPOINTMENTS_ROUTE.name]: {
+        [APPOINTMENTS_ROUTE.name]: {
           icon: icons.NOTE,
           text: this.$t('Base.PatientsRecords'),
         },
