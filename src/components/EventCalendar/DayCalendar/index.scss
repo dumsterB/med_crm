@@ -1,10 +1,16 @@
 .ec-day-calendar {
   display: flex;
   flex-direction: column;
+  width: 100%;
 
   &-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     gap: 20px;
+  }
+
+  &__current-day {
+    font-weight: bold;
   }
 }
