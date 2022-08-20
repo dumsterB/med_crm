@@ -12,7 +12,7 @@ import * as icons from '@/enums/icons.enum.js';
 import { Appointment } from '@/models/Appointment.model';
 
 export default {
-  name: 'DoctorsQueue',
+  name: 'VQueues',
   icons: icons,
   components: { LayoutDoctors, QueueTable },
   props: {

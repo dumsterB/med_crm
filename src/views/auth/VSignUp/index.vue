@@ -4,6 +4,6 @@
 
 <script>
 export default {
-  name: 'V_SignUp',
+  name: 'VSignUp',
 };
 </script>
