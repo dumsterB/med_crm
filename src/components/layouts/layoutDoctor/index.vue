@@ -20,7 +20,7 @@ import DoctorsMenu from '@/components/doctors/DoctorsMenu/index.vue';
 import LayoutDefault from '@/components/layouts/LayoutDefault/index.vue';
 
 export default {
-  name: 'LayoutRegistry',
+  name: 'LayoutDoctor',
   components: { LayoutDefault, DoctorsHeader, DoctorsMenu },
 };
 </script>

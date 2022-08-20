@@ -28,8 +28,7 @@
       "Gender": "Jinsi",
       "Genders": {
         "man": "Erkak",
-        "woman": "Ayol",
-        "null": ""
+        "woman": "Ayol"
       },
       "IsChildren": "Yosh bola",
       "Parent": "Otonasi",

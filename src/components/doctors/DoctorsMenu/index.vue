@@ -14,6 +14,7 @@
 import * as icons from '@/enums/icons.enum.js';
 import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
 import DefaultMenu from '@/components/DefaultMenu/index.vue';
+
 export default {
   name: 'DoctorsMenu',
   components: { DefaultMenu },
