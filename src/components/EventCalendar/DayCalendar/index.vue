@@ -33,11 +33,8 @@ export default {
       const date = new Date(this.date);
       const day = date.getDate().toString();
       const dayWeek = date.getDay().toString();
-      const month = date.getMonth().toString();
 
-      return `${day} ${this.$t(`DateAndTime.Months.${month}.Full`)}, ${this.$t(
-        `DateAndTime.Days.${dayWeek}.Full`
-      )}`;
+      return `${day},  ${this.$t(`DateAndTime.Days.${dayWeek}.Full`)}`;
     },
   },
 

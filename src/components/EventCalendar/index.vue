@@ -1,5 +1,5 @@
 <template>
-  <div class="event-calendar">
+  <div :class="['event-calendar', `event-calendar_${type}`]">
     <div class="event-calendar__header event-calendar-header">
       <div class="event-calendar-header-picker">
         <ElButton text class="event-calendar-header-picker__prev" @click="prevMonth">
@@ -38,7 +38,7 @@
         :date="date"
         :data="monthData"
         @update:date="setDayTypeAndDate" />
-      <DayCalendar v-if="type === EVENT_CALENDAR_TYPES.DAY" />
+      <DayCalendar v-if="type === EVENT_CALENDAR_TYPES.DAY" v-model:date="date" />
     </div>
   </div>
 </template>
