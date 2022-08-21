@@ -150,24 +150,21 @@ export default {
     },
     async updateStatus(status) {
       try {
-        const response = await Appointment.updateStatus({
+        const { data } = await Appointment.updateStatus({
           id: this.data.id,
           status: status,
         });
-        console.log(response);
-        this.data.status = response.data.data.status;
+        this.$emit('update:data', data.data);
 
         this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
-        console.log(status);
         if (
-          status != Appointment.enum.statuses.Waiting &&
-          status != Appointment.enum.statuses.InProgress
+          status !== Appointment.enum.statuses.Waiting &&
+          status !== Appointment.enum.statuses.InProgress &&
+          this.user.role === User.enum.roles.Doctor
         ) {
           this.$router.push({
             name: DOCTORS_QUEUE_ROUTE.name,
           });
-        } else {
-          return true;
         }
       } catch (err) {
         console.log(err);
