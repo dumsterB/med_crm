@@ -26,12 +26,19 @@ export function ISOStringToDateAppFormat(date, options) {
  * @return {string} ISO
  */
 export function dateAppFormatToISOString(date) {
+  // TODO доработать работу с таймзонами
   const [onlyDate, onlyTime] = date.split(' ');
   let [hours, minutes] = onlyTime?.split(':') || [0, 0];
   let [day, month, year] = onlyDate.split('.');
   year = year.length === 2 ? `20${year}` : year;
 
-  return new Date(+year, +month - 1, +day, +hours, +minutes).toISOString();
+  return new Date(
+    +year,
+    +month - 1,
+    +day,
+    +hours,
+    +minutes - new Date().getTimezoneOffset() // для быстрого фикса при использования календаря
+  ).toISOString();
 }
 
 /**
