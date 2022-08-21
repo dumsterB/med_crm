@@ -29,13 +29,13 @@
       <ElButton
         type="primary"
         @click="updateStatus(Appointment.enum.statuses.InProgress)"
-        v-if="data.status == Appointment.enum.statuses.Waiting">
+        v-if="data.status === Appointment.enum.statuses.Waiting">
         {{ $t('Appointments.PatientCome') }}
       </ElButton>
       <ElButton
         type="primary"
         @click="editAppointment"
-        v-if="data.status == Appointment.enum.statuses.Waiting">
+        v-if="data.status === Appointment.enum.statuses.Waiting">
         {{ $t('Appointments.EditReception') }}</ElButton
       >
       <ElButton type="danger" @click="updateStatus(Appointment.enum.statuses.Canceled)" plain>
@@ -131,10 +131,11 @@ export default {
         });
       }
     },
-    setup: () => ({
-      Appointment,
-    }),
   },
+
+  setup: () => ({
+    Appointment,
+  }),
 };
 </script>
 
