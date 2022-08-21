@@ -134,7 +134,7 @@ export default {
         data: groups[doctorId].map(
           (appointment) =>
             new EventCalendarEvent({
-              title: 'Record',
+              title: this.$t('Base.Appointment'),
               description: appointment.patient?.name,
               startAt: appointment.start_at,
               endAt: appointment.end_at,
@@ -189,5 +189,6 @@ export default {
 </script>
 
 <style lang="scss" src="./index.scss" />
+<i18n src="@/locales/base.locales.json" />
 <i18n src="@/locales/appointments.locales.json" />
 <i18n src="./index.locales.json" />

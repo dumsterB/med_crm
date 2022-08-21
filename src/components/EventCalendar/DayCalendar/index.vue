@@ -127,7 +127,7 @@ export default {
 
   setup: () => ({
     icons,
-    hourIntervalHeight: 150,
+    hourIntervalHeight: 180,
   }),
 };
 </script>
