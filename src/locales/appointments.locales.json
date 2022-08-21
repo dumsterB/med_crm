@@ -12,6 +12,7 @@
       "StartDateAndTime": "Время и дата приёма",
       "EditReception": "Редактировать прием",
       "CancelReception": "Отменить запись",
+      "EndReception": "Завершить прем",
       "PatientCome": "Пациент явился",
       "StartTime": "Время приёма",
       "Statuses": {
@@ -42,6 +43,7 @@
       "StartDate": "Qabul kuni",
       "StartDateAndTime": "Qabul kuni va vaqti",
       "StartTime": "Qabul vaqti",
+      "EndReception": "Yozuvni tugatish",
       "EditReception": "Qabul qilishni tahrirlash",
       "CancelReception": "Kirishni bekor qilish",
       "Statuses": {

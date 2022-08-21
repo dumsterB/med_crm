@@ -1,7 +1,6 @@
 <template>
   <div class="doctors-header">
-    <PatientsSearch class="doctors-header__search" />
-    <LangSelect />
+    <LangSelect class="lang" />
   </div>
 </template>
 

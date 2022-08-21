@@ -117,11 +117,11 @@ export class Appointment extends CRUDModel {
     },
     statuses: {
       Created: 'created',
-      Approved: 'approve',
+      Approved: 'approved',
       Waiting: 'waiting',
-      InProgress: 'inProgress',
+      InProgress: 'in_progress',
       Provided: 'provided',
-      Canceled: 'cancel',
+      Canceled: 'canceled',
     },
   };
 }

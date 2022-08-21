@@ -38,8 +38,12 @@
         v-if="data.status === !Appointment.enum.statuses.Waiting">
         {{ $t('Appointments.EditReception') }}</ElButton
       >
-      <ElButton type="danger" @click="updateStatus(Appointment.enum.statuses.Canceled)" plain>
+<!--   TODO: FIX   -->
+      <ElButton type="danger" @click="updateStatus(Appointment.enum.statuses.Canceled)" plain v-if="data.status != Appointment.enum.statuses.InProgress && data.status != Appointment.enum.statuses.Canceled && data.status != Appointment.enum.statuses.Provided">
         {{ $t('Appointments.CancelReception') }}
+      </ElButton>
+      <ElButton type="danger" @click="updateStatus(Appointment.enum.statuses.Provided)" plain v-if="data.status === 'in_progress' || data.status !== Appointment.enum.statuses.InProgress && data.status != Appointment.enum.statuses.Provided && data.status != Appointment.enum.statuses.Waiting && data.status != Appointment.enum.statuses.Canceled">
+        {{ $t('Appointments.EndReception') }}
       </ElButton>
     </div>
   </ElCard>

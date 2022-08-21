@@ -1,7 +1,7 @@
 <template>
   <div class="queues-table-wrapper">
     <ElScrollbar class="queues-table-wrapper__scrollbar">
-      <ElTable class="queues-table" ref="elTable" :data="items" v-loading="loading">
+      <ElTable class="queues-table" ref="elTable" @row-click="goToAppointment" :data="items" v-loading="loading">
         <template #empty>
           <div class="queues-table__empty queues-table-empty">
             <span>{{ $t('Base.NoData') }}</span>
@@ -87,16 +87,17 @@ export default {
 
         this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
 
-        this.$router.push({
-          name: APPOINTMENT_ROUTE.name,
-          params: {
-            id: payload.id,
-          },
-        });
       } catch (error) {
         console.log(error);
         this.$notify({ type: 'success', title: error?.response?.data?.message || this.$t("Notifications.Error") });
       }
+    },
+
+    goToAppointment(payload) {
+      this.$router.push({
+        name: APPOINTMENT_ROUTE.name,
+        params: { id: payload.id },
+      });
     },
   },
   setup: () => ({
