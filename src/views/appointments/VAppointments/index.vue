@@ -46,6 +46,7 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import { usePage, usePerPage, useSearch } from '@/hooks/query';
+import { ISOStringToDateAppFormat } from '@/utils/dateAndTime.utils';
 import { Appointment } from '@/models/Appointment.model.js';
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
@@ -59,6 +60,10 @@ export default {
     perPage: usePerPage(),
     page: usePage(),
     search: useSearch(),
+    timeOptions: {
+      startAt: ISOStringToDateAppFormat(new Date().toISOString()),
+      endAt: ISOStringToDateAppFormat(new Date().toISOString()),
+    },
   }),
   computed: {
     ...mapState({
@@ -97,6 +102,8 @@ export default {
         const { data } = await Appointment.find({
           per_page: this.perPage.value,
           page: this.page.value,
+          start_at: this.timeOptions.startAt,
+          end_at: this.timeOptions.endAt,
         });
         this.setData({
           items: data.data,
