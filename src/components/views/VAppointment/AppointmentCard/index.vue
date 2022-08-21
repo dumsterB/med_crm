@@ -5,8 +5,8 @@
         <UiAvatar class="appointment-card-header__avatar" size="super-large" />
 
         <div class="appointment-card-header__user appointment-card-header-user">
-          <div class="appointment-card-header-user__name">{{ data.patient.name }}</div>
-          <div class="appointment-card-header-user__phone">{{ data.patient.phone }}</div>
+          <div class="appointment-card-header-user__name">{{ data.patient?.name }}</div>
+          <div class="appointment-card-header-user__phone">{{ data.patient?.phone }}</div>
         </div>
 
         <AppointmentStatusTag class="appointment-card-header__status" :status="data.status" />
@@ -26,8 +26,44 @@
     <ElDivider />
 
     <div class="appointment-card-actions">
-      <ElButton type="danger" plain> Test button </ElButton>
-      <ElButton type="primary"> Test button </ElButton>
+      <ElButton
+        type="primary"
+        @click="updateStatus(Appointment.enum.statuses.InProgress)"
+        v-if="data.status === Appointment.enum.statuses.Waiting || data.status === Appointment.enum.statuses.Approved">
+        {{ $t('Appointments.PatientCome') }}
+      </ElButton>
+      <ElButton
+        type="primary"
+        @click="editAppointment"
+        v-if="data.status === !Appointment.enum.statuses.Waiting">
+        {{ $t('Appointments.EditReception') }}</ElButton
+      >
+      <!--   TODO: FIX   -->
+      <ElButton
+        type="danger"
+        @click="updateStatus(Appointment.enum.statuses.Canceled)"
+        plain
+        v-if="
+          data.status != Appointment.enum.statuses.InProgress &&
+          data.status != Appointment.enum.statuses.Canceled &&
+          data.status != Appointment.enum.statuses.Provided
+        ">
+        {{ $t('Appointments.CancelReception') }}
+      </ElButton>
+      <ElButton
+        type="danger"
+        @click="updateStatus(Appointment.enum.statuses.Provided)"
+        plain
+        v-if="
+          data.status === 'in_progress' ||
+          (data.status !== Appointment.enum.statuses.InProgress &&
+            data.status != Appointment.enum.statuses.Provided &&
+            data.status != Appointment.enum.statuses.Waiting &&
+            data.status != Appointment.enum.statuses.Canceled &&
+            data.status != Appointment.enum.statuses.Approved)
+        ">
+        {{ $t('Appointments.EndReception') }}
+      </ElButton>
     </div>
   </ElCard>
 </template>
@@ -37,8 +73,10 @@ import { insertRouteParams } from '@/utils/router.utils';
 import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
 import { Appointment } from '@/models/Appointment.model';
 import { PriceService } from '@/services/price.service';
-
+import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
+import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
+import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
 
 export default {
   name: 'AppointmentCard',
@@ -83,6 +121,53 @@ export default {
       ];
     },
   },
+
+  methods: {
+    async editAppointment() {
+      const action = await this.$store.dispatch('modalAndDrawer/openDrawer', {
+        component: CreateOrEditAppointmentDrawer,
+        payload: {
+          data: this.data,
+        },
+      });
+
+      if (action instanceof GlobalDrawerCloseAction) return;
+      this.$emit('update:data', action.data.appointment);
+    },
+    async updateStatus(status) {
+      try {
+        const response = await Appointment.updateStatus({
+          id: this.data.id,
+          status: status,
+        });
+        console.log(response)
+        this.data.status = response.data.data.status;
+
+        this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
+        console.log(status);
+        if (
+          status != Appointment.enum.statuses.Waiting &&
+          status != Appointment.enum.statuses.InProgress
+        ) {
+          this.$router.push({
+            name: DOCTORS_QUEUE_ROUTE.name,
+          });
+        }else{
+          return true
+        }
+      } catch (err) {
+        console.log(err);
+        this.$notify({
+          type: 'error',
+          title: err?.response?.data?.message || this.$t('Notifications.Error'),
+        });
+      }
+    },
+  },
+
+  setup: () => ({
+    Appointment,
+  }),
 };
 </script>
 

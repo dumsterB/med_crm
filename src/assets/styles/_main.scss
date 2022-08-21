@@ -17,3 +17,22 @@ a {
 a > .el-button {
   width: 100%;
 }
+
+/* W3C standard
+   сейчас только для Firefox */
+* {
+  scrollbar-color: #dcdddf var(--bg-color);
+}
+
+/* для Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+*::-webkit-scrollbar-track {
+  background-color: var(--bg-color);
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #dcdddf;
+  border-radius: 5px;
+}

@@ -20,7 +20,7 @@ export default {
   name: 'App',
   components: { RouterView, ElConfigProvider, SVG, GlobalModalsAndDrawers },
 
-  mounted() {
+  created() {
     I18nService.setLocaleFromStorage();
     this.$store.dispatch('auth/checkAndSetUserAndTokenFromClientStorage');
   },

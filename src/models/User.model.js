@@ -8,12 +8,14 @@ export class User extends CRUDModel {
     super(payload);
     this.name = payload?.name ?? null;
     // TODO: убрать
-    this.email = payload?.email ?? 'test@gmail.com';
+    this.email = payload?.email ?? null;
     this.phone = payload?.phone ?? null;
     this.birthdate = payload?.birthdate ?? null;
     this.gender = payload?.gender ?? User.enum.genders.MAN;
     this.role = payload?.role ?? null;
     this.created_at = payload?.created_at ?? null;
+    this.doctor = payload?.doctor ?? null;
+    this.doctor_id = payload?.doctor_id ?? null;
   }
 
   static enum = {
@@ -26,6 +28,7 @@ export class User extends CRUDModel {
       Admin: 'admin',
       Patient: 'patient',
       Manager: 'manager',
+      Doctor: 'doctor',
     },
   };
 

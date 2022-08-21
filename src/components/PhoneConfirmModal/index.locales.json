@@ -1,8 +1,18 @@
 {
   "ru": {
-
+     "WriteCode": "Введите код",
+     "SendedCode": "Пациенту выслан код подтверждения",
+     "CodeRepeat": "Отправить код заново",
+     "GoToAppointments": "Вернуться к записям",
+     "Success": "Вы успешно поменяли номер!",
+     "Waiting": "Повторно можете отправить код через "
   },
   "uz": {
-
+    "WriteCode": "Kodni kiriting",
+    "SendedCode": "Bemorga tasdiqlash kodi yuborildi",
+    "CodeRepeat": "Kodni qayta yuboring",
+    "GoToAppointments": "Xabarlarga qaytish",
+    "Success": "Siz raqamingizni muvaffaqiyatli o'zgartirdingiz!",
+    "Waiting": "kodni qayta yuborishingiz uchun  "
   }
 }

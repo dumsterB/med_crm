@@ -2,13 +2,25 @@
   "ru": {
     "Appointments": {
       "Appointments": "Записи",
+      "AppointmentsTc": "{n} записей | {n} запись | {n} записей",
+      "CancelReception": "Отменить запись",
       "CreateAppointment": "Создать запись",
+      "EditReception": "Редактировать прием",
+      "LiveQueue": "Живая очередь",
+      "PatientCome": "Пациент явился",
       "PhonePatient": "Телефон пациента",
       "RecordingSource": "Источник записи",
       "SelectDoctor": "Выберите доктора",
       "SelectStatus": "Выберите статус",
       "StartDate": "Дата приёма",
       "StartDateAndTime": "Время и дата приёма",
+<<<<<<< HEAD
+      "EditReception": "Редактировать прием",
+      "CancelReception": "Отменить запись",
+      "EndReception": "Завершить прием",
+      "PatientCome": "Пациент явился",
+=======
+>>>>>>> eff8cada09bed06a107e0761d77a576aafe6dfd5
       "StartTime": "Время приёма",
       "Statuses": {
         "created": "Создан",
@@ -27,8 +39,13 @@
   },
   "uz": {
     "Appointments": {
-      "Appointments": "??Записи??",
+      "Appointments": "Yozuvlar",
+      "AppointmentsTc": "{n} Yozuvlar | {n} Yozuv | {n} Yozuvlar",
+      "CancelReception": "Kirishni bekor qilish",
       "CreateAppointment": "Kirish yaratish",
+      "EditReception": "Qabul qilishni tahrirlash",
+      "LiveQueue": "Jonli navbat",
+      "PatientCome": "Bemor keldi",
       "PhonePatient": "Bemorning telefoni",
       "RecordingSource": "Yozib olish manbai",
       "SelectDoctor": "Shifokorni tanlang",
@@ -36,6 +53,12 @@
       "StartDate": "Qabul kuni",
       "StartDateAndTime": "Qabul kuni va vaqti",
       "StartTime": "Qabul vaqti",
+<<<<<<< HEAD
+      "EndReception": "Yozuvni tugatish",
+      "EditReception": "Qabul qilishni tahrirlash",
+      "CancelReception": "Kirishni bekor qilish",
+=======
+>>>>>>> eff8cada09bed06a107e0761d77a576aafe6dfd5
       "Statuses": {
         "approved": "Tasdiqlangan",
         "provided": "Kutilmoqda",

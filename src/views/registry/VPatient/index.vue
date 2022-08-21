@@ -13,7 +13,7 @@
         </div>
 
         <div class="v-patient-content-item__body">
-          <PatientCard :data="patient" type="horizontal" />
+          <PatientCard v-model:data="patient" type="horizontal" />
         </div>
       </div>
 
@@ -117,16 +117,14 @@ export default {
     async getAppointments() {
       this.loading.appointment = true;
 
-      if (this.patient) {
-        const { data } = await Appointment.find({
-          user_id: this.patient.id,
-          query_type: 'EQUALS',
-          search: this.patient.id,
-          page: 1,
-          per_page: 100,
-        });
-        this.appointments = data.data;
-      }
+      const { data } = await Appointment.find({
+        query_type: 'EQUALS',
+        search: this.patient.id,
+        query_field: 'user_id',
+        page: 1,
+        per_page: 100,
+      });
+      this.appointments = data.data;
 
       this.loading.appointment = false;
     },

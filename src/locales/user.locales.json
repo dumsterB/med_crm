@@ -10,7 +10,8 @@
       "Gender": "Пол",
       "Genders": {
         "man": "Мужчина",
-        "woman": "Женщина"
+        "woman": "Женщина",
+        "null": ""
       },
       "IsChildren": "Ребёнок",
       "Parent": "Родитель",
@@ -19,7 +20,7 @@
   },
   "uz": {
     "User": {
-      "AddChildren": "??Добавить ребёнка??",
+      "AddChildren": "Bolani qo'shish",
       "Age": "Yosh",
       "Birthdate": "Togilgan sanasi",
       "Children": "Bolalar",

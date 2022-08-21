@@ -2,8 +2,11 @@
   "ru": {
     "Base": {
       "Actions": "Действия",
+      "Appointment": "Запись",
       "Attach": "Привязать",
       "Authorization": "Авторизация",
+      "Back": "Назад",
+      "CallToReception": "Вызвать на прием",
       "Cancel": "Отменить",
       "Create": "Создать",
       "Dashboard": "Дашборд",
@@ -12,6 +15,7 @@
       "DoctorsSchedule": "Расписание врачей",
       "Edit": "Редактировать",
       "ForgotPassword": "Заблыи пароль?",
+      "FullName": "ФИО",
       "InviteByNumber": "Пригласить по номеру",
       "Loading": "Загрузка...",
       "Login": "Логин",
@@ -27,19 +31,24 @@
       "PleaseInput": "Пожалуйста, введите",
       "PleaseSelect": "Пожалуйста выберите",
       "Price": "Цена",
+      "Queue": "Очередь",
       "SaveChanges": "Сохранить изменения",
       "Search": "Поиск",
       "SelectDate": "Выберите дату",
       "Service": "Услуга",
       "SignUp": "Регистрация",
-      "Sum": "сум"
+      "Sum": "сум",
+      "Time": "Время"
     }
   },
   "uz": {
     "Base": {
       "Actions": "Harakatlar",
+      "Appointment": "Yozuv",
       "Attach": "Bog'lash",
       "Authorization": "Kirish",
+      "Back": "Назад",
+      "CallToReception": "Qabul qilish",
       "Cancel": "Qaytish",
       "Create": "Yaratish",
       "Dashboard": "Dashboard",
@@ -68,7 +77,8 @@
       "SelectDate": "Sanani tanlang",
       "Service": "Xizmat",
       "SignUp": "Ro'yxatdan o'tish",
-      "Sum": "som"
+      "Sum": "som",
+      "Time": "Vaqt"
     }
   }
 }

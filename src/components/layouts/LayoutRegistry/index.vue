@@ -1,36 +1,27 @@
 <template>
-  <ElContainer class="layout-registry">
-    <ElAside class="layout-registry__menu"> <RegistryMenu /> </ElAside>
+  <LayoutDefault v-bind="$attrs">
+    <template #header>
+      <RegistryHeader />
+    </template>
 
-    <ElContainer
-      :class="[
-        'layout-registry__main',
-        { 'layout-registry__main_fix-height': fixHeight },
-        mainClass,
-      ]">
-      <ElHeader class="layout-registry__header layout-registry__el-header">
-        <RegistryHeader />
-      </ElHeader>
-      <ElMain :class="['layout-registry__content', contentClass]" v-loading="loading">
-        <slot></slot>
-      </ElMain>
-    </ElContainer>
-  </ElContainer>
+    <template #menu>
+      <RegistryMenu />
+    </template>
+
+    <template #default>
+      <slot></slot>
+    </template>
+  </LayoutDefault>
 </template>
 
 <script>
 import RegistryHeader from '@/components/registry/RegistryHeader/index.vue';
 import RegistryMenu from '@/components/registry/RegistryMenu/index.vue';
+import LayoutDefault from '@/components/layouts/LayoutDefault/index.vue';
 
 export default {
   name: 'LayoutRegistry',
-  components: { RegistryHeader, RegistryMenu },
-  props: {
-    fixHeight: Boolean,
-    contentClass: String,
-    mainClass: String,
-    loading: Boolean,
-  },
+  components: { LayoutDefault, RegistryHeader, RegistryMenu },
 };
 </script>
 
