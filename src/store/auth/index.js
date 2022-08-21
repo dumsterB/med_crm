@@ -43,7 +43,6 @@ export default {
       ApiService.setToken(data.access_token);
       localStorage.setItem(enums.ACCESS_TOKEN_KEY, data.access_token);
       localStorage.setItem(enums.USER_KEY, JSON.stringify(data.user));
-      console.log(data.user);
       commit('LOGIN', { user: data.user });
     },
 
