@@ -17,8 +17,18 @@
         </template>
 
         <ElTableColumn class-name="appointments-table__id" width="60" prop="id" label="ID" />
-        <ElTableColumn prop="start_at" :label="$t('DateAndTime.StartAt')" />
-        <ElTableColumn prop="end_at" :label="$t('DateAndTime.EndAt')" />
+
+        <ElTableColumn width="150px" prop="start_at" :label="$t('DateAndTime.StartAt')">
+          <template #default="{ row }">
+            <AppointmentStartOrEndDate :date="row.start_at" />
+          </template>
+        </ElTableColumn>
+        <ElTableColumn width="150px" prop="end_at" :label="$t('DateAndTime.EndAt')">
+          <template #default="{ row }">
+            <AppointmentStartOrEndDate :date="row.end_at" />
+          </template>
+        </ElTableColumn>
+
         <ElTableColumn prop="doctor.name" :label="$t('Appointments.Types.doctor')" />
         <ElTableColumn prop="patient.name" :label="$t('Base.Patient')" />
         <ElTableColumn prop="patient.phone" :label="$t('Appointments.PhonePatient')" />
@@ -60,10 +70,11 @@ import { Appointment } from '@/models/Appointment.model';
 
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
+import AppointmentStartOrEndDate from '@/components/appointments/AppointmentStartOrEndDate/index.vue';
 
 export default {
   name: 'AppointmentsTable',
-  components: { AppointmentStatusTag },
+  components: { AppointmentStartOrEndDate, AppointmentStatusTag },
   emits: ['update:perPage', 'update:page'],
   props: {
     /** @property { Array<Appointment|object> } items */
