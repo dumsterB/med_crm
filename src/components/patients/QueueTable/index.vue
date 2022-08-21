@@ -7,6 +7,7 @@
             <span>{{ $t('Base.NoData') }}</span>
           </div>
         </template>
+
         <ElTableColumn prop="name" :label="$t('Base.FullName')">
           <template #default="{ row }">
             {{ row.patient.name }}
@@ -27,9 +28,9 @@
             {{ row.patient.phone }}
           </template>
         </ElTableColumn>
-        <ElTableColumn prop="name" :label="$t('Base.Time')">
+        <ElTableColumn prop="start_at" :label="$t('Base.Time')">
           <template #default="{ row }">
-            {{ row.start_at }}
+            <AppointmentStartOrEndDate :date="row.start_at" />
           </template>
         </ElTableColumn>
         <ElTableColumn prop="name" :label="$t('Appointments.Statuses.Status')">
@@ -41,12 +42,15 @@
         </ElTableColumn>
         <ElTableColumn prop="name" width="200" :label="$t('Base.Actions')">
           <template #default="{ row }">
-              <div  class="queues-table-actions">
-<!--     TODO: FIX           -->
-                <ElButton v-if="row.status == 'approved'" type="primary" @click="callToReception(row)">
-                  {{$t('Base.CallToReception')}}
-                </ElButton>
-              </div>
+            <div class="queues-table-actions">
+              <!--     TODO: FIX           -->
+              <ElButton
+                v-if="row.status == 'approved'"
+                type="primary"
+                @click="callToReception(row)">
+                {{ $t('Base.CallToReception') }}
+              </ElButton>
+            </div>
           </template>
         </ElTableColumn>
       </ElTable>
@@ -55,14 +59,15 @@
 </template>
 
 <script>
-import * as icons from '@/enums/icons.enum.js';
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
+import AppointmentStartOrEndDate from '@/components/appointments/AppointmentStartOrEndDate/index.vue';
+import * as icons from '@/enums/icons.enum.js';
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import { Appointment } from '@/models/Appointment.model';
 
 export default {
   name: 'QueueTable',
-  components: { AppointmentStatusTag },
+  components: { AppointmentStartOrEndDate, AppointmentStatusTag },
   props: {
     /**
      * @param { Array<Queues|object> } items
@@ -95,7 +100,10 @@ export default {
         });
       } catch (error) {
         console.log(error);
-        this.$notify({ type: 'success', title: error?.response?.data?.message || this.$t("Notifications.Error") });
+        this.$notify({
+          type: 'success',
+          title: error?.response?.data?.message || this.$t('Notifications.Error'),
+        });
       }
     },
   },
