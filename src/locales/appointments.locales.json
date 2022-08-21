@@ -9,6 +9,7 @@
       "EndReception": "Завершить прием",
       "LiveQueue": "Живая очередь",
       "PatientCome": "Пациент явился",
+      "PatientNotCome": "Пациент не явился",
       "PhonePatient": "Телефон пациента",
       "RecordingSource": "Источник записи",
       "SelectDoctor": "Выберите доктора",
@@ -41,6 +42,7 @@
       "EndReception": "Yozuvni tugatish",
       "LiveQueue": "Jonli navbat",
       "PatientCome": "Bemor keldi",
+      "PatientNotCome": "Bemor kelmadi",
       "PhonePatient": "Bemorning telefoni",
       "RecordingSource": "Yozib olish manbai",
       "SelectDoctor": "Shifokorni tanlang",
@@ -48,7 +50,6 @@
       "StartDate": "Qabul kuni",
       "StartDateAndTime": "Qabul kuni va vaqti",
       "StartTime": "Qabul vaqti",
-      "EndReception": "Yozuvni tugatish",
       "Statuses": {
         "Status": "Holat",
         "approved": "Tasdiqlangan",
