@@ -41,16 +41,11 @@
         </ElTableColumn>
         <ElTableColumn prop="name" width="200" :label="$t('Base.Actions')">
           <template #default="{ row }">
-            <!--            <div v-if="row.status == status" class="queues-table-actions">-->
-            <!--              <ElButton type="primary" @click="progressReception">{{-->
-            <!--                $t('Base.CallToReception')-->
-            <!--              }}</ElButton>-->
-            <!--            </div>-->
-            <div class="queues-table-actions">
-              <ElButton type="primary" @click="callToReception(row)">{{
-                $t('Base.CallToReception')
-              }}</ElButton>
-            </div>
+              <div  class="queues-table-actions">
+                <ElButton v-if="row.status == Appointment.enum.statuses.Approved" type="primary" @click="callToReception(row)">
+                  {{$t('Base.CallToReception')}}
+                </ElButton>
+              </div>
           </template>
         </ElTableColumn>
       </ElTable>
@@ -76,7 +71,6 @@ export default {
   },
   icons: icons,
   computed: {},
-  status: 'waiting',
   watch: {
     loading() {
       this.$refs.elTable.scrollTo({ top: 0, behavior: 'smooth' });
@@ -84,21 +78,29 @@ export default {
   },
   methods: {
     async callToReception(payload) {
-      const { data } = await Appointment.updateStatus({
-        id: payload.id,
-        status: Appointment.enum.statuses.Approved
-      });
-
-      this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
-
-      this.$router.push({
-        name: APPOINTMENT_ROUTE.name,
-        params: {
+      try {
+        await Appointment.updateStatus({
           id: payload.id,
-        },
-      });
+          status: Appointment.enum.statuses.Waiting,
+        });
+
+        this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
+
+        this.$router.push({
+          name: APPOINTMENT_ROUTE.name,
+          params: {
+            id: payload.id,
+          },
+        });
+      } catch (error) {
+        console.log(error);
+        this.$notify({ type: 'success', title: error?.response?.data?.message || this.$t("Notifications.Error") });
+      }
     },
   },
+  setup: () => ({
+    Appointment,
+  }),
 };
 </script>
 
