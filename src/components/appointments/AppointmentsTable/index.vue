@@ -23,7 +23,7 @@
         <ElTableColumn prop="patient.name" :label="$t('Base.Patient')" />
         <ElTableColumn prop="patient.phone" :label="$t('Appointments.PhonePatient')" />
 
-        <ElTableColumn width="120" prop="status" :label="$t('Appointments.Statuses.Status')">
+        <ElTableColumn prop="status" :label="$t('Appointments.Statuses.Status')">
           <template #default="{ row }">
             <AppointmentStatusTag :status="row.status" />
           </template>
