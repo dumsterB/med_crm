@@ -5,8 +5,8 @@
         <UiAvatar class="appointment-card-header__avatar" size="super-large" />
 
         <div class="appointment-card-header__user appointment-card-header-user">
-          <div class="appointment-card-header-user__name">{{ data.patient.name }}</div>
-          <div class="appointment-card-header-user__phone">{{ data.patient.phone }}</div>
+          <div class="appointment-card-header-user__name">{{ data.patient?.name }}</div>
+          <div class="appointment-card-header-user__phone">{{ data.patient?.phone }}</div>
         </div>
 
         <AppointmentStatusTag class="appointment-card-header__status" :status="data.status" />

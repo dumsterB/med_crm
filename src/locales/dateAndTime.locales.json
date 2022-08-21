@@ -2,6 +2,36 @@
   "ru": {
     "DateAndTime": {
       "CreatedAt": "Создана",
+      "Days": {
+        "0": {
+          "Full": "Воскресенье",
+          "Short": "Вс"
+        },
+        "1": {
+          "Full": "Понедельник",
+          "Short": "Пн"
+        },
+        "2": {
+          "Full": "Вторник",
+          "Short": "Вт"
+        },
+        "3": {
+          "Full": "Среда",
+          "Short": "Ср"
+        },
+        "4": {
+          "Full": "Четверг",
+          "Short": "Чт"
+        },
+        "5": {
+          "Full": "Пятница",
+          "Short": "Пт"
+        },
+        "6": {
+          "Full": "Суббота",
+          "Short": "Сб"
+        }
+      },
       "EndAt": "Конец в",
       "Months": {
         "0": {
@@ -61,6 +91,36 @@
   "uz": {
     "DateAndTime": {
       "CreatedAt": "Yaratilgan",
+      "Days": {
+        "0": {
+          "Full": "Yakshamba",
+          "Short": "Ya"
+        },
+        "1": {
+          "Full": "Dushamba",
+          "Short": "Du"
+        },
+        "2": {
+          "Full": "Seshamba",
+          "Short": "Se"
+        },
+        "3": {
+          "Full": "Chorshamba",
+          "Short": "Ch"
+        },
+        "4": {
+          "Full": "Payshamba",
+          "Short": "Psh"
+        },
+        "5": {
+          "Full": "Juma",
+          "Short": "Juma"
+        },
+        "6": {
+          "Full": "Shamba",
+          "Short": "Sh"
+        }
+      },
       "EndAt": "Tugashi",
       "Months": {
         "0": {

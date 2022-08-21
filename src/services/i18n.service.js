@@ -9,8 +9,8 @@ export class I18nService {
   static t(payload) {
     return I18nPlugin.global.t(payload);
   }
-  static tc(payload) {
-    return I18nPlugin.global.tc(payload);
+  static tc(payload, options) {
+    return I18nPlugin.global.tc(payload, options);
   }
   static te(payload) {
     return I18nPlugin.global.te(payload);

@@ -26,12 +26,19 @@ export function ISOStringToDateAppFormat(date, options) {
  * @return {string} ISO
  */
 export function dateAppFormatToISOString(date) {
+  // TODO доработать работу с таймзонами
   const [onlyDate, onlyTime] = date.split(' ');
   let [hours, minutes] = onlyTime?.split(':') || [0, 0];
   let [day, month, year] = onlyDate.split('.');
   year = year.length === 2 ? `20${year}` : year;
 
-  return new Date(+year, +month - 1, +day, +hours, +minutes).toISOString();
+  return new Date(
+    +year,
+    +month - 1,
+    +day,
+    +hours,
+    +minutes - new Date().getTimezoneOffset() // для быстрого фикса при использования календаря
+  ).toISOString();
 }
 
 /**
@@ -120,11 +127,29 @@ export function resetDaysInISOString(date) {
  * @return {string}
  */
 export function prevOrNextMonthByISOString(date, options = { type: 'next' }) {
-  return date.replace(/(\d\d\d\d)-(\d\d)-(\d\d)T/gm, (val, year, month, days) => {
-    const newMonth = _addZeroPrefix(options.type === 'next' ? +month + 1 : +month - 1);
+  let _date = new Date(date);
+  let newMonthDate = new Date(date);
+  newMonthDate.setMonth(options.type === 'next' ? _date.getMonth() + 1 : _date.getMonth() - 1, 1);
 
-    return `${year}-${newMonth}-${days}T`;
-  });
+  const oldDay = _date.getDate();
+  const daysInNewMonth = getDaysInMonth(newMonthDate.toISOString());
+  newMonthDate.setDate(oldDay > daysInNewMonth ? daysInNewMonth : oldDay);
+
+  return newMonthDate.toISOString();
+}
+
+/**
+ * @example 2022-09-30T00:00:00.000Z  ->  2022-08-30T00:00:00.000Z || 2022-10-30T00:00:00.000Z
+ * @param {string} date ISO format
+ * @param {object} [options]
+ * @param {"next"|"prev"} options.type = "next"
+ * @return {string}
+ */
+export function prevOrNextDayByISOString(date, options = { type: 'next' }) {
+  const _date = new Date(date);
+  _date.setDate(options.type === 'next' ? _date.getDate() + 1 : _date.getDate() - 1);
+
+  return _date.toISOString();
 }
 
 /**
