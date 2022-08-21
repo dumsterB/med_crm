@@ -92,9 +92,9 @@ export default {
             id: payload.id,
           },
         });
-      } catch (e) {
-        console.log(e);
-        this.$notify({ type: 'success', title: this.$i18n.t('Notifications.Error') });
+      } catch (error) {
+        console.log(error);
+        this.$notify({ type: 'success', title: err?.response?.data?.message || this.$t("Notifications.Error") });
       }
     },
   },
