@@ -114,7 +114,7 @@
           :service-id="appointment.service_id"
           :group-service-id="appointment.group_service_id"
           :dependencies="slotsOptions.dependencies"
-          required />
+        />
       </ElFormItem>
 
       <!--  Actions  -->

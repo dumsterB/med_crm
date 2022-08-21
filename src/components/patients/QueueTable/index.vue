@@ -41,16 +41,16 @@
         </ElTableColumn>
         <ElTableColumn prop="name" width="200" :label="$t('Base.Actions')">
           <template #default="{ row }">
-            <!--            <div v-if="row.status == status" class="queues-table-actions">-->
-            <!--              <ElButton type="primary" @click="progressReception">{{-->
-            <!--                $t('Base.CallToReception')-->
-            <!--              }}</ElButton>-->
-            <!--            </div>-->
-            <div class="queues-table-actions">
-              <ElButton type="primary" @click="callToReception(row)">{{
-                $t('Base.CallToReception')
-              }}</ElButton>
-            </div>
+                        <div v-if="row.status == status" class="queues-table-actions">
+                          <ElButton type="primary" @click="callToReception(row)">{{
+                            $t('Base.CallToReception')
+                          }}</ElButton>
+                        </div>
+<!--            <div class="queues-table-actions">-->
+<!--              <ElButton type="primary" @click="callToReception(row)">{{-->
+<!--                $t('Base.CallToReception')-->
+<!--              }}</ElButton>-->
+<!--            </div>-->
           </template>
         </ElTableColumn>
       </ElTable>
