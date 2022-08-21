@@ -1,10 +1,12 @@
 <template>
-  <LayoutRegistry>
+  <LayoutRegistry fixHeight>
     <EventCalendar
+      class="v-dashboard-content__calendar"
       v-model:type="type.value"
       v-model:date="date.value"
       :loading="loading.calendar"
-      :month-data="dataForMonth">
+      :month-data="dataForMonth"
+      :day-data="dataForDay">
       <template #actions>
         <UiModelsAutocompleteSearch
           v-model="doctorId.value"
@@ -30,6 +32,7 @@ import {
 import { Doctor } from '@/models/Doctor.model';
 import { Appointment } from '@/models/Appointment.model';
 import { I18nService } from '@/services/i18n.service';
+import { groupBy } from 'lodash';
 
 export default {
   name: 'VDashboard',
@@ -41,6 +44,7 @@ export default {
         doctor: false,
       },
       dataForMonth: {},
+      dataForDay: [],
 
       /** @type Doctor */
       doctor: null, // загрузить доктора при открытии страницы по ид из query
@@ -48,14 +52,19 @@ export default {
   },
   computed: {
     startAt() {
-      return resetDaysInISOString(this.date.value);
+      const forMonthType = resetDaysInISOString(this.date.value);
+
+      return this.type.value === EVENT_CALENDAR_TYPES.MONTH ? forMonthType : this.date.value;
     },
     endAt() {
-      return this.startAt.replace(
+      const forMonthType = this.startAt.replace(
         /(\d\d\d\d)-(\d\d)-(\d\d)T/,
         (str, year, month) => `${year}-${month}-${this.daysInMonth}T`
       );
+
+      return this.type.value === EVENT_CALENDAR_TYPES.MONTH ? forMonthType : this.date.value;
     },
+
     daysInMonth() {
       return getDaysInMonth(this.startAt);
     },
@@ -102,7 +111,31 @@ export default {
       });
     },
 
-    async getDateForDayType() {},
+    async getDateForDayType() {
+      const { data } = await Appointment.find({
+        page: 1,
+        per_page: 999,
+        query_field: 'doctor_id',
+        query_type: 'IN',
+        search: this.doctorId.value ? [this.doctorId.value] : [],
+        start_at: ISOStringToDateAppFormat(this.startAt, { withTime: false, fullYear: false }),
+        end_at: ISOStringToDateAppFormat(this.endAt, { withTime: false, fullYear: false }),
+      });
+
+      const groups = groupBy(data.data, 'doctor_id');
+      this.dataForDay = Object.keys(groups).map((doctorId) => ({
+        column: {
+          id: doctorId,
+          title: groups[doctorId][0].doctor.name,
+        },
+        data: groups[doctorId].map((appointment) => ({
+          title: 'Record',
+          description: appointment.patient?.name,
+          startAt: appointment.start_at,
+          endAt: appointment.end_at,
+        })),
+      }));
+    },
 
     async getDefaultDoctor() {
       this.loading.doctor = true;

@@ -4,10 +4,9 @@
   width: 100%;
   padding: 20px;
   background-color: var(--bg-color);
-  height: 100%;
 
   &_month {
-    gap: 0px;
+    gap: 0;
   }
   &_day {
     gap: 20px;
@@ -39,7 +38,7 @@
     flex: 1;
 
     & > * {
-      height: 100%;
+      flex: 1;
     }
   }
 
