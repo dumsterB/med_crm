@@ -6,7 +6,8 @@
       v-model:date="date.value"
       :loading="loading.calendar"
       :month-data="dataForMonth"
-      :day-data="dataForDay">
+      :day-data="dataForDay"
+      @click:event="goToAppointment">
       <template #actions>
         <UiModelsAutocompleteSearch
           v-model="doctorId.value"
@@ -34,6 +35,7 @@ import { Appointment } from '@/models/Appointment.model';
 import { EventCalendarEvent } from '@/components/EventCalendar/Event/EventCalendarEvent.model';
 import { I18nService } from '@/services/i18n.service';
 import { groupBy } from 'lodash';
+import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 
 export default {
   name: 'VDashboard',
@@ -149,6 +151,15 @@ export default {
       this.doctor = data.data;
 
       this.loading.doctor = false;
+    },
+
+    goToAppointment(event) {
+      this.$router.push({
+        name: APPOINTMENT_ROUTE.name,
+        params: {
+          id: event.payload.id,
+        },
+      });
     },
   },
 

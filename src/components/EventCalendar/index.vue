@@ -41,7 +41,11 @@
         :date="date"
         :data="monthData"
         @update:date="setDayTypeAndDate" />
-      <DayCalendar v-if="type === EVENT_CALENDAR_TYPES.DAY" v-model:date="date" :data="dayData" />
+      <DayCalendar
+        v-if="type === EVENT_CALENDAR_TYPES.DAY"
+        v-model:date="date"
+        :data="dayData"
+        @click:event="$emit('click:event', $event)" />
     </div>
   </div>
 </template>

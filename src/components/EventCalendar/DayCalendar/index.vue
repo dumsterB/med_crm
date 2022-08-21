@@ -50,7 +50,8 @@
               :key="event.title + event.startAt"
               :event="event"
               short-time
-              :style="calculateEventPositionStyles(event)" />
+              :style="calculateEventPositionStyles(event)"
+              @click="$emit('click:event', event)" />
           </div>
         </div>
       </div>
@@ -65,7 +66,7 @@ import EventCalendarEvent from '@/components/EventCalendar/Event/index.vue';
 export default {
   name: 'DayCalendar',
   components: { EventCalendarEvent },
-  emits: ['update:date'],
+  emits: ['update:date', 'click:event'],
   props: {
     date: String, // ISO format
 
