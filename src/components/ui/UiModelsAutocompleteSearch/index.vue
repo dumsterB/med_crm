@@ -54,6 +54,7 @@ export default {
       handler() {
         if (this.defaultItem) this.query = this.defaultItem[this.label];
       },
+      immediate: true,
     },
   },
 
