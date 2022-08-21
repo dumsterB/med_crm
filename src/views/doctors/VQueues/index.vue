@@ -6,7 +6,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import LayoutDoctors from '@/components/layouts/layoutDoctor/index.vue';
+import LayoutDoctors from '@/components/layouts/LayoutDoctor/index.vue';
 import QueueTable from '@/components/patients/QueueTable/index.vue';
 import * as icons from '@/enums/icons.enum.js';
 import { Appointment } from '@/models/Appointment.model';
