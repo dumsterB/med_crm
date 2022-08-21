@@ -31,8 +31,8 @@
   },
   "uz": {
     "Appointments": {
-      "Appointments": "??Записи??",
-      "AppointmentsTc": "??{n} записей | {n} запись | {n} записей??",
+      "Appointments": "Yozuvlar",
+      "AppointmentsTc": "{n} Yozuvlar | {n} Yozuv | {n} Yozuvlar",
       "CreateAppointment": "Kirish yaratish",
       "PhonePatient": "Bemorning telefoni",
       "RecordingSource": "Yozib olish manbai",
