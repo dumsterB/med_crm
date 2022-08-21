@@ -14,13 +14,7 @@
       "SelectStatus": "Выберите статус",
       "StartDate": "Дата приёма",
       "StartDateAndTime": "Время и дата приёма",
-<<<<<<< HEAD
-      "EditReception": "Редактировать прием",
-      "CancelReception": "Отменить запись",
       "EndReception": "Завершить прием",
-      "PatientCome": "Пациент явился",
-=======
->>>>>>> eff8cada09bed06a107e0761d77a576aafe6dfd5
       "StartTime": "Время приёма",
       "Statuses": {
         "created": "Создан",
@@ -53,12 +47,7 @@
       "StartDate": "Qabul kuni",
       "StartDateAndTime": "Qabul kuni va vaqti",
       "StartTime": "Qabul vaqti",
-<<<<<<< HEAD
       "EndReception": "Yozuvni tugatish",
-      "EditReception": "Qabul qilishni tahrirlash",
-      "CancelReception": "Kirishni bekor qilish",
-=======
->>>>>>> eff8cada09bed06a107e0761d77a576aafe6dfd5
       "Statuses": {
         "approved": "Tasdiqlangan",
         "provided": "Kutilmoqda",
