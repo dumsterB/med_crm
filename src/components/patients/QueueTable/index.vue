@@ -94,7 +94,7 @@ export default {
         });
       } catch (error) {
         console.log(error);
-        this.$notify({ type: 'success', title: err?.response?.data?.message || this.$t("Notifications.Error") });
+        this.$notify({ type: 'success', title: error?.response?.data?.message || this.$t("Notifications.Error") });
       }
     },
   },
