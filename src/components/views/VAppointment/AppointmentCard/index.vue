@@ -29,7 +29,7 @@
       <ElButton
         type="primary"
         @click="updateStatus(Appointment.enum.statuses.InProgress)"
-        v-if="data.status === Appointment.enum.statuses.Waiting">
+        v-if="data.status === Appointment.enum.statuses.Waiting || data.status === Appointment.enum.statuses.Approved">
         {{ $t('Appointments.PatientCome') }}
       </ElButton>
       <ElButton
@@ -59,7 +59,8 @@
           (data.status !== Appointment.enum.statuses.InProgress &&
             data.status != Appointment.enum.statuses.Provided &&
             data.status != Appointment.enum.statuses.Waiting &&
-            data.status != Appointment.enum.statuses.Canceled)
+            data.status != Appointment.enum.statuses.Canceled &&
+            data.status != Appointment.enum.statuses.Approved)
         ">
         {{ $t('Appointments.EndReception') }}
       </ElButton>
@@ -135,16 +136,25 @@ export default {
     },
     async updateStatus(status) {
       try {
-        await Appointment.updateStatus({
+        const response = await Appointment.updateStatus({
           id: this.data.id,
           status: status,
         });
+        console.log(response)
+        this.data.status = response.data.data.status;
 
         this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
-
-        this.$router.push({
-          name: DOCTORS_QUEUE_ROUTE.name,
-        });
+        console.log(status);
+        if (
+          status != Appointment.enum.statuses.Waiting &&
+          status != Appointment.enum.statuses.InProgress
+        ) {
+          this.$router.push({
+            name: DOCTORS_QUEUE_ROUTE.name,
+          });
+        }else{
+          return true
+        }
       } catch (err) {
         console.log(err);
         this.$notify({

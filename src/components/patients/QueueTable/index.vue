@@ -86,6 +86,10 @@ export default {
 
         this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
 
+        this.$router.push({
+          name: APPOINTMENT_ROUTE.name,
+          params: { id: payload.id },
+        });
       } catch (error) {
         console.log(error);
         this.$notify({ type: 'success', title: error?.response?.data?.message || this.$t("Notifications.Error") });
