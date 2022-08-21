@@ -127,11 +127,15 @@ export function resetDaysInISOString(date) {
  * @return {string}
  */
 export function prevOrNextMonthByISOString(date, options = { type: 'next' }) {
-  return date.replace(/(\d\d\d\d)-(\d\d)-(\d\d)T/gm, (val, year, month, days) => {
-    const newMonth = _addZeroPrefix(options.type === 'next' ? +month + 1 : +month - 1);
+  let _date = new Date(date);
+  let newMonthDate = new Date(date);
+  newMonthDate.setMonth(options.type === 'next' ? _date.getMonth() + 1 : _date.getMonth() - 1, 1);
 
-    return `${year}-${newMonth}-${days}T`;
-  });
+  const oldDay = _date.getDate();
+  const daysInNewMonth = getDaysInMonth(newMonthDate.toISOString());
+  newMonthDate.setDate(oldDay > daysInNewMonth ? daysInNewMonth : oldDay);
+
+  return newMonthDate.toISOString();
 }
 
 /**
