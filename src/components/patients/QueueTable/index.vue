@@ -59,7 +59,6 @@ import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import { Appointment } from '@/models/Appointment.model';
 
-const STATUS = 'approved';
 export default {
   name: 'QueueTable',
   components: { AppointmentStatusTag },

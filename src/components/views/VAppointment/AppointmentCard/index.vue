@@ -51,12 +51,10 @@ import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
 import { Appointment } from '@/models/Appointment.model';
 import { PriceService } from '@/services/price.service';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
-
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
-import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
-const STATUS = 'waiting';
+
 export default {
   name: 'AppointmentCard',
   components: { AppointmentStatusTag },
