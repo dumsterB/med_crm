@@ -61,7 +61,7 @@ export default {
   methods: {
     goToAppointment() {
       this.$router.push({
-        ...APPOINTMENT_ROUTE,
+        name: APPOINTMENT_ROUTE.name,
         params: {
           patientId: this.data.patient_id,
           id: this.data.id,
