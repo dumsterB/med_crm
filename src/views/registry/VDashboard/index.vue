@@ -115,6 +115,7 @@ export default {
     },
 
     async getDateForDayType() {
+      /** @type { {data: Array<Appointment>} } */
       const { data } = await Appointment.find({
         page: 1,
         per_page: 999,
@@ -124,8 +125,9 @@ export default {
         start_at: ISOStringToDateAppFormat(this.startAt, { withTime: false, fullYear: false }),
         end_at: ISOStringToDateAppFormat(this.endAt, { withTime: false, fullYear: false }),
       });
+      const excludedLiveQueue = data.data.filter((appointment) => appointment.start_at);
 
-      const groups = groupBy(data.data, 'doctor_id');
+      const groups = groupBy(excludedLiveQueue, 'doctor_id');
       this.dataForDay = Object.keys(groups).map((doctorId) => ({
         column: {
           id: doctorId,
