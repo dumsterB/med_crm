@@ -31,6 +31,7 @@ import {
 } from '@/utils/dateAndTime.utils';
 import { Doctor } from '@/models/Doctor.model';
 import { Appointment } from '@/models/Appointment.model';
+import { EventCalendarEvent } from '@/components/EventCalendar/Event/EventCalendarEvent.model';
 import { I18nService } from '@/services/i18n.service';
 import { groupBy } from 'lodash';
 
@@ -128,12 +129,16 @@ export default {
           id: doctorId,
           title: groups[doctorId][0].doctor.name,
         },
-        data: groups[doctorId].map((appointment) => ({
-          title: 'Record',
-          description: appointment.patient?.name,
-          startAt: appointment.start_at,
-          endAt: appointment.end_at,
-        })),
+        data: groups[doctorId].map(
+          (appointment) =>
+            new EventCalendarEvent({
+              title: 'Record',
+              description: appointment.patient?.name,
+              startAt: appointment.start_at,
+              endAt: appointment.end_at,
+              payload: appointment,
+            })
+        ),
       }));
     },
 
