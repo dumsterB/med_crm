@@ -35,7 +35,7 @@
       <ElButton
         type="primary"
         @click="editAppointment"
-        v-if="data.status === Appointment.enum.statuses.Waiting">
+        v-if="data.status === !Appointment.enum.statuses.Waiting">
         {{ $t('Appointments.EditReception') }}</ElButton
       >
       <ElButton type="danger" @click="updateStatus(Appointment.enum.statuses.Canceled)" plain>
