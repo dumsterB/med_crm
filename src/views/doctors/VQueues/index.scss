@@ -1,0 +1,11 @@
+.v-doctors-queue-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__table {
+    flex-direction: column;
+    height: 100%;
+    gap: 20px;
+  }
+}

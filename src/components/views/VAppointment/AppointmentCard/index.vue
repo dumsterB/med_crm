@@ -26,8 +26,8 @@
     <ElDivider />
 
     <div class="appointment-card-actions">
-      <ElButton type="danger" plain> Test button </ElButton>
-      <ElButton type="primary" @click="editAppointment"> Edit </ElButton>
+      <ElButton type="primary"  @click="editAppointment" > {{ $t('Appointments.EditReception') }} </ElButton>
+      <ElButton type="danger" @click="cancelAppointment" plain> {{ $t('Appointments.CancelReception') }} </ElButton>
     </div>
   </ElCard>
 </template>
@@ -41,6 +41,8 @@ import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDr
 
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
+import {APPOINTMENT_ROUTE} from "@/router/appointments.routes";
+import {DOCTORS_QUEUE_ROUTE} from "@/router/doctors.routes";
 
 export default {
   name: 'AppointmentCard',
@@ -98,6 +100,27 @@ export default {
       if (action instanceof GlobalDrawerCloseAction) return;
       this.$emit('update:data', action.data.appointment);
     },
+   async cancelAppointment(){
+      try {
+         await Appointment.updateStatus({
+          id: this.data.id,
+          status: Appointment.enum.statuses.Canceled
+        });
+
+        this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
+
+        this.$router.push({
+          name: DOCTORS_QUEUE_ROUTE.name,
+        });
+
+      } catch (err) {
+        console.log(err);
+        this.$notify({
+          type: 'error',
+          title: err?.response?.data?.message || this.$t('Notifications.Error'),
+        });
+      }
+    }
   },
 };
 </script>

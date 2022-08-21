@@ -1,0 +1,9 @@
+.doctors-header{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  &__search {
+    width: 60%;
+    margin-right: auto;
+  }
+}
