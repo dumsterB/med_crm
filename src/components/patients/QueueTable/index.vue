@@ -42,23 +42,11 @@
         </ElTableColumn>
         <ElTableColumn prop="name" width="200" :label="$t('Base.Actions')">
           <template #default="{ row }">
-<<<<<<< HEAD
               <div  class="queues-table-actions">
                 <ElButton v-if="row.status == Appointment.enum.statuses.Approved" type="primary" @click="callToReception(row)">
                   {{$t('Base.CallToReception')}}
                 </ElButton>
               </div>
-=======
-            <div class="queues-table-actions">
-              <!--     TODO: FIX           -->
-              <ElButton
-                v-if="row.status == 'approved'"
-                type="primary"
-                @click="callToReception(row)">
-                {{ $t('Base.CallToReception') }}
-              </ElButton>
-            </div>
->>>>>>> eff8cada09bed06a107e0761d77a576aafe6dfd5
           </template>
         </ElTableColumn>
       </ElTable>
