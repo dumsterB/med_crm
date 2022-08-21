@@ -26,8 +26,21 @@
     <ElDivider />
 
     <div class="appointment-card-actions">
-      <ElButton type="primary"  @click="editAppointment" > {{ $t('Appointments.EditReception') }} </ElButton>
-      <ElButton type="danger" @click="cancelAppointment" plain> {{ $t('Appointments.CancelReception') }} </ElButton>
+      <ElButton
+        type="primary"
+        @click="updateStatus(Appointment.enum.statuses.InProgress)"
+        v-if="data.status == Appointment.enum.statuses.Waiting">
+        {{ $t('Appointments.PatientCome') }}
+      </ElButton>
+      <ElButton
+        type="primary"
+        @click="editAppointment"
+        v-if="data.status == Appointment.enum.statuses.Waiting">
+        {{ $t('Appointments.EditReception') }}</ElButton
+      >
+      <ElButton type="danger" @click="updateStatus(Appointment.enum.statuses.Canceled)" plain>
+        {{ $t('Appointments.CancelReception') }}
+      </ElButton>
     </div>
   </ElCard>
 </template>
@@ -41,9 +54,9 @@ import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDr
 
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
-import {APPOINTMENT_ROUTE} from "@/router/appointments.routes";
-import {DOCTORS_QUEUE_ROUTE} from "@/router/doctors.routes";
-
+import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
+import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
+const STATUS = 'waiting';
 export default {
   name: 'AppointmentCard',
   components: { AppointmentStatusTag },
@@ -100,11 +113,11 @@ export default {
       if (action instanceof GlobalDrawerCloseAction) return;
       this.$emit('update:data', action.data.appointment);
     },
-   async cancelAppointment(){
+    async updateStatus(status) {
       try {
-         await Appointment.updateStatus({
+        await Appointment.updateStatus({
           id: this.data.id,
-          status: Appointment.enum.statuses.Canceled
+          status: status,
         });
 
         this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
@@ -112,7 +125,6 @@ export default {
         this.$router.push({
           name: DOCTORS_QUEUE_ROUTE.name,
         });
-
       } catch (err) {
         console.log(err);
         this.$notify({
@@ -120,7 +132,10 @@ export default {
           title: err?.response?.data?.message || this.$t('Notifications.Error'),
         });
       }
-    }
+    },
+    setup: () => ({
+      Appointment,
+    }),
   },
 };
 </script>

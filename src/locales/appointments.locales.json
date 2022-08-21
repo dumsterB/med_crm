@@ -12,6 +12,7 @@
       "StartDateAndTime": "Время и дата приёма",
       "EditReception": "Редактировать прием",
       "CancelReception": "Отменить запись",
+      "PatientCome": "Пациент явился",
       "StartTime": "Время приёма",
       "Statuses": {
         "created": "Создан",
@@ -36,6 +37,7 @@
       "PhonePatient": "Bemorning telefoni",
       "RecordingSource": "Yozib olish manbai",
       "SelectDoctor": "Shifokorni tanlang",
+      "PatientCome": "Bemor keldi",
       "SelectStatus": "Holatni tanlang",
       "StartDate": "Qabul kuni",
       "StartDateAndTime": "Qabul kuni va vaqti",
