@@ -1,7 +1,12 @@
 <template>
   <div class="queues-table-wrapper">
     <ElScrollbar class="queues-table-wrapper__scrollbar">
-      <ElTable class="queues-table" ref="elTable" @row-click="goToAppointment" :data="items" v-loading="loading">
+      <ElTable
+        class="queues-table"
+        ref="elTable"
+        @row-click="goToAppointment"
+        :data="items"
+        v-loading="loading">
         <template #empty>
           <div class="queues-table__empty queues-table-empty">
             <span>{{ $t('Base.NoData') }}</span>
@@ -42,11 +47,14 @@
         </ElTableColumn>
         <ElTableColumn prop="name" width="200" :label="$t('Base.Actions')">
           <template #default="{ row }">
-              <div  class="queues-table-actions">
-                <ElButton v-if="row.status === Appointment.enum.statuses.Approved" type="primary" @click="callToReception(row)">
-                  {{$t('Base.CallToReception')}}
-                </ElButton>
-              </div>
+            <div class="queues-table-actions">
+              <ElButton
+                v-if="row.status === Appointment.enum.statuses.Approved"
+                type="primary"
+                @click="callToReception(row)">
+                {{ $t('Base.CallToReception') }}
+              </ElButton>
+            </div>
             <div class="queues-table-actions">
               <!--     TODO: FIX           -->
               <ElButton
@@ -96,6 +104,10 @@ export default {
         });
 
         this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
+        this.$router.push({
+          name: APPOINTMENT_ROUTE.name,
+          params: { id: payload.id },
+        });
       } catch (error) {
         console.log(error);
         this.$notify({
