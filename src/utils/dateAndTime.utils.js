@@ -139,6 +139,20 @@ export function prevOrNextMonthByISOString(date, options = { type: 'next' }) {
 }
 
 /**
+ * @example 2022-09-30T00:00:00.000Z  ->  2022-08-30T00:00:00.000Z || 2022-10-30T00:00:00.000Z
+ * @param {string} date ISO format
+ * @param {object} [options]
+ * @param {"next"|"prev"} options.type = "next"
+ * @return {string}
+ */
+export function prevOrNextDayByISOString(date, options = { type: 'next' }) {
+  const _date = new Date(date);
+  _date.setDate(options.type === 'next' ? _date.getDate() + 1 : _date.getDate() - 1);
+
+  return _date.toISOString();
+}
+
+/**
  * Добавляет ноль если длина строки или число имеет один символов
  * @param {string|number} value
  * @return {string|number}
