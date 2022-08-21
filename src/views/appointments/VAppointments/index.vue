@@ -1,5 +1,5 @@
 <template>
-  <LayoutRegistry content-class="v-patients-records-content" fixHeight>
+  <LayoutByUserRole content-class="v-patients-records-content" fixHeight>
     <div class="v-patients-records-content__header v-patients-records-content-header">
       <div class="v-patients-records-content-header__filters">
         <!--        <ElSelect
@@ -40,27 +40,30 @@
       v-model:per-page="perPage.value"
       :total="total"
       :search="search.value" />
-  </LayoutRegistry>
+  </LayoutByUserRole>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
 import { usePage, usePerPage, useSearch } from '@/hooks/query';
+import { ISOStringToDateAppFormat } from '@/utils/dateAndTime.utils';
 import { Appointment } from '@/models/Appointment.model.js';
-import { REGISTRY_APPOINTMENTS_ROUTE } from '@/router/registry.routes';
-
-import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
+import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
 
 export default {
   name: 'VAppointments',
-  components: { LayoutRegistry, AppointmentsTable },
+  components: { LayoutByUserRole, AppointmentsTable },
 
   setup: () => ({
     perPage: usePerPage(),
     page: usePage(),
     search: useSearch(),
+    timeOptions: {
+      startAt: ISOStringToDateAppFormat(new Date().toISOString()),
+      endAt: ISOStringToDateAppFormat(new Date().toISOString()),
+    },
   }),
   computed: {
     ...mapState({
@@ -99,6 +102,8 @@ export default {
         const { data } = await Appointment.find({
           per_page: this.perPage.value,
           page: this.page.value,
+          start_at: this.timeOptions.startAt,
+          end_at: this.timeOptions.endAt,
         });
         this.setData({
           items: data.data,

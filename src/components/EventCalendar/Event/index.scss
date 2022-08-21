@@ -1,14 +1,28 @@
 .ec-event {
   --ec-event-bg-color: #f4fafa;
+  --ec-event-bg-hover-color: #e4f0f1;
 
   display: inline-flex;
   flex-direction: column;
   gap: 4px;
   padding: 10px 20px;
   background-color: var(--ec-event-bg-color);
+  border: 1px solid #eaeaea;
   border-left: 5px solid var(--primary-color);
+  border-top-right-radius: var(--border-radius-medium);
+  border-bottom-right-radius: var(--border-radius-medium);
+
+  &:hover {
+    background-color: var(--ec-event-bg-hover-color);
+    cursor: pointer;
+  }
 
   &__title {
     font-weight: 600;
+  }
+
+  &__description {
+    color: var(--text-secondary-color);
+    font-size: 0.9em;
   }
 }

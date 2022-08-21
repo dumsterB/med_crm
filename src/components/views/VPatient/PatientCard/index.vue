@@ -53,7 +53,7 @@ import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatient
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 
 export default {
-  name: 'VPatientProfileCard',
+  name: 'VPatientPatientCard',
   icons: icons,
   props: {
     data: {
@@ -95,7 +95,7 @@ export default {
   methods: {
     goToPatient() {
       this.$router.push({
-        ...REGISTRY_PATIENT_ROUTE,
+        name: REGISTRY_PATIENT_ROUTE.name,
         params: { id: this.data.id },
       });
     },

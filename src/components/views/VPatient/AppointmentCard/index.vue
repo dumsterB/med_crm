@@ -29,7 +29,7 @@
 import * as icons from '@/enums/icons.enum';
 import { Appointment } from '@/models/Appointment.model';
 import { PriceService } from '@/services/price.service';
-import { REGISTRY_APPOINTMENT_ROUTE } from '@/router/registry.routes';
+import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 
 export default {
   name: 'VPatientAppointmentCard',
@@ -61,7 +61,7 @@ export default {
   methods: {
     goToAppointment() {
       this.$router.push({
-        ...REGISTRY_APPOINTMENT_ROUTE,
+        name: APPOINTMENT_ROUTE.name,
         params: {
           patientId: this.data.patient_id,
           id: this.data.id,

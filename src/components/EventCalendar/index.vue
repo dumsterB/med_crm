@@ -1,5 +1,6 @@
 <template>
-  <div class="event-calendar">
+  <div :class="['event-calendar', `event-calendar_${type}`]">
+    <!--  Header  -->
     <div class="event-calendar__header event-calendar-header">
       <div class="event-calendar-header-picker">
         <ElButton text class="event-calendar-header-picker__prev" @click="prevMonth">
@@ -21,6 +22,7 @@
         </ElButton>
       </div>
 
+      <!--  Header Actions  -->
       <div class="event-calendar-header-actions">
         <slot name="actions"></slot>
         <ElSelect
@@ -32,13 +34,19 @@
       </div>
     </div>
 
+    <!--  Content  -->
     <div class="event-calendar__content event-calendar-content" v-loading="loading">
       <MonthCalendar
         v-if="type === EVENT_CALENDAR_TYPES.MONTH"
         :date="date"
         :data="monthData"
         @update:date="setDayTypeAndDate" />
-      <DayCalendar v-if="type === EVENT_CALENDAR_TYPES.DAY" />
+      <DayCalendar
+        v-if="type === EVENT_CALENDAR_TYPES.DAY"
+        :date="date"
+        :data="dayData"
+        @update:date="$emit('update:date', $event)"
+        @click:event="$emit('click:event', $event)" />
     </div>
   </div>
 </template>

@@ -73,6 +73,28 @@ export class Appointment extends CRUDModel {
   }
 
   /**
+   * @param {string,number} doctorId
+   * @return {Promise<{data: response.data, response: AxiosResponse<*>}>}
+   */
+  static async findByDoctor({ doctorId }) {
+    const response = await ApiService.get(`${this.tableName}/${doctorId}/queues`);
+    return { response, data: response.data };
+  }
+
+  /**
+   * @param {string,number} id
+   * @param {string} status
+   * @return {Promise<{data: response.data, response: AxiosResponse<*>}>}
+   */
+  static async updateStatus({ id, status }) {
+    const response = await ApiService.put(`${this.tableName}/${id}/${status}`);
+    return {
+      response: response,
+      data: response.data,
+    };
+  }
+
+  /**
    * @param {string} date format - DD.MM.YY hh:mm
    * @return {Date|string}
    */
@@ -95,11 +117,11 @@ export class Appointment extends CRUDModel {
     },
     statuses: {
       Created: 'created',
-      Approved: 'approved',
+      Approved: 'approve',
       Waiting: 'waiting',
       InProgress: 'in_progress',
       Provided: 'provided',
-      Canceled: 'canceled',
+      Canceled: 'cancel',
     },
   };
 }

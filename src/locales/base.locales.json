@@ -2,11 +2,15 @@
   "ru": {
     "Base": {
       "Actions": "Действия",
+      "FullName": "ФИО",
       "Attach": "Привязать",
       "Authorization": "Авторизация",
       "Cancel": "Отменить",
+      "Back": "Назад",
+      "Time": "Время",
       "Create": "Создать",
       "Dashboard": "Дашборд",
+      "Queue": "Очередь",
       "Delete": "Удалить",
       "Doctor": "Доктор",
       "DoctorsSchedule": "Расписание врачей",
@@ -32,7 +36,8 @@
       "SelectDate": "Выберите дату",
       "Service": "Услуга",
       "SignUp": "Регистрация",
-      "Sum": "сум"
+      "Sum": "сум",
+      "CallToReception": "Вызвать на прием"
     }
   },
   "uz": {
@@ -41,10 +46,12 @@
       "Attach": "Bog'lash",
       "Authorization": "Kirish",
       "Cancel": "Qaytish",
+      "Back": "Назад",
       "Create": "Yaratish",
       "Dashboard": "Dashboard",
       "Delete": "Oʻchirish",
       "Doctor": "Shifokor",
+      "Time": "Vaqt",
       "DoctorsSchedule": "Shifokorlar jadvali",
       "Edit": "Tahrirlash",
       "ForgotPassword": "Parolni unutdingizmi?",
@@ -68,7 +75,8 @@
       "SelectDate": "Sanani tanlang",
       "Service": "Xizmat",
       "SignUp": "Ro'yxatdan o'tish",
-      "Sum": "som"
+      "Sum": "som",
+      "CallToReception": "Qabul qilish"
     }
   }
 }
