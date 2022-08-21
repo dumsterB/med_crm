@@ -8,7 +8,7 @@ export class EventCalendarEvent {
    */
   constructor(payload) {
     this.title = payload.title;
-    this.descripton = payload?.description ?? null;
+    this.description = payload?.description ?? null;
     this.startAt = payload?.startAt ?? null;
     this.endAt = payload?.endAt ?? null;
   }
