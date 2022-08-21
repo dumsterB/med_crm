@@ -43,8 +43,9 @@
         @update:date="setDayTypeAndDate" />
       <DayCalendar
         v-if="type === EVENT_CALENDAR_TYPES.DAY"
-        v-model:date="date"
+        :date="date"
         :data="dayData"
+        @update:date="$emit('update:date', $event)"
         @click:event="$emit('click:event', $event)" />
     </div>
   </div>

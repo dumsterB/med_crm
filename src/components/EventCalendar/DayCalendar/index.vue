@@ -1,7 +1,7 @@
 <template>
   <div class="ec-day-calendar">
     <div class="ec-day-calendar__header ec-day-calendar-header">
-      <ElButton class="ec-day-calendar-header__prev" text>
+      <ElButton class="ec-day-calendar-header__prev" text @click="prevDay">
         <UiIcon :icon="icons.CHEVRON_LEFT" />
       </ElButton>
 
@@ -9,7 +9,7 @@
         {{ dateText }}
       </div>
 
-      <ElButton class="ec-day-calendar-header__next" text>
+      <ElButton class="ec-day-calendar-header__next" text @click="nextDay">
         <UiIcon :icon="icons.CHEVRON_RIGHT" />
       </ElButton>
     </div>
@@ -60,8 +60,9 @@
 </template>
 
 <script>
-import * as icons from '@/enums/icons.enum.js';
 import EventCalendarEvent from '@/components/EventCalendar/Event/index.vue';
+import * as icons from '@/enums/icons.enum.js';
+import { prevOrNextDayByISOString } from '@/utils/dateAndTime.utils';
 
 export default {
   name: 'DayCalendar',
@@ -114,6 +115,13 @@ export default {
         height: `${height - 1}px`,
         maxHeight: `${height - 1}px`,
       };
+    },
+
+    prevDay() {
+      this.$emit('update:date', prevOrNextDayByISOString(this.date, { type: 'prev' }));
+    },
+    nextDay() {
+      this.$emit('update:date', prevOrNextDayByISOString(this.date, { type: 'next' }));
     },
   },
 
