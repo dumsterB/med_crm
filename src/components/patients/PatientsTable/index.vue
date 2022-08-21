@@ -59,7 +59,6 @@
         </ElTableColumn>
       </ElTable>
     </ElScrollbar>
-
     <ElPagination
       class="patients-table-wrapper__pagination"
       :current-page="page"

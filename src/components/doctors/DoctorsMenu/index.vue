@@ -10,17 +10,17 @@
 </template>
 
 <script>
+
 import * as icons from '@/enums/icons.enum.js';
-import { REGISTRY_DASHBOARD_ROUTE, REGISTRY_PATIENTS_ROUTE } from '@/router/registry.routes';
-import { APPOINTMENTS_ROUTE } from '@/router/appointments.routes';
+import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
 import DefaultMenu from '@/components/DefaultMenu/index.vue';
 
 export default {
-  name: 'RegistryMenu',
+  name: 'DoctorsMenu',
   components: { DefaultMenu },
   computed: {
     navigation() {
-      return [REGISTRY_DASHBOARD_ROUTE, REGISTRY_PATIENTS_ROUTE, APPOINTMENTS_ROUTE].map(
+      return [DOCTORS_QUEUE_ROUTE].map(
         (route) => ({
           ...route,
           title: this.routesOptionsByRouteName[route.name].text,
@@ -31,17 +31,9 @@ export default {
 
     routesOptionsByRouteName() {
       return {
-        [REGISTRY_DASHBOARD_ROUTE.name]: {
-          icon: icons.DASHBOARD,
-          text: this.$t('Base.Dashboard'),
-        },
-        [REGISTRY_PATIENTS_ROUTE.name]: {
-          icon: icons.USER_TAG,
-          text: this.$t('Base.Patients'),
-        },
-        [APPOINTMENTS_ROUTE.name]: {
-          icon: icons.NOTE,
-          text: this.$t('Base.PatientsRecords'),
+        [DOCTORS_QUEUE_ROUTE.name]: {
+          icon: icons.DOCTORS_QUEUE,
+          text: this.$t('Base.Queue'),
         },
       };
     },

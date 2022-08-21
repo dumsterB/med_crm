@@ -10,7 +10,8 @@
       "Gender": "Пол",
       "Genders": {
         "man": "Мужчина",
-        "woman": "Женщина"
+        "woman": "Женщина",
+        "null": ""
       },
       "IsChildren": "Ребёнок",
       "Parent": "Родитель",

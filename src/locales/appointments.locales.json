@@ -10,6 +10,8 @@
       "SelectStatus": "Выберите статус",
       "StartDate": "Дата приёма",
       "StartDateAndTime": "Время и дата приёма",
+      "EditReception": "Редактировать прием",
+      "CancelReception": "Отменить запись",
       "StartTime": "Время приёма",
       "Statuses": {
         "created": "Создан",
@@ -38,6 +40,8 @@
       "StartDate": "Qabul kuni",
       "StartDateAndTime": "Qabul kuni va vaqti",
       "StartTime": "Qabul vaqti",
+      "EditReception": "Qabul qilishni tahrirlash",
+      "CancelReception": "Kirishni bekor qilish",
       "Statuses": {
         "approved": "Tasdiqlangan",
         "provided": "Kutilmoqda",
