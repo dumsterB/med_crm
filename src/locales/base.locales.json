@@ -2,20 +2,20 @@
   "ru": {
     "Base": {
       "Actions": "Действия",
-      "FullName": "ФИО",
+      "Appointment": "Запись",
       "Attach": "Привязать",
       "Authorization": "Авторизация",
-      "Cancel": "Отменить",
       "Back": "Назад",
-      "Time": "Время",
+      "CallToReception": "Вызвать на прием",
+      "Cancel": "Отменить",
       "Create": "Создать",
       "Dashboard": "Дашборд",
-      "Queue": "Очередь",
       "Delete": "Удалить",
       "Doctor": "Доктор",
       "DoctorsSchedule": "Расписание врачей",
       "Edit": "Редактировать",
       "ForgotPassword": "Заблыи пароль?",
+      "FullName": "ФИО",
       "InviteByNumber": "Пригласить по номеру",
       "Loading": "Загрузка...",
       "Login": "Логин",
@@ -31,27 +31,29 @@
       "PleaseInput": "Пожалуйста, введите",
       "PleaseSelect": "Пожалуйста выберите",
       "Price": "Цена",
+      "Queue": "Очередь",
       "SaveChanges": "Сохранить изменения",
       "Search": "Поиск",
       "SelectDate": "Выберите дату",
       "Service": "Услуга",
       "SignUp": "Регистрация",
       "Sum": "сум",
-      "CallToReception": "Вызвать на прием"
+      "Time": "Время"
     }
   },
   "uz": {
     "Base": {
       "Actions": "Harakatlar",
+      "Appointment": "??Запись??",
       "Attach": "Bog'lash",
       "Authorization": "Kirish",
-      "Cancel": "Qaytish",
       "Back": "Назад",
+      "CallToReception": "Qabul qilish",
+      "Cancel": "Qaytish",
       "Create": "Yaratish",
       "Dashboard": "Dashboard",
       "Delete": "Oʻchirish",
       "Doctor": "Shifokor",
-      "Time": "Vaqt",
       "DoctorsSchedule": "Shifokorlar jadvali",
       "Edit": "Tahrirlash",
       "ForgotPassword": "Parolni unutdingizmi?",
@@ -76,7 +78,7 @@
       "Service": "Xizmat",
       "SignUp": "Ro'yxatdan o'tish",
       "Sum": "som",
-      "CallToReception": "Qabul qilish"
+      "Time": "Vaqt"
     }
   }
 }

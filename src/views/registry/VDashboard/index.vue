@@ -1,10 +1,13 @@
 <template>
-  <LayoutRegistry>
+  <LayoutRegistry fixHeight>
     <EventCalendar
+      class="v-dashboard-content__calendar"
       v-model:type="type.value"
       v-model:date="date.value"
       :loading="loading.calendar"
-      :month-data="dataForMonth">
+      :month-data="dataForMonth"
+      :day-data="dataForDay"
+      @click:event="goToAppointment">
       <template #actions>
         <UiModelsAutocompleteSearch
           v-model="doctorId.value"
@@ -21,14 +24,18 @@ import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import EventCalendar from '@/components/EventCalendar/index.vue';
 import { EVENT_CALENDAR_TYPES } from '@/components/EventCalendar/index.enum';
 import { useQuery } from '@/hooks/useQuery.hook';
-import { Doctor } from '@/models/Doctor.model';
-import { Appointment } from '@/models/Appointment.model';
 import {
   ISOStringToDateAppFormat,
   getDaysInMonth,
   resetDaysInISOString,
   dateAppFormatToISOString,
 } from '@/utils/dateAndTime.utils';
+import { Doctor } from '@/models/Doctor.model';
+import { Appointment } from '@/models/Appointment.model';
+import { EventCalendarEvent } from '@/components/EventCalendar/Event/EventCalendarEvent.model';
+import { I18nService } from '@/services/i18n.service';
+import { groupBy } from 'lodash';
+import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 
 export default {
   name: 'VDashboard',
@@ -40,6 +47,7 @@ export default {
         doctor: false,
       },
       dataForMonth: {},
+      dataForDay: [],
 
       /** @type Doctor */
       doctor: null, // загрузить доктора при открытии страницы по ид из query
@@ -47,14 +55,19 @@ export default {
   },
   computed: {
     startAt() {
-      return resetDaysInISOString(this.date.value);
+      const forMonthType = resetDaysInISOString(this.date.value);
+
+      return this.type.value === EVENT_CALENDAR_TYPES.MONTH ? forMonthType : this.date.value;
     },
     endAt() {
-      return this.startAt.replace(
+      const forMonthType = this.startAt.replace(
         /(\d\d\d\d)-(\d\d)-(\d\d)T/,
         (str, year, month) => `${year}-${month}-${this.daysInMonth}T`
       );
+
+      return this.type.value === EVENT_CALENDAR_TYPES.MONTH ? forMonthType : this.date.value;
     },
+
     daysInMonth() {
       return getDaysInMonth(this.startAt);
     },
@@ -85,6 +98,7 @@ export default {
   },
 
   methods: {
+    // использую I18nService - почему-то при переходе на другую страницу watcher всё равно отрабатывает до демонтирования компонента
     async getDataForMonthType() {
       const { data } = await Appointment.getStatistic({
         startAt: ISOStringToDateAppFormat(this.startAt, { withTime: false, fullYear: false }),
@@ -95,12 +109,40 @@ export default {
       this.dataForMonth = {};
       Object.keys(data.data).forEach((date) => {
         this.dataForMonth[dateAppFormatToISOString(date).split('T')[0]] = [
-          { title: this.$tc('Appointments.AppointmentsTc', data.data[date].count) },
+          { title: I18nService.tc('Appointments.AppointmentsTc', data.data[date].count) },
         ];
       });
     },
 
-    async getDateForDayType() {},
+    async getDateForDayType() {
+      const { data } = await Appointment.find({
+        page: 1,
+        per_page: 999,
+        query_field: 'doctor_id',
+        query_type: 'IN',
+        search: this.doctorId.value ? [this.doctorId.value] : [],
+        start_at: ISOStringToDateAppFormat(this.startAt, { withTime: false, fullYear: false }),
+        end_at: ISOStringToDateAppFormat(this.endAt, { withTime: false, fullYear: false }),
+      });
+
+      const groups = groupBy(data.data, 'doctor_id');
+      this.dataForDay = Object.keys(groups).map((doctorId) => ({
+        column: {
+          id: doctorId,
+          title: groups[doctorId][0].doctor.name,
+        },
+        data: groups[doctorId].map(
+          (appointment) =>
+            new EventCalendarEvent({
+              title: this.$t('Base.Appointment'),
+              description: appointment.patient?.name,
+              startAt: appointment.start_at,
+              endAt: appointment.end_at,
+              payload: appointment,
+            })
+        ),
+      }));
+    },
 
     async getDefaultDoctor() {
       this.loading.doctor = true;
@@ -109,6 +151,15 @@ export default {
       this.doctor = data.data;
 
       this.loading.doctor = false;
+    },
+
+    goToAppointment(event) {
+      this.$router.push({
+        name: APPOINTMENT_ROUTE.name,
+        params: {
+          id: event.payload.id,
+        },
+      });
     },
   },
 
@@ -138,5 +189,6 @@ export default {
 </script>
 
 <style lang="scss" src="./index.scss" />
+<i18n src="@/locales/base.locales.json" />
 <i18n src="@/locales/appointments.locales.json" />
 <i18n src="./index.locales.json" />

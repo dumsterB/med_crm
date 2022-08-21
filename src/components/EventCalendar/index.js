@@ -6,7 +6,7 @@ import { prevOrNextMonthByISOString } from '@/utils/dateAndTime.utils';
 
 export default {
   name: 'EventCalendar',
-  emits: ['update:type', 'update:date'],
+  emits: ['update:type', 'update:date', 'click:event'],
   components: { MonthCalendar, DayCalendar },
   props: {
     loading: Boolean,
@@ -23,6 +23,13 @@ export default {
      * @property {string} monthData[key][].title
      */
     monthData: Object,
+
+    /**
+     * @param {Array<object>} dayData
+     * @param {{id: number, title: string}} dayData[].column
+     * @param {Array<Appointment>} dayData[].data
+     */
+    dayData: Array,
   },
   computed: {
     month() {
