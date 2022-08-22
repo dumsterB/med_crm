@@ -51,6 +51,14 @@ export default {
       };
     },
 
+    patientsOptions() {
+      return {
+        searchQuery: {
+          query_field: ['name', 'phone'],
+        },
+      };
+    },
+
     specialtiesOptions() {
       return {
         isShow: this.appointmentType === this.appointmentTypesEnum.Doctor && !this.data,

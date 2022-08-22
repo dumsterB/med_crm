@@ -9,6 +9,7 @@
       "EndReception": "Завершить прием",
       "LiveQueue": "Живая очередь",
       "PatientCome": "Пациент явился",
+      "PatientNotCome": "Пациент не явился",
       "PhonePatient": "Телефон пациента",
       "RecordingSource": "Источник записи",
       "SelectDoctor": "Выберите доктора",
@@ -41,6 +42,7 @@
       "EndReception": "Yozuvni tugatish",
       "LiveQueue": "Jonli navbat",
       "PatientCome": "Bemor keldi",
+      "PatientNotCome": "Bemor kelmadi",
       "PhonePatient": "Bemorning telefoni",
       "RecordingSource": "Yozib olish manbai",
       "SelectDoctor": "Shifokorni tanlang",
@@ -52,7 +54,10 @@
         "Status": "Holat",
         "approved": "Tasdiqlangan",
         "canceled": "Bekor qilish",
-        "provided": "Kutilmoqda"
+        "created": "Создан",
+        "in_progress": "В процессе",
+        "provided": "Kutilmoqda",
+        "waiting": "Ожидает"
       },
       "Types": {
         "doctor": "Shifokor",

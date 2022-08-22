@@ -1,16 +1,15 @@
 <template>
   <div class="doctors-header">
-    <LangSelect class="lang" />
+    <!--    <LangSelect class="lang" />-->
   </div>
 </template>
 
 <script>
 import LangSelect from '@/components/LangSelect/index.vue';
-import PatientsSearch from '@/components/patients/PatientsSearch/index.vue';
 
 export default {
   name: 'RegistryHeader',
-  components: { LangSelect, PatientsSearch },
+  components: { LangSelect },
 };
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <ElCard v-loading="loading" class="appointment-card" shadow="never" v-bind="$attrs">
+  <ElCard class="appointment-card" shadow="never" v-bind="$attrs">
     <template #header>
       <router-link class="appointment-card__header appointment-card-header" :to="patientPageLink">
         <UiAvatar class="appointment-card-header__avatar" size="super-large" />
@@ -27,48 +27,71 @@
 
     <div class="appointment-card-actions">
       <ElButton
+        v-if="data.status === Appointment.enum.statuses.Approved"
         type="primary"
-        @click="updateStatus(Appointment.enum.statuses.InProgress)"
-        v-if="
-          data.status === Appointment.enum.statuses.Waiting ||
-          data.status === Appointment.enum.statuses.Approved
-        ">
+        :loading="loading.waiting"
+        @click="updateStatus(Appointment.enum.statuses.Waiting)">
+        {{ $t('Base.CallToReception') }}
+      </ElButton>
+      <ElButton
+        v-if="data.status === Appointment.enum.statuses.Approved"
+        type="danger"
+        plain
+        :loading="loading.canceled"
+        @click="updateStatus(Appointment.enum.statuses.Canceled)">
+        {{ $t('Appointments.CancelReception') }}
+      </ElButton>
+
+      <ElButton
+        v-if="data.status === Appointment.enum.statuses.Waiting"
+        type="primary"
+        :loading="loading.in_progress"
+        @click="updateStatus(Appointment.enum.statuses.InProgress)">
         {{ $t('Appointments.PatientCome') }}
       </ElButton>
       <ElButton
-        type="primary"
-        @click="editAppointment"
-        v-if="data.status === !Appointment.enum.statuses.Waiting">
-        {{ $t('Appointments.EditReception') }}</ElButton
-      >
-      <!--   TODO: FIX   -->
-      <ElButton
+        v-if="data.status === Appointment.enum.statuses.Waiting"
         type="danger"
-        @click="updateStatus(Appointment.enum.statuses.Canceled)"
         plain
-        v-if="cancelReception">
-        {{ $t('Appointments.CancelReception') }}
+        :loading="loading.canceled"
+        @click="updateStatus(Appointment.enum.statuses.Canceled)">
+        {{ $t('Appointments.PatientNotCome') }}
       </ElButton>
+
       <ElButton
-        type="danger"
-        @click="updateStatus(Appointment.enum.statuses.Provided)"
-        plain
-        v-if="endReception">
+        v-if="data.status === Appointment.enum.statuses.InProgress"
+        type="primary"
+        :loading="loading.provided"
+        @click="updateStatus(Appointment.enum.statuses.Provided)">
         {{ $t('Appointments.EndReception') }}
+      </ElButton>
+
+      <ElButton
+        v-if="
+          user.role === User.enum.roles.Manager &&
+          data.status === Appointment.enum.statuses.Approved
+        "
+        type="primary"
+        plain
+        @click="editAppointment">
+        {{ $t('Appointments.EditReception') }}
       </ElButton>
     </div>
   </ElCard>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { insertRouteParams } from '@/utils/router.utils';
 import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
+import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
+import { User } from '@/models/User.model';
 import { Appointment } from '@/models/Appointment.model';
 import { PriceService } from '@/services/price.service';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
+
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
-import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
 
 export default {
   name: 'AppointmentCard',
@@ -78,10 +101,20 @@ export default {
   },
   data() {
     return {
-      loading: false,
+      loading: {
+        waiting: false,
+        canceled: false,
+        in_progress: false,
+        approved: false,
+        provided: false,
+      },
     };
   },
   computed: {
+    ...mapState({
+      user: (state) => state.auth.user,
+    }),
+
     patientPageLink() {
       return insertRouteParams({
         path: REGISTRY_PATIENT_ROUTE.path,
@@ -116,22 +149,6 @@ export default {
         },
       ];
     },
-    endReception() {
-      return (
-        this.data.status === Appointment.enum.statuses.InProgress ||
-        (this.data.status !== Appointment.enum.statuses.Provided &&
-          this.data.status !== Appointment.enum.statuses.Waiting &&
-          this.data.status !== Appointment.enum.statuses.Canceled &&
-          this.data.status !== Appointment.enum.statuses.Approved)
-      );
-    },
-    cancelReception() {
-      return (
-        this.data.status !== Appointment.enum.statuses.InProgress &&
-        this.data.status !== Appointment.enum.statuses.Canceled &&
-        this.data.status !== Appointment.enum.statuses.Provided
-      );
-    },
   },
 
   methods: {
@@ -146,28 +163,33 @@ export default {
       if (action instanceof GlobalDrawerCloseAction) return;
       this.$emit('update:data', action.data.appointment);
     },
+    setLoader(value) {
+      let key;
+      if (Object.keys(this.loading).includes(value)) {
+        key = Object.keys(this.loading).filter((ell) => ell === value);
+      }
+      return key;
+    },
     async updateStatus(status) {
+      let key = this.setLoader(status);
+      this.loading[key] = true
       try {
-        this.loading = true;
-        const response = await Appointment.updateStatus({
+        const { data } = await Appointment.updateStatus({
           id: this.data.id,
           status: status,
         });
-
-        this.data.status = response.data.data.status;
+        this.$emit('update:data', data.data);
 
         this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
 
-        this.loading = false;
         if (
-          status != Appointment.enum.statuses.Waiting &&
-          status != Appointment.enum.statuses.InProgress
+          status !== Appointment.enum.statuses.Waiting &&
+          status !== Appointment.enum.statuses.InProgress &&
+          this.user.role === User.enum.roles.Doctor
         ) {
           this.$router.push({
             name: DOCTORS_QUEUE_ROUTE.name,
           });
-        } else {
-          return true;
         }
       } catch (err) {
         console.log(err);
@@ -176,11 +198,13 @@ export default {
           title: err?.response?.data?.message || this.$t('Notifications.Error'),
         });
       }
+      this.loading[key] = false
     },
   },
 
   setup: () => ({
     Appointment,
+    User,
   }),
 };
 </script>

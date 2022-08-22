@@ -7,6 +7,7 @@
       "Children": "Дети",
       "Email": "Почта",
       "FullName": "ФИО",
+      "FullNameFormat": "Латинские буквы",
       "Gender": "Пол",
       "Genders": {
         "man": "Мужчина",
@@ -15,7 +16,8 @@
       },
       "IsChildren": "Ребёнок",
       "Parent": "Родитель",
-      "Phone": "Телефон"
+      "Phone": "Телефон",
+      "PleaseInputNameOrPhone": "Введите номер или ФИО"
     }
   },
   "uz": {
@@ -24,7 +26,9 @@
       "Age": "Yosh",
       "Birthdate": "Togilgan sanasi",
       "Children": "Bolalar",
+      "Email": "Email",
       "FullName": "FIO",
+      "FullNameFormat": "Латинские буквы",
       "Gender": "Jinsi",
       "Genders": {
         "man": "Erkak",
@@ -33,7 +37,7 @@
       "IsChildren": "Yosh bola",
       "Parent": "Otonasi",
       "Phone": "Telefon",
-      "Email": "Email"
+      "PleaseInputNameOrPhone": "Введите номер или ФИО"
     }
   }
 }
