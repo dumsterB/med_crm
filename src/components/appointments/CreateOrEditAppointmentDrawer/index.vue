@@ -15,8 +15,10 @@
         <UiModelsAutocompleteSearch
           v-model="appointment.patient_id"
           :modelForUse="Patient"
+          :searchQuery="patientsOptions.searchQuery"
           :defaultItem="data?.patient || patient"
           :disabled="!!patient || !!data"
+          :placeholder="$t('User.PleaseInputNameOrPhone')"
           required />
       </ElFormItem>
 
@@ -113,8 +115,7 @@
           :disabled="slotsOptions.isDisabled"
           :service-id="appointment.service_id"
           :group-service-id="appointment.group_service_id"
-          :dependencies="slotsOptions.dependencies"
-        />
+          :dependencies="slotsOptions.dependencies" />
       </ElFormItem>
 
       <!--  Actions  -->
@@ -134,6 +135,7 @@
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/base.locales.json" />
 <i18n src="@/locales/notifications.locales.json" />
+<i18n src="@/locales/user.locales.json" />
 <i18n src="@/locales/appointments.locales.json" />
 <i18n src="@/locales/dateAndTime.locales.json" />
 <i18n src="./index.locales.json" />

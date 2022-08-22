@@ -3,7 +3,7 @@
     class="ui-patients-autocomplete-search"
     v-model="query"
     :value-key="label"
-    :placeholder="$t('Base.PleaseInput')"
+    :placeholder="placeholder || $t('Base.PleaseInput')"
     :fetch-suggestions="getItems"
     :debounce="250"
     :required="required"
@@ -38,6 +38,7 @@ export default {
 
     required: Boolean,
     disabled: Boolean,
+    placeholder: String,
   },
   data() {
     return {

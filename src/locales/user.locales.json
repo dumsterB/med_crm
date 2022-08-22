@@ -15,7 +15,8 @@
       },
       "IsChildren": "Ребёнок",
       "Parent": "Родитель",
-      "Phone": "Телефон"
+      "Phone": "Телефон",
+      "PleaseInputNameOrPhone": "Введите номер или ФИО"
     }
   },
   "uz": {
@@ -24,6 +25,7 @@
       "Age": "Yosh",
       "Birthdate": "Togilgan sanasi",
       "Children": "Bolalar",
+      "Email": "Email",
       "FullName": "FIO",
       "Gender": "Jinsi",
       "Genders": {
@@ -33,7 +35,7 @@
       "IsChildren": "Yosh bola",
       "Parent": "Otonasi",
       "Phone": "Telefon",
-      "Email": "Email"
+      "PleaseInputNameOrPhone": "Введите номер или ФИО"
     }
   }
 }
