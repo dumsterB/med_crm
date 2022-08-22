@@ -43,7 +43,7 @@
           {{ $t('Base.NoData') }}
         </ElTableColumn>
 
-        <ElTableColumn prop="clinic.published_at" :label="$t('DateAndTime.CreatedAt')" />
+        <ElTableColumn prop="start_at" :label="$t('DateAndTime.CreatedAt')" />
       </ElTable>
     </ElScrollbar>
 
