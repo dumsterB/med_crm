@@ -23,9 +23,9 @@
             <AppointmentStartOrEndDate :date="row.start_at" />
           </template>
         </ElTableColumn>
-        <ElTableColumn width="150px" prop="end_at" :label="$t('DateAndTime.EndAt')">
+        <ElTableColumn width="100px" prop="end_at" :label="$t('DateAndTime.EndAt')">
           <template #default="{ row }">
-            <AppointmentStartOrEndDate :date="row.end_at" />
+            <AppointmentStartOrEndDate v-if="row.end_at" :date="row.end_at" show-only-time />
           </template>
         </ElTableColumn>
 
