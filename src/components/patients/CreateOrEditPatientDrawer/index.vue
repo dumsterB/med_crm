@@ -36,7 +36,7 @@
             v-model="patient.name"
             required
             :disabled="isDisabledSecondaryInputs"
-            pattern="[a-zA-Z\d]{3,}" />
+            pattern="[a-zA-Z?\d]{3,}" />
         </ElFormItem>
 
         <!--  Gender  -->
