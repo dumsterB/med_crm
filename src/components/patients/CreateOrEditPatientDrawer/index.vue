@@ -34,9 +34,10 @@
         <ElFormItem :label="$t('User.FullName') + ` (${$t('User.FullNameFormat').toLowerCase()})`">
           <ElInput
             v-model="patient.name"
+            minlength="3"
             required
             :disabled="isDisabledSecondaryInputs"
-            pattern="[a-zA-Z?\d]{3,}" />
+            pattern="[a-zA-Z\d*]*" />
         </ElFormItem>
 
         <!--  Gender  -->
