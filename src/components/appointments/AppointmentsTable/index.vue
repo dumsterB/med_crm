@@ -39,13 +39,11 @@
           </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="clinic.published_at" :label="$t('DateAndTime.CreatedAt')" >
-          <template #default="{ row }">
-            <div>
-              {{row.clinic.published_at}}
-            </div>
-          </template>
+        <ElTableColumn prop="appointment.resource" :label="$t('Appointments.RecordingSource')">
+          {{ $t('Base.NoData') }}
         </ElTableColumn>
+
+        <ElTableColumn prop="clinic.published_at" :label="$t('DateAndTime.CreatedAt')" />
       </ElTable>
     </ElScrollbar>
 

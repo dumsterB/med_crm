@@ -34,9 +34,10 @@
         <ElFormItem :label="$t('User.FullName') + ` (${$t('User.FullNameFormat').toLowerCase()})`">
           <ElInput
             v-model="patient.name"
+            minlength="3"
             required
             :disabled="isDisabledSecondaryInputs"
-            pattern="[a-zA-Z?\d]{3,}" />
+            pattern="[a-zA-Z\d*]*" />
         </ElFormItem>
 
         <!--  Gender  -->
@@ -61,13 +62,17 @@
       <!--  OldPatient  -->
       <ElFormItem v-show="hasPatient">
         <div class="create-patient-drawer-patient">
-          <div class="create-patient-drawer-patient__title">Пациент есть в системе</div>
+          <div class="create-patient-drawer-patient__title">{{ $t('PatientIsInSystem') }}</div>
+
           <router-link
             v-show="!hasPatientFromOtherClinic"
             class="create-patient-drawer-patient__name"
             :to="oldPatientPageUrl">
             {{ oldPatient?.name }}
           </router-link>
+          <div v-show="hasPatientFromOtherClinic" class="create-patient-drawer-patient__name">
+            {{ oldPatient?.name }}
+          </div>
         </div>
       </ElFormItem>
 
