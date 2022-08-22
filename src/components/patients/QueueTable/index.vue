@@ -7,32 +7,20 @@
         @row-click="goToAppointment"
         :data="items"
         v-loading="loading">
+
         <template #empty>
           <div class="queues-table__empty queues-table-empty">
             <span>{{ $t('Base.NoData') }}</span>
           </div>
         </template>
-
-        <ElTableColumn prop="name" :label="$t('Base.FullName')">
-          <template #default="{ row }">
-            {{ row.patient.name }}
-          </template>
-        </ElTableColumn>
-        <ElTableColumn prop="name" :label="$t('User.Gender')">
+        <ElTableColumn prop="patient.name" :label="$t('Base.FullName')"></ElTableColumn>
+        <ElTableColumn prop="patient.gender" :label="$t('User.Gender')">
           <template #default="{ row }">
             {{ $t(`User.Genders.${row.patient.gender}`) }}
           </template>
         </ElTableColumn>
-        <ElTableColumn prop="name" :label="$t('User.Age')">
-          <template #default="{ row }">
-            {{ row.patient.age }}
-          </template>
-        </ElTableColumn>
-        <ElTableColumn prop="name" :label="$t('User.Phone')">
-          <template #default="{ row }">
-            {{ row.patient.phone }}
-          </template>
-        </ElTableColumn>
+        <ElTableColumn prop="patient.age" :label="$t('User.Age')"></ElTableColumn>
+        <ElTableColumn prop="patient.phone" :label="$t('User.Phone')"></ElTableColumn>
         <ElTableColumn prop="start_at" :label="$t('Base.Time')">
           <template #default="{ row }">
             <AppointmentStartOrEndDate :date="row.start_at" />
