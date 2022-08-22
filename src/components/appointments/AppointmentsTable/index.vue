@@ -39,9 +39,9 @@
           </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="appointment.resource" :label="$t('Appointments.RecordingSource')">
+        <!--        <ElTableColumn prop="appointment.resource" :label="$t('Appointments.RecordingSource')">
           {{ $t('Base.NoData') }}
-        </ElTableColumn>
+        </ElTableColumn>-->
 
         <ElTableColumn prop="created_at" :label="$t('DateAndTime.CreatedAt')" />
       </ElTable>
