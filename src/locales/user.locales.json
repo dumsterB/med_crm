@@ -7,6 +7,7 @@
       "Children": "Дети",
       "Email": "Почта",
       "FullName": "ФИО",
+      "FullNameFormat": "Латинские буквы",
       "Gender": "Пол",
       "Genders": {
         "man": "Мужчина",
@@ -27,6 +28,7 @@
       "Children": "Bolalar",
       "Email": "Email",
       "FullName": "FIO",
+      "FullNameFormat": "Латинские буквы",
       "Gender": "Jinsi",
       "Genders": {
         "man": "Erkak",

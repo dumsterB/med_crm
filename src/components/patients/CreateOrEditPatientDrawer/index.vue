@@ -4,7 +4,11 @@
     :title="data && data.id ? $t('Patients.EditPatient') : $t('Patients.AddPatient')"
     v-bind="$attrs"
     @update:model-value="$emit('update:modelValue', $event)">
-    <ElForm class="create-patient-drawer-form" label-position="top" @submit.prevent="submitHandler">
+    <ElForm
+      class="create-patient-drawer-form"
+      label-position="top"
+      ref="form"
+      @submit.prevent="submitHandler">
       <!--  Is Children  -->
       <ElFormItem v-show="!isChildrenSwitchIsDisabled">
         <ElSwitch :active-text="$t('User.IsChildren')" v-model="isChildren" />
@@ -27,8 +31,12 @@
 
       <div v-show="isChildren || (hasPhoneNumber && !hasPatient)">
         <!--  FullName  -->
-        <ElFormItem :label="$t('User.FullName')">
-          <ElInput v-model="patient.name" required :disabled="isDisabledSecondaryInputs" />
+        <ElFormItem :label="$t('User.FullName') + ` (${$t('User.FullNameFormat').toLowerCase()})`">
+          <ElInput
+            v-model="patient.name"
+            required
+            :disabled="isDisabledSecondaryInputs"
+            pattern="[a-zA-Z\d]{3,}" />
         </ElFormItem>
 
         <!--  Gender  -->

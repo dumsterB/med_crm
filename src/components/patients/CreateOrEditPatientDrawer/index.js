@@ -33,6 +33,10 @@ export default {
       code: null, // для хранения кода подтверждения при rebinding или смене номера
 
       throttleCheckHasPatient: null,
+
+      error: {
+        fullName: false,
+      },
     };
   },
   computed: {
@@ -76,7 +80,14 @@ export default {
   },
 
   methods: {
+    fullNameRule(payload) {
+      console.log('rule', payload);
+    },
+
     async submitHandler() {
+      console.log(this.$refs.form.clearValidate());
+
+      return;
       if (this.loading.form) return;
       this.loading.form = true;
 
