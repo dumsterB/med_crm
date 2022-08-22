@@ -29,7 +29,10 @@
       <ElButton
         type="primary"
         @click="updateStatus(Appointment.enum.statuses.InProgress)"
-        v-if="data.status === Appointment.enum.statuses.Waiting || data.status === Appointment.enum.statuses.Approved">
+        v-if="
+          data.status === Appointment.enum.statuses.Waiting ||
+          data.status === Appointment.enum.statuses.Approved
+        ">
         {{ $t('Appointments.PatientCome') }}
       </ElButton>
       <ElButton
@@ -43,25 +46,14 @@
         type="danger"
         @click="updateStatus(Appointment.enum.statuses.Canceled)"
         plain
-        v-if="
-          data.status != Appointment.enum.statuses.InProgress &&
-          data.status != Appointment.enum.statuses.Canceled &&
-          data.status != Appointment.enum.statuses.Provided
-        ">
+        v-if="cancelReception">
         {{ $t('Appointments.CancelReception') }}
       </ElButton>
       <ElButton
         type="danger"
         @click="updateStatus(Appointment.enum.statuses.Provided)"
         plain
-        v-if="
-          data.status === 'in_progress' ||
-          (data.status !== Appointment.enum.statuses.InProgress &&
-            data.status != Appointment.enum.statuses.Provided &&
-            data.status != Appointment.enum.statuses.Waiting &&
-            data.status != Appointment.enum.statuses.Canceled &&
-            data.status != Appointment.enum.statuses.Approved)
-        ">
+        v-if="endReception">
         {{ $t('Appointments.EndReception') }}
       </ElButton>
     </div>
@@ -120,6 +112,22 @@ export default {
         },
       ];
     },
+    endReception() {
+      return (
+        this.data.status === Appointment.enum.statuses.InProgress ||
+        (this.data.status !== Appointment.enum.statuses.Provided &&
+          this.data.status !== Appointment.enum.statuses.Waiting &&
+          this.data.status !== Appointment.enum.statuses.Canceled &&
+          this.data.status !== Appointment.enum.statuses.Approved)
+      );
+    },
+    cancelReception() {
+      return (
+        this.data.status !== Appointment.enum.statuses.InProgress &&
+        this.data.status !== Appointment.enum.statuses.Canceled &&
+        this.data.status !== Appointment.enum.statuses.Provided
+      );
+    },
   },
 
   methods: {
@@ -140,7 +148,7 @@ export default {
           id: this.data.id,
           status: status,
         });
-        console.log(response)
+        console.log(response);
         this.data.status = response.data.data.status;
 
         this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
@@ -152,8 +160,8 @@ export default {
           this.$router.push({
             name: DOCTORS_QUEUE_ROUTE.name,
           });
-        }else{
-          return true
+        } else {
+          return true;
         }
       } catch (err) {
         console.log(err);
