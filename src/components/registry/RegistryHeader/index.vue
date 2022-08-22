@@ -1,7 +1,7 @@
 <template>
   <div class="registry-header">
     <PatientsSearch class="registry-header__search" />
-    <LangSelect />
+    <!--    <LangSelect />-->
   </div>
 </template>
 
