@@ -1,3 +1,6 @@
+# for generate .locales.json files
+/locales/
+
 # Logs
 logs
 *.log
