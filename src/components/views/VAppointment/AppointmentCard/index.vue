@@ -1,5 +1,5 @@
 <template>
-  <ElCard class="appointment-card" shadow="never" v-bind="$attrs">
+  <ElCard v-loading="loading" class="appointment-card" shadow="never" v-bind="$attrs">
     <template #header>
       <router-link class="appointment-card__header appointment-card-header" :to="patientPageLink">
         <UiAvatar class="appointment-card-header__avatar" size="super-large" />
@@ -76,7 +76,11 @@ export default {
   props: {
     data: [Appointment, Object],
   },
-
+  data() {
+    return {
+      loading: false,
+    };
+  },
   computed: {
     patientPageLink() {
       return insertRouteParams({
@@ -144,15 +148,17 @@ export default {
     },
     async updateStatus(status) {
       try {
+        this.loading = true;
         const response = await Appointment.updateStatus({
           id: this.data.id,
           status: status,
         });
-        console.log(response);
+
         this.data.status = response.data.data.status;
 
         this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
-        console.log(status);
+
+        this.loading = false;
         if (
           status != Appointment.enum.statuses.Waiting &&
           status != Appointment.enum.statuses.InProgress
