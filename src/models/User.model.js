@@ -31,14 +31,4 @@ export class User extends CRUDModel {
       Doctor: 'doctor',
     },
   };
-
-  static create(payload, options) {
-    return super.create(
-      {
-        ...payload,
-        birthdate: new Date(payload.birthdate).toISOString(),
-      },
-      options
-    );
-  }
 }
