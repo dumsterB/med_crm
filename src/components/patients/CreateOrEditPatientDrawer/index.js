@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     hasPhoneNumber() {
-      return this.patient.phone && this.patient.phone.replace(/^\+*/gm, '')?.length;
+      return !!this.patient.phone;
     },
     isDisabledSecondaryInputs() {
       return this.isChildren ? !this.patient.parent_id : !this.hasPhoneNumber;
@@ -72,6 +72,12 @@ export default {
       },
       immediate: true,
     },
+    'isChildren': {
+      handler() {
+        this.patient.phone = null;
+      },
+    },
+
     'patient.phone': {
       handler() {
         this.patientPhoneWatcherHandler();
@@ -189,8 +195,11 @@ export default {
     nameOrPhoneWatcherHandler() {
       if (!this.nameOrPhone) return;
 
-      const isName = /[a-zA-Zа-яА-Я]/gim.test(this.nameOrPhone);
-      isName ? (this.patient.name = this.nameOrPhone) : (this.patient.phone = this.nameOrPhone);
+      const isName = /[a-zA-Zа-яА-Я?\s]/gim.test(this.nameOrPhone);
+      console.log(isName);
+      if (isName) this.patient.name = this.nameOrPhone;
+      else this.patient.phone = this.nameOrPhone;
+      // isName ? (this.patient.name = this.nameOrPhone) : (this.patient.phone = this.nameOrPhone);
     },
     patientPhoneWatcherHandler() {
       if (!this.hasPhoneNumber) return;
