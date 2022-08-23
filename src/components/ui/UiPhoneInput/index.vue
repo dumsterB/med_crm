@@ -3,6 +3,7 @@
     class="ui-phone-input"
     :model-value="phone"
     pattern="\d{9}"
+    placeholder="(xx) xxx-xx-xx"
     v-bind="$attrs"
     @update:model-value="updateModelValue">
     <template #prefix>
@@ -22,12 +23,21 @@ export default {
   },
   computed: {
     phone() {
-      return this.modelValue?.replace(this.prefix, '');
+      const phoneExcludePrefix = this.modelValue?.replace(this.prefix, '');
+      return phoneExcludePrefix?.replace(
+        /^(\d{2})(\d{0,3})(\d{0,2})(\d{0,2})/gm,
+        (str, code, group1, group2, group3) => {
+          return `(${code}${group1 ? ') ' + group1 : ''}${group2 ? '-' + group2 : ''}${
+            group3 ? '-' + group3 : ''
+          }`;
+        }
+      );
     },
   },
+
   methods: {
     updateModelValue(value) {
-      this.$emit('update:modelValue', this.prefix + value);
+      this.$emit('update:modelValue', this.prefix + value.replace(/[-\s()]/gm, ''));
     },
   },
 
