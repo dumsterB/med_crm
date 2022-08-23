@@ -8,8 +8,8 @@
   },
   "uz": {
     "Patients": {
-      "AddPatient": "Bemorni yaratish",
-      "EditPatient": "Bemor ma'lumotlarini o'zgartirish",
+      "AddPatient": "Bemorni qo'shish",
+      "EditPatient": "Bemorning ma'lumotlarini o'zgartirish",
       "NoPatient": "Bemor topilmadi"
     }
   }

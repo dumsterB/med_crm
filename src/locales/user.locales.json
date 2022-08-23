@@ -24,20 +24,20 @@
     "User": {
       "AddChildren": "Bolani qo'shish",
       "Age": "Yosh",
-      "Birthdate": "Togilgan sanasi",
+      "Birthdate": "Tug'ilgan sanasi",
       "Children": "Bolalar",
-      "Email": "Email",
-      "FullName": "FIO",
-      "FullNameFormat": "Латинские буквы",
+      "Email": "E-mail",
+      "FullName": "FISh",
+      "FullNameFormat": "Lotin harflari",
       "Gender": "Jinsi",
       "Genders": {
         "man": "Erkak",
         "woman": "Ayol"
       },
       "IsChildren": "Yosh bola",
-      "Parent": "Otonasi",
-      "Phone": "Telefon",
-      "PleaseInputNameOrPhone": "Введите номер или ФИО"
+      "Parent": "Ota-onasi",
+      "Phone": "Telefon raqami",
+      "PleaseInputNameOrPhone": "Telefon raqamini yoki FiSh kiriting"
     }
   }
 }

@@ -10,9 +10,9 @@
   },
   "uz": {
     "Error": "Xato",
-    "NumberIsBusy": "Ushbu nomber band",
-    "SuccessCreated": "Muvaffaqiyatli yaratildi",
-    "SuccessAttached": "Muvaffaqiyatli ulandi",
-    "SuccessUpdate": "Muvaffaqiyatli ozgarildi"
+    "NumberIsBusy": "Ushbu raqam band",
+    "SuccessCreated": "Muvaffaqiyatli ulandi",
+    "SuccessAttached": "Muvaffaqiyatli yaratildi",
+    "SuccessUpdate": "Muvaffaqiyatli yangilandi"
   }
 }
