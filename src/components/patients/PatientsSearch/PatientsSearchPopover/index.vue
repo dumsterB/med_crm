@@ -46,7 +46,9 @@ export default {
     addPatient() {
       this.$store.dispatch('modalAndDrawer/openDrawer', {
         component: CreateOrEditPatientDrawer,
-        nameOrPhone: this.search,
+        payload: {
+          nameOrPhone: this.search,
+        },
       });
     },
   },
