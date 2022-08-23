@@ -27,56 +27,71 @@
 
     <div class="appointment-card-actions">
       <ElButton
+        v-if="data.status === Appointment.enum.statuses.Approved"
         type="primary"
-        @click="updateStatus(Appointment.enum.statuses.InProgress)"
-        v-if="data.status === Appointment.enum.statuses.Waiting || data.status === Appointment.enum.statuses.Approved">
+        :loading="loading[Appointment.enum.statuses.Waiting]"
+        @click="updateStatus(Appointment.enum.statuses.Waiting)">
+        {{ $t('Base.CallToReception') }}
+      </ElButton>
+      <ElButton
+        v-if="data.status === Appointment.enum.statuses.Approved"
+        type="danger"
+        plain
+        :loading="loading[Appointment.enum.statuses.Canceled]"
+        @click="updateStatus(Appointment.enum.statuses.Canceled)">
+        {{ $t('Appointments.CancelReception') }}
+      </ElButton>
+
+      <ElButton
+        v-if="data.status === Appointment.enum.statuses.Waiting"
+        type="primary"
+        :loading="loading[Appointment.enum.statuses.InProgress]"
+        @click="updateStatus(Appointment.enum.statuses.InProgress)">
         {{ $t('Appointments.PatientCome') }}
       </ElButton>
       <ElButton
-        type="primary"
-        @click="editAppointment"
-        v-if="data.status === !Appointment.enum.statuses.Waiting">
-        {{ $t('Appointments.EditReception') }}</ElButton
-      >
-      <!--   TODO: FIX   -->
-      <ElButton
+        v-if="data.status === Appointment.enum.statuses.Waiting"
         type="danger"
-        @click="updateStatus(Appointment.enum.statuses.Canceled)"
         plain
-        v-if="
-          data.status != Appointment.enum.statuses.InProgress &&
-          data.status != Appointment.enum.statuses.Canceled &&
-          data.status != Appointment.enum.statuses.Provided
-        ">
-        {{ $t('Appointments.CancelReception') }}
+        :loading="loading[Appointment.enum.statuses.Canceled]"
+        @click="updateStatus(Appointment.enum.statuses.Canceled)">
+        {{ $t('Appointments.PatientNotCome') }}
       </ElButton>
+
       <ElButton
-        type="danger"
-        @click="updateStatus(Appointment.enum.statuses.Provided)"
-        plain
-        v-if="
-          data.status === 'in_progress' ||
-          (data.status !== Appointment.enum.statuses.InProgress &&
-            data.status != Appointment.enum.statuses.Provided &&
-            data.status != Appointment.enum.statuses.Waiting &&
-            data.status != Appointment.enum.statuses.Canceled &&
-            data.status != Appointment.enum.statuses.Approved)
-        ">
+        v-if="data.status === Appointment.enum.statuses.InProgress"
+        type="primary"
+        :loading="loading[Appointment.enum.statuses.Provided]"
+        @click="updateStatus(Appointment.enum.statuses.Provided)">
         {{ $t('Appointments.EndReception') }}
+      </ElButton>
+
+      <ElButton
+        v-if="
+          user.role === User.enum.roles.Manager &&
+          data.status === Appointment.enum.statuses.Approved
+        "
+        type="primary"
+        plain
+        @click="editAppointment">
+        {{ $t('Appointments.EditReception') }}
       </ElButton>
     </div>
   </ElCard>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { insertRouteParams } from '@/utils/router.utils';
 import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
+import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
+import { User } from '@/models/User.model';
 import { Appointment } from '@/models/Appointment.model';
 import { PriceService } from '@/services/price.service';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
+
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
-import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
 
 export default {
   name: 'AppointmentCard',
@@ -84,8 +99,23 @@ export default {
   props: {
     data: [Appointment, Object],
   },
-
+  data() {
+    return {
+      loading: {
+        [Appointment.enum.statuses.Waiting]: false,
+        [Appointment.enum.statuses.Canceled]: false,
+        [Appointment.enum.statuses.InProgress]: false,
+        [Appointment.enum.statuses.Approved]: false,
+        [Appointment.enum.statuses.Approved]: false,
+      },
+      hasLoadingState: false,
+    };
+  },
   computed: {
+    ...mapState({
+      user: (state) => state.auth.user,
+    }),
+
     patientPageLink() {
       return insertRouteParams({
         path: REGISTRY_PATIENT_ROUTE.path,
@@ -134,26 +164,29 @@ export default {
       if (action instanceof GlobalDrawerCloseAction) return;
       this.$emit('update:data', action.data.appointment);
     },
+
     async updateStatus(status) {
+      if (this.hasLoadingState) return;
+      this.loading[status] = true;
+      this.hasLoadingState = true;
+
       try {
-        const response = await Appointment.updateStatus({
+        const { data } = await Appointment.updateStatus({
           id: this.data.id,
           status: status,
         });
-        console.log(response)
-        this.data.status = response.data.data.status;
 
+        this.$emit('update:data', data.data);
         this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
-        console.log(status);
+
         if (
-          status != Appointment.enum.statuses.Waiting &&
-          status != Appointment.enum.statuses.InProgress
+          status !== Appointment.enum.statuses.Waiting &&
+          status !== Appointment.enum.statuses.InProgress &&
+          this.user.role === User.enum.roles.Doctor
         ) {
           this.$router.push({
             name: DOCTORS_QUEUE_ROUTE.name,
           });
-        }else{
-          return true
         }
       } catch (err) {
         console.log(err);
@@ -162,11 +195,15 @@ export default {
           title: err?.response?.data?.message || this.$t('Notifications.Error'),
         });
       }
+
+      this.loading[status] = false;
+      this.hasLoadingState = false;
     },
   },
 
   setup: () => ({
     Appointment,
+    User,
   }),
 };
 </script>

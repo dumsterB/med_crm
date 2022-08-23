@@ -2,7 +2,7 @@
   <ElCard class="v-patient-appointment-card" shadow="hover" @click="goToAppointment">
     <template #header>
       <div class="v-patient-appointment-card-header">
-        <UiAvatar size="super-large" :image="{ src: data.doctor.avatar.link, alt: 'avatar' }" />
+        <UiAvatar size="super-large" :image="{ src: data.doctor?.avatar?.link, alt: 'avatar' }" />
 
         <div class="v-patient-appointment-card__doctor v-patient-appointment-card-doctor">
           <div class="v-patient-appointment-card-doctor__name">

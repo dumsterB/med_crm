@@ -1,33 +1,26 @@
 <template>
   <div class="queues-table-wrapper">
     <ElScrollbar class="queues-table-wrapper__scrollbar">
-      <ElTable class="queues-table" ref="elTable" @row-click="goToAppointment" :data="items" v-loading="loading">
+      <ElTable
+        class="queues-table"
+        ref="elTable"
+        @row-click="goToAppointment"
+        :data="items"
+        v-loading="loading">
+
         <template #empty>
           <div class="queues-table__empty queues-table-empty">
             <span>{{ $t('Base.NoData') }}</span>
           </div>
         </template>
-
-        <ElTableColumn prop="name" :label="$t('Base.FullName')">
-          <template #default="{ row }">
-            {{ row.patient.name }}
-          </template>
-        </ElTableColumn>
-        <ElTableColumn prop="name" :label="$t('User.Gender')">
+        <ElTableColumn prop="patient.name" :label="$t('Base.FullName')"></ElTableColumn>
+        <ElTableColumn prop="patient.gender" :label="$t('User.Gender')">
           <template #default="{ row }">
             {{ $t(`User.Genders.${row.patient.gender}`) }}
           </template>
         </ElTableColumn>
-        <ElTableColumn prop="name" :label="$t('User.Age')">
-          <template #default="{ row }">
-            {{ row.patient.age }}
-          </template>
-        </ElTableColumn>
-        <ElTableColumn prop="name" :label="$t('User.Phone')">
-          <template #default="{ row }">
-            {{ row.patient.phone }}
-          </template>
-        </ElTableColumn>
+        <ElTableColumn prop="patient.age" :label="$t('User.Age')"></ElTableColumn>
+        <ElTableColumn prop="patient.phone" :label="$t('User.Phone')"></ElTableColumn>
         <ElTableColumn prop="start_at" :label="$t('Base.Time')">
           <template #default="{ row }">
             <AppointmentStartOrEndDate :date="row.start_at" />
@@ -42,23 +35,14 @@
         </ElTableColumn>
         <ElTableColumn prop="name" width="200" :label="$t('Base.Actions')">
           <template #default="{ row }">
-<<<<<<< HEAD
-              <div  class="queues-table-actions">
-                <ElButton v-if="row.status == Appointment.enum.statuses.Approved" type="primary" @click="callToReception(row)">
-                  {{$t('Base.CallToReception')}}
-                </ElButton>
-              </div>
-=======
             <div class="queues-table-actions">
-              <!--     TODO: FIX           -->
               <ElButton
-                v-if="row.status == 'approved'"
+                v-if="row.status === Appointment.enum.statuses.Approved"
                 type="primary"
                 @click="callToReception(row)">
                 {{ $t('Base.CallToReception') }}
               </ElButton>
             </div>
->>>>>>> eff8cada09bed06a107e0761d77a576aafe6dfd5
           </template>
         </ElTableColumn>
       </ElTable>
@@ -99,7 +83,6 @@ export default {
         });
 
         this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
-
         this.$router.push({
           name: APPOINTMENT_ROUTE.name,
           params: { id: payload.id },

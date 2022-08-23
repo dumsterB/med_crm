@@ -45,8 +45,8 @@ export default {
       this.$emit('update:date', prevOrNextMonthByISOString(this.date, { type: 'next' }));
     },
     setDayTypeAndDate(date) {
-      this.$emit('update:type', EVENT_CALENDAR_TYPES.DAY);
-      setTimeout(() => this.$emit('update:date', date));
+      this.$emit('update:date', date);
+      setTimeout(() => this.$emit('update:type', EVENT_CALENDAR_TYPES.DAY));
     },
   },
 

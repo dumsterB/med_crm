@@ -93,23 +93,23 @@
       "CreatedAt": "Yaratilgan",
       "Days": {
         "0": {
-          "Full": "Yakshamba",
+          "Full": "Yakshanba",
           "Short": "Ya"
         },
         "1": {
-          "Full": "Dushamba",
+          "Full": "Dushanba",
           "Short": "Du"
         },
         "2": {
-          "Full": "Seshamba",
+          "Full": "Seshanba",
           "Short": "Se"
         },
         "3": {
-          "Full": "Chorshamba",
+          "Full": "Chorshanba",
           "Short": "Ch"
         },
         "4": {
-          "Full": "Payshamba",
+          "Full": "Payshanba",
           "Short": "Psh"
         },
         "5": {
@@ -117,7 +117,7 @@
           "Short": "Juma"
         },
         "6": {
-          "Full": "Shamba",
+          "Full": "Shanba",
           "Short": "Sh"
         }
       },
@@ -168,12 +168,12 @@
           "Short": "Noy"
         },
         "11": {
-          "Full": "Dekaber",
+          "Full": "Dekabr",
           "Short": "Dek"
         }
       },
       "SelectDate": "Sanani tanlang",
-      "StartAt": "Boshlanish",
+      "StartAt": "Boshlanishi",
       "Time": "Vaqt"
     }
   }

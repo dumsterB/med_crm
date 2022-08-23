@@ -33,6 +33,10 @@ export default {
       code: null, // для хранения кода подтверждения при rebinding или смене номера
 
       throttleCheckHasPatient: null,
+
+      error: {
+        fullName: false,
+      },
     };
   },
   computed: {

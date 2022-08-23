@@ -7,6 +7,7 @@
       "Children": "Дети",
       "Email": "Почта",
       "FullName": "ФИО",
+      "FullNameFormat": "Латинские буквы",
       "Gender": "Пол",
       "Genders": {
         "man": "Мужчина",
@@ -15,25 +16,28 @@
       },
       "IsChildren": "Ребёнок",
       "Parent": "Родитель",
-      "Phone": "Телефон"
+      "Phone": "Телефон",
+      "PleaseInputNameOrPhone": "Введите номер или ФИО"
     }
   },
   "uz": {
     "User": {
       "AddChildren": "Bolani qo'shish",
       "Age": "Yosh",
-      "Birthdate": "Togilgan sanasi",
+      "Birthdate": "Tug'ilgan sanasi",
       "Children": "Bolalar",
-      "FullName": "FIO",
+      "Email": "E-mail",
+      "FullName": "FISh",
+      "FullNameFormat": "Lotin harflari",
       "Gender": "Jinsi",
       "Genders": {
         "man": "Erkak",
         "woman": "Ayol"
       },
       "IsChildren": "Yosh bola",
-      "Parent": "Otonasi",
-      "Phone": "Telefon",
-      "Email": "Email"
+      "Parent": "Ota-onasi",
+      "Phone": "Telefon raqami",
+      "PleaseInputNameOrPhone": "Telefon raqamini yoki FiSh kiriting"
     }
   }
 }
