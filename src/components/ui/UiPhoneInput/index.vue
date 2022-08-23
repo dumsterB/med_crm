@@ -2,11 +2,13 @@
   <ElInput
     class="ui-phone-input"
     :model-value="phone"
-    type="number"
-    min="0"
+    pattern="\d{9}"
+    placeholder="(xx) xxx-xx-xx"
     v-bind="$attrs"
     @update:model-value="updateModelValue">
-    <template #prefix> + </template>
+    <template #prefix>
+      <span class="ui-phone-prefix">{{ prefix }}</span>
+    </template>
   </ElInput>
 </template>
 
@@ -16,21 +18,32 @@ export default {
   props: {
     modelValue: String,
   },
+  data() {
+    return {};
+  },
   computed: {
     phone() {
-      return this.modelValue?.replace(/^\+*/, '');
-    },
-  },
-  methods: {
-    updateModelValue(value) {
-      this.$emit('update:modelValue', `+${value || ''}`.replace(/^\+*/, '+'));
+      const phoneExcludePrefix = this.modelValue?.replace(this.prefix, '');
+      return phoneExcludePrefix?.replace(
+        /^(\d{2})(\d{0,3})(\d{0,2})(\d{0,2})/gm,
+        (str, code, group1, group2, group3) => {
+          return `(${code}${group1 ? ') ' + group1 : ''}${group2 ? '-' + group2 : ''}${
+            group3 ? '-' + group3 : ''
+          }`;
+        }
+      );
     },
   },
 
-  mounted() {
-    // На всякий случай, если изначально было без плюса
-    this.updateModelValue(this.modelValue);
+  methods: {
+    updateModelValue(value) {
+      this.$emit('update:modelValue', this.prefix + value.replace(/[-\s()]/gm, ''));
+    },
   },
+
+  setup: () => ({
+    prefix: '+998',
+  }),
 };
 </script>
 
