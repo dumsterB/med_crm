@@ -37,7 +37,7 @@ export default {
 
   methods: {
     updateModelValue(value) {
-      this.$emit('update:modelValue', this.prefix + value.replace(/[-\s()]/gm, ''));
+      this.$emit('update:modelValue', this.prefix + value.replace(/[-\s()]/gm, '').slice(0, 9));
     },
   },
 
