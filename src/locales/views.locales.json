@@ -1,0 +1,18 @@
+{
+  "ru": {
+    "Appointments": {
+      "Title": "Очередь на сегодня"
+    },
+    "Dashboard": {
+      "Title": "Календарь приемов"
+    }
+  },
+  "uz": {
+    "Appointments": {
+      "Title": "Bugunga navbat"
+    },
+    "Dashboard": {
+      "Title": "Qabullar taqvimi"
+    }
+  }
+}

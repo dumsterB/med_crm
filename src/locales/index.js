@@ -5,3 +5,4 @@ export { default as PatientsLocales } from './patients.locales.json';
 export { default as UserLocales } from './user.locales.json';
 export { default as AppointmentsLocales } from './appointments.locales.json';
 export { default as DateAndTimeLocales } from './dateAndTime.locales.json';
+export { default as ViewsLocales } from './views.locales.json';
