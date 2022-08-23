@@ -4,7 +4,6 @@
       class="ui-phone-input"
       :model-value="phone"
       type="number"
-      :mask="{ mask: '9999 9999 9999 9999', greedy: true }"
       min="0"
       v-bind="$attrs"
       @update:model-value="updateModelValue">
