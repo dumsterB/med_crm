@@ -196,10 +196,7 @@ export default {
       if (!this.nameOrPhone) return;
 
       const isName = /[a-zA-Zа-яА-Я?\s]/gim.test(this.nameOrPhone);
-      console.log(isName);
-      if (isName) this.patient.name = this.nameOrPhone;
-      else this.patient.phone = this.nameOrPhone;
-      // isName ? (this.patient.name = this.nameOrPhone) : (this.patient.phone = this.nameOrPhone);
+      isName ? (this.patient.name = this.nameOrPhone) : (this.patient.phone = this.nameOrPhone);
     },
     patientPhoneWatcherHandler() {
       if (!this.hasPhoneNumber) return;
