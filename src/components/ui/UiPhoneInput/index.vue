@@ -1,17 +1,14 @@
 <template>
-  <div>
-    <ElInput
-      class="ui-phone-input"
-      :model-value="phone"
-      type="number"
-      min="0"
-      v-bind="$attrs"
-      @update:model-value="updateModelValue">
-      <template #prefix>
-        <span class="ui-phone-prefix">{{ prefix }}</span>
-      </template>
-    </ElInput>
-  </div>
+  <ElInput
+    class="ui-phone-input"
+    :model-value="phone"
+    pattern="\d{9}"
+    v-bind="$attrs"
+    @update:model-value="updateModelValue">
+    <template #prefix>
+      <span class="ui-phone-prefix">{{ prefix }}</span>
+    </template>
+  </ElInput>
 </template>
 
 <script>
@@ -29,20 +26,11 @@ export default {
     },
   },
   methods: {
-    updateModelValue(value, state) {
-      // На всякий случай, если изначально было без плюса
-      if (state) {
-        this.$emit('update:modelValue', value);
-      } else {
-        this.$emit('update:modelValue', this.prefix + value);
-      }
+    updateModelValue(value) {
+      this.$emit('update:modelValue', this.prefix + value);
     },
   },
 
-  mounted() {
-    // На всякий случай, если изначально было без плюса
-    this.updateModelValue(this.modelValue, true);
-  },
   setup: () => ({
     prefix: '+998',
   }),
