@@ -6,30 +6,25 @@
       "CancelReception": "Отменить запись",
       "CreateAppointment": "Создать запись",
       "EditReception": "Редактировать прием",
+      "EndReception": "Завершить прием",
       "LiveQueue": "Живая очередь",
       "PatientCome": "Пациент явился",
+      "PatientNotCome": "Пациент не явился",
       "PhonePatient": "Телефон пациента",
       "RecordingSource": "Источник записи",
       "SelectDoctor": "Выберите доктора",
       "SelectStatus": "Выберите статус",
       "StartDate": "Дата приёма",
       "StartDateAndTime": "Время и дата приёма",
-<<<<<<< HEAD
-      "EditReception": "Редактировать прием",
-      "CancelReception": "Отменить запись",
-      "EndReception": "Завершить прием",
-      "PatientCome": "Пациент явился",
-=======
->>>>>>> eff8cada09bed06a107e0761d77a576aafe6dfd5
       "StartTime": "Время приёма",
       "Statuses": {
-        "created": "Создан",
+        "Status": "Статусы",
         "approved": "Подтвержден",
-        "waiting": "Ожидает",
+        "canceled": "Отменён",
+        "created": "Создан",
         "in_progress": "В процессе",
         "provided": "Закончен",
-        "canceled": "Отменён",
-        "Status": "Статусы"
+        "waiting": "Ожидает"
       },
       "Types": {
         "doctor": "Врач",
@@ -39,31 +34,30 @@
   },
   "uz": {
     "Appointments": {
-      "Appointments": "Yozuvlar",
-      "AppointmentsTc": "{n} Yozuvlar | {n} Yozuv | {n} Yozuvlar",
-      "CancelReception": "Kirishni bekor qilish",
-      "CreateAppointment": "Kirish yaratish",
-      "EditReception": "Qabul qilishni tahrirlash",
+      "Appointments": "Qabulga yozuvlar",
+      "AppointmentsTc": "{n} yozuvlar | {n} yozuv | {n} yozuvlar",
+      "CancelReception": "Qabulga yozuvni bekor qilish",
+      "CreateAppointment": "Qabulga yozuvni yaratish",
+      "EditReception": "Qabulga yozuvni tahrirlash",
+      "EndReception": "Qabulni yakunlash",
       "LiveQueue": "Jonli navbat",
-      "PatientCome": "Bemor keldi",
-      "PhonePatient": "Bemorning telefoni",
-      "RecordingSource": "Yozib olish manbai",
+      "PatientCome": "Bemor tashrif buyurdi",
+      "PatientNotCome": "Bemor tashrif buyurmadi",
+      "PhonePatient": "Bemorning telefon raqami",
+      "RecordingSource": "Qabulga yozuv manbai",
       "SelectDoctor": "Shifokorni tanlang",
-      "SelectStatus": "Holatni tanlang",
-      "StartDate": "Qabul kuni",
-      "StartDateAndTime": "Qabul kuni va vaqti",
+      "SelectStatus": "Statusni tanlang",
+      "StartDate": "Qabul sanansi",
+      "StartDateAndTime": "Qabul sanasi va vaqti",
       "StartTime": "Qabul vaqti",
-<<<<<<< HEAD
-      "EndReception": "Yozuvni tugatish",
-      "EditReception": "Qabul qilishni tahrirlash",
-      "CancelReception": "Kirishni bekor qilish",
-=======
->>>>>>> eff8cada09bed06a107e0761d77a576aafe6dfd5
       "Statuses": {
-        "approved": "Tasdiqlangan",
-        "provided": "Kutilmoqda",
-        "canceled": "Bekor qilish",
-        "Status": "Holat"
+        "Status": "Statuslar",
+        "approved": "Tasdiqlandi",
+        "canceled": "Bekor qilindi",
+        "created": "Yaratildi",
+        "in_progress": "Jarayonda",
+        "provided": "Yakunlangan",
+        "waiting": "Kutmoqda"
       },
       "Types": {
         "doctor": "Shifokor",
