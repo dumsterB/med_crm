@@ -37,7 +37,7 @@
             minlength="3"
             required
             :disabled="isDisabledSecondaryInputs"
-            pattern="[a-zA-Z\d*]*" />
+            pattern="[a-zA-Z\d\s]*" />
         </ElFormItem>
 
         <!--  Gender  -->
