@@ -62,13 +62,17 @@
       <!--  OldPatient  -->
       <ElFormItem v-show="hasPatient">
         <div class="create-patient-drawer-patient">
-          <div class="create-patient-drawer-patient__title">Пациент есть в системе</div>
+          <div class="create-patient-drawer-patient__title">{{ $t('PatientIsInSystem') }}</div>
+
           <router-link
             v-show="!hasPatientFromOtherClinic"
             class="create-patient-drawer-patient__name"
             :to="oldPatientPageUrl">
             {{ oldPatient?.name }}
           </router-link>
+          <div v-show="hasPatientFromOtherClinic" class="create-patient-drawer-patient__name">
+            {{ oldPatient?.name }}
+          </div>
         </div>
       </ElFormItem>
 

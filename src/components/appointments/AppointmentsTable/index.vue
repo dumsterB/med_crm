@@ -23,9 +23,9 @@
             <AppointmentStartOrEndDate :date="row.start_at" />
           </template>
         </ElTableColumn>
-        <ElTableColumn width="150px" prop="end_at" :label="$t('DateAndTime.EndAt')">
+        <ElTableColumn width="100px" prop="end_at" :label="$t('DateAndTime.EndAt')">
           <template #default="{ row }">
-            <AppointmentStartOrEndDate :date="row.end_at" />
+            <AppointmentStartOrEndDate v-if="row.end_at" :date="row.end_at" show-only-time />
           </template>
         </ElTableColumn>
 
@@ -39,11 +39,11 @@
           </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="appointment.resource" :label="$t('Appointments.RecordingSource')">
+        <!--        <ElTableColumn prop="appointment.resource" :label="$t('Appointments.RecordingSource')">
           {{ $t('Base.NoData') }}
-        </ElTableColumn>
+        </ElTableColumn>-->
 
-        <ElTableColumn prop="start_at" :label="$t('DateAndTime.CreatedAt')" />
+        <ElTableColumn prop="created_at" :label="$t('DateAndTime.CreatedAt')" />
       </ElTable>
     </ElScrollbar>
 

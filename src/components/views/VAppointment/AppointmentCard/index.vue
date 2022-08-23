@@ -29,6 +29,7 @@
       <ElButton
         v-if="data.status === Appointment.enum.statuses.Approved"
         type="primary"
+        :loading="loading[Appointment.enum.statuses.Waiting]"
         @click="updateStatus(Appointment.enum.statuses.Waiting)">
         {{ $t('Base.CallToReception') }}
       </ElButton>
@@ -36,6 +37,7 @@
         v-if="data.status === Appointment.enum.statuses.Approved"
         type="danger"
         plain
+        :loading="loading[Appointment.enum.statuses.Canceled]"
         @click="updateStatus(Appointment.enum.statuses.Canceled)">
         {{ $t('Appointments.CancelReception') }}
       </ElButton>
@@ -43,6 +45,7 @@
       <ElButton
         v-if="data.status === Appointment.enum.statuses.Waiting"
         type="primary"
+        :loading="loading[Appointment.enum.statuses.InProgress]"
         @click="updateStatus(Appointment.enum.statuses.InProgress)">
         {{ $t('Appointments.PatientCome') }}
       </ElButton>
@@ -50,6 +53,7 @@
         v-if="data.status === Appointment.enum.statuses.Waiting"
         type="danger"
         plain
+        :loading="loading[Appointment.enum.statuses.Canceled]"
         @click="updateStatus(Appointment.enum.statuses.Canceled)">
         {{ $t('Appointments.PatientNotCome') }}
       </ElButton>
@@ -57,6 +61,7 @@
       <ElButton
         v-if="data.status === Appointment.enum.statuses.InProgress"
         type="primary"
+        :loading="loading[Appointment.enum.statuses.Provided]"
         @click="updateStatus(Appointment.enum.statuses.Provided)">
         {{ $t('Appointments.EndReception') }}
       </ElButton>
@@ -94,7 +99,18 @@ export default {
   props: {
     data: [Appointment, Object],
   },
-
+  data() {
+    return {
+      loading: {
+        [Appointment.enum.statuses.Waiting]: false,
+        [Appointment.enum.statuses.Canceled]: false,
+        [Appointment.enum.statuses.InProgress]: false,
+        [Appointment.enum.statuses.Approved]: false,
+        [Appointment.enum.statuses.Approved]: false,
+      },
+      hasLoadingState: false,
+    };
+  },
   computed: {
     ...mapState({
       user: (state) => state.auth.user,
@@ -148,15 +164,21 @@ export default {
       if (action instanceof GlobalDrawerCloseAction) return;
       this.$emit('update:data', action.data.appointment);
     },
+
     async updateStatus(status) {
+      if (this.hasLoadingState) return;
+      this.loading[status] = true;
+      this.hasLoadingState = true;
+
       try {
         const { data } = await Appointment.updateStatus({
           id: this.data.id,
           status: status,
         });
-        this.$emit('update:data', data.data);
 
+        this.$emit('update:data', data.data);
         this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
+
         if (
           status !== Appointment.enum.statuses.Waiting &&
           status !== Appointment.enum.statuses.InProgress &&
@@ -173,6 +195,9 @@ export default {
           title: err?.response?.data?.message || this.$t('Notifications.Error'),
         });
       }
+
+      this.loading[status] = false;
+      this.hasLoadingState = false;
     },
   },
 
