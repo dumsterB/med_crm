@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import ElementPlus from 'element-plus';
+import ru from 'element-plus/lib/locale/lang/ru';
 import 'element-plus/dist/index.css';
 
 import App from './App.vue';
@@ -10,7 +11,9 @@ import { I18nPlugin } from '@/plugins/i18n.plugin';
 
 import '@/assets/styles/index.scss';
 
-const app = createApp(App).use(Router).use(Store).use(ApiPlugin).use(I18nPlugin).use(ElementPlus);
+const app = createApp(App).use(Router).use(Store).use(ApiPlugin).use(I18nPlugin).use(ElementPlus, {
+  locale: ru,
+});
 
 const UiComponents = import.meta.glob('./components/ui/**/*.vue', { eager: true });
 for (let key in UiComponents) {
