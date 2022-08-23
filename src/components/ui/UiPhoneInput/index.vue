@@ -2,7 +2,7 @@
   <ElInput
     class="ui-phone-input"
     :model-value="phone"
-    pattern="\d{9}"
+    pattern="\(\d{2}\)\s\d{3}\-\d{2}-{d2}"
     placeholder="(xx) xxx-xx-xx"
     v-bind="$attrs"
     @update:model-value="updateModelValue">
