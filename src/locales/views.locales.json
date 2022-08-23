@@ -1,18 +1,22 @@
 {
   "ru": {
-    "Appointments": {
-      "Title": "Очередь на сегодня"
+    "Views": {
+      "Appointments": {
+        "Title": "Очередь на сегодня"
+      },
+      "Dashboard": {
+        "Title": "Календарь приемов"
+      }
     },
-    "Dashboard": {
-      "Title": "Календарь приемов"
-    }
-  },
-  "uz": {
-    "Appointments": {
-      "Title": "Bugunga navbat"
-    },
-    "Dashboard": {
-      "Title": "Qabullar taqvimi"
+    "uz": {
+      "Views": {
+        "Appointments": {
+          "Title": "Bugunga navbat"
+        },
+        "Dashboard": {
+          "Title": "Qabullar taqvimi"
+        }
+      }
     }
   }
 }
