@@ -33,7 +33,7 @@ export default {
       return {
         [REGISTRY_DASHBOARD_ROUTE.name]: {
           icon: icons.DASHBOARD,
-          text: this.$t('Base.Dashboard'),
+          text: this.$t('Views.Dashboard.Title'),
         },
         [REGISTRY_PATIENTS_ROUTE.name]: {
           icon: icons.USER_TAG,
@@ -41,7 +41,7 @@ export default {
         },
         [APPOINTMENTS_ROUTE.name]: {
           icon: icons.NOTE,
-          text: this.$t('Base.PatientsRecords'),
+          text: this.$t('Views.Appointments.Title'),
         },
       };
     },
@@ -51,4 +51,5 @@ export default {
 
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/base.locales.json" />
+<i18n src="@/locales/views.locales.json" />
 <i18n src="./index.locales.json" />
