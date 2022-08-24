@@ -25,13 +25,11 @@
         </div>
 
         <ElEmpty v-show="!patient.childrens?.length" :description="$t('Base.NoData')" />
-        <div
-          class="v-patient-content-item__body v-patient-content-item-body v-patient-content-item-body_grid">
-          <PatientCard
-            v-for="children in patient.childrens || []"
-            :key="children.id"
+
+        <div class="v-patient-content-item__body">
+          <PatinetsChildrenTable
             type="vertical"
-            :data="{ ...children, parent: patient, parent_id: patient.id }" />
+            :data="{ children: patient.childrens, parent: patient.name }"></PatinetsChildrenTable>
         </div>
       </div>
 
@@ -47,12 +45,9 @@
         <ElEmpty
           v-show="!appointments?.length && !loading.appointment"
           :description="$t('Base.NoData')" />
-        <div
-          class="v-patient-content-item__body v-patient-content-item-body v-patient-content-item-body_grid">
-          <AppointmentCard
-            v-for="appointment in appointments || []"
-            :key="appointment.id"
-            :data="appointment" />
+
+        <div class="v-patient-content-item__body">
+          <AppointmentTable :data="appointments" />
         </div>
       </div>
     </template>
@@ -68,11 +63,19 @@ import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEdi
 import { Patient } from '@/models/Patient.model';
 import { Appointment } from '@/models/Appointment.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
+import PatinetsChildrenTable from '@/components/patients/PatinetsChildrenTable/index.vue';
+import AppointmentTable from '@/components/views/VAppointment/AppointmentTable/index.vue';
 import * as icons from '@/enums/icons.enum.js';
 
 export default {
   name: 'VPatient',
-  components: { LayoutRegistry, PatientCard, AppointmentCard },
+  components: {
+    LayoutRegistry,
+    PatientCard,
+    AppointmentCard,
+    PatinetsChildrenTable,
+    AppointmentTable,
+  },
   icons: icons,
   props: {
     id: [Number, String],
