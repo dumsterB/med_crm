@@ -7,15 +7,15 @@
       "Dashboard": {
         "Title": "Календарь приемов"
       }
-    },
-    "uz": {
-      "Views": {
-        "Appointments": {
-          "Title": "Bugunga navbat"
-        },
-        "Dashboard": {
-          "Title": "Qabullar taqvimi"
-        }
+    }
+  },
+  "uz": {
+    "Views": {
+      "Appointments": {
+        "Title": "Bugunga navbat"
+      },
+      "Dashboard": {
+        "Title": "Qabullar taqvimi"
       }
     }
   }
