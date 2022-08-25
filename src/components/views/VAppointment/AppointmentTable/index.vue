@@ -26,7 +26,7 @@
         <ElTableColumn prop="name" :label="$t('Base.Actions')">
           <template #default="{ row }">
             <div class="patient-appointment-table-actions">
-              <ElButton type="primary" @click.stop="editPatient">
+              <ElButton type="primary" @click.stop="openAppointment(row)">
                 {{ $t('Base.OpenCard') }}
               </ElButton>
             </div>
@@ -42,6 +42,7 @@
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 import AppointmentStartOrEndDate from '@/components/appointments/AppointmentStartOrEndDate/index.vue';
 import * as icons from '@/enums/icons.enum.js';
+import {APPOINTMENT_ROUTE} from "@/router/appointments.routes";
 export default {
   name: 'QueueTable',
   components: { AppointmentStartOrEndDate, AppointmentStatusTag },
@@ -60,8 +61,12 @@ export default {
     },
   },
   methods: {
-    createAppointment(){},
-    editPatient(){}
+    openAppointment(payload){
+      this.$router.push({
+        name: APPOINTMENT_ROUTE.name,
+        params: { id: payload.id },
+      });
+    }
   },
   setup: () => ({
   }),

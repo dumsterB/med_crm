@@ -23,14 +23,14 @@
         <ElTableColumn prop="name" width="300" :label="$t('Base.Actions')">
           <template #default="{ row }">
             <div class="patient-children-table-actions">
-              <ElButton type="primary" @click.stop="createAppointment">
+              <ElButton type="primary" @click.stop="createAppointment(row)">
                 <template #icon>
                   <UiIcon :icon="$options.icons.PLUS" />
                 </template>
                 {{ $t('Appointments.CreateAppointment') }}
               </ElButton>
 
-              <ElButton type="primary" plain @click.stop="editPatient">
+              <ElButton type="primary" plain @click.stop="openChildren(row)">
                 {{ $t('Base.OpenCard') }}
               </ElButton>
             </div>
@@ -46,6 +46,8 @@
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 import AppointmentStartOrEndDate from '@/components/appointments/AppointmentStartOrEndDate/index.vue';
 import * as icons from '@/enums/icons.enum.js';
+import CreateOrEditAppointmentDrawer from "@/components/appointments/CreateOrEditAppointmentDrawer/index.vue";
+import {REGISTRY_PATIENT_ROUTE} from "@/router/registry.routes";
 
 export default {
   name: 'QueueTable',
@@ -65,8 +67,20 @@ export default {
     },
   },
   methods: {
-    createAppointment(){},
-    editPatient(){}
+    createAppointment(row) {
+      this.$store.dispatch('modalAndDrawer/openDrawer', {
+        component: CreateOrEditAppointmentDrawer,
+        payload: {
+          patient: row,
+        },
+      });
+    },
+    openChildren(row){
+      this.$router.push({
+        name: REGISTRY_PATIENT_ROUTE.name,
+        params: { id: row.id },
+      });
+    }
   },
   setup: () => ({
   }),

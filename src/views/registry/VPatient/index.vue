@@ -7,9 +7,6 @@
       <div class="v-patient-content__item v-patient-content-item">
         <div class="v-patient-content-item__header v-patient-content-item-header">
           <div class="v-patient-content__title">{{ $t('Title') }}</div>
-          <ElButton type="primary" @click="editPatient">
-            {{ $t('Patients.EditPatient') }}
-          </ElButton>
         </div>
 
         <div class="v-patient-content-item__body">
@@ -26,7 +23,7 @@
 
         <ElEmpty v-show="!patient.childrens?.length" :description="$t('Base.NoData')" />
 
-        <div class="v-patient-content-item__body">
+        <div class="v-patient-content-item__body" v-if="patient.childrens?.length">
           <PatinetsChildrenTable
             type="vertical"
             :data="{ children: patient.childrens, parent: patient.name }"></PatinetsChildrenTable>
@@ -46,7 +43,7 @@
           v-show="!appointments?.length && !loading.appointment"
           :description="$t('Base.NoData')" />
 
-        <div class="v-patient-content-item__body">
+        <div class="v-patient-content-item__body" v-if="appointments?.length">
           <AppointmentTable :data="appointments" />
         </div>
       </div>
