@@ -14,7 +14,7 @@
       </ElButton>
     </div>
 
-    <div class="ec-day-calendar__content ec-day-calendar-content">
+    <div class="ec-day-calendar__content ec-day-calendar-content" ref="content">
       <div>
         <div class="ec-day-calendar__intervals"></div>
         <div class="ec-day-calendar-columns">
@@ -94,6 +94,9 @@ export default {
     times() {
       return Array.from(new Array(24)).map((hours, index) => `${index}:00`);
     },
+    currentHour() {
+      return new Date().getHours();
+    },
   },
   methods: {
     calculateEventPositionStyles(event) {
@@ -123,6 +126,12 @@ export default {
     nextDay() {
       this.$emit('update:date', prevOrNextDayByISOString(this.date, { type: 'next' }));
     },
+  },
+
+  mounted() {
+    this.$refs.content.scroll({
+      top: this.hourIntervalHeight * this.currentHour,
+    });
   },
 
   setup: () => ({

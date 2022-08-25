@@ -36,10 +36,10 @@
   &-content {
     display: flex;
     flex: 1;
-
-    & > * {
-      flex: 1;
-    }
+  }
+  &_day &-content {
+    height: 100%;
+    overflow-y: hidden;
   }
 
   &-hidden-picker-label {
