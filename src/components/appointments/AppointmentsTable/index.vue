@@ -17,6 +17,7 @@
         </template>
 
         <ElTableColumn class-name="appointments-table__id" width="60" prop="id" label="ID" />
+        <ElTableColumn prop="doctor.name" :label="$t('Appointments.Types.doctor')" />
 
         <ElTableColumn width="150px" prop="start_at" :label="$t('DateAndTime.StartAt')">
           <template #default="{ row }">
@@ -29,7 +30,8 @@
           </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="doctor.name" :label="$t('Appointments.Types.doctor')" />
+<!--        <ElTableColumn prop="service.title" :label="$t('Base.ReasonService')" />-->
+
         <ElTableColumn prop="patient.name" :label="$t('Base.Patient')" />
         <ElTableColumn prop="patient.phone" :label="$t('Appointments.PhonePatient')" />
 
