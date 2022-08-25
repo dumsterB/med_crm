@@ -6,7 +6,9 @@
     }
   },
   "uz": {
-    "day": "Kun",
-    "month": "Oy"
+    "Types": {
+      "day": "Kun",
+      "month": "Oy"
+    }
   }
 }
