@@ -1,5 +1,5 @@
 /**
- * @param {string} path vue-router Router.path
+ * @param {string} path vue-router Route.path
  * @param {object} params params for replace
  */
 export function insertRouteParams({ path, params }) {
@@ -11,6 +11,7 @@ export function insertRouteParams({ path, params }) {
 
 /**
  * Подставляет компоненты в объект опций роута
+ *
  * @param {Array<VueRouteOptions>} routes
  * @return {Array<VueRouteOtions>}
  */
@@ -26,4 +27,26 @@ export function setComponentInRoutesByViewsFolder({ routes }) {
     ...route,
     component: components[route.component],
   }));
+}
+
+/**
+ * Функция для сравненния двух query объектов, выполнения необходимых действий сброса некоторых ключей и дальнейшего получения данных
+ *
+ * @param {object} query объект с ключами равными общим query параметрам для данных и таблиц. perPage, page, search ...
+ * @param {object} oldQuery
+ * @param {function} resetPage функция для сброса текущей страницы при необходимости
+ * @param {function} getData функция для получения данных
+ * @return {number|undefined} может вернуть счётчик от вызова setTimeout
+ */
+export function compareQueriesThenLoadData({ query, oldQuery, resetPage, getData }) {
+  if (
+    query &&
+    oldQuery &&
+    (query.perPage !== oldQuery.perPage || query.search !== oldQuery.search)
+  ) {
+    resetPage();
+    return setTimeout(() => getData());
+  }
+
+  getData();
 }

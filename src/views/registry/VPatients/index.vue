@@ -20,8 +20,8 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import { usePerPage, usePage, useSearch } from '@/hooks/query';
+import { compareQueriesThenLoadData } from '@/utils/router.utils';
 import { Patient } from '@/models/Patient.model';
-import { REGISTRY_PATIENTS_ROUTE } from '@/router/registry.routes';
 
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
@@ -30,7 +30,6 @@ import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatient
 export default {
   name: 'VPatients',
   components: { LayoutRegistry, PatientsTable },
-
   setup: () => ({
     perPage: usePerPage(),
     page: usePage(),
@@ -54,7 +53,12 @@ export default {
   watch: {
     queryWatchers: {
       handler(value, oldValue) {
-        this.queryWatchersHandler(value, oldValue);
+        compareQueriesThenLoadData({
+          query: value,
+          oldQuery: oldValue,
+          resetPage: this.page.reset,
+          getData: this.getPatients,
+        });
       },
       immediate: true,
       deep: true,
@@ -93,23 +97,6 @@ export default {
       }
 
       this.setLoading(false);
-    },
-
-    // TODO: вынести чтобы не дублировать
-    queryWatchersHandler(value, oldValue) {
-      if (
-        value &&
-        oldValue &&
-        (value.perPage !== oldValue.perPage || value.search !== oldValue.search)
-      ) {
-        this.resetPage();
-        return setTimeout(() => this.getPatients());
-      }
-
-      this.getPatients();
-    },
-    resetPage() {
-      this.page.reset();
     },
 
     createPatient() {
