@@ -46,8 +46,10 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import { usePage, usePerPage, useSearch } from '@/hooks/query';
+import { compareQueriesThenLoadData } from '@/utils/router.utils';
 import { ISOStringToDateAppFormat } from '@/utils/dateAndTime.utils';
 import { Appointment } from '@/models/Appointment.model.js';
+
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
@@ -83,7 +85,12 @@ export default {
   watch: {
     queryWatchers: {
       handler(value, oldValue) {
-        this.queryWatchersHandler(value, oldValue);
+        compareQueriesThenLoadData({
+          query: value,
+          oldQuery: oldValue,
+          resetPage: this.page.reset,
+          getData: this.getAppointments,
+        });
       },
       immediate: true,
       deep: true,
@@ -116,23 +123,6 @@ export default {
       }
 
       this.setLoading(false);
-    },
-
-    // TODO: вынести чтобы не дублировать
-    queryWatchersHandler(value, oldValue) {
-      if (
-        value &&
-        oldValue &&
-        (value.perPage !== oldValue.perPage || value.search !== oldValue.search)
-      ) {
-        this.resetPage();
-        return setTimeout(() => this.getAppointments());
-      }
-
-      this.getAppointments();
-    },
-    resetPage() {
-      this.page.reset();
     },
 
     createAppointment() {
