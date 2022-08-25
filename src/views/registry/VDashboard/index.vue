@@ -124,6 +124,7 @@ export default {
         search: this.doctorId.value ? [this.doctorId.value] : [],
         start_at: ISOStringToDateAppFormat(this.startAt, { withTime: false, fullYear: false }),
         end_at: ISOStringToDateAppFormat(this.endAt, { withTime: false, fullYear: false }),
+        not_canceled: true,
       });
       const excludedLiveQueue = data.data.filter((appointment) => appointment.start_at);
 
