@@ -24,9 +24,14 @@
         <ElEmpty v-show="!patient.childrens?.length" :description="$t('Base.NoData')" />
 
         <div class="v-patient-content-item__body" v-if="patient.childrens?.length">
-          <PatinetsChildrenTable
-            type="vertical"
-            :data="{ children: patient.childrens, parent: patient.name }"></PatinetsChildrenTable>
+          <PatientsTable
+            :total="patient?.childrens?.length"
+            :perPage="patient?.childrens?.length"
+            :page="1"
+            background
+            hide-on-single-page
+            layout="prev, pager, next, sizes"
+            :items="patient.childrens"></PatientsTable>
         </div>
       </div>
 
@@ -44,7 +49,11 @@
           :description="$t('Base.NoData')" />
 
         <div class="v-patient-content-item__body" v-if="appointments?.length">
-          <AppointmentTable :data="appointments" />
+          <AppointmentsTable
+              :total="appointments?.length"
+              :perPage="appointments?.length"
+              :page="1"
+              :items="appointments"></AppointmentsTable>
         </div>
       </div>
     </template>
@@ -60,8 +69,8 @@ import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEdi
 import { Patient } from '@/models/Patient.model';
 import { Appointment } from '@/models/Appointment.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
-import PatinetsChildrenTable from '@/components/patients/PatinetsChildrenTable/index.vue';
-import AppointmentTable from '@/components/views/VAppointment/AppointmentTable/index.vue';
+import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
+import PatientsTable from '@/components/patients/PatientsTable/index.vue';
 import * as icons from '@/enums/icons.enum.js';
 
 export default {
@@ -70,8 +79,8 @@ export default {
     LayoutRegistry,
     PatientCard,
     AppointmentCard,
-    PatinetsChildrenTable,
-    AppointmentTable,
+    AppointmentsTable,
+    PatientsTable,
   },
   icons: icons,
   props: {
