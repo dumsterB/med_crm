@@ -38,7 +38,9 @@
       "Service": "Услуга",
       "SignUp": "Регистрация",
       "Sum": "сум",
-      "Time": "Время"
+      "Time": "Время",
+      "OpenCard": "Открыть",
+      "ReasonService": "Случай обслуживания"
     }
   },
   "uz": {
@@ -78,7 +80,9 @@
       "Service": "Xizmat",
       "SignUp": "Ro'yxatdan o'tish",
       "Sum": "som",
-      "Time": "Vaqt"
+      "Time": "Vaqt",
+      "OpenCard": " Ochish",
+      "ReasonService": "Xizmat ishi"
     }
   }
 }
