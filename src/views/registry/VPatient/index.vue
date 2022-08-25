@@ -7,6 +7,9 @@
       <div class="v-patient-content__item v-patient-content-item">
         <div class="v-patient-content-item__header v-patient-content-item-header">
           <div class="v-patient-content__title">{{ $t('Title') }}</div>
+          <ElButton type="primary" @click="editPatient">
+            {{ $t('Patients.EditPatient') }}
+          </ElButton>
         </div>
 
         <div class="v-patient-content-item__body">
@@ -22,16 +25,13 @@
         </div>
 
         <ElEmpty v-show="!patient.childrens?.length" :description="$t('Base.NoData')" />
-
-        <div class="v-patient-content-item__body" v-if="patient.childrens?.length">
-          <PatientsTable
-            :total="patient?.childrens?.length"
-            :perPage="patient?.childrens?.length"
-            :page="1"
-            background
-            hide-on-single-page
-            layout="prev, pager, next, sizes"
-            :items="patient.childrens"></PatientsTable>
+        <div
+          class="v-patient-content-item__body v-patient-content-item-body v-patient-content-item-body_grid">
+          <PatientCard
+            v-for="children in patient.childrens || []"
+            :key="children.id"
+            type="vertical"
+            :data="{ ...children, parent: patient, parent_id: patient.id }" />
         </div>
       </div>
 
@@ -47,13 +47,12 @@
         <ElEmpty
           v-show="!appointments?.length && !loading.appointment"
           :description="$t('Base.NoData')" />
-
-        <div class="v-patient-content-item__body" v-if="appointments?.length">
-          <AppointmentsTable
-              :total="appointments?.length"
-              :perPage="appointments?.length"
-              :page="1"
-              :items="appointments"></AppointmentsTable>
+        <div
+          class="v-patient-content-item__body v-patient-content-item-body v-patient-content-item-body_grid">
+          <AppointmentCard
+            v-for="appointment in appointments || []"
+            :key="appointment.id"
+            :data="appointment" />
         </div>
       </div>
     </template>
@@ -63,23 +62,17 @@
 <script>
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import PatientCard from '@/components/views/VPatient/PatientCard/index.vue';
+import AppointmentCard from '@/components/views/VPatient/AppointmentCard/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 import { Patient } from '@/models/Patient.model';
 import { Appointment } from '@/models/Appointment.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
-import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
-import PatientsTable from '@/components/patients/PatientsTable/index.vue';
 import * as icons from '@/enums/icons.enum.js';
 
 export default {
   name: 'VPatient',
-  components: {
-    LayoutRegistry,
-    PatientCard,
-    AppointmentsTable,
-    PatientsTable,
-  },
+  components: { LayoutRegistry, PatientCard, AppointmentCard },
   icons: icons,
   props: {
     id: [Number, String],

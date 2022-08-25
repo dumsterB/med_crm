@@ -1,0 +1,44 @@
+.v-patient-appointment-card {
+  &:hover {
+    cursor: pointer;
+  }
+
+  &-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  /*  .el-card__header:hover {
+    background-color: var(--bg-secondary-color);
+  }*/
+  .el-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &-doctor {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    &__name {
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    &__specialties {
+      color: var(--text-secondary-color);
+      font-size: 0.9em;
+    }
+  }
+
+  &-data {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    &__title {
+      font-weight: bold;
+    }
+  }
+}
