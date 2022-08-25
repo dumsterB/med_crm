@@ -28,7 +28,14 @@
     </div>
 
     <div class="v-patient-profile-card__actions v-patient-profile-card-actions">
-      <ElButton type="primary"  @click.stop="editPatient">
+      <ElButton type="primary" @click.stop="createAppointment">
+        <template #icon>
+          <UiIcon :icon="$options.icons.PLUS" />
+        </template>
+        {{ $t('Appointments.CreateAppointment') }}
+      </ElButton>
+
+      <ElButton type="primary" plain @click.stop="editPatient">
         {{ $t('Base.Edit') }}
       </ElButton>
     </div>
@@ -90,6 +97,15 @@ export default {
       this.$router.push({
         name: REGISTRY_PATIENT_ROUTE.name,
         params: { id: this.data.id },
+      });
+    },
+
+    createAppointment() {
+      this.$store.dispatch('modalAndDrawer/openDrawer', {
+        component: CreateOrEditAppointmentDrawer,
+        payload: {
+          patient: this.data,
+        },
       });
     },
     async editPatient() {

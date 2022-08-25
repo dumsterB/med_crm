@@ -30,8 +30,9 @@
             {{ row.gender ? $t(`User.Genders.${row.gender}`) : '' }}
           </template>
         </ElTableColumn>
-        <ElTableColumn prop="birthdate" :label="$t('User.Birthdate')"></ElTableColumn>
+
         <ElTableColumn prop="phone" :label="$t('User.Phone')"></ElTableColumn>
+        <ElTableColumn prop="age" :label="$t('User.Age')"> </ElTableColumn>
         <ElTableColumn prop="childrens_count" :label="$t('User.Children')">
           <template #default="{ row }">
             <template v-if="!row.parent_id">
@@ -58,7 +59,6 @@
         </ElTableColumn>
       </ElTable>
     </ElScrollbar>
-
     <ElPagination
       class="patients-table-wrapper__pagination"
       :current-page="page"
