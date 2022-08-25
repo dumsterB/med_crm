@@ -1,6 +1,6 @@
 <template>
   <div class="doctors-header">
-    <!--    <LangSelect class="lang" />-->
+    <LangSelect class="lang" />
   </div>
 </template>
 
