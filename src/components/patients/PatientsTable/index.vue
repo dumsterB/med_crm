@@ -32,7 +32,6 @@
         </ElTableColumn>
         <ElTableColumn prop="birthdate" :label="$t('User.Birthdate')"></ElTableColumn>
         <ElTableColumn prop="phone" :label="$t('User.Phone')"></ElTableColumn>
-        <ElTableColumn prop="age" :label="$t('User.Age')"> </ElTableColumn>
         <ElTableColumn prop="childrens_count" :label="$t('User.Children')">
           <template #default="{ row }">
             <template v-if="!row.parent_id">
@@ -48,7 +47,7 @@
           </template>
         </ElTableColumn>
 
-        <ElTableColumn width="200" prop="actions" :label="$t('Base.Actions')">
+        <ElTableColumn prop="actions" :label="$t('Base.Actions')">
           <template #default="{ row }">
             <div class="patients-table-actions">
               <ElButton type="primary" @click.stop="makeAppointment(row)">

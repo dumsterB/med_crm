@@ -63,7 +63,6 @@
 <script>
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import PatientCard from '@/components/views/VPatient/PatientCard/index.vue';
-import AppointmentCard from '@/components/views/VPatient/AppointmentCard/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 import { Patient } from '@/models/Patient.model';
@@ -78,7 +77,6 @@ export default {
   components: {
     LayoutRegistry,
     PatientCard,
-    AppointmentCard,
     AppointmentsTable,
     PatientsTable,
   },
