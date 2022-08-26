@@ -6,7 +6,7 @@
         class="appointments-table"
         :data="items"
         ref="elTable"
-        :row-class-name="tableRowClassName"
+        :row-class-name="getTableRowClassName"
         @row-click="goToAppointment">
         <template #empty>
           <div class="appointments-table__empty appointments-table-empty">
@@ -103,9 +103,9 @@ export default {
   },
 
   methods: {
-    tableRowClassName(row) {
+    getTableRowClassName(row) {
       if (row.row.status === Appointment.enum.statuses.InProgress) {
-        return Appointment.enum.statuses.InProgress;
+        return  `appointment-${Appointment.enum.statuses.InProgress}`;
       }
       return '';
     },
