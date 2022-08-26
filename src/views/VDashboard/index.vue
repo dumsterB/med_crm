@@ -1,5 +1,5 @@
 <template>
-  <LayoutRegistry fixHeight>
+  <LayoutByUserRole fixHeight>
     <EventCalendar
       class="v-dashboard-content__calendar"
       v-model:type="type.value"
@@ -16,11 +16,11 @@
           :placeholder="$t('Appointments.SelectDoctor')" />
       </template>
     </EventCalendar>
-  </LayoutRegistry>
+  </LayoutByUserRole>
 </template>
 
 <script>
-import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
+import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
 import EventCalendar from '@/components/EventCalendar/index.vue';
 import { EVENT_CALENDAR_TYPES } from '@/components/EventCalendar/index.enum';
 import { useQuery } from '@/hooks/useQuery.hook';
@@ -39,7 +39,7 @@ import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 
 export default {
   name: 'VDashboard',
-  components: { EventCalendar, LayoutRegistry },
+  components: { EventCalendar, LayoutByUserRole },
   data() {
     return {
       loading: {
