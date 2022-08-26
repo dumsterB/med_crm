@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { setComponentInRoutesByViewsFolder } from '@/utils/router.utils';
 import { routes as authRoutes } from './auth.routes.js';
-import { routes as registryRoutes, REGISTRY_DASHBOARD_ROUTE } from './registry.routes';
+import { routes as registryRoutes } from './registry.routes';
+import { routes as dashboardRoutes, DASHBOARD_ROUTE } from './dashboard.routes';
 import { routes as doctorsRoutes, DOCTORS_QUEUE_ROUTE } from './doctors.routes';
 import { routes as appointmentsRoutes } from './appointments.routes';
 
@@ -19,7 +20,13 @@ const router = createRouter({
     },
 
     ...setComponentInRoutesByViewsFolder({
-      routes: [...authRoutes, ...registryRoutes, ...doctorsRoutes, ...appointmentsRoutes],
+      routes: [
+        ...authRoutes,
+        ...registryRoutes,
+        ...dashboardRoutes,
+        ...doctorsRoutes,
+        ...appointmentsRoutes,
+      ],
     }),
   ],
   scrollBehavior(to, from, savedPosition) {
@@ -36,7 +43,7 @@ export { router as Router };
 function _redirectCurrentPageByUserRole(to, from, next) {
   switch (Store.state.auth.user.role) {
     case User.enum.roles.Manager:
-      return next(REGISTRY_DASHBOARD_ROUTE.path);
+      return next(DASHBOARD_ROUTE.path);
     case User.enum.roles.Doctor:
       return next(DOCTORS_QUEUE_ROUTE);
   }

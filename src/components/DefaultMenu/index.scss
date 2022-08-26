@@ -20,7 +20,7 @@
     flex-direction: column;
     gap: 20px;
 
-    & > * {
+    &__item {
       display: flex;
       align-items: center;
       gap: 0.9em;
@@ -34,7 +34,7 @@
         color: var(--primary-hover-color);
       }
     }
-    & > *.router-link-exact-active {
+    &__item.router-link-exact-active {
       color: var(--primary-color);
       border-right: 4px solid var(--primary-color);
     }

@@ -1,5 +1,5 @@
 <template>
-  <LayoutRegistry fixHeight>
+  <LayoutByUserRole fixHeight>
     <EventCalendar
       class="v-dashboard-content__calendar"
       v-model:type="type.value"
@@ -10,17 +10,19 @@
       @click:event="goToAppointment">
       <template #actions>
         <UiModelsAutocompleteSearch
+          v-if="!userIsDoctor"
           v-model="doctorId.value"
           :model-for-use="Doctor"
           :default-item="doctor"
           :placeholder="$t('Appointments.SelectDoctor')" />
       </template>
     </EventCalendar>
-  </LayoutRegistry>
+  </LayoutByUserRole>
 </template>
 
 <script>
-import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
+import { mapState } from 'vuex';
+import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
 import EventCalendar from '@/components/EventCalendar/index.vue';
 import { EVENT_CALENDAR_TYPES } from '@/components/EventCalendar/index.enum';
 import { useQuery } from '@/hooks/useQuery.hook';
@@ -32,6 +34,7 @@ import {
 } from '@/utils/dateAndTime.utils';
 import { Doctor } from '@/models/Doctor.model';
 import { Appointment } from '@/models/Appointment.model';
+import { User } from '@/models/User.model';
 import { EventCalendarEvent } from '@/components/EventCalendar/Event/EventCalendarEvent.model';
 import { I18nService } from '@/services/i18n.service';
 import { groupBy } from 'lodash';
@@ -39,7 +42,7 @@ import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 
 export default {
   name: 'VDashboard',
-  components: { EventCalendar, LayoutRegistry },
+  components: { EventCalendar, LayoutByUserRole },
   data() {
     return {
       loading: {
@@ -54,6 +57,17 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      user: (state) => state.auth.user,
+    }),
+
+    userIsDoctor() {
+      return this.user.role === User.enum.roles.Doctor;
+    },
+
+    daysInMonth() {
+      return getDaysInMonth(this.startAt);
+    },
     startAt() {
       const forMonthType = resetDaysInISOString(this.date.value);
 
@@ -66,10 +80,6 @@ export default {
       );
 
       return this.type.value === EVENT_CALENDAR_TYPES.MONTH ? forMonthType : this.date.value;
-    },
-
-    daysInMonth() {
-      return getDaysInMonth(this.startAt);
     },
 
     watchers() {
@@ -103,7 +113,7 @@ export default {
       const { data } = await Appointment.getStatistic({
         startAt: ISOStringToDateAppFormat(this.startAt, { withTime: false, fullYear: false }),
         endAt: ISOStringToDateAppFormat(this.endAt, { withTime: false, fullYear: false }),
-        doctorsId: this.doctorId.value ? [this.doctorId.value] : [],
+        doctorsId: this.userIsDoctor ? this.user.doctor_id : this.doctorId.value,
       });
 
       this.dataForMonth = {};
@@ -121,7 +131,7 @@ export default {
         per_page: 999,
         query_field: 'doctor_id',
         query_type: 'IN',
-        search: this.doctorId.value ? [this.doctorId.value] : [],
+        search: this.userIsDoctor ? this.user.doctor_id : this.doctorId.value,
         start_at: ISOStringToDateAppFormat(this.startAt, { withTime: false, fullYear: false }),
         end_at: ISOStringToDateAppFormat(this.endAt, { withTime: false, fullYear: false }),
         not_canceled: true,

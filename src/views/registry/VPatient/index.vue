@@ -18,7 +18,7 @@
       <div v-show="!isChildren" class="v-patient-content-item">
         <div class="v-patient-content-item__header v-patient-content-item-header">
           <div class="v-patient-content__title">{{ $t('User.Children') }}</div>
-          <ElButton type="primary" @click="createChildren"> {{ $t('User.AddChildren') }} </ElButton>
+          <ElButton type="primary" @click="createChildren"> {{ $t('User.AddChildren') }}</ElButton>
         </div>
 
         <ElEmpty v-show="!patient.childrens?.length" :description="$t('Base.NoData')" />
@@ -50,10 +50,10 @@
 
         <div class="v-patient-content-item__body" v-if="appointments?.length">
           <AppointmentsTable
-              :total="appointments?.length"
-              :perPage="appointments?.length"
-              :page="1"
-              :items="appointments"></AppointmentsTable>
+            :total="appointments?.length"
+            :perPage="appointments?.length"
+            :page="1"
+            :items="appointments"></AppointmentsTable>
         </div>
       </div>
     </template>
