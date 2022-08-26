@@ -11,7 +11,8 @@
 
 <script>
 import * as icons from '@/enums/icons.enum.js';
-import { REGISTRY_DASHBOARD_ROUTE, REGISTRY_PATIENTS_ROUTE } from '@/router/registry.routes';
+import { REGISTRY_PATIENTS_ROUTE } from '@/router/registry.routes';
+import { DASHBOARD_ROUTE } from '@/router/dashboard.routes';
 import { APPOINTMENTS_ROUTE } from '@/router/appointments.routes';
 import DefaultMenu from '@/components/DefaultMenu/index.vue';
 
@@ -20,18 +21,16 @@ export default {
   components: { DefaultMenu },
   computed: {
     navigation() {
-      return [REGISTRY_DASHBOARD_ROUTE, REGISTRY_PATIENTS_ROUTE, APPOINTMENTS_ROUTE].map(
-        (route) => ({
-          ...route,
-          title: this.routesOptionsByRouteName[route.name].text,
-          icon: this.routesOptionsByRouteName[route.name].icon,
-        })
-      );
+      return [DASHBOARD_ROUTE, REGISTRY_PATIENTS_ROUTE, APPOINTMENTS_ROUTE].map((route) => ({
+        ...route,
+        title: this.routesOptionsByRouteName[route.name].text,
+        icon: this.routesOptionsByRouteName[route.name].icon,
+      }));
     },
 
     routesOptionsByRouteName() {
       return {
-        [REGISTRY_DASHBOARD_ROUTE.name]: {
+        [DASHBOARD_ROUTE.name]: {
           icon: icons.DASHBOARD,
           text: this.$t('Views.Dashboard.Title'),
         },

@@ -2,16 +2,6 @@ import { onlyLoggedInMiddleware } from '@/middlewares/onlyLoggedIn.middleware';
 import { onlyManagerMiddleware } from '@/middlewares/onlyManager.middleware';
 import { I18nService } from '@/services/i18n.service';
 
-export const REGISTRY_DASHBOARD_ROUTE = {
-  name: 'REGISTRY_DASHBOARD',
-  path: '/registry/dashboard',
-  component: 'VDashboard',
-  beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
-  meta: {
-    title: I18nService.t('Base.Dashboard'),
-  },
-};
-
 export const REGISTRY_PATIENTS_ROUTE = {
   name: 'REGISTRY_PATIENTS',
   path: '/registry/patients',
@@ -32,4 +22,4 @@ export const REGISTRY_PATIENT_ROUTE = {
   props: true,
 };
 
-export const routes = [REGISTRY_DASHBOARD_ROUTE, REGISTRY_PATIENTS_ROUTE, REGISTRY_PATIENT_ROUTE];
+export const routes = [REGISTRY_PATIENTS_ROUTE, REGISTRY_PATIENT_ROUTE];
