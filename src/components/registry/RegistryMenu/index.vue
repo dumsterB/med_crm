@@ -1,12 +1,5 @@
 <template>
-  <DefaultMenu>
-    <template #nav>
-      <router-link v-for="route in navigation" :key="route.path" :to="route.path">
-        <UiIcon :icon="route.icon" />
-        <span>{{ route.title }}</span>
-      </router-link>
-    </template>
-  </DefaultMenu>
+  <DefaultMenu :navigation="navigation" />
 </template>
 
 <script>
@@ -22,7 +15,7 @@ export default {
   computed: {
     navigation() {
       return [DASHBOARD_ROUTE, REGISTRY_PATIENTS_ROUTE, APPOINTMENTS_ROUTE].map((route) => ({
-        ...route,
+        path: route.path,
         title: this.routesOptionsByRouteName[route.name].text,
         icon: this.routesOptionsByRouteName[route.name].icon,
       }));
