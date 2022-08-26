@@ -31,3 +31,7 @@
     padding-bottom: 1.5em;
   }
 }
+
+.el-table .appointment-in_progress {
+  --el-table-tr-bg-color: #e7f5f2 !important;
+}
