@@ -3,7 +3,16 @@
     <img class="default-menu__logo" src="@/assets/images/logo.svg" alt="logo" />
 
     <nav class="default-menu__nav default-menu-nav">
-      <slot name="nav"> </slot>
+      <slot name="nav">
+        <router-link
+          class="default-menu-nav__item"
+          v-for="route in navigation"
+          :key="route.path"
+          :to="route.path">
+          <UiIcon :icon="route.icon" />
+          <span>{{ route.title }}</span>
+        </router-link>
+      </slot>
     </nav>
 
     <div class="default-menu__actions default-menu-actions">
@@ -25,6 +34,15 @@ import * as icons from '@/enums/icons.enum.js';
 
 export default {
   name: 'DefaultMenu',
+  props: {
+    /**
+     * @param {Array<Object>} navigation
+     * @param {string} navigation[].path
+     * @param {string} navigation[].title
+     * @param {string} navigation[].icon
+     */
+    navigation: Array,
+  },
   methods: {
     logout() {
       this.$store.dispatch('auth/logout');
