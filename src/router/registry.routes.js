@@ -4,16 +4,16 @@ import { I18nService } from '@/services/i18n.service';
 
 export const REGISTRY_PATIENTS_ROUTE = {
   name: 'REGISTRY_PATIENTS',
-  path: '/registry/patients',
+  path: '/patients',
   component: 'VPatients',
-  beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
+  beforeEnter: [onlyLoggedInMiddleware],
   meta: {
     title: I18nService.t('Base.Patients'),
   },
 };
 export const REGISTRY_PATIENT_ROUTE = {
   name: 'REGISTRY_PATIENT',
-  path: '/registry/patients/:id',
+  path: '/patients/:id',
   component: 'VPatient',
   beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
   meta: {

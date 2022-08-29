@@ -1,8 +1,10 @@
 <template>
-  <LayoutRegistry content-class="v-patients-content" fixHeight>
+  <LayoutByUserRole content-class="v-patients-content" fixHeight>
     <div class="v-patients-content__header v-patients-content-header">
       <div class="v-patients-content-header-actions">
-        <ElButton type="primary" @click="createPatient"> {{ $t('Patients.AddPatient') }} </ElButton>
+        <ElButton v-if="!isDoctor" type="primary" @click="createPatient">
+          {{ $t('Patients.AddPatient') }}
+        </ElButton>
       </div>
     </div>
 
@@ -14,7 +16,7 @@
       v-model:per-page="perPage.value"
       :total="total"
       :search="search.value" />
-  </LayoutRegistry>
+  </LayoutByUserRole>
 </template>
 
 <script>
@@ -22,31 +24,39 @@ import { mapState, mapActions } from 'vuex';
 import { usePerPage, usePage, useSearch } from '@/hooks/query';
 import { compareQueriesThenLoadData } from '@/utils/router.utils';
 import { Patient } from '@/models/Patient.model';
-
-import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
+import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import { useQuery } from '@/hooks/useQuery.hook';
+import { User } from '@/models/User.model';
 
 export default {
   name: 'VPatients',
-  components: { LayoutRegistry, PatientsTable },
+  components: { PatientsTable, LayoutByUserRole },
   setup: () => ({
     perPage: usePerPage(),
     page: usePage(),
     search: useSearch(),
+    findForDoctor: useQuery({ field: 'doctor' }),
   }),
   computed: {
     ...mapState({
       loading: (state) => state.patients.loading,
       items: (state) => state.patients.data,
       total: (state) => state.patients.total,
+      user: (state) => state.auth.user,
     }),
+
+    isDoctor() {
+      return this.user.role === User.enum.roles.Doctor;
+    },
 
     queryWatchers() {
       return {
         perPage: this.perPage.value,
         page: this.page.value,
         search: this.search.value,
+        findForDoctor: this.findForDoctor.value
       };
     },
   },
@@ -73,16 +83,16 @@ export default {
 
     async getPatients() {
       this.setLoading(true);
-
+      const payload = {
+        per_page: this.perPage.value,
+        page: this.page.value,
+        search: this.search.value,
+        query_type: 'ILIKE',
+        query_operator: 'OR',
+        query_field: ['name', 'phone'],
+      };
       try {
-        const { data } = await Patient.find({
-          per_page: this.perPage.value,
-          page: this.page.value,
-          search: this.search.value,
-          query_type: 'ILIKE',
-          query_operator: 'OR',
-          query_field: ['name', 'phone'],
-        });
+        const { data } = this.findForDoctor ? await Doctor.getPatient(payload) :  await Patient.find(payload);
         this.setData({
           items: data.data,
           total: +data.meta.total,

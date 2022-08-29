@@ -5,7 +5,8 @@
 <script>
 import * as icons from '@/enums/icons.enum.js';
 import { DASHBOARD_ROUTE } from '@/router/dashboard.routes';
-import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
+import { DOCTORS_QUEUE_ROUTE} from '@/router/doctors.routes';
+import { REGISTRY_PATIENTS_ROUTE } from '@/router/registry.routes'
 import DefaultMenu from '@/components/DefaultMenu/index.vue';
 
 export default {
@@ -13,7 +14,7 @@ export default {
   components: { DefaultMenu },
   computed: {
     navigation() {
-      return [DASHBOARD_ROUTE, DOCTORS_QUEUE_ROUTE].map((route) => ({
+      return [DASHBOARD_ROUTE, DOCTORS_QUEUE_ROUTE, REGISTRY_PATIENTS_ROUTE].map((route) => ({
         path: route.path,
         title: this.routesOptionsByRouteName[route.name].text,
         icon: this.routesOptionsByRouteName[route.name].icon,
@@ -29,6 +30,10 @@ export default {
         [DOCTORS_QUEUE_ROUTE.name]: {
           icon: icons.DOCTORS_QUEUE,
           text: this.$t('Base.Queue'),
+        },
+        [REGISTRY_PATIENTS_ROUTE.name]: {
+          icon: icons.USER_TAG,
+          text: this.$t('Base.Patients'),
         },
       };
     },
