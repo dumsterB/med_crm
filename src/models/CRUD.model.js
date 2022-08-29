@@ -105,5 +105,16 @@ export class CRUDModel {
     };
   }
 
-  static delete(payload) {}
+  /**
+   *
+   * @param {number} id
+   * @return {Promise<{data: response.data, response: AxiosResponse<any>}>}
+   */
+  static async delete({ id }) {
+    const response = await ApiService.delete(`${this.tableName}/${id}/delete`);
+    return {
+      response: response,
+      data: response.data,
+    };
+  }
 }
