@@ -1,3 +1,5 @@
+import { PER_PAGE, SEARCH } from '@/enums/query.enum';
+
 /**
  * @param {string} path vue-router Route.path
  * @param {object} params params for replace
@@ -34,19 +36,26 @@ export function setComponentInRoutesByViewsFolder({ routes }) {
  *
  * @param {object} query объект с ключами равными общим query параметрам для данных и таблиц. perPage, page, search ...
  * @param {object} oldQuery
+ * @param {Array<string>} [fieldsForResetPage = [per_page, search]] ключи в query, при изменение которых надо сбросить страницу
  * @param {function} resetPage функция для сброса текущей страницы при необходимости
  * @param {function} getData функция для получения данных
  * @return {number|undefined} может вернуть счётчик от вызова setTimeout
  */
-export function compareQueriesThenLoadData({ query, oldQuery, resetPage, getData }) {
-  if (
-    query &&
-    oldQuery &&
-    (query.perPage !== oldQuery.perPage || query.search !== oldQuery.search)
-  ) {
-    resetPage();
-    return setTimeout(() => getData());
-  }
+export function compareQueriesThenLoadData({
+  query,
+  oldQuery,
+  fieldsForResetPage = [],
+  resetPage,
+  getData,
+}) {
+  const defaultFieldsForReset = [PER_PAGE, SEARCH];
+
+  [...defaultFieldsForReset, ...fieldsForResetPage].forEach((key) => {
+    if (query && oldQuery && query[key] !== oldQuery[key]) {
+      resetPage();
+      return setTimeout(() => getData());
+    }
+  });
 
   getData();
 }
