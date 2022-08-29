@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { ServiceGroup } from '@/models/ServiceGroup';
+import { ServiceGroup } from '@/models/ServiceGroup.model';
 import { Appointment } from '@/models/Appointment.model';
 
 export default {
