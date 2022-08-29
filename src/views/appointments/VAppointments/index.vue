@@ -1,39 +1,14 @@
 <template>
   <LayoutByUserRole content-class="v-patients-records-content" fixHeight>
-    <div class="v-patients-records-content__header v-patients-records-content-header">
-      <div class="v-patients-records-content-header__filters">
-        <!--        <ElSelect
-          v-model="value"
-          :placeholder="$t('Appointments.SelectDoctor')"
-          size="large">
-          <ElOption
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value" />
-        </ElSelect>
-
-        <ElSelect
-          v-model="value"
-          :placeholder="$t('Appointments.SelectStatus')"
-          size="large">
-          <ElOption
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value" />
-        </ElSelect>-->
-      </div>
-
-      <div class="v-patients-records-content-header__actions">
+    <LayoutContentHeader>
+      <template #actions>
         <ElButton type="primary" @click="createAppointment">
           {{ $t('Appointments.CreateAppointment') }}
         </ElButton>
-      </div>
-    </div>
+      </template>
+    </LayoutContentHeader>
 
     <AppointmentsTable
-      class="v-patients-records-content__table"
       :items="items"
       :loading="loading"
       v-model:page="page.value"
@@ -53,10 +28,11 @@ import { Appointment } from '@/models/Appointment.model.js';
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
+import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
 
 export default {
   name: 'VAppointments',
-  components: { LayoutByUserRole, AppointmentsTable },
+  components: { LayoutContentHeader, LayoutByUserRole, AppointmentsTable },
 
   setup: () => ({
     perPage: usePerPage(),

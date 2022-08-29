@@ -3,16 +3,11 @@
     <ElScrollbar class="queues-table-wrapper__scrollbar">
       <ElTable
         class="queues-table"
-        ref="elTable"
-        @row-click="goToAppointment"
+        v-loading="loading"
         :data="items"
-        v-loading="loading">
-
-        <template #empty>
-          <div class="queues-table__empty queues-table-empty">
-            <span>{{ $t('Base.NoData') }}</span>
-          </div>
-        </template>
+        :empty-text="$t('Base.NoData')"
+        ref="elTable"
+        @row-click="goToAppointment">
         <ElTableColumn prop="patient.name" :label="$t('Base.FullName')"></ElTableColumn>
         <ElTableColumn prop="patient.gender" :label="$t('User.Gender')">
           <template #default="{ row }">
@@ -26,14 +21,16 @@
             <AppointmentStartOrEndDate :date="row.start_at" />
           </template>
         </ElTableColumn>
-        <ElTableColumn prop="name" :label="$t('Appointments.Statuses.Status')">
+
+        <ElTableColumn prop="status" :label="$t('Appointments.Statuses.Status')">
           <template #default="{ row }">
             <div class="queues-table-actions">
               <AppointmentStatusTag :status="row.status"></AppointmentStatusTag>
             </div>
           </template>
         </ElTableColumn>
-        <ElTableColumn prop="name" width="200" :label="$t('Base.Actions')">
+
+        <ElTableColumn prop="actions" width="200" :label="$t('Base.Actions')">
           <template #default="{ row }">
             <div class="queues-table-actions">
               <ElButton
