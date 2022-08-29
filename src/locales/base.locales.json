@@ -42,6 +42,7 @@
       "SignUp": "Регистрация",
       "Sum": "сум",
       "Template": "Шаблон",
+      "Templates": "Шаблоны",
       "Time": "Время"
     }
   },
@@ -87,7 +88,8 @@
       "Settings": "Sozlamalar",
       "SignUp": "Ro'yxatdan o'tish",
       "Sum": "som",
-      "Template": "Namuna",
+      "Template": "??Шаблон??",
+      "Templates": "??Шаблоны??",
       "Time": "Vaqt"
     }
   }
