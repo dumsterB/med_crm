@@ -23,6 +23,7 @@
       "MakeAppointment": "Записать на приём",
       "NoData": "Нет данных",
       "Open": "Открыть",
+      "OpenCard": "Открыть",
       "Password": "Пароль",
       "Patient": "Пациент",
       "PatientRecord": "Запись пациента",
@@ -32,15 +33,14 @@
       "PleaseSelect": "Пожалуйста выберите",
       "Price": "Цена",
       "Queue": "Очередь",
+      "ReasonService": "Случай обслуживания",
       "SaveChanges": "Сохранить изменения",
       "Search": "Поиск",
       "SelectDate": "Выберите дату",
       "Service": "Услуга",
       "SignUp": "Регистрация",
       "Sum": "сум",
-      "Time": "Время",
-      "OpenCard": "Открыть",
-      "ReasonService": "Случай обслуживания"
+      "Time": "Время"
     }
   },
   "uz": {
@@ -59,6 +59,7 @@
       "DoctorsSchedule": "Shifokorlar jadvali",
       "Edit": "Tahrirlash",
       "ForgotPassword": "Parolni unutdingizmi?",
+      "FullName": "F.I.Sh",
       "InviteByNumber": "Telefondan ulash",
       "Loading": "Yuklanmoqda...",
       "Login": "Login",
@@ -66,6 +67,7 @@
       "MakeAppointment": "Qabulga yozdirish",
       "NoData": "Malumot topilmadi",
       "Open": "Ochish",
+      "OpenCard": " Ochish",
       "Password": "Parol",
       "Patient": "Bemor",
       "PatientRecord": "Bemor yozuvi",
@@ -74,15 +76,15 @@
       "PleaseInput": "Iltimos, kiriting",
       "PleaseSelect": "Iltimos tanlang",
       "Price": "Narxi",
+      "Queue": "Navbat",
+      "ReasonService": "Xizmat ishi",
       "SaveChanges": "O'zgarishlarni saqlash",
       "Search": "Topish",
       "SelectDate": "Sanani tanlang",
       "Service": "Xizmat",
       "SignUp": "Ro'yxatdan o'tish",
       "Sum": "som",
-      "Time": "Vaqt",
-      "OpenCard": " Ochish",
-      "ReasonService": "Xizmat ishi"
+      "Time": "Vaqt"
     }
   }
 }
