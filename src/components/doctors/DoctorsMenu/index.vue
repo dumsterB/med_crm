@@ -10,7 +10,7 @@ import {
   DOCTORS_TEMPLATES_ROUTE,
   DOCTORS_SETTINGS_ROUTE,
 } from '@/router/doctors.routes';
-import DefaultMenu from '@/components/DefaultMenu/index.vue';
+import DefaultMenu from '@/components/layouts/assets/DefaultMenu/index.vue';
 
 export default {
   name: 'DoctorsMenu',
