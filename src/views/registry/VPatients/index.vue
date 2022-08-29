@@ -1,13 +1,12 @@
 <template>
   <LayoutRegistry content-class="v-patients-content" fixHeight>
-    <div class="v-patients-content__header v-patients-content-header">
-      <div class="v-patients-content-header-actions">
+    <LayoutContentHeader>
+      <template #actions>
         <ElButton type="primary" @click="createPatient"> {{ $t('Patients.AddPatient') }} </ElButton>
-      </div>
-    </div>
+      </template>
+    </LayoutContentHeader>
 
     <PatientsTable
-      class="v-patients-content__table"
       :items="items"
       :loading="loading"
       v-model:page="page.value"
@@ -26,10 +25,11 @@ import { Patient } from '@/models/Patient.model';
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import LayoutContentHeader from '@/components/LayoutContentHeader/index.vue';
 
 export default {
   name: 'VPatients',
-  components: { LayoutRegistry, PatientsTable },
+  components: { LayoutContentHeader, LayoutRegistry, PatientsTable },
   setup: () => ({
     perPage: usePerPage(),
     page: usePage(),
