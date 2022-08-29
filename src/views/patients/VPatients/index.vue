@@ -1,6 +1,12 @@
 <template>
   <LayoutByUserRole content-class="v-patients-content" fixHeight>
     <div class="v-patients-content__header v-patients-content-header">
+      <ElButton v-if="isDoctor" type="primary" @click="getMyPatients">
+        {{ $t('Patients.MyPatients') }}
+      </ElButton>
+      <ElButton v-if="isDoctor" @click="getClinicPatients">
+        {{ $t('Patients.ClinicPatients') }}
+      </ElButton>
       <div class="v-patients-content-header-actions">
         <ElButton v-if="!isDoctor" type="primary" @click="createPatient">
           {{ $t('Patients.AddPatient') }}
@@ -22,13 +28,14 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import { usePerPage, usePage, useSearch } from '@/hooks/query';
+import { useQuery } from '@/hooks/useQuery.hook';
 import { compareQueriesThenLoadData } from '@/utils/router.utils';
 import { Patient } from '@/models/Patient.model';
+import { User } from '@/models/User.model';
+import { Doctor } from '@/models/Doctor.model';
 import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
-import { useQuery } from '@/hooks/useQuery.hook';
-import { User } from '@/models/User.model';
 
 export default {
   name: 'VPatients',
@@ -39,6 +46,11 @@ export default {
     search: useSearch(),
     findForDoctor: useQuery({ field: 'doctor' }),
   }),
+  data(){
+    return{
+      patientsClinic: false,
+    }
+  },
   computed: {
     ...mapState({
       loading: (state) => state.patients.loading,
@@ -51,12 +63,16 @@ export default {
       return this.user.role === User.enum.roles.Doctor;
     },
 
+    stateDeterminer(){
+      return !this.isDoctor || this.patientsClinic
+    },
+
     queryWatchers() {
       return {
         perPage: this.perPage.value,
         page: this.page.value,
         search: this.search.value,
-        findForDoctor: this.findForDoctor.value
+        findForDoctor: this.findForDoctor.value,
       };
     },
   },
@@ -68,6 +84,7 @@ export default {
           oldQuery: oldValue,
           resetPage: this.page.reset,
           getData: this.getPatients,
+          fieldsForResetPage: ['doctor'],
         });
       },
       immediate: true,
@@ -92,12 +109,13 @@ export default {
         query_field: ['name', 'phone'],
       };
       try {
-        const { data } = this.findForDoctor ? await Doctor.getPatient(payload) :  await Patient.find(payload);
+        const { data } = !this.stateDeterminer ? await Doctor.getPatients(this.user.doctor_id, payload) : await Patient.find(payload);
         this.setData({
           items: data.data,
           total: +data.meta.total,
           overwriteDataState: true,
         });
+        console.log(items, 'items');
       } catch (err) {
         console.log(err);
         this.$notify({
@@ -107,6 +125,13 @@ export default {
       }
 
       this.setLoading(false);
+    },
+
+    getMyPatients() {},
+
+    getClinicPatients() {
+      this.patientsClinic = !this.patientsClinic;
+      this.getPatients()
     },
 
     createPatient() {
