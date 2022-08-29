@@ -1,7 +1,7 @@
 <template>
   <div class="layout-content-header">
     <div class="layout-content-header__main layout-content-header-main">
-      <slot name="main">
+      <slot>
         <h1 class="layout-content-header-main__title">
           <slot name="title"></slot>
         </h1>
