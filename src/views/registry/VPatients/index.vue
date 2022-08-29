@@ -25,7 +25,7 @@ import { Patient } from '@/models/Patient.model';
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
-import LayoutContentHeader from '@/components/LayoutContentHeader/index.vue';
+import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
 
 export default {
   name: 'VPatients',
