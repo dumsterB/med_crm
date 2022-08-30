@@ -37,7 +37,7 @@
 
 <script>
 import * as icons from '@/enums/icons.enum.js';
-import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
+import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
@@ -88,7 +88,7 @@ export default {
   methods: {
     goToPatient() {
       this.$router.push({
-        name: REGISTRY_PATIENT_ROUTE.name,
+        name: PATIENT_ROUTE.name,
         params: { id: this.data.id },
       });
     },

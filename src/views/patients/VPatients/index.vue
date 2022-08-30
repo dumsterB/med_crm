@@ -1,52 +1,78 @@
 <template>
-  <LayoutRegistry content-class="v-patients-content" fixHeight>
+  <LayoutByUserRole content-class="v-patients-content" fixHeight>
     <LayoutContentHeader>
+      <template v-if="isDoctor" #default>
+        <ElButton :type="findForDoctor.value ? 'primary' : ''" @click="findForDoctor.value = 1">
+          {{ $t('Patients.MyPatients') }}
+        </ElButton>
+        <ElButton :type="!findForDoctor.value ? 'primary' : ''" @click="findForDoctor.value = 0">
+          Clinic
+        </ElButton>
+      </template>
+
       <template #actions>
-        <ElButton type="primary" @click="createPatient"> {{ $t('Patients.AddPatient') }} </ElButton>
+        <ElButton v-if="!isDoctor" type="primary" @click="createPatient">
+          {{ $t('Patients.AddPatient') }}
+        </ElButton>
       </template>
     </LayoutContentHeader>
 
     <PatientsTable
+      class="v-patients-content__table"
       :items="items"
       :loading="loading"
       v-model:page="page.value"
       v-model:per-page="perPage.value"
       :total="total"
       :search="search.value" />
-  </LayoutRegistry>
+  </LayoutByUserRole>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
 import { usePerPage, usePage, useSearch } from '@/hooks/query';
+import { useQuery } from '@/hooks/useQuery.hook';
 import { compareQueriesThenLoadData } from '@/utils/router.utils';
 import { Patient } from '@/models/Patient.model';
+import { User } from '@/models/User.model';
+import { Doctor } from '@/models/Doctor.model';
 
-import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
+import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
 
 export default {
   name: 'VPatients',
-  components: { LayoutContentHeader, LayoutRegistry, PatientsTable },
+  components: { LayoutContentHeader, PatientsTable, LayoutByUserRole },
   setup: () => ({
     perPage: usePerPage(),
     page: usePage(),
     search: useSearch(),
+    findForDoctor: useQuery({ field: 'doctor', valueIsNumber: true }),
   }),
+  data() {
+    return {
+      patientsClinic: false,
+    };
+  },
   computed: {
     ...mapState({
       loading: (state) => state.patients.loading,
       items: (state) => state.patients.data,
       total: (state) => state.patients.total,
+      user: (state) => state.auth.user,
     }),
 
+    isDoctor() {
+      return this.user.role === User.enum.roles.Doctor;
+    },
     queryWatchers() {
       return {
         perPage: this.perPage.value,
         page: this.page.value,
         search: this.search.value,
+        findForDoctor: this.findForDoctor.value,
       };
     },
   },
@@ -58,6 +84,7 @@ export default {
           oldQuery: oldValue,
           resetPage: this.page.reset,
           getData: this.getPatients,
+          fieldsForResetPage: ['doctor'],
         });
       },
       immediate: true,
@@ -74,15 +101,19 @@ export default {
     async getPatients() {
       this.setLoading(true);
 
+      const payload = {
+        per_page: this.perPage.value,
+        page: this.page.value,
+        search: this.search.value,
+        query_type: 'ILIKE',
+        query_operator: 'OR',
+        query_field: ['name', 'phone'],
+      };
+
       try {
-        const { data } = await Patient.find({
-          per_page: this.perPage.value,
-          page: this.page.value,
-          search: this.search.value,
-          query_type: 'ILIKE',
-          query_operator: 'OR',
-          query_field: ['name', 'phone'],
-        });
+        const { data } = !!this.findForDoctor.value
+          ? await Doctor.getPatients(this.user.doctor_id, payload)
+          : await Patient.find(payload);
         this.setData({
           items: data.data,
           total: +data.meta.total,
@@ -97,6 +128,11 @@ export default {
       }
 
       this.setLoading(false);
+    },
+
+    getPatientsHandler() {
+      this.patientsClinic = !this.patientsClinic;
+      this.getPatients();
     },
 
     createPatient() {
