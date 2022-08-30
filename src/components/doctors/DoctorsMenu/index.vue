@@ -5,9 +5,9 @@
 <script>
 import * as icons from '@/enums/icons.enum.js';
 import { DASHBOARD_ROUTE } from '@/router/dashboard.routes';
-import { DOCTORS_QUEUE_ROUTE} from '@/router/doctors.routes';
-import { PATIENTS_ROUTE } from '@/router/patients.routes'
-import DefaultMenu from '@/components/DefaultMenu/index.vue';
+import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
+import { PATIENTS_ROUTE } from '@/router/patients.routes';
+import DefaultMenu from '@/components/layouts/assets/DefaultMenu/index.vue';
 
 export default {
   name: 'DoctorsMenu',
