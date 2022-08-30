@@ -1,46 +1,45 @@
 <template>
   <LayoutByUserRole content-class="v-patients-content" fixHeight>
-    <LayoutRegistry content-class="v-patients-content" fixHeight>
-      <LayoutContentHeader>
-        <ElButton
-          v-if="isDoctor"
-          :type="stateDeterminer === false ? 'primary' : ''"
-          @click="getPatientsHandler">
-          {{ $t('Patients.MyPatients') }}
-        </ElButton>
-        <ElButton
-          v-if="isDoctor"
-          :type="stateDeterminer === true ? 'primary' : ''"
-          @click="getPatientsHandler">
-        </ElButton>
+    <LayoutContentHeader>
+      <ElButton
+        v-if="isDoctor"
+        :type="stateDeterminer === false ? 'primary' : ''"
+        @click="getPatientsHandler">
+        {{ $t('Patients.MyPatients') }}
+      </ElButton>
+      <ElButton
+        v-if="isDoctor"
+        :type="stateDeterminer === true ? 'primary' : ''"
+        @click="getPatientsHandler">
+      </ElButton>
 
-        <template #actions>
-          <ElButton v-if="!isDoctor" type="primary" @click="createPatient">
-            {{ $t('Patients.AddPatient') }}
-          </ElButton>
-          \
-        </template>
-      </LayoutContentHeader>
+      <template #actions>
+        <ElButton v-if="!isDoctor" type="primary" @click="createPatient">
+          {{ $t('Patients.AddPatient') }}
+        </ElButton>
+      </template>
+    </LayoutContentHeader>
 
-      <PatientsTable
-        class="v-patients-content__table"
-        :items="items"
-        :loading="loading"
-        v-model:page="page.value"
-        v-model:per-page="perPage.value"
-        :total="total"
-        :search="search.value"/>
+    <PatientsTable
+      class="v-patients-content__table"
+      :items="items"
+      :loading="loading"
+      v-model:page="page.value"
+      v-model:per-page="perPage.value"
+      :total="total"
+      :search="search.value" />
   </LayoutByUserRole>
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex';
-import {usePerPage, usePage, useSearch} from '@/hooks/query';
+import { mapState, mapActions } from 'vuex';
+import { usePerPage, usePage, useSearch } from '@/hooks/query';
 import { useQuery } from '@/hooks/useQuery.hook';
-import {compareQueriesThenLoadData} from '@/utils/router.utils';
-import {Patient} from '@/models/Patient.model';
+import { compareQueriesThenLoadData } from '@/utils/router.utils';
+import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
 import { Doctor } from '@/models/Doctor.model';
+
 import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
@@ -149,6 +148,6 @@ export default {
 };
 </script>
 
-<style lang="scss" src="./index.scss"/>
-<i18n src="@/locales/notifications.locales.json"/>
-<i18n src="@/locales/patients.locales.json"/>
+<style lang="scss" src="./index.scss" />
+<i18n src="@/locales/notifications.locales.json" />
+<i18n src="@/locales/patients.locales.json" />

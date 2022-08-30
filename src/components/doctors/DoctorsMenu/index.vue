@@ -7,7 +7,7 @@ import * as icons from '@/enums/icons.enum.js';
 import { DASHBOARD_ROUTE } from '@/router/dashboard.routes';
 import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
 import { REGISTRY_PATIENTS_ROUTE } from '@/router/registry.routes';
-import DefaultMenu from '@/components/DefaultMenu/index.vue';
+import DefaultMenu from '@/components/layouts/assets/DefaultMenu/index.vue';
 
 export default {
   name: 'DoctorsMenu',
