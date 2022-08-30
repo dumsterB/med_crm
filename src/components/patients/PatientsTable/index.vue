@@ -76,7 +76,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
+import { PATIENT_ROUTE } from '@/router/patients.routes';
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
 import { Patient } from '@/models/Patient.model';
@@ -123,7 +123,7 @@ export default {
   methods: {
     goToPatient(payload) {
       this.$router.push({
-        name: REGISTRY_PATIENT_ROUTE.name,
+        name: PATIENT_ROUTE.name,
         params: { id: payload.id },
       });
     },

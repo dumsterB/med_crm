@@ -2,8 +2,8 @@ import { onlyLoggedInMiddleware } from '@/middlewares/onlyLoggedIn.middleware';
 import { onlyManagerMiddleware } from '@/middlewares/onlyManager.middleware';
 import { I18nService } from '@/services/i18n.service';
 
-export const REGISTRY_PATIENTS_ROUTE = {
-  name: 'REGISTRY_PATIENTS',
+export const PATIENTS_ROUTE = {
+  name: 'PATIENTS',
   path: '/patients',
   component: 'VPatients',
   beforeEnter: [onlyLoggedInMiddleware],
@@ -11,8 +11,8 @@ export const REGISTRY_PATIENTS_ROUTE = {
     title: I18nService.t('Base.Patients'),
   },
 };
-export const REGISTRY_PATIENT_ROUTE = {
-  name: 'REGISTRY_PATIENT',
+export const PATIENT_ROUTE = {
+  name: 'PATIENT',
   path: '/patients/:id',
   component: 'VPatient',
   beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
@@ -22,4 +22,4 @@ export const REGISTRY_PATIENT_ROUTE = {
   props: true,
 };
 
-export const routes = [REGISTRY_PATIENTS_ROUTE, REGISTRY_PATIENT_ROUTE];
+export const routes = [PATIENTS_ROUTE, PATIENT_ROUTE];
