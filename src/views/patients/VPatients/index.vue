@@ -1,17 +1,14 @@
 <template>
   <LayoutByUserRole content-class="v-patients-content" fixHeight>
     <LayoutContentHeader>
-      <ElButton
-        v-if="isDoctor"
-        :type="stateDeterminer === false ? 'primary' : ''"
-        @click="getPatientsHandler">
-        {{ $t('Patients.MyPatients') }}
-      </ElButton>
-      <ElButton
-        v-if="isDoctor"
-        :type="stateDeterminer === true ? 'primary' : ''"
-        @click="getPatientsHandler">
-      </ElButton>
+      <template v-if="isDoctor" #default>
+        <ElButton :type="findForDoctor.value ? 'primary' : ''" @click="findForDoctor.value = 1">
+          {{ $t('Patients.MyPatients') }}
+        </ElButton>
+        <ElButton :type="!findForDoctor.value ? 'primary' : ''" @click="findForDoctor.value = 0">
+          Clinic
+        </ElButton>
+      </template>
 
       <template #actions>
         <ElButton v-if="!isDoctor" type="primary" @click="createPatient">
@@ -52,7 +49,7 @@ export default {
     perPage: usePerPage(),
     page: usePage(),
     search: useSearch(),
-    findForDoctor: useQuery({ field: 'doctor' }),
+    findForDoctor: useQuery({ field: 'doctor', valueIsNumber: true }),
   }),
   data() {
     return {
@@ -70,11 +67,6 @@ export default {
     isDoctor() {
       return this.user.role === User.enum.roles.Doctor;
     },
-
-    stateDeterminer() {
-      return !this.isDoctor || this.patientsClinic;
-    },
-
     queryWatchers() {
       return {
         perPage: this.perPage.value,
@@ -108,6 +100,7 @@ export default {
 
     async getPatients() {
       this.setLoading(true);
+
       const payload = {
         per_page: this.perPage.value,
         page: this.page.value,
@@ -116,8 +109,9 @@ export default {
         query_operator: 'OR',
         query_field: ['name', 'phone'],
       };
+
       try {
-        const { data } = !this.stateDeterminer
+        const { data } = !!this.findForDoctor.value
           ? await Doctor.getPatients(this.user.doctor_id, payload)
           : await Patient.find(payload);
         this.setData({
