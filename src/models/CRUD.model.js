@@ -16,7 +16,7 @@ export class CRUDModel {
    * @param {any} payload[key]
    */
   constructor(payload) {
-    this.id = payload?.id || null;
+    this.id = payload?.id ?? null;
   }
 
   /**
@@ -97,7 +97,6 @@ export class CRUDModel {
    * @return {Promise<{response: AxiosResponse<any>, data: response.data}>}
    */
   static async update({ id, payload, options = {} }) {
-    delete payload.id;
     const response = await ApiService.put(options.url || `${this.tableName}/${id}/update`, payload);
     return {
       response: response,
