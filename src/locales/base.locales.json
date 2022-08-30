@@ -2,7 +2,7 @@
   "ru": {
     "Base": {
       "Actions": "Действия",
-      "Absent": "отсутствует",
+      "Absent": "Отсутствует",
       "Appointment": "Запись",
       "Attach": "Привязать",
       "Authorization": "Авторизация",
@@ -47,7 +47,7 @@
   "uz": {
     "Base": {
       "Actions": "Harakatlar",
-      "Absent": "mavjud emas",
+      "Absent": "Mavjud emas",
       "Appointment": "Yozuv",
       "Attach": "Bog'lash",
       "Authorization": "Kirish",
