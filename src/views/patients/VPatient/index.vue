@@ -21,7 +21,7 @@
           <ElButton type="primary" @click="createChildren"> {{ $t('User.AddChildren') }}</ElButton>
         </div>
 
-        <ElEmpty v-show="!patient.childrens?.length" :description="$t('Base.NoData')" />
+        <ElEmpty class="v-patient-content-item-empty" v-show="!patient.childrens?.length" :description="$t('Base.NoData')" />
 
         <div class="v-patient-content-item__body" v-if="patient.childrens?.length">
           <PatientsTable
@@ -45,6 +45,7 @@
         </div>
 
         <ElEmpty
+          class="v-patient-content-item-empty"
           v-show="!appointments?.length && !loading.appointment"
           :description="$t('Base.NoData')" />
 
