@@ -10,7 +10,7 @@
         <template #empty>
           <div class="patients-table__empty patients-table-empty">
             <span>{{ $t('Base.NoData') }}</span>
-            <ElButton type="primary" @click="addPatient">
+            <ElButton v-if="!isDoctor" type="primary" @click="addPatient">
               {{ $t('Patients.AddPatient') }}
             </ElButton>
           </div>
@@ -75,10 +75,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
 import { Patient } from '@/models/Patient.model';
+import { User } from '@/models/User.model';
 
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
@@ -99,6 +101,9 @@ export default {
   },
   icons: icons,
   computed: {
+    ...mapState({
+      user: (state) => state.auth.user,
+    }),
     hasItems() {
       return !!this.items.length;
     },
@@ -121,6 +126,10 @@ export default {
         name: REGISTRY_PATIENT_ROUTE.name,
         params: { id: payload.id },
       });
+    },
+
+    isDoctor() {
+      return this.user.role === User.enum.roles.Doctor;
     },
 
     makeAppointment(payload) {

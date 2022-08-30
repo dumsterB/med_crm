@@ -1,10 +1,16 @@
 <template>
   <LayoutByUserRole content-class="v-patients-content" fixHeight>
     <div class="v-patients-content__header v-patients-content-header">
-      <ElButton v-if="isDoctor" type="primary" @click="getMyPatients">
+      <ElButton
+        v-if="isDoctor"
+        :type="stateDeterminer === false ? 'primary' : ''"
+        @click="getPatientsHandler">
         {{ $t('Patients.MyPatients') }}
       </ElButton>
-      <ElButton v-if="isDoctor" @click="getClinicPatients">
+      <ElButton
+        v-if="isDoctor"
+        :type="stateDeterminer === true ? 'primary' : ''"
+        @click="getPatientsHandler">
         {{ $t('Patients.ClinicPatients') }}
       </ElButton>
       <div class="v-patients-content-header-actions">
@@ -46,10 +52,10 @@ export default {
     search: useSearch(),
     findForDoctor: useQuery({ field: 'doctor' }),
   }),
-  data(){
-    return{
+  data() {
+    return {
       patientsClinic: false,
-    }
+    };
   },
   computed: {
     ...mapState({
@@ -63,8 +69,8 @@ export default {
       return this.user.role === User.enum.roles.Doctor;
     },
 
-    stateDeterminer(){
-      return !this.isDoctor || this.patientsClinic
+    stateDeterminer() {
+      return !this.isDoctor || this.patientsClinic;
     },
 
     queryWatchers() {
@@ -109,13 +115,14 @@ export default {
         query_field: ['name', 'phone'],
       };
       try {
-        const { data } = !this.stateDeterminer ? await Doctor.getPatients(this.user.doctor_id, payload) : await Patient.find(payload);
+        const { data } = !this.stateDeterminer
+          ? await Doctor.getPatients(this.user.doctor_id, payload)
+          : await Patient.find(payload);
         this.setData({
           items: data.data,
           total: +data.meta.total,
           overwriteDataState: true,
         });
-        console.log(items, 'items');
       } catch (err) {
         console.log(err);
         this.$notify({
@@ -127,11 +134,9 @@ export default {
       this.setLoading(false);
     },
 
-    getMyPatients() {},
-
-    getClinicPatients() {
+    getPatientsHandler() {
       this.patientsClinic = !this.patientsClinic;
-      this.getPatients()
+      this.getPatients();
     },
 
     createPatient() {
