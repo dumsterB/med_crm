@@ -6,7 +6,7 @@ import { User } from '@/models/User.model';
 import { Patient } from '@/models/Patient.model';
 import { Doctor } from '@/models/Doctor.model';
 import { Service } from '@/models/Service.model';
-import { ServiceGroup } from '@/models/ServiceGroup';
+import { ServiceGroup } from '@/models/ServiceGroup.model';
 
 import SpecialtiesSelect from '@/components/specialties/SpecialtiesSelect/index.vue';
 import DoctorsSelectByGroupService from './DoctorsSelectByGroupService/index.vue';

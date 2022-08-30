@@ -21,14 +21,6 @@
   tr:hover {
     cursor: pointer;
   }
-  &__empty {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 1.5em;
-  }
-
   &__name-avatar {
     display: flex;
     align-items: center;
@@ -38,8 +30,8 @@
     display: flex;
     gap: 6px;
   }
-  &__bg-color{
-    background: #FCFCFC;
+  &__bg-color {
+    background: #fcfcfc;
     opacity: 0.5;
   }
 }
