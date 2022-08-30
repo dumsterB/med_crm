@@ -1,24 +1,21 @@
 <template>
   <LayoutByUserRole content-class="v-patients-content" fixHeight>
-    <div class="v-patients-content__header v-patients-content-header">
-      <ElButton
-        v-if="isDoctor"
-        :type="stateDeterminer === false ? 'primary' : ''"
-        @click="getPatientsHandler">
-        {{ $t('Patients.MyPatients') }}
-      </ElButton>
-      <ElButton
-        v-if="isDoctor"
-        :type="stateDeterminer === true ? 'primary' : ''"
-        @click="getPatientsHandler">
-        {{ $t('Patients.ClinicPatients') }}
-      </ElButton>
-      <div class="v-patients-content-header-actions">
+    <LayoutContentHeader>
+      <template v-if="isDoctor" #default>
+        <ElButton :type="findForDoctor.value ? 'primary' : ''" @click="findForDoctor.value = 1">
+          {{ $t('Patients.MyPatients') }}
+        </ElButton>
+        <ElButton :type="!findForDoctor.value ? 'primary' : ''" @click="findForDoctor.value = 0">
+          Clinic
+        </ElButton>
+      </template>
+
+      <template #actions>
         <ElButton v-if="!isDoctor" type="primary" @click="createPatient">
           {{ $t('Patients.AddPatient') }}
         </ElButton>
-      </div>
-    </div>
+      </template>
+    </LayoutContentHeader>
 
     <PatientsTable
       class="v-patients-content__table"
@@ -39,18 +36,20 @@ import { compareQueriesThenLoadData } from '@/utils/router.utils';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
 import { Doctor } from '@/models/Doctor.model';
+
 import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
 
 export default {
   name: 'VPatients',
-  components: { PatientsTable, LayoutByUserRole },
+  components: { LayoutContentHeader, PatientsTable, LayoutByUserRole },
   setup: () => ({
     perPage: usePerPage(),
     page: usePage(),
     search: useSearch(),
-    findForDoctor: useQuery({ field: 'doctor' }),
+    findForDoctor: useQuery({ field: 'doctor', valueIsNumber: true }),
   }),
   data() {
     return {
@@ -68,11 +67,6 @@ export default {
     isDoctor() {
       return this.user.role === User.enum.roles.Doctor;
     },
-
-    stateDeterminer() {
-      return !this.isDoctor || this.patientsClinic;
-    },
-
     queryWatchers() {
       return {
         perPage: this.perPage.value,
@@ -106,6 +100,7 @@ export default {
 
     async getPatients() {
       this.setLoading(true);
+
       const payload = {
         per_page: this.perPage.value,
         page: this.page.value,
@@ -114,8 +109,9 @@ export default {
         query_operator: 'OR',
         query_field: ['name', 'phone'],
       };
+
       try {
-        const { data } = !this.stateDeterminer
+        const { data } = !!this.findForDoctor.value
           ? await Doctor.getPatients(this.user.doctor_id, payload)
           : await Patient.find(payload);
         this.setData({

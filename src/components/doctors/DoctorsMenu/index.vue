@@ -28,7 +28,7 @@ export default {
           text: this.$t('Base.Dashboard'),
         },
         [DOCTORS_QUEUE_ROUTE.name]: {
-          icon: icons.DOCTORS_QUEUE,
+          icon: icons.NOTE,
           text: this.$t('Base.Queue'),
         },
         [PATIENTS_ROUTE.name]: {

@@ -14,6 +14,7 @@ module.exports = {
     'no-debugger': 'warn',
     'no-unused-vars': 'warn',
     'no-empty': 'warn',
+    'no-extra-boolean-cast': 'off',
     'vue/multi-word-component-names': 'off',
   },
 };
