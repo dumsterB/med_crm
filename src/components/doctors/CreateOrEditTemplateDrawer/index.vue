@@ -4,8 +4,8 @@
     :title="$t('Templates.Create')"
     size="50%"
     @update:model-value="$emit('update:modelValue', $event)">
-
-    <ElForm @submit="submitHandler" class="create-template-drawer-form" label-position="top">
+{{data}}
+    <ElForm @submit.prevent="submitHandler" class="create-template-drawer-form" label-position="top">
       <ElFormItem :label="field.label" v-for="(field, index) of formFields" :key="index">
         <component
           :is="field.tag"
