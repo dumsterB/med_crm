@@ -1,5 +1,4 @@
 import { onlyLoggedInMiddleware } from '@/middlewares/onlyLoggedIn.middleware';
-import { onlyManagerMiddleware } from '@/middlewares/onlyManager.middleware';
 import { I18nService } from '@/services/i18n.service';
 
 export const PATIENTS_ROUTE = {
