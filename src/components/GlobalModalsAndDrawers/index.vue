@@ -10,9 +10,9 @@
     v-if="isDrawerOpen"
     :is="drawerComponent"
     v-model="drawerModel"
-    v-bind="drawerPayload"
     :direction="$options.DRAWER_DEFAULT_DIRECTION"
     :size="$options.DRAWER_DEFAULT_SIZE"
+    v-bind="drawerPayload"
     @action="drawerActionHandler" />
 </template>
 
