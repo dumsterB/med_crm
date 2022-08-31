@@ -15,7 +15,7 @@ export const PATIENT_ROUTE = {
   name: 'PATIENT',
   path: '/patients/:id',
   component: 'VPatient',
-  beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
+  beforeEnter: [onlyLoggedInMiddleware],
   meta: {
     title: I18nService.t('Base.Patient'),
   },
