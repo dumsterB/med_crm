@@ -107,6 +107,7 @@ export default {
         [Appointment.enum.statuses.Canceled]: false,
         [Appointment.enum.statuses.InProgress]: false,
         [Appointment.enum.statuses.Approved]: false,
+        [Appointment.enum.statuses.Provided]: false,
       },
       hasLoadingState: false,
     };
