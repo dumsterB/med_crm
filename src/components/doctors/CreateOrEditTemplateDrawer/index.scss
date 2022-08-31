@@ -1,0 +1,28 @@
+.create-template-drawer {
+  &-form {
+    display: flex;
+    flex-direction: column;
+
+    &-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+
+      & > * {
+        min-width: 8em;
+      }
+      &__field{
+        width: 100%;
+        min-height: 100px;
+      }
+    }
+  }
+  .el-textarea__inner{
+    min-height: 50px !important;
+  }
+  .el-form-item__content,
+  .el-form-item__content > * {
+    width: 100% !important;
+  }
+}

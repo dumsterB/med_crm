@@ -8,7 +8,7 @@
 
 <script>
 import LayoutDoctor from '@/components/layouts/LayoutDoctor/index.vue';
-import CreateOrEditTemplates from "@/components/doctors/CreateOrEditTemplates/index.vue";
+import CreateOrEditTemplates from "@/components/doctors/CreateOrEditTemplateDrawer/index.vue";
 
 export default {
   name: 'VTemplates',
