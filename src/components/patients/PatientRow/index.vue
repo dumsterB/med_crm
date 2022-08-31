@@ -22,7 +22,7 @@
 
 <script>
 import { Patient } from '@/models/Patient.model';
-import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
+import { PATIENT_ROUTE } from '@/router/patients.routes';
 
 export default {
   name: 'PatientRow',

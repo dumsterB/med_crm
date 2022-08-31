@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { setComponentInRoutesByViewsFolder } from '@/utils/router.utils';
 import { routes as authRoutes } from './auth.routes.js';
-import { routes as registryRoutes } from './registry.routes';
+import { routes as patientsRoutes } from './patients.routes';
 import { routes as dashboardRoutes, DASHBOARD_ROUTE } from './dashboard.routes';
 import { routes as doctorsRoutes, DOCTORS_QUEUE_ROUTE } from './doctors.routes';
 import { routes as appointmentsRoutes } from './appointments.routes';
@@ -22,7 +22,7 @@ const router = createRouter({
     ...setComponentInRoutesByViewsFolder({
       routes: [
         ...authRoutes,
-        ...registryRoutes,
+        ...patientsRoutes,
         ...dashboardRoutes,
         ...doctorsRoutes,
         ...appointmentsRoutes,
