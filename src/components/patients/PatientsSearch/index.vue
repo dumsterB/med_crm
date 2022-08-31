@@ -25,7 +25,7 @@ import { throttle, debounce } from 'lodash';
 import { useSearch } from '@/hooks/query';
 import { SEARCH } from '@/enums/icons.enum';
 import { Patient } from '@/models/Patient.model';
-import { REGISTRY_PATIENTS_ROUTE } from '@/router/registry.routes';
+import { PATIENTS_ROUTE } from '@/router/patients.routes';
 
 import PatientsSearchPopover from './PatientsSearchPopover/index.vue';
 
@@ -51,7 +51,7 @@ export default {
     }),
 
     isDisabledByPatientsPages() {
-      return this.$route.name === REGISTRY_PATIENTS_ROUTE.name;
+      return this.$route.name === PATIENTS_ROUTE.name;
     },
   },
   watch: {
