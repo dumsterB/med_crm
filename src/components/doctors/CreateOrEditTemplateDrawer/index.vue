@@ -172,6 +172,7 @@ export default {
       console.log(this.formFields);
     },
   },
+
   setup:()=>({
     SELECT: "ElSelect",
     EDIT: 'edit'
