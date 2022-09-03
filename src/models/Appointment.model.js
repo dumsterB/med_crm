@@ -99,13 +99,27 @@ export class Appointment extends CRUDModel {
   }
 
   /**
+   * @param {number} serviceCaseId
+   * @param {number} appointmentId
+   * @return {Promise<{data: response.data, response: AxiosResponse<any>}>}
+   */
+  static async attachServiceCase({ serviceCaseId, appointmentId }) {
+    const response = await ApiService.put(`${this.tableName}/${appointmentId}/case`, {
+      service_case_id: serviceCaseId,
+    });
+    return {
+      response: response,
+      data: response.data,
+    };
+  }
+
+  /**
    * @param {string} date format - DD.MM.YY hh:mm
    * @return {Date|string}
    */
   static getStartDate(date) {
     return date.split(' ')[0];
   }
-
   /**
    * @param {string} date format - DD.MM.YY hh:mm
    * @return {Date|string}
