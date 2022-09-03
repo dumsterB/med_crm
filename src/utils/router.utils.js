@@ -25,10 +25,20 @@ export function setComponentInRoutesByViewsFolder({ routes }) {
     components[component.name] = component;
   }
 
-  return routes.map((route) => ({
-    ...route,
-    component: components[route.component],
-  }));
+  const insertComponentsInRoutes = (routes) => {
+    return routes.map((route) => {
+      const component = components[route.component];
+      const children = insertComponentsInRoutes(route.children || []);
+
+      return {
+        ...route,
+        component,
+        children,
+      };
+    });
+  };
+
+  return insertComponentsInRoutes(routes);
 }
 
 /**
