@@ -6,14 +6,17 @@ import { User } from '@/models/User.model';
 import { Appointment } from '@/models/Appointment.model';
 import { PriceService } from '@/services/price.service';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
+import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 import SelectAppointmentInspectionTypeModal from '@/components/appointments/SelectAppointmentInspectionTypeModal/index.vue';
+import SelectOrCreateServiceCaseModal from '@/components/appointments/SelectOrCreateServiceCaseModal/index.vue';
 
 export default {
   name: 'AppointmentCard',
   components: { AppointmentStatusTag },
+  emits: ['update:data'],
   props: {
     data: [Appointment, Object],
   },
@@ -138,11 +141,40 @@ export default {
       if (action.name === Appointment.enum.inspectionTypes.Treatment)
         await this.startTreatmentApproveFlow();
     },
+
     async startFullApproveFlow() {
       this.$notify({ type: 'info', title: 'full flow' });
+
+      const success = await this.selectOrCreateServiceCase();
+      if (!success) return this.$emit('update:modelValue', false);
+
+      // other code
     },
     async startTreatmentApproveFlow() {
       this.$notify({ type: 'info', title: 'treatment flow' });
+    },
+
+    /**
+     * Возращает
+     *   true - если успешно установлен service_case,
+     *   false - модалка закрылась и нужно приостановить текщий flow
+     * @return {Promise<boolean>}
+     */
+    async selectOrCreateServiceCase() {
+      if (this.data.service_case_id) return true;
+
+      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
+        component: SelectOrCreateServiceCaseModal,
+        payload: {
+          userId: this.data.patient_id,
+          appointmentId: this.data.id,
+        },
+      });
+      if (!(action instanceof GlobalModalCloseAction)) {
+        this.$emit('update:data', action.data.appointment);
+      }
+
+      return !(action instanceof GlobalModalCloseAction);
     },
   },
 
