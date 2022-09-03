@@ -40,7 +40,7 @@ export class ServiceCase extends CRUDModel {
     this.created_at = payload?.created_at ?? null;
   }
 
-  static async findForUser(userId, query) {
+  static async findByUserId(userId, query) {
     return this.find({
       _url: `${this.tableName}/${userId}`,
       ...query,
