@@ -1,14 +1,17 @@
 <template>
   <ElDialog
-    title="Inspection type"
+    :title="$t('Title')"
+    width="500px"
     :model-value="modelValue"
     @update:model-value="$emit('update:modelValue', $event)">
     <div class="select-appointment-inspection-type-modal-content">
-      <ElButton @click="selectInspectionTypeHandler(Appointment.enum.inspectionTypes.Full)">
-        Full
+      <ElButton plain @click="selectInspectionTypeHandler(Appointment.enum.inspectionTypes.Full)">
+        {{ $t(`Appointments.InspectionTypes.${Appointment.enum.inspectionTypes.Full}`) }}
       </ElButton>
-      <ElButton @click="selectInspectionTypeHandler(Appointment.enum.inspectionTypes.Treatment)">
-        Treatment
+      <ElButton
+        type="primary"
+        @click="selectInspectionTypeHandler(Appointment.enum.inspectionTypes.Treatment)">
+        {{ $t(`Appointments.InspectionTypes.${Appointment.enum.inspectionTypes.Treatment}`) }}
       </ElButton>
     </div>
   </ElDialog>
@@ -39,4 +42,5 @@ export default {
 </script>
 
 <style lang="scss" src="./index.scss" />
+<i18n src="@/locales/appointments.locales.json" />
 <i18n src="./index.locales.json" />
