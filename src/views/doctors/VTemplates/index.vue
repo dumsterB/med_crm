@@ -1,7 +1,8 @@
 <template>
   <LayoutDoctor>
     <div>
-      <el-button type="primary" @click="createTemplate">Drawer</el-button>
+      <el-button type="primary" @click="createTemplate">Create template</el-button>
+      <el-button type="primary" @click="editTemplate">Edit template</el-button>
     </div>
   </LayoutDoctor>
 </template>
@@ -132,14 +133,21 @@ export default {
   },
   methods: {
     createTemplate() {
+      this.$store.dispatch('modalAndDrawer/openDrawer', CreateOrEditTemplates);
+    },
+    editTemplate(){
       this.$store.dispatch('modalAndDrawer/openDrawer', {
         component: CreateOrEditTemplates,
         payload: {
           data: this.arr,
+          status: this.EDIT
         },
       });
-    },
+    }
   },
+  setup:()=>({
+    EDIT: 'edit'
+  }),
 };
 </script>
 
