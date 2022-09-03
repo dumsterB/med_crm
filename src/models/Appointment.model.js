@@ -141,6 +141,7 @@ export class Appointment extends CRUDModel {
       Provided: 'provided',
       Canceled: 'canceled',
     },
+    // only for front
     inspectionTypes: {
       Full: 'full',
       Treatment: 'treatment',
