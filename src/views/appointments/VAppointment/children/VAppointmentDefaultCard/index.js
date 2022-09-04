@@ -14,11 +14,14 @@ import SelectAppointmentInspectionTypeModal from '@/components/appointments/Sele
 import SelectOrCreateServiceCaseModal from '@/components/appointments/SelectOrCreateServiceCaseModal/index.vue';
 
 export default {
-  name: 'AppointmentCard',
+  name: 'VAppointmentDefaultCard',
   components: { AppointmentStatusTag },
   emits: ['update:data'],
   props: {
-    data: [Appointment, Object],
+    appointment: {
+      type: [Appointment, Object],
+      default: () => new Appointment(),
+    },
   },
   data() {
     return {
@@ -45,31 +48,31 @@ export default {
     patientPageLink() {
       return insertRouteParams({
         path: PATIENT_ROUTE.path,
-        params: { id: this.data.patient_id },
+        params: { id: this.appointment?.patient_id },
       });
     },
     infoItems() {
       return [
         {
           label: this.$t('Appointments.StartDate'),
-          value: Appointment.getStartDate(this.data.start_at || ''),
+          value: Appointment.getStartDate(this.appointment.start_at || ''),
         },
         {
           label: this.$t('Appointments.StartTime'),
-          value: Appointment.getStartTime(this.data.start_at || ''),
+          value: Appointment.getStartTime(this.appointment.start_at || ''),
         },
         {
           label: this.$t('Base.Doctor'),
-          value: this.data.doctor.name,
+          value: this.appointment.doctor?.name,
         },
         {
           label: this.$t('Base.Service'),
-          value: this.data.service.title,
+          value: this.appointment.service?.title,
         },
         {
           label: this.$t('Base.Price'),
           value:
-            PriceService.formatPrice({ price: this.data.service.price }) +
+            PriceService.formatPrice({ price: this.appointment.service?.price }) +
             ' ' +
             this.$t('Base.Sum'),
         },
@@ -82,7 +85,7 @@ export default {
       const action = await this.$store.dispatch('modalAndDrawer/openDrawer', {
         component: CreateOrEditAppointmentDrawer,
         payload: {
-          data: this.data,
+          data: this.appointment,
         },
       });
 
@@ -100,7 +103,7 @@ export default {
           await this.startDoctorApproveFlow();
 
         // const { data } = await Appointment.updateStatus({
-        //   id: this.data.id,
+        //   id: this.appointment.id,
         //   status: status,
         // });
         //
@@ -131,7 +134,9 @@ export default {
     },
 
     async startDoctorApproveFlow() {
-      if (!this.data.patient.has_treatment) return this.startFullApproveFlow();
+      if (!this.appointment.patient.has_treatment || this.appointment.service_case_id)
+        return this.startFullApproveFlow();
+
       const action = await this.$store.dispatch(
         'modalAndDrawer/openModal',
         SelectAppointmentInspectionTypeModal
@@ -161,13 +166,13 @@ export default {
      * @return {Promise<boolean>}
      */
     async selectOrCreateServiceCase() {
-      if (this.data.service_case_id) return true;
+      if (this.appointment.service_case_id) return true;
 
       const action = await this.$store.dispatch('modalAndDrawer/openModal', {
         component: SelectOrCreateServiceCaseModal,
         payload: {
-          userId: this.data.patient_id,
-          appointmentId: this.data.id,
+          userId: this.appointment.patient_id,
+          appointmentId: this.appointment.id,
         },
       });
       if (!(action instanceof GlobalModalCloseAction)) {

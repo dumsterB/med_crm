@@ -5,11 +5,13 @@
         <UiAvatar class="appointment-card-header__avatar" size="super-large" />
 
         <div class="appointment-card-header__user appointment-card-header-user">
-          <div class="appointment-card-header-user__name">{{ data.patient?.name }}</div>
-          <div class="appointment-card-header-user__phone">{{ data.patient?.phone }}</div>
+          <div class="appointment-card-header-user__name">{{ appointment.patient?.name }}</div>
+          <div class="appointment-card-header-user__phone">{{ appointment.patient?.phone }}</div>
         </div>
 
-        <AppointmentStatusTag class="appointment-card-header__status" :status="data.status" />
+        <AppointmentStatusTag
+          class="appointment-card-header__status"
+          :status="appointment.status" />
       </router-link>
     </template>
 
@@ -27,14 +29,14 @@
 
     <div class="appointment-card-actions">
       <ElButton
-        v-if="data.status === Appointment.enum.statuses.Approved"
+        v-if="appointment.status === Appointment.enum.statuses.Approved"
         type="primary"
         :loading="loading[Appointment.enum.statuses.Waiting]"
         @click="updateStatus(Appointment.enum.statuses.Waiting)">
         {{ $t('Base.CallToReception') }}
       </ElButton>
       <ElButton
-        v-if="data.status === Appointment.enum.statuses.Approved"
+        v-if="appointment.status === Appointment.enum.statuses.Approved"
         type="danger"
         plain
         :loading="loading[Appointment.enum.statuses.Canceled]"
@@ -43,14 +45,14 @@
       </ElButton>
 
       <ElButton
-        v-if="data.status === Appointment.enum.statuses.Waiting"
+        v-if="appointment.status === Appointment.enum.statuses.Waiting"
         type="primary"
         :loading="loading[Appointment.enum.statuses.InProgress]"
         @click="updateStatus(Appointment.enum.statuses.InProgress)">
         {{ $t('Appointments.PatientCome') }}
       </ElButton>
       <ElButton
-        v-if="data.status === Appointment.enum.statuses.Waiting"
+        v-if="appointment.status === Appointment.enum.statuses.Waiting"
         type="danger"
         plain
         :loading="loading[Appointment.enum.statuses.Canceled]"
@@ -59,7 +61,7 @@
       </ElButton>
 
       <ElButton
-        v-if="data.status === Appointment.enum.statuses.InProgress"
+        v-if="appointment.status === Appointment.enum.statuses.InProgress"
         type="primary"
         :loading="loading[Appointment.enum.statuses.Provided]"
         @click="updateStatus(Appointment.enum.statuses.Provided)">
@@ -69,7 +71,7 @@
       <ElButton
         v-if="
           user.role === User.enum.roles.Manager &&
-          data.status === Appointment.enum.statuses.Approved
+          appointment.status === Appointment.enum.statuses.Approved
         "
         type="primary"
         plain
