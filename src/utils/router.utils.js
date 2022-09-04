@@ -28,7 +28,9 @@ export function setComponentInRoutesByViewsFolder({ routes }) {
   const insertComponentsInRoutes = (routes) => {
     return routes.map((route) => {
       const component = components[route.component];
-      const children = insertComponentsInRoutes(route.children || []);
+      const children = insertComponentsInRoutes(
+        createChildrenRoutesByChildrenMap(route.childrenMap || {})
+      );
 
       return {
         ...route,
@@ -39,6 +41,16 @@ export function setComponentInRoutesByViewsFolder({ routes }) {
   };
 
   return insertComponentsInRoutes(routes);
+}
+
+/**
+ * Преобразует объект с именнованными роутами в обычный массив, который необходим для vue-router
+ *
+ * @param {object} childrenMap
+ * @return {Array<object>}
+ */
+export function createChildrenRoutesByChildrenMap(childrenMap) {
+  return Object.keys(childrenMap).map((key) => childrenMap[key]);
 }
 
 /**
