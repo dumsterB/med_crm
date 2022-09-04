@@ -13,6 +13,7 @@ export function insertRouteParams({ path, params }) {
 
 /**
  * Подставляет компоненты в объект опций роута
+ * Создаёт children роуты исходя из childrenMap
  *
  * @param {Array<VueRouteOptions>} routes
  * @return {Array<VueRouteOtions>}
