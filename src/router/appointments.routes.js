@@ -2,6 +2,16 @@ import { onlyLoggedInMiddleware } from '@/middlewares/onlyLoggedIn.middleware';
 import { onlyManagerMiddleware } from '@/middlewares/onlyManager.middleware';
 import { I18nService } from '@/services/i18n.service';
 
+export const APPOINTMENTS_ROUTE = {
+  name: 'APPOINTMENTS_ROUTE',
+  path: '/appointments',
+  component: 'VAppointments',
+  beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
+  meta: {
+    title: I18nService.t('Base.PatientsRecords'),
+  },
+};
+
 export const APPOINTMENT_ROUTE = {
   name: 'APPOINTMENT_ROUTE',
   path: '/appointments/:id',
@@ -11,16 +21,23 @@ export const APPOINTMENT_ROUTE = {
     title: I18nService.t('Base.PatientRecord'),
   },
   props: true,
-};
+  redirect: (route) => route.path + '/default-card',
 
-export const APPOINTMENTS_ROUTE = {
-  name: 'APPOINTMENTS_ROUTE',
-  path: '/appointments',
-  component: 'VAppointments',
-  beforeEnter: [onlyLoggedInMiddleware, onlyManagerMiddleware],
-  meta: {
-    title: I18nService.t('Base.PatientsRecords'),
+  childrenMap: {
+    APPOINTMENT_ROUTE_DEFAULT_CARD: {
+      name: 'APPOINTMENT_ROUTE_DEFAULT_CARD',
+      path: 'default-card',
+      _fullPath: '/appointments/:id/default-card',
+      component: 'VAppointmentDefaultCard',
+    },
+    APPOINTMENT_ROUTE_INSPECTION_CARD: {
+      name: 'APPOINTMENT_ROUTE_INSPECTION_CARD',
+      path: 'inspection-card',
+      _fullPath: '/appointments/:id/inspection-card',
+      component: 'VAppointmentInspectionCard',
+    },
   },
+  children: [], // утилита сама подставит сюда роуты из childrenMap
 };
 
 export const routes = [APPOINTMENTS_ROUTE, APPOINTMENT_ROUTE];
