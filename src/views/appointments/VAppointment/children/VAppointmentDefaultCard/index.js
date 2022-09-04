@@ -16,7 +16,7 @@ import SelectOrCreateServiceCaseModal from '@/components/appointments/SelectOrCr
 export default {
   name: 'VAppointmentDefaultCard',
   components: { AppointmentStatusTag },
-  emits: ['update:data'],
+  emits: ['update:appointment'],
   props: {
     appointment: {
       type: [Appointment, Object],
@@ -90,7 +90,7 @@ export default {
       });
 
       if (action instanceof GlobalDrawerCloseAction) return;
-      this.$emit('update:data', action.data.appointment);
+      this.$emit('update:appointment', action.data.appointment);
     },
 
     async updateStatus(status) {
@@ -107,7 +107,7 @@ export default {
         //   status: status,
         // });
         //
-        // this.$emit('update:data', data.data);
+        // this.$emit('update:appointment', data.data);
         // this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
         // this.redirectIfNeeded(status);
       } catch (err) {
@@ -176,7 +176,7 @@ export default {
         },
       });
       if (!(action instanceof GlobalModalCloseAction)) {
-        this.$emit('update:data', action.data.appointment);
+        this.$emit('update:appointment', action.data.appointment);
       }
 
       return !(action instanceof GlobalModalCloseAction);
