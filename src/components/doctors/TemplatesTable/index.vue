@@ -15,7 +15,7 @@
               <ElButton @click="editTemplate(row)" type="primary">
                 {{ $t('Base.Edit') }}
               </ElButton>
-              <ElButton round @click="deleteTemplate(row)">
+              <ElButton type="danger" plain @click="deleteTemplate(row)">
                 <UiIcon :icon="$options.icons.TRASH" />
               </ElButton>
             </div>
@@ -48,22 +48,19 @@ export default {
         },
       });
     },
-    deleteTemplate(payload) {
 
+    deleteTemplate(payload) {
       try {
         const action = InspectionCardTemplate.delete(payload.id);
         if (action instanceof GlobalDrawerCloseAction) return;
         this.$store.dispatch('templates/deleteItem', payload);
-      }catch (err) {
+      } catch (err) {
         console.log(err);
         this.$notify({
           type: 'error',
           title: err?.response?.data?.message || this.$t('Notifications.Error'),
         });
       }
-
-
-
     },
   },
 };

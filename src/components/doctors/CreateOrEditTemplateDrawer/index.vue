@@ -1,6 +1,6 @@
 <template>
   <ElDrawer
-    custom-class="create-template-drawer"
+    custom-class="create-or-edit-template-drawer"
     :title="data?.id ? $t('Templates.Edit') : $t('Templates.Create')"
     size="50%"
     @update:model-value="$emit('update:modelValue', $event)">
@@ -8,7 +8,7 @@
       @submit.prevent="submitHandler"
       class="create-template-drawer-form"
       label-position="top">
-      <ElFormItem :label="field.label" v-for="(field, index) of formFields" :key="index">
+      <ElFormItem :label="field.label" v-for="(field, index) of FormFields" :key="index">
         <component
           :is="field.tag"
           :placeholder="field.placeholder"
@@ -17,11 +17,11 @@
           :required="field.required"
           :type="field.type"
           class="create-template-drawer-form__field">
-          <UiRequiredHiddenInput v-if="field.tag === SELECT" :required="field.required">
+          <UiRequiredHiddenInput v-if="field.options?.length" :required="field.required">
           </UiRequiredHiddenInput>
 
           <ElOption
-            v-if="field.tag === SELECT"
+            v-if="field.options?.length"
             v-for="item in field.options"
             :key="item.value"
             :label="item.label"
@@ -54,10 +54,9 @@ export default {
     return {
       template: null,
       loading: false,
-      formFields: [
+      FormFields: [
         {
           label: this.$t('Templates.Name'),
-          field: '',
           name: 'title',
           type: 'textarea',
           required: true,
@@ -68,13 +67,11 @@ export default {
           label: this.$t('Templates.Сomplaints'),
           type: 'textarea',
           name: 'complaints',
-          field: '',
           placeholder: this.$t('Base.WriteText'),
           tag: 'el-input',
         },
         {
           label: this.$t('Templates.Anomnes'),
-          field: '',
           name: 'anamnesis',
           type: 'textarea',
           required: true,
@@ -84,7 +81,6 @@ export default {
         {
           label: this.$t('Templates.Operations'),
           type: 'textarea',
-          field: '',
           name: 'operations',
           tag: 'el-input',
           required: true,
@@ -105,7 +101,6 @@ export default {
           type: 'textarea',
           required: true,
           name: 'anamnesis_life',
-          field: '',
           placeholder: this.$t('Base.WriteText'),
           tag: 'el-input',
           options: [
@@ -121,7 +116,6 @@ export default {
         },
         {
           label: this.$t('Templates.GeneralState'),
-          field: '',
           type: 'textarea',
           name: 'general_state',
           required: true,
@@ -130,7 +124,6 @@ export default {
         },
         {
           label: this.$t('Templates.LocalStatus'),
-          field: '',
           type: 'textarea',
           name: 'local_status',
           required: true,
@@ -139,7 +132,6 @@ export default {
         },
         {
           label: this.$t('Templates.PreDiagnosis'),
-          field: '',
           type: 'textarea',
           name: 'preliminary_diagnosis',
           required: true,
@@ -158,8 +150,7 @@ export default {
         },
         {
           label: this.$t('Templates.PlanObservation'),
-          field: '',
-          type: 'textarea',
+            type: 'textarea',
           name: 'survey_plan',
           required: true,
           placeholder: this.$t('Base.WriteText'),
@@ -210,6 +201,7 @@ export default {
 
       this.loading = false;
     },
+
     async createTemplate() {
       const { data } = await InspectionCardTemplate.create({
         ...this.template,
@@ -217,24 +209,21 @@ export default {
       });
       this.$store.dispatch('templates/createItem', data.data);
       this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessCreated') });
+
       this.$emit(
         'action',
         new GlobalDrawerAction({ name: 'created', data: { template: data.data } })
       );
     },
+
     async editTemplate() {
-      delete this.template['id'];
-      delete this.template['doctor'];
       const { data } = await InspectionCardTemplate.update(this.template, this.data.id);
       this.$store.dispatch('templates/editItem', data.data);
       this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
+
       this.$emit('action', new GlobalDrawerAction({ name: 'created', data: { template: data } }));
     },
   },
-
-  setup: () => ({
-    SELECT: 'ElSelect',
-  }),
 };
 </script>
 

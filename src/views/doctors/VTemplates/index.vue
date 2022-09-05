@@ -1,7 +1,9 @@
 <template>
   <LayoutDoctor>
     <div>
-      <el-button type="primary" @click="createTemplate">+ {{ $t('Templates.AddTemplate') }}</el-button>
+      <ElButton type="primary" @click="createTemplate"
+        >+ {{ $t('Templates.AddTemplate') }}</ElButton
+      >
       <div class="templates-content">
         <TemplatesTable :data="data" :loading="loading"></TemplatesTable>
       </div>
@@ -16,15 +18,15 @@ import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model.js
 import { compareQueriesThenLoadData } from '@/utils/router.utils';
 import { usePage, usePerPage, useSearch } from '@/hooks/query';
 import TemplatesTable from '@/components/doctors/TemplatesTable/index.vue';
-import { mapState } from 'vuex'
-import {GlobalDrawerCloseAction} from "@/models/client/ModalAndDrawer/GlobalDrawerCloseAction";
+import { mapState } from 'vuex';
+import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
+
 export default {
   name: 'VTemplates',
   components: { LayoutDoctor, CreateOrEditTemplates, TemplatesTable },
   setup: () => ({
     perPage: usePerPage(),
     page: usePage(),
-    search: useSearch(),
   }),
   data() {
     return {
@@ -47,10 +49,10 @@ export default {
       deep: true,
     },
   },
-  computed:{
+  computed: {
     ...mapState({
       data: (state) => state.templates.data,
-    })
+    }),
   },
   methods: {
     async getTemplates() {
@@ -60,12 +62,8 @@ export default {
         const { data } = await InspectionCardTemplate.find({
           per_page: this.perPage.value,
           page: this.page.value,
-          search: this.search.value,
-          query_type: 'ILIKE',
-          query_operator: 'OR',
-          query_field: ['name', 'phone'],
         });
-        this.$store.dispatch('templates/setData', {items: data.data, overwriteDataState: true})
+        this.$store.dispatch('templates/setData', { items: data.data, overwriteDataState: true });
       } catch (err) {
         console.log(err);
         this.$notify({
@@ -76,13 +74,12 @@ export default {
 
       this.loading = false;
     },
+
     async createTemplate() {
       const action = await this.$store.dispatch('modalAndDrawer/openDrawer', CreateOrEditTemplates);
       if (action instanceof GlobalDrawerCloseAction) return;
-      console.log(action)
-      this.data = action.template
+      this.data = action.template;
     },
-
   },
 };
 </script>
