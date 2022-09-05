@@ -32,7 +32,7 @@
         v-if="appointment.status === Appointment.enum.statuses.Approved"
         type="primary"
         :loading="loading[Appointment.enum.statuses.Waiting]"
-        @click="updateStatus(Appointment.enum.statuses.Waiting)">
+        @click="$emit('status:update', Appointment.enum.statuses.Waiting)">
         {{ $t('Base.CallToReception') }}
       </ElButton>
       <ElButton
@@ -40,7 +40,7 @@
         type="danger"
         plain
         :loading="loading[Appointment.enum.statuses.Canceled]"
-        @click="updateStatus(Appointment.enum.statuses.Canceled)">
+        @click="$emit('status:update', Appointment.enum.statuses.Canceled)">
         {{ $t('Appointments.CancelReception') }}
       </ElButton>
 
@@ -48,7 +48,7 @@
         v-if="appointment.status === Appointment.enum.statuses.Waiting"
         type="primary"
         :loading="loading[Appointment.enum.statuses.InProgress]"
-        @click="updateStatus(Appointment.enum.statuses.InProgress)">
+        @click="$emit('status:update', Appointment.enum.statuses.InProgress)">
         {{ $t('Appointments.PatientCome') }}
       </ElButton>
       <ElButton
@@ -56,7 +56,7 @@
         type="danger"
         plain
         :loading="loading[Appointment.enum.statuses.Canceled]"
-        @click="updateStatus(Appointment.enum.statuses.Canceled)">
+        @click="$emit('status:update', Appointment.enum.statuses.Canceled)">
         {{ $t('Appointments.PatientNotCome') }}
       </ElButton>
 
@@ -64,7 +64,7 @@
         v-if="appointment.status === Appointment.enum.statuses.InProgress"
         type="primary"
         :loading="loading[Appointment.enum.statuses.Provided]"
-        @click="updateStatus(Appointment.enum.statuses.Provided)">
+        @click="$emit('status:update', Appointment.enum.statuses.Provided)">
         {{ $t('Appointments.EndReception') }}
       </ElButton>
 
@@ -75,7 +75,7 @@
         "
         type="primary"
         plain
-        @click="editAppointment">
+        @click="$emit('appointment:edit')">
         {{ $t('Appointments.EditReception') }}
       </ElButton>
     </div>
