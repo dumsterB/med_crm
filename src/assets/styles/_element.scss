@@ -54,3 +54,9 @@ body {
 .el-tag {
   --el-color-primary: var(--_el-color-primay);
 }
+
+.el-page-header {
+  &__left {
+    align-items: center;
+  }
+}
