@@ -5,6 +5,7 @@ export class AmbulatoryCard {
    * @param {object} [payload]
    * @param {number} payload.id
    * @param {string} payload.place_residence
+   * @param {string} payload.place_treatment
    * @param {string} payload.study_work
    * @param {string} payload.clinical_examination
    * @param {string} payload.place_treatment
@@ -23,6 +24,7 @@ export class AmbulatoryCard {
   constructor(payload) {
     this.id = payload?.id ?? null;
     this.place_residence = payload?.place_residence ?? null;
+    this.place_treatment = payload?.place_treatment ?? null;
     this.study_work = payload?.study_work ?? null;
     this.clinical_examination = payload?.clinical_examination ?? null;
     this.blood_type_rh_factor = payload?.blood_type_rh_factor ?? null;
