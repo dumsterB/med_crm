@@ -5,7 +5,7 @@
     size="50%"
     @update:model-value="$emit('update:modelValue', $event)">
     <ElForm @submit.prevent="submitHandler" class="create-template-drawer-form" label-position="top">
-      <ElFormItem :label="field.label" v-for="(field, index) of status === EDIT ? data : formFields" :key="index">
+      <ElFormItem :label="field.label" v-for="(field, index) of data ? data.data : formFields" :key="index">
         <component
           :is="field.tag"
           :placeholder="field.placeholder"
@@ -48,7 +48,6 @@ export default {
   props:{
     templates: [InspectionCardTemplate, Object],
     data: [InspectionCardTemplate, Object],
-    status: String
   },
   data() {
     return {
@@ -175,7 +174,6 @@ export default {
 
   setup:()=>({
     SELECT: "ElSelect",
-    EDIT: 'edit'
   }),
 };
 </script>
