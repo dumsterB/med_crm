@@ -52,6 +52,13 @@ export default {
     ...mapState({
       data: (state) => state.templates.data,
     }),
+
+    queryWatchers() {
+      return {
+        query: this.query.value,
+        oldQuery: this.oldQuery.value,
+      };
+    },
   },
 
   methods: {
