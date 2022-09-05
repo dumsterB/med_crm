@@ -2,7 +2,7 @@ import { throttle } from 'lodash';
 import { insertRouteParams } from '@/utils/router.utils';
 import { Patient } from '@/models/Patient.model';
 import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
-import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
+import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { PHONE_CONFIRM_MODAL_CONFIRMED_ACTION } from '@/components/PhoneConfirmModal/index.enum';
 import { FULL_DATE_FORMAT } from '@/config/dateAndTime.config';
 import PhoneConfirmModal from '@/components/PhoneConfirmModal/index.vue';
@@ -49,7 +49,7 @@ export default {
 
     oldPatientPageUrl() {
       return insertRouteParams({
-        path: REGISTRY_PATIENT_ROUTE.path,
+        path: PATIENT_ROUTE.path,
         params: { id: this.oldPatient?.id },
       });
     },

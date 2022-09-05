@@ -20,6 +20,7 @@ export class InspectionCardTemplate extends CRUDModel {
    * @param {string} payload.local_status
    * @param {string} payload.preliminary_diagnosis
    * @param {string} payload.survey_plan
+   * @param {number} payload.doctor_id
    * @param {Doctor} payload.doctor
    */
   constructor(payload) {
@@ -35,14 +36,16 @@ export class InspectionCardTemplate extends CRUDModel {
     this.preliminary_diagnosis = payload?.preliminary_diagnosis ?? null;
 
     this.survey_plan = payload?.survey_plan ?? null;
-
+    this.doctor_id = payload?.doctor_id ?? null;
     this.doctor = payload?.doctor ?? null;
   }
+
   static async create(payload) {
     return super.create(payload, {
       url: `${this.tableName}/create`,
     });
   }
+
   static async update(data, id) {
     const response = await ApiService.put(`${this.tableName}/${id}/update`, {
       ...data,
@@ -52,6 +55,7 @@ export class InspectionCardTemplate extends CRUDModel {
       data: response.data,
     };
   }
+
   static async delete(id) {
     const response = await ApiService.delete(`${this.tableName}/${id}/delete`);
     return {
