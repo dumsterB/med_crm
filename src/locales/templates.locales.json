@@ -2,6 +2,8 @@
   "ru": {
     "Templates": {
       "Create": "Создать шаблон",
+      "Edit": "Редактировать шаблон",
+      "AddTemplate": "Добавить шаблон",
       "Name": "Название шаблона",
       "Сomplaints": "Жалобы",
       "Anomnes": "Анамнез",
@@ -18,6 +20,8 @@
   "uz": {
     "Templates": {
       "Create": "Shablon yaratish",
+      "Edit": "Shablonni tahrirlash",
+      "AddTemplate": "Shablon qo'shish",
       "Name": "Название шаблона",
       "Сomplaints": "Shikoyatlar",
       "Anomnes": "Anamnez",

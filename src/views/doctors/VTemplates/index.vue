@@ -1,8 +1,10 @@
 <template>
   <LayoutDoctor>
     <div>
-      <el-button type="primary" @click="createTemplate">Create template</el-button>
-      <el-button type="primary" @click="editTemplate">Edit template</el-button>
+      <el-button type="primary" @click="createTemplate">+ {{ $t('Templates.AddTemplate') }}</el-button>
+      <div class="templates-content">
+        <TemplatesTable :data="data" :loading="loading"></TemplatesTable>
+      </div>
     </div>
   </LayoutDoctor>
 </template>
@@ -10,145 +12,81 @@
 <script>
 import LayoutDoctor from '@/components/layouts/LayoutDoctor/index.vue';
 import CreateOrEditTemplates from '@/components/doctors/CreateOrEditTemplateDrawer/index.vue';
-
+import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model.js';
+import { compareQueriesThenLoadData } from '@/utils/router.utils';
+import { usePage, usePerPage, useSearch } from '@/hooks/query';
+import TemplatesTable from '@/components/doctors/TemplatesTable/index.vue';
+import { mapState } from 'vuex'
+import {GlobalDrawerCloseAction} from "@/models/client/ModalAndDrawer/GlobalDrawerCloseAction";
 export default {
   name: 'VTemplates',
-  components: { LayoutDoctor, CreateOrEditTemplates },
+  components: { LayoutDoctor, CreateOrEditTemplates, TemplatesTable },
+  setup: () => ({
+    perPage: usePerPage(),
+    page: usePage(),
+    search: useSearch(),
+  }),
   data() {
     return {
+      loading: false,
       arr: {
         id: 1,
-        data: [
-          {
-            label: 'Название шаблона',
-            field: 'fewf',
-            type: 'textarea',
-            required: true,
-            placeholder: 'Напишите текст...',
-            tag: 'el-input',
-          },
-          {
-            label: 'Жалобы',
-            type: 'textarea',
-            field: 'few',
-            placeholder: 'Напишите текст...',
-            tag: 'el-input',
-          },
-          {
-            label: 'Анамнез',
-            field: 'few',
-            type: 'textarea',
-            required: true,
-            placeholder: 'Напишите текст...',
-            tag: 'el-input',
-          },
-          {
-            label: 'Операции',
-            type: 'textarea',
-            field: 'few',
-            tag: 'el-input',
-            required: true,
-            placeholder: 'Выбрать шаблон',
-            options: [
-              {
-                value: 'Option1',
-                label: 'Option1',
-              },
-              {
-                value: 'Option2',
-                label: 'Option2',
-              },
-            ],
-          },
-          {
-            label: 'Анамнез жизни',
-            type: 'textarea',
-            required: true,
-            field: 'few',
-            placeholder: 'Выбрать шаблон',
-            tag: 'el-input',
-            options: [
-              {
-                value: 'Option1',
-                label: 'Option1',
-              },
-              {
-                value: 'Option2',
-                label: 'Option2',
-              },
-            ],
-          },
-          {
-            label: 'Общее состояние',
-            field: 'fwe',
-            type: 'textarea',
-            required: true,
-            placeholder: 'Напишите текст...',
-            tag: 'el-input',
-          },
-          {
-            label: 'Локальный статус',
-            field: 'fweew',
-            type: 'textarea',
-            required: true,
-            placeholder: 'Напишите текст...',
-            tag: 'el-input',
-          },
-          {
-            label: 'Предворительный диагноз',
-            field: 'few',
-            type: 'textarea',
-            required: true,
-            placeholder: 'Выбрать шаблон',
-            tag: 'el-input',
-            options: [
-              {
-                value: 'Option1',
-                label: 'Option1',
-              },
-              {
-                value: 'Option2',
-                label: 'Option2',
-              },
-            ],
-          },
-          {
-            label: 'План обследования',
-            field: 'fwe',
-            type: 'textarea',
-            required: true,
-            placeholder: 'Выбрать шаблон',
-            tag: 'el-input',
-            options: [
-              {
-                value: 'Option1',
-                label: 'Option1',
-              },
-              {
-                value: 'Option2',
-                label: 'Option2',
-              },
-            ],
-          }
-          ],
       },
     };
   },
-  methods: {
-    createTemplate() {
-      this.$store.dispatch('modalAndDrawer/openDrawer', CreateOrEditTemplates);
+  watch: {
+    queryWatchers: {
+      handler(value, oldValue) {
+        compareQueriesThenLoadData({
+          query: value,
+          oldQuery: oldValue,
+          getData: this.getTemplates,
+        });
+      },
+      immediate: true,
+      deep: true,
     },
-    editTemplate(){
-      this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreateOrEditTemplates,
-        payload: {
-          data: this.arr,
-        },
-      });
-    }
+  },
+  computed:{
+    ...mapState({
+      data: (state) => state.templates.data,
+    })
+  },
+  methods: {
+    async getTemplates() {
+      this.loading = true;
+
+      try {
+        const { data } = await InspectionCardTemplate.find({
+          per_page: this.perPage.value,
+          page: this.page.value,
+          search: this.search.value,
+          query_type: 'ILIKE',
+          query_operator: 'OR',
+          query_field: ['name', 'phone'],
+        });
+        this.$store.dispatch('templates/setData', {items: data.data, overwriteDataState: true})
+      } catch (err) {
+        console.log(err);
+        this.$notify({
+          type: 'error',
+          title: err?.response?.data?.message || this.$t('Notifications.Error'),
+        });
+      }
+
+      this.loading = false;
+    },
+    async createTemplate() {
+      const action = await this.$store.dispatch('modalAndDrawer/openDrawer', CreateOrEditTemplates);
+      if (action instanceof GlobalDrawerCloseAction) return;
+      console.log(action)
+      this.data = action.template
+    },
+
   },
 };
 </script>
 
 <style lang="scss" src="./index.scss" />
 <i18n src="./index.locales.json" />
+<i18n src="@/locales/templates.locales.json" />

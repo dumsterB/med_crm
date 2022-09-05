@@ -43,7 +43,8 @@
       "Sum": "сум",
       "Template": "Шаблон",
       "Templates": "Шаблоны",
-      "Time": "Время"
+      "Time": "Время",
+      "WriteText": "Напишите текст..."
     }
   },
   "uz": {
@@ -90,7 +91,8 @@
       "Sum": "som",
       "Template": "??Шаблон??",
       "Templates": "??Шаблоны??",
-      "Time": "Vaqt"
+      "Time": "Vaqt",
+      "WriteText": "Matn yozing..."
     }
   }
 }
