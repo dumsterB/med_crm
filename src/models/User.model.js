@@ -5,20 +5,23 @@ export class User extends CRUDModel {
   static tableName = 'users';
 
   /**
-   * @param {object} [payload]
-   * @param {number} payload.id
-   * @param {string} payload.name
-   * @param {string} payload.email
-   * @param {string} payload.phone
-   * @param {string} payload.birthdate
-   * @param {string} payload.gender from User.enum.genders
-   * @param {string} payload.role from User.enum.roles
-   * @param {number} payload.doctor_id
-   * @param {Doctor} payload.doctor
-   * @param {number} payload.childrens_count
-   * @param {Array<User|Patient>} payload.childrens
-   * @param {number} payload.parent_id
-   * @param {User|Patient} payload.parent
+   * @typedef {object} UserConstructorPayload
+   * @property {number} id
+   * @property {string} name
+   * @property {string} email
+   * @property {string} phone
+   * @property {string} birthdate
+   * @property {string} gender from User.enum.genders
+   * @property {string} role from User.enum.roles
+   * @property {number} doctor_id
+   * @property {Doctor} doctor
+   * @property {number} childrens_count
+   * @property {Array<User|Patient>} childrens
+   * @property {number} parent_id
+   * @property {User|Patient} parent
+   */
+  /**
+   * @param {UserConstructorPayload|object} payload
    */
   constructor(payload) {
     super(payload);
