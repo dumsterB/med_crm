@@ -3,14 +3,18 @@
     "Patients": {
       "AddPatient": "Добавить пациента",
       "EditPatient": "Изменить данные пациента",
-      "NoPatient": "Пациен не найден"
+      "NoPatient": "Пациен не найден",
+      "MyPatients": "Мои пациенты",
+      "ClinicPatients": "Пациенты клиники"
     }
   },
   "uz": {
     "Patients": {
       "AddPatient": "Bemorni qo'shish",
       "EditPatient": "Bemorning ma'lumotlarini o'zgartirish",
-      "NoPatient": "Bemor topilmadi"
+      "NoPatient": "Bemor topilmadi",
+      "MyPatients": "Mening bemorlarim",
+      "ClinicPatients": "Klinikadagi bemorlar"
     }
   }
 }

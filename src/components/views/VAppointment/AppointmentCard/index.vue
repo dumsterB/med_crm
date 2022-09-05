@@ -83,7 +83,7 @@
 <script>
 import { mapState } from 'vuex';
 import { insertRouteParams } from '@/utils/router.utils';
-import { REGISTRY_PATIENT_ROUTE } from '@/router/registry.routes';
+import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
 import { User } from '@/models/User.model';
 import { Appointment } from '@/models/Appointment.model';
@@ -102,11 +102,12 @@ export default {
   data() {
     return {
       loading: {
+        [Appointment.enum.statuses.Created]: false,
         [Appointment.enum.statuses.Waiting]: false,
         [Appointment.enum.statuses.Canceled]: false,
         [Appointment.enum.statuses.InProgress]: false,
         [Appointment.enum.statuses.Approved]: false,
-        [Appointment.enum.statuses.Approved]: false,
+        [Appointment.enum.statuses.Provided]: false,
       },
       hasLoadingState: false,
     };
@@ -118,7 +119,7 @@ export default {
 
     patientPageLink() {
       return insertRouteParams({
-        path: REGISTRY_PATIENT_ROUTE.path,
+        path: PATIENT_ROUTE.path,
         params: { id: this.data.patient_id },
       });
     },
