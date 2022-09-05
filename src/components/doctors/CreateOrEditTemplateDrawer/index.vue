@@ -61,14 +61,14 @@ export default {
           type: 'textarea',
           required: true,
           placeholder: this.$t('Base.WriteText'),
-          tag: 'el-input',
+          tag: 'ElInput',
         },
         {
           label: this.$t('Templates.Сomplaints'),
           type: 'textarea',
           name: 'complaints',
           placeholder: this.$t('Base.WriteText'),
-          tag: 'el-input',
+          tag: 'ElInput',
         },
         {
           label: this.$t('Templates.Anomnes'),
@@ -76,13 +76,13 @@ export default {
           type: 'textarea',
           required: true,
           placeholder: this.$t('Base.WriteText'),
-          tag: 'el-input',
+          tag: 'ElInput',
         },
         {
           label: this.$t('Templates.Operations'),
           type: 'textarea',
           name: 'operations',
-          tag: 'el-input',
+          tag: 'ElInput',
           required: true,
           placeholder: this.$t('Base.WriteText'),
           options: [
@@ -102,7 +102,7 @@ export default {
           required: true,
           name: 'anamnesis_life',
           placeholder: this.$t('Base.WriteText'),
-          tag: 'el-input',
+          tag: 'ElInput',
           options: [
             {
               value: 'Option1',
@@ -120,7 +120,7 @@ export default {
           name: 'general_state',
           required: true,
           placeholder: this.$t('Base.WriteText'),
-          tag: 'el-input',
+          tag: 'ElInput',
         },
         {
           label: this.$t('Templates.LocalStatus'),
@@ -128,7 +128,7 @@ export default {
           name: 'local_status',
           required: true,
           placeholder: this.$t('Base.WriteText'),
-          tag: 'el-input',
+          tag: 'ElInput',
         },
         {
           label: this.$t('Templates.PreDiagnosis'),
@@ -136,7 +136,7 @@ export default {
           name: 'preliminary_diagnosis',
           required: true,
           placeholder: this.$t('Base.WriteText'),
-          tag: 'el-input',
+          tag: 'ElInput',
           options: [
             {
               value: 'Option1',
@@ -154,7 +154,7 @@ export default {
           name: 'survey_plan',
           required: true,
           placeholder: this.$t('Base.WriteText'),
-          tag: 'el-input',
+          tag: 'ElInput',
           options: [
             {
               value: 'Option1',
@@ -180,7 +180,7 @@ export default {
     modelValue: {
       handler() {
         this.template = new InspectionCardTemplate(
-          this.data || { template_id: this.template?.id || null }
+          this.data || {}
         );
       },
       immediate: true,
