@@ -26,6 +26,17 @@ const router = createRouter({
         ...dashboardRoutes,
         ...doctorsRoutes,
         ...appointmentsRoutes,
+
+        {
+          path: '/404',
+          name: '404',
+          component: 'VNotFound',
+          meta: { title: '404' },
+        },
+        {
+          path: '/:pathMatch(.*)*',
+          redirect: '/404',
+        },
       ],
     }),
   ],

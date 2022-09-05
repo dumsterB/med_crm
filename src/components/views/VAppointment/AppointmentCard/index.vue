@@ -102,11 +102,12 @@ export default {
   data() {
     return {
       loading: {
+        [Appointment.enum.statuses.Created]: false,
         [Appointment.enum.statuses.Waiting]: false,
         [Appointment.enum.statuses.Canceled]: false,
         [Appointment.enum.statuses.InProgress]: false,
         [Appointment.enum.statuses.Approved]: false,
-        [Appointment.enum.statuses.Approved]: false,
+        [Appointment.enum.statuses.Provided]: false,
       },
       hasLoadingState: false,
     };
