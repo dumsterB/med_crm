@@ -15,7 +15,7 @@ import LayoutDoctor from '@/components/layouts/LayoutDoctor/index.vue';
 import CreateOrEditTemplates from '@/components/doctors/CreateOrEditTemplateDrawer/index.vue';
 import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model.js';
 import { compareQueriesThenLoadData } from '@/utils/router.utils';
-import { usePage, usePerPage, useSearch } from '@/hooks/query';
+import { usePage, usePerPage } from '@/hooks/query';
 import TemplatesTable from '@/components/doctors/TemplatesTable/index.vue';
 import { mapState } from 'vuex';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
@@ -24,10 +24,12 @@ import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader
 export default {
   name: 'VTemplates',
   components: { LayoutContentHeader, LayoutDoctor, CreateOrEditTemplates, TemplatesTable },
+
   setup: () => ({
     perPage: usePerPage(99),
     page: usePage(),
   }),
+
   data() {
     return {
       loading: false,
@@ -71,6 +73,7 @@ export default {
           page: this.page.value,
         });
         this.$store.dispatch('templates/setData', { items: data.data, overwriteDataState: true });
+
       } catch (err) {
         console.log(err);
         this.$notify({
