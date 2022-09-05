@@ -14,6 +14,11 @@
         </template>
       </ElPageHeader>
     </LayoutContentHeader>
+
+    <AmbulatoryCard
+      class="v-patient-ambulatory__card"
+      :patient="patient"
+      @update:patient="updatePatientFromAmbulatoryCard" />
   </div>
 </template>
 
@@ -22,10 +27,11 @@ import * as icons from '@/enums/icons.enum';
 import { Patient } from '@/models/Patient.model';
 import { PATIENT_ROUTE } from '@/router/patients.routes';
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
+import AmbulatoryCard from '@/components/patients/AmbulatoryCard/index.vue';
 
 export default {
   name: 'VPatientAmbulatoryCard',
-  components: { LayoutContentHeader },
+  components: { AmbulatoryCard, LayoutContentHeader },
   emits: ['update:patient'],
   props: {
     patient: [Patient, Object],
@@ -43,6 +49,11 @@ export default {
           id: this.patient.id,
         },
       });
+    },
+
+    updatePatientFromAmbulatoryCard(patient) {
+      this.$emit('update:patient', patient);
+      this.goToPatient();
     },
   },
 

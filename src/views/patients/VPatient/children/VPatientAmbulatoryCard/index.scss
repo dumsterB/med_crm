@@ -1,4 +1,8 @@
 .v-patient-ambulatory {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
   &-header {
     &-info {
       display: flex;
