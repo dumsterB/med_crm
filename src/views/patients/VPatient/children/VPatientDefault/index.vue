@@ -83,6 +83,7 @@ export default {
     /** @param {Array<Appointment>} appointments */
     appointments: Array,
 
+    /** @param {{profile: boolean, appointment: boolean}} loading */
     loading: Object,
   },
   computed: {
