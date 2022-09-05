@@ -13,9 +13,14 @@ export class User extends CRUDModel {
     this.birthdate = payload?.birthdate ?? null;
     this.gender = payload?.gender ?? User.enum.genders.MAN;
     this.role = payload?.role ?? null;
-    this.created_at = payload?.created_at ?? null;
     this.doctor = payload?.doctor ?? null;
     this.doctor_id = payload?.doctor_id ?? null;
+
+    this.childrens_count = payload?.childrens_count ?? 0;
+    this.childrens = payload?.childrens ?? [];
+    this.parent_id = payload?.parent_id ?? null;
+    this.parent = payload?.parent ?? null;
+    this.created_at = payload?.created_at ?? null;
   }
 
   static enum = {

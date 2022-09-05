@@ -20,10 +20,6 @@ export class Patient extends User {
   constructor(payload) {
     super(payload);
     this.role = User.enum.roles.Patient;
-    this.childrens_count = payload?.childrens_count ?? 0;
-    this.childrens = payload?.childrens ?? [];
-    this.parent_id = payload?.parent_id ?? null;
-    this.parent = payload?.parent ?? null;
   }
 
   static async create(payload) {
