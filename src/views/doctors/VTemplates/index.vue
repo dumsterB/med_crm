@@ -1,13 +1,12 @@
 <template>
   <LayoutDoctor>
-    <div>
-      <ElButton type="primary" @click="createTemplate"
-        >+ {{ $t('Templates.AddTemplate') }}</ElButton
-      >
-      <div class="templates-content">
-        <TemplatesTable :data="data" :loading="loading"></TemplatesTable>
-      </div>
-    </div>
+    <LayoutContentHeader>
+      <template #actions>
+        <ElButton type="primary" @click="createTemplate"
+        >+ {{ $t('Templates.AddTemplate') }}</ElButton>
+      </template>
+    </LayoutContentHeader>
+    <TemplatesTable :data="data" :loading="loading"></TemplatesTable>
   </LayoutDoctor>
 </template>
 
@@ -20,12 +19,13 @@ import { usePage, usePerPage, useSearch } from '@/hooks/query';
 import TemplatesTable from '@/components/doctors/TemplatesTable/index.vue';
 import { mapState } from 'vuex';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
+import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
 
 export default {
   name: 'VTemplates',
-  components: { LayoutDoctor, CreateOrEditTemplates, TemplatesTable },
+  components: { LayoutContentHeader, LayoutDoctor, CreateOrEditTemplates, TemplatesTable },
   setup: () => ({
-    perPage: usePerPage(),
+    perPage: usePerPage(99),
     page: usePage(),
   }),
   data() {
