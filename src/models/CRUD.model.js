@@ -1,7 +1,6 @@
 import { ApiService } from '@/services/api.service';
 import { mergeOrCreateQuery } from '@/utils/http.util';
 import { deleteEmptyValueKeys } from '@/utils/object.util';
-import { QUERY_ARRAY_SEPARATOR } from '@/config/api.config';
 
 /**
  * @class CRUDModel
