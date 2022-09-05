@@ -10,12 +10,7 @@ export class Patient extends User {
   static tableName = 'patients';
 
   /**
-   * @param {object} [payload]
-   * @param {number} payload.id
-   * @param {number} payload.childrens_count
-   * @param {Array<User|Patient>} payload.childrens
-   * @param {number} payload.parent_id
-   * @param {User|Patient} payload.parent
+   * @param {object} [payload] User constructor arguments
    */
   constructor(payload) {
     super(payload);
