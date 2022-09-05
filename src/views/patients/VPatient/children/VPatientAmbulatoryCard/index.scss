@@ -1,0 +1,13 @@
+.v-patient-ambulatory {
+  &-header {
+    &-info {
+      display: flex;
+      align-items: baseline;
+    }
+
+    .el-button.is-text {
+      padding: 0 12px;
+      font-size: 1.1em;
+    }
+  }
+}
