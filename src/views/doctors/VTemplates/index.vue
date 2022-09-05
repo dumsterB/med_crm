@@ -31,9 +31,6 @@ export default {
   data() {
     return {
       loading: false,
-      arr: {
-        id: 1,
-      },
     };
   },
   watch: {
