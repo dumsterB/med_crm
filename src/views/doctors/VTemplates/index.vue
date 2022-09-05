@@ -3,7 +3,8 @@
     <LayoutContentHeader>
       <template #actions>
         <ElButton type="primary" @click="createTemplate"
-        >+ {{ $t('Templates.AddTemplate') }}</ElButton>
+          >+ {{ $t('Templates.AddTemplate') }}</ElButton
+        >
       </template>
     </LayoutContentHeader>
     <TemplatesTable :data="data" :loading="loading"></TemplatesTable>
@@ -57,8 +58,8 @@ export default {
 
     queryWatchers() {
       return {
-        query: this.query.value,
-        oldQuery: this.oldQuery.value,
+        perPage: this.perPage.value,
+        page: this.page.value,
       };
     },
   },
@@ -73,7 +74,6 @@ export default {
           page: this.page.value,
         });
         this.$store.dispatch('templates/setData', { items: data.data, overwriteDataState: true });
-
       } catch (err) {
         console.log(err);
         this.$notify({
