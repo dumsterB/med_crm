@@ -76,7 +76,7 @@ export class CRUDModel {
 
   /**
    * @param {object} payload
-   * @param {object} options
+   * @param {object} [options]
    * @param {string} options.url
    * @return {Promise<{data: any, response: AxiosResponse<any>}>} data = response.data
    */

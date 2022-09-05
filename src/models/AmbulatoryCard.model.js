@@ -2,7 +2,7 @@ import { ApiService } from '@/services/api.service';
 
 export class AmbulatoryCard {
   /**
-   * @param {object} payload
+   * @param {object} [payload]
    * @param {number} payload.id
    * @param {string} payload.place_residence
    * @param {string} payload.study_work
