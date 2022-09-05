@@ -33,6 +33,7 @@ export default {
       loading: false,
     };
   },
+
   watch: {
     queryWatchers: {
       handler(value, oldValue) {
@@ -46,11 +47,13 @@ export default {
       deep: true,
     },
   },
+
   computed: {
     ...mapState({
       data: (state) => state.templates.data,
     }),
   },
+
   methods: {
     async getTemplates() {
       this.loading = true;

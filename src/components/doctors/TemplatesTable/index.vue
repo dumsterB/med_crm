@@ -38,7 +38,9 @@ export default {
     data: Array,
     loading: Boolean,
   },
+
   icons: icons,
+
   methods: {
     editTemplate(payload) {
       this.$store.dispatch('modalAndDrawer/openDrawer', {

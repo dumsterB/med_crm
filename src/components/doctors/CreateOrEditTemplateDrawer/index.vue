@@ -169,11 +169,13 @@ export default {
       ],
     };
   },
+
   computed: {
     ...mapState({
       user: (state) => state.auth.user,
     }),
   },
+
   watch: {
     modelValue: {
       handler() {
@@ -185,6 +187,7 @@ export default {
       deep: true,
     },
   },
+
   methods: {
     async submitHandler() {
       this.loading = true;
