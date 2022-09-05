@@ -1,3 +1,4 @@
+// TODO: разобраться с расширением от @typedef
 import { User } from '@/models/User.model';
 import { ApiService } from '@/services/api.service';
 
@@ -10,11 +11,14 @@ export class Patient extends User {
   static tableName = 'patients';
 
   /**
-   * @param {object} [payload] User constructor arguments
+   * @param {UserConstructorPayload} [payload]
+   * @
    */
   constructor(payload) {
     super(payload);
+
     this.role = User.enum.roles.Patient;
+    this.ambulatory_card = payload?.ambulatory_card || null;
   }
 
   static async create(payload) {
