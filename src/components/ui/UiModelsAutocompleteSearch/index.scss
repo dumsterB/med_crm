@@ -4,13 +4,13 @@
   &-empty {
     text-align: center;
   }
-  &-actions {
+  &-create {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
     padding: 5px 0;
 
-    & > * {
+    & > .el-button {
       min-width: 12em;
     }
   }

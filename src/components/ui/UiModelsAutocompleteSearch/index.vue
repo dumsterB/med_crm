@@ -11,21 +11,26 @@
     clearable
     @select="selectHandler">
     <template #default="{ item }">
-      <slot :item="item" :query="query">
-        <div v-if="item.id === localEnum.NO_DATA_KEY" class="ui-models-autocomplete-search-empty">
-          <slot name="empty" :item="item" :query="query">
-            {{ $t('Base.NoData') }}
-          </slot>
-        </div>
+      <div v-if="item.id === localEnum.NO_DATA_KEY" class="ui-models-autocomplete-search-empty">
+        <slot name="empty" :item="item" :query="query">
+          {{ $t('Base.NoData') }}
+        </slot>
+      </div>
 
-        <div v-if="item.id === localEnum.ACTIONS_KEY" class="ui-models-autocomplete-search-actions">
-          <slot name="actions" :item="item" :query="query"> </slot>
-        </div>
+      <div v-if="item.id === localEnum.CREATE_KEY" class="ui-models-autocomplete-search-create">
+        <slot name="create" :item="item" :query="query">
+          <ElButton type="primary" text size="small">
+            <template #icon> <UiIcon :icon="icons.PLUS" /> </template>
+            {{ $t('Base.Create') }}
+          </ElButton>
+        </slot>
+      </div>
 
-        <template v-else>
+      <template v-else>
+        <slot>
           {{ item[label] }}
-        </template>
-      </slot>
+        </slot>
+      </template>
     </template>
   </ElAutocomplete>
 </template>
@@ -36,8 +41,8 @@ import { CRUDModel } from '@/models/CRUD.model';
 
 export default {
   name: 'UiModelsAutocompleteSearch',
-  emits: ['update:modelValue', 'update:data'],
-  slots: ['default', 'empty', 'actions'],
+  emits: ['update:modelValue', 'update:data', 'create'],
+  slots: ['default', 'empty', 'create'],
   props: {
     modelValue: Number,
     // принимает все классы расширяющий CRUDModel
@@ -60,6 +65,7 @@ export default {
     required: Boolean,
     disabled: Boolean,
     placeholder: String,
+    showCreateOption: Boolean,
   },
   data() {
     return {
@@ -102,7 +108,9 @@ export default {
       const options = [
         ...data.data,
         ...(!data.data.length ? [{ id: this.localEnum.NO_DATA_KEY, [this.label]: '' }] : []),
-        ...(this.$slots.actions ? [{ id: this.localEnum.ACTIONS_KEY, [this.label]: '' }] : []),
+        ...(this.showCreateOption
+          ? [{ id: this.localEnum.CREATE_KEY, [this.label]: this.query }]
+          : []),
       ];
 
       cb(options);
@@ -111,6 +119,8 @@ export default {
 
     selectHandler(payload) {
       if (payload.id === this.localEnum.NO_DATA_KEY) return;
+      if (payload.id === this.localEnum.CREATE_KEY)
+        return this.$emit('create', { query: this.query });
 
       this.$emit('update:modelValue', payload[this.value]);
     },
@@ -120,7 +130,7 @@ export default {
     icons,
     localEnum: {
       NO_DATA_KEY: 'NO_DATA_KEY',
-      ACTIONS_KEY: 'ACTIONS_KEY',
+      CREATE_KEY: 'CREATE_KEY',
     },
   }),
 };
