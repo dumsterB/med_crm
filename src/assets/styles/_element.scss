@@ -15,10 +15,17 @@ body {
     --el-button-disabled-bg-color: var(--primary-disabled-color);
     --el-button-disabled-border-color: var(--primary-disabled-color);
   }
-
   &:hover {
-    --el-button-hover-bg-color: var(--primary-hover-color);
-    --el-button-hover-border-color: var(--primary-hover-color);
+    color: var(--el-button-hover-text-color);
+    border-color: var(--el-button-hover-border-color);
+    background-color: var(--el-button-hover-bg-color);
+    outline: 0;
+  }
+  &:focus {
+    color: var(--el-button-hover-text-color);
+    border-color: var(--el-button-hover-border-color);
+    background-color: var(--el-button-hover-bg-color);
+    outline: 0;
   }
 }
 
