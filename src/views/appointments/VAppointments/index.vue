@@ -2,7 +2,7 @@
   <LayoutByUserRole content-class="v-patients-records-content" fixHeight>
     <LayoutContentHeader>
       <template #actions>
-        <ElButton type="primary" :focus="true" @click="createAppointment">
+        <ElButton type="primary" @click="createAppointment">
           {{ $t('Appointments.CreateAppointment') }}
         </ElButton>
       </template>
