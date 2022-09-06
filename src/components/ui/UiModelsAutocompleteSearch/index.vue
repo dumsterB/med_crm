@@ -11,20 +11,33 @@
     clearable
     @select="selectHandler">
     <template #default="{ item }">
-      <template v-if="item.id === localEnum.NO_DATA_KEY"> {{ $t('Base.NoData') }} </template>
-      <template v-else>
-        {{ item[label] }}
-      </template>
+      <slot :item="item" :query="query">
+        <div v-if="item.id === localEnum.NO_DATA_KEY" class="ui-models-autocomplete-search-empty">
+          <slot name="empty" :item="item" :query="query">
+            {{ $t('Base.NoData') }}
+          </slot>
+        </div>
+
+        <div v-if="item.id === localEnum.ACTIONS_KEY" class="ui-models-autocomplete-search-actions">
+          <slot name="actions" :item="item" :query="query"> </slot>
+        </div>
+
+        <template v-else>
+          {{ item[label] }}
+        </template>
+      </slot>
     </template>
   </ElAutocomplete>
 </template>
 
 <script>
+import * as icons from '@/enums/icons.enum.js';
 import { CRUDModel } from '@/models/CRUD.model';
 
 export default {
   name: 'UiModelsAutocompleteSearch',
   emits: ['update:modelValue', 'update:data'],
+  slots: ['default', 'empty', 'actions'],
   props: {
     modelValue: Number,
     // принимает все классы расширяющий CRUDModel
@@ -86,7 +99,13 @@ export default {
         ...(this.searchQuery || {}),
       });
 
-      cb(data.data.length ? data.data : [{ id: this.localEnum.NO_DATA_KEY, [this.label]: '' }]);
+      const options = [
+        ...data.data,
+        ...(!data.data.length ? [{ id: this.localEnum.NO_DATA_KEY, [this.label]: '' }] : []),
+        ...(this.$slots.actions ? [{ id: this.localEnum.ACTIONS_KEY, [this.label]: '' }] : []),
+      ];
+
+      cb(options);
       this.$emit('update:data', data.data);
     },
 
@@ -98,8 +117,10 @@ export default {
   },
 
   setup: () => ({
+    icons,
     localEnum: {
       NO_DATA_KEY: 'NO_DATA_KEY',
+      ACTIONS_KEY: 'ACTIONS_KEY',
     },
   }),
 };
