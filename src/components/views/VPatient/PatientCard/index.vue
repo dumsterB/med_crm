@@ -103,7 +103,6 @@ export default {
       if (action instanceof GlobalDrawerCloseAction) return;
       this.$emit('update:data', action.data.patient);
     },
-    deletePatient() {},
   },
 };
 </script>
