@@ -26,7 +26,6 @@
         <div class="v-patient-profile-card-data__value">{{ item.value }}</div>
       </div>
     </div>
-
     <div class="v-patient-profile-card__actions v-patient-profile-card-actions">
       <ElButton type="primary"  @click.stop="editPatient">
         {{ $t('Base.Edit') }}
