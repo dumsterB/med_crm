@@ -9,6 +9,7 @@
     :required="required"
     :disabled="disabled"
     clearable
+    ref="component"
     @select="selectHandler">
     <template #default="{ item }">
       <div v-if="item.id === localEnum.NO_DATA_KEY" class="ui-models-autocomplete-search-empty">
@@ -123,6 +124,13 @@ export default {
         return this.$emit('create', { query: this.query });
 
       this.$emit('update:modelValue', payload[this.value]);
+    },
+
+    focus() {
+      this.$refs.component.focus();
+    },
+    blur() {
+      this.$refs.component.blur();
     },
   },
 
