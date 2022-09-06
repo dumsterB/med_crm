@@ -5,6 +5,7 @@ import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerA
 import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { PHONE_CONFIRM_MODAL_CONFIRMED_ACTION } from '@/components/PhoneConfirmModal/index.enum';
 import { FULL_DATE_FORMAT } from '@/config/dateAndTime.config';
+
 import PhoneConfirmModal from '@/components/PhoneConfirmModal/index.vue';
 
 export default {
@@ -183,7 +184,7 @@ export default {
 
     goToPatient({ patientId }) {
       this.$router.push({
-        name: REGISTRY_PATIENT_ROUTE.name,
+        name: PATIENT_ROUTE.name,
         params: {
           id: patientId || this.patient.id,
         },
