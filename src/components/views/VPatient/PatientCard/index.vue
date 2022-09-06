@@ -42,7 +42,6 @@ import { User } from '@/models/User.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
-import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 
 export default {
   name: 'VPatientPatientCard',
@@ -102,7 +101,6 @@ export default {
       if (action instanceof GlobalDrawerCloseAction) return;
       this.$emit('update:data', action.data.patient);
     },
-    deletePatient() {},
   },
 };
 </script>
