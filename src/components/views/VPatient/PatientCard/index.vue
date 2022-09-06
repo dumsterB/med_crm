@@ -78,7 +78,7 @@ export default {
         },
         {
           label: this.$t('User.Email'),
-          value: this.data.email?.length || this.$t('Base.Absent')
+          value: this.data.email || this.$t('Base.Absent')
         },
       ];
     },
