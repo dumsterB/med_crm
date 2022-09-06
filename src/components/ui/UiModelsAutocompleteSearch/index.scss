@@ -1,3 +1,17 @@
-.ui-patients-autocomplete-search {
+.ui-models-autocomplete-search {
   width: 100%;
+
+  &-empty {
+    text-align: center;
+  }
+  &-create {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0;
+
+    & > .el-button {
+      min-width: 12em;
+    }
+  }
 }
