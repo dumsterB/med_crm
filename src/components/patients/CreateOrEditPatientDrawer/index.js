@@ -5,6 +5,7 @@ import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerA
 import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { PHONE_CONFIRM_MODAL_CONFIRMED_ACTION } from '@/components/PhoneConfirmModal/index.enum';
 import { FULL_DATE_FORMAT } from '@/config/dateAndTime.config';
+
 import PhoneConfirmModal from '@/components/PhoneConfirmModal/index.vue';
 
 export default {
@@ -14,6 +15,8 @@ export default {
     modelValue: Boolean,
     nameOrPhone: String,
     data: [Patient, Object],
+
+    disableDefaultAction: Boolean, // отключаем дефолтное поведение после создания
   },
   data() {
     return {
@@ -33,10 +36,6 @@ export default {
       code: null, // для хранения кода подтверждения при rebinding или смене номера
 
       throttleCheckHasPatient: null,
-
-      error: {
-        fullName: false,
-      },
     };
   },
   computed: {
@@ -110,7 +109,7 @@ export default {
 
       this.$notify({ type: 'success', title: this.$t('Notifications.SuccessCreated') });
       this.$emit('action', new GlobalDrawerAction({ name: 'created', data: { patient } }));
-      this.goToPatient({ patientId: patient.id });
+      if (!this.disableDefaultAction) this.goToPatient({ patientId: patient.id });
     },
 
     // проверку телефона для создания нового пациента или смены текущего номера
@@ -185,7 +184,7 @@ export default {
 
     goToPatient({ patientId }) {
       this.$router.push({
-        name: REGISTRY_PATIENT_ROUTE.name,
+        name: PATIENT_ROUTE.name,
         params: {
           id: patientId || this.patient.id,
         },
