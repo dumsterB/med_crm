@@ -14,6 +14,8 @@ export default {
     modelValue: Boolean,
     nameOrPhone: String,
     data: [Patient, Object],
+
+    disableDefaultAction: Boolean, // отключаем дефолтное поведение после создания
   },
   data() {
     return {
@@ -106,7 +108,7 @@ export default {
 
       this.$notify({ type: 'success', title: this.$t('Notifications.SuccessCreated') });
       this.$emit('action', new GlobalDrawerAction({ name: 'created', data: { patient } }));
-      this.goToPatient({ patientId: patient.id });
+      if (!this.disableDefaultAction) this.goToPatient({ patientId: patient.id });
     },
 
     // проверку телефона для создания нового пациента или смены текущего номера
