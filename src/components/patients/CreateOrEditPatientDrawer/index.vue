@@ -53,8 +53,6 @@
             :placeholder="$t('Base.SelectDate')"
             :value-format="FULL_DATE_FORMAT"
             :disabled="isDisabledSecondaryInputs" />
-
-          <UiRequiredHiddenInput :modelValue="patient.birthdate" />
         </ElFormItem>
       </div>
 
