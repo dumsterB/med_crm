@@ -1,6 +1,6 @@
 <template>
   <ElAutocomplete
-    class="ui-patients-autocomplete-search"
+    class="ui-models-autocomplete-search"
     v-model="query"
     :value-key="label"
     :placeholder="placeholder || $t('Base.PleaseInput')"
@@ -8,7 +8,14 @@
     :debounce="250"
     :required="required"
     :disabled="disabled"
+    clearable
     @select="selectHandler">
+    <template #default="{ item }">
+      <template v-if="item.id === localEnum.NO_DATA_KEY"> {{ $t('Base.NoData') }} </template>
+      <template v-else>
+        {{ item[label] }}
+      </template>
+    </template>
   </ElAutocomplete>
 </template>
 
@@ -21,6 +28,7 @@ export default {
   props: {
     modelValue: Number,
     // принимает все классы расширяющий CRUDModel
+    // для поиска вызвается find метод этого класса
     modelForUse: [CRUDModel, Function],
 
     defaultItem: [CRUDModel, Object],
@@ -57,6 +65,10 @@ export default {
       },
       immediate: true,
     },
+    query: {
+      handler() {},
+      immediate: true,
+    },
   },
 
   methods: {
@@ -74,14 +86,22 @@ export default {
         ...(this.searchQuery || {}),
       });
 
-      cb(data.data);
+      cb(data.data.length ? data.data : [{ id: this.localEnum.NO_DATA_KEY, [this.label]: '' }]);
       this.$emit('update:data', data.data);
     },
 
     selectHandler(payload) {
+      if (payload.id === this.localEnum.NO_DATA_KEY) return;
+
       this.$emit('update:modelValue', payload[this.value]);
     },
   },
+
+  setup: () => ({
+    localEnum: {
+      NO_DATA_KEY: 'NO_DATA_KEY',
+    },
+  }),
 };
 </script>
 
