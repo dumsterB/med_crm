@@ -26,7 +26,6 @@
         <div class="v-patient-profile-card-data__value">{{ item.value }}</div>
       </div>
     </div>
-
     <div class="v-patient-profile-card__actions v-patient-profile-card-actions">
       <ElButton type="primary"  @click.stop="editPatient">
         {{ $t('Base.Edit') }}
@@ -43,7 +42,6 @@ import { User } from '@/models/User.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
-import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 
 export default {
   name: 'VPatientPatientCard',
@@ -75,11 +73,11 @@ export default {
         },
         {
           label: this.$t('User.Gender'),
-          value: this.data.gender?.length || this.$t('Base.Absent'),
+          value: this.data.gender?.length ? this.$t(`User.Genders.${this.data.gender}`) : this.$t('Base.Absent')
         },
         {
           label: this.$t('User.Email'),
-          value: this.data.email?.length || this.$t('Base.Absent')
+          value: this.data?.email?.length ? this.data.email : this.$t('Base.Absent')
         },
       ];
     },
