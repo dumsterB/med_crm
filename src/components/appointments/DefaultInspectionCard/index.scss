@@ -1,0 +1,7 @@
+.default-inspection-card {
+  &-form {
+    & > * {
+      max-width: 500px;
+    }
+  }
+}

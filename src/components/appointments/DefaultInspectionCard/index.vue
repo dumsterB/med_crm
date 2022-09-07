@@ -1,6 +1,9 @@
 <template>
-  <ElCard shadow="never">
-    <ElForm label-position="top" @submit.prevent="submitHandler">
+  <ElCard class="default-inspection-card" shadow="never">
+    <ElForm
+      class="default-inspection-card-form"
+      label-position="top"
+      @submit.prevent="submitHandler">
       <ElFormItem label="select template">
         <UiModelsAutocompleteSearch
           v-model="templateId"
@@ -8,6 +11,8 @@
           :model-for-use="InspectionCardTemplate"
           @select="selectTemplate" />
       </ElFormItem>
+
+      <DefaultInspectionCardBaseFormItems v-model:data="inspectionCard" />
     </ElForm>
   </ElCard>
 </template>
@@ -17,8 +22,11 @@ import { Appointment } from '@/models/Appointment.model';
 import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model';
 import { DefaultInspectionCard } from '@/models/DefaultInspectionCard.model';
 
+import DefaultInspectionCardBaseFormItems from '@/components/appointments/DefaultInspectionCardBaseFormItems/index.vue';
+
 export default {
   name: 'DefaultInspectionCard',
+  components: { DefaultInspectionCardBaseFormItems },
   props: {
     appointment: [Appointment, Object],
   },
@@ -32,7 +40,6 @@ export default {
     'appointment.id': {
       handler(value) {
         if (!value) return;
-
         this.inspectionCard = new DefaultInspectionCard(this.appointment.inspection_card || {});
       },
       immediate: true,
@@ -53,3 +60,6 @@ export default {
   }),
 };
 </script>
+
+<style lang="scss" src="./index.scss" />
+<i18n src="./index.locales.json" />
