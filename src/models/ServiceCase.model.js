@@ -13,7 +13,6 @@ export class ServiceCase extends CRUDModel {
   /**
    * @param {object} payload
    * @param {number} payload.id
-   * @param {string} payload.type
    * @param {string} payload.title
    * @param {string} payload.complaint
    * @param {DiseaseCode} payload.disease_code
@@ -28,7 +27,6 @@ export class ServiceCase extends CRUDModel {
   constructor(payload) {
     super(payload);
 
-    this.type = payload?.type ?? ServiceCase.enum.types.Default;
     this.title = payload?.title ?? '';
     this.complaint = payload?.complaint ?? null;
     this.disease_code = payload?.disease_code ?? null;
@@ -50,10 +48,6 @@ export class ServiceCase extends CRUDModel {
   }
 
   static enum = {
-    types: {
-      Default: 'default',
-      Treatment: 'treatment',
-    },
     statuses: {
       Created: 'created',
       Closed: 'closed',
