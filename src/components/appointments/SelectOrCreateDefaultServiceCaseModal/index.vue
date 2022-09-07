@@ -44,7 +44,7 @@ import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAct
 import { Appointment } from '@/models/Appointment.model';
 
 export default {
-  name: 'SelectOrCreateServiceCaseModal',
+  name: 'SelectOrCreateDefaultServiceCaseModal',
   emits: ['update:modelValue', 'action'],
   props: {
     modelValue: Boolean,

@@ -19,7 +19,7 @@ import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalMod
 import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 import SelectAppointmentInspectionTypeModal from '@/components/appointments/SelectAppointmentInspectionTypeModal/index.vue';
-import SelectOrCreateServiceCaseModal from '@/components/appointments/SelectOrCreateServiceCaseModal/index.vue';
+import SelectOrCreateDefaultServiceCaseModal from '@/components/appointments/SelectOrCreateDefaultServiceCaseModal/index.vue';
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 
 export default {
@@ -184,7 +184,7 @@ export default {
       if (this.appointment.service_case_id) return true;
 
       const action = await this.$store.dispatch('modalAndDrawer/openModal', {
-        component: SelectOrCreateServiceCaseModal,
+        component: SelectOrCreateDefaultServiceCaseModal,
         payload: {
           userId: this.appointment.patient_id,
           appointmentId: this.appointment.id,
