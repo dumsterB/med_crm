@@ -8,7 +8,7 @@
       @submit.prevent="submitHandler"
       class="create-template-drawer-form"
       label-position="top">
-      <ElFormItem :label="field.label" v-for="(field, index) of FormFields" :key="index">
+      <ElFormItem :label="field.label" v-for="(field, index) of formFields" :key="index">
         <component
           :is="field.tag"
           :placeholder="field.placeholder"
@@ -55,7 +55,16 @@ export default {
     return {
       template: null,
       loading: false,
-      FormFields: [
+    };
+  },
+
+  computed: {
+    ...mapState({
+      user: (state) => state.auth.user,
+    }),
+
+    formFields() {
+      return [
         {
           label: this.$t('Templates.Name'),
           name: 'title',
@@ -86,16 +95,6 @@ export default {
           tag: 'ElInput',
           required: true,
           placeholder: this.$t('Base.WriteText'),
-          options: [
-            {
-              value: 'Option1',
-              label: 'Option1',
-            },
-            {
-              value: 'Option2',
-              label: 'Option2',
-            },
-          ],
         },
         {
           label: this.$t('Appointments.InspectionCard.AnomnesLife'),
@@ -104,16 +103,6 @@ export default {
           name: 'anamnesis_life',
           placeholder: this.$t('Base.WriteText'),
           tag: 'ElInput',
-          options: [
-            {
-              value: 'Option1',
-              label: 'Option1',
-            },
-            {
-              value: 'Option2',
-              label: 'Option2',
-            },
-          ],
         },
         {
           label: this.$t('Appointments.InspectionCard.GeneralState'),
@@ -138,16 +127,6 @@ export default {
           required: true,
           placeholder: this.$t('Base.WriteText'),
           tag: 'ElInput',
-          options: [
-            {
-              value: 'Option1',
-              label: 'Option1',
-            },
-            {
-              value: 'Option2',
-              label: 'Option2',
-            },
-          ],
         },
         {
           label: this.$t('Appointments.InspectionCard.PlanObservation'),
@@ -156,25 +135,17 @@ export default {
           required: true,
           placeholder: this.$t('Base.WriteText'),
           tag: 'ElInput',
-          options: [
-            {
-              value: 'Option1',
-              label: 'Option1',
-            },
-            {
-              value: 'Option2',
-              label: 'Option2',
-            },
-          ],
         },
-      ],
-    };
-  },
-
-  computed: {
-    ...mapState({
-      user: (state) => state.auth.user,
-    }),
+        {
+          label: this.$t('Appointments.InspectionCard.Recommendations'),
+          type: 'textarea',
+          name: 'recommendations',
+          required: false,
+          placeholder: this.$t('Base.WriteText'),
+          tag: 'ElInput',
+        },
+      ];
+    },
   },
 
   watch: {
