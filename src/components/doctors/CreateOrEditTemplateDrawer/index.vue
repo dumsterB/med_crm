@@ -47,6 +47,7 @@ import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerA
 
 export default {
   name: 'CreateOrEditTemplateDrawer',
+  emits: ['update:modelValue', 'action'],
   props: {
     data: [InspectionCardTemplate, Object],
   },
@@ -64,14 +65,14 @@ export default {
           tag: 'ElInput',
         },
         {
-          label: this.$t('Templates.Сomplaints'),
+          label: this.$t('Appointments.InspectionCard.Сomplaints'),
           type: 'textarea',
           name: 'complaints',
           placeholder: this.$t('Base.WriteText'),
           tag: 'ElInput',
         },
         {
-          label: this.$t('Templates.Anomnes'),
+          label: this.$t('Appointments.InspectionCard.Anomnes'),
           name: 'anamnesis',
           type: 'textarea',
           required: true,
@@ -79,7 +80,7 @@ export default {
           tag: 'ElInput',
         },
         {
-          label: this.$t('Templates.Operations'),
+          label: this.$t('Appointments.InspectionCard.Operations'),
           type: 'textarea',
           name: 'operations',
           tag: 'ElInput',
@@ -97,7 +98,7 @@ export default {
           ],
         },
         {
-          label: this.$t('Templates.AnomnesLife'),
+          label: this.$t('Appointments.InspectionCard.AnomnesLife'),
           type: 'textarea',
           required: true,
           name: 'anamnesis_life',
@@ -115,7 +116,7 @@ export default {
           ],
         },
         {
-          label: this.$t('Templates.GeneralState'),
+          label: this.$t('Appointments.InspectionCard.GeneralState'),
           type: 'textarea',
           name: 'general_state',
           required: true,
@@ -123,7 +124,7 @@ export default {
           tag: 'ElInput',
         },
         {
-          label: this.$t('Templates.LocalStatus'),
+          label: this.$t('Appointments.InspectionCard.LocalStatus'),
           type: 'textarea',
           name: 'local_status',
           required: true,
@@ -131,7 +132,7 @@ export default {
           tag: 'ElInput',
         },
         {
-          label: this.$t('Templates.PreDiagnosis'),
+          label: this.$t('Appointments.InspectionCard.PreDiagnosis'),
           type: 'textarea',
           name: 'preliminary_diagnosis',
           required: true,
@@ -149,8 +150,8 @@ export default {
           ],
         },
         {
-          label: this.$t('Templates.PlanObservation'),
-            type: 'textarea',
+          label: this.$t('Appointments.InspectionCard.PlanObservation'),
+          type: 'textarea',
           name: 'survey_plan',
           required: true,
           placeholder: this.$t('Base.WriteText'),
@@ -179,9 +180,7 @@ export default {
   watch: {
     modelValue: {
       handler() {
-        this.template = new InspectionCardTemplate(
-          this.data || {}
-        );
+        this.template = new InspectionCardTemplate(this.data || {});
       },
       immediate: true,
       deep: true,
@@ -231,4 +230,6 @@ export default {
 </script>
 
 <style lang="scss" src="./index.scss" />
+<i18n src="@/locales/base.locales.json" />
+<i18n src="@/locales/appointments.locales.json" />
 <i18n src="@/locales/templates.locales.json" />

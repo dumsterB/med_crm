@@ -7,6 +7,16 @@
       "CreateAppointment": "Создать запись",
       "EditReception": "Редактировать прием",
       "EndReception": "Завершить прием",
+      "InspectionCard": {
+        "Anomnes": "Анамнез",
+        "AnomnesLife": "Анамнез жизни",
+        "GeneralState": "Общее состояние",
+        "LocalStatus": "Локальный статус",
+        "Operations": "Операции",
+        "PlanObservation": "План обследования",
+        "PreDiagnosis": "Предворительный диагноз",
+        "Сomplaints": "Жалобы"
+      },
       "InspectionTypes": {
         "full": "Полный осмотр",
         "treatment": "Осмотр дневника лечения"
@@ -44,6 +54,16 @@
       "CreateAppointment": "Qabulga yozuvni yaratish",
       "EditReception": "Qabulga yozuvni tahrirlash",
       "EndReception": "Qabulni yakunlash",
+      "InspectionCard": {
+        "Anomnes": "Anamnez",
+        "AnomnesLife": "Hayotning anamnezi",
+        "GeneralState": "Umumiy holat",
+        "LocalStatus": "Mahalliy holat",
+        "Operations": "Operatsiyalar",
+        "PlanObservation": "So'rov rejasi",
+        "PreDiagnosis": "Dastlabki tashxis",
+        "Сomplaints": "Shikoyatlar"
+      },
       "InspectionTypes": {
         "full": "To'liq tekshirish",
         "treatment": "Davolash jurnalini ko'rib chiqish"
