@@ -1,6 +1,7 @@
 <template>
   <LayoutByUserRole content-class="v-appointment-content" :loading="loading.get">
     <RouterView
+      v-if="appointment"
       v-model:appointment="appointment"
       @status:update="updateStatus"
       @appointment:edit="editAppointment">
@@ -41,7 +42,7 @@ export default {
         [Appointment.enum.statuses.Provided]: false,
       },
       hasStatusLoadingState: false,
-      appointment: new Appointment(),
+      appointment: null,
     };
   },
   computed: {
