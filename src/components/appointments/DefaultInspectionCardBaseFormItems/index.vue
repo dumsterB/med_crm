@@ -5,9 +5,9 @@
       :is="field.tag"
       :placeholder="field.placeholder"
       :model-value="data[field.name]"
-      autosize
       :required="field.required"
       :type="field.type"
+      :rows="3"
       @update:model-value="updateField(field, $event)">
       <UiRequiredHiddenInput v-if="field.options?.length" :required="field.required" />
 
