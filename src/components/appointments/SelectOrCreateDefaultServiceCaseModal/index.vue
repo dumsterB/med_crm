@@ -37,9 +37,8 @@
 </template>
 
 <script>
-import * as icons from '@/enums/icons.enum.js';
 import { ServiceCase } from '@/models/ServiceCase.model';
-import { DefaultServiceCase } from '@/models/DefaultServiceCase.model';
+import * as icons from '@/enums/icons.enum.js';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
 import { Appointment } from '@/models/Appointment.model';
 
@@ -80,7 +79,7 @@ export default {
     async getServiceCases(userId) {
       this.loading.get = true;
 
-      const { data } = await DefaultServiceCase.findByUserId(userId, {
+      const { data } = await ServiceCase.findByUserId(userId, {
         status: ServiceCase.enum.statuses.Created,
         per_page: 10,
       });
@@ -95,14 +94,11 @@ export default {
       this.loading.create = true;
 
       try {
-        const { data } = await DefaultServiceCase.create(
-          new DefaultServiceCase({
-            title: this.title,
-            user_id: this.userId,
-            complaint: 'test', // TODO: убрать
-            disease_code: 'test', // TODO: убрать
-          })
-        );
+        const { data } = await ServiceCase.create({
+          title: this.title,
+          user_id: this.userId,
+          complaint: 'test', // TODO: убрать
+        });
         await this.selectServiceCase(data.data);
       } catch (err) {
         console.log(err);
