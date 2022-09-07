@@ -1,14 +1,15 @@
 <template>
   <LayoutByUserRole content-class="v-patients-content" fixHeight>
     <LayoutContentHeader>
-      <template v-if="isDoctor" #default>
+      <div v-if="isDoctor" class="v-patients-content-actions">
         <ElButton :type="findForDoctor.value ? 'primary' : ''" @click="findForDoctor.value = 1">
           {{ $t('Patients.MyPatients') }}
         </ElButton>
+
         <ElButton :type="!findForDoctor.value ? 'primary' : ''" @click="findForDoctor.value = 0">
-          Clinic
+          {{ $t('Patients.ClinicPatients') }}
         </ElButton>
-      </template>
+      </div>
 
       <template #actions>
         <ElButton v-if="!isDoctor" type="primary" @click="createPatient">

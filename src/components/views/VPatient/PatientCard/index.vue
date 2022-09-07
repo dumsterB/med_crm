@@ -89,11 +89,11 @@ export default {
         },
         {
           label: this.$t('User.Gender'),
-          value: this.data.gender?.length || this.$t('Base.Absent'),
+          value: this.data.gender?.length ? this.$t(`User.Genders.${this.data.gender}`) : this.$t('Base.Absent')
         },
         {
           label: this.$t('User.Email'),
-          value: this.data.email?.length || this.$t('Base.Absent'),
+          value: this.data?.email?.length ? this.data.email : this.$t('Base.Absent')
         },
       ];
     },
@@ -118,7 +118,6 @@ export default {
       if (action instanceof GlobalDrawerCloseAction) return;
       this.$emit('update:data', action.data.patient);
     },
-    deletePatient() {},
   },
 };
 </script>

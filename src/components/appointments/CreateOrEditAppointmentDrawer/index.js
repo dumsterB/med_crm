@@ -1,6 +1,11 @@
 import { markRaw } from 'vue';
-import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
+import { mapState } from 'vuex';
+import * as icons from '@/enums/icons.enum.js';
+import { DRAWER_DEFAULT_SIZE } from '@/config/ui.config';
+
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
+import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
+import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 import { Appointment } from '@/models/Appointment.model';
 import { User } from '@/models/User.model';
 import { Patient } from '@/models/Patient.model';
@@ -8,6 +13,7 @@ import { Doctor } from '@/models/Doctor.model';
 import { Service } from '@/models/Service.model';
 import { ServiceGroup } from '@/models/ServiceGroup.model';
 
+import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 import SpecialtiesSelect from '@/components/specialties/SpecialtiesSelect/index.vue';
 import DoctorsSelectByGroupService from './DoctorsSelectByGroupService/index.vue';
 import ScheduleSlotsSelect from '@/components/appointments/ScheduleSlotsSelect/index.vue';
@@ -15,7 +21,12 @@ import ScheduleSlotsSelect from '@/components/appointments/ScheduleSlotsSelect/i
 // TODO: написать документацию по бизнес логике
 export default {
   name: 'CreateOrEditAppointmentDrawer',
-  components: { SpecialtiesSelect, DoctorsSelectByGroupService, ScheduleSlotsSelect },
+  components: {
+    CreateOrEditPatientDrawer,
+    SpecialtiesSelect,
+    DoctorsSelectByGroupService,
+    ScheduleSlotsSelect,
+  },
   emits: ['update:modelValue', 'action'],
   props: {
     modelValue: Boolean,
@@ -32,9 +43,25 @@ export default {
       loading: {
         form: false,
       },
+
+      patientDrawer: {
+        show: false,
+        nameOrPhone: null,
+        newPatient: null,
+      },
     };
   },
   computed: {
+    ...mapState({
+      user: (state) => state.auth.user,
+    }),
+
+    permissions() {
+      return {
+        createPatient: this.user.role === User.enum.roles.Manager,
+      };
+    },
+
     appointmentFields() {
       return Object.keys(this.appointment);
     },
@@ -266,6 +293,19 @@ export default {
         }
       }
     },
+
+    openCreatePatientDrawer({ query }) {
+      this.$refs.autocomplete_patient.blur();
+      this.patientDrawer.show = true;
+      this.$nextTick(() => (this.patientDrawer.nameOrPhone = query));
+    },
+    insertPatient(action) {
+      if (action instanceof GlobalModalCloseAction) return;
+      this.patientDrawer.show = false;
+
+      this.patientDrawer.newPatient = action.data.patient;
+      this.appointment.patient_id = action.data;
+    },
   },
 
   // other
@@ -275,5 +315,7 @@ export default {
     Service: markRaw(Service),
     ServiceGroup: markRaw(ServiceGroup),
     appointmentTypesEnum: markRaw(Appointment.enum.types),
+    icons,
+    DRAWER_DEFAULT_SIZE,
   }),
 };
