@@ -14,12 +14,15 @@
         :style="{ order: this.appointmentFieldsFlexOrder.patient }">
         <UiModelsAutocompleteSearch
           v-model="appointment.patient_id"
-          :modelForUse="Patient"
-          :searchQuery="patientsOptions.searchQuery"
-          :defaultItem="data?.patient || patient"
+          :model-for-use="Patient"
+          :search-query="patientsOptions.searchQuery"
+          :default-item="data?.patient || patient || patientDrawer.newPatient"
           :disabled="!!patient || !!data"
           :placeholder="$t('User.PleaseInputNameOrPhone')"
-          required />
+          required
+          :show-create-option="permissions.createPatient"
+          ref="autocomplete_patient"
+          @create="openCreatePatientDrawer" />
       </ElFormItem>
 
       <!--  Type  -->
@@ -127,6 +130,13 @@
         </div>
       </ElFormItem>
     </ElForm>
+
+    <CreateOrEditPatientDrawer
+      v-model="patientDrawer.show"
+      :size="DRAWER_DEFAULT_SIZE"
+      :name-or-phone="patientDrawer.nameOrPhone"
+      disable-default-action
+      @action="insertPatient" />
   </ElDrawer>
 </template>
 

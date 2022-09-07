@@ -41,9 +41,13 @@
       "Search": "Поиск",
       "SelectDate": "Выберите дату",
       "Service": "Услуга",
+      "Settings": "Настройки",
       "SignUp": "Регистрация",
       "Sum": "сум",
-      "Time": "Время"
+      "Template": "Шаблон",
+      "Templates": "Шаблоны",
+      "Time": "Время",
+      "WriteText": "Напишите текст..."
     }
   },
   "uz": {
@@ -88,9 +92,13 @@
       "Search": "Topish",
       "SelectDate": "Sanani tanlang",
       "Service": "Xizmat",
+      "Settings": "Sozlamalar",
       "SignUp": "Ro'yxatdan o'tish",
       "Sum": "som",
-      "Time": "Vaqt"
+      "Template": "??Шаблон??",
+      "Templates": "??Шаблоны??",
+      "Time": "Vaqt",
+      "WriteText": "Matn yozing..."
     }
   }
 }

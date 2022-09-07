@@ -1,0 +1,37 @@
+{
+  "ru": {
+    "Templates": {
+      "Create": "Создать шаблон",
+      "Edit": "Редактировать шаблон",
+      "AddTemplate": "Добавить шаблон",
+      "Name": "Название шаблона",
+      "Сomplaints": "Жалобы",
+      "Anomnes": "Анамнез",
+      "Operations": "Операции",
+      "AnomnesLife": "Анамнез жизни",
+      "GeneralState": "Общее состояние",
+      "LocalStatus": "Локальный статус",
+      "PreDiagnosis": "Предворительный диагноз",
+      "PlanObservation": "План обследования",
+      "SelectTemplates": "Выбрать шаблон"
+
+    }
+  },
+  "uz": {
+    "Templates": {
+      "Create": "Shablon yaratish",
+      "Edit": "Shablonni tahrirlash",
+      "AddTemplate": "Shablon qo'shish",
+      "Name": "Название шаблона",
+      "Сomplaints": "Shikoyatlar",
+      "Anomnes": "Anamnez",
+      "Operations": "Operatsiyalar",
+      "AnomnesLife": "Hayotning anamnezi",
+      "GeneralState": "Umumiy holat",
+      "LocalStatus": "Mahalliy holat",
+      "PreDiagnosis": "Dastlabki tashxis",
+      "PlanObservation": "So'rov rejasi",
+      "SelectTemplates": "Shablonni tanlang"
+    }
+  }
+}

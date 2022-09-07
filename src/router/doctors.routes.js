@@ -12,4 +12,24 @@ export const DOCTORS_QUEUE_ROUTE = {
   },
 };
 
-export const routes = [DOCTORS_QUEUE_ROUTE];
+export const DOCTORS_TEMPLATES_ROUTE = {
+  name: 'DOCTORS_TEMPLATE',
+  path: '/templates',
+  component: 'VTemplates',
+  beforeEnter: [onlyLoggedInMiddleware, onlyDoctorMiddleware],
+  meta: {
+    title: I18nService.t('Base.Template'),
+  },
+};
+
+export const DOCTORS_SETTINGS_ROUTE = {
+  name: 'DOCTORS_SETTINGS',
+  path: '/profile/settings',
+  component: 'VSettings',
+  beforeEnter: [onlyLoggedInMiddleware, onlyDoctorMiddleware],
+  meta: {
+    title: I18nService.t('Base.Settings'),
+  },
+};
+
+export const routes = [DOCTORS_QUEUE_ROUTE, DOCTORS_TEMPLATES_ROUTE, DOCTORS_SETTINGS_ROUTE];
