@@ -108,7 +108,7 @@ export default {
     },
     'patient.ambulatory_card': {
       handler(val) {
-        this.localAmbulatoryCard = val || new AmbulatoryCard();
+        this.localAmbulatoryCard = val || new AmbulatoryCard(val || {});
       },
       immediate: true,
       deep: true,
@@ -121,17 +121,17 @@ export default {
       this.loading = true;
 
       try {
+        await Patient.update({
+          id: this.patient.id,
+          payload: this.localPatient,
+        });
         const payloadFromCard = await AmbulatoryCard.save(
           this.patient.id,
           this.localAmbulatoryCard
         );
-        const payloadFromPatient = await Patient.update({
-          id: this.patient.id,
-          payload: this.localPatient,
-        });
 
         this.$emit('update:patient', {
-          ...payloadFromPatient.data.data,
+          ...payloadFromCard.data.data,
         });
       } catch (err) {
         console.log(err);
