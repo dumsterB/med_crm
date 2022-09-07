@@ -39,6 +39,7 @@
 <script>
 import * as icons from '@/enums/icons.enum.js';
 import { CRUDModel } from '@/models/CRUD.model';
+import { cloneDeep } from 'lodash';
 
 export default {
   name: 'UiModelsAutocompleteSearch',
@@ -124,7 +125,7 @@ export default {
         return this.$emit('create', { query: this.query });
 
       this.$emit('update:modelValue', payload[this.value]);
-      this.$emit('select', payload);
+      this.$emit('select', cloneDeep(payload));
     },
 
     focus() {
