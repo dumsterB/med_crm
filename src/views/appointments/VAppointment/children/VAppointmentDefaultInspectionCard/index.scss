@@ -1,4 +1,8 @@
 .v-app-ins-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
   &-header {
     display: flex;
     align-items: center;

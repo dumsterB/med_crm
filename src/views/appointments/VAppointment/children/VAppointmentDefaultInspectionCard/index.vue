@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="v-app-ins-card">
     <LayoutContentHeader>
       <div class="v-app-ins-card-header">
         <RouterLink :to="appointmentDefaultCardPageLink">
@@ -21,6 +21,8 @@
         </div>
       </div>
     </LayoutContentHeader>
+
+    <DefaultInspectionCard :appointment="appointment" />
   </div>
 </template>
 
@@ -32,10 +34,12 @@ import { insertRouteParams } from '@/utils/router.utils';
 import { Appointment } from '@/models/Appointment.model';
 
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
+import DefaultInspectionCard from '@/components/appointments/DefaultInspectionCard/index.vue';
 
 export default {
   name: 'VAppointmentDefaultInspectionCard',
-  components: { LayoutContentHeader },
+  emits: ['update:appointment'],
+  components: { DefaultInspectionCard, LayoutContentHeader },
   props: {
     appointment: [Appointment, Object],
   },
