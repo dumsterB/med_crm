@@ -45,7 +45,12 @@
       "Template": "Шаблон",
       "Templates": "Шаблоны",
       "Time": "Время",
-      "WriteText": "Напишите текст..."
+      "WriteText": "Напишите текст...",
+      "SetTreatment": "Назначение лечении",
+      "Naming": "Название",
+      "QuantityDays": "Количество дней",
+      "Appoint": "Назначить",
+      "TableTreatment": "Таблица лечений"
     }
   },
   "uz": {
@@ -94,7 +99,12 @@
       "Template": "??Шаблон??",
       "Templates": "??Шаблоны??",
       "Time": "Vaqt",
-      "WriteText": "Matn yozing..."
+      "WriteText": "Matn yozing...",
+      "SetTreatment": "Davolashni tayinlash",
+      "Naming": "Ism",
+      "QuantityDays": "Kunlar miqdori",
+      "Appoint": "Tayinlash",
+      "TableTreatment": "Davolash jadvali"
     }
   }
 }

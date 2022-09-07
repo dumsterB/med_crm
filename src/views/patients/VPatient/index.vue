@@ -35,6 +35,18 @@
         </div>
       </div>
 
+      <!--  Treatment  -->
+      <div class="v-patient-content__item v-patient-content-item">
+        <div class="v-patient-content-item__header v-patient-content-item-header">
+          <div class="v-patient-content__title">{{ $t('Base.TableTreatment') }}</div>
+        </div>
+        <!--     TODO: переделать -->
+        <ElEmpty class="v-patient-content-item-empty" v-show="!patient.childrens?.length" :description="$t('Base.NoData')" />
+        <div class="v-patient-content-item__body">
+          <TreatmentTable v-model:data="patient" type="horizontal" />
+        </div>
+      </div>
+
       <!--  Appointments  -->
       <div class="v-patient-content-item">
         <div class="v-patient-content-item__header v-patient-content-item-header">
@@ -71,6 +83,7 @@ import { Appointment } from '@/models/Appointment.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
+import TreatmentTable from "@/components/views/Treatment/index.vue";
 import * as icons from '@/enums/icons.enum.js';
 
 export default {
@@ -80,6 +93,7 @@ export default {
     PatientCard,
     AppointmentsTable,
     PatientsTable,
+    TreatmentTable
   },
   icons: icons,
   props: {
