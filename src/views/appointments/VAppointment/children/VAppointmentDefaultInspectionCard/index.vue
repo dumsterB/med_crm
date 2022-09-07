@@ -34,7 +34,7 @@ import { Appointment } from '@/models/Appointment.model';
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
 
 export default {
-  name: 'VAppointmentInspectionCard',
+  name: 'VAppointmentDefaultInspectionCard',
   components: { LayoutContentHeader },
   props: {
     appointment: [Appointment, Object],
