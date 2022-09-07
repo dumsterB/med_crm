@@ -9,7 +9,7 @@
         ref="elTable">
         <ElTableColumn prop="title" :label="$t('Base.Templates')"></ElTableColumn>
 
-        <ElTableColumn prop="actions" :label="$t('Base.Actions')">
+        <ElTableColumn prop="actions" :label="$t('Base.Actions')" width="250px">
           <template #default="{ row }">
             <div class="templates-table-actions">
               <ElButton @click="editTemplate(row)" type="primary">
