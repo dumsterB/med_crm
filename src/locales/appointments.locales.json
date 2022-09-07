@@ -15,6 +15,7 @@
         "Operations": "Операции",
         "PlanObservation": "План обследования",
         "PreDiagnosis": "Предворительный диагноз",
+        "Recommendations": "Рекомендации",
         "Сomplaints": "Жалобы"
       },
       "InspectionTypes": {
@@ -62,6 +63,7 @@
         "Operations": "Operatsiyalar",
         "PlanObservation": "So'rov rejasi",
         "PreDiagnosis": "Dastlabki tashxis",
+        "Recommendations": "Tavsiyalar",
         "Сomplaints": "Shikoyatlar"
       },
       "InspectionTypes": {
