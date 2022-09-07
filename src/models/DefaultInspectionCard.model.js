@@ -12,5 +12,6 @@ export class DefaultInspectionCard extends InspectionCard {
     this.local_status = payload?.local_status ?? null;
     this.preliminary_diagnosis = payload?.preliminary_diagnosis ?? null;
     this.survey_plan = payload?.survey_plan ?? null;
+    this.recommendations = payload?.recommendations ?? null;
   }
 }
