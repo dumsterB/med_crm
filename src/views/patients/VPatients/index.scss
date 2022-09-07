@@ -1,7 +1,5 @@
 .v-patients-content {
   &-actions {
-    &__btn {
-      margin-left: 10px !important;
-    }
+    display: flex;
   }
 }
