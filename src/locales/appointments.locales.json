@@ -41,6 +41,7 @@
         "provided": "Закончен",
         "waiting": "Ожидает"
       },
+      "ToDiagnose": "Поставить диагноз",
       "Types": {
         "doctor": "Врач",
         "service": "Услуга"
@@ -89,6 +90,7 @@
         "provided": "Yakunlangan",
         "waiting": "Kutmoqda"
       },
+      "ToDiagnose": "Tashxis qo'yish",
       "Types": {
         "doctor": "Shifokor",
         "service": "Xizmat"
