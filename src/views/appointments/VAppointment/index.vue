@@ -25,6 +25,7 @@ import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEdi
 import SelectAppointmentInspectionTypeModal from '@/components/appointments/SelectAppointmentInspectionTypeModal/index.vue';
 import SelectOrCreateServiceCaseModal from '@/components/appointments/SelectOrCreateServiceCaseModal/index.vue';
 import SuggestControlAppointmentModal from '@/components/appointments/SuggestControlAppointmentModal/index.vue';
+import SelectTreatmentModal from '@/components/appointments/SelectTreatmentModal/index.vue';
 
 export default {
   name: 'VAppointment',
@@ -115,7 +116,7 @@ export default {
         // });
         //
         // this.appointment = data.data;
-        // this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
+        this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
         // this.redirectIfNeeded(status);
       } catch (err) {
         console.log(err);
@@ -157,7 +158,6 @@ export default {
     },
 
     async startFullApproveFlow() {
-      return this.startAfterApproveFlow();
       const success = await this.selectOrCreateServiceCase();
       if (!success) return;
 
@@ -208,7 +208,19 @@ export default {
      * @return {Promise<boolean>}
      */
     async selectTreatment() {
-      return false;
+      if (this.appointment.treatment_id) return true;
+
+      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
+        component: SelectTreatmentModal,
+        payload: {
+          appointment: this.appointment,
+        },
+      });
+      if (!(action instanceof GlobalModalCloseAction)) {
+        this.$emit('update:appointment', action.data.appointment);
+      }
+
+      return !(action instanceof GlobalModalCloseAction);
     },
 
     setDiagnosis() {},
@@ -222,7 +234,8 @@ export default {
       });
 
       await this.updateStatus(Appointment.enum.statuses.Approved, { forceUpdate: true });
-      this.startAfterApproveFlow();
+      // иначе не открываются модалки по след. флоу
+      setTimeout(async () => this.startAfterApproveFlow());
     },
 
     async startAfterApproveFlow() {
@@ -257,4 +270,5 @@ export default {
 
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/base.locales.json" />
+<i18n src="@/locales/notifications.locales.json" />
 <i18n src="./index.locales.json" />
