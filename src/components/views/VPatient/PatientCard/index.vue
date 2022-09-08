@@ -27,8 +27,11 @@
       </div>
     </div>
     <div class="v-patient-profile-card__actions v-patient-profile-card-actions">
-      <ElButton type="primary"  @click.stop="editPatient">
+      <ElButton type="primary" @click.stop="editPatient">
         {{ $t('Base.Edit') }}
+      </ElButton>
+      <ElButton type="primary" @click.stop="treatmentHandler">
+        {{ $t('Base.SetTreatment') }}
       </ElButton>
     </div>
   </ElCard>
@@ -40,8 +43,9 @@ import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
-
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import SetTreatment from "@/components/Modals/CreateTreatment/index.vue";
+import {GlobalModalAction} from "@/models/client/ModalAndDrawer/GlobalModalAction";
+import {GlobalModalCloseAction} from "@/models/client/ModalAndDrawer/GlobalModalCloseAction";
 
 export default {
   name: 'VPatientPatientCard',
@@ -73,11 +77,13 @@ export default {
         },
         {
           label: this.$t('User.Gender'),
-          value: this.data.gender?.length ? this.$t(`User.Genders.${this.data.gender}`) : this.$t('Base.Absent')
+          value: this.data.gender?.length
+            ? this.$t(`User.Genders.${this.data.gender}`)
+            : this.$t('Base.Absent'),
         },
         {
           label: this.$t('User.Email'),
-          value: this.data?.email?.length ? this.data.email : this.$t('Base.Absent')
+          value: this.data?.email?.length ? this.data.email : this.$t('Base.Absent'),
         },
       ];
     },
@@ -100,6 +106,16 @@ export default {
 
       if (action instanceof GlobalDrawerCloseAction) return;
       this.$emit('update:data', action.data.patient);
+    },
+  async treatmentHandler() {
+     const action = await this.$store.dispatch('modalAndDrawer/openModal', {
+        component: SetTreatment,
+        payload: {
+          data: this.data,
+        },
+      });
+      if (action instanceof GlobalModalCloseAction) return;
+      this.$emit('create:treatment', action.data.treatment);
     },
   },
 };

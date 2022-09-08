@@ -94,7 +94,6 @@ export default {
         CreateOrEditTemplateDrawer
       );
       if (action instanceof GlobalDrawerCloseAction) return;
-      this.data = action.template;
     },
   },
 };
