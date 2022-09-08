@@ -173,7 +173,7 @@ export default {
         user_id: this.user.id,
       });
 
-      console.log(data,'data fmfwe')
+      console.log(data,'data treatmnets')
       this.treatments = data.data;
 
       this.treatments = false;
