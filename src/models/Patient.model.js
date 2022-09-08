@@ -16,6 +16,7 @@ export class Patient extends User {
    * @param {Array<User|Patient>} payload.childrens
    * @param {number} payload.parent_id
    * @param {User|Patient} payload.parent
+   * @param {boolean} payload.has_treatment
    */
   constructor(payload) {
     super(payload);
@@ -24,6 +25,8 @@ export class Patient extends User {
     this.childrens = payload?.childrens ?? [];
     this.parent_id = payload?.parent_id ?? null;
     this.parent = payload?.parent ?? null;
+
+    this.has_treatment = payload?.has_treatment ?? true;
   }
 
   static async create(payload) {
