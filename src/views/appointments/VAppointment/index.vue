@@ -14,6 +14,7 @@
 <script>
 import { mapState } from 'vuex';
 import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
+import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import { User } from '@/models/User.model';
 import { Appointment } from '@/models/Appointment.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
@@ -23,7 +24,7 @@ import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 import SelectAppointmentInspectionTypeModal from '@/components/appointments/SelectAppointmentInspectionTypeModal/index.vue';
 import SelectOrCreateServiceCaseModal from '@/components/appointments/SelectOrCreateServiceCaseModal/index.vue';
-import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
+import SuggestControlAppointmentModal from '@/components/appointments/SuggestControlAppointmentModal/index.vue';
 
 export default {
   name: 'VAppointment',
@@ -143,6 +144,7 @@ export default {
     async startDoctorApproveFlow() {
       if (!this.appointment.patient.has_treatment || this.appointment.service_case_id)
         return this.startFullApproveFlow();
+      if (this.appointment.treatment_id) return this.startTreatmentApproveFlow();
 
       const action = await this.$store.dispatch(
         'modalAndDrawer/openModal',
@@ -155,10 +157,9 @@ export default {
     },
 
     async startFullApproveFlow() {
-      this.$notify({ type: 'info', title: 'full flow' });
-
+      return this.startAfterApproveFlow();
       const success = await this.selectOrCreateServiceCase();
-      if (!success) return this.$emit('update:modelValue', false);
+      if (!success) return;
 
       this.$router.push({
         name: APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_INSPECTION_CARD.name,
@@ -166,11 +167,15 @@ export default {
           id: this.appointment.id,
         },
       });
-
-      // other code
     },
     async startTreatmentApproveFlow() {
-      this.$notify({ type: 'info', title: 'treatment flow' });
+      const success = await this.selectTreatment();
+      if (!success) return;
+
+      // go to treatment
+      // this.$router.push({
+      // name: APPOINTMENT_ROUTE.childrenMap.A
+      // })
     },
 
     /**
@@ -196,6 +201,18 @@ export default {
       return !(action instanceof GlobalModalCloseAction);
     },
 
+    /**
+     * Возращает
+     *   true - если успешно выбрано лечение,
+     *   false - модалка закрылась и нужно приостановить текщий flow
+     * @return {Promise<boolean>}
+     */
+    async selectTreatment() {
+      return false;
+    },
+
+    setDiagnosis() {},
+
     async approveAppointment() {
       this.$router.push({
         name: APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_DEFAULT_CARD.name,
@@ -204,10 +221,31 @@ export default {
         },
       });
 
-      // await this.updateStatus(Appointment.enum.statuses.Approved, { forceUpdate: true });
+      await this.updateStatus(Appointment.enum.statuses.Approved, { forceUpdate: true });
+      this.startAfterApproveFlow();
     },
 
-    setDiagnosis() {},
+    async startAfterApproveFlow() {
+      const success = await this.suggestControlAppointment();
+    },
+
+    /**
+     * Возращает
+     *   true - если успешно создан контрольынй приём
+     *   false - модалка закрылась и нужно приостановить текщий flow
+     * @return {Promise<boolean>}
+     */
+    async suggestControlAppointment() {
+      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
+        component: SuggestControlAppointmentModal,
+        payload: {
+          doctor: this.appointment.doctor,
+          patient: this.appointment.patient,
+        },
+      });
+
+      return !(action instanceof GlobalModalCloseAction);
+    },
   },
 
   setup: () => ({
