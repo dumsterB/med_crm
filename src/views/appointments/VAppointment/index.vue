@@ -172,10 +172,12 @@ export default {
       const success = await this.selectTreatment();
       if (!success) return;
 
-      // go to treatment
-      // this.$router.push({
-      // name: APPOINTMENT_ROUTE.childrenMap.A
-      // })
+      this.$router.push({
+        name: APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_TREATMENT_CARD.name,
+        params: {
+          id: this.appointment.id,
+        },
+      });
     },
 
     /**
