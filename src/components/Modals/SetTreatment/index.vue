@@ -21,6 +21,11 @@ import { mapState } from 'vuex'
 export default {
   name: 'SetTreatmentModal',
   icons: icons,
+  props:{
+    appointment:{
+      type: Object
+    }
+  },
   data(){
     return{
       title: '',
