@@ -4,7 +4,9 @@
       v-if="appointment"
       v-model:appointment="appointment"
       @status:update="updateStatus"
-      @appointment:edit="editAppointment">
+      @appointment:edit="editAppointment"
+      @appointment:approve="approveAppointment"
+      @appointment:set:diagnose="setDiagnosis">
     </RouterView>
   </LayoutByUserRole>
 </template>
@@ -83,10 +85,6 @@ export default {
 
       if (action instanceof GlobalDrawerCloseAction) return;
       this.appointment = action.data.appointment;
-    },
-
-    approveAppointment() {
-      this.updateStatus(Appointment.enum.statuses.Approved, { forceUpdate: true });
     },
 
     /**
@@ -197,6 +195,19 @@ export default {
 
       return !(action instanceof GlobalModalCloseAction);
     },
+
+    async approveAppointment() {
+      this.$router.push({
+        name: APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_DEFAULT_CARD.name,
+        params: {
+          id: this.appointment.id,
+        },
+      });
+
+      // await this.updateStatus(Appointment.enum.statuses.Approved, { forceUpdate: true });
+    },
+
+    setDiagnosis() {},
   },
 
   setup: () => ({
