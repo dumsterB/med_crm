@@ -89,19 +89,20 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import * as icons from '@/enums/icons.enum.js';
+import { Patient } from '@/models/Patient.model';
+import { Appointment } from '@/models/Appointment.model';
+import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
+import { Treatment } from '@/models/Treatment.model';
+
+import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
+import PatientsTable from '@/components/patients/PatientsTable/index.vue';
+import TreatmentTable from '@/components/treatment/TreatmentTable/index.vue';
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import PatientCard from '@/components/views/VPatient/PatientCard/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
-import { Patient } from '@/models/Patient.model';
-import { Appointment } from '@/models/Appointment.model';
-import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
-import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
-import PatientsTable from '@/components/patients/PatientsTable/index.vue';
-import TreatmentTable from '@/components/treatment/TreatmentTable/index.vue';
-import * as icons from '@/enums/icons.enum.js';
-import { Treatment } from '@/models/Treatment.model';
-import { mapState } from 'vuex';
 
 export default {
   name: 'VPatient',
@@ -131,9 +132,9 @@ export default {
   },
   computed: {
     ...mapState({
-      user: (state) => state.auth.user,
       treatments: (state) => state.treatments.data,
     }),
+
     isChildren() {
       return !!this.patient.parent_id;
     },
@@ -177,7 +178,7 @@ export default {
     async getTreatmentByUserId() {
       this.loading.treatments = true;
 
-      const { data } = await Treatment.findByUserId(this.user.id);
+      const { data } = await Treatment.findByUserId(this.id);
 
       this.$store.dispatch('treatments/setData', { items: data.data, overwriteDataState: true });
       this.loading.treatments = false;
