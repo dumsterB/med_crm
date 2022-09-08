@@ -43,7 +43,7 @@ import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
-import SetTreatment from "@/components/modals/SetTreatment/index.vue";
+import SetTreatment from "@/components/Modals/SetTreatment/index.vue";
 
 export default {
   name: 'VPatientPatientCard',

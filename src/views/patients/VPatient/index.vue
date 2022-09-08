@@ -1,8 +1,9 @@
 <template>
   <LayoutRegistry
-    :loading="loading.profile || loading.appointment"
+    :loading="loading.profile || loading.appointment || loading.treatments"
     content-class="v-patient-content">
     <template v-if="patient">
+
       <!--  Patient  -->
       <div class="v-patient-content__item v-patient-content-item">
         <div class="v-patient-content-item__header v-patient-content-item-header">
@@ -21,7 +22,10 @@
           <ElButton type="primary" @click="createChildren"> {{ $t('User.AddChildren') }}</ElButton>
         </div>
 
-        <ElEmpty class="v-patient-content-item-empty" v-show="!patient.childrens?.length" :description="$t('Base.NoData')" />
+        <ElEmpty
+          class="v-patient-content-item-empty"
+          v-show="!patient.childrens?.length"
+          :description="$t('Base.NoData')" />
 
         <div class="v-patient-content-item__body" v-if="patient.childrens?.length">
           <PatientsTable
@@ -34,14 +38,16 @@
             :items="patient.childrens"></PatientsTable>
         </div>
       </div>
-
       <!--  Treatment  -->
       <div class="v-patient-content__item v-patient-content-item">
         <div class="v-patient-content-item__header v-patient-content-item-header">
           <div class="v-patient-content__title">{{ $t('Base.TableTreatment') }}</div>
         </div>
         <!--     TODO: переделать -->
-        <ElEmpty class="v-patient-content-item-empty" v-show="!patient.childrens?.length" :description="$t('Base.NoData')" />
+        <ElEmpty
+          class="v-patient-content-item-empty"
+          v-show="!patient.childrens?.length"
+          :description="$t('Base.NoData')" />
         <div class="v-patient-content-item__body">
           <TreatmentTable v-model:data="patient" type="horizontal" />
         </div>
@@ -83,8 +89,9 @@ import { Appointment } from '@/models/Appointment.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
-import TreatmentTable from "@/components/views/Treatment/index.vue";
+import TreatmentTable from '@/components/views/Treatment/index.vue';
 import * as icons from '@/enums/icons.enum.js';
+import { TreatmentModel } from '@/models/Treatment.model';
 
 export default {
   name: 'VPatient',
@@ -93,7 +100,7 @@ export default {
     PatientCard,
     AppointmentsTable,
     PatientsTable,
-    TreatmentTable
+    TreatmentTable,
   },
   icons: icons,
   props: {
@@ -105,9 +112,11 @@ export default {
       appointments: null,
       /** @type Patient */
       patient: null,
+      treatments: [],
       loading: {
         profile: false,
         appointment: false,
+        treatments: false,
       },
     };
   },
@@ -121,6 +130,7 @@ export default {
       async handler() {
         await this.getUser();
         this.getAppointments();
+        this.getTreatments();
       },
       immediate: true,
     },
@@ -149,6 +159,17 @@ export default {
       this.appointments = data.data;
 
       this.loading.appointment = false;
+    },
+
+    async getTreatments() {
+      this.treatments = true;
+
+      const { data } = await TreatmentModel.getTreatments({
+        user_id: this.patient.id,
+      });
+      this.treatments = data.data;
+
+      this.treatments = false;
     },
     createAppointment() {
       this.$store.dispatch('modalAndDrawer/openDrawer', {
