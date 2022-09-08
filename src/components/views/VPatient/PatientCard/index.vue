@@ -43,9 +43,10 @@ import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
-import SetTreatment from "@/components/Modals/CreateTreatment/index.vue";
-import {GlobalModalAction} from "@/models/client/ModalAndDrawer/GlobalModalAction";
-import {GlobalModalCloseAction} from "@/models/client/ModalAndDrawer/GlobalModalCloseAction";
+import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
+
+import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer';
+import SetTreatment from '@/components/Modals/CreateTreatment/index.vue';
 
 export default {
   name: 'VPatientPatientCard',
@@ -96,6 +97,7 @@ export default {
         params: { id: this.data.id },
       });
     },
+
     async editPatient() {
       const action = await this.$store.dispatch('modalAndDrawer/openDrawer', {
         component: CreateOrEditPatientDrawer,
@@ -107,11 +109,12 @@ export default {
       if (action instanceof GlobalDrawerCloseAction) return;
       this.$emit('update:data', action.data.patient);
     },
-  async treatmentHandler() {
-     const action = await this.$store.dispatch('modalAndDrawer/openModal', {
+
+    async treatmentHandler() {
+      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
         component: SetTreatment,
         payload: {
-          data: this.data,
+          userId: this.data.id,
         },
       });
       if (action instanceof GlobalModalCloseAction) return;
