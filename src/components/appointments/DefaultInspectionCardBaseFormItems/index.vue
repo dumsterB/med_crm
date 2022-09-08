@@ -8,7 +8,8 @@
       :required="field.required"
       :type="field.type"
       :rows="3"
-      @update:model-value="updateField(field, $event)">
+      @update:model-value="updateField(field, $event)"
+      @change="$emit('change', $event)">
       <UiRequiredHiddenInput v-if="field.options?.length" :required="field.required" />
 
       <ElOption
@@ -26,6 +27,7 @@ import { DefaultInspectionCard } from '@/models/DefaultInspectionCard.model';
 
 export default {
   name: 'DefaultInspectionCardBaseFormItems',
+  emits: ['update:data', 'change'],
   props: {
     data: [DefaultInspectionCard, Object],
   },
@@ -110,7 +112,10 @@ export default {
 
   methods: {
     updateField(field, value) {
+      const isSelect = field.options?.length;
+
       this.$emit('update:data', { ...this.data, [field.name]: value });
+      if (isSelect) this.$nextTick(() => this.$emit('change', {}));
     },
   },
 };
