@@ -44,7 +44,7 @@ export default {
         await TreatmentModel.create({
           user_id: this.user.id,
           title: this.title,
-          appointment_id: this.appointment.id,
+          appointment_id: 539,
           price: this.price,
           duration: this.duration
         });

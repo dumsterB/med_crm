@@ -39,6 +39,7 @@
         </div>
       </div>
       <!--  Treatment  -->
+      {{treatments}}
       <div class="v-patient-content__item v-patient-content-item">
         <div class="v-patient-content-item__header v-patient-content-item-header">
           <div class="v-patient-content__title">{{ $t('Base.TableTreatment') }}</div>
@@ -92,6 +93,7 @@ import PatientsTable from '@/components/patients/PatientsTable/index.vue';
 import TreatmentTable from '@/components/views/Treatment/index.vue';
 import * as icons from '@/enums/icons.enum.js';
 import { TreatmentModel } from '@/models/Treatment.model';
+import {mapState} from "vuex";
 
 export default {
   name: 'VPatient',
@@ -112,7 +114,7 @@ export default {
       appointments: null,
       /** @type Patient */
       patient: null,
-      treatments: [],
+      treatments: null,
       loading: {
         profile: false,
         appointment: false,
@@ -121,6 +123,9 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      user: (state) => state.auth.user,
+    }),
     isChildren() {
       return !!this.patient.parent_id;
     },
@@ -165,12 +170,15 @@ export default {
       this.treatments = true;
 
       const { data } = await TreatmentModel.getTreatments({
-        user_id: this.patient.id,
+        user_id: this.user.id,
       });
+
+      console.log(data,'data fmfwe')
       this.treatments = data.data;
 
       this.treatments = false;
     },
+
     createAppointment() {
       this.$store.dispatch('modalAndDrawer/openDrawer', {
         component: CreateOrEditAppointmentDrawer,
