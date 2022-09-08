@@ -27,6 +27,8 @@ export class Appointment extends CRUDModel {
    * @param {ServiceGroup} payload.group_service
    * @param {number} payload.service_case_id
    * @param {ServiceCase} payload.service_case
+   * @param {number} payload.inspection_card_id
+   * @param {DefaultInspectionCard|TreatmentInspectionCard|InspectionCard} payload.inspection_Card
    * @param {Date|string} payload.start_at - format DD.MM.YY hh:mm
    * @param {Date|string} payload.end_at
    * @param {string} payload.status
@@ -48,6 +50,8 @@ export class Appointment extends CRUDModel {
     this.group_service = payload?.group_service ?? null;
     this.service_case_id = payload?.service_case_id ?? null;
     this.service_case = payload?.service_case ?? null;
+    this.inspection_card_id = payload?.inspection_card_id ?? null;
+    this.inspection_card = payload?.inspection_card ?? null;
     this.start_at = payload?.start_at ?? null;
     this.end_at = payload?.end_at ?? null;
     this.status = payload?.status ?? null;
