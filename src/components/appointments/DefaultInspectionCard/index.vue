@@ -3,6 +3,7 @@
     <ElForm
       class="default-inspection-card-form"
       label-position="top"
+      ref="form"
       @submit.prevent="submitHandler">
       <ElFormItem label="select template">
         <UiModelsAutocompleteSearch
@@ -12,7 +13,21 @@
           @select="selectTemplate" />
       </ElFormItem>
 
-      <DefaultInspectionCardBaseFormItems v-model:data="inspectionCard" />
+      <DefaultInspectionCardBaseFormItems
+        v-model:data="inspectionCard"
+        @change="updateInspectionCard" />
+
+      <ElFormItem>
+        <div class="default-inspection-card-form-actions">
+          <ElButton data-method="toDiagnose" type="warning" native-type="submit" plain>
+            {{ $t('Appointments.ToDiagnose') }}
+          </ElButton>
+
+          <ElButton data-method="endReception" type="primary" native-type="submit">
+            {{ $t('Appointments.EndReception') }}
+          </ElButton>
+        </div>
+      </ElFormItem>
     </ElForm>
   </ElCard>
 </template>
@@ -27,6 +42,7 @@ import DefaultInspectionCardBaseFormItems from '@/components/appointments/Defaul
 export default {
   name: 'DefaultInspectionCard',
   components: { DefaultInspectionCardBaseFormItems },
+  emits: ['update:appointment', 'appointment:approve', 'appointment:set:diagnosis'],
   props: {
     appointment: [Appointment, Object],
   },
@@ -38,20 +54,63 @@ export default {
   },
   watch: {
     'appointment.id': {
-      handler(value) {
-        if (!value) return;
-        this.inspectionCard = new DefaultInspectionCard(this.appointment.inspection_card || {});
+      handler() {
+        this.inspectionCard = new DefaultInspectionCard(
+          this.appointment?.inspection_card || {
+            user_id: this.appointment.patient_id,
+            appointment_id: this.appointment.id,
+          }
+        );
       },
       immediate: true,
     },
   },
 
   methods: {
-    submitHandler() {
-      console.log('submit');
-    },
     selectTemplate(template) {
-      this.inspectionCard = new DefaultInspectionCard({ ...template, id: null });
+      this.inspectionCard = new DefaultInspectionCard({
+        ...template,
+
+        id: null,
+        user_id: this.appointment.patient_id,
+        appointment_id: this.appointment.id,
+      });
+      this.updateInspectionCard();
+    },
+
+    async updateInspectionCard() {
+      try {
+        const { data } = this.appointment.inspection_card_id
+          ? await DefaultInspectionCard.update({
+              id: this.appointment.inspection_card_id,
+              payload: this.inspectionCard,
+            })
+          : await DefaultInspectionCard.create(this.inspectionCard);
+
+        this.$emit('update:appointment', {
+          ...this.appointment,
+          inspection_card_id: data.data.id,
+          inspection_card: data.data,
+        });
+      } catch (err) {
+        console.log(err);
+        this.$notify({
+          type: 'error',
+          title: err?.response?.data?.message || this.$t('Notifications.Error'),
+        });
+      }
+    },
+
+    submitHandler(event) {
+      const methodName = event.submitter.dataset.method;
+      this[methodName]();
+    },
+
+    toDiagnose() {
+      this.$emit('appointment:set:diagnosis');
+    },
+    endReception() {
+      this.$emit('appointment:approve');
     },
   },
 
@@ -62,4 +121,7 @@ export default {
 </script>
 
 <style lang="scss" src="./index.scss" />
+<i18n src="@/locales/base.locales.json" />
+<i18n src="@/locales/appointments.locales.json" />
+<i18n src="@/locales/notifications.locales.json" />
 <i18n src="./index.locales.json" />

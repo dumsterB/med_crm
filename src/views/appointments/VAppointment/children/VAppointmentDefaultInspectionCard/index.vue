@@ -22,7 +22,11 @@
       </div>
     </LayoutContentHeader>
 
-    <DefaultInspectionCard :appointment="appointment" />
+    <DefaultInspectionCard
+      :appointment="appointment"
+      @update:appointment="$emit('update:appointment', $event)"
+      @appointment:approve="$emit('appointment:approve')"
+      @appointment:set:diagnosis="$emit('appointment:set:diagnosis')" />
   </div>
 </template>
 
@@ -38,7 +42,7 @@ import DefaultInspectionCard from '@/components/appointments/DefaultInspectionCa
 
 export default {
   name: 'VAppointmentDefaultInspectionCard',
-  emits: ['update:appointment'],
+  emits: ['update:appointment', 'appointment:approve', 'appointment:set:diagnosis'],
   components: { DefaultInspectionCard, LayoutContentHeader },
   props: {
     appointment: [Appointment, Object],
