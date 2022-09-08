@@ -26,15 +26,15 @@
 <script>
 import * as icons from '@/enums/icons.enum.js';
 import { Treatment } from '@/models/Treatment.model';
-import { mapState } from 'vuex';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
+import { Appointment } from '@/models/Appointment.model';
+
 export default {
   name: 'CreateTreatmentModal',
   icons: icons,
   props: {
-    appointment: {
-      type: Object,
-    },
+    appointment: [Appointment, Object],
+    userId: [Number, String],
   },
   data() {
     return {
@@ -44,22 +44,17 @@ export default {
       loading: false,
     };
   },
-  computed: {
-    ...mapState({
-      user: (state) => state.auth.user,
-    }),
-  },
   methods: {
     async createTreatment() {
       this.loading = true;
+
       try {
-        const payload = {
-          user_id: this.user.id,
+        const { data } = await Treatment.create({
+          user_id: this.appointment?.patient_id || this.userId,
           title: this.title,
           price: this.price,
           duration: this.duration,
-        };
-        const { data } = await Treatment.create(payload);
+        });
 
         this.$emit(
           'action',
@@ -82,7 +77,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/notifications.locales.json" />
 <i18n src="@/locales/base.locales.json" />
-<style scoped></style>
