@@ -3,7 +3,6 @@
     :loading="loading.profile || loading.appointment || loading.treatments"
     content-class="v-patient-content">
     <template v-if="patient">
-
       <!--  Patient  -->
       <div class="v-patient-content__item v-patient-content-item">
         <div class="v-patient-content-item__header v-patient-content-item-header">
@@ -11,7 +10,7 @@
         </div>
 
         <div class="v-patient-content-item__body">
-          <PatientCard v-model:data="patient" type="horizontal" />
+          <PatientCard v-model:data="patient" type="horizontal" @create:treatment="createTreatment" />
         </div>
       </div>
 
@@ -38,19 +37,25 @@
             :items="patient.childrens"></PatientsTable>
         </div>
       </div>
+
       <!--  Treatment  -->
-      {{treatments}}
       <div class="v-patient-content__item v-patient-content-item">
         <div class="v-patient-content-item__header v-patient-content-item-header">
           <div class="v-patient-content__title">{{ $t('Base.TableTreatment') }}</div>
         </div>
-        <!--     TODO: переделать -->
+
         <ElEmpty
           class="v-patient-content-item-empty"
-          v-show="!patient.childrens?.length"
+          v-show="!treatments?.length && !loading.treatments"
           :description="$t('Base.NoData')" />
+
         <div class="v-patient-content-item__body">
-          <TreatmentTable v-model:data="patient" type="horizontal" />
+          <TreatmentTable
+            :total="treatments?.length"
+            :perPage="treatments?.length"
+            :page="1"
+            :items="treatments"
+            type="horizontal" />
         </div>
       </div>
 
@@ -90,10 +95,10 @@ import { Appointment } from '@/models/Appointment.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
-import TreatmentTable from '@/components/views/Treatment/index.vue';
+import TreatmentTable from '@/components/treatment/TreatmentTable/index.vue'
 import * as icons from '@/enums/icons.enum.js';
 import { TreatmentModel } from '@/models/Treatment.model';
-import {mapState} from "vuex";
+import { mapState } from 'vuex';
 
 export default {
   name: 'VPatient',
@@ -114,7 +119,6 @@ export default {
       appointments: null,
       /** @type Patient */
       patient: null,
-      treatments: null,
       loading: {
         profile: false,
         appointment: false,
@@ -125,6 +129,7 @@ export default {
   computed: {
     ...mapState({
       user: (state) => state.auth.user,
+      treatments: (state) => state.treatments.data
     }),
     isChildren() {
       return !!this.patient.parent_id;
@@ -135,7 +140,7 @@ export default {
       async handler() {
         await this.getUser();
         this.getAppointments();
-        this.getTreatments();
+        this.getTreatmentByUserId();
       },
       immediate: true,
     },
@@ -166,17 +171,15 @@ export default {
       this.loading.appointment = false;
     },
 
-    async getTreatments() {
-      this.treatments = true;
+    async getTreatmentByUserId() {
+      this.loading.treatments = true;
 
       const { data } = await TreatmentModel.getTreatments({
         user_id: this.user.id,
       });
 
-      console.log(data,'data treatmnets')
-      this.treatments = data.data;
-
-      this.treatments = false;
+      this.$store.dispatch('treatments/setData', { items: data.data, overwriteDataState: true });
+      this.loading.treatments = false;
     },
 
     createAppointment() {
@@ -186,6 +189,10 @@ export default {
           patient: this.patient,
         },
       });
+    },
+
+    createTreatment(treatment){
+       this.$store.dispatch('treatments/createItem', treatment)
     },
 
     async editPatient() {

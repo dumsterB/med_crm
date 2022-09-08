@@ -88,7 +88,6 @@ export default {
     async createTemplate() {
       const action = await this.$store.dispatch('modalAndDrawer/openDrawer', CreateOrEditTemplates);
       if (action instanceof GlobalDrawerCloseAction) return;
-      this.data = action.template;
     },
   },
 };

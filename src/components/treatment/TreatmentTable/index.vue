@@ -6,7 +6,8 @@
           :data="items"
           v-loading="loading"
           ref="elTable"
-          @row-click="goToTreatment">
+          @row-click="goToTreatment"
+      >
         <template #empty>
           <div class="treatments-table__empty treatments-table-empty">
             <span>{{ $t('Base.NoData') }}</span>
@@ -16,14 +17,26 @@
           </div>
         </template>
 
-        <ElTableColumn prop="birthdate" :label="$t('User.Birthdate')"></ElTableColumn>
-        <ElTableColumn prop="phone" :label="$t('User.Phone')"></ElTableColumn>
+        <ElTableColumn prop="user.doctor.name" :label="$t('Base.DoctorFullName')"></ElTableColumn>
+        <ElTableColumn prop="title" :label="$t('Base.Naming')"></ElTableColumn>
+        <ElTableColumn prop="price" :label="$t('Base.Price')">
+          <template #default="{ row }">
+             {{row.price}}  {{$t('Base.Sum')}}
+          </template>
+        </ElTableColumn>
+        <ElTableColumn prop="created_at" :label="$t('Base.DateAppoint')"></ElTableColumn>
+        <ElTableColumn prop="duration" :label="$t('Base.ColDays')"></ElTableColumn>
+        <ElTableColumn :label="$t('Base.Status')">
+          <template #default="{ row }">
+            <AppointmentStatusTag :status="row.status" />
+          </template>
+        </ElTableColumn>
 
         <ElTableColumn prop="actions" :label="$t('Base.Actions')">
           <template #default="{ row }">
             <div class="treatments-table-actions">
-              <ElButton type="primary">
-                {{ $t('Base.MakeAppointment') }}
+              <ElButton @click="goToTreatment">
+                {{ $t('Base.Open') }}
               </ElButton>
             </div>
           </template>
@@ -50,9 +63,12 @@
 import { mapState } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
+import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 export default {
-  name: 'PatientsTable',
-  emits: ['update:perPage', 'update:page'],
+  name: 'TreatmentTable',
+  components:{
+    AppointmentStatusTag
+  },
   props: {
     /**
      * @param { Array<Patient|object> } items
@@ -86,9 +102,9 @@ export default {
   },
 
   methods: {
-    isDoctor() {
-      return this.user.role === User.enum.roles.Doctor;
-    },
+    goToTreatment(row){
+
+    }
   },
 };
 </script>

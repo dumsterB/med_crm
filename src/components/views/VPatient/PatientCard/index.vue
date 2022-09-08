@@ -43,7 +43,9 @@ import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
-import SetTreatment from "@/components/Modals/SetTreatment/index.vue";
+import SetTreatment from "@/components/Modals/CreateTreatment/index.vue";
+import {GlobalModalAction} from "@/models/client/ModalAndDrawer/GlobalModalAction";
+import {GlobalModalCloseAction} from "@/models/client/ModalAndDrawer/GlobalModalCloseAction";
 
 export default {
   name: 'VPatientPatientCard',
@@ -105,13 +107,15 @@ export default {
       if (action instanceof GlobalDrawerCloseAction) return;
       this.$emit('update:data', action.data.patient);
     },
-    treatmentHandler() {
-      this.$store.dispatch('modalAndDrawer/openDrawer', {
+  async treatmentHandler() {
+     const action = await this.$store.dispatch('modalAndDrawer/openModal', {
         component: SetTreatment,
         payload: {
           data: this.data,
         },
       });
+      if (action instanceof GlobalModalCloseAction) return;
+      this.$emit('create:treatment', action.data.treatment);
     },
   },
 };

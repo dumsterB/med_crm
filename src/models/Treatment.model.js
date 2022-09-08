@@ -39,10 +39,4 @@ export class TreatmentModel extends CRUDModel {
 
     return { response, data: response.data };
   }
-
-  static async create(payload) {
-    return super.create(payload, {
-      url: `${this.tableName}/create`,
-    });
-  }
 }

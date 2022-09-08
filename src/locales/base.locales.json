@@ -50,7 +50,11 @@
       "Naming": "Название",
       "QuantityDays": "Количество дней",
       "Appoint": "Назначить",
-      "TableTreatment": "Таблица лечений"
+      "TableTreatment": "Таблица лечений",
+      "DoctorFullName": "Врач ФИО",
+      "DateAppoint": "Дата назначение",
+      "ColDays": "Кол. дней",
+      "Status": "Статус"
     }
   },
   "uz": {
@@ -104,7 +108,11 @@
       "Naming": "Ism",
       "QuantityDays": "Kunlar miqdori",
       "Appoint": "Tayinlash",
-      "TableTreatment": "Davolash jadvali"
+      "TableTreatment": "Davolash jadvali",
+      "DoctorFullName": "Shifokor FIO",
+      "DateAppoint": "Tayinlash sanasi",
+      "ColDays": "Kunlar Miqdori",
+      "Status": "holat"
     }
   }
 }
