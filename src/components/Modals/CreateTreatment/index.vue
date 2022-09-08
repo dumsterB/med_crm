@@ -25,7 +25,7 @@
 
 <script>
 import * as icons from '@/enums/icons.enum.js';
-import { TreatmentModel } from '@/models/Treatment.model';
+import { Treatment } from '@/models/Treatment.model';
 import { mapState } from 'vuex';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
 export default {
@@ -59,7 +59,7 @@ export default {
           price: this.price,
           duration: this.duration,
         };
-        const { data } = await TreatmentModel.create(payload);
+        const { data } = await Treatment.create(payload);
 
         this.$emit(
           'action',
