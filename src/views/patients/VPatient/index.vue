@@ -177,9 +177,7 @@ export default {
     async getTreatmentByUserId() {
       this.loading.treatments = true;
 
-      const { data } = await Treatment.getTreatments({
-        user_id: this.user.id,
-      });
+      const { data } = await Treatment.findByUserId(this.user.id);
 
       this.$store.dispatch('treatments/setData', { items: data.data, overwriteDataState: true });
       this.loading.treatments = false;
