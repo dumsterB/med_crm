@@ -11,7 +11,12 @@
         v-model="duration"
         :placeholder="$t('Base.QuantityDays')">
       </ElInput>
-      <ElButton class="treatment-modal-submit" :loading="loading" size="large" type="primary" @click="createTreatment">
+      <ElButton
+        class="treatment-modal-submit"
+        :loading="loading"
+        size="large"
+        type="primary"
+        @click="createTreatment">
         {{ $t('Base.Appoint') }}
       </ElButton>
     </ElForm>
@@ -22,7 +27,7 @@
 import * as icons from '@/enums/icons.enum.js';
 import { TreatmentModel } from '@/models/Treatment.model';
 import { mapState } from 'vuex';
-import {GlobalModalAction} from "@/models/client/ModalAndDrawer/GlobalModalAction";
+import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
 export default {
   name: 'CreateTreatmentModal',
   icons: icons,
@@ -36,7 +41,7 @@ export default {
       title: '',
       price: '',
       duration: '',
-      loading: false
+      loading: false,
     };
   },
   computed: {
@@ -46,7 +51,7 @@ export default {
   },
   methods: {
     async createTreatment() {
-      this.loading = true
+      this.loading = true;
       try {
         const payload = {
           user_id: this.user.id,
@@ -54,14 +59,17 @@ export default {
           price: this.price,
           duration: this.duration,
         };
-        const {data} = await TreatmentModel.create(payload)
+        const { data } = await TreatmentModel.create(payload);
 
-        this.$emit('action', new GlobalModalAction({
-          name: 'create',
-          data: {
-            treatment: data.data
-          }
-        }))
+        this.$emit(
+          'action',
+          new GlobalModalAction({
+            name: 'create',
+            data: {
+              treatment: data.data,
+            },
+          })
+        );
       } catch (err) {
         console.log(err);
         this.$notify({
@@ -69,7 +77,7 @@ export default {
           title: err?.response?.data?.message || this.$t('Notifications.Error'),
         });
       }
-      this.loading = false
+      this.loading = false;
     },
   },
 };

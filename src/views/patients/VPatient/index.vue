@@ -10,7 +10,10 @@
         </div>
 
         <div class="v-patient-content-item__body">
-          <PatientCard v-model:data="patient" type="horizontal" @create:treatment="createTreatment" />
+          <PatientCard
+            v-model:data="patient"
+            type="horizontal"
+            @create:treatment="createTreatment" />
         </div>
       </div>
 
@@ -95,7 +98,7 @@ import { Appointment } from '@/models/Appointment.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
-import TreatmentTable from '@/components/treatment/TreatmentTable/index.vue'
+import TreatmentTable from '@/components/treatment/TreatmentTable/index.vue';
 import * as icons from '@/enums/icons.enum.js';
 import { TreatmentModel } from '@/models/Treatment.model';
 import { mapState } from 'vuex';
@@ -129,7 +132,7 @@ export default {
   computed: {
     ...mapState({
       user: (state) => state.auth.user,
-      treatments: (state) => state.treatments.data
+      treatments: (state) => state.treatments.data,
     }),
     isChildren() {
       return !!this.patient.parent_id;
@@ -191,8 +194,8 @@ export default {
       });
     },
 
-    createTreatment(treatment){
-       this.$store.dispatch('treatments/createItem', treatment)
+    createTreatment(treatment) {
+      this.$store.dispatch('treatments/createItem', treatment);
     },
 
     async editPatient() {
