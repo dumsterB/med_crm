@@ -10,6 +10,7 @@ export class InspectionCard extends CRUDModel {
 
     this.type = payload?.type || null;
     this.status = payload?.status || null;
+    this.appointment_id = payload?.appointment_id ?? null;
     this.user_id = payload?.user_id ?? null;
     this.user = payload?.user ?? null;
     this.created_at = payload?.created_at ?? null;
