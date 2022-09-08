@@ -1,6 +1,7 @@
 <template>
   <div class="v-app-ins-card">
     <LayoutContentHeader>
+      <!--  TODO: заменить на ElPageHeader  -->
       <div class="v-app-ins-card-header">
         <RouterLink :to="appointmentDefaultCardPageLink">
           <ElButton text>
