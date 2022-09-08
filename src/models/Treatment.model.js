@@ -1,9 +1,7 @@
 import { CRUDModel } from '@/models/CRUD.model';
 import { ApiService } from '@/services/api.service';
-import { mergeOrCreateQuery } from '@/utils/http.util';
-import { deleteEmptyValueKeys } from '@/utils/object.util';
 
-export class TreatmentModel extends CRUDModel {
+export class Treatment extends CRUDModel {
   static modelName = 'treatment';
   static tableName = 'treatments';
 
@@ -36,7 +34,6 @@ export class TreatmentModel extends CRUDModel {
 
   static async getTreatments({ user_id }) {
     const response = await ApiService.get(`${this.tableName}/${user_id}`);
-
     return { response, data: response.data };
   }
 }

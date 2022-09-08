@@ -100,7 +100,7 @@ import AppointmentsTable from '@/components/appointments/AppointmentsTable/index
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
 import TreatmentTable from '@/components/treatment/TreatmentTable/index.vue';
 import * as icons from '@/enums/icons.enum.js';
-import { TreatmentModel } from '@/models/Treatment.model';
+import { Treatment } from '@/models/Treatment.model';
 import { mapState } from 'vuex';
 
 export default {
@@ -177,7 +177,7 @@ export default {
     async getTreatmentByUserId() {
       this.loading.treatments = true;
 
-      const { data } = await TreatmentModel.getTreatments({
+      const { data } = await Treatment.getTreatments({
         user_id: this.user.id,
       });
 
