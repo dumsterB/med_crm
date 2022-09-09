@@ -1,22 +1,19 @@
 <template>
   <div class="reception-card-wrapper">
-    <ElScrollbar class="treatments-table-wrapper__scrollbar">
+    <ElScrollbar class="reception-table-wrapper__scrollbar">
       <ElTable
-        class="treatments-table"
+        class="reception-table"
         :data="data"
         v-loading="loading"
         ref="elTable"
         @row-click="goToReception">
         <template #empty>
-          <div class="treatments-table__empty treatments-table-empty">
+          <div class="reception-table__empty reception-table-empty">
             <span>{{ $t('Base.NoData') }}</span>
-            <ElButton v-if="!isDoctor" type="primary">
-              {{ $t('Patients.AddPatient') }}
-            </ElButton>
           </div>
         </template>
 
-        <ElTableColumn prop="start_at" :label="$t('Base.DoctorFullName')"></ElTableColumn>
+        <ElTableColumn prop="start_at" :label="$t('Appointments.StartDate')"></ElTableColumn>
         <ElTableColumn :label="$t('Base.Status')">
           <template #default="{ row }">
             <AppointmentStatusTag :status="row.status" />
@@ -25,9 +22,9 @@
 
         <ElTableColumn prop="actions" width="200" :label="$t('Base.Actions')">
           <template #default="{ row }">
-            <div class="treatments-table-actions">
+            <div class="reception-table-actions">
               <ElButton type="primary" @click="goToReception">
-                {{ $t('Base.EndTreatment') }}
+                {{ $t('Base.Open') }}
               </ElButton>
             </div>
           </template>
@@ -38,16 +35,24 @@
 </template>
 
 <script>
+import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 export default {
   name: 'index',
+  components: {
+    AppointmentStatusTag,
+  },
   props: {
     data: {
       type: Array,
     },
     loading: Boolean,
   },
+  methods: {
+    goToReception() {},
+  },
 };
 </script>
 
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/base.locales.json" />
+<i18n src="@/locales/appointments.locales.json" />

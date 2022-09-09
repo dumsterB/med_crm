@@ -60,7 +60,8 @@
       "ColDays": "Кол. дней",
       "Status": "Статус",
       "Days": "дней",
-      "EndTreatment": "Закончить лечение"
+      "EndTreatment": "Закончить лечение",
+      "TableReception": "Таблица приемов"
     }
   },
   "uz": {
@@ -124,7 +125,8 @@
       "ColDays": "Kunlar Miqdori",
       "Status": "holat",
       "Days": "kun",
-      "EndTreatment": "Davolanishni tugating"
+      "EndTreatment": "Davolanishni tugating",
+      "TableReception": "Fokuslar jadvali"
     }
   }
 }

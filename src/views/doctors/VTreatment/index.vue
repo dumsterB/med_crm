@@ -10,7 +10,12 @@
       </ElPageHeader>
     </LayoutContentHeader>
     <TreatmentCard :data="[treatment]" :loading="loading.treatment" />
-    <ReceptionTable :data="reception" :loading="loading.reception" />
+    <div class="v-patient-default__title">{{ $t('Base.TableReception') }}</div>
+    <ElEmpty
+        class="v-patient-treatment-item-empty"
+        v-show="!reception?.length && !loading.reception"
+        :description="$t('Base.NoData')" />
+    <ReceptionTable v-if="reception?.length" :data="reception" :loading="loading.reception" />
   </LayoutDoctor>
 </template>
 

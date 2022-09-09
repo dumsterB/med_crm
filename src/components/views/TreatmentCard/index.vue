@@ -10,22 +10,19 @@
         <template #empty>
           <div class="treatments-table__empty treatments-table-empty">
             <span>{{ $t('Base.NoData') }}</span>
-            <ElButton v-if="!isDoctor" type="primary">
-              {{ $t('Patients.AddPatient') }}
-            </ElButton>
           </div>
         </template>
 
         <ElTableColumn prop="doctor.name" :label="$t('Base.DoctorFullName')"></ElTableColumn>
         <ElTableColumn prop="title" :label="$t('Base.Naming')"></ElTableColumn>
         <ElTableColumn prop="price" :label="$t('Base.Price')">
-          <template #default="{ row }"> {{ row.price }} {{ $t('Base.Sum') }} </template>
+          <template #default="{ row }"> {{ row?.price }} {{ $t('Base.Sum') }} </template>
         </ElTableColumn>
         <ElTableColumn prop="created_at" :label="$t('Base.DateAppoint')"></ElTableColumn>
         <ElTableColumn prop="duration" :label="$t('Base.ColDays')"></ElTableColumn>
         <ElTableColumn :label="$t('Base.Status')">
           <template #default="{ row }">
-            <AppointmentStatusTag :status="row.status" />
+            <AppointmentStatusTag :status="row?.status" />
           </template>
         </ElTableColumn>
 

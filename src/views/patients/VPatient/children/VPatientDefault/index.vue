@@ -77,7 +77,7 @@
       v-show="!treatments?.length && !loading.treatments"
       :description="$t('Base.NoData')" />
 
-    <div class="v-patient-default-item__body">
+    <div class="v-patient-default-item__body" v-if="treatments?.length">
       <TreatmentTable
         :total="treatments?.length"
         :perPage="treatments?.length"
