@@ -32,6 +32,7 @@ import { Appointment } from '@/models/Appointment.model';
 export default {
   name: 'CreateTreatmentModal',
   icons: icons,
+  emits: ['update:modelValue', 'action'],
   props: {
     appointment: [Appointment, Object],
     userId: [Number, String],
@@ -50,12 +51,14 @@ export default {
 
       try {
         const { data } = await Treatment.create({
-          user_id: this.appointment?.patient_id || this.userId,
           title: this.title,
           price: this.price,
           duration: this.duration,
+          appointment_id: this.appointment?.id || null,
+          user_id: this.appointment?.patient_id || this.userId,
         });
 
+        this.$notify({ type: 'success', title: this.$t('Notifications.SuccessCreated') });
         this.$emit(
           'action',
           new GlobalModalAction({

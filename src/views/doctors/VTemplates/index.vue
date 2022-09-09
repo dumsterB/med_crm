@@ -1,36 +1,39 @@
 <template>
-  <LayoutDoctor>
+  <LayoutDoctor fixHeight>
     <LayoutContentHeader>
       <template #actions>
-        <ElButton type="primary" @click="createTemplate"
-          >+ {{ $t('Templates.AddTemplate') }}</ElButton
-        >
+        <ElButton type="primary" @click="createTemplate">
+          + {{ $t('Templates.AddTemplate') }}
+        </ElButton>
       </template>
     </LayoutContentHeader>
-    <TemplatesTable :data="data" :loading="loading"></TemplatesTable>
+
+    <TemplatesTable
+      class="v-templates-content__table"
+      :data="data"
+      :loading="loading"></TemplatesTable>
   </LayoutDoctor>
 </template>
 
 <script>
-import LayoutDoctor from '@/components/layouts/LayoutDoctor/index.vue';
-import CreateOrEditTemplates from '@/components/doctors/CreateOrEditTemplateDrawer/index.vue';
+import { mapState } from 'vuex';
 import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model.js';
 import { compareQueriesThenLoadData } from '@/utils/router.utils';
 import { usePage, usePerPage } from '@/hooks/query';
-import TemplatesTable from '@/components/doctors/TemplatesTable/index.vue';
-import { mapState } from 'vuex';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
+
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
+import LayoutDoctor from '@/components/layouts/LayoutDoctor/index.vue';
+import CreateOrEditTemplateDrawer from '@/components/doctors/CreateOrEditTemplateDrawer/index.vue';
+import TemplatesTable from '@/components/doctors/TemplatesTable/index.vue';
 
 export default {
   name: 'VTemplates',
-  components: { LayoutContentHeader, LayoutDoctor, CreateOrEditTemplates, TemplatesTable },
-
+  components: { LayoutContentHeader, LayoutDoctor, TemplatesTable },
   setup: () => ({
     perPage: usePerPage(99),
     page: usePage(),
   }),
-
   data() {
     return {
       loading: false,
@@ -86,7 +89,10 @@ export default {
     },
 
     async createTemplate() {
-      const action = await this.$store.dispatch('modalAndDrawer/openDrawer', CreateOrEditTemplates);
+      const action = await this.$store.dispatch(
+        'modalAndDrawer/openDrawer',
+        CreateOrEditTemplateDrawer
+      );
       if (action instanceof GlobalDrawerCloseAction) return;
     },
   },

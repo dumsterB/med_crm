@@ -2,89 +2,16 @@
   <LayoutRegistry
     :loading="loading.profile || loading.appointment || loading.treatments"
     content-class="v-patient-content">
-    <template v-if="patient">
-      <!--  Patient  -->
-      <div class="v-patient-content__item v-patient-content-item">
-        <div class="v-patient-content-item__header v-patient-content-item-header">
-          <div class="v-patient-content__title">{{ $t('Title') }}</div>
-        </div>
-
-        <div class="v-patient-content-item__body">
-          <PatientCard
-            v-model:data="patient"
-            type="horizontal"
-            @create:treatment="createTreatment" />
-        </div>
-      </div>
-
-      <!--  Children  -->
-      <div v-show="!isChildren" class="v-patient-content-item">
-        <div class="v-patient-content-item__header v-patient-content-item-header">
-          <div class="v-patient-content__title">{{ $t('User.Children') }}</div>
-          <ElButton type="primary" @click="createChildren"> {{ $t('User.AddChildren') }}</ElButton>
-        </div>
-
-        <ElEmpty
-          class="v-patient-content-item-empty"
-          v-show="!patient.childrens?.length"
-          :description="$t('Base.NoData')" />
-
-        <div class="v-patient-content-item__body" v-if="patient.childrens?.length">
-          <PatientsTable
-            :total="patient?.childrens?.length"
-            :perPage="patient?.childrens?.length"
-            :page="1"
-            background
-            hide-on-single-page
-            layout="prev, pager, next, sizes"
-            :items="patient.childrens"></PatientsTable>
-        </div>
-      </div>
-
-      <!--  Treatment  -->
-      <div class="v-patient-content__item v-patient-content-item">
-        <div class="v-patient-content-item__header v-patient-content-item-header">
-          <div class="v-patient-content__title">{{ $t('Base.TableTreatment') }}</div>
-        </div>
-
-        <ElEmpty
-          class="v-patient-content-item-empty"
-          v-show="!treatments?.length && !loading.treatments"
-          :description="$t('Base.NoData')" />
-
-        <div class="v-patient-content-item__body">
-          <TreatmentTable
-            :total="treatments?.length"
-            :perPage="treatments?.length"
-            :page="1"
-            :items="treatments"
-            type="horizontal" />
-        </div>
-      </div>
-
-      <!--  Appointments  -->
-      <div class="v-patient-content-item">
-        <div class="v-patient-content-item__header v-patient-content-item-header">
-          <div class="v-patient-content__title">{{ $t('Appointments.Appointments') }}</div>
-          <ElButton type="primary" @click="createAppointment">
-            {{ $t('Appointments.CreateAppointment') }}
-          </ElButton>
-        </div>
-
-        <ElEmpty
-          class="v-patient-content-item-empty"
-          v-show="!appointments?.length && !loading.appointment"
-          :description="$t('Base.NoData')" />
-
-        <div class="v-patient-content-item__body" v-if="appointments?.length">
-          <AppointmentsTable
-            :total="appointments?.length"
-            :perPage="appointments?.length"
-            :page="1"
-            :items="appointments"></AppointmentsTable>
-        </div>
-      </div>
-    </template>
+    <RouterView
+      v-if="patient"
+      v-model:patient="patient"
+      :appointments="appointments"
+      :treatments="treatments"
+      :loading="loading"
+      @appointment:create="createAppointment"
+      @treatment:create="createTreatment"
+      @patient:createChildren="createChildren">
+    </RouterView>
   </LayoutRegistry>
 </template>
 
@@ -108,10 +35,6 @@ export default {
   name: 'VPatient',
   components: {
     LayoutRegistry,
-    PatientCard,
-    AppointmentsTable,
-    PatientsTable,
-    TreatmentTable,
   },
   icons: icons,
   props: {
@@ -120,7 +43,7 @@ export default {
   data() {
     return {
       /** @type Array<Appointment> */
-      appointments: null,
+      appointments: [],
       /** @type Patient */
       patient: null,
       loading: {
@@ -216,16 +139,9 @@ export default {
       });
     },
   },
-
-  setup: () => ({
-    emptyAppointment: new Appointment(),
-  }),
 };
 </script>
 
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/base.locales.json" />
-<i18n src="@/locales/patients.locales.json" />
-<i18n src="@/locales/user.locales.json" />
-<i18n src="@/locales/appointments.locales.json" />
 <i18n src="./index.locales.json" />

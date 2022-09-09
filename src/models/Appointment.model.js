@@ -117,10 +117,19 @@ export class Appointment extends CRUDModel {
     const response = await ApiService.put(`${this.tableName}/${appointmentId}/case`, {
       service_case_id: serviceCaseId,
     });
-    return {
-      response: response,
-      data: response.data,
-    };
+    return { response, data: response.data };
+  }
+
+  /**
+   * @param {number} treatmentId
+   * @param {number} appointmentId
+   * @return {Promise<{data: response.data, response: AxiosResponse<any>}>}
+   */
+  static async attachTreatment({ treatmentId, appointmentId }) {
+    const response = await ApiService.put(`${this.tableName}/${appointmentId}/treatment`, {
+      treatment_id: treatmentId,
+    });
+    return { response: response, data: response.data };
   }
 
   /**

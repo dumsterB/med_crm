@@ -32,6 +32,8 @@ export default {
     modelValue: Boolean,
     patient: [Patient, User, Object],
     data: [Appointment, Object],
+
+    disableDefaultAction: Boolean, // отключаем дефолтное поведение после создания
   },
   data() {
     return {
@@ -232,12 +234,7 @@ export default {
         'action',
         new GlobalDrawerAction({ name: 'created', data: { appointment: data.data } })
       );
-      this.$router.push({
-        name: APPOINTMENT_ROUTE.name,
-        params: {
-          id: data.data.id,
-        },
-      });
+      if (!this.disableDefaultAction) this.goToAppointment(data.data.id);
     },
 
     async editAppointment() {
@@ -251,12 +248,8 @@ export default {
         'action',
         new GlobalDrawerAction({ name: 'edited', data: { appointment: data.data } })
       );
-      this.$router.push({
-        name: APPOINTMENT_ROUTE.name,
-        params: {
-          id: data.data.id,
-        },
-      });
+
+      if (!this.disableDefaultAction) this.goToAppointment(data.data.id);
     },
 
     appointmentWatcherHandler({ field, value, oldValue }) {
@@ -305,6 +298,15 @@ export default {
 
       this.patientDrawer.newPatient = action.data.patient;
       this.appointment.patient_id = action.data;
+    },
+
+    goToAppointment(id) {
+      this.$router.push({
+        name: APPOINTMENT_ROUTE.name,
+        params: {
+          id: id,
+        },
+      });
     },
   },
 
