@@ -34,4 +34,9 @@ export class Treatment extends CRUDModel {
     const response = await ApiService.get(`${this.tableName}/${userId}`);
     return { response, data: response.data };
   }
+
+  static async findTreatmentById(id) {
+    const response = await ApiService.get(`${this.tableName}/${id}/get`);
+    return { response, data: response.data };
+  }
 }

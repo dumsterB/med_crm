@@ -28,6 +28,7 @@ import * as icons from '@/enums/icons.enum.js';
 import { Treatment } from '@/models/Treatment.model';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
 import { Appointment } from '@/models/Appointment.model';
+import { Doctor } from '@/models/Doctor.model'
 
 export default {
   name: 'CreateTreatmentModal',
@@ -36,6 +37,7 @@ export default {
   props: {
     appointment: [Appointment, Object],
     userId: [Number, String],
+    doctor: [Doctor, Object]
   },
   data() {
     return {
@@ -48,7 +50,7 @@ export default {
   methods: {
     async createTreatment() {
       this.loading = true;
-
+      console.log(this.doctor)
       try {
         const { data } = await Treatment.create({
           title: this.title,
@@ -56,6 +58,7 @@ export default {
           duration: this.duration,
           appointment_id: this.appointment?.id || null,
           user_id: this.appointment?.patient_id || this.userId,
+          doctor_id: this.doctor?.id
         });
 
         this.$notify({ type: 'success', title: this.$t('Notifications.SuccessCreated') });

@@ -22,6 +22,17 @@ export const DOCTORS_TEMPLATES_ROUTE = {
   },
 };
 
+export const DOCTORS_TREATMENTS_ROUTE = {
+  name: 'DOCTORS_TREATMENTS',
+  path: '/treatments/:id',
+  component: 'VTreatment',
+  beforeEnter: [onlyLoggedInMiddleware, onlyDoctorMiddleware],
+  meta: {
+    title: I18nService.t('Base.Template'),
+  },
+  props: true,
+};
+
 export const DOCTORS_SETTINGS_ROUTE = {
   name: 'DOCTORS_SETTINGS',
   path: '/profile/settings',
@@ -32,4 +43,9 @@ export const DOCTORS_SETTINGS_ROUTE = {
   },
 };
 
-export const routes = [DOCTORS_QUEUE_ROUTE, DOCTORS_TEMPLATES_ROUTE, DOCTORS_SETTINGS_ROUTE];
+export const routes = [
+  DOCTORS_QUEUE_ROUTE,
+  DOCTORS_TEMPLATES_ROUTE,
+  DOCTORS_SETTINGS_ROUTE,
+  DOCTORS_TREATMENTS_ROUTE,
+];

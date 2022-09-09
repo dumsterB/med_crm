@@ -67,6 +67,9 @@
   <div class="v-patient-default__item v-patient-default-item">
     <div class="v-patient-default-item__header v-patient-default-item-header">
       <div class="v-patient-default__title">{{ $t('Base.TableTreatment') }}</div>
+      <ElButton type="primary" @click="$emit('treatment:create')">
+        {{ $t('Base.SetTreatment') }}
+      </ElButton>
     </div>
 
     <ElEmpty
@@ -92,7 +95,7 @@ import { Patient } from '@/models/Patient.model';
 import PatientCard from '@/components/views/VPatient/PatientCard/index.vue';
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
-import TreatmentTable from '@/components/treatment/TreatmentTable/index.vue';
+import TreatmentTable from '@/components/treatments/TreatmentTable/index.vue';
 
 export default {
   name: 'VPatientDefault',

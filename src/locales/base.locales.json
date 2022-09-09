@@ -58,7 +58,9 @@
       "DoctorFullName": "Врач ФИО",
       "DateAppoint": "Дата назначение",
       "ColDays": "Кол. дней",
-      "Status": "Статус"
+      "Status": "Статус",
+      "Days": "дней",
+      "EndTreatment": "Закончить лечение"
     }
   },
   "uz": {
@@ -120,7 +122,9 @@
       "DoctorFullName": "Shifokor FIO",
       "DateAppoint": "Tayinlash sanasi",
       "ColDays": "Kunlar Miqdori",
-      "Status": "holat"
+      "Status": "holat",
+      "Days": "kun",
+      "EndTreatment": "Davolanishni tugating"
     }
   }
 }

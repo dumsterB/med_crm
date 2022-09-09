@@ -35,9 +35,6 @@
         {{ $t('Base.Edit') }}
       </ElButton>
 
-      <ElButton type="primary" @click.stop="treatmentHandler">
-        {{ $t('Base.SetTreatment') }}
-      </ElButton>
     </div>
   </ElCard>
 </template>
@@ -50,10 +47,8 @@ import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
-import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer';
-import CreateTreatmentModal from '@/components/treatment/CreateTreatmentModal/index.vue';
 
 export default {
   name: 'VPatientPatientCard',
@@ -125,18 +120,6 @@ export default {
 
       if (action instanceof GlobalDrawerCloseAction) return;
       this.$emit('update:data', action.data.patient);
-    },
-
-    async treatmentHandler() {
-      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
-        component: CreateTreatmentModal,
-        payload: {
-          userId: this.data.id,
-        },
-      });
-
-      if (action instanceof GlobalModalCloseAction) return;
-      this.$emit('create:treatment', action.data.treatment);
     },
   },
 };
