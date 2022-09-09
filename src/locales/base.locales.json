@@ -3,6 +3,7 @@
     "Base": {
       "Absent": "Отсутствует",
       "Actions": "Действия",
+      "AmbulatoryCard": "Амбулаторная карта",
       "Appointment": "Запись",
       "Attach": "Привязать",
       "Authorization": "Авторизация",
@@ -64,6 +65,7 @@
     "Base": {
       "Absent": "Mavjud emas",
       "Actions": "Harakatlar",
+      "AmbulatoryCard": "Ambulatoriya kartasi",
       "Appointment": "Yozuv",
       "Attach": "Bog'lash",
       "Authorization": "Kirish",

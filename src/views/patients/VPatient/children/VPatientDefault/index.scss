@@ -1,0 +1,40 @@
+.v-patient-default {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  &__title {
+    font-weight: bold;
+  }
+
+  &-item {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    &-body {
+    }
+    &-body_grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+
+      @media (max-width: 1300px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @media (max-width: 960px) {
+        grid-template-columns: 1fr;
+      }
+    }
+    &-empty {
+      height: 150px;
+    }
+  }
+}

@@ -66,7 +66,7 @@ export class StoreCRUDModule {
       setData({ state, commit }, payload) {
         commit(
           'SET_DATA',
-          payload.overwriteDataState ? payload.items : { ...state.data, ...payload.items }
+          payload.overwriteDataState ? payload.items : [...state.data, ...payload.items]
         );
         commit('SET_TOTAL', payload.total ?? payload.items.length);
       },
