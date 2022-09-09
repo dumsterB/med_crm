@@ -5,7 +5,7 @@
       label-position="top"
       ref="form"
       @submit.prevent="submitHandler">
-      <ElFormItem label="select template">
+      <ElFormItem v-show="!readonly" label="select template">
         <UiModelsAutocompleteSearch
           v-model="templateId"
           label="title"
