@@ -6,7 +6,7 @@
       @status:update="updateStatus"
       @appointment:edit="editAppointment"
       @appointment:provide="provideAppointment"
-      @appointment:set:diagnose="setDiagnosis">
+      @appointment:set:diagnosis="setDiagnosis">
     </RouterView>
   </LayoutByUserRole>
 </template>
@@ -28,6 +28,7 @@ import SuggestControlAppointmentModal from '@/components/appointments/SuggestCon
 import SelectTreatmentModal from '@/components/appointments/SelectTreatmentModal/index.vue';
 import SuggestTreatmentModal from '@/components/appointments/SuggestTreatmentModal/index.vue';
 import CreateTreatmentModal from '@/components/treatment/CreateTreatmentModal/index.vue';
+import SetDiagnosisModal from '@/components/appointments/SetDiagnosisModal/index.vue';
 
 export default {
   name: 'VAppointment',
@@ -196,7 +197,7 @@ export default {
         },
       });
       if (!(action instanceof GlobalModalCloseAction)) {
-        this.$emit('update:appointment', action.data.appointment);
+        this.appointment = action.data.appointment;
       }
 
       return !(action instanceof GlobalModalCloseAction);
@@ -218,13 +219,25 @@ export default {
         },
       });
       if (!(action instanceof GlobalModalCloseAction)) {
-        this.$emit('update:appointment', action.data.appointment);
+        this.appointment = action.data.appointment;
       }
 
       return !(action instanceof GlobalModalCloseAction);
     },
 
-    setDiagnosis() {},
+    async setDiagnosis() {
+      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
+        component: SetDiagnosisModal,
+        payload: {
+          appointment: this.appointment,
+        },
+      });
+
+      if (!(action instanceof GlobalModalCloseAction)) {
+        this.appointment = action.data.appointment;
+        await this.provideAppointment();
+      }
+    },
 
     async provideAppointment() {
       this.$router.push({
