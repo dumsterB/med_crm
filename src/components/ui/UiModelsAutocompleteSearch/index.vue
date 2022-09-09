@@ -28,7 +28,7 @@
       </div>
 
       <template v-else>
-        <slot>
+        <slot name="default" :label="item[label]" :item="item">
           {{ item[label] }}
         </slot>
       </template>
@@ -46,7 +46,7 @@ export default {
   emits: ['update:modelValue', 'select', 'update:data', 'create'],
   slots: ['default', 'empty', 'create'],
   props: {
-    modelValue: Number,
+    modelValue: [Number, String],
     // принимает все классы расширяющий CRUDModel
     // для поиска вызвается find метод этого класса
     modelForUse: [CRUDModel, Function],
