@@ -1,22 +1,28 @@
 <template>
   <ElDialog custom-class="treatment-modal" @update:modelValue="$emit('update:modelValue')">
     <p class="treatment-modal__title">{{ $t('Base.SetTreatment') }}</p>
-    <ElForm class="treatment-modal-form" label-position="top">
-      <ElInput class="treatment-modal__input" v-model="title" :placeholder="$t('Base.Naming')">
-      </ElInput>
-      <ElInput class="treatment-modal__input" v-model="price" :placeholder="$t('Base.Price')">
-      </ElInput>
+    <ElForm class="treatment-modal-form" label-position="top" @submit.prevent="createTreatment">
+      <ElInput
+        class="treatment-modal__input"
+        required
+        v-model="title"
+        :placeholder="$t('Base.Naming')" />
+      <ElInput
+        class="treatment-modal__input"
+        required
+        v-model="price"
+        :placeholder="$t('Base.Price')" />
       <ElInput
         class="treatment-modal__input"
         v-model="duration"
-        :placeholder="$t('Base.QuantityDays')">
-      </ElInput>
+        required
+        :placeholder="$t('Base.QuantityDays')" />
       <ElButton
         class="treatment-modal-submit"
         :loading="loading"
         size="large"
         type="primary"
-        @click="createTreatment">
+        native-type="submit">
         {{ $t('Base.Appoint') }}
       </ElButton>
     </ElForm>
@@ -28,7 +34,6 @@ import * as icons from '@/enums/icons.enum.js';
 import { Treatment } from '@/models/Treatment.model';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
 import { Appointment } from '@/models/Appointment.model';
-import { Doctor } from '@/models/Doctor.model'
 
 export default {
   name: 'CreateTreatmentModal',
@@ -37,7 +42,6 @@ export default {
   props: {
     appointment: [Appointment, Object],
     userId: [Number, String],
-    doctor: [Doctor, Object]
   },
   data() {
     return {
@@ -58,7 +62,7 @@ export default {
           duration: this.duration,
           appointment_id: this.appointment?.id || null,
           user_id: this.appointment?.patient_id || this.userId,
-          doctor_id: this.doctor?.id
+          doctor_id: this.$store.state.auth.user.doctor_id,
         });
 
         this.$notify({ type: 'success', title: this.$t('Notifications.SuccessCreated') });

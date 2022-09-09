@@ -22,9 +22,9 @@ export const DOCTORS_TEMPLATES_ROUTE = {
   },
 };
 
-export const DOCTORS_TREATMENTS_ROUTE = {
-  name: 'DOCTORS_TREATMENTS',
-  path: '/treatments/:id',
+export const DOCTORS_TREATMENT_ROUTE = {
+  name: 'DOCTORS_TREATMENT',
+  path: '/treatment/:id',
   component: 'VTreatment',
   beforeEnter: [onlyLoggedInMiddleware, onlyDoctorMiddleware],
   meta: {
@@ -47,5 +47,5 @@ export const routes = [
   DOCTORS_QUEUE_ROUTE,
   DOCTORS_TEMPLATES_ROUTE,
   DOCTORS_SETTINGS_ROUTE,
-  DOCTORS_TREATMENTS_ROUTE,
+  DOCTORS_TREATMENT_ROUTE,
 ];

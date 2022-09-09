@@ -82,8 +82,7 @@
         :total="treatments?.length"
         :perPage="treatments?.length"
         :page="1"
-        :items="treatments"
-        type="horizontal" />
+        :items="treatments"/>
     </div>
   </div>
 </template>
@@ -95,7 +94,7 @@ import { Patient } from '@/models/Patient.model';
 import PatientCard from '@/components/views/VPatient/PatientCard/index.vue';
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
-import TreatmentTable from '@/components/treatments/TreatmentTable/index.vue';
+import TreatmentTable from '@/components/treatments/TreatmentsTable/index.vue';
 
 export default {
   name: 'VPatientDefault',

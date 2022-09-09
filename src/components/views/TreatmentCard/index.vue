@@ -13,13 +13,13 @@
           </div>
         </template>
 
-        <ElTableColumn prop="doctor.name" :label="$t('Base.DoctorFullName')"></ElTableColumn>
-        <ElTableColumn prop="title" :label="$t('Base.Naming')"></ElTableColumn>
+        <ElTableColumn prop="doctor.name" :label="$t('Base.DoctorFullName')" />
+        <ElTableColumn prop="title" :label="$t('Base.Naming')" />
         <ElTableColumn prop="price" :label="$t('Base.Price')">
           <template #default="{ row }"> {{ row?.price }} {{ $t('Base.Sum') }} </template>
         </ElTableColumn>
-        <ElTableColumn prop="created_at" :label="$t('Base.DateAppoint')"></ElTableColumn>
-        <ElTableColumn prop="duration" :label="$t('Base.ColDays')"></ElTableColumn>
+        <ElTableColumn prop="created_at" :label="$t('Base.DateAppoint')" />
+        <ElTableColumn prop="duration" :label="$t('Base.ColDays')" />
         <ElTableColumn :label="$t('Base.Status')">
           <template #default="{ row }">
             <AppointmentStatusTag :status="row?.status" />
@@ -42,6 +42,7 @@
 
 <script>
 import AppointmentStatusTag from "@/components/appointments/AppointmentStatusTag/index.vue";
+
 export default {
   name: 'index',
   components: {
@@ -59,5 +60,6 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/base.locales.json" />

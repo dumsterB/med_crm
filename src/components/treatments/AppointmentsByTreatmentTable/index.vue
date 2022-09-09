@@ -1,5 +1,5 @@
 <template>
-  <div class="reception-card-wrapper">
+  <div class="reception-table-wrapper">
     <ElScrollbar class="reception-table-wrapper__scrollbar">
       <ElTable
         class="reception-table"
