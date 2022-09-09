@@ -1,4 +1,4 @@
-.v-app-treat-ins-card {
+.v-app-treat-card {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -11,7 +11,14 @@
 
     .el-button.is-text {
       padding: 0 12px;
-      font-size: 1.1em;
+      font-size: 1.2em;
+    }
+  }
+
+  &-form {
+    &-actions {
+      display: flex;
+      gap: 10px;
     }
   }
 }
