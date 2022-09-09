@@ -37,7 +37,7 @@
 <script>
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 export default {
-  name: 'index',
+  name: 'ReceptionTable',
   components: {
     AppointmentStatusTag,
   },

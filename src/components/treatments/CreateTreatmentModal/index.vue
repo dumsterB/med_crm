@@ -50,7 +50,7 @@ export default {
   methods: {
     async createTreatment() {
       this.loading = true;
-      console.log(this.doctor)
+
       try {
         const { data } = await Treatment.create({
           title: this.title,
