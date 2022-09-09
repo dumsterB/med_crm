@@ -34,6 +34,7 @@
       <ElButton v-if="permissions.editUser" type="primary" @click="editPatient">
         {{ $t('Base.Edit') }}
       </ElButton>
+
       <ElButton type="primary" @click.stop="treatmentHandler">
         {{ $t('Base.SetTreatment') }}
       </ElButton>
@@ -133,6 +134,7 @@ export default {
           userId: this.data.id,
         },
       });
+
       if (action instanceof GlobalModalCloseAction) return;
       this.$emit('create:treatment', action.data.treatment);
     },

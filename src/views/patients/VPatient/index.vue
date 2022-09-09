@@ -6,8 +6,10 @@
       v-if="patient"
       v-model:patient="patient"
       :appointments="appointments"
+      :treatments="treatments"
       :loading="loading"
       @appointment:create="createAppointment"
+      @treatment:create="createTreatment"
       @patient:createChildren="createChildren">
     </RouterView>
   </LayoutRegistry>
