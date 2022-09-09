@@ -58,7 +58,7 @@ import { mapState } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
-import { DOCTORS_TREATMENT_ROUTE } from '@/router/doctors.routes';
+import { DOCTORS_TREATMENT_ROUTE } from '@/router/treatments.routes';
 export default {
   name: 'TreatmentTable',
   components: {
