@@ -46,7 +46,7 @@ import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDr
 import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer';
-import SetTreatment from '@/components/Modals/CreateTreatment/index.vue';
+import CreateTreatmentModal from '@/components/treatment/CreateTreatmentModal/index.vue';
 
 export default {
   name: 'VPatientPatientCard',
@@ -112,7 +112,7 @@ export default {
 
     async treatmentHandler() {
       const action = await this.$store.dispatch('modalAndDrawer/openModal', {
-        component: SetTreatment,
+        component: CreateTreatmentModal,
         payload: {
           userId: this.data.id,
         },
