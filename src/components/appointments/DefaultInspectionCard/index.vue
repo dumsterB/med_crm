@@ -42,7 +42,7 @@ import DefaultInspectionCardBaseFormItems from '@/components/appointments/Defaul
 export default {
   name: 'DefaultInspectionCard',
   components: { DefaultInspectionCardBaseFormItems },
-  emits: ['update:appointment', 'appointment:approve', 'appointment:set:diagnosis'],
+  emits: ['update:appointment', 'appointment:provide', 'appointment:set:diagnosis'],
   props: {
     appointment: [Appointment, Object],
   },
@@ -110,7 +110,7 @@ export default {
       this.$emit('appointment:set:diagnosis');
     },
     endReception() {
-      this.$emit('appointment:approve');
+      this.$emit('appointment:provide');
     },
   },
 

@@ -5,7 +5,7 @@
       v-model:appointment="appointment"
       @status:update="updateStatus"
       @appointment:edit="editAppointment"
-      @appointment:approve="approveAppointment"
+      @appointment:provide="provideAppointment"
       @appointment:set:diagnose="setDiagnosis">
     </RouterView>
   </LayoutByUserRole>
@@ -26,6 +26,8 @@ import SelectAppointmentInspectionTypeModal from '@/components/appointments/Sele
 import SelectOrCreateServiceCaseModal from '@/components/appointments/SelectOrCreateServiceCaseModal/index.vue';
 import SuggestControlAppointmentModal from '@/components/appointments/SuggestControlAppointmentModal/index.vue';
 import SelectTreatmentModal from '@/components/appointments/SelectTreatmentModal/index.vue';
+import SuggestTreatmentModal from '@/components/appointments/SuggestTreatmentModal/index.vue';
+import CreateTreatmentModal from '@/components/treatment/CreateTreatmentModal/index.vue';
 
 export default {
   name: 'VAppointment',
@@ -46,6 +48,8 @@ export default {
         [Appointment.enum.statuses.Provided]: false,
       },
       hasStatusLoadingState: false,
+
+      /** @type {Appointment} */
       appointment: null,
     };
   },
@@ -90,7 +94,6 @@ export default {
     },
 
     /**
-     *
      * @param {string} status
      * @param {object} options
      * @param {boolean} options.forceUpdate проигнорирует бизнес логику и обновит статус
@@ -107,17 +110,17 @@ export default {
           this.isDoctor &&
           status === Appointment.enum.statuses.Provided
         ) {
-          await this.startDoctorApproveFlow();
-        }
+          await this.startDoctorProvideFlow();
+        } else {
+          const { data } = await Appointment.updateStatus({
+            id: this.appointment.id,
+            status: status,
+          });
 
-        // const { data } = await Appointment.updateStatus({
-        //   id: this.appointment.id,
-        //   status: status,
-        // });
-        //
-        // this.appointment = data.data;
-        this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
-        // this.redirectIfNeeded(status);
+          this.appointment = data.data;
+          this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
+          this.redirectIfNeeded(status);
+        }
       } catch (err) {
         console.log(err);
         this.$notify({
@@ -131,33 +134,29 @@ export default {
     },
 
     redirectIfNeeded(status) {
-      if (
-        status !== Appointment.enum.statuses.Waiting &&
-        status !== Appointment.enum.statuses.InProgress &&
-        this.user.role === User.enum.roles.Doctor
-      ) {
+      if ([Appointment.enum.statuses.Canceled].includes(status)) {
         this.$router.push({
           name: DOCTORS_QUEUE_ROUTE.name,
         });
       }
     },
 
-    async startDoctorApproveFlow() {
+    async startDoctorProvideFlow() {
       if (!this.appointment.patient.has_treatment || this.appointment.service_case_id)
-        return this.startFullApproveFlow();
-      if (this.appointment.treatment_id) return this.startTreatmentApproveFlow();
+        return this.startFullProvideFlow();
+      if (this.appointment.treatment_id) return this.startTreatmentProvideFlow();
 
       const action = await this.$store.dispatch(
         'modalAndDrawer/openModal',
         SelectAppointmentInspectionTypeModal
       );
 
-      if (action.name === Appointment.enum.inspectionTypes.Full) await this.startFullApproveFlow();
+      if (action.name === Appointment.enum.inspectionTypes.Full) await this.startFullProvideFlow();
       if (action.name === Appointment.enum.inspectionTypes.Treatment)
-        await this.startTreatmentApproveFlow();
+        await this.startTreatmentProvideFlow();
     },
 
-    async startFullApproveFlow() {
+    async startFullProvideFlow() {
       const success = await this.selectOrCreateServiceCase();
       if (!success) return;
 
@@ -168,7 +167,7 @@ export default {
         },
       });
     },
-    async startTreatmentApproveFlow() {
+    async startTreatmentProvideFlow() {
       const success = await this.selectTreatment();
       if (!success) return;
 
@@ -227,7 +226,7 @@ export default {
 
     setDiagnosis() {},
 
-    async approveAppointment() {
+    async provideAppointment() {
       this.$router.push({
         name: APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_DEFAULT_CARD.name,
         params: {
@@ -235,19 +234,29 @@ export default {
         },
       });
 
-      await this.updateStatus(Appointment.enum.statuses.Approved, { forceUpdate: true });
+      await this.updateStatus(Appointment.enum.statuses.Provided, { forceUpdate: true });
       // иначе не открываются модалки по след. флоу
-      setTimeout(async () => this.startAfterApproveFlow());
+      setTimeout(async () => this.startAfterProvideFlow());
     },
 
-    async startAfterApproveFlow() {
-      const success = await this.suggestControlAppointment();
+    async startAfterProvideFlow() {
+      const successControlAppointment = await this.suggestControlAppointment();
+
+      if (!this.appointment.treatment_id) {
+        const successTreatment = await this.suggestTreatment();
+
+        if (successTreatment) {
+          await this.createTreatment();
+        }
+      }
+
+      this.$router.push(DOCTORS_QUEUE_ROUTE.path);
     },
 
     /**
      * Возращает
      *   true - если успешно создан контрольынй приём
-     *   false - модалка закрылась и нужно приостановить текщий flow
+     *   false - модалка закрылась или выбрали "пропустить"
      * @return {Promise<boolean>}
      */
     async suggestControlAppointment() {
@@ -256,6 +265,36 @@ export default {
         payload: {
           doctor: this.appointment.doctor,
           patient: this.appointment.patient,
+        },
+      });
+
+      return !(action instanceof GlobalModalCloseAction);
+    },
+
+    /**
+     * Возращает
+     *   true - нужно создать лечение
+     *   false - модалка закрылась или выбрали "пропустить"
+     * @return {Promise<boolean>}
+     */
+    async suggestTreatment() {
+      // if(this.appointment.treatment_id) return false
+
+      const action = await this.$store.dispatch('modalAndDrawer/openModal', SuggestTreatmentModal);
+      return !(action instanceof GlobalModalCloseAction);
+    },
+
+    /**
+     * Возращает
+     *   true - если создано лечение
+     *   false - модалка закрылась(отмена)
+     * @return {Promise<boolean>}
+     */
+    async createTreatment() {
+      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
+        component: CreateTreatmentModal,
+        payload: {
+          appointment: this.appointment,
         },
       });
 
