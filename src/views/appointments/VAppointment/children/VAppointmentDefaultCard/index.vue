@@ -78,6 +78,14 @@
         @click="$emit('appointment:edit')">
         {{ $t('Appointments.EditReception') }}
       </ElButton>
+
+      <RouterLink
+        v-if="
+          appointment.status === Appointment.enum.statuses.Provided && appointment.service_case_id
+        "
+        :to="appointmentInspectionCardPageLink">
+        <ElButton type="primary"> {{ $t('GoToDefaultInspectionCard') }}</ElButton>
+      </RouterLink>
     </div>
   </ElCard>
 </template>
@@ -87,3 +95,4 @@
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/base.locales.json" />
 <i18n src="@/locales/appointments.locales.json" />
+<i18n src="./index.locales.json" />
