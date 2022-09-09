@@ -10,22 +10,35 @@
           v-model="templateId"
           label="title"
           :model-for-use="InspectionCardTemplate"
+          :disabled="readonly"
           @select="selectTemplate" />
       </ElFormItem>
 
       <DefaultInspectionCardBaseFormItems
         v-model:data="inspectionCard"
+        :readonly="readonly"
         @change="updateInspectionCard" />
 
       <ElFormItem>
         <div class="default-inspection-card-form-actions">
-          <ElButton data-method="toDiagnose" type="warning" native-type="submit" plain>
-            {{ $t('Appointments.ToDiagnose') }}
-          </ElButton>
+          <slot name="actions">
+            <ElButton
+              v-show="!readonly"
+              data-method="toDiagnose"
+              type="warning"
+              native-type="submit"
+              plain>
+              {{ $t('Appointments.ToDiagnose') }}
+            </ElButton>
 
-          <ElButton data-method="endReception" type="primary" native-type="submit">
-            {{ $t('Appointments.EndReception') }}
-          </ElButton>
+            <ElButton
+              v-show="!readonly"
+              data-method="endReception"
+              type="primary"
+              native-type="submit">
+              {{ $t('Appointments.EndReception') }}
+            </ElButton>
+          </slot>
         </div>
       </ElFormItem>
     </ElForm>
@@ -45,6 +58,7 @@ export default {
   emits: ['update:appointment', 'appointment:provide', 'appointment:set:diagnosis'],
   props: {
     appointment: [Appointment, Object],
+    readonly: Boolean,
   },
   data() {
     return {
