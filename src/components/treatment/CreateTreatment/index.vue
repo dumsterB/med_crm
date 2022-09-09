@@ -78,6 +78,6 @@ export default {
 };
 </script>
 
-<style lang="scss" src="./index.scss" />
+<style lang="scss" src="index.scss" />
 <i18n src="@/locales/notifications.locales.json" />
 <i18n src="@/locales/base.locales.json" />
