@@ -36,7 +36,7 @@ export class Treatment extends CRUDModel {
   }
 
   static async close(id) {
-    const { response } = await ApiService.put(`${this.tableName}/${id}/closed`);
+    const response = await ApiService.put(`${this.tableName}/${id}/closed`);
     return { response, data: response.data };
   }
 }
