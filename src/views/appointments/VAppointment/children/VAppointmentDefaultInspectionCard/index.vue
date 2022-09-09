@@ -76,10 +76,11 @@ export default {
     'appointment.status': {
       handler(value) {
         if (
-          value &&
-          ![Appointment.enum.statuses.InProgress, Appointment.enum.statuses.Provided].includes(
-            value
-          )
+          (value &&
+            ![Appointment.enum.statuses.InProgress, Appointment.enum.statuses.Provided].includes(
+              value
+            )) ||
+          this.appointment.treatment_id
         )
           return this.$router.push(this.appointmentDefaultCardPageLink);
       },
