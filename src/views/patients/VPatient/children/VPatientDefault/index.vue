@@ -82,7 +82,7 @@
         :total="treatments?.length"
         :perPage="treatments?.length"
         :page="1"
-        :items="treatments"/>
+        :items="treatments" />
     </div>
   </div>
 </template>
@@ -98,7 +98,7 @@ import TreatmentTable from '@/components/treatments/TreatmentsTable/index.vue';
 
 export default {
   name: 'VPatientDefault',
-  emits: ['update:patient', 'appointment:create', 'patient:createChildren'],
+  emits: ['update:patient', 'appointment:create', 'patient:createChildren', 'treatment:create'],
   components: {
     PatientCard,
     AppointmentsTable,
