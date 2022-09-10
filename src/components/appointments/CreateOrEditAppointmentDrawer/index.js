@@ -294,7 +294,7 @@ export default {
       }
     },
 
-    openCreatePatientDrawer({ query }) {
+    openCreatePatientDrawer(query) {
       this.$refs.autocomplete_patient.blur();
       this.patientDrawer.show = true;
       this.$nextTick(() => (this.patientDrawer.nameOrPhone = query));
