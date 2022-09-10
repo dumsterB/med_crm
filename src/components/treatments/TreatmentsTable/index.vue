@@ -33,7 +33,7 @@
                 v-show="row.status !== Treatment.enum.statuses.Closed"
                 type="primary"
                 :loading="localLoading.closeTreatment && closedTreatmentId == row.id"
-                @click="closeTreatment(row)">
+                @click.stop="closeTreatment(row)">
                 {{ $t('Treatments.CloseTreatment') }}
               </ElButton>
             </div>
