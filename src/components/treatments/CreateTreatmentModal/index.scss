@@ -1,0 +1,20 @@
+.treatment-modal {
+  --base-width: 300px;
+  max-width: calc(var(--base-width) * 2);
+
+  &-form {
+    display: grid;
+    gap: 15px;
+  }
+  &__title {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 42px;
+    text-align: center;
+    color: #404040;
+    margin-bottom: 20px;
+  }
+  &-submit{
+    width: 100%;
+  }
+}
