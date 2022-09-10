@@ -120,12 +120,11 @@ export default {
         component: CreateTreatmentModal,
         payload: {
           userId: this.patient.id,
-          doctor: this.user.doctor,
         },
       });
 
       if (action instanceof GlobalModalCloseAction) return;
-      this.$emit('create:treatment', action.data.treatment);
+      this.$store.dispatch('treatments/createItem', action.data.treatment);
     },
 
     async editPatient() {
