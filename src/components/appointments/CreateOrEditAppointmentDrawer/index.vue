@@ -97,13 +97,14 @@
         :label="$t('SelectService')"
         :style="{ order: this.appointmentFieldsFlexOrder.service }">
         <UiModelsAutocompleteSearch
-          v-model="appointment.service_id"
+          v-model="appointment.service_ids"
           label="title"
           :defaultItem="data?.service"
           :modelForUse="Service"
           :searchQuery="servicesOptions.searchQuery"
           :disabled="servicesOptions.isDisabled"
-          :required="servicesOptions.isRequired" />
+          :required="servicesOptions.isRequired"
+          multiple />
       </ElFormItem>
 
       <!--  Date  -->
