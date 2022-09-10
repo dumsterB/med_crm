@@ -226,6 +226,8 @@ export default {
     },
 
     async setDiagnosis() {
+      if (this.appointment.service_case?.disease_code_codes?.length) return;
+
       const action = await this.$store.dispatch('modalAndDrawer/openModal', {
         component: SetDiagnosisModal,
         payload: {
