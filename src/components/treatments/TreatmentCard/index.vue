@@ -1,7 +1,7 @@
 <template>
   <TreatmentsTable
     class="treatment-card"
-    :items="[data]"
+    :items="[...(data ? [data] : [])]"
     :loading="loading"
     :page="1"
     :per-page="1"
