@@ -23,7 +23,7 @@
         <div class="default-inspection-card-form-actions">
           <slot name="actions">
             <ElButton
-              v-show="!readonly"
+              v-show="!readonly && !appointment.service_case?.disease_code_codes?.length"
               data-method="toDiagnose"
               type="warning"
               native-type="submit"
