@@ -70,6 +70,21 @@ export default {
     },
   },
 
+  methods: {
+    goToInspectionCard() {
+      const path = this.appointment.service_case_id
+        ? APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_INSPECTION_CARD._fullPath
+        : APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_TREATMENT_CARD._fullPath;
+
+      this.$router.push(
+        insertRouteParams({
+          path: path,
+          params: { id: this.appointment.id },
+        })
+      );
+    },
+  },
+
   setup: () => ({
     Appointment,
     User,

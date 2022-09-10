@@ -79,13 +79,12 @@
         {{ $t('Appointments.EditReception') }}
       </ElButton>
 
-      <RouterLink
-        v-if="
-          appointment.status === Appointment.enum.statuses.Provided && appointment.service_case_id
-        "
-        :to="appointmentInspectionCardPageLink">
-        <ElButton type="primary"> {{ $t('GoToDefaultInspectionCard') }}</ElButton>
-      </RouterLink>
+      <ElButton
+        v-if="appointment.status === Appointment.enum.statuses.Provided"
+        type="primary"
+        @click="goToInspectionCard">
+        {{ $t('GoToDefaultInspectionCard') }}
+      </ElButton>
     </div>
   </ElCard>
 </template>
