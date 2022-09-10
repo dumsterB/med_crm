@@ -93,7 +93,7 @@ export default {
     },
     defaultItem: {
       handler() {
-        if (this.defaultItem) this.query = this.defaultItem[this.label];
+        if (this.defaultItem) this.items = [this.defaultItem];
       },
       immediate: true,
     },
