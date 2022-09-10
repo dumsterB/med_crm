@@ -20,8 +20,8 @@ export class Appointment extends CRUDModel {
    * @param {Doctor} payload.doctor
    * @param {number} payload.specialty_id
    * @param {Specialty} payload.specialty
-   * @param {number} payload.service_id
-   * @param {Service} payload.service
+   * @param {Array<number>} payload.service_ids
+   * @param {Array<Service>} payload.services
    * @param {number} payload.group_service_id
    * @param {ServiceGroup} payload.group_service
    * @param {number} payload.user_id synonym for payload.patient_id
@@ -40,8 +40,8 @@ export class Appointment extends CRUDModel {
     this.doctor = payload?.doctor ?? null;
     this.specialty_id = payload?.specialty_id ?? null;
     this.specialty = payload?.specialty ?? null;
-    this.service_id = payload?.service_id ?? null;
-    this.service = payload?.service ?? null;
+    this.service_ids = payload?.service_ids ?? [];
+    this.services = payload?.services ?? [];
     this.group_service_id = payload?.group_service_id ?? null;
     this.group_service = payload?.group_service ?? null;
     this.start_at = payload?.start_at ?? null;
