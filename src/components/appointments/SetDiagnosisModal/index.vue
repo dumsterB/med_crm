@@ -48,10 +48,10 @@ export default {
       try {
         const { data } = await ServiceCase.update({
           id: this.appointment.service_case_id,
-          payload: {
+          payload: new ServiceCase({
             ...this.appointment.service_case,
-            diseases_code_codes: this.codes,
-          },
+            disease_code_codes: this.codes,
+          }),
         });
 
         this.$emit(
