@@ -13,6 +13,7 @@ export function insertRouteParams({ path, params }) {
 
 /**
  * Подставляет компоненты в объект опций роута
+ * Создаёт children роуты исходя из childrenMap
  *
  * @param {Array<VueRouteOptions>} routes
  * @return {Array<VueRouteOtions>}
@@ -25,10 +26,32 @@ export function setComponentInRoutesByViewsFolder({ routes }) {
     components[component.name] = component;
   }
 
-  return routes.map((route) => ({
-    ...route,
-    component: components[route.component],
-  }));
+  const insertComponentsInRoutes = (routes) => {
+    return routes.map((route) => {
+      const component = components[route.component];
+      const children = insertComponentsInRoutes(
+        createChildrenRoutesByChildrenMap(route.childrenMap || {})
+      );
+
+      return {
+        ...route,
+        component,
+        children,
+      };
+    });
+  };
+
+  return insertComponentsInRoutes(routes);
+}
+
+/**
+ * Преобразует объект с именнованными роутами в обычный массив, который необходим для vue-router
+ *
+ * @param {object} childrenMap
+ * @return {Array<object>}
+ */
+export function createChildrenRoutesByChildrenMap(childrenMap) {
+  return Object.keys(childrenMap).map((key) => childrenMap[key]);
 }
 
 /**
