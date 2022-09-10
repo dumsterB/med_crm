@@ -4,7 +4,9 @@
       <ElPageHeader class="v-patient-treatment-header" :title="$t('Base.Back')" @back="goToPatient">
         <template #content>
           <div class="v-patient-ambulatory-header-info" v-if="treatment">
-            <RouterLink :to="`/patients/${treatment?.user.id}/default`"> <ElButton type="primary" text> {{ treatment?.user?.name }}</ElButton></RouterLink>
+            <RouterLink :to="`/patients/${treatment?.user.id}/default`">
+              <ElButton type="primary" text> {{ treatment?.user?.name }}</ElButton></RouterLink
+            >
           </div>
         </template>
       </ElPageHeader>
@@ -12,20 +14,22 @@
     <TreatmentCard :data="[treatment]" :loading="loading.treatment" />
     <div class="v-patient-default__title">{{ $t('Base.TableReception') }}</div>
     <ElEmpty
-        class="v-patient-treatment-item-empty"
-        v-show="!receptions?.length && !loading.reception"
-        :description="$t('Base.NoData')" />
+      class="v-patient-treatment-item-empty"
+      v-show="!receptions?.length && !loading.reception"
+      :description="$t('Base.NoData')" />
     <ReceptionTable v-if="receptions?.length" :data="receptions" :loading="loading.reception" />
   </LayoutDoctor>
 </template>
 
 <script>
-import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
-import LayoutDoctor from '@/components/layouts/LayoutDoctor/index.vue';
 import { Treatment } from '@/models/Treatment.model';
+import { Appointment } from '@/models/Appointment.model';
+
 import TreatmentCard from '@/components/views/TreatmentCard/index.vue';
 import ReceptionTable from '@/components/treatments/AppointmentsByTreatmentTable/index.vue';
-import { Appointment } from '@/models/Appointment.model';
+import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
+import LayoutDoctor from '@/components/layouts/LayoutDoctor/index.vue';
+
 export default {
   name: 'VTreatment',
   components: {
