@@ -26,15 +26,19 @@
           </template>
         </ElTableColumn>
 
-        <!--        <ElTableColumn prop="actions" :label="$t('Base.Actions')">-->
-        <!--          <template #default="{ row }">-->
-        <!--            <div class="treatments-table-actions">-->
-        <!--              <ElButton @click="goToTreatment">-->
-        <!--                {{ $t('Base.Open') }}-->
-        <!--              </ElButton>-->
-        <!--            </div>-->
-        <!--          </template>-->
-        <!--        </ElTableColumn>-->
+        <ElTableColumn v-if="isDoctor" prop="actions" :label="$t('Base.Actions')">
+          <template #default="{ row }">
+            <div class="treatments-table-actions">
+              <ElButton
+                v-show="row.status !== Treatment.enum.statuses.Closed"
+                type="primary"
+                :loading="localLoading.closeTreatment && closedTreatmentId == row.id"
+                @click="closeTreatment(row)">
+                Close treatment
+              </ElButton>
+            </div>
+          </template>
+        </ElTableColumn>
       </ElTable>
     </ElScrollbar>
 
@@ -55,16 +59,17 @@
 
 <script>
 import { mapState } from 'vuex';
-import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
 import { DOCTORS_TREATMENT_ROUTE } from '@/router/treatments.routes';
 import { Treatment } from '@/models/Treatment.model';
+import { User } from '@/models/User.model';
 
 import TreatmentStatusTag from '@/components/treatments/TreatmentStatusTag/index.vue';
 
 export default {
   name: 'TreatmentsTable',
   components: { TreatmentStatusTag },
+  emits: ['item:update'],
   props: {
     /** @param { Array<Treatment|object> } items */
     items: Array,
@@ -74,11 +79,23 @@ export default {
     total: Number,
     search: String,
   },
-  icons: icons,
+  data() {
+    return {
+      localLoading: {
+        closeTreatment: false,
+      },
+      closedTreatmentId: null,
+    };
+  },
   computed: {
     ...mapState({
       user: (state) => state.auth.user,
     }),
+
+    isDoctor() {
+      return this.user.role === User.enum.roles.Doctor;
+    },
+
     hasItems() {
       return !!this.items.length;
     },
@@ -104,6 +121,26 @@ export default {
         },
       });
     },
+
+    async closeTreatment(treatment) {
+      if (this.localLoading.closeTreatment) return;
+      this.localLoading.closeTreatment = true;
+      this.closedTreatmentId = treatment.id;
+
+      try {
+        const { data } = await Treatment.close(treatment.id);
+        this.$emit('item:update', data.data);
+      } catch (err) {
+        console.log(err);
+        this.$notify({
+          type: 'error',
+          title: err?.response?.data?.message || this.$t('Notifications.Error'),
+        });
+      }
+
+      this.localLoading.closeTreatment = false;
+      this.closedTreatmentId = null;
+    },
   },
 
   setup: () => ({
@@ -117,3 +154,4 @@ export default {
 <i18n src="@/locales/user.locales.json" />
 <i18n src="@/locales/patients.locales.json" />
 <i18n src="@/locales/treatments.locales.json" />
+<i18n src="@/locales/notifications.locales.json" />
