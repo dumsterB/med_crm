@@ -54,7 +54,7 @@ export default {
   emits: ['update:modelValue', 'update:data', 'create'],
   slots: ['default', 'empty', 'create'],
   props: {
-    modelValue: Number,
+    modelValue: [Number, String, Boolean, Array],
     // принимает все классы расширяющий CRUDModel
     // для поиска вызвается find метод этого класса
     modelForUse: [CRUDModel, Function],
