@@ -78,11 +78,12 @@
       :description="$t('Base.NoData')" />
 
     <div class="v-patient-default-item__body" v-if="treatments?.length">
-      <TreatmentTable
+      <TreatmentsTable
         :total="treatments?.length"
         :perPage="treatments?.length"
         :page="1"
-        :items="treatments" />
+        :items="treatments"
+        @item:update="$emit('treatment:updated', $event)" />
     </div>
   </div>
 </template>
@@ -94,16 +95,22 @@ import { Patient } from '@/models/Patient.model';
 import PatientCard from '@/components/views/VPatient/PatientCard/index.vue';
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
-import TreatmentTable from '@/components/treatments/TreatmentsTable/index.vue';
+import TreatmentsTable from '@/components/treatments/TreatmentsTable/index.vue';
 
 export default {
   name: 'VPatientDefault',
-  emits: ['update:patient', 'appointment:create', 'patient:createChildren', 'treatment:create'],
+  emits: [
+    'update:patient',
+    'appointment:create',
+    'patient:createChildren',
+    'treatment:create',
+    'treatment:updated',
+  ],
   components: {
     PatientCard,
     AppointmentsTable,
     PatientsTable,
-    TreatmentTable,
+    TreatmentsTable,
   },
   icons: icons,
   props: {
