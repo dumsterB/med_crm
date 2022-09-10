@@ -5,7 +5,8 @@
     :loading="loading"
     :page="1"
     :per-page="1"
-    :total="1" />
+    :total="1"
+    @item:update="$emit('treatment:update', $event)" />
 </template>
 
 <script>
@@ -14,14 +15,13 @@ import TreatmentsTable from '@/components/treatments/TreatmentsTable/index.vue';
 
 export default {
   name: 'TreatmentCard',
-  components: {
-    TreatmentsTable,
-  },
-
+  emits: ['treatment:update'],
+  components: { TreatmentsTable },
   props: {
     data: [Treatment, Object],
     loading: Boolean,
   },
+
   methods: {
     goToPatient() {
       this.$router.go(-1);

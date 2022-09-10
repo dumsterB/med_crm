@@ -12,7 +12,10 @@
       </ElPageHeader>
     </LayoutContentHeader>
 
-    <TreatmentCard :data="treatment" :loading="loading.treatment" />
+    <TreatmentCard
+      :data="treatment"
+      :loading="loading.treatment"
+      @treatment:update="treatment = $event" />
     <div class="v-patient-default__title">{{ $t('Base.TableReception') }}</div>
 
     <ElEmpty
@@ -29,7 +32,7 @@ import { Appointment } from '@/models/Appointment.model';
 import { insertRouteParams } from '@/utils/router.utils';
 import { PATIENT_ROUTE } from '@/router/patients.routes';
 
-import TreatmentCard from '@/components/views/TreatmentCard/index.vue';
+import TreatmentCard from '@/components/treatments/TreatmentCard/index.vue';
 import ReceptionTable from '@/components/treatments/AppointmentsByTreatmentTable/index.vue';
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
 import LayoutDoctor from '@/components/layouts/LayoutDoctor/index.vue';
