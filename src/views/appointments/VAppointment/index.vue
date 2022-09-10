@@ -27,7 +27,7 @@ import SelectOrCreateServiceCaseModal from '@/components/appointments/SelectOrCr
 import SuggestControlAppointmentModal from '@/components/appointments/SuggestControlAppointmentModal/index.vue';
 import SelectTreatmentModal from '@/components/appointments/SelectTreatmentModal/index.vue';
 import SuggestTreatmentModal from '@/components/appointments/SuggestTreatmentModal/index.vue';
-import CreateTreatmentModal from '@/components/treatment/CreateTreatmentModal/index.vue';
+import CreateTreatmentModal from '@/components/treatments/CreateTreatmentModal/index.vue';
 
 export default {
   name: 'VAppointment',

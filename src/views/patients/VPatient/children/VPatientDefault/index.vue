@@ -67,6 +67,9 @@
   <div class="v-patient-default__item v-patient-default-item">
     <div class="v-patient-default-item__header v-patient-default-item-header">
       <div class="v-patient-default__title">{{ $t('Base.TableTreatment') }}</div>
+      <ElButton type="primary" @click="$emit('treatment:create')">
+        {{ $t('Base.SetTreatment') }}
+      </ElButton>
     </div>
 
     <ElEmpty
@@ -74,13 +77,12 @@
       v-show="!treatments?.length && !loading.treatments"
       :description="$t('Base.NoData')" />
 
-    <div class="v-patient-default-item__body">
+    <div class="v-patient-default-item__body" v-if="treatments?.length">
       <TreatmentTable
         :total="treatments?.length"
         :perPage="treatments?.length"
         :page="1"
-        :items="treatments"
-        type="horizontal" />
+        :items="treatments"/>
     </div>
   </div>
 </template>
@@ -92,7 +94,7 @@ import { Patient } from '@/models/Patient.model';
 import PatientCard from '@/components/views/VPatient/PatientCard/index.vue';
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
-import TreatmentTable from '@/components/treatment/TreatmentTable/index.vue';
+import TreatmentTable from '@/components/treatments/TreatmentsTable/index.vue';
 
 export default {
   name: 'VPatientDefault',

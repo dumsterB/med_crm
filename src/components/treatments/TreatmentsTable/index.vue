@@ -2,30 +2,24 @@
   <div class="treatments-table-wrapper">
     <ElScrollbar class="treatments-table-wrapper__scrollbar">
       <ElTable
-          class="treatments-table"
-          :data="items"
-          v-loading="loading"
-          ref="elTable"
-          @row-click="goToTreatment"
-      >
+        class="treatments-table"
+        :data="items"
+        v-loading="loading"
+        ref="elTable"
+        @row-click="goToTreatment">
         <template #empty>
           <div class="treatments-table__empty treatments-table-empty">
             <span>{{ $t('Base.NoData') }}</span>
-            <ElButton v-if="!isDoctor" type="primary" >
-              {{ $t('Patients.AddPatient') }}
-            </ElButton>
           </div>
         </template>
 
-        <ElTableColumn prop="user.doctor.name" :label="$t('Base.DoctorFullName')"></ElTableColumn>
-        <ElTableColumn prop="title" :label="$t('Base.Naming')"></ElTableColumn>
+        <ElTableColumn prop="doctor.name" :label="$t('Base.DoctorFullName')" />
+        <ElTableColumn prop="title" :label="$t('Base.Naming')" />
         <ElTableColumn prop="price" :label="$t('Base.Price')">
-          <template #default="{ row }">
-             {{row.price}}  {{$t('Base.Sum')}}
-          </template>
+          <template #default="{ row }"> {{ row.price }} {{ $t('Base.Sum') }} </template>
         </ElTableColumn>
-        <ElTableColumn prop="created_at" :label="$t('Base.DateAppoint')"></ElTableColumn>
-        <ElTableColumn prop="duration" :label="$t('Base.ColDays')"></ElTableColumn>
+        <ElTableColumn prop="created_at" :label="$t('Base.DateAppoint')" />
+        <ElTableColumn prop="duration" :label="$t('Base.ColDays')" />
         <ElTableColumn :label="$t('Base.Status')">
           <template #default="{ row }">
             <AppointmentStatusTag :status="row.status" />
@@ -45,17 +39,17 @@
     </ElScrollbar>
 
     <ElPagination
-        class="treatments-table-wrapper__pagination"
-        :current-page="page"
-        :page-count="pageCount"
-        :page-size="perPage"
-        :page-sizes="pageSizes"
-        :total="total"
-        background
-        hide-on-single-page
-        layout="prev, pager, next, sizes"
-        @update:current-page="$emit('update:page', $event)"
-        @update:page-size="$emit('update:perPage', $event)" />
+      class="treatments-table-wrapper__pagination"
+      :current-page="page"
+      :page-count="pageCount"
+      :page-size="perPage"
+      :page-sizes="pageSizes"
+      :total="total"
+      background
+      hide-on-single-page
+      layout="prev, pager, next, sizes"
+      @update:current-page="$emit('update:page', $event)"
+      @update:page-size="$emit('update:perPage', $event)" />
   </div>
 </template>
 
@@ -64,10 +58,11 @@ import { mapState } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
+import { DOCTORS_TREATMENT_ROUTE } from '@/router/treatments.routes';
 export default {
   name: 'TreatmentTable',
-  components:{
-    AppointmentStatusTag
+  components: {
+    AppointmentStatusTag,
   },
   props: {
     /**
@@ -102,9 +97,14 @@ export default {
   },
 
   methods: {
-    goToTreatment(row){
-
-    }
+    goToTreatment(row) {
+      this.$router.push({
+        name: DOCTORS_TREATMENT_ROUTE.name,
+        params: {
+          id: row.id,
+        },
+      });
+    },
   },
 };
 </script>

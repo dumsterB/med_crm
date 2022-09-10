@@ -23,13 +23,11 @@ import { Appointment } from '@/models/Appointment.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 import { Treatment } from '@/models/Treatment.model';
 
-import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
-import PatientsTable from '@/components/patients/PatientsTable/index.vue';
-import TreatmentTable from '@/components/treatment/TreatmentTable/index.vue';
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
-import PatientCard from '@/components/views/VPatient/PatientCard/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
+import CreateTreatmentModal from '@/components/treatments/CreateTreatmentModal/index.vue';
+import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 export default {
   name: 'VPatient',
@@ -56,6 +54,7 @@ export default {
   computed: {
     ...mapState({
       treatments: (state) => state.treatments.data,
+      user: (state) => state.auth.user,
     }),
 
     isChildren() {
@@ -116,8 +115,17 @@ export default {
       });
     },
 
-    createTreatment(treatment) {
-      this.$store.dispatch('treatments/createItem', treatment);
+    async createTreatment() {
+      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
+        component: CreateTreatmentModal,
+        payload: {
+          userId: this.patient.id,
+          doctor: this.user.doctor,
+        },
+      });
+
+      if (action instanceof GlobalModalCloseAction) return;
+      this.$emit('create:treatment', action.data.treatment);
     },
 
     async editPatient() {
