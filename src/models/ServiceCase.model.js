@@ -15,8 +15,8 @@ export class ServiceCase extends CRUDModel {
    * @param {number} payload.id
    * @param {string} payload.title
    * @param {string} payload.complaint
-   * @param {DiseaseCode} payload.disease_code
-   * @param {DiseaseCode} payload.provisional_disease_code
+   * @param {Array<string>>} payload.disease_code_codes
+   * @param {Array<DiseaseCode>} payload.disease_codes
    * @param {string} payload.status
    * @param {number} payload.user_id
    * @param {User|Patient} payload.user
@@ -29,8 +29,8 @@ export class ServiceCase extends CRUDModel {
 
     this.title = payload?.title ?? '';
     this.complaint = payload?.complaint ?? null;
-    this.disease_code = payload?.disease_code ?? null;
-    this.provisional_disease_code = payload?.provisional_disease_code ?? null;
+    this.disease_code_codes = payload?.disease_code_codes ?? [];
+    this.disease_codes = payload?.disease_codes ?? [];
     this.status = payload?.status ?? null;
     this.user_id = payload?.user_id ?? null;
     this.user = payload?.user ?? null;

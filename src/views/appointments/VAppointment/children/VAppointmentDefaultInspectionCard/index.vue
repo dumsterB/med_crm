@@ -25,6 +25,7 @@
 
     <DefaultInspectionCard
       :appointment="appointment"
+      :readonly="isProvided"
       @update:appointment="$emit('update:appointment', $event)"
       @appointment:provide="$emit('appointment:provide')"
       @appointment:set:diagnosis="$emit('appointment:set:diagnosis')" />
@@ -49,6 +50,10 @@ export default {
     appointment: [Appointment, Object],
   },
   computed: {
+    isProvided() {
+      return this.appointment.status === Appointment.enum.statuses.Provided;
+    },
+
     appointmentDefaultCardPageLink() {
       return insertRouteParams({
         path: APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_DEFAULT_CARD._fullPath,
@@ -65,6 +70,21 @@ export default {
           id: this.appointment.patient_id,
         },
       });
+    },
+  },
+  watch: {
+    'appointment.status': {
+      handler(value) {
+        if (
+          (value &&
+            ![Appointment.enum.statuses.InProgress, Appointment.enum.statuses.Provided].includes(
+              value
+            )) ||
+          this.appointment.treatment_id
+        )
+          return this.$router.push(this.appointmentDefaultCardPageLink);
+      },
+      immediate: true,
     },
   },
 

@@ -34,9 +34,20 @@ export class Treatment extends CRUDModel {
     const response = await ApiService.get(`${this.tableName}/${userId}`);
     return { response, data: response.data };
   }
-
   static async findById(id) {
     const response = await ApiService.get(`${this.tableName}/${id}/get`);
     return { response, data: response.data };
   }
+
+  static async close(id) {
+    const response = await ApiService.put(`${this.tableName}/${id}/closed`);
+    return { response, data: response.data };
+  }
+
+  static enum = {
+    statuses: {
+      Created: 'created',
+      Closed: 'closed',
+    },
+  };
 }

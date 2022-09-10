@@ -10,6 +10,7 @@
       :loading="loading"
       @appointment:create="createAppointment"
       @treatment:create="createTreatment"
+      @treatment:updated="updateTreatment"
       @patient:createChildren="createChildren">
     </RouterView>
   </LayoutRegistry>
@@ -120,12 +121,15 @@ export default {
         component: CreateTreatmentModal,
         payload: {
           userId: this.patient.id,
-          doctor: this.user.doctor,
         },
       });
 
       if (action instanceof GlobalModalCloseAction) return;
-      this.$emit('create:treatment', action.data.treatment);
+      this.$store.dispatch('treatments/createItem', action.data.treatment);
+    },
+
+    updateTreatment(treatment) {
+      this.$store.dispatch('treatments/editItem', treatment);
     },
 
     async editPatient() {

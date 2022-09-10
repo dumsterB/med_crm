@@ -1,6 +1,11 @@
 <template>
-  <ElDialog custom-class="treatment-modal" @update:modelValue="$emit('update:modelValue')">
+  <ElDialog
+    custom-class="treatment-modal"
+    :model-value="modelValue"
+    width="500px"
+    @update:modelValue="$emit('update:modelValue')">
     <p class="treatment-modal__title">{{ $t('Base.SetTreatment') }}</p>
+
     <ElForm class="treatment-modal-form" label-position="top" @submit.prevent="createTreatment">
       <ElInput
         class="treatment-modal__input"
@@ -17,6 +22,7 @@
         v-model="duration"
         required
         :placeholder="$t('Base.QuantityDays')" />
+
       <ElButton
         class="treatment-modal-submit"
         :loading="loading"
@@ -40,6 +46,7 @@ export default {
   icons: icons,
   emits: ['update:modelValue', 'action'],
   props: {
+    modelValue: Boolean,
     appointment: [Appointment, Object],
     userId: [Number, String],
   },

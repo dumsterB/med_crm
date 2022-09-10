@@ -3,11 +3,13 @@
     <component
       class="create-template-drawer-form__field"
       :is="field.tag"
-      :placeholder="field.placeholder"
       :model-value="data[field.name]"
-      :required="field.required"
+      :placeholder="field.placeholder"
       :type="field.type"
       :rows="3"
+      :readonly="readonly"
+      :disabled="readonly && field.options?.length"
+      :required="field.required"
       @update:model-value="updateField(field, $event)"
       @change="$emit('change', $event)">
       <UiRequiredHiddenInput v-if="field.options?.length" :required="field.required" />
@@ -30,6 +32,7 @@ export default {
   emits: ['update:data', 'change'],
   props: {
     data: [DefaultInspectionCard, Object],
+    readonly: Boolean,
   },
   computed: {
     formFields() {

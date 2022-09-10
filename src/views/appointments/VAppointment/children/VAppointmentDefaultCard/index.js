@@ -6,6 +6,7 @@ import { Appointment } from '@/models/Appointment.model';
 import { PriceService } from '@/services/price.service';
 
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
+import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 
 export default {
   name: 'VAppointmentDefaultCard',
@@ -33,6 +34,13 @@ export default {
         params: { id: this.appointment?.patient_id },
       });
     },
+    appointmentInspectionCardPageLink() {
+      return insertRouteParams({
+        path: APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_INSPECTION_CARD._fullPath,
+        params: { id: this.appointment.id },
+      });
+    },
+
     infoItems() {
       return [
         {
@@ -59,6 +67,21 @@ export default {
             this.$t('Base.Sum'),
         },
       ];
+    },
+  },
+
+  methods: {
+    goToInspectionCard() {
+      const path = this.appointment.service_case_id
+        ? APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_INSPECTION_CARD._fullPath
+        : APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_TREATMENT_CARD._fullPath;
+
+      this.$router.push(
+        insertRouteParams({
+          path: path,
+          params: { id: this.appointment.id },
+        })
+      );
     },
   },
 
