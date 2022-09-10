@@ -22,19 +22,19 @@
         <ElTableColumn prop="duration" :label="$t('Base.ColDays')" />
         <ElTableColumn :label="$t('Base.Status')">
           <template #default="{ row }">
-            <AppointmentStatusTag :status="row.status" />
+            <TreatmentStatusTag :status="row.status" />
           </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="actions" :label="$t('Base.Actions')">
-          <template #default="{ row }">
-            <div class="treatments-table-actions">
-              <ElButton @click="goToTreatment">
-                {{ $t('Base.Open') }}
-              </ElButton>
-            </div>
-          </template>
-        </ElTableColumn>
+        <!--        <ElTableColumn prop="actions" :label="$t('Base.Actions')">-->
+        <!--          <template #default="{ row }">-->
+        <!--            <div class="treatments-table-actions">-->
+        <!--              <ElButton @click="goToTreatment">-->
+        <!--                {{ $t('Base.Open') }}-->
+        <!--              </ElButton>-->
+        <!--            </div>-->
+        <!--          </template>-->
+        <!--        </ElTableColumn>-->
       </ElTable>
     </ElScrollbar>
 
@@ -57,19 +57,18 @@
 import { mapState } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
-import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 import { DOCTORS_TREATMENT_ROUTE } from '@/router/treatments.routes';
+import { Treatment } from '@/models/Treatment.model';
+
+import TreatmentStatusTag from '@/components/treatments/TreatmentStatusTag/index.vue';
+
 export default {
-  name: 'TreatmentTable',
-  components: {
-    AppointmentStatusTag,
-  },
+  name: 'TreatmentsTable',
+  components: { TreatmentStatusTag },
   props: {
-    /**
-     * @param { Array<Patient|object> } items
-     */
-    loading: Boolean,
+    /** @param { Array<Treatment|object> } items */
     items: Array,
+    loading: Boolean,
     page: Number,
     perPage: Number,
     total: Number,
@@ -106,6 +105,10 @@ export default {
       });
     },
   },
+
+  setup: () => ({
+    Treatment,
+  }),
 };
 </script>
 
@@ -113,3 +116,4 @@ export default {
 <i18n src="@/locales/base.locales.json" />
 <i18n src="@/locales/user.locales.json" />
 <i18n src="@/locales/patients.locales.json" />
+<i18n src="@/locales/treatments.locales.json" />
