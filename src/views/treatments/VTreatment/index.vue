@@ -4,15 +4,17 @@
       <ElPageHeader class="v-patient-treatment-header" :title="$t('Base.Back')" @back="goToPatient">
         <template #content>
           <div class="v-patient-ambulatory-header-info" v-if="treatment">
-            <RouterLink :to="`/patients/${treatment?.user.id}/default`">
-              <ElButton type="primary" text> {{ treatment?.user?.name }}</ElButton></RouterLink
-            >
+            <RouterLink :to="patientPageLink">
+              <ElButton type="primary" text> {{ treatment?.user?.name }}</ElButton>
+            </RouterLink>
           </div>
         </template>
       </ElPageHeader>
     </LayoutContentHeader>
-    <TreatmentCard :data="[treatment]" :loading="loading.treatment" />
+
+    <TreatmentCard :data="treatment" :loading="loading.treatment" />
     <div class="v-patient-default__title">{{ $t('Base.TableReception') }}</div>
+
     <ElEmpty
       class="v-patient-treatment-item-empty"
       v-show="!receptions?.length && !loading.reception"
@@ -24,6 +26,8 @@
 <script>
 import { Treatment } from '@/models/Treatment.model';
 import { Appointment } from '@/models/Appointment.model';
+import { insertRouteParams } from '@/utils/router.utils';
+import { PATIENT_ROUTE } from '@/router/patients.routes';
 
 import TreatmentCard from '@/components/views/TreatmentCard/index.vue';
 import ReceptionTable from '@/components/treatments/AppointmentsByTreatmentTable/index.vue';
@@ -38,19 +42,30 @@ export default {
     TreatmentCard,
     ReceptionTable,
   },
+  props: {
+    id: [Number, String],
+  },
   data() {
     return {
       loading: {
         treatment: false,
         reception: false,
       },
+      /** @type {Treatment} */
       treatment: null,
+      /** @type {Array<Appointment>} */
       receptions: null,
     };
   },
-  props: {
-    id: [Number, String],
+  computed: {
+    patientPageLink() {
+      return insertRouteParams({
+        path: PATIENT_ROUTE.path,
+        params: { id: this.treatment.user_id },
+      });
+    },
   },
+
   watch: {
     id: {
       async handler() {
@@ -60,6 +75,7 @@ export default {
       immediate: true,
     },
   },
+
   methods: {
     goToPatient() {
       this.$router.go(-1);
