@@ -94,11 +94,13 @@ export default {
       this.loading.create = true;
 
       try {
-        const { data } = await ServiceCase.create({
-          title: this.title,
-          user_id: this.userId,
-          complaint: 'test', // TODO: убрать
-        });
+        const { data } = await ServiceCase.create(
+          new ServiceCase({
+            title: this.title,
+            user_id: this.userId,
+            complaint: 'TEST', // TODO: убрать
+          })
+        );
         await this.selectServiceCase(data.data);
       } catch (err) {
         console.log(err);
