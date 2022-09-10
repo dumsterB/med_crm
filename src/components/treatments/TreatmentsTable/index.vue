@@ -34,7 +34,7 @@
                 type="primary"
                 :loading="localLoading.closeTreatment && closedTreatmentId == row.id"
                 @click="closeTreatment(row)">
-                Close treatment
+                {{ $t('Treatments.CloseTreatment') }}
               </ElButton>
             </div>
           </template>
