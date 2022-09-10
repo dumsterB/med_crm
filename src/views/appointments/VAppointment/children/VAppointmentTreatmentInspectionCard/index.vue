@@ -25,6 +25,7 @@
             type="textarea"
             :placeholder="$t('Base.PleaseInput')"
             :rows="3"
+            required
             @change="updateInspectionCard" />
         </ElFormItem>
 
@@ -34,6 +35,7 @@
             type="textarea"
             :placeholder="$t('Base.PleaseInput')"
             :rows="3"
+            required
             @change="updateInspectionCard" />
         </ElFormItem>
 
