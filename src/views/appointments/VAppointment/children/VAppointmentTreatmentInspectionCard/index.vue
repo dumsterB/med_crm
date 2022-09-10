@@ -26,6 +26,7 @@
             :placeholder="$t('Base.PleaseInput')"
             :rows="3"
             required
+            :readonly="isProvided"
             @change="updateInspectionCard" />
         </ElFormItem>
 
@@ -36,10 +37,11 @@
             :placeholder="$t('Base.PleaseInput')"
             :rows="3"
             required
+            :readonly="isProvided"
             @change="updateInspectionCard" />
         </ElFormItem>
 
-        <div class="v-app-treat-card-form-actions">
+        <div v-show="!isProvided" class="v-app-treat-card-form-actions">
           <ElButton
             data-method="closeTreatment"
             type="warning"
@@ -85,21 +87,23 @@ export default {
       },
     };
   },
+  computed: {
+    isProvided() {
+      return this.appointment.status === Appointment.enum.statuses.Provided;
+    },
+    patientPageLink() {
+      return insertRouteParams({
+        path: PATIENT_ROUTE.path,
+        params: { id: this.appointment.patient_id },
+      });
+    },
+  },
   watch: {
     'appointment.id': {
       handler() {
         this.inspectionCard = new TreatmentInspectionCard(this.appointment.inspection_card || {});
       },
       immediate: true,
-    },
-  },
-
-  computed: {
-    patientPageLink() {
-      return insertRouteParams({
-        path: PATIENT_ROUTE.path,
-        params: { id: this.appointment.patient_id },
-      });
     },
   },
 
