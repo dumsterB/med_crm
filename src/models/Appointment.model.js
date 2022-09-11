@@ -71,7 +71,7 @@ export class Appointment extends CRUDModel {
    */
   static async create(payload) {
     return super.create(payload, {
-      url: !payload.service_id ? `${this.tableName}/create/byGroup` : null,
+      url: !payload.service_ids?.length ? `${this.tableName}/create/byGroup` : null,
     });
   }
 
