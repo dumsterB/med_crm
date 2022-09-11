@@ -1,6 +1,6 @@
 <template>
   <ElSelect
-    :model-value="appointment.service_id"
+    :model-value="serviceId"
     :placeholder="$t('Appointments.SelectDoctor')"
     @update:model-value="selectHandler">
     <ElOption
@@ -29,6 +29,10 @@ export default {
     services() {
       return this.serviceGroup?.services || [];
     },
+
+    serviceId() {
+      return this.appointment.service_ids?.length ? this.appointment.service_ids[0] : null;
+    },
   },
 
   methods: {
@@ -37,7 +41,7 @@ export default {
       this.$emit('update:appointment', {
         ...this.appointment,
         doctor_id: doctorId,
-        service_id: serviceId,
+        service_ids: [serviceId],
       });
     },
   },
