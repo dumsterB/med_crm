@@ -78,7 +78,7 @@ export default {
     },
   },
   watch: {
-    queryWatchers: {
+    'queryWatchers': {
       handler(value, oldValue) {
         compareQueriesThenLoadData({
           query: value,
@@ -90,6 +90,13 @@ export default {
       },
       immediate: true,
       deep: true,
+    },
+
+    'user.role': {
+      handler(value) {
+        if (value === User.enum.roles.Doctor) this.findForDoctor.value = 1;
+      },
+      immediate: true,
     },
   },
 
