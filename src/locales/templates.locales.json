@@ -5,7 +5,7 @@
       "Create": "Создать шаблон",
       "Edit": "Редактировать шаблон",
       "Name": "Название шаблона",
-      "SelectTemplates": "Выбрать шаблон"
+      "SelectTemplate": "Выбрать шаблон"
     }
   },
   "uz": {
@@ -14,7 +14,7 @@
       "Edit": "Shablonni tahrirlash",
       "AddTemplate": "Shablon qo'shish",
       "Name": "Название шаблона",
-      "SelectTemplates": "Shablonni tanlang"
+      "SelectTemplate": "Shablonni tanlang"
     }
   }
 }
