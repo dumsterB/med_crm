@@ -9,7 +9,7 @@ export class PriceService {
    * @param {string} delimiter
    * @return {string}
    */
-  static formatPrice({ price, delimiter = DEFAULT_PRICE_DELIMITER }) {
+  static formatPrice({ price = 0, delimiter = DEFAULT_PRICE_DELIMITER }) {
     return price
       .toString()
       .split(/(?=(?:\d{3})+(?:\.|$))/g)

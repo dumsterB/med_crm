@@ -1,20 +1,21 @@
 <template>
-  <div class="queues-table-wrapper">
-    <ElScrollbar class="queues-table-wrapper__scrollbar">
+  <div class="templates-table-wrapper">
+    <ElScrollbar class="templates-table-wrapper__scrollbar">
       <ElTable
-        class="queues-table"
+        class="templates-table"
         v-loading="loading"
         :data="data"
         :empty-text="$t('Base.NoData')"
         ref="elTable">
         <ElTableColumn prop="title" :label="$t('Base.Templates')"></ElTableColumn>
 
-        <ElTableColumn prop="actions" width="250" :label="$t('Base.Actions')">
+        <ElTableColumn prop="actions" :label="$t('Base.Actions')" width="250px">
           <template #default="{ row }">
-            <div class="queues-table-actions">
+            <div class="templates-table-actions">
               <ElButton @click="editTemplate(row)" type="primary">
                 {{ $t('Base.Edit') }}
               </ElButton>
+
               <ElButton type="danger" plain @click="deleteTemplate(row)">
                 <UiIcon :icon="$options.icons.TRASH" />
               </ElButton>
@@ -68,4 +69,4 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style src="./index.scss" />

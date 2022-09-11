@@ -65,7 +65,6 @@ export default {
     loading: Boolean,
   },
   icons: icons,
-  computed: {},
   watch: {
     loading() {
       this.$refs.elTable.scrollTo({ top: 0, behavior: 'smooth' });
@@ -79,7 +78,7 @@ export default {
           status: Appointment.enum.statuses.Waiting,
         });
 
-        this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
+        this.$notify({ type: 'success', title: this.$t('Notifications.SuccessUpdated') });
         this.$router.push({
           name: APPOINTMENT_ROUTE.name,
           params: { id: payload.id },

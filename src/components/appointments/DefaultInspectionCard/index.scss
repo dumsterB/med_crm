@@ -1,0 +1,12 @@
+.default-inspection-card {
+  &-form {
+    & > * {
+      max-width: 500px;
+    }
+
+    &-actions {
+      display: flex;
+      gap: 10px;
+    }
+  }
+}

@@ -2,7 +2,7 @@
   <ElDrawer
     custom-class="create-appointment-drawer"
     :model-value="modelValue"
-    :title="$t(`Title.${data ? 'Edit' : 'Create'}`)"
+    :title="$t(`Title.${data?.id ? 'Edit' : 'Create'}`)"
     @update:model-value="$emit('update:modelValue', $event)">
     <ElForm
       class="create-appointment-drawer-form"
@@ -85,7 +85,7 @@
         <UiModelsAutocompleteSearch
           v-model="appointment.doctor_id"
           :modelForUse="Doctor"
-          :defaultItem="data?.doctor"
+          :defaultItem="data?.doctor || user?.doctor"
           :searchQuery="doctorsOptions.searchQuery"
           :disabled="doctorsOptions.isDisabled"
           :required="doctorsOptions.isRequired" />

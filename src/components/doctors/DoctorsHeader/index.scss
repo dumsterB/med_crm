@@ -1,8 +1,10 @@
-.doctors-header{
-  position: relative;
-  height: 30px;
-  .lang {
-    position: absolute;
-    right: 10px;
+.doctors-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &__search {
+    width: 60%;
+    margin-right: auto;
   }
 }

@@ -5,8 +5,7 @@
       `v-patient-profile-card_${type}`,
       { 'v-patient-profile-card_children': isChildren },
     ]"
-    shadow="hover"
-    @click="goToPatient">
+    shadow="hover">
     <template #header>
       <UiAvatar size="super-large" />
 
@@ -26,22 +25,30 @@
         <div class="v-patient-profile-card-data__value">{{ item.value }}</div>
       </div>
     </div>
+
     <div class="v-patient-profile-card__actions v-patient-profile-card-actions">
-      <ElButton type="primary"  @click.stop="editPatient">
+      <RouterLink v-if="permissions.ambulatoryCard" :to="ambulatoryCardPageLink">
+        <ElButton type="primary"> {{ $t('Base.AmbulatoryCard') }}</ElButton>
+      </RouterLink>
+
+      <ElButton v-if="permissions.editUser" type="primary" @click="editPatient">
         {{ $t('Base.Edit') }}
       </ElButton>
+
     </div>
   </ElCard>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
+import { insertRouteParams } from '@/utils/router.utils';
 import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer';
 
 export default {
   name: 'VPatientPatientCard',
@@ -61,10 +68,20 @@ export default {
     return {};
   },
   computed: {
+    ...mapState({
+      user: (state) => state.auth.user,
+    }),
+
+    permissions() {
+      return {
+        editUser: this.user.role !== User.enum.roles.Doctor,
+        ambulatoryCard: this.user.role === User.enum.roles.Doctor,
+      };
+    },
+
     isChildren() {
       return !!this.data.parent_id;
     },
-
     infoItems() {
       return [
         {
@@ -73,23 +90,26 @@ export default {
         },
         {
           label: this.$t('User.Gender'),
-          value: this.data.gender?.length ? this.$t(`User.Genders.${this.data.gender}`) : this.$t('Base.Absent')
+          value: this.data.gender?.length
+            ? this.$t(`User.Genders.${this.data.gender}`)
+            : this.$t('Base.Absent'),
         },
         {
           label: this.$t('User.Email'),
-          value: this.data?.email?.length ? this.data.email : this.$t('Base.Absent')
+          value: this.data?.email?.length ? this.data.email : this.$t('Base.Absent'),
         },
       ];
+    },
+
+    ambulatoryCardPageLink() {
+      return insertRouteParams({
+        path: PATIENT_ROUTE.childrenMap.PATIENT_ROUTE_AMBULATORY_CARD._fullPath,
+        params: { id: this.data.id },
+      });
     },
   },
 
   methods: {
-    goToPatient() {
-      this.$router.push({
-        name: PATIENT_ROUTE.name,
-        params: { id: this.data.id },
-      });
-    },
     async editPatient() {
       const action = await this.$store.dispatch('modalAndDrawer/openDrawer', {
         component: CreateOrEditPatientDrawer,

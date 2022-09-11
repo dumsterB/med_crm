@@ -32,6 +32,8 @@ export default {
     modelValue: Boolean,
     patient: [Patient, User, Object],
     data: [Appointment, Object],
+
+    disableDefaultAction: Boolean, // отключаем дефолтное поведение после создания
   },
   data() {
     return {
@@ -90,7 +92,7 @@ export default {
       return {
         isShow: this.appointmentType === this.appointmentTypesEnum.Doctor && !this.data,
         isDisabled: !this.appointment.patient_id,
-        isRequired: this.appointmentType === this.appointmentTypesEnum.Doctor && !this.data,
+        isRequired: false,
       };
     },
 
@@ -126,9 +128,7 @@ export default {
         isShow: this.appointmentType === this.appointmentTypesEnum.Doctor,
         isDisabled:
           this.appointmentType === this.appointmentTypesEnum.Doctor
-            ? this.data
-              ? !this.appointment.patient_id
-              : !this.appointment.specialty_id
+            ? !this.appointment.patient_id
             : false,
         isRequired: this.appointmentType === this.appointmentTypesEnum.Doctor,
         searchQuery: {
@@ -170,7 +170,9 @@ export default {
   watch: {
     'modelValue': {
       handler() {
-        this.appointment = new Appointment(this.data || { patient_id: this.patient?.id || null });
+        this.appointment = new Appointment(
+          this.data || { patient_id: this.patient?.id || null, doctor_id: this.user.doctor_id }
+        );
       },
       immediate: true,
       deep: true,
@@ -232,12 +234,7 @@ export default {
         'action',
         new GlobalDrawerAction({ name: 'created', data: { appointment: data.data } })
       );
-      this.$router.push({
-        name: APPOINTMENT_ROUTE.name,
-        params: {
-          id: data.data.id,
-        },
-      });
+      if (!this.disableDefaultAction) this.goToAppointment(data.data.id);
     },
 
     async editAppointment() {
@@ -251,12 +248,8 @@ export default {
         'action',
         new GlobalDrawerAction({ name: 'edited', data: { appointment: data.data } })
       );
-      this.$router.push({
-        name: APPOINTMENT_ROUTE.name,
-        params: {
-          id: data.data.id,
-        },
-      });
+
+      if (!this.disableDefaultAction) this.goToAppointment(data.data.id);
     },
 
     appointmentWatcherHandler({ field, value, oldValue }) {
@@ -305,6 +298,15 @@ export default {
 
       this.patientDrawer.newPatient = action.data.patient;
       this.appointment.patient_id = action.data;
+    },
+
+    goToAppointment(id) {
+      this.$router.push({
+        name: APPOINTMENT_ROUTE.name,
+        params: {
+          id: id,
+        },
+      });
     },
   },
 
