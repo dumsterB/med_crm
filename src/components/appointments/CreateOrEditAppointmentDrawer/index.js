@@ -92,7 +92,7 @@ export default {
       return {
         isShow: this.appointmentType === this.appointmentTypesEnum.Doctor && !this.data,
         isDisabled: !this.appointment.patient_id,
-        isRequired: this.appointmentType === this.appointmentTypesEnum.Doctor && !this.data,
+        isRequired: false,
       };
     },
 
@@ -128,9 +128,7 @@ export default {
         isShow: this.appointmentType === this.appointmentTypesEnum.Doctor,
         isDisabled:
           this.appointmentType === this.appointmentTypesEnum.Doctor
-            ? this.data
-              ? !this.appointment.patient_id
-              : !this.appointment.specialty_id
+            ? !this.appointment.patient_id
             : false,
         isRequired: this.appointmentType === this.appointmentTypesEnum.Doctor,
         searchQuery: {
@@ -172,7 +170,9 @@ export default {
   watch: {
     'modelValue': {
       handler() {
-        this.appointment = new Appointment(this.data || { patient_id: this.patient?.id || null });
+        this.appointment = new Appointment(
+          this.data || { patient_id: this.patient?.id || null, doctor_id: this.user.doctor_id }
+        );
       },
       immediate: true,
       deep: true,
