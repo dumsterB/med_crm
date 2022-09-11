@@ -14,10 +14,14 @@
         "woman": "Женщина",
         "null": ""
       },
+      "Height": "Рост",
       "IsChildren": "Ребёнок",
       "Parent": "Родитель",
       "Phone": "Телефон",
-      "PleaseInputNameOrPhone": "Введите номер или ФИО"
+      "PlaceResidence": "Место проживания",
+      "PleaseInputNameOrPhone": "Введите номер или ФИО",
+      "StudyWork": "Учёба - работа",
+      "Weight": "Вес"
     }
   },
   "uz": {
@@ -34,10 +38,14 @@
         "man": "Erkak",
         "woman": "Ayol"
       },
+      "Height": "Boyi",
       "IsChildren": "Yosh bola",
       "Parent": "Ota-onasi",
       "Phone": "Telefon raqami",
-      "PleaseInputNameOrPhone": "Telefon raqamini yoki FiSh kiriting"
+      "PlaceResidence": "Yashash joyi",
+      "PleaseInputNameOrPhone": "Telefon raqamini yoki FiSh kiriting",
+      "StudyWork": "O'qish - ishlash",
+      "Weight": "Vazni"
     }
   }
 }
