@@ -5,7 +5,7 @@
       label-position="top"
       ref="form"
       @submit.prevent="submitHandler">
-      <ElFormItem v-show="!readonly" label="select template">
+      <ElFormItem v-show="!readonly" :label="$t('Templates.SelectTemplate')">
         <UiModelsAutocompleteSearch
           v-model="templateId"
           label="title"
@@ -138,4 +138,5 @@ export default {
 <i18n src="@/locales/base.locales.json" />
 <i18n src="@/locales/appointments.locales.json" />
 <i18n src="@/locales/notifications.locales.json" />
+<i18n src="@/locales/templates.locales.json" />
 <i18n src="./index.locales.json" />

@@ -21,11 +21,9 @@
         </ElTableColumn>
 
         <ElTableColumn prop="actions" width="200" :label="$t('Base.Actions')">
-          <template #default="{ row }">
+          <template #default>
             <div class="reception-table-actions">
-              <ElButton type="primary" @click="goToReception">
-                {{ $t('Base.Open') }}
-              </ElButton>
+              <ElButton type="primary"> {{ $t('Base.Open') }} </ElButton>
             </div>
           </template>
         </ElTableColumn>
@@ -36,8 +34,10 @@
 
 <script>
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
+import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
+
 export default {
-  name: 'ReceptionTable',
+  name: 'AppointmentsByTreatmentTable',
   components: {
     AppointmentStatusTag,
   },
@@ -48,7 +48,14 @@ export default {
     loading: Boolean,
   },
   methods: {
-    goToReception() {},
+    goToReception(row) {
+      this.$router.push({
+        name: APPOINTMENT_ROUTE.name,
+        params: {
+          id: row.id,
+        },
+      });
+    },
   },
 };
 </script>

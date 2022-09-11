@@ -85,7 +85,7 @@
         <UiModelsAutocompleteSearch
           v-model="appointment.doctor_id"
           :modelForUse="Doctor"
-          :defaultItem="data?.doctor"
+          :defaultItem="data?.doctor || user?.doctor"
           :searchQuery="doctorsOptions.searchQuery"
           :disabled="doctorsOptions.isDisabled"
           :required="doctorsOptions.isRequired" />

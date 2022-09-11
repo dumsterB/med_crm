@@ -121,6 +121,9 @@ export default {
           this.appointment = data.data;
           this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
           this.redirectIfNeeded(status);
+
+          if (this.isDoctor && status === Appointment.enum.statuses.InProgress)
+            this.startDoctorProvideFlow();
         }
       } catch (err) {
         console.log(err);
@@ -293,7 +296,7 @@ export default {
      * @return {Promise<boolean>}
      */
     async suggestTreatment() {
-      // if(this.appointment.treatment_id) return false
+      if (this.appointment.treatment_id) return false;
 
       const action = await this.$store.dispatch('modalAndDrawer/openModal', SuggestTreatmentModal);
       return !(action instanceof GlobalModalCloseAction);
