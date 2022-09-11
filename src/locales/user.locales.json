@@ -4,6 +4,7 @@
       "AddChildren": "Добавить ребёнка",
       "Age": "Возраст",
       "Birthdate": "Дата рождения",
+      "BloodTypeRhFactor": "Группа крови и резус фактор",
       "Children": "Дети",
       "Email": "Почта",
       "FullName": "ФИО",
@@ -19,6 +20,7 @@
       "Parent": "Родитель",
       "Phone": "Телефон",
       "PlaceResidence": "Место проживания",
+      "PlaceTreatment": "Место лечения",
       "PleaseInputNameOrPhone": "Введите номер или ФИО",
       "StudyWork": "Учёба - работа",
       "Weight": "Вес"
@@ -29,6 +31,7 @@
       "AddChildren": "Bolani qo'shish",
       "Age": "Yosh",
       "Birthdate": "Tug'ilgan sanasi",
+      "BloodTypeRhFactor": "Qon guruhi va Rh omil",
       "Children": "Bolalar",
       "Email": "E-mail",
       "FullName": "FISh",
@@ -43,6 +46,7 @@
       "Parent": "Ota-onasi",
       "Phone": "Telefon raqami",
       "PlaceResidence": "Yashash joyi",
+      "PlaceTreatment": "Davolash joyi",
       "PleaseInputNameOrPhone": "Telefon raqamini yoki FiSh kiriting",
       "StudyWork": "O'qish - ishlash",
       "Weight": "Vazni"
