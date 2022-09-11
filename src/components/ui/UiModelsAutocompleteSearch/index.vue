@@ -93,7 +93,8 @@ export default {
     },
     defaultItem: {
       handler() {
-        if (this.defaultItem) this.items = [this.defaultItem];
+        if (this.defaultItem)
+          this.items = this.defaultItem instanceof Array ? this.defaultItem : [this.defaultItem];
       },
       immediate: true,
     },
