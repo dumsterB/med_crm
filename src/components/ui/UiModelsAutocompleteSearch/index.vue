@@ -1,52 +1,60 @@
 <template>
-  <ElAutocomplete
-    class="ui-models-autocomplete-search"
-    v-model="query"
-    :value-key="label"
-    :placeholder="placeholder || $t('Base.PleaseInput')"
-    :fetch-suggestions="getItems"
-    :debounce="250"
-    :required="required"
+  <ElSelect
+    :class="['ui-models-autocomplete-search', $attrs.class]"
+    :model-value="modelValue"
+    remote
+    filterable
+    reserve-keyword
+    :remote-method="getItems"
+    :loading="loading"
+    :multiple="multiple"
     :disabled="disabled"
-    clearable
-    ref="component"
-    @select="selectHandler">
-    <template #default="{ item }">
-      <div v-if="item.id === localEnum.NO_DATA_KEY" class="ui-models-autocomplete-search-empty">
-        <slot name="empty" :item="item" :query="query">
-          {{ $t('Base.NoData') }}
-        </slot>
-      </div>
+    :placeholder="placeholder || $t('Base.PleaseInput')"
+    :no-data-text="$t('Base.NoData')"
+    @visible-change="getItems"
+    @update:model-value="$emit('update:modelValue', $event)"
+    ref="component">
+    <ElOption
+      v-for="(item, index) in items"
+      :key="item.id || index"
+      :label="item[label]"
+      :value="item[value]">
+    </ElOption>
 
-      <div v-if="item.id === localEnum.CREATE_KEY" class="ui-models-autocomplete-search-create">
-        <slot name="create" :item="item" :query="query">
-          <ElButton type="primary" text size="small">
-            <template #icon> <UiIcon :icon="icons.PLUS" /> </template>
-            {{ $t('Base.Create') }}
-          </ElButton>
-        </slot>
-      </div>
+    <template #empty>
+      <div class="ui-models-autocomplete-search-empty">
+        <div class="ui-models-autocomplete-search-empty__text">
+          {{ loading ? 'Loading' : $t('Base.NoData') }}
+        </div>
 
-      <template v-else>
-        <slot name="default" :label="item[label]" :item="item">
-          {{ item[label] }}
-        </slot>
-      </template>
+        <ElButton
+          v-if="showCreateOption"
+          v-show="!loading"
+          class="ui-models-autocomplete-search-empty__create"
+          type="primary"
+          text
+          size="default"
+          @click="createItem">
+          <template #icon> <UiIcon :icon="icons.PLUS" /> </template>
+          {{ $t('Base.Create') }}
+        </ElButton>
+      </div>
     </template>
-  </ElAutocomplete>
+  </ElSelect>
+
+  <UiRequiredHiddenInput :model-value="modelValue" :required="required" />
 </template>
 
 <script>
 import * as icons from '@/enums/icons.enum.js';
 import { CRUDModel } from '@/models/CRUD.model';
-import { cloneDeep } from 'lodash';
 
 export default {
   name: 'UiModelsAutocompleteSearch',
-  emits: ['update:modelValue', 'select', 'update:data', 'create'],
+  emits: ['update:modelValue', 'update:data', 'create'],
   slots: ['default', 'empty', 'create'],
   props: {
-    modelValue: [Number, String],
+    modelValue: [Number, String, Boolean, Array],
     // принимает все классы расширяющий CRUDModel
     // для поиска вызвается find метод этого класса
     modelForUse: [CRUDModel, Function],
@@ -64,6 +72,7 @@ export default {
       default: 'id',
     },
 
+    multiple: Boolean,
     required: Boolean,
     disabled: Boolean,
     placeholder: String,
@@ -72,6 +81,8 @@ export default {
   data() {
     return {
       query: '',
+      items: [],
+      loading: false,
     };
   },
   watch: {
@@ -82,19 +93,16 @@ export default {
     },
     defaultItem: {
       handler() {
-        if (this.defaultItem) this.query = this.defaultItem[this.label];
+        if (this.defaultItem)
+          this.items = this.defaultItem instanceof Array ? this.defaultItem : [this.defaultItem];
       },
-      immediate: true,
-    },
-    query: {
-      handler() {},
       immediate: true,
     },
   },
 
   methods: {
-    async getItems(query, cb) {
-      if (!query.length) this.$emit('update:modelValue', null);
+    async getItems(query) {
+      this.loading = true;
 
       const { data } = await this.modelForUse.find({
         page: 1,
@@ -102,30 +110,19 @@ export default {
         query_type: 'ILIKE',
         query_field: ['name'],
         query_operator: 'OR',
-        search: query,
+        search: typeof query === 'string' ? query : '',
 
         ...(this.searchQuery || {}),
       });
 
-      const options = [
-        ...data.data,
-        ...(!data.data.length ? [{ id: this.localEnum.NO_DATA_KEY, [this.label]: '' }] : []),
-        ...(this.showCreateOption
-          ? [{ id: this.localEnum.CREATE_KEY, [this.label]: this.query }]
-          : []),
-      ];
+      this.items = data.data;
 
-      cb(options);
+      this.loading = false;
       this.$emit('update:data', data.data);
     },
 
-    selectHandler(payload) {
-      if (payload.id === this.localEnum.NO_DATA_KEY) return;
-      if (payload.id === this.localEnum.CREATE_KEY)
-        return this.$emit('create', { query: this.query });
-
-      this.$emit('update:modelValue', payload[this.value]);
-      this.$emit('select', cloneDeep(payload));
+    createItem() {
+      return this.$emit('create', this.$refs.component.query);
     },
 
     focus() {
@@ -138,10 +135,6 @@ export default {
 
   setup: () => ({
     icons,
-    localEnum: {
-      NO_DATA_KEY: 'NO_DATA_KEY',
-      CREATE_KEY: 'CREATE_KEY',
-    },
   }),
 };
 </script>
