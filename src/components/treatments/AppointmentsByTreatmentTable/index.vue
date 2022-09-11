@@ -37,7 +37,7 @@ import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 
 export default {
-  name: 'ReceptionTable',
+  name: 'AppointmentsByTreatmentTable',
   components: {
     AppointmentStatusTag,
   },

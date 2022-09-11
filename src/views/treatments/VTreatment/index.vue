@@ -22,7 +22,10 @@
       class="v-patient-treatment-item-empty"
       v-show="!receptions?.length && !loading.reception"
       :description="$t('Base.NoData')" />
-    <ReceptionTable v-if="receptions?.length" :data="receptions" :loading="loading.reception" />
+    <AppointmentsByTreatmentTable
+      v-if="receptions?.length"
+      :data="receptions"
+      :loading="loading.reception" />
   </LayoutDoctor>
 </template>
 
@@ -33,7 +36,7 @@ import { insertRouteParams } from '@/utils/router.utils';
 import { PATIENT_ROUTE } from '@/router/patients.routes';
 
 import TreatmentCard from '@/components/treatments/TreatmentCard/index.vue';
-import ReceptionTable from '@/components/treatments/AppointmentsByTreatmentTable/index.vue';
+import AppointmentsByTreatmentTable from '@/components/treatments/AppointmentsByTreatmentTable/index.vue';
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
 import LayoutDoctor from '@/components/layouts/LayoutDoctor/index.vue';
 
@@ -43,7 +46,7 @@ export default {
     LayoutContentHeader,
     LayoutDoctor,
     TreatmentCard,
-    ReceptionTable,
+    AppointmentsByTreatmentTable,
   },
   props: {
     id: [Number, String],
