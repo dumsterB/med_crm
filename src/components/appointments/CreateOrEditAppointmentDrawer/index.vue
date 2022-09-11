@@ -99,7 +99,7 @@
         <UiModelsAutocompleteSearch
           v-model="appointment.service_ids"
           label="title"
-          :defaultItem="data?.service"
+          :defaultItem="data?.services"
           :modelForUse="Service"
           :searchQuery="servicesOptions.searchQuery"
           :disabled="servicesOptions.isDisabled"
