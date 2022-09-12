@@ -110,6 +110,20 @@ export default {
       },
       immediate: true,
     },
+
+    'appointment.status': {
+      handler(value) {
+        if (
+          (value &&
+            ![Appointment.enum.statuses.InProgress, Appointment.enum.statuses.Provided].includes(
+              value
+            )) ||
+          this.appointment.service_case_id
+        )
+          return this.goToAppointment();
+      },
+      immediate: true,
+    },
   },
 
   methods: {
