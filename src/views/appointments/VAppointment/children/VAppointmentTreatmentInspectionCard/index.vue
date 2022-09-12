@@ -101,7 +101,12 @@ export default {
   watch: {
     'appointment.id': {
       handler() {
-        this.inspectionCard = new TreatmentInspectionCard(this.appointment.inspection_card || {});
+        this.inspectionCard = new TreatmentInspectionCard(
+          this.appointment.inspection_card || {
+            user_id: this.appointment.patient_id,
+            appointment_id: this.appointment.id,
+          }
+        );
       },
       immediate: true,
     },
