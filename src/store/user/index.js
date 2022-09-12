@@ -1,6 +1,7 @@
 /** @typedef UserPayload
  *  @property {boolean} has_active_appointment
  */
+import { ACTIVE_APPOINTMENT, HAS_ACTIVE_APPOINTMENT } from '@/store/user/index.enum';
 
 export default {
   namespaced: true,
@@ -31,10 +32,16 @@ export default {
     SET_ACTIVE_APPOINTMENT: (state, appointment) => {
       state.userPayload.active_appointment = appointment;
       state.userPayload.has_active_appointment = true;
+
+      localStorage.setItem(ACTIVE_APPOINTMENT, JSON.stringify(appointment));
+      localStorage.setItem(HAS_ACTIVE_APPOINTMENT, 1);
     },
     CLOSE_ACTIVE_APPOINTMENT: (state) => {
       state.userPayload.active_appointment = null;
       state.userPayload.has_active_appointment = false;
+
+      localStorage.removeItem(ACTIVE_APPOINTMENT);
+      localStorage.removeItem(HAS_ACTIVE_APPOINTMENT);
     },
   },
   actions: {
@@ -56,6 +63,13 @@ export default {
     },
     closeActiveAppointment({ commit }) {
       commit('CLOSE_ACTIVE_APPOINTMENT');
+    },
+
+    getDataFromStorage({ dispatch }) {
+      const hasActiveAppointment = localStorage.getItem(HAS_ACTIVE_APPOINTMENT);
+      if (hasActiveAppointment) {
+        dispatch('setActiveAppointment', JSON.parse(localStorage.getItem(ACTIVE_APPOINTMENT)));
+      }
     },
   },
 };
