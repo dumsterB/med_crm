@@ -277,9 +277,9 @@ export default {
           // appointment.type === Service используется компонент которые сразу обновляет два поля doctor_id, service_id
           if (
             this.appointmentType !== this.appointmentTypesEnum.Service &&
-            this.appointment.service_id
+            this.appointment.service_ids.length
           ) {
-            this.appointment.service_id = null;
+            this.appointment.service_ids = [];
           }
 
           if (this.appointment.start_at) this.appointment.start_at = null;
