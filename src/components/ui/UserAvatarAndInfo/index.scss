@@ -1,13 +1,36 @@
-.user-avatar-and-info {
+.avatar-and-info {
   display: flex;
   justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  overflow: hidden;
+  gap: 10px;
   &-content {
+    &-info {
+      cursor: pointer;
+      &-private {
+        &-name {
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 24px;
+          display: flex;
+          align-items: center;
+          letter-spacing: 0.5px;
+          color: #404040;
+        }
+        &-icon {
+          margin-top: -30px;
+        }
+      }
+    }
+    &-img {
+      border-radius: 50%;
+      align-items: center;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+    }
+
     &_md {
-      height: 35px;
-      width: 35px;
+      height: 40px;
+      width: 40px;
     }
     &_lg {
       height: 70px;
@@ -17,7 +40,7 @@
 
   &-img {
     &_md {
-      height: 25px;
+      height: 30px;
     }
     &_lg {
       height: 50px;

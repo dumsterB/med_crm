@@ -1,17 +1,29 @@
 <template>
   <div class="registry-header">
     <PatientsSearch class="registry-header__search" />
-    <LangSelect />
+    <div class="registry-header-dropdown">
+      <UserAvatarAndInfo :gender="user.gender" :user="user"></UserAvatarAndInfo>
+      <LangSelect />
+    </div>
   </div>
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import LangSelect from '@/components/LangSelect/index.vue';
 import PatientsSearch from '@/components/patients/PatientsSearch/index.vue';
-
+import UserAvatarAndInfo from '@/components/ui/UserAvatarAndInfo/index.vue';
 export default {
   name: 'RegistryHeader',
-  components: { LangSelect, PatientsSearch },
+  components: { LangSelect, PatientsSearch, UserAvatarAndInfo },
+  computed: {
+    ...mapState({
+      user: (state) => state.auth.user,
+    })
+  },
+  watch:{
+
+  }
 };
 </script>
 
