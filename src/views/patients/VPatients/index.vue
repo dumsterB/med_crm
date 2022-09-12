@@ -85,7 +85,7 @@ export default {
           oldQuery: oldValue,
           resetPage: this.page.reset,
           getData: this.getPatients,
-          fieldsForResetPage: ['doctor'],
+          fieldsForResetPage: ['findForDoctor'],
         });
       },
       immediate: true,
