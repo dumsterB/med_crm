@@ -1,48 +1,51 @@
 <template>
-  <ElSelect
-    :class="['ui-models-autocomplete-search', $attrs.class]"
-    :model-value="modelValue"
-    remote
-    filterable
-    reserve-keyword
-    :remote-method="getItems"
-    :loading="loading"
-    :multiple="multiple"
-    :disabled="disabled"
-    :placeholder="placeholder || $t('Base.PleaseInput')"
-    :no-data-text="$t('Base.NoData')"
-    @visible-change="getItems"
-    @update:model-value="$emit('update:modelValue', $event)"
-    ref="component">
-    <ElOption
-      v-for="(item, index) in items"
-      :key="item.id || index"
-      :label="item[label]"
-      :value="item[value]">
-    </ElOption>
+  <div class="ui-models-autocomplete-search">
+    <ElSelect
+      :class="['ui-models-autocomplete-search__select', $attrs.class]"
+      :model-value="modelValue"
+      remote
+      filterable
+      reserve-keyword
+      :remote-method="getItems"
+      :loading="loading"
+      :multiple="multiple"
+      :disabled="disabled"
+      :placeholder="placeholder || $t('Base.PleaseInput')"
+      :clearable="clearable"
+      :no-data-text="$t('Base.NoData')"
+      @visible-change="getItems"
+      @update:model-value="$emit('update:modelValue', $event)"
+      ref="component">
+      <ElOption
+        v-for="(item, index) in items"
+        :key="item.id || index"
+        :label="item[label]"
+        :value="item[value]">
+      </ElOption>
 
-    <template #empty>
-      <div class="ui-models-autocomplete-search-empty">
-        <div class="ui-models-autocomplete-search-empty__text">
-          {{ loading ? 'Loading' : $t('Base.NoData') }}
+      <template #empty>
+        <div class="ui-models-autocomplete-search-empty">
+          <div class="ui-models-autocomplete-search-empty__text">
+            {{ loading ? 'Loading' : $t('Base.NoData') }}
+          </div>
+
+          <ElButton
+            v-if="showCreateOption"
+            v-show="!loading"
+            class="ui-models-autocomplete-search-empty__create"
+            type="primary"
+            text
+            size="default"
+            @click="createItem">
+            <template #icon> <UiIcon :icon="icons.PLUS" /> </template>
+            {{ $t('Base.Create') }}
+          </ElButton>
         </div>
+      </template>
+    </ElSelect>
 
-        <ElButton
-          v-if="showCreateOption"
-          v-show="!loading"
-          class="ui-models-autocomplete-search-empty__create"
-          type="primary"
-          text
-          size="default"
-          @click="createItem">
-          <template #icon> <UiIcon :icon="icons.PLUS" /> </template>
-          {{ $t('Base.Create') }}
-        </ElButton>
-      </div>
-    </template>
-  </ElSelect>
-
-  <UiRequiredHiddenInput :model-value="modelValue" :required="required" />
+    <UiRequiredHiddenInput :model-value="modelValue" :required="required" />
+  </div>
 </template>
 
 <script>
@@ -76,6 +79,7 @@ export default {
     required: Boolean,
     disabled: Boolean,
     placeholder: String,
+    clearable: Boolean,
     showCreateOption: Boolean,
   },
   data() {

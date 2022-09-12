@@ -156,7 +156,7 @@ export default {
       return {
         isDisabled:
           this.appointmentType === this.appointmentTypesEnum.Doctor
-            ? !this.appointment.service_id
+            ? !this.appointment.service_ids.length
             : !this.appointment.group_service_id,
         dependencies: {
           type: this.appointmentType,
