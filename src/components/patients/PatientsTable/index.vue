@@ -19,7 +19,8 @@
         <ElTableColumn prop="name" :label="$t('User.FullName')">
           <template #default="{ row }">
             <div class="patients-table__name-avatar">
-              <UiAvatar :image="row.avatar" />
+<!--              <UiAvatar :image="row.avatar" />-->
+              <UserAvatarAndInfo :gender="row.gender"></UserAvatarAndInfo>
               <span> {{ row.name }} </span>
             </div>
           </template>
@@ -82,12 +83,16 @@ import { PAGE_SIZES } from '@/config/ui.config';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
 
+import UserAvatarAndInfo from "@/components/ui/UserAvatarAndInfo/index.vue";
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 
 export default {
   name: 'PatientsTable',
   emits: ['update:perPage', 'update:page'],
+  components:{
+    UserAvatarAndInfo
+  },
   props: {
     /**
      * @param { Array<Patient|object> } items
