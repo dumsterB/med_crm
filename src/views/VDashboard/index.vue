@@ -12,11 +12,12 @@
         <UiModelsAutocompleteSearch
           v-if="!userIsDoctor"
           class="v-dashboard-content__doctor-select"
-          v-model="doctorId.value"
+          :model-value="doctorId.value || null"
           :model-for-use="Doctor"
           :default-item="doctor"
           :placeholder="$t('Appointments.SelectDoctor')"
-          clearable />
+          clearable
+          @update:model-value="doctorId.value = $event" />
       </template>
     </EventCalendar>
   </LayoutByUserRole>
