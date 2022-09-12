@@ -31,7 +31,7 @@ export class ScheduleSlot extends CRUDModel {
     const urlWithQuery = mergeOrCreateQuery({
       url: 'schedule/slots',
       query: {
-        service_ids: serviceIds,
+        service_id: serviceIds[0], // TODO: убрать
         from,
         to,
       },
