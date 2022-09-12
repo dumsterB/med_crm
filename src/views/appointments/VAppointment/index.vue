@@ -124,17 +124,11 @@ export default {
 
           if (this.isDoctor && status === Appointment.enum.statuses.InProgress) {
             this.startDoctorProvideFlow();
-            this.$store.dispatch('user/setPayloadByKey', {
-              key: 'has_active_appointment',
-              value: true,
-            });
+            this.$store.dispatch('user/setActiveAppointment', this.appointment);
           }
 
           if (this.isDoctor && status === Appointment.enum.statuses.Provided) {
-            this.$store.dispatch('user/setPayloadByKey', {
-              key: 'has_active_appointment',
-              value: false,
-            });
+            this.$store.dispatch('user/closeActiveAppointment');
           }
         }
       } catch (err) {
