@@ -2,6 +2,7 @@
   <LayoutRegistry
     :loading="loading.profile || loading.appointment"
     content-class="v-patient-content">
+    <ElButton type="primary" @click="tcpHandler"> TCP </ElButton>
     <RouterView
       v-if="patient"
       v-model:patient="patient"
@@ -14,6 +15,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import * as icons from '@/enums/icons.enum.js';
 import { Patient } from '@/models/Patient.model';
 import { Appointment } from '@/models/Appointment.model';
@@ -21,6 +23,7 @@ import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDr
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
+import { ApiService } from '@/services/api.service';
 
 export default {
   name: 'VPatient',
@@ -107,6 +110,31 @@ export default {
         payload: {
           data: new Patient({ parent: this.patient, parent_id: this.patient.id }),
         },
+      });
+    },
+
+    async tcpHandler() {
+      const blob = new TextEncoder().encode(
+        'SIZE 150 mm, 100.1 mm' +
+          '\n' +
+          'GAP 3 mm, 0 mm' +
+          '\n' +
+          'CLS' +
+          '\n' +
+          'QRCODE 10,10,H,10,A,0,"https://zordoc.uz"' +
+          '\n' +
+          `TEXT 200, 200, "1", 0, 2, 2, "\["]DEMO FOR TEXT\["]"` +
+          '\n' +
+          'PRINT 1,1' +
+          '\n'
+        // { type: 'text/plain' }
+      );
+
+      console.log(blob);
+
+      const data = await fetch(`http://192.168.0.100:9100`, {
+        method: 'POST',
+        body: blob,
       });
     },
   },
