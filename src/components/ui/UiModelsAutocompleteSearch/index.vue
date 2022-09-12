@@ -15,6 +15,7 @@
       :no-data-text="$t('Base.NoData')"
       @visible-change="getItems"
       @update:model-value="$emit('update:modelValue', $event)"
+      @change="selectHandler"
       ref="component">
       <ElOption
         v-for="(item, index) in items"
@@ -54,7 +55,7 @@ import { CRUDModel } from '@/models/CRUD.model';
 
 export default {
   name: 'UiModelsAutocompleteSearch',
-  emits: ['update:modelValue', 'update:data', 'create'],
+  emits: ['update:modelValue', 'update:data', 'create', 'select'],
   slots: ['default', 'empty', 'create'],
   props: {
     modelValue: [Number, String, Boolean, Array],
@@ -123,6 +124,13 @@ export default {
 
       this.loading = false;
       this.$emit('update:data', data.data);
+    },
+
+    selectHandler(id) {
+      this.$emit(
+        'select',
+        this.items.find((elem) => elem[this.value] === id)
+      );
     },
 
     createItem() {
