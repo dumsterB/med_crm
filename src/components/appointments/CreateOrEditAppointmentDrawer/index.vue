@@ -2,7 +2,7 @@
   <ElDrawer
     custom-class="create-appointment-drawer"
     :model-value="modelValue"
-    :title="$t(`Title.${data ? 'Edit' : 'Create'}`)"
+    :title="$t(`Title.${data?.id ? 'Edit' : 'Create'}`)"
     @update:model-value="$emit('update:modelValue', $event)">
     <ElForm
       class="create-appointment-drawer-form"
@@ -85,7 +85,7 @@
         <UiModelsAutocompleteSearch
           v-model="appointment.doctor_id"
           :modelForUse="Doctor"
-          :defaultItem="data?.doctor"
+          :defaultItem="data?.doctor || user?.doctor"
           :searchQuery="doctorsOptions.searchQuery"
           :disabled="doctorsOptions.isDisabled"
           :required="doctorsOptions.isRequired" />
@@ -97,13 +97,14 @@
         :label="$t('SelectService')"
         :style="{ order: this.appointmentFieldsFlexOrder.service }">
         <UiModelsAutocompleteSearch
-          v-model="appointment.service_id"
+          v-model="appointment.service_ids"
           label="title"
-          :defaultItem="data?.service"
+          :defaultItem="data?.services"
           :modelForUse="Service"
           :searchQuery="servicesOptions.searchQuery"
           :disabled="servicesOptions.isDisabled"
-          :required="servicesOptions.isRequired" />
+          :required="servicesOptions.isRequired"
+          multiple />
       </ElFormItem>
 
       <!--  Date  -->
@@ -116,7 +117,7 @@
           :default-start-at="data?.start_at"
           :default-end-at="data?.end_at"
           :disabled="slotsOptions.isDisabled"
-          :service-id="appointment.service_id"
+          :service-ids="appointment.service_ids"
           :group-service-id="appointment.group_service_id"
           :dependencies="slotsOptions.dependencies" />
       </ElFormItem>

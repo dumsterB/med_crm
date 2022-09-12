@@ -12,13 +12,13 @@ export class Patient extends User {
 
   /**
    * @param {UserConstructorPayload} [payload]
-   * @
    */
   constructor(payload) {
     super(payload);
 
     this.role = User.enum.roles.Patient;
     this.ambulatory_card = payload?.ambulatory_card || null;
+    this.has_treatment = payload?.has_treatment ?? true;
   }
 
   static async create(payload) {

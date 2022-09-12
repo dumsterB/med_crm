@@ -1,34 +1,40 @@
 <template>
-  <LayoutRegistry
-    :loading="loading.profile || loading.appointment"
+  <LayoutByUserRole
+    :loading="loading.profile || loading.appointment || loading.treatments"
     content-class="v-patient-content">
     <ElButton type="primary" @click="tcpHandler"> TCP </ElButton>
     <RouterView
       v-if="patient"
       v-model:patient="patient"
       :appointments="appointments"
+      :treatments="treatments"
       :loading="loading"
       @appointment:create="createAppointment"
+      @treatment:create="createTreatment"
+      @treatment:updated="updateTreatment"
       @patient:createChildren="createChildren">
     </RouterView>
-  </LayoutRegistry>
+  </LayoutByUserRole>
 </template>
 
 <script>
-import axios from 'axios';
+import { mapState } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
 import { Patient } from '@/models/Patient.model';
 import { Appointment } from '@/models/Appointment.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
-import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
+import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
+import { Treatment } from '@/models/Treatment.model';
+
+import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
-import { ApiService } from '@/services/api.service';
+import CreateTreatmentModal from '@/components/treatments/CreateTreatmentModal/index.vue';
 
 export default {
   name: 'VPatient',
   components: {
-    LayoutRegistry,
+    LayoutByUserRole,
   },
   icons: icons,
   props: {
@@ -43,10 +49,16 @@ export default {
       loading: {
         profile: false,
         appointment: false,
+        treatments: false,
       },
     };
   },
   computed: {
+    ...mapState({
+      treatments: (state) => state.treatments.data,
+      user: (state) => state.auth.user,
+    }),
+
     isChildren() {
       return !!this.patient.parent_id;
     },
@@ -56,6 +68,7 @@ export default {
       async handler() {
         await this.getUser();
         this.getAppointments();
+        this.getTreatmentByUserId();
       },
       immediate: true,
     },
@@ -85,6 +98,16 @@ export default {
 
       this.loading.appointment = false;
     },
+
+    async getTreatmentByUserId() {
+      this.loading.treatments = true;
+
+      const { data } = await Treatment.findByUserId(this.id);
+
+      this.$store.dispatch('treatments/setData', { items: data.data, overwriteDataState: true });
+      this.loading.treatments = false;
+    },
+
     createAppointment() {
       this.$store.dispatch('modalAndDrawer/openDrawer', {
         component: CreateOrEditAppointmentDrawer,
@@ -92,6 +115,22 @@ export default {
           patient: this.patient,
         },
       });
+    },
+
+    async createTreatment() {
+      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
+        component: CreateTreatmentModal,
+        payload: {
+          userId: this.patient.id,
+        },
+      });
+
+      if (action instanceof GlobalModalCloseAction) return;
+      this.$store.dispatch('treatments/createItem', action.data.treatment);
+    },
+
+    updateTreatment(treatment) {
+      this.$store.dispatch('treatments/editItem', treatment);
     },
 
     async editPatient() {

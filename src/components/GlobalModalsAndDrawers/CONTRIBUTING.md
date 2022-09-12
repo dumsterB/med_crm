@@ -15,3 +15,4 @@ const drawerPayload: GlobalDrawerAction|GlobalDrawerCloseAction = await this.$st
 * 'created' - создано
 * 'updated' - обновлено
 * 'deleted' - удалено
+* 'selected' - выбран

@@ -5,6 +5,7 @@ import { routes as patientsRoutes } from './patients.routes';
 import { routes as dashboardRoutes, DASHBOARD_ROUTE } from './dashboard.routes';
 import { routes as doctorsRoutes, DOCTORS_QUEUE_ROUTE } from './doctors.routes';
 import { routes as appointmentsRoutes } from './appointments.routes';
+import { routes as treatmentsRoutes } from './treatments.routes';
 
 import { onlyLoggedInMiddleware } from '@/middlewares/onlyLoggedIn.middleware';
 import { Store } from '@/store';
@@ -26,6 +27,7 @@ const router = createRouter({
         ...dashboardRoutes,
         ...doctorsRoutes,
         ...appointmentsRoutes,
+        ...treatmentsRoutes,
 
         {
           path: '/404',

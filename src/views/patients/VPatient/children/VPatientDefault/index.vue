@@ -9,7 +9,8 @@
       <PatientCard
         :data="patient"
         type="horizontal"
-        @update:data="$emit('update:patient', $event)" />
+        @update:data="$emit('update:patient', $event)"
+        @create:treatment="$emit('treatment:create', $event)" />
     </div>
   </div>
 
@@ -17,7 +18,9 @@
   <div v-show="!isChildren" class="v-patient-default-item">
     <div class="v-patient-default-item__header v-patient-default-item-header">
       <div class="v-patient-default__title">{{ $t('User.Children') }}</div>
-      <ElButton type="primary" @click="$emit('')"> {{ $t('User.AddChildren') }}</ElButton>
+      <ElButton type="primary" @click="$emit('patient:createChildren')">
+        {{ $t('User.AddChildren') }}
+      </ElButton>
     </div>
 
     <ElEmpty
@@ -56,7 +59,31 @@
         :total="appointments?.length"
         :perPage="appointments?.length"
         :page="1"
-        :items="appointments"></AppointmentsTable>
+        :items="appointments" />
+    </div>
+  </div>
+
+  <!--  Treatments  -->
+  <div class="v-patient-default__item v-patient-default-item">
+    <div class="v-patient-default-item__header v-patient-default-item-header">
+      <div class="v-patient-default__title">{{ $t('Base.TableTreatment') }}</div>
+      <ElButton type="primary" @click="$emit('treatment:create')">
+        {{ $t('Base.SetTreatment') }}
+      </ElButton>
+    </div>
+
+    <ElEmpty
+      class="v-patient-default-item-empty"
+      v-show="!treatments?.length && !loading.treatments"
+      :description="$t('Base.NoData')" />
+
+    <div class="v-patient-default-item__body" v-if="treatments?.length">
+      <TreatmentsTable
+        :total="treatments?.length"
+        :perPage="treatments?.length"
+        :page="1"
+        :items="treatments"
+        @item:update="$emit('treatment:updated', $event)" />
     </div>
   </div>
 </template>
@@ -64,17 +91,26 @@
 <script>
 import * as icons from '@/enums/icons.enum.js';
 import { Patient } from '@/models/Patient.model';
+
 import PatientCard from '@/components/views/VPatient/PatientCard/index.vue';
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
+import TreatmentsTable from '@/components/treatments/TreatmentsTable/index.vue';
 
 export default {
   name: 'VPatientDefault',
-  emits: ['update:patient', 'appointment:create', 'patient:createChildren'],
+  emits: [
+    'update:patient',
+    'appointment:create',
+    'patient:createChildren',
+    'treatment:create',
+    'treatment:updated',
+  ],
   components: {
     PatientCard,
     AppointmentsTable,
     PatientsTable,
+    TreatmentsTable,
   },
   icons: icons,
   props: {
@@ -82,6 +118,8 @@ export default {
 
     /** @param {Array<Appointment>} appointments */
     appointments: Array,
+    /** @param {Array<Treatment>} treatments */
+    treatments: Array,
 
     /** @param {{profile: boolean, appointment: boolean}} loading */
     loading: Object,

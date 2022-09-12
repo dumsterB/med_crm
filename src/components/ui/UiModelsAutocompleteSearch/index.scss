@@ -1,17 +1,25 @@
 .ui-models-autocomplete-search {
+  display: flex;
+  flex-direction: column;
   width: 100%;
 
-  &-empty {
-    text-align: center;
+  &__select {
+    width: 100%;
   }
-  &-create {
+
+  &-empty {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5px 0;
+    gap: 8px;
+    padding: 14px 10px;
 
-    & > .el-button {
-      min-width: 12em;
+    &__text {
+      text-align: center;
+    }
+
+    &__create {
+      margin-left: auto;
     }
   }
 }
