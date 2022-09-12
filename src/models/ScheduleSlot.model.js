@@ -27,11 +27,11 @@ export class ScheduleSlot extends CRUDModel {
    * @param {Date|string} to
    * @return {Promise<{response: AxiosResponse<*>, data: response.data}>}
    */
-  static async getSlotsByServiceId({ serviceId, from, to }) {
+  static async getSlotsByServiceIds({ serviceIds, from, to }) {
     const urlWithQuery = mergeOrCreateQuery({
       url: 'schedule/slots',
       query: {
-        service_id: serviceId,
+        service_ids: serviceIds,
         from,
         to,
       },
