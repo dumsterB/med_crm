@@ -117,7 +117,7 @@
           :default-start-at="data?.start_at"
           :default-end-at="data?.end_at"
           :disabled="slotsOptions.isDisabled"
-          :service-id="appointment.service_id"
+          :service-ids="appointment.service_ids"
           :group-service-id="appointment.group_service_id"
           :dependencies="slotsOptions.dependencies" />
       </ElFormItem>
