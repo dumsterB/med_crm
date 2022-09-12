@@ -122,8 +122,20 @@ export default {
           this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
           this.redirectIfNeeded(status);
 
-          if (this.isDoctor && status === Appointment.enum.statuses.InProgress)
+          if (this.isDoctor && status === Appointment.enum.statuses.InProgress) {
             this.startDoctorProvideFlow();
+            this.$store.dispatch('user/setPayloadByKey', {
+              key: 'has_active_appointment',
+              value: true,
+            });
+          }
+
+          if (this.isDoctor && status === Appointment.enum.statuses.Provided) {
+            this.$store.dispatch('user/setPayloadByKey', {
+              key: 'has_active_appointment',
+              value: false,
+            });
+          }
         }
       } catch (err) {
         console.log(err);
