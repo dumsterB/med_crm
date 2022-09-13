@@ -62,7 +62,7 @@
           :modelForUse="ServiceGroup"
           :searchQuery="groupServicesOptions.searchQuery"
           :disabled="groupServicesOptions.isDisabled"
-          :required="appointmentType === appointmentTypesEnum.Service"
+          :required="groupServicesOptions.isRequired"
           multiple
           @update:data="groupServices = $event" />
       </ElFormItem>

@@ -103,6 +103,7 @@ export default {
           this.appointmentType === this.appointmentTypesEnum.Service
             ? !this.appointment.patient_id
             : true,
+        isRequired: this.appointmentType === this.appointmentTypesEnum.Service,
         searchQuery: {
           query_field: null,
           query_type: null,
@@ -117,7 +118,9 @@ export default {
 
     doctorsAndServicesOptions() {
       return {
-        isShow: this.appointmentType === this.appointmentTypesEnum.Service,
+        isShow:
+          this.appointmentType === this.appointmentTypesEnum.Service &&
+          this.appointment.group_service_ids.length < 2,
         // isRequired: this.appointmentType === this.appointmentTypesEnum.Service,
         isRequired: false,
       };
@@ -154,7 +157,8 @@ export default {
 
     slotsOptions() {
       return {
-        isShow: this.appointment.service_ids.length < 2,
+        isShow:
+          this.appointment.service_ids.length < 2 && this.appointment.group_service_ids.length < 2,
         isDisabled:
           this.appointmentType === this.appointmentTypesEnum.Doctor
             ? !this.appointment.service_ids.length
