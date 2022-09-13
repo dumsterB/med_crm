@@ -154,6 +154,7 @@ export default {
 
     slotsOptions() {
       return {
+        isShow: this.appointment.service_ids.length < 2,
         isDisabled:
           this.appointmentType === this.appointmentTypesEnum.Doctor
             ? !this.appointment.service_ids.length

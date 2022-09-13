@@ -109,6 +109,7 @@
 
       <!--  Date  -->
       <ElFormItem
+        v-show="slotsOptions.isShow"
         :label="$t('DateAndTime.SelectDate')"
         :style="{ order: this.appointmentFieldsFlexOrder.date }">
         <ScheduleSlotsSelect
