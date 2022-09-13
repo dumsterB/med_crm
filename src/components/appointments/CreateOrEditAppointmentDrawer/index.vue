@@ -41,7 +41,7 @@
       </ElFormItem>
 
       <!--  Specialty  -->
-      <ElFormItem
+      <!--      <ElFormItem
         v-show="specialtiesOptions.isShow"
         :label="$t('SelectSpecialty')"
         :style="{ order: this.appointmentFieldsFlexOrder.specialty }">
@@ -49,7 +49,7 @@
           v-model="appointment.specialty_id"
           :disabled="specialtiesOptions.isDisabled"
           :required="specialtiesOptions.isRequired" />
-      </ElFormItem>
+      </ElFormItem>-->
 
       <!--  GroupService  -->
       <ElFormItem
