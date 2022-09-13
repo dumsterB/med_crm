@@ -32,11 +32,11 @@
         :style="{ order: this.appointmentFieldsFlexOrder.type }">
         <ElRadioGroup v-model="appointmentType">
           <ElRadio :label="appointmentTypesEnum.Doctor">
-            {{ $t(`Appointments.Types.${appointmentTypesEnum.Doctor}`) }}</ElRadio
-          >
+            {{ $t(`Appointments.Types.${appointmentTypesEnum.Doctor}`) }}
+          </ElRadio>
           <ElRadio :label="appointmentTypesEnum.Service">
-            {{ $t(`Appointments.Types.${appointmentTypesEnum.Service}`) }}</ElRadio
-          >
+            {{ $t(`Appointments.Types.${appointmentTypesEnum.Service}`) }}
+          </ElRadio>
         </ElRadioGroup>
       </ElFormItem>
 
@@ -106,6 +106,16 @@
           :disabled="servicesOptions.isDisabled"
           :required="servicesOptions.isRequired"
           multiple />
+      </ElFormItem>
+
+      <!--  Select Date type  -->
+      <ElFormItem
+        v-show="dateTypeOptions.isShow"
+        :style="{ order: this.appointmentFieldsFlexOrder.dateType }">
+        <ElRadioGroup v-model="isLiveQueue">
+          <ElRadio :label="true"> {{ $t('Appointments.LiveQueue') }} </ElRadio>
+          <ElRadio :label="false"> {{ $t('Appointments.RecordOnTime') }} </ElRadio>
+        </ElRadioGroup>
       </ElFormItem>
 
       <!--  Date  -->
