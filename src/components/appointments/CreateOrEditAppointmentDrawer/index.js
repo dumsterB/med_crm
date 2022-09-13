@@ -112,8 +112,11 @@ export default {
         },
       };
     },
+    // если выбрано больше одной группы услуг, компонент DoctorsSelectByGroupService скрывается
     currentGroupService() {
-      return this.groupServices.find((elem) => elem.id === this.appointment.group_service_id);
+      return this.appointment.group_service_ids.length
+        ? this.groupServices.find((elem) => elem.id === this.appointment.group_service_ids[0])
+        : null;
     },
 
     doctorsAndServicesOptions() {
