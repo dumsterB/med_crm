@@ -57,12 +57,13 @@
         :label="$t('SelectService')"
         :style="{ order: this.appointmentFieldsFlexOrder.groupService }">
         <UiModelsAutocompleteSearch
-          v-model="appointment.group_service_id"
+          v-model="appointment.group_service_ids"
           label="title"
           :modelForUse="ServiceGroup"
           :searchQuery="groupServicesOptions.searchQuery"
           :disabled="groupServicesOptions.isDisabled"
           :required="appointmentType === appointmentTypesEnum.Service"
+          multiple
           @update:data="groupServices = $event" />
       </ElFormItem>
 
