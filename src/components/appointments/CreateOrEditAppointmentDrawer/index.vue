@@ -32,16 +32,16 @@
         :style="{ order: this.appointmentFieldsFlexOrder.type }">
         <ElRadioGroup v-model="appointmentType">
           <ElRadio :label="appointmentTypesEnum.Doctor">
-            {{ $t(`Appointments.Types.${appointmentTypesEnum.Doctor}`) }}</ElRadio
-          >
+            {{ $t(`Appointments.Types.${appointmentTypesEnum.Doctor}`) }}
+          </ElRadio>
           <ElRadio :label="appointmentTypesEnum.Service">
-            {{ $t(`Appointments.Types.${appointmentTypesEnum.Service}`) }}</ElRadio
-          >
+            {{ $t(`Appointments.Types.${appointmentTypesEnum.Service}`) }}
+          </ElRadio>
         </ElRadioGroup>
       </ElFormItem>
 
       <!--  Specialty  -->
-      <ElFormItem
+      <!--      <ElFormItem
         v-show="specialtiesOptions.isShow"
         :label="$t('SelectSpecialty')"
         :style="{ order: this.appointmentFieldsFlexOrder.specialty }">
@@ -49,7 +49,7 @@
           v-model="appointment.specialty_id"
           :disabled="specialtiesOptions.isDisabled"
           :required="specialtiesOptions.isRequired" />
-      </ElFormItem>
+      </ElFormItem>-->
 
       <!--  GroupService  -->
       <ElFormItem
@@ -57,12 +57,13 @@
         :label="$t('SelectService')"
         :style="{ order: this.appointmentFieldsFlexOrder.groupService }">
         <UiModelsAutocompleteSearch
-          v-model="appointment.group_service_id"
+          v-model="appointment.group_service_ids"
           label="title"
           :modelForUse="ServiceGroup"
           :searchQuery="groupServicesOptions.searchQuery"
           :disabled="groupServicesOptions.isDisabled"
-          :required="appointmentType === appointmentTypesEnum.Service"
+          :required="groupServicesOptions.isRequired"
+          multiple
           @update:data="groupServices = $event" />
       </ElFormItem>
 
@@ -107,8 +108,19 @@
           multiple />
       </ElFormItem>
 
+      <!--  Select Date type  -->
+      <ElFormItem
+        v-show="dateTypeOptions.isShow"
+        :style="{ order: this.appointmentFieldsFlexOrder.dateType }">
+        <ElRadioGroup v-model="isLiveQueue">
+          <ElRadio :label="true"> {{ $t('Appointments.LiveQueue') }} </ElRadio>
+          <ElRadio :label="false"> {{ $t('Appointments.RecordOnTime') }} </ElRadio>
+        </ElRadioGroup>
+      </ElFormItem>
+
       <!--  Date  -->
       <ElFormItem
+        v-show="slotsOptions.isShow"
         :label="$t('DateAndTime.SelectDate')"
         :style="{ order: this.appointmentFieldsFlexOrder.date }">
         <ScheduleSlotsSelect
