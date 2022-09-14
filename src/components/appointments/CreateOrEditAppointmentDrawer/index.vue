@@ -2,7 +2,7 @@
   <ElDrawer
     custom-class="create-appointment-drawer"
     :model-value="modelValue"
-    :title="$t(`Title.${data ? 'Edit' : 'Create'}`)"
+    :title="$t(`Title.${data?.id ? 'Edit' : 'Create'}`)"
     @update:model-value="$emit('update:modelValue', $event)">
     <ElForm
       class="create-appointment-drawer-form"
@@ -32,16 +32,16 @@
         :style="{ order: this.appointmentFieldsFlexOrder.type }">
         <ElRadioGroup v-model="appointmentType">
           <ElRadio :label="appointmentTypesEnum.Doctor">
-            {{ $t(`Appointments.Types.${appointmentTypesEnum.Doctor}`) }}</ElRadio
-          >
+            {{ $t(`Appointments.Types.${appointmentTypesEnum.Doctor}`) }}
+          </ElRadio>
           <ElRadio :label="appointmentTypesEnum.Service">
-            {{ $t(`Appointments.Types.${appointmentTypesEnum.Service}`) }}</ElRadio
-          >
+            {{ $t(`Appointments.Types.${appointmentTypesEnum.Service}`) }}
+          </ElRadio>
         </ElRadioGroup>
       </ElFormItem>
 
       <!--  Specialty  -->
-      <ElFormItem
+      <!--      <ElFormItem
         v-show="specialtiesOptions.isShow"
         :label="$t('SelectSpecialty')"
         :style="{ order: this.appointmentFieldsFlexOrder.specialty }">
@@ -49,7 +49,7 @@
           v-model="appointment.specialty_id"
           :disabled="specialtiesOptions.isDisabled"
           :required="specialtiesOptions.isRequired" />
-      </ElFormItem>
+      </ElFormItem>-->
 
       <!--  GroupService  -->
       <ElFormItem
@@ -57,13 +57,16 @@
         :label="$t('SelectService')"
         :style="{ order: this.appointmentFieldsFlexOrder.groupService }">
         <UiModelsAutocompleteSearch
-          v-model="appointment.group_service_id"
+          v-model="appointment.group_service_ids"
           label="title"
           :modelForUse="ServiceGroup"
           :searchQuery="groupServicesOptions.searchQuery"
           :disabled="groupServicesOptions.isDisabled"
-          :required="appointmentType === appointmentTypesEnum.Service"
-          @update:data="groupServices = $event" />
+          :required="groupServicesOptions.isRequired"
+          multiple
+          @update:data="groupServices = $event">
+          <template #default="{ item }"> {{ generateServiceOptionLabel(item) }} </template>
+        </UiModelsAutocompleteSearch>
       </ElFormItem>
 
       <!--  Doctor and Service when has GroupService  -->
@@ -85,7 +88,7 @@
         <UiModelsAutocompleteSearch
           v-model="appointment.doctor_id"
           :modelForUse="Doctor"
-          :defaultItem="data?.doctor"
+          :defaultItem="data?.doctor || user?.doctor"
           :searchQuery="doctorsOptions.searchQuery"
           :disabled="doctorsOptions.isDisabled"
           :required="doctorsOptions.isRequired" />
@@ -97,17 +100,31 @@
         :label="$t('SelectService')"
         :style="{ order: this.appointmentFieldsFlexOrder.service }">
         <UiModelsAutocompleteSearch
-          v-model="appointment.service_id"
+          v-model="appointment.service_ids"
           label="title"
-          :defaultItem="data?.service"
+          :defaultItem="data?.services"
           :modelForUse="Service"
           :searchQuery="servicesOptions.searchQuery"
           :disabled="servicesOptions.isDisabled"
-          :required="servicesOptions.isRequired" />
+          :required="servicesOptions.isRequired"
+          multiple>
+          <template #default="{ item }"> {{ generateServiceOptionLabel(item) }} </template>
+        </UiModelsAutocompleteSearch>
+      </ElFormItem>
+
+      <!--  Select Date type  -->
+      <ElFormItem
+        v-show="dateTypeOptions.isShow"
+        :style="{ order: this.appointmentFieldsFlexOrder.dateType }">
+        <ElRadioGroup v-model="isLiveQueue">
+          <ElRadio :label="true"> {{ $t('Appointments.LiveQueue') }} </ElRadio>
+          <ElRadio :label="false"> {{ $t('Appointments.RecordOnTime') }} </ElRadio>
+        </ElRadioGroup>
       </ElFormItem>
 
       <!--  Date  -->
       <ElFormItem
+        v-show="slotsOptions.isShow"
         :label="$t('DateAndTime.SelectDate')"
         :style="{ order: this.appointmentFieldsFlexOrder.date }">
         <ScheduleSlotsSelect
@@ -116,11 +133,10 @@
           :default-start-at="data?.start_at"
           :default-end-at="data?.end_at"
           :disabled="slotsOptions.isDisabled"
-          :service-id="appointment.service_id"
+          :service-ids="appointment.service_ids"
           :group-service-id="appointment.group_service_id"
           :dependencies="slotsOptions.dependencies" />
       </ElFormItem>
-
       <!--  Actions  -->
       <ElFormItem :style="{ order: this.appointmentFieldsFlexOrder.actions }">
         <div class="create-appointment-drawer-form-actions">

@@ -7,10 +7,26 @@
       "CreateAppointment": "Создать запись",
       "EditReception": "Редактировать прием",
       "EndReception": "Завершить прием",
+      "InspectionCard": {
+        "Anomnes": "Анамнез",
+        "AnomnesLife": "Анамнез жизни",
+        "GeneralState": "Общее состояние",
+        "LocalStatus": "Локальный статус",
+        "Operations": "Операции",
+        "PlanObservation": "План обследования",
+        "PreDiagnosis": "Предворительный диагноз",
+        "Recommendations": "Рекомендации",
+        "Сomplaints": "Жалобы"
+      },
+      "InspectionTypes": {
+        "full": "Полный осмотр",
+        "treatment": "Осмотр дневника лечения"
+      },
       "LiveQueue": "Живая очередь",
       "PatientCome": "Пациент явился",
       "PatientNotCome": "Пациент не явился",
       "PhonePatient": "Телефон пациента",
+      "RecordOnTime": "На время",
       "RecordingSource": "Источник записи",
       "SelectDoctor": "Выберите доктора",
       "SelectStatus": "Выберите статус",
@@ -26,6 +42,7 @@
         "provided": "Закончен",
         "waiting": "Ожидает"
       },
+      "ToDiagnose": "Поставить диагноз",
       "Types": {
         "doctor": "Врач",
         "service": "Услуга"
@@ -40,6 +57,22 @@
       "CreateAppointment": "Qabulga yozuvni yaratish",
       "EditReception": "Qabulga yozuvni tahrirlash",
       "EndReception": "Qabulni yakunlash",
+      "InspectionCard": {
+        "Anomnes": "Anamnez",
+        "AnomnesLife": "Hayotning anamnezi",
+        "GeneralState": "Umumiy holat",
+        "LocalStatus": "Mahalliy holat",
+        "Operations": "Operatsiyalar",
+        "PlanObservation": "So'rov rejasi",
+        "PreDiagnosis": "Dastlabki tashxis",
+        "Recommendations": "Tavsiyalar",
+        "Сomplaints": "Shikoyatlar"
+      },
+      "RecordOnTime": "Vaqtga",
+      "InspectionTypes": {
+        "full": "To'liq tekshirish",
+        "treatment": "Davolash jurnalini ko'rib chiqish"
+      },
       "LiveQueue": "Jonli navbat",
       "PatientCome": "Bemor tashrif buyurdi",
       "PatientNotCome": "Bemor tashrif buyurmadi",
@@ -59,6 +92,7 @@
         "provided": "Yakunlangan",
         "waiting": "Kutmoqda"
       },
+      "ToDiagnose": "Tashxis qo'yish",
       "Types": {
         "doctor": "Shifokor",
         "service": "Xizmat"

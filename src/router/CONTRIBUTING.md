@@ -39,7 +39,7 @@ export const APPOINTMENT_ROUTE = {
       name: 'APPOINTMENT_ROUTE_INSPECTION_CARD',
       path: 'inspection-card',
       _fullPath: '/appointments/:id/inspection-card',
-      component: 'VAppointmentInspectionCard',
+      component: 'VAppointmentDefaultInspectionCard',
     },
   },
   children: [], // утилита сама подставит сюда роуты из childrenMap
