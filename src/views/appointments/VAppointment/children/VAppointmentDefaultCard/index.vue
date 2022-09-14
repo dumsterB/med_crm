@@ -23,6 +23,16 @@
         <div class="appointment-card-body-item__title">{{ item.label }}:</div>
         <div class="appointment-card-body-item__value">{{ item.value }}</div>
       </div>
+
+      <div class="appointment-card-body-item appointment-card-body-services-item">
+        <div class="appointment-card-body-item__title">{{ $t('Base.Services') }}:</div>
+        <div class="appointment-card-body-services-item__value">
+          <div v-for="service in services" :key="service.id">
+            <span> {{ service.title }} - </span>
+            <span> {{ service.price }} </span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <ElDivider />
