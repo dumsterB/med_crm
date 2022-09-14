@@ -70,7 +70,8 @@
       "Template": "Шаблон",
       "Templates": "Шаблоны",
       "Time": "Время",
-      "WriteText": "Напишите текст..."
+      "WriteText": "Напишите текст...",
+      "StatePrice": "Стоимость"
     }
   },
   "uz": {
@@ -144,7 +145,8 @@
       "Template": "Namuna",
       "Templates": "Namunalar",
       "Time": "Vaqt",
-      "WriteText": "Matn yozing..."
+      "WriteText": "Matn yozing...",
+      "StatePrice": "Narxi"
     }
   }
 }

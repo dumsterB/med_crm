@@ -23,13 +23,17 @@
         <div class="appointment-card-body-item__title">{{ item.label }}:</div>
         <div class="appointment-card-body-item__value">{{ item.value }}</div>
       </div>
+      <div class="appointment-card-body__item appointment-card-body-item">
+        <div class="appointment-card-body-item__title">{{$t('Base.StatePrice')}}:</div>
+        <div class="appointment-card-body-item__value">{{calculateServices}}</div>
+      </div>
 
       <div class="appointment-card-body-item appointment-card-body-services-item">
         <div class="appointment-card-body-item__title">{{ $t('Base.Services') }}:</div>
         <div class="appointment-card-body-services-item__value">
           <div v-for="service in services" :key="service.id">
-            <span> {{ service.title }} - </span>
-            <span> {{ service.price }} </span>
+            <span class="appointment-card-body-item__title"> {{ service.title }} - </span>
+            <span class="appointment-card-body-item__value"> {{ service.price }} </span>
           </div>
         </div>
       </div>
