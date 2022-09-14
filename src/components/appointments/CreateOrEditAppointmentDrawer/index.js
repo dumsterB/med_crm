@@ -204,7 +204,7 @@ export default {
 
     'appointmentType': {
       handler(value) {
-        if (this.appointment.service_id) this.appointment.service_id = null;
+        if (this.appointment.service_ids.length) this.appointment.service_ids = [];
         if (this.appointment.doctor_id) this.appointment.doctor_id = this.user.doctor_id || null;
       },
     },
