@@ -22,6 +22,7 @@
         :key="item.id || index"
         :label="item[label]"
         :value="item[value]">
+        <slot :item="item" :label="item[label]" :value="item[value]"></slot>
       </ElOption>
 
       <template #empty>
