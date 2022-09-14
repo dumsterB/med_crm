@@ -105,7 +105,9 @@
           :searchQuery="servicesOptions.searchQuery"
           :disabled="servicesOptions.isDisabled"
           :required="servicesOptions.isRequired"
-          multiple />
+          multiple>
+          <template #default="{ item }"> {{ generateServiceOptionLabel(item) }} </template>
+        </UiModelsAutocompleteSearch>
       </ElFormItem>
 
       <!--  Select Date type  -->

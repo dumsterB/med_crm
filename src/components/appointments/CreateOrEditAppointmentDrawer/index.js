@@ -17,6 +17,7 @@ import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatient
 import SpecialtiesSelect from '@/components/specialties/SpecialtiesSelect/index.vue';
 import DoctorsSelectByGroupService from './DoctorsSelectByGroupService/index.vue';
 import ScheduleSlotsSelect from '@/components/appointments/ScheduleSlotsSelect/index.vue';
+import { PriceService } from '@/services/price.service';
 
 // TODO: написать документацию по бизнес логике
 export default {
@@ -226,7 +227,6 @@ export default {
     },
     'appointment.service_ids': {
       handler(value, oldValue) {
-        console.log(value, oldValue);
         this.appointmentWatcherHandler({ field: 'service_ids', value, oldValue });
       },
       deep: true,
@@ -325,6 +325,13 @@ export default {
           id: id,
         },
       });
+    },
+
+    /** @param {Service|object} service */
+    generateServiceOptionLabel(service) {
+      return `${service.title} - ${PriceService.formatPrice({ price: service.price })} ${this.$t(
+        'Base.Sum'
+      )}`;
     },
   },
 
