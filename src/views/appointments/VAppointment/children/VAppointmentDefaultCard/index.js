@@ -34,12 +34,6 @@ export default {
         params: { id: this.appointment?.patient_id },
       });
     },
-    appointmentInspectionCardPageLink() {
-      return insertRouteParams({
-        path: APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_INSPECTION_CARD._fullPath,
-        params: { id: this.appointment.id },
-      });
-    },
 
     infoItems() {
       return [
@@ -55,18 +49,15 @@ export default {
           label: this.$t('Base.Doctor'),
           value: this.appointment.doctor?.name,
         },
-        {
-          label: this.$t('Base.Service'),
-          value: this.appointment.service?.title,
-        },
-        {
-          label: this.$t('Base.Price'),
-          value:
-            PriceService.formatPrice({ price: this.appointment.service?.price }) +
-            ' ' +
-            this.$t('Base.Sum'),
-        },
       ];
+    },
+
+    /** @return {Array<Service>} */
+    services() {
+      return this.appointment.services.map((service) => ({
+        ...service,
+        price: PriceService.formatPrice({ price: service.price }) + ' ' + this.$t('Base.Sum'),
+      }));
     },
   },
 
