@@ -23,10 +23,6 @@
         <div class="appointment-card-body-item__title">{{ item.label }}:</div>
         <div class="appointment-card-body-item__value">{{ item.value }}</div>
       </div>
-      <div class="appointment-card-body__item appointment-card-body-item">
-        <div class="appointment-card-body-item__title">{{$t('Base.StatePrice')}}:</div>
-        <div class="appointment-card-body-item__value">{{calculateServices}}</div>
-      </div>
 
       <div class="appointment-card-body-item appointment-card-body-services-item">
         <div class="appointment-card-body-item__title">{{ $t('Base.Services') }}:</div>
