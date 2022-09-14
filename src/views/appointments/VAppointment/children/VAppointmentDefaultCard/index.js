@@ -49,6 +49,15 @@ export default {
           label: this.$t('Base.Doctor'),
           value: this.appointment.doctor?.name,
         },
+        {
+          label: this.$t('Base.StatePrice'),
+          value:
+            PriceService.formatPrice({
+              price: this.appointment.services.reduce((total, obj) => obj.price + total, 0),
+            }) +
+            ' ' +
+            this.$t('Base.Sum'),
+        },
       ];
     },
 

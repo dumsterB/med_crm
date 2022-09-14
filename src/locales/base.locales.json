@@ -70,7 +70,8 @@
       "Template": "Шаблон",
       "Templates": "Шаблоны",
       "Time": "Время",
-      "WriteText": "Напишите текст..."
+      "WriteText": "Напишите текст...",
+      "StatePrice": "Стоимость"
     }
   },
   "uz": {
@@ -87,7 +88,7 @@
       "BloodTransfusion": "Qon quyish",
       "CallToReception": "Qabul qilish",
       "Cancel": "Qaytish",
-      "ClinicalExamination": "??Диспансеризация??",
+      "ClinicalExamination": "Dispanser ko'rigi",
       "ColDays": "Kunlar Miqdori",
       "Create": "Yaratish",
       "CreateNew": "Yangi yaratish",
@@ -141,10 +142,11 @@
       "SurgicalIntervention": "Jarrohlik aralashuvlar",
       "TableReception": "Fokuslar jadvali",
       "TableTreatment": "Davolash jadvali",
-      "Template": "??Шаблон??",
-      "Templates": "??Шаблоны??",
+      "Template": "Namuna",
+      "Templates": "Namunalar",
       "Time": "Vaqt",
-      "WriteText": "Matn yozing..."
+      "WriteText": "Matn yozing...",
+      "StatePrice": "Narxi"
     }
   }
 }

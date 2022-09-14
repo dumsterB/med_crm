@@ -64,7 +64,9 @@
           :disabled="groupServicesOptions.isDisabled"
           :required="groupServicesOptions.isRequired"
           multiple
-          @update:data="groupServices = $event" />
+          @update:data="groupServices = $event">
+          <template #default="{ item }"> {{ generateServiceOptionLabel(item) }} </template>
+        </UiModelsAutocompleteSearch>
       </ElFormItem>
 
       <!--  Doctor and Service when has GroupService  -->
@@ -105,7 +107,9 @@
           :searchQuery="servicesOptions.searchQuery"
           :disabled="servicesOptions.isDisabled"
           :required="servicesOptions.isRequired"
-          multiple />
+          multiple>
+          <template #default="{ item }"> {{ generateServiceOptionLabel(item) }} </template>
+        </UiModelsAutocompleteSearch>
       </ElFormItem>
 
       <!--  Select Date type  -->
@@ -133,7 +137,6 @@
           :group-service-id="appointment.group_service_id"
           :dependencies="slotsOptions.dependencies" />
       </ElFormItem>
-
       <!--  Actions  -->
       <ElFormItem :style="{ order: this.appointmentFieldsFlexOrder.actions }">
         <div class="create-appointment-drawer-form-actions">

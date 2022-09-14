@@ -7,6 +7,7 @@ export class ServiceGroup extends CRUDModel {
    * @param {object} [payload]
    * @param {number} payload.id
    * @param {string} payload.title
+   * @param {number} payload.price
    * @param {number} payload.clinic_id
    * @param {Clinic} payload.clinic
    * @param {Array<Service>} payload.services
@@ -15,6 +16,7 @@ export class ServiceGroup extends CRUDModel {
     super(payload);
 
     this.title = payload?.title ?? null;
+    this.price = payload?.price ?? null;
     this.clinic_id = payload?.clinic_id ?? null;
     this.clinic = payload?.clinic ?? null;
     this.services = payload?.services ?? null;

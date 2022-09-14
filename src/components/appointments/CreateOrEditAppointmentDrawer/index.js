@@ -17,6 +17,7 @@ import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatient
 import SpecialtiesSelect from '@/components/specialties/SpecialtiesSelect/index.vue';
 import DoctorsSelectByGroupService from './DoctorsSelectByGroupService/index.vue';
 import ScheduleSlotsSelect from '@/components/appointments/ScheduleSlotsSelect/index.vue';
+import { PriceService } from '@/services/price.service';
 
 // TODO: написать документацию по бизнес логике
 export default {
@@ -324,6 +325,13 @@ export default {
           id: id,
         },
       });
+    },
+
+    /** @param {Service|ServiceGroup|object} service */
+    generateServiceOptionLabel(service) {
+      return `${service.title} - ${PriceService.formatPrice({ price: service.price })} ${this.$t(
+        'Base.Sum'
+      )}`;
     },
   },
 
