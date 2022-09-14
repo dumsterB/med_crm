@@ -64,7 +64,9 @@
           :disabled="groupServicesOptions.isDisabled"
           :required="groupServicesOptions.isRequired"
           multiple
-          @update:data="groupServices = $event" />
+          @update:data="groupServices = $event">
+          <template #default="{ item }"> {{ generateServiceOptionLabel(item) }} </template>
+        </UiModelsAutocompleteSearch>
       </ElFormItem>
 
       <!--  Doctor and Service when has GroupService  -->
