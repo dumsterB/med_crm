@@ -226,6 +226,7 @@ export default {
     },
     'appointment.service_ids': {
       handler(value, oldValue) {
+        console.log(value, oldValue);
         this.appointmentWatcherHandler({ field: 'service_ids', value, oldValue });
       },
       deep: true,

@@ -133,7 +133,6 @@
           :group-service-id="appointment.group_service_id"
           :dependencies="slotsOptions.dependencies" />
       </ElFormItem>
-
       <!--  Actions  -->
       <ElFormItem :style="{ order: this.appointmentFieldsFlexOrder.actions }">
         <div class="create-appointment-drawer-form-actions">
