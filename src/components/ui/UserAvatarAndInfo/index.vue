@@ -4,14 +4,11 @@
       <div
         :class="[`avatar-and-info-content-img`, `avatar-and-info-content_${size}`]"
         :style="{ backgroundColor: avatar.bg }">
-        <img
-          :class="`avatar-and-info-img_${size}`"
-          :src="src?.length ? src : avatar.url"
-          alt="" />
+        <img :class="`avatar-and-info-img_${size}`" :src="src?.length ? src : avatar.url" alt="" />
       </div>
     </div>
     <div class="avatar-and-info-content-info" v-if="user?.name">
-      <el-dropdown trigger="click">
+      <ElDropdown trigger="click">
         <span class="avatar-and-info-content-info-private">
           <span class="avatar-and-info-content-info-private-name">
             {{ user.name }}
@@ -19,8 +16,8 @@
           <span class="avatar-and-info-content-info-private-email">
             {{ user.email }}
           </span>
-          <el-icon class="avatar-and-info-content-info-private-icon el-icon--right ">
-           <UiIcon :icon="icons.CHEVRON_DOWN" />
+          <el-icon class="avatar-and-info-content-info-private-icon el-icon--right">
+            <UiIcon :icon="icons.CHEVRON_DOWN" />
           </el-icon>
         </span>
         <template #dropdown>
@@ -30,7 +27,7 @@
             <el-dropdown-item>Action 3</el-dropdown-item>
           </el-dropdown-menu>
         </template>
-      </el-dropdown>
+      </ElDropdown>
     </div>
   </div>
 </template>
@@ -38,26 +35,22 @@
 <script>
 import { AvatarService } from '@/services/avatar.sevice';
 import { User } from '@/models/User.model';
+import { Patient } from '@/models/Patient.model';
 import * as icons from '@/enums/icons.enum.js';
 
 export default {
   name: 'UserAvatarAndInfo',
   props: {
-    src: {
-      type: String,
-    },
+    src: String,
     size: {
       type: String,
-      default: 'md',
+      default: 'medium',
     },
     gender: {
       type: String,
       default: 'не найдено',
     },
-    user: {
-      type: Object,
-      default: {},
-    },
+    user: [User, Patient, Object],
   },
   data() {
     return {
@@ -70,7 +63,7 @@ export default {
   methods: {},
   mounted() {
     this.avatar.url = AvatarService.getRandomAvatarUrl({
-      gender: this.gender || User.enum.genders.MAN,
+      gender: this.user?.gender || this.gender || User.enum.genders.MAN,
     });
     this.avatar.bg = AvatarService.getRandomAvatarBg();
   },
