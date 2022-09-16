@@ -39,7 +39,7 @@ import { Patient } from '@/models/Patient.model';
 import * as icons from '@/enums/icons.enum.js';
 
 export default {
-  name: 'UserAvatarAndInfo',
+  name: 'UiUserAvatarAndInfo',
   props: {
     src: String,
     size: {
