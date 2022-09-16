@@ -2,6 +2,7 @@ import { markRaw } from 'vue';
 import { mapState } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
 import { DRAWER_DEFAULT_SIZE } from '@/config/ui.config';
+import { formatPrice } from '@/utils/price.util';
 
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
@@ -45,6 +46,7 @@ export default {
       loading: {
         form: false,
       },
+      isLiveQueue: true,
 
       patientDrawer: {
         show: false,
@@ -75,8 +77,9 @@ export default {
         groupService: 4,
         doctor: 5,
         service: 6,
-        date: 7,
-        actions: 8,
+        dateType: 7,
+        date: 8,
+        actions: 9,
       };
     },
 
@@ -103,6 +106,7 @@ export default {
           this.appointmentType === this.appointmentTypesEnum.Service
             ? !this.appointment.patient_id
             : true,
+        isRequired: this.appointmentType === this.appointmentTypesEnum.Service,
         searchQuery: {
           query_field: null,
           query_type: null,
@@ -111,13 +115,18 @@ export default {
         },
       };
     },
+    // если выбрано больше одной группы услуг, компонент DoctorsSelectByGroupService скрывается
     currentGroupService() {
-      return this.groupServices.find((elem) => elem.id === this.appointment.group_service_id);
+      return this.appointment.group_service_ids.length
+        ? this.groupServices.find((elem) => elem.id === this.appointment.group_service_ids[0])
+        : null;
     },
 
     doctorsAndServicesOptions() {
       return {
-        isShow: this.appointmentType === this.appointmentTypesEnum.Service,
+        isShow:
+          this.appointmentType === this.appointmentTypesEnum.Service &&
+          this.appointment.group_service_ids.length < 2,
         // isRequired: this.appointmentType === this.appointmentTypesEnum.Service,
         isRequired: false,
       };
@@ -152,16 +161,32 @@ export default {
       };
     },
 
+    dateTypeOptions() {
+      return {
+        isShow:
+          !this.data?.id &&
+          this.appointment.service_ids.length < 2 &&
+          this.appointment.group_service_ids.length < 2,
+      };
+    },
+
     slotsOptions() {
       return {
+        isShow:
+          !this.isLiveQueue &&
+          this.appointment.service_ids.length < 2 &&
+          this.appointment.group_service_ids.length < 2,
         isDisabled:
           this.appointmentType === this.appointmentTypesEnum.Doctor
             ? !this.appointment.service_ids.length
             : !this.appointment.group_service_id,
+        // при изменении этих значений сбрасывается start_at, end_at
         dependencies: {
           type: this.appointmentType,
-          serviceId: this.appointment.service_id,
+          groupServiceIds: this.appointment.group_service_ids,
+          serviceIds: this.appointment.service_ids,
           doctorId: this.appointment.doctor_id,
+          isLiveQueue: this.isLiveQueue,
         },
       };
     },
@@ -180,10 +205,8 @@ export default {
 
     'appointmentType': {
       handler(value) {
-        if (this.appointment.service_id) this.appointment.service_id = null;
-        if (this.appointment.doctor_id) this.appointment.doctor_id = null;
-        if (this.appointment.start_at) this.appointment.start_at = null;
-        if (this.appointment.end_at) this.appointment.end_at = null;
+        if (this.appointment.service_ids.length) this.appointment.service_ids = [];
+        if (this.appointment.doctor_id) this.appointment.doctor_id = this.user.doctor_id || null;
       },
     },
     'appointment.specialty_id': {
@@ -191,20 +214,22 @@ export default {
         this.appointmentWatcherHandler({ field: 'specialty_id', value, oldValue });
       },
     },
-    'appointment.group_service_id': {
+    'appointment.group_service_ids': {
       handler(value, oldValue) {
-        this.appointmentWatcherHandler({ field: 'group_service_id', value, oldValue });
+        this.appointmentWatcherHandler({ field: 'group_service_ids', value, oldValue });
       },
+      deep: true,
     },
     'appointment.doctor_id': {
       handler(value, oldValue) {
         this.appointmentWatcherHandler({ field: 'doctor_id', value, oldValue });
       },
     },
-    'appointment.service_id': {
+    'appointment.service_ids': {
       handler(value, oldValue) {
-        this.appointmentWatcherHandler({ field: 'service_id', value, oldValue });
+        this.appointmentWatcherHandler({ field: 'service_ids', value, oldValue });
       },
+      deep: true,
     },
   },
 
@@ -260,28 +285,21 @@ export default {
           if (this.appointment.doctor_id) this.appointment.doctor_id = null;
           break;
         }
-        case 'group_service_id': {
+        case 'group_service_ids': {
           if (this.appointment.doctor_id) this.appointment.doctor_id = null;
-          if (this.appointment.start_at) this.appointment.start_at = null;
-          if (this.appointment.end_at) this.appointment.end_at = null;
           break;
         }
         case 'doctor_id': {
-          // appointment.type === Service используется компонент которые сразу обновляет два поля doctor_id, service_id
+          // appointment.type === Service используется компонент который сразу обновляет два поля doctor_id, service_id
           if (
             this.appointmentType !== this.appointmentTypesEnum.Service &&
-            this.appointment.service_id
+            this.appointment.service_ids.length
           ) {
-            this.appointment.service_id = null;
+            this.appointment.service_ids = [];
           }
-
-          if (this.appointment.start_at) this.appointment.start_at = null;
-          if (this.appointment.end_at) this.appointment.end_at = null;
           break;
         }
         case 'service_id': {
-          if (this.appointment.start_at) this.appointment.start_at = null;
-          if (this.appointment.end_at) this.appointment.end_at = null;
           break;
         }
       }
@@ -307,6 +325,15 @@ export default {
           id: id,
         },
       });
+    },
+
+    /** @param {Service|ServiceGroup|object} service */
+    generateServiceOptionLabel(service) {
+      const title = service.title;
+      const price =
+        service.price ?? service.services?.reduce((acc, service) => acc + (service.price || 0), 0);
+
+      return `${title} - ${formatPrice({ price: price })} ${this.$t('Base.Sum')}`;
     },
   },
 

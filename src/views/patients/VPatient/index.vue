@@ -1,5 +1,5 @@
 <template>
-  <LayoutRegistry
+  <LayoutByUserRole
     :loading="loading.profile || loading.appointment || loading.treatments"
     content-class="v-patient-content">
     <RouterView
@@ -13,7 +13,7 @@
       @treatment:updated="updateTreatment"
       @patient:createChildren="createChildren">
     </RouterView>
-  </LayoutRegistry>
+  </LayoutByUserRole>
 </template>
 
 <script>
@@ -22,18 +22,18 @@ import * as icons from '@/enums/icons.enum.js';
 import { Patient } from '@/models/Patient.model';
 import { Appointment } from '@/models/Appointment.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
+import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 import { Treatment } from '@/models/Treatment.model';
 
-import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
+import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 import CreateTreatmentModal from '@/components/treatments/CreateTreatmentModal/index.vue';
-import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 export default {
   name: 'VPatient',
   components: {
-    LayoutRegistry,
+    LayoutByUserRole,
   },
   icons: icons,
   props: {

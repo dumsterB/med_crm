@@ -23,10 +23,12 @@
       <ElFormItem v-if="isChildren" :label="$t('User.Parent')">
         <UiModelsAutocompleteSearch
           v-model="patient.parent_id"
-          :modelForUse="Patient"
-          :searchQuery="{ query_field: ['name', 'phone'] }"
-          :defaultItem="data?.parent"
-          required />
+          :model-for-use="Patient"
+          :search-query="{ query_field: ['name', 'phone'] }"
+          :default-item="data?.parent || parent"
+          show-create-option
+          required
+          @create="createParentFlow" />
       </ElFormItem>
 
       <div v-show="isChildren || (hasPhoneNumber && !hasPatient)">

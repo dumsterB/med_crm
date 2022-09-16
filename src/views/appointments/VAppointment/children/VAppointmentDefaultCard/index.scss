@@ -46,6 +46,15 @@
       &__value {
       }
     }
+
+    &-services-item {
+      flex-direction: column;
+
+      &__value {
+        padding-left: 1em;
+      }
+    }
+
   }
 
   &-actions {
