@@ -10,11 +10,12 @@ export class InspectionCardTemplate extends DefaultInspectionCard {
   static tableName = 'templates';
 
   /**
-   * @param {string} [payload]
-   * @param {string} payload.title
-   * @param {number} payload.doctor_id
-   * @param {Doctor} payload.doctor
+   * @typedef {DefaultInspectionCardConstructorPayload|object} InspectionCardTemplateConstructorPayload
+   * @property {string} title
+   * @property {number} doctor_id
+   * @property {Doctor} doctor
    */
+  /** @param {InspectionCardTemplateConstructorPayload|object} [payload] */
   constructor(payload) {
     super(payload);
 

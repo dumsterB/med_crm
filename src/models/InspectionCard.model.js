@@ -1,10 +1,24 @@
 import { CRUDModel } from '@/models/CRUD.model';
 import { ApiService } from '@/services/api.service';
 
+/**
+ * @class InspectionCard
+ * @extends CRUDModel
+ */
 export class InspectionCard extends CRUDModel {
   static modelName = 'card';
   static tableName = 'cards';
 
+  /**
+   * @typedef {object} InspectionCardConstructorPayload
+   * @property {string} type
+   * @property {string} status
+   * @property {number} appointment_id
+   * @property {number} user_id
+   * @property {User} user
+   * @property {Date|string} created_at
+   */
+  /** @param {InspectionCardConstructorPayload|object} [payload] */
   constructor(payload) {
     super(payload);
 

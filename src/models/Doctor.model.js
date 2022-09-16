@@ -1,5 +1,4 @@
 import { CRUDModel } from '@/models/CRUD.model';
-import { ApiService } from '@/services/api.service';
 
 /**
  * @class Doctors
@@ -10,13 +9,13 @@ export class Doctor extends CRUDModel {
   static tableName = 'doctors';
 
   /**
-   *
-   * @param {object} [payload]
-   * @param {string} payload.name
-   * @param {string} payload.avatar
-   * @param {Array<Speciality>} payload.specialties
-   * @param {Date|string} payload.published_at
+   * @typedef {object} DoctorConstructorPayload
+   * @property {string} name
+   * @property {string} avatar
+   * @property {Array<Specialty>} specialties
+   * @property {Date|string} published_at
    */
+  /** @param {DoctorConstructorPayload|object} payload */
   constructor(payload) {
     super(payload);
 

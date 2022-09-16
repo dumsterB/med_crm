@@ -12,32 +12,33 @@ export class Appointment extends CRUDModel {
   static tableName = 'appointments';
 
   /**
-   * @param {object} [payload]
-   * @param {number} payload.id
-   * @param {number} payload.patient_id
-   * @param {Patient} payload.patient
-   * @param {number} payload.user_id synonym for payload.patient_id
-   * @param {number} payload.doctor_id
-   * @param {Doctor} payload.doctor
-   * @param {number} payload.specialty_id
-   * @param {Specialty} payload.specialty
-   * @param {Array<number>} payload.service_ids
-   * @param {Array<Service>} payload.services
-   * @param {Array<number>} payload.group_service_ids
-   * @param {Array<ServiceGroup>} payload.group_services
-   * @param {number} payload.service_case_id
-   * @param {ServiceCase} payload.service_case
-   * @param {number} payload.treatment_id
-   * @param {Treatment} payload.treatment
-   * @param {number} payload.inspection_card_id
-   * @param {DefaultInspectionCard|TreatmentInspectionCard|InspectionCard} payload.inspection_card
+   * @typedef {object} AppointmentConstructorPayload
+   * @property {number} id
+   * @property {number} patient_id
+   * @property {Patient} patient
+   * @property {number} user_id synonym for payload.patient_id
+   * @property {number} doctor_id
+   * @property {Doctor} doctor
+   * @property {number} specialty_id
+   * @property {Specialty} specialty
+   * @property {Array<number>} service_ids
+   * @property {Array<Service>} services
+   * @property {Array<number>} group_service_ids
+   * @property {Array<ServiceGroup>} group_services
+   * @property {number} service_case_id
+   * @property {ServiceCase} service_case
+   * @property {number} treatment_id
+   * @property {Treatment} treatment
+   * @property {number} inspection_card_id
+   * @property {DefaultInspectionCard|TreatmentInspectionCard|InspectionCard} inspection_card
    *
-   * @param {Date|string} payload.start_at - format DD.MM.YY hh:mm
-   * @param {Date|string} payload.end_at
-   * @param {string} payload.status
-   * @param {string} payload.cancel_reason
-   * @param {string} payload.cancel_description
+   * @property {Date|string} start_at - format DD.MM.YY hh:mm
+   * @property {Date|string} end_at
+   * @property {string} status
+   * @property {string} cancel_reason
+   * @property {string} cancel_description
    */
+  /** @param {AppointmentConstructorPayload} [payload] */
   constructor(payload) {
     super(payload);
 
