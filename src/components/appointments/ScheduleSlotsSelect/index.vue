@@ -39,9 +39,9 @@ export default {
   emits: ['update:startAt', 'update:endAt'],
   props: {
     startAt: [Date, String],
+    endAt: [Date, String],
     defaultStartAt: [Date, String],
     defaultEndAt: [Date, String],
-    endAt: [Date, String],
     serviceIds: Array,
     groupServiceId: [Number, String],
     disabled: Boolean,
@@ -122,6 +122,7 @@ export default {
         this.slot.start_at = null;
         this.slot.end_at = null;
         this.date = null;
+        this.slots = [];
       },
       deep: true,
     },

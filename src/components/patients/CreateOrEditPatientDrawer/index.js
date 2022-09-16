@@ -35,6 +35,10 @@ export default {
       isRebinding: false, // если пользователь был найден и мы успешно подтвердили код - можем создать новый акк
       code: null, // для хранения кода подтверждения при rebinding или смене номера
 
+      // если не найшли такого родителя - создайм сначала его
+      parent: null,
+      isSwitchTypeOnChildren: false,
+
       throttleCheckHasPatient: null,
     };
   },
@@ -108,6 +112,15 @@ export default {
         : await Patient.create(this.patient);
 
       this.$notify({ type: 'success', title: this.$t('Notifications.SuccessCreated') });
+      if (this.isSwitchTypeOnChildren) {
+        this.parent = patient;
+        this.isChildren = true;
+        this.isSwitchTypeOnChildren = false;
+        this.patient = new Patient({ parent_id: patient.id });
+
+        return;
+      }
+
       this.$emit('action', new GlobalDrawerAction({ name: 'created', data: { patient } }));
       if (!this.disableDefaultAction) this.goToPatient({ patientId: patient.id });
     },
@@ -191,15 +204,32 @@ export default {
       });
     },
 
+    createParentFlow(query) {
+      this.isSwitchTypeOnChildren = true;
+      this.isChildren = false;
+
+      const isName = this.queryIsName(query);
+      // после смены isChildren сбрасывается patient.phone
+      this.$nextTick(() => {
+        this.patient = new Patient({
+          name: isName ? query : '',
+          phone: !isName ? query : null,
+        });
+      });
+    },
+
     nameOrPhoneWatcherHandler() {
       if (!this.nameOrPhone) return;
 
-      const isName = /[a-zA-Zа-яА-Я?\s]/gim.test(this.nameOrPhone);
+      const isName = this.queryIsName(this.nameOrPhone);
       isName ? (this.patient.name = this.nameOrPhone) : (this.patient.phone = this.nameOrPhone);
     },
     patientPhoneWatcherHandler() {
       if (!this.hasPhoneNumber) return;
       this.throttleCheckHasPatient();
+    },
+    queryIsName(query) {
+      return /[a-zA-Zа-яА-Я?\s]/gim.test(query);
     },
   },
 

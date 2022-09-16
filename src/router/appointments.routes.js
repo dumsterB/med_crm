@@ -1,5 +1,6 @@
 import { onlyLoggedInMiddleware } from '@/middlewares/onlyLoggedIn.middleware';
 import { onlyManagerMiddleware } from '@/middlewares/onlyManager.middleware';
+import { onlyDoctorMiddleware } from '@/middlewares/onlyDoctor.middleware';
 import { I18nService } from '@/services/i18n.service';
 
 export const APPOINTMENTS_ROUTE = {
@@ -35,12 +36,14 @@ export const APPOINTMENT_ROUTE = {
       path: 'inspection-card',
       _fullPath: '/appointments/:id/inspection-card',
       component: 'VAppointmentDefaultInspectionCard',
+      beforeEnter: [onlyDoctorMiddleware],
     },
     APPOINTMENT_ROUTE_TREATMENT_CARD: {
       name: 'APPOINTMENT_TREATMENT_CARD',
       path: 'treatment-card',
       _fullPath: '/appointments/:id/treatment-card',
       component: 'VAppointmentTreatmentInspectionCard',
+      beforeEnter: [onlyDoctorMiddleware],
     },
   },
   children: [], // утилита сама подставит сюда роуты из childrenMap
