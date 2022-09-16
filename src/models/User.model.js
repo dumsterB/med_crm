@@ -25,9 +25,7 @@ export class User extends CRUDModel {
    * @property {User|Patient} parent
    * @property {Date|string} created_at
    */
-  /**
-   * @param {UserConstructorPayload|object} payload
-   */
+  /** @param {UserConstructorPayload|object} payload */
   constructor(payload) {
     super(payload);
 
