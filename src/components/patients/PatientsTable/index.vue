@@ -18,7 +18,7 @@
 
         <ElTableColumn prop="name" :label="$t('User.FullName')">
           <template #default="{ row }">
-            <UiUserAvatarAndInfo class="patients-table__user" :user="row" />
+            <UiUserAvatarInfo class="patients-table__user" :user="row" />
           </template>
         </ElTableColumn>
 

@@ -19,7 +19,7 @@ import { User } from '@/models/User.model';
 import { Patient } from '@/models/Patient.model';
 
 export default {
-  name: 'UiUserAvatarAndInfo',
+  name: 'UiUserAvatarInfo',
   props: {
     user: [User, Patient, Object],
     secondaryFieldKey: String, // ключ-столбец от модели пользователя

@@ -3,7 +3,7 @@
     <PatientsSearch class="registry-header__search" />
 
     <LangSelect />
-    <UiUserAvatarAndInfo :gender="user.gender" :user="user"></UiUserAvatarAndInfo>
+    <UiUserAvatarInfo :gender="user.gender" :user="user"></UiUserAvatarInfo>
   </div>
 </template>
 
