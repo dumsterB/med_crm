@@ -2,7 +2,6 @@
   <LayoutByUserRole
     :loading="loading.profile || loading.appointment || loading.treatments"
     content-class="v-patient-content">
-    <ElButton type="primary" @click="tcpHandler"> TCP </ElButton>
     <RouterView
       v-if="patient"
       v-model:patient="patient"
@@ -150,40 +149,6 @@ export default {
           data: new Patient({ parent: this.patient, parent_id: this.patient.id }),
         },
       });
-    },
-
-    async tcpHandler() {
-      const blob = new TextEncoder().encode(
-        'SIZE 150 mm, 100.1 mm' +
-          '\n' +
-          'GAP 3 mm, 0 mm' +
-          '\n' +
-          'CLS' +
-          '\n' +
-          'QRCODE 10,10,H,10,A,0,"https://zordoc.uz"' +
-          '\n' +
-          `TEXT 200, 200, "1", 0, 2, 2, "\["]DEMO FOR TEXT\["]"` +
-          '\n' +
-          'PRINT 1,1' +
-          '\n'
-        // { type: 'text/plain' }
-      );
-
-      const _window = await window.open('http:printer.zordouc.uz', 'printer');
-      setTimeout(() => _window.close(), 3000);
-
-      // fetch(`https://printer.zordoc.uz:9100`, {
-      //   method: 'POST',
-      //   body: blob,
-      // });
-      // fetch(`http://192.168.0.105:9100`, {
-      //   method: 'POST',
-      //   body: blob,
-      // });
-      // const data = await fetch(`http://192.168.0.100:9100`, {
-      //   method: 'POST',
-      //   body: blob,
-      // });
     },
   },
 };
