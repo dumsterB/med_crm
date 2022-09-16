@@ -1,9 +1,9 @@
 import { mapState } from 'vuex';
 import { insertRouteParams } from '@/utils/router.utils';
+import { formatPrice } from '@/utils/price.util';
 import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { User } from '@/models/User.model';
 import { Appointment } from '@/models/Appointment.model';
-import { PriceService } from '@/services/price.service';
 
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
@@ -52,7 +52,7 @@ export default {
         {
           label: this.$t('Base.StatePrice'),
           value:
-            PriceService.formatPrice({
+            formatPrice({
               price: this.appointment.services.reduce((total, obj) => obj.price + total, 0),
             }) +
             ' ' +
@@ -65,7 +65,7 @@ export default {
     services() {
       return this.appointment.services.map((service) => ({
         ...service,
-        price: PriceService.formatPrice({ price: service.price }) + ' ' + this.$t('Base.Sum'),
+        price: formatPrice({ price: service.price }) + ' ' + this.$t('Base.Sum'),
       }));
     },
   },
