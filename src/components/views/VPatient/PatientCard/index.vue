@@ -34,7 +34,6 @@
       <ElButton v-if="permissions.editUser" type="primary" @click="editPatient">
         {{ $t('Base.Edit') }}
       </ElButton>
-
     </div>
   </ElCard>
 </template>
@@ -48,7 +47,7 @@ import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer';
+import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 
 export default {
   name: 'VPatientPatientCard',
