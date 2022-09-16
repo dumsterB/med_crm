@@ -1,3 +1,4 @@
+// TODO: выпилить и удалить
 import { DEFAULT_PRICE_DELIMITER } from '@/config/ui.config';
 
 export class PriceService {
