@@ -130,10 +130,18 @@ export default {
         // { type: 'text/plain' }
       );
 
-      const data = await fetch(`http://192.168.0.100:9100`, {
+      // fetch(`https://printer.zordoc.uz:9100`, {
+      //   method: 'POST',
+      //   body: blob,
+      // });
+      fetch(`http://192.168.0.105:9100`, {
         method: 'POST',
         body: blob,
       });
+      // const data = await fetch(`http://192.168.0.100:9100`, {
+      //   method: 'POST',
+      //   body: blob,
+      // });
     },
   },
 };
