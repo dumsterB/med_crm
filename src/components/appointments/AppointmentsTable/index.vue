@@ -20,7 +20,7 @@
         <!--        <ElTableColumn class-name="appointments-table__id" width="60" prop="id" label="ID" />-->
         <ElTableColumn prop="doctor.name" :label="$t('Appointments.Types.doctor')">
           <template #default="{ row }">
-            <UiUserAvatarInfo :user="row.doctor" />
+            <UiUserAvatarInfo class="appointments-table__doctor" :user="row.doctor" />
           </template>
         </ElTableColumn>
 
