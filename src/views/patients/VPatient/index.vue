@@ -130,8 +130,6 @@ export default {
         // { type: 'text/plain' }
       );
 
-      console.log(blob);
-
       const data = await fetch(`http://192.168.0.100:9100`, {
         method: 'POST',
         body: blob,
