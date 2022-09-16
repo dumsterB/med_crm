@@ -1,6 +1,10 @@
 <template>
   <div class="ui-user-avatar-info">
-    <UiAvatar class="ui-user-avatar-info__avatar" :image="user.avatar" size="large" />
+    <UiAvatar
+      class="ui-user-avatar-info__avatar"
+      :image="user.avatar"
+      size="large"
+      :gender="user.gender" />
 
     <div class="ui-user-avatar-info__content ui-user-avatar-info-content">
       <span class="ui-user-avatar-info-content__name">
