@@ -1,5 +1,9 @@
 import { CRUDModel } from '@/models/CRUD.model';
 
+/**
+ * @class User
+ * @extends CRUDModel
+ */
 export class User extends CRUDModel {
   static modelName = 'user';
   static tableName = 'users';
@@ -19,6 +23,7 @@ export class User extends CRUDModel {
    * @property {Array<User|Patient>} childrens
    * @property {number} parent_id
    * @property {User|Patient} parent
+   * @property {Date|string} created_at
    */
   /**
    * @param {UserConstructorPayload|object} payload
