@@ -30,8 +30,8 @@ export default {
     image: Object,
     size: {
       type: String,
-      default: 'medium',
-      validator: (val) => ['small', 'medium', 'large', 'super-large'].includes(val),
+      default: 'default',
+      validator: (val) => ['small', 'default', 'large', 'super-large'].includes(val),
     },
 
     /**
