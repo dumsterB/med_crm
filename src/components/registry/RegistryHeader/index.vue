@@ -3,7 +3,7 @@
     <PatientsSearch class="registry-header__search" />
 
     <LangSelect />
-    <UiUserAvatarInfo :gender="user.gender" :user="user"></UiUserAvatarInfo>
+    <UiUserAvatarInfo secondary-field-key="email" :user="user"></UiUserAvatarInfo>
   </div>
 </template>
 
