@@ -1,50 +1,21 @@
-.avatar-and-info {
+.ui-user-avatar-info {
   display: flex;
-  justify-content: center;
+  align-items: center;
   gap: 10px;
-  &-content {
-    &-info {
-      cursor: pointer;
-      &-private {
-        &-name {
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 24px;
-          display: flex;
-          align-items: center;
-          letter-spacing: 0.5px;
-          color: #404040;
-        }
-        &-icon {
-          margin-top: -30px;
-        }
-      }
-    }
-    &-img {
-      border-radius: 50%;
-      align-items: center;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-    }
 
-    &_medium{
-      height: 40px;
-      width: 40px;
-    }
-    &_large{
-      height: 70px;
-      width: 70px;
-    }
+  &__avatar {
   }
+  &-content {
+    display: flex;
+    flex-direction: column;
 
-  &-img {
-    &_medium {
-      height: 30px;
+    &__name {
+      font-weight: bold;
+      font-size: 1.1em;
     }
-    &_large {
-      height: 50px;
-      width: 50px;
+    &__secondary {
+      color: var(--text-secondary-color);
+      font-size: 0.85em;
     }
   }
 }
