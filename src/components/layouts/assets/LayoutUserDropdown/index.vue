@@ -1,5 +1,5 @@
 <template>
-  <ElPopover class="layout-user-dropdown" trigger="click" placement="bottom" width="260px">
+  <ElPopover class="layout-user-dropdown" trigger="click" placement="bottom" width="300px">
     <template #reference>
       <UiUserAvatarInfo
         class="layout-user-dropdown__reference"
