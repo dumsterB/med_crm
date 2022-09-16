@@ -2,6 +2,7 @@ import { markRaw } from 'vue';
 import { mapState } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
 import { DRAWER_DEFAULT_SIZE } from '@/config/ui.config';
+import { formatPrice } from '@/utils/price.util';
 
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
@@ -17,7 +18,6 @@ import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatient
 import SpecialtiesSelect from '@/components/specialties/SpecialtiesSelect/index.vue';
 import DoctorsSelectByGroupService from './DoctorsSelectByGroupService/index.vue';
 import ScheduleSlotsSelect from '@/components/appointments/ScheduleSlotsSelect/index.vue';
-import { PriceService } from '@/services/price.service';
 
 // TODO: написать документацию по бизнес логике
 export default {
@@ -329,9 +329,11 @@ export default {
 
     /** @param {Service|ServiceGroup|object} service */
     generateServiceOptionLabel(service) {
-      return `${service.title} - ${PriceService.formatPrice({ price: service.price })} ${this.$t(
-        'Base.Sum'
-      )}`;
+      const title = service.title;
+      const price =
+        service.price ?? service.services?.reduce((acc, service) => acc + (service.price || 0), 0);
+
+      return `${title} - ${formatPrice({ price: price })} ${this.$t('Base.Sum')}`;
     },
   },
 
