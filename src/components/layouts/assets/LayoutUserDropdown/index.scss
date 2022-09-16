@@ -1,0 +1,18 @@
+.layout-user-dropdown {
+  &__reference {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+
+    &__title {
+      font-weight: bold;
+    }
+  }
+}
