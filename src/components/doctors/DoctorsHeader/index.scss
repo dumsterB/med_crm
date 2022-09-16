@@ -1,10 +1,16 @@
 .doctors-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
 
   &__search {
     width: 60%;
+  }
+  &__appointment-btn {
     margin-right: auto;
+  }
+  &__dropdown {
+    margin-left: auto;
   }
 }

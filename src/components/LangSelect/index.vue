@@ -25,7 +25,10 @@ export default {
     },
 
     locales() {
-      return Object.keys(LOCALES).map((key) => ({ label: LOCALES[key], value: LOCALES[key] }));
+      return Object.keys(LOCALES).map((key) => ({
+        label: LOCALES[key].label,
+        value: LOCALES[key].id,
+      }));
     },
   },
 };

@@ -1,0 +1,20 @@
+.ui-user-avatar-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &__avatar {
+  }
+  &-content {
+    display: flex;
+    flex-direction: column;
+
+    &__name {
+      font-weight: bold;
+    }
+    &__secondary {
+      color: var(--text-secondary-color);
+      font-size: 0.85em;
+    }
+  }
+}

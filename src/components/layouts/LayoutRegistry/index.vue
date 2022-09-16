@@ -21,7 +21,7 @@ import LayoutDefault from '@/components/layouts/LayoutDefault/index.vue';
 
 export default {
   name: 'LayoutRegistry',
-  components: { LayoutDefault, RegistryHeader, RegistryMenu },
+  components: { LayoutDefault, RegistryHeader, RegistryMenu }
 };
 </script>
 

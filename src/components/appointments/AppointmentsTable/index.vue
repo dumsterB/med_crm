@@ -17,8 +17,12 @@
           </div>
         </template>
 
-        <ElTableColumn class-name="appointments-table__id" width="60" prop="id" label="ID" />
-        <ElTableColumn prop="doctor.name" :label="$t('Appointments.Types.doctor')" />
+        <!--        <ElTableColumn class-name="appointments-table__id" width="60" prop="id" label="ID" />-->
+        <ElTableColumn prop="doctor.name" :label="$t('Appointments.Types.doctor')">
+          <template #default="{ row }">
+            <UiUserAvatarInfo class="appointments-table__doctor" :user="row.doctor" />
+          </template>
+        </ElTableColumn>
 
         <ElTableColumn width="150px" prop="start_at" :label="$t('DateAndTime.StartAt')">
           <template #default="{ row }">
@@ -31,7 +35,7 @@
           </template>
         </ElTableColumn>
 
-<!--        <ElTableColumn prop="service.title" :label="$t('Base.ReasonService')" />-->
+        <!--        <ElTableColumn prop="service.title" :label="$t('Base.ReasonService')" />-->
 
         <ElTableColumn prop="patient.name" :label="$t('Base.Patient')" />
         <ElTableColumn prop="patient.phone" :label="$t('Appointments.PhonePatient')" />
@@ -107,7 +111,7 @@ export default {
   methods: {
     getTableRowClassName(row) {
       if (row.row.status === Appointment.enum.statuses.InProgress) {
-        return  `appointment-${Appointment.enum.statuses.InProgress}`;
+        return `appointment-${Appointment.enum.statuses.InProgress}`;
       }
       return '';
     },

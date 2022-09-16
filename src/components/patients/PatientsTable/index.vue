@@ -18,10 +18,7 @@
 
         <ElTableColumn prop="name" :label="$t('User.FullName')">
           <template #default="{ row }">
-            <div class="patients-table__name-avatar">
-              <UiAvatar :image="row.avatar" />
-              <span> {{ row.name }} </span>
-            </div>
+            <UiUserAvatarInfo class="patients-table__user" :user="row" />
           </template>
         </ElTableColumn>
 
