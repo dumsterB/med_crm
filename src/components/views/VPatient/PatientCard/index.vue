@@ -7,7 +7,7 @@
     ]"
     shadow="hover">
     <template #header>
-      <UiAvatar size="super-large" />
+      <UiAvatar size="super-large" :gender="data.gender" />
 
       <div class="v-patient-profile-card__user v-patient-profile-card-user">
         <div class="v-patient-profile-card-user__name">
