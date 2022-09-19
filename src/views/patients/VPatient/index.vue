@@ -3,6 +3,7 @@
     :loading="loading.profile || loading.appointment || loading.treatments"
     content-class="v-patient-content">
     <ElButton type="primary" @click="tcpHandler"> TCP </ElButton>
+    <ElButton type="primary" plain @click="tcpHandlerWindow">Window</ElButton>
     <RouterView
       v-if="patient"
       v-model:patient="patient"
@@ -172,6 +173,18 @@ export default {
         method: 'POST',
         body: blob,
       });
+    },
+
+    async tcpHandlerWindow() {
+      const _window = await window.open(
+        'http://test-printer.zordoc.uz/',
+        'printer',
+        'width=500,height=500'
+      );
+      // console.log(_window);
+      // _window.addEventListener('message', (message) => {
+      //   console.log('__window');
+      // });
     },
   },
 };
