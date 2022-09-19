@@ -156,10 +156,10 @@ export default {
     async tcpHandler() {
       const data = await fetch(`http://localhost:65535`, {
         method: 'POST',
-        body: {
+        body: JSON.stringify({
           printer_address: '192.168.0.101:9100',
           message: `SIZE 150 mm, 100.1 mm\nGAP 3 mm, 0 mm\nCLS\nQRCODE 10,10,H,10,A,0,"https://zordoc.uz\"\nTEXT 200, 200, "1", 0, 2, 2, "DEMO FOR TEXT"\nPRINT 1,1\n`,
-        },
+        }),
       });
     },
 
