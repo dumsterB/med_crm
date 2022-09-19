@@ -330,7 +330,7 @@ export default {
     /** @param {Service|ServiceGroup|object} service */
     generateServiceOptionLabel(service) {
       const title = service.title;
-      const price = service.price ?? service.services?.length ? service.services[0].price : 0;
+      const price = service.price ?? (service.services?.length ? service.services[0].price : 0);
 
       return `${title} - ${formatPrice({ price: price })} ${this.$t('Base.Sum')}`;
     },
