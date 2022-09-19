@@ -18,9 +18,12 @@
         </template>
 
         <!--        <ElTableColumn class-name="appointments-table__id" width="60" prop="id" label="ID" />-->
-        <ElTableColumn prop="doctor.name" :label="$t('Appointments.Types.doctor')">
+        <ElTableColumn prop="doctor.name" :label="$t('Appointments.Types.doctor')" width="300px">
           <template #default="{ row }">
-            <UiUserAvatarInfo class="appointments-table__doctor" :user="row.doctor" />
+            <UiUserAvatarInfo
+              class="appointments-table__doctor"
+              :user="row.doctor"
+              show-has-treatmnet />
           </template>
         </ElTableColumn>
 

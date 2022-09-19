@@ -8,6 +8,7 @@
   &-content {
     display: flex;
     flex-direction: column;
+    min-width: 4em;
 
     &__name {
       font-weight: bold;
@@ -16,5 +17,9 @@
       color: var(--text-secondary-color);
       font-size: 0.85em;
     }
+  }
+
+  &__tag {
+    margin-left: 10px;
   }
 }

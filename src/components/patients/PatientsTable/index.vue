@@ -16,9 +16,9 @@
           </div>
         </template>
 
-        <ElTableColumn prop="name" :label="$t('User.FullName')">
+        <ElTableColumn prop="name" :label="$t('User.FullName')" width="300px">
           <template #default="{ row }">
-            <UiUserAvatarInfo class="patients-table__user" :user="row" />
+            <UiUserAvatarInfo class="patients-table__user" :user="row" show-has-treatment />
           </template>
         </ElTableColumn>
 
