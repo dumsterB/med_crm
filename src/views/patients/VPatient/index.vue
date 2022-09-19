@@ -2,6 +2,7 @@
   <LayoutByUserRole
     :loading="loading.profile || loading.appointment || loading.treatments"
     content-class="v-patient-content">
+    <ElButton type="primary" @click="tcpHandler"> TCP </ElButton>
     <RouterView
       v-if="patient"
       v-model:patient="patient"
@@ -148,6 +149,28 @@ export default {
         payload: {
           data: new Patient({ parent: this.patient, parent_id: this.patient.id }),
         },
+      });
+    },
+
+    async tcpHandler() {
+      const blob = new TextEncoder().encode(
+        'SIZE 150 mm, 100.1 mm' +
+          '\n' +
+          'GAP 3 mm, 0 mm' +
+          '\n' +
+          'CLS' +
+          '\n' +
+          'QRCODE 10,10,H,10,A,0,"https://zordoc.uz"' +
+          '\n' +
+          `TEXT 200, 200, "1", 0, 2, 2, "\["]DEMO FOR TEXT\["]"` +
+          '\n' +
+          'PRINT 1,1' +
+          '\n'
+      );
+
+      const data = await fetch(`http://192.168.0.101:9100`, {
+        method: 'POST',
+        body: blob,
       });
     },
   },
