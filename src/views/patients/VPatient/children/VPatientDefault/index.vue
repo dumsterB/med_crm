@@ -67,7 +67,8 @@
   <div class="v-patient-default__item v-patient-default-item">
     <div class="v-patient-default-item__header v-patient-default-item-header">
       <div class="v-patient-default__title">{{ $t('Base.TableTreatment') }}</div>
-      <ElButton type="primary" @click="$emit('treatment:create')">
+
+      <ElButton v-show="isDoctor" type="primary" @click="$emit('treatment:create')">
         {{ $t('Base.SetTreatment') }}
       </ElButton>
     </div>
@@ -96,6 +97,7 @@ import PatientCard from '@/components/views/VPatient/PatientCard/index.vue';
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
 import TreatmentsTable from '@/components/treatments/TreatmentsTable/index.vue';
+import { mapState } from 'vuex';
 
 export default {
   name: 'VPatientDefault',
@@ -125,6 +127,14 @@ export default {
     loading: Object,
   },
   computed: {
+    ...mapState({
+      user: (state) => state.auth.user,
+    }),
+
+    isDoctor() {
+      return !!this.user.doctor_id;
+    },
+
     isChildren() {
       return !!this.patient.parent_id;
     },
