@@ -8,9 +8,12 @@
         :empty-text="$t('Base.NoData')"
         ref="elTable"
         @row-click="goToAppointment">
-        <ElTableColumn prop="patient.name" :label="$t('Base.FullName')">
+        <ElTableColumn prop="patient.name" :label="$t('Base.FullName')" width="300px">
           <template #default="{ row }">
-            <UiUserAvatarInfo class="queues-table__patient" :user="row.patient" />
+            <UiUserAvatarInfo
+              class="queues-table__patient"
+              :user="row.patient"
+              show-has-treatment />
           </template>
         </ElTableColumn>
 
