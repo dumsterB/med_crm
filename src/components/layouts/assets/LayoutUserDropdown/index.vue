@@ -1,10 +1,10 @@
 <template>
   <ElPopover class="layout-user-dropdown" trigger="click" placement="bottom" width="300px">
     <template #reference>
-      <UiUserAvatarInfo
-        class="layout-user-dropdown__reference"
-        :user="user"
-        secondary-field-key="email" />
+      <div class="layout-user-dropdown__reference layout-user-dropdown-reference">
+        <UiUserAvatarInfo :user="user" secondary-field-key="email" />
+        <UiIcon class="layout-user-dropdown-reference__icon" :icon="icons.CHEVRON_DOWN" />
+      </div>
     </template>
 
     <div class="layout-user-dropdown__content layout-user-dropdown-content">
@@ -19,6 +19,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import * as icons from '@/enums/icons.enum.js';
 import LangSelect from '@/components/LangSelect/index.vue';
 
 export default {
@@ -29,6 +30,10 @@ export default {
       user: (state) => state.auth.user,
     }),
   },
+
+  setup: () => ({
+    icons,
+  }),
 };
 </script>
 

@@ -1,7 +1,15 @@
 .layout-user-dropdown {
-  &__reference {
+  &-reference {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
     &:hover {
       cursor: pointer;
+    }
+
+    &__icon {
+      font-size: 0.9em;
     }
   }
 
