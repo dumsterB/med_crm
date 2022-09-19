@@ -15,6 +15,15 @@
         {{ user[secondaryFieldKey] }}
       </span>
     </div>
+
+    <ElTag
+      v-show="showHasTreatment && user.has_treatment"
+      class="ui-user-avatar-info__tag"
+      type="success"
+      effect="dark"
+      round>
+      {{ $t('Patients.HasTreatment') }}
+    </ElTag>
   </div>
 </template>
 
@@ -31,8 +40,10 @@ export default {
       type: String,
       default: 'medium',
     },
+    showHasTreatment: Boolean,
   },
 };
 </script>
 
 <style lang="scss" src="./index.scss" />
+<i18n src="@/locales/patients.locales.json" />
