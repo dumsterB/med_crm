@@ -2,12 +2,13 @@
 
 <template>
   <ElCard id="ambulatory" class="ambulatory-card" shadow="never">
+    <h1 class="ambulatory-card__title">{{ $t('Base.AmbulatoryCard') }}</h1>
     <ElForm label-position="top">
       <ElFormItem :label="$t('User.FullName')">
         <ElInput v-model="localPatient.name" />
       </ElFormItem>
       <ElFormItem :label="$t('User.Birthdate')">
-        <ElDatePicker  class="ambulatory-card__date-picker" v-model="localPatient.birthdate" />
+        <ElDatePicker class="ambulatory-card__date-picker" v-model="localPatient.birthdate" />
       </ElFormItem>
 
       <ElFormItem :label="$t('User.Phone')">
@@ -76,18 +77,19 @@
       <ElButton type="primary" :loading="loading" @click="saveChanges">
         {{ $t('Base.SaveChanges') }}
       </ElButton>
-    </div>
-    <br>
-    <iframe id="ifmcontentstoprint" style="height: 0px; width: 0px; position:absolute;"></iframe>
-    <div class="ambulatory-card__actions ambulatory-card-actions">
-      <ElButton type="primary"  @click="callPrint">
-        Print
+      <ElButton text @click="callPrint">
+        <template #icon>
+          <UiIcon :icon="icons.PRINTER" />
+        </template>
+        {{ $t('Base.Print') }}
       </ElButton>
     </div>
+    <br />
   </ElCard>
 </template>
 
 <script>
+import * as icons from '@/enums/icons.enum.js';
 import { AmbulatoryCard } from '@/models/AmbulatoryCard.model';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
@@ -127,22 +129,20 @@ export default {
   },
 
   methods: {
-    callPrint(){
-      var content = document.getElementById("ambulatory");
-      var pri = document.getElementById("ifmcontentstoprint").contentWindow;
-      pri.document.open();
-      pri.document.write('<h1>Behruz DUMSTER</h1>')
-      pri.document.write(content.innerHTML);
-      pri.document.close();
-      pri.focus();
-      pri.print();
-      // let contentOfDiv = document.getElementById("ambulatory").innerHTML;
-      // let newWin = window.open('', '', 'height=650, width=650');
-      // newWin.document.write(contentOfDiv);
-      // var parser = new DOMParser();
-      // console.log(parser.parseFromString(contentOfDiv, 'text/html'),'contentOfDiv')
-      // newWin.print();
+    callPrint() {
+      const modal = document.getElementById('ambulatory');
+      const cloned = modal.cloneNode(true);
+      let section = document.getElementById('print');
 
+      if (!section) {
+        section = document.createElement('div');
+        section.id = 'print';
+        document.body.appendChild(section);
+      }
+
+      section.innerHTML = '';
+      section.appendChild(cloned);
+      window.print();
     },
     async saveChanges() {
       if (this.loading) return;
@@ -172,11 +172,13 @@ export default {
       this.loading = false;
     },
   },
+  setup: () => ({
+    icons,
+  }),
 };
 </script>
 
 <style lang="scss" src="./index.scss" />
-<style lang="scss" media="print" src="./print.css" />
 <i18n src="@/locales/base.locales.json" />
 <i18n src="@/locales/notifications.locales.json" />
 <i18n src="@/locales/user.locales.json" />

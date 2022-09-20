@@ -72,7 +72,8 @@
       "Templates": "Шаблоны",
       "Time": "Время",
       "WriteText": "Напишите текст...",
-      "StatePrice": "Стоимость"
+      "StatePrice": "Стоимость",
+      "Print": "Распечатать"
     }
   },
   "uz": {
@@ -148,7 +149,8 @@
       "Templates": "Namunalar",
       "Time": "Vaqt",
       "WriteText": "Matn yozing...",
-      "StatePrice": "Narxi"
+      "StatePrice": "Narxi",
+      "Print": "chop etish"
     }
   }
 }

@@ -3,7 +3,55 @@
     width: 100%;
     max-width: 800px;
   }
-  &__date-picker{
-    width: 100%!important;
+  &__date-picker {
+    width: 100% !important;
+  }
+  &__title {
+    font-weight: 800;
+    font-size: 24px;
+    text-align: center;
+    display: none;
+    margin-bottom: 30px;
+  }
+  &-actions {
+    display: flex;
+    gap: 20px;
+  }
+}
+
+@media print {
+  .ambulatory-card * {
+    visibility: visible !important;
+  }
+  .ambulatory-card {
+    position: absolute !important;
+    width: 100% !important;
+    left: 0 !important;
+    top: 0 !important;
+    &__title {
+      display: flex !important;
+    }
+    .el-card__body {
+      max-width: 100% !important;
+    }
+    .el-form-item__label {
+      font-weight: 700;
+    }
+    .el-input {
+      --el-input-bg-color: white;
+    }
+    .el-input__wrapper {
+      box-shadow: none;
+    }
+    .ambulatory-card__actions {
+      display: none;
+    }
+    .el-input__prefix {
+      display: none !important;
+    }
+  }
+
+  .ambulatory-card .el-input__wrapper {
+    background: white !important;
   }
 }
