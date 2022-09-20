@@ -1,0 +1,17 @@
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #ambulatory, #ambulatory * {
+        visibility: visible;
+    }
+    #ambulatory {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .ambulatory-card__actions{
+        display: none;
+    }
+
+}

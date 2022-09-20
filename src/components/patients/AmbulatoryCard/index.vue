@@ -1,13 +1,13 @@
 <!--  TODO: перебиравть поля циклом когда будут известны все поля и их типы  -->
 
 <template>
-  <ElCard class="ambulatory-card" shadow="never">
+  <ElCard id="ambulatory" class="ambulatory-card" shadow="never">
     <ElForm label-position="top">
       <ElFormItem :label="$t('User.FullName')">
         <ElInput v-model="localPatient.name" />
       </ElFormItem>
       <ElFormItem :label="$t('User.Birthdate')">
-        <ElDatePicker v-model="localPatient.birthdate" />
+        <ElDatePicker  class="ambulatory-card__date-picker" v-model="localPatient.birthdate" />
       </ElFormItem>
 
       <ElFormItem :label="$t('User.Phone')">
@@ -77,6 +77,13 @@
         {{ $t('Base.SaveChanges') }}
       </ElButton>
     </div>
+    <br>
+    <iframe id="ifmcontentstoprint" style="height: 0px; width: 0px; position:absolute;"></iframe>
+    <div class="ambulatory-card__actions ambulatory-card-actions">
+      <ElButton type="primary"  @click="callPrint">
+        Print
+      </ElButton>
+    </div>
   </ElCard>
 </template>
 
@@ -120,6 +127,23 @@ export default {
   },
 
   methods: {
+    callPrint(){
+      var content = document.getElementById("ambulatory");
+      var pri = document.getElementById("ifmcontentstoprint").contentWindow;
+      pri.document.open();
+      pri.document.write('<h1>Behruz DUMSTER</h1>')
+      pri.document.write(content.innerHTML);
+      pri.document.close();
+      pri.focus();
+      pri.print();
+      // let contentOfDiv = document.getElementById("ambulatory").innerHTML;
+      // let newWin = window.open('', '', 'height=650, width=650');
+      // newWin.document.write(contentOfDiv);
+      // var parser = new DOMParser();
+      // console.log(parser.parseFromString(contentOfDiv, 'text/html'),'contentOfDiv')
+      // newWin.print();
+
+    },
     async saveChanges() {
       if (this.loading) return;
       this.loading = true;
@@ -152,6 +176,7 @@ export default {
 </script>
 
 <style lang="scss" src="./index.scss" />
+<style lang="scss" media="print" src="./print.css" />
 <i18n src="@/locales/base.locales.json" />
 <i18n src="@/locales/notifications.locales.json" />
 <i18n src="@/locales/user.locales.json" />
