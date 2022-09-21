@@ -77,6 +77,7 @@
       <ElButton type="primary" :loading="loading" @click="saveChanges">
         {{ $t('Base.SaveChanges') }}
       </ElButton>
+
       <ElButton text @click="callPrint">
         <template #icon>
           <UiIcon :icon="icons.PRINTER" />
@@ -84,7 +85,6 @@
         {{ $t('Base.Print') }}
       </ElButton>
     </div>
-    <br />
   </ElCard>
 </template>
 
@@ -131,7 +131,7 @@ export default {
   methods: {
     callPrint() {
       const modal = document.getElementById('ambulatory');
-      const cloned = modal.cloneNode(true);
+      let cloned = modal.cloneNode(true);
       let section = document.getElementById('print');
 
       if (!section) {
@@ -143,6 +143,7 @@ export default {
       section.innerHTML = '';
       section.appendChild(cloned);
       window.print();
+      document.getElementById("print").remove();
     },
     async saveChanges() {
       if (this.loading) return;

@@ -55,6 +55,7 @@
             {{ $t('Appointments.EndReception') }}
           </ElButton>
         </div>
+
       </ElForm>
     </ElCard>
   </div>

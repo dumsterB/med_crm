@@ -3,8 +3,10 @@
     <ElForm
       class="default-inspection-card-form"
       label-position="top"
+      id="inspection-card"
       ref="form"
       @submit.prevent="submitHandler">
+      <h1 class="default-inspection-card-form__title">{{ $t('Base.InspectationCard') }}</h1>
       <ElFormItem v-show="!readonly" :label="$t('Templates.SelectTemplate')">
         <UiModelsAutocompleteSearch
           v-model="templateId"
@@ -23,7 +25,6 @@
         <div class="default-inspection-card-form-actions">
           <slot name="actions">
             <ElButton
-              v-show="!readonly && !appointment.service_case?.disease_code_codes?.length"
               data-method="toDiagnose"
               type="warning"
               native-type="submit"
@@ -32,11 +33,17 @@
             </ElButton>
 
             <ElButton
-              v-show="!readonly"
               data-method="endReception"
               type="primary"
               native-type="submit">
               {{ $t('Appointments.EndReception') }}
+            </ElButton>
+
+            <ElButton text @click="callPrint">
+              <template #icon>
+                <UiIcon :icon="icons.PRINTER" />
+              </template>
+              {{ $t('Base.Print') }}
             </ElButton>
           </slot>
         </div>
@@ -46,6 +53,7 @@
 </template>
 
 <script>
+import * as icons from '@/enums/icons.enum.js';
 import { Appointment } from '@/models/Appointment.model';
 import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model';
 import { DefaultInspectionCard } from '@/models/DefaultInspectionCard.model';
@@ -81,6 +89,22 @@ export default {
   },
 
   methods: {
+    callPrint() {
+      const modal = document.getElementById('inspection-card');
+      const cloned = modal.cloneNode(true);
+      let section = document.getElementById('print');
+
+      if (!section) {
+        section = document.createElement('div');
+        section.id = 'print';
+        document.body.appendChild(section);
+      }
+
+      section.innerHTML = '';
+      section.appendChild(cloned);
+      window.print();
+      document.getElementById('print').remove();
+    },
     selectTemplate(template) {
       this.inspectionCard = new DefaultInspectionCard({
         ...template,
@@ -130,6 +154,7 @@ export default {
 
   setup: () => ({
     InspectionCardTemplate,
+    icons,
   }),
 };
 </script>
