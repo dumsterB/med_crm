@@ -18,8 +18,12 @@
     </LayoutContentHeader>
 
     <ElCard shadow="never">
-      <ElForm class="v-app-treat-card-form" id="treatments" label-position="top" @submit.prevent="submitHandler">
-        <h1 class="v-app-treat-card-form__title">{{$t('Title')}}</h1>
+      <ElForm
+        class="v-app-treat-card-form"
+        id="treatments"
+        label-position="top"
+        @submit.prevent="submitHandler">
+        <h1 class="v-app-treat-card-form__title">{{ $t('Title') }}</h1>
         <ElFormItem :label="$t('Appointments.InspectionCard.Сomplaints')">
           <ElInput
             v-model="inspectionCard.complaints"
@@ -55,7 +59,6 @@
           <ElButton data-method="endReception" type="primary" native-type="submit">
             {{ $t('Appointments.EndReception') }}
           </ElButton>
-
         </div>
         <ElButton text @click="callPrint" class="v-app-treat-card-form-actions">
           <template #icon>

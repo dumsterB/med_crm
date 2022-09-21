@@ -38,12 +38,12 @@
     width: 100% !important;
     left: 0 !important;
     top: 0 !important;
-      &__title {
-        display: block !important;
-      }
-      &-actions{
-        display: none !important;
-      }
+    &__title {
+      display: block !important;
+    }
+    &-actions {
+      display: none !important;
+    }
 
     .el-textarea__inner {
       box-shadow: none !important;
@@ -60,5 +60,4 @@
       display: none !important;
     }
   }
-
 }

@@ -143,7 +143,7 @@ export default {
       section.innerHTML = '';
       section.appendChild(cloned);
       window.print();
-      document.getElementById("print").remove();
+      document.getElementById('print').remove();
     },
     async saveChanges() {
       if (this.loading) return;
