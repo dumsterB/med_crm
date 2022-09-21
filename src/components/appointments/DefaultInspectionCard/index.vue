@@ -26,6 +26,7 @@
           <slot name="actions">
             <ElButton
               data-method="toDiagnose"
+              v-show="!readonly && !appointment.service_case?.disease_code_codes?.length"
               type="warning"
               native-type="submit"
               plain>
@@ -34,6 +35,7 @@
 
             <ElButton
               data-method="endReception"
+              v-show="!readonly"
               type="primary"
               native-type="submit">
               {{ $t('Appointments.EndReception') }}

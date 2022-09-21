@@ -20,5 +20,45 @@
       display: flex;
       gap: 10px;
     }
+    &__title {
+      font-weight: 800;
+      font-size: 24px;
+      text-align: center;
+      display: none;
+      margin-bottom: 30px;
+    }
   }
+}
+@media print {
+  .v-app-treat-card-form * {
+    visibility: visible !important;
+  }
+  .v-app-treat-card-form {
+    position: absolute !important;
+    width: 100% !important;
+    left: 0 !important;
+    top: 0 !important;
+      &__title {
+        display: block !important;
+      }
+      &-actions{
+        display: none !important;
+      }
+
+    .el-textarea__inner {
+      box-shadow: none !important;
+      outline: none !important;
+      resize: none;
+    }
+    .el-card__body {
+      max-width: 100% !important;
+    }
+    .el-form-item__label {
+      font-weight: 700;
+    }
+    .el-input__prefix {
+      display: none !important;
+    }
+  }
+
 }
