@@ -1,8 +1,20 @@
+.printer__title {
+  display: none;
+  text-align: center;
+  font-size: 1.9em;
+  font-weight: 800;
+  visibility: visible !important;
+}
+
 @media print {
   *,
   *::after,
   *::before {
     visibility: hidden !important;
+  }
+
+  .printer__title {
+    display: block;
   }
 
   .el-input__prefix {
