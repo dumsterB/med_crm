@@ -17,13 +17,14 @@
       </ElPageHeader>
     </LayoutContentHeader>
 
-    <ElCard shadow="never">
+    <ElCard class="printer__block printer__doc" shadow="never">
       <ElForm
         class="v-app-treat-card-form"
         id="treatments"
         label-position="top"
         @submit.prevent="submitHandler">
-        <h1 class="v-app-treat-card-form__title">{{ $t('Title') }}</h1>
+        <h1 class="printer__title">{{ $t('Title') }}</h1>
+
         <ElFormItem :label="$t('Appointments.InspectionCard.Сomplaints')">
           <ElInput
             v-model="inspectionCard.complaints"
