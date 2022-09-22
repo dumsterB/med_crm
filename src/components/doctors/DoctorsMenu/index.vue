@@ -12,6 +12,7 @@ import {
 } from '@/router/doctors.routes';
 import { PATIENTS_ROUTE } from '@/router/patients.routes';
 import DefaultMenu from '@/components/layouts/assets/DefaultMenu/index.vue';
+import {TIMETABLE_NAV} from "@/enums/icons.enum.js";
 
 export default {
   name: 'DoctorsMenu',
@@ -30,15 +31,15 @@ export default {
     routesOptionsByRouteName() {
       return {
         [DASHBOARD_ROUTE.name]: {
-          icon: icons.DASHBOARD,
+          icon: icons.DASHBOARD_NAV,
           text: this.$t('Base.Dashboard'),
         },
         [DOCTORS_QUEUE_ROUTE.name]: {
-          icon: icons.NOTE,
+          icon: icons.TIMETABLE_NAV,
           text: this.$t('Base.Queue'),
         },
         [PATIENTS_ROUTE.name]: {
-          icon: icons.USER_TAG,
+          icon: icons.PATIENTS_NAV,
           text: this.$t('Base.Patients'),
         },
         [DOCTORS_TEMPLATES_ROUTE.name]: {

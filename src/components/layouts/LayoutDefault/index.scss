@@ -16,6 +16,7 @@
   &__main {
     height: 100vh;
     overflow-y: auto;
+    background: #F6F9F9;
 
     &_fix-height {
       overflow-y: hidden;
@@ -24,6 +25,8 @@
   &__header {
     padding: var(--padding-medium);
     background-color: var(--bg-color);
+    margin: 15px 15px 0px 15px;
+    border-radius: 8px;
   }
   &__content {
     display: flex;
