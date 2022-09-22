@@ -1,7 +1,7 @@
 <!--  TODO: перебиравть поля циклом когда будут известны все поля и их типы  -->
 <template>
-  <ElCard id="ambulatory" class="ambulatory-card" shadow="never">
-    <h1 class="ambulatory-card__title">{{ $t('Base.AmbulatoryCard') }}</h1>
+  <ElCard class="ambulatory-card printer__block printer__doc" shadow="never">
+    <h1 class="printer__title ambulatory-card__title">{{ $t('Base.AmbulatoryCard') }}</h1>
     <ElForm label-position="top">
       <ElFormItem :label="$t('User.FullName')">
         <ElInput v-model="localPatient.name" />
