@@ -5,6 +5,7 @@
       "Actions": "Действия",
       "Allergy": "Аллергия",
       "AmbulatoryCard": "Амбулаторная карта",
+      "InspectationCard": "Карта осмотра",
       "Appoint": "Назначить",
       "Appointment": "Запись",
       "Attach": "Привязать",
@@ -72,7 +73,8 @@
       "Templates": "Шаблоны",
       "Time": "Время",
       "WriteText": "Напишите текст...",
-      "StatePrice": "Стоимость"
+      "StatePrice": "Стоимость",
+      "Print": "Распечатать"
     }
   },
   "uz": {
@@ -81,6 +83,7 @@
       "Actions": "Harakatlar",
       "Allergy": "Allergiya",
       "AmbulatoryCard": "Ambulatoriya kartasi",
+      "InspectationCard": "Tekshirish kartasi",
       "Appoint": "Tayinlash",
       "Appointment": "Yozuv",
       "Attach": "Bog'lash",
@@ -148,7 +151,8 @@
       "Templates": "Namunalar",
       "Time": "Vaqt",
       "WriteText": "Matn yozing...",
-      "StatePrice": "Narxi"
+      "StatePrice": "Narxi",
+      "Print": "chop etish"
     }
   }
 }
