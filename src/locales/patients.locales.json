@@ -2,19 +2,21 @@
   "ru": {
     "Patients": {
       "AddPatient": "Добавить пациента",
+      "ClinicPatients": "Пациенты клиники",
       "EditPatient": "Изменить данные пациента",
-      "NoPatient": "Пациен не найден",
+      "HasTreatment": "На лечении",
       "MyPatients": "Мои пациенты",
-      "ClinicPatients": "Пациенты клиники"
+      "NoPatient": "Пациен не найден"
     }
   },
   "uz": {
     "Patients": {
       "AddPatient": "Bemorni qo'shish",
+      "ClinicPatients": "Klinikadagi bemorlar",
       "EditPatient": "Bemorning ma'lumotlarini o'zgartirish",
-      "NoPatient": "Bemor topilmadi",
+      "HasTreatment": "Davolanmoqda",
       "MyPatients": "Mening bemorlarim",
-      "ClinicPatients": "Klinikadagi bemorlar"
+      "NoPatient": "Bemor topilmadi"
     }
   }
 }

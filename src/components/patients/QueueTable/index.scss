@@ -21,10 +21,11 @@
   tr:hover {
     cursor: pointer;
   }
-  &__name-avatar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+
+  &__patient {
+    .ui-user-avatar-info-content__name {
+      font-weight: normal;
+    }
   }
   &-actions {
     display: flex;

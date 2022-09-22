@@ -2,14 +2,17 @@
   <div class="doctors-header">
     <PatientsSearch class="doctors-header__search" />
 
-    <RouterLink v-if="showActiveAppointmentPageLink" :to="activeAppointmentPageLink">
+    <RouterLink
+      v-if="showActiveAppointmentPageLink"
+      class="doctors-header__appointment-btn"
+      :to="activeAppointmentPageLink">
       <ElButton type="primary">
         <template #icon> <UiIcon :icon="icons.CHEVRON_LEFT" /> </template>
         {{ $t('GoToAppointment') }}
       </ElButton>
     </RouterLink>
 
-    <LangSelect />
+    <LayoutUserDropdown class="doctors-header__dropdown" />
   </div>
 </template>
 
@@ -19,12 +22,12 @@ import * as icons from '@/enums/icons.enum.js';
 import { insertRouteParams } from '@/utils/router.utils';
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 
-import LangSelect from '@/components/LangSelect/index.vue';
 import PatientsSearch from '@/components/patients/PatientsSearch/index.vue';
+import LayoutUserDropdown from '@/components/layouts/assets/LayoutUserDropdown/index.vue';
 
 export default {
   name: 'RegistryHeader',
-  components: { LangSelect, PatientsSearch },
+  components: { LayoutUserDropdown, PatientsSearch },
   computed: {
     ...mapGetters({
       user: 'user/user',

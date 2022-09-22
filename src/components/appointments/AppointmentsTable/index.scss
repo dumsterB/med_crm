@@ -30,6 +30,12 @@
     align-items: center;
     padding-bottom: 1.5em;
   }
+
+  &__doctor {
+    .ui-user-avatar-info-content__name {
+      font-weight: normal;
+    }
+  }
 }
 
 .el-table .appointment-in_progress {
