@@ -38,6 +38,10 @@
   .el-loading-parent--relative {
     position: static !important;
   }
+  .el-card__body {
+    max-width: 100% !important;
+  }
+
   .el-input__prefix {
     display: none !important;
   }
@@ -50,5 +54,10 @@
   .el-input__wrapper {
     box-shadow: none;
     background: transparent !important;
+  }
+  .el-textarea__inner {
+    box-shadow: none !important;
+    outline: none !important;
+    resize: none;
   }
 }
