@@ -1,0 +1,20 @@
+@media print {
+  *,
+  *::after,
+  *::before {
+    visibility: hidden !important;
+  }
+
+  .el-input__prefix {
+    display: none !important;
+  }
+  .el-input {
+    --el-input-bg-color: transparent;
+  }
+  .el-form-item__label {
+    font-weight: 700;
+  }
+  .el-input__wrapper {
+    box-shadow: none;
+  }
+}

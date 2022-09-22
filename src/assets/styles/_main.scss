@@ -36,11 +36,3 @@ a > .el-button {
   background-color: #dcdddf;
   border-radius: 5px;
 }
-
-/*To reset styles in print*/
-
-@media print {
-  *, *::after, *::before{
-    visibility: hidden !important;
-  }
-}
