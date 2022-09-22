@@ -18,29 +18,19 @@
 
 <script>
 import { mapState } from 'vuex';
-import axios from 'axios';
-import * as icons from '@/enums/icons.enum.js';
 import { Patient } from '@/models/Patient.model';
 import { Appointment } from '@/models/Appointment.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 import { Treatment } from '@/models/Treatment.model';
 
-import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 import CreateTreatmentModal from '@/components/treatments/CreateTreatmentModal/index.vue';
-import { ApiService } from '@/services/api.service';
 
 export default {
   name: 'VPatient',
-  components: {
-    LayoutByUserRole,
-  },
-  icons: icons,
-  props: {
-    id: [Number, String],
-  },
+  components: {},
   data() {
     return {
       /** @type Array<Appointment> */
