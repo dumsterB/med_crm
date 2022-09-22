@@ -7,7 +7,7 @@ export class PrinterService {
    */
   static async printBraceletByPatientId(patientId) {
     const { data } = await ApiService.post('printer/printBracelet', { patient_id: patientId });
-    const { printer_address, task } = data.data;
+    const { printer_address, task } = data;
 
     return this.print({ printerAddress: printer_address, task: task });
   }
