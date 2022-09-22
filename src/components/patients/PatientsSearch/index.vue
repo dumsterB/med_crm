@@ -80,7 +80,7 @@ export default {
         const { data } = await Patient.find({
           page: 1,
           per_page: 100,
-          search: this.queryWord.value,
+          search: this.queryWord.value?.trim(),
           query_field: ['name', 'phone'],
           query_type: 'ILIKE',
           query_operator: 'OR',
@@ -94,7 +94,10 @@ export default {
         this.isOpenPopover = true;
       } catch (err) {
         console.log(err);
-        this.$notify(err?.response?.data?.message || this.$t('Notifications.Error'));
+        this.$notify({
+          type: 'error',
+          title: err?.response?.data?.message || this.$t('Notifications.Error'),
+        });
       }
 
       this.setLoading(false);
