@@ -2,8 +2,6 @@
   <LayoutByUserRole
     :loading="loading.profile || loading.appointment || loading.treatments"
     content-class="v-patient-content">
-    <ElButton type="primary" @click="tcpHandler"> TCP </ElButton>
-    <ElButton type="primary" plain @click="tcpHandlerWindow">Window</ElButton>
     <RouterView
       v-if="patient"
       v-model:patient="patient"
@@ -153,28 +151,6 @@ export default {
           data: new Patient({ parent: this.patient, parent_id: this.patient.id }),
         },
       });
-    },
-
-    async tcpHandler() {
-      const data = await fetch(`http://localhost:65535`, {
-        method: 'POST',
-        body: JSON.stringify({
-          printer_address: '192.168.0.101:9100',
-          message: `SIZE 150 mm, 100.1 mm\nGAP 3 mm, 0 mm\nCLS\nQRCODE 10,10,H,10,A,0,"https://zordoc.uz\"\nTEXT 200, 200, "1", 0, 2, 2, "DEMO FOR TEXT"\nPRINT 1,1\n`,
-        }),
-      });
-    },
-
-    async tcpHandlerWindow() {
-      const _window = await window.open(
-        'http://test-printer.zordoc.uz/',
-        'printer',
-        'width=500,height=500'
-      );
-      // console.log(_window);
-      // _window.addEventListener('message', (message) => {
-      //   console.log('__window');
-      // });
     },
   },
 };
