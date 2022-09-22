@@ -1,5 +1,5 @@
 <template>
-  <ElCard class="default-inspection-card" shadow="never">
+  <ElCard class="default-inspection-card printer__block printer__doc" shadow="never">
     <ElForm
       class="default-inspection-card-form"
       label-position="top"
@@ -9,6 +9,7 @@
       <h1 class="printer__title default-inspection-card-form__title">
         {{ $t('Base.InspectationCard') }}
       </h1>
+
       <ElFormItem v-show="!readonly" :label="$t('Templates.SelectTemplate')">
         <UiModelsAutocompleteSearch
           v-model="templateId"
