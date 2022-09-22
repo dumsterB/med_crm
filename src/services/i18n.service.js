@@ -3,7 +3,7 @@ import { DEFAULT_LOCALE, LOCALES } from '@/config/i18n.config';
 import { ApiService } from '@/services/api.service';
 
 export class I18nService {
-  static locales = Object.keys(LOCALES).map((key) => LOCALES[key]);
+  static locales = Object.keys(LOCALES).map((key) => LOCALES[key].id);
   static LOCALE_STORAGE_KEY = 'LOCALE';
 
   static t(payload) {

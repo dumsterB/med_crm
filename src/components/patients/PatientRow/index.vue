@@ -33,7 +33,7 @@ export default {
   methods: {
     goToPatient() {
       this.$router.push({
-        name: REGISTRY_PATIENT_ROUTE.name,
+        name: PATIENT_ROUTE.name,
         params: { id: this.patient.id },
       });
     },

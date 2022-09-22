@@ -10,8 +10,11 @@
 </template>
 
 <script>
-import { RouterView } from 'vue-router';
+import { mapState } from 'vuex';
 import { I18nService } from '@/services/i18n.service';
+import { User } from '@/models/User.model';
+
+import { RouterView } from 'vue-router';
 import { ElConfigProvider } from 'element-plus';
 import SVG from '@/components/SVG.vue';
 import GlobalModalsAndDrawers from '@/components/GlobalModalsAndDrawers/index.vue';
@@ -19,6 +22,22 @@ import GlobalModalsAndDrawers from '@/components/GlobalModalsAndDrawers/index.vu
 export default {
   name: 'App',
   components: { RouterView, ElConfigProvider, SVG, GlobalModalsAndDrawers },
+  computed: {
+    ...mapState({
+      user: (state) => state.auth.user,
+    }),
+  },
+
+  watch: {
+    'user.id': {
+      handler() {
+        if (this.user?.role === User.enum.roles.Doctor) {
+          this.$store.dispatch('user/getDataFromStorage');
+        }
+      },
+      immediate: true,
+    },
+  },
 
   created() {
     I18nService.setLocaleFromStorage();

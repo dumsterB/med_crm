@@ -39,10 +39,10 @@ export default {
   emits: ['update:startAt', 'update:endAt'],
   props: {
     startAt: [Date, String],
+    endAt: [Date, String],
     defaultStartAt: [Date, String],
     defaultEndAt: [Date, String],
-    endAt: [Date, String],
-    serviceId: [Number, String],
+    serviceIds: Array,
     groupServiceId: [Number, String],
     disabled: Boolean,
     required: Boolean,
@@ -122,6 +122,7 @@ export default {
         this.slot.start_at = null;
         this.slot.end_at = null;
         this.date = null;
+        this.slots = [];
       },
       deep: true,
     },
@@ -130,13 +131,13 @@ export default {
   methods: {
     async getSlots() {
       this.loading = true;
-      this.serviceId ? await this.getSlotsByService() : await this.getSlotsByGroupService();
+      this.serviceIds.length ? await this.getSlotsByService() : await this.getSlotsByGroupService();
       this.loading = false;
     },
 
     async getSlotsByService() {
-      const { data } = await ScheduleSlot.getSlotsByServiceId({
-        serviceId: this.serviceId,
+      const { data } = await ScheduleSlot.getSlotsByServiceIds({
+        serviceIds: this.serviceIds,
         from: `${this.date} 00:00`,
         to: `${this.date} 23:59`,
       });

@@ -8,7 +8,15 @@
         :empty-text="$t('Base.NoData')"
         ref="elTable"
         @row-click="goToAppointment">
-        <ElTableColumn prop="patient.name" :label="$t('Base.FullName')"></ElTableColumn>
+        <ElTableColumn prop="patient.name" :label="$t('Base.FullName')" width="300px">
+          <template #default="{ row }">
+            <UiUserAvatarInfo
+              class="queues-table__patient"
+              :user="row.patient"
+              show-has-treatment />
+          </template>
+        </ElTableColumn>
+
         <ElTableColumn prop="patient.gender" :label="$t('User.Gender')">
           <template #default="{ row }">
             {{ $t(`User.Genders.${row.patient.gender}`) }}
@@ -50,7 +58,6 @@
 <script>
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 import AppointmentStartOrEndDate from '@/components/appointments/AppointmentStartOrEndDate/index.vue';
-import * as icons from '@/enums/icons.enum.js';
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import { Appointment } from '@/models/Appointment.model';
 
@@ -58,14 +65,10 @@ export default {
   name: 'QueueTable',
   components: { AppointmentStartOrEndDate, AppointmentStatusTag },
   props: {
-    /**
-     * @param { Array<Queues|object> } items
-     */
+    /** @param { Array<Queues|object> } items */
     items: Array,
     loading: Boolean,
   },
-  icons: icons,
-  computed: {},
   watch: {
     loading() {
       this.$refs.elTable.scrollTo({ top: 0, behavior: 'smooth' });
@@ -79,7 +82,7 @@ export default {
           status: Appointment.enum.statuses.Waiting,
         });
 
-        this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
+        this.$notify({ type: 'success', title: this.$t('Notifications.SuccessUpdated') });
         this.$router.push({
           name: APPOINTMENT_ROUTE.name,
           params: { id: payload.id },

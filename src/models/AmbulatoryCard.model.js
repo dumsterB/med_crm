@@ -2,25 +2,26 @@ import { ApiService } from '@/services/api.service';
 
 export class AmbulatoryCard {
   /**
-   * @param {object} [payload]
-   * @param {number} payload.id
-   * @param {string} payload.place_residence
-   * @param {string} payload.place_treatment
-   * @param {string} payload.study_work
-   * @param {string} payload.clinical_examination
-   * @param {string} payload.place_treatment
-   * @param {string} payload.blood_type_rh_factor
-   * @param {string} payload.allergy
-   * @param {string} payload.reaction
-   * @param {string} payload.blood_transfusion
-   * @param {string} payload.surgical_intervention
-   * @param {string} payload.diabetes
-   * @param {string} payload.infectious_diseases
-   * @param {string} payload.height
-   * @param {string} payload.weight
-   * @param {string} payload.fluorography
-   * @param {string} payload.treatment_diary
+   * @typedef {object} AmbulatoryCardConstructorPayload
+   * @property {number} id
+   * @property {string} place_residence
+   * @property {string} place_treatment
+   * @property {string} study_work
+   * @property {string} clinical_examination
+   * @property {string} place_treatment
+   * @property {string} blood_type_rh_factor
+   * @property {string} allergy
+   * @property {string} reaction
+   * @property {string} blood_transfusion
+   * @property {string} surgical_intervention
+   * @property {string} diabetes
+   * @property {string} infectious_diseases
+   * @property {string} height
+   * @property {string} weight
+   * @property {string} fluorography
+   * @property {string} treatment_diary
    */
+  /** @param {AmbulatoryCardConstructorPayload} [payload]  */
   constructor(payload) {
     this.id = payload?.id ?? null;
     this.place_residence = payload?.place_residence ?? null;

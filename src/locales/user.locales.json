@@ -4,6 +4,7 @@
       "AddChildren": "Добавить ребёнка",
       "Age": "Возраст",
       "Birthdate": "Дата рождения",
+      "BloodTypeRhFactor": "Группа крови и резус фактор",
       "Children": "Дети",
       "Email": "Почта",
       "FullName": "ФИО",
@@ -14,10 +15,15 @@
         "woman": "Женщина",
         "null": ""
       },
+      "Height": "Рост",
       "IsChildren": "Ребёнок",
       "Parent": "Родитель",
       "Phone": "Телефон",
-      "PleaseInputNameOrPhone": "Введите номер или ФИО"
+      "PlaceResidence": "Место проживания",
+      "PlaceTreatment": "Место лечения",
+      "PleaseInputNameOrPhone": "Введите номер или ФИО",
+      "StudyWork": "Учёба - работа",
+      "Weight": "Вес"
     }
   },
   "uz": {
@@ -25,6 +31,7 @@
       "AddChildren": "Bolani qo'shish",
       "Age": "Yosh",
       "Birthdate": "Tug'ilgan sanasi",
+      "BloodTypeRhFactor": "Qon guruhi va Rh omil",
       "Children": "Bolalar",
       "Email": "E-mail",
       "FullName": "FISh",
@@ -34,10 +41,15 @@
         "man": "Erkak",
         "woman": "Ayol"
       },
+      "Height": "Boyi",
       "IsChildren": "Yosh bola",
       "Parent": "Ota-onasi",
       "Phone": "Telefon raqami",
-      "PleaseInputNameOrPhone": "Telefon raqamini yoki FiSh kiriting"
+      "PlaceResidence": "Yashash joyi",
+      "PlaceTreatment": "Davolash joyi",
+      "PleaseInputNameOrPhone": "Telefon raqamini yoki FiSh kiriting",
+      "StudyWork": "O'qish - ishlash",
+      "Weight": "Vazni"
     }
   }
 }

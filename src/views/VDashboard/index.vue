@@ -11,10 +11,13 @@
       <template #actions>
         <UiModelsAutocompleteSearch
           v-if="!userIsDoctor"
-          v-model="doctorId.value"
+          class="v-dashboard-content__doctor-select"
+          :model-value="doctorId.value || null"
           :model-for-use="Doctor"
           :default-item="doctor"
-          :placeholder="$t('Appointments.SelectDoctor')" />
+          :placeholder="$t('Appointments.SelectDoctor')"
+          clearable
+          @update:model-value="doctorId.value = $event" />
       </template>
     </EventCalendar>
   </LayoutByUserRole>
@@ -43,6 +46,24 @@ import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 export default {
   name: 'VDashboard',
   components: { EventCalendar, LayoutByUserRole },
+  setup: () => ({
+    type: useQuery({
+      field: 'calendar_type',
+      defaultValue: EVENT_CALENDAR_TYPES.MONTH,
+      routerPush: true,
+    }),
+    date: useQuery({
+      field: 'calendar_date',
+      defaultValue: new Date().toISOString(),
+      formatter: (val) => new Date(val).toISOString(),
+    }),
+    doctorId: useQuery({
+      field: 'doctor_id',
+      defaultValue: null,
+      valueIsNumber: true,
+    }),
+    Doctor: Doctor,
+  }),
   data() {
     return {
       loading: {
@@ -113,7 +134,7 @@ export default {
       const { data } = await Appointment.getStatistic({
         startAt: ISOStringToDateAppFormat(this.startAt, { withTime: false, fullYear: false }),
         endAt: ISOStringToDateAppFormat(this.endAt, { withTime: false, fullYear: false }),
-        doctorsId: this.userIsDoctor ? this.user.doctor_id : this.doctorId.value,
+        doctorsId: this.userIsDoctor ? this.user.doctor_id : this.doctorId.value || null,
       });
 
       this.dataForMonth = {};
@@ -131,7 +152,7 @@ export default {
         per_page: 999,
         query_field: 'doctor_id',
         query_type: 'IN',
-        search: this.userIsDoctor ? this.user.doctor_id : this.doctorId.value,
+        search: this.userIsDoctor ? this.user.doctor_id : this.doctorId.value || null,
         start_at: ISOStringToDateAppFormat(this.startAt, { withTime: false, fullYear: false }),
         end_at: ISOStringToDateAppFormat(this.endAt, { withTime: false, fullYear: false }),
         not_canceled: true,
@@ -179,25 +200,6 @@ export default {
   mounted() {
     if (this.doctorId.value) this.getDefaultDoctor();
   },
-
-  setup: () => ({
-    type: useQuery({
-      field: 'calendar_type',
-      defaultValue: EVENT_CALENDAR_TYPES.MONTH,
-      routerPush: true,
-    }),
-    date: useQuery({
-      field: 'calendar_date',
-      defaultValue: new Date().toISOString(),
-      formatter: (val) => new Date(val).toISOString(),
-    }),
-    doctorId: useQuery({
-      field: 'doctor_id',
-      defaultValue: null,
-      valueIsNumber: true,
-    }),
-    Doctor: Doctor,
-  }),
 };
 </script>
 

@@ -1,24 +1,28 @@
-// TODO: разобраться с расширением от @typedef
 import { User } from '@/models/User.model';
 import { ApiService } from '@/services/api.service';
 
 /**
  * @class Patient
- * @extends CRUDModel
+ * @extends User
  */
 export class Patient extends User {
   static modelName = 'patient';
   static tableName = 'patients';
 
   /**
-   * @param {UserConstructorPayload} [payload]
-   * @
+   * @typedef {UserConstructorPayload|object} PatientConstructorPayload
+   * @property {AmbulatoryCard} ambulatory_card
+   * @property {boolean} has_treatment
+   */
+  /**
+   * @param {PatientConstructorPayload} [payload]
    */
   constructor(payload) {
     super(payload);
 
     this.role = User.enum.roles.Patient;
     this.ambulatory_card = payload?.ambulatory_card || null;
+    this.has_treatment = payload?.has_treatment ?? true;
   }
 
   static async create(payload) {

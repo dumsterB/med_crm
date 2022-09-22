@@ -15,16 +15,17 @@
 
 .queues-table {
   height: 100%;
-  min-width: calc(var(--container-width) / 1.6);
+  min-width: calc(var(--container-width) / 1.5);
   border-radius: 16px;
 
   tr:hover {
     cursor: pointer;
   }
-  &__name-avatar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+
+  &__patient {
+    .ui-user-avatar-info-content__name {
+      font-weight: normal;
+    }
   }
   &-actions {
     display: flex;

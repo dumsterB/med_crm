@@ -10,7 +10,7 @@
 export default {
   name: 'UiRequiredHiddenInput',
   props: {
-    modelValue: [Number, String],
+    modelValue: [Number, String, Boolean, Array],
     required: {
       type: Boolean,
       default: true,

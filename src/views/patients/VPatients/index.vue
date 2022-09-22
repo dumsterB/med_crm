@@ -78,18 +78,25 @@ export default {
     },
   },
   watch: {
-    queryWatchers: {
+    'queryWatchers': {
       handler(value, oldValue) {
         compareQueriesThenLoadData({
           query: value,
           oldQuery: oldValue,
           resetPage: this.page.reset,
           getData: this.getPatients,
-          fieldsForResetPage: ['doctor'],
+          fieldsForResetPage: ['findForDoctor'],
         });
       },
       immediate: true,
       deep: true,
+    },
+
+    'user.role': {
+      handler(value) {
+        if (value === User.enum.roles.Doctor) this.findForDoctor.value = 1;
+      },
+      immediate: true,
     },
   },
 

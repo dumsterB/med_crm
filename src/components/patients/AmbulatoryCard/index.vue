@@ -3,75 +3,79 @@
 <template>
   <ElCard class="ambulatory-card" shadow="never">
     <ElForm label-position="top">
-      <ElFormItem label="FIO"> <ElInput v-model="localPatient.name" /> </ElFormItem>
-      <ElFormItem label="birthdate">
+      <ElFormItem :label="$t('User.FullName')">
+        <ElInput v-model="localPatient.name" />
+      </ElFormItem>
+      <ElFormItem :label="$t('User.Birthdate')">
         <ElDatePicker v-model="localPatient.birthdate" />
       </ElFormItem>
 
-      <ElFormItem label="phone">
+      <ElFormItem :label="$t('User.Phone')">
         <UiPhoneInput v-model="localPatient.phone" />
       </ElFormItem>
 
-      <ElFormItem label="место проживания">
+      <ElFormItem :label="$t('User.PlaceResidence')">
         <ElInput v-model="localAmbulatoryCard.place_residence" />
       </ElFormItem>
 
-      <ElFormItem label="Учёба - работа">
+      <ElFormItem :label="$t('User.StudyWork')">
         <ElInput v-model="localAmbulatoryCard.study_work" />
       </ElFormItem>
 
-      <ElFormItem label="Диспансеризация">
+      <ElFormItem :label="$t('Base.ClinicalExamination')">
         <ElInput v-model="localAmbulatoryCard.clinical_examination" />
       </ElFormItem>
 
-      <ElFormItem label="Место лечения">
+      <ElFormItem :label="$t('User.PlaceTreatment')">
         <ElInput v-model="localAmbulatoryCard.place_treatment" />
       </ElFormItem>
 
-      <ElFormItem label="Группа крови и резус фактор ">
+      <ElFormItem :label="$t('User.BloodTypeRhFactor')">
         <ElInput v-model="localAmbulatoryCard.blood_type_rh_factor" />
       </ElFormItem>
 
-      <ElFormItem label="Аллергия">
+      <ElFormItem :label="$t('Base.Allergy')">
         <ElInput v-model="localAmbulatoryCard.allergy" />
       </ElFormItem>
 
-      <ElFormItem label="Реакция">
+      <ElFormItem :label="$t('Base.Reaction')">
         <ElInput v-model="localAmbulatoryCard.reaction" />
       </ElFormItem>
 
-      <ElFormItem label="Переливание крови ">
+      <ElFormItem :label="$t('Base.BloodTransfusion')">
         <ElInput v-model="localAmbulatoryCard.blood_transfusion" />
       </ElFormItem>
 
-      <ElFormItem label="Хирургические вмешательсто">
+      <ElFormItem :label="$t('Base.SurgicalIntervention')">
         <ElInput v-model="localAmbulatoryCard.surgical_intervention" />
       </ElFormItem>
 
-      <ElFormItem label="Сахарный диабет ">
+      <ElFormItem :label="$t('Base.Diabetes')">
         <ElInput v-model="localAmbulatoryCard.diabetes" />
       </ElFormItem>
 
-      <ElFormItem label="Инфекционное заболевание ">
+      <ElFormItem :label="$t('Base.InfectiousDiseases')">
         <ElInput v-model="localAmbulatoryCard.infectious_diseases" />
       </ElFormItem>
 
-      <ElFormItem label="Рост">
+      <ElFormItem :label="$t('User.Height')">
         <ElInput v-model="localAmbulatoryCard.height" />
       </ElFormItem>
 
-      <ElFormItem label="Вес">
+      <ElFormItem :label="$t('User.Weight')">
         <ElInput v-model="localAmbulatoryCard.weight" />
       </ElFormItem>
 
-      <ElFormItem label="Флюраграфия">
+      <ElFormItem :label="$t('Base.Fluorography')">
         <ElInput v-model="localAmbulatoryCard.fluorography" />
       </ElFormItem>
     </ElForm>
 
     <ElDivider />
     <div class="ambulatory-card__actions ambulatory-card-actions">
-      <ElButton type="primary" :loading="loading" @click="saveChanges">Save</ElButton>
+      <ElButton type="primary" :loading="loading" @click="saveChanges">
+        {{ $t('Base.SaveChanges') }}
+      </ElButton>
     </div>
   </ElCard>
 </template>
@@ -150,4 +154,5 @@ export default {
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/base.locales.json" />
 <i18n src="@/locales/notifications.locales.json" />
+<i18n src="@/locales/user.locales.json" />
 <i18n src="./index.locales.json" />

@@ -1,41 +1,25 @@
-import { CRUDModel } from '@/models/CRUD.model';
 import { ApiService } from '@/services/api.service';
+import { DefaultInspectionCard } from '@/models/DefaultInspectionCard.model';
 
 /**
  * @class InspectionCardTemplate
- * @extends CRUDModel
+ * @extends DefaultInspectionCard
  */
-export class InspectionCardTemplate extends CRUDModel {
+export class InspectionCardTemplate extends DefaultInspectionCard {
   static modelName = 'template';
   static tableName = 'templates';
 
   /**
-   * @param {[{field: string, name: string, label: *, placeholder: string, tag: string, type: string, required: boolean},{field: string, label: *, placeholder: string, tag: string, type: string},{field: string, label: *, placeholder: string, tag: string, type: string, required: boolean},{field: string, options: [{label: string, value: string},{label: string, value: string}], label: *, tag: string, placeholder: *, type: string, required: boolean},{field: string, options: [{label: string, value: string},{label: string, value: string}], label: *, placeholder: *, tag: string, type: string, required: boolean},null,null,null,null]|{template_id: (*|null)}} payload
-   * @param {string} payload.title
-   * @param {string} payload.complaints
-   * @param {string} payload.anamnesis
-   * @param {string} payload.anamnesis_life
-   * @param {string} payload.operations
-   * @param {string} payload.general_state
-   * @param {string} payload.local_status
-   * @param {string} payload.preliminary_diagnosis
-   * @param {string} payload.survey_plan
-   * @param {number} payload.doctor_id
-   * @param {Doctor} payload.doctor
+   * @typedef {DefaultInspectionCardConstructorPayload|object} InspectionCardTemplateConstructorPayload
+   * @property {string} title
+   * @property {number} doctor_id
+   * @property {Doctor} doctor
    */
+  /** @param {InspectionCardTemplateConstructorPayload|object} [payload] */
   constructor(payload) {
     super(payload);
 
     this.title = payload?.title ?? '';
-    this.complaints = payload?.complaints ?? null;
-    this.anamnesis = payload?.anamnesis ?? null;
-    this.anamnesis_life = payload?.anamnesis_life ?? null;
-    this.operations = payload?.operations ?? null;
-    this.general_state = payload?.general_state ?? null;
-    this.local_status = payload?.local_status ?? null;
-    this.preliminary_diagnosis = payload?.preliminary_diagnosis ?? null;
-
-    this.survey_plan = payload?.survey_plan ?? null;
     this.doctor_id = payload?.doctor_id ?? null;
     this.doctor = payload?.doctor ?? null;
   }

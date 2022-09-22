@@ -28,11 +28,12 @@
     padding-bottom: 1.5em;
   }
 
-  &__name-avatar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  &__user {
+    .ui-user-avatar-info-content__name {
+      font-weight: normal;
+    }
   }
+
   &-actions {
     display: flex;
     gap: 6px;

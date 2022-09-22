@@ -7,7 +7,7 @@
     ]"
     shadow="hover">
     <template #header>
-      <UiAvatar size="super-large" />
+      <UiAvatar size="super-large" :gender="data.gender" />
 
       <div class="v-patient-profile-card__user v-patient-profile-card-user">
         <div class="v-patient-profile-card-user__name">
@@ -89,11 +89,13 @@ export default {
         },
         {
           label: this.$t('User.Gender'),
-          value: this.data.gender?.length ? this.$t(`User.Genders.${this.data.gender}`) : this.$t('Base.Absent')
+          value: this.data.gender?.length
+            ? this.$t(`User.Genders.${this.data.gender}`)
+            : this.$t('Base.Absent'),
         },
         {
           label: this.$t('User.Email'),
-          value: this.data?.email?.length ? this.data.email : this.$t('Base.Absent')
+          value: this.data?.email?.length ? this.data.email : this.$t('Base.Absent'),
         },
       ];
     },

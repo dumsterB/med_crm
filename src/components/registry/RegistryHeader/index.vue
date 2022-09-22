@@ -1,17 +1,17 @@
 <template>
   <div class="registry-header">
     <PatientsSearch class="registry-header__search" />
-    <LangSelect />
+    <LayoutUserDropdown />
   </div>
 </template>
 
 <script>
-import LangSelect from '@/components/LangSelect/index.vue';
 import PatientsSearch from '@/components/patients/PatientsSearch/index.vue';
+import LayoutUserDropdown from '@/components/layouts/assets/LayoutUserDropdown/index.vue';
 
 export default {
   name: 'RegistryHeader',
-  components: { LangSelect, PatientsSearch },
+  components: { LayoutUserDropdown, PatientsSearch },
 };
 </script>
 

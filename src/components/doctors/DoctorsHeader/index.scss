@@ -1,8 +1,16 @@
-.doctors-header{
-  position: relative;
-  height: 30px;
-  .lang {
-    position: absolute;
-    right: 10px;
+.doctors-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  &__search {
+    width: 60%;
+  }
+  &__appointment-btn {
+    margin-right: auto;
+  }
+  &__dropdown {
+    margin-left: auto;
   }
 }
