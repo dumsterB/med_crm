@@ -8,13 +8,6 @@
       display: flex;
       gap: 10px;
     }
-    &__title {
-      font-weight: 800;
-      font-size: 24px;
-      text-align: center;
-      display: none;
-      margin-bottom: 30px;
-    }
   }
 }
 @media print {
@@ -23,12 +16,13 @@
   }
   .default-inspection-card {
     position: absolute !important;
-    width: 100% !important;
-    left: 0 !important;
-    top: 0 !important;
+    left: 0;
+    top: 0;
+    width: 100%;
+
     &-form {
-      &__title {
-        display: block !important;
+      & > * {
+        max-width: 100%;
       }
       &-actions {
         display: none !important;
@@ -42,12 +36,6 @@
     }
     .el-card__body {
       max-width: 100% !important;
-    }
-    .el-form-item__label {
-      font-weight: 700;
-    }
-    .el-input__prefix {
-      display: none !important;
     }
   }
 }

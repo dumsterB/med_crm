@@ -6,7 +6,9 @@
       id="inspection-card"
       ref="form"
       @submit.prevent="submitHandler">
-      <h1 class="default-inspection-card-form__title">{{ $t('Base.InspectationCard') }}</h1>
+      <h1 class="printer__title default-inspection-card-form__title">
+        {{ $t('Base.InspectationCard') }}
+      </h1>
       <ElFormItem v-show="!readonly" :label="$t('Templates.SelectTemplate')">
         <UiModelsAutocompleteSearch
           v-model="templateId"
