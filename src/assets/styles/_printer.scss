@@ -15,6 +15,22 @@
     visibility: hidden;
   }
 
+  .printer__block,
+  .printer__block * {
+    visibility: visible !important;
+  }
+  .printer__block {
+    display: block;
+    position: absolute !important;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  .printer__doc,
+  .printer__doc * {
+    border-color: transparent;
+  }
+
   .printer__title {
     display: block;
   }
@@ -33,5 +49,6 @@
   }
   .el-input__wrapper {
     box-shadow: none;
+    background: transparent !important;
   }
 }
