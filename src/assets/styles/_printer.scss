@@ -1,5 +1,6 @@
 .printer__title {
   display: none;
+  margin-bottom: 30px;
   text-align: center;
   font-size: 1.9em;
   font-weight: 800;
@@ -10,7 +11,7 @@
   *,
   *::after,
   *::before {
-    visibility: hidden !important;
+    visibility: hidden;
   }
 
   .printer__title {
