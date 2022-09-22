@@ -41,7 +41,7 @@
               {{ $t('Appointments.EndReception') }}
             </ElButton>
 
-            <ElButton text @click="callPrint">
+            <ElButton v-show="readonly" text @click="print">
               <template #icon>
                 <UiIcon :icon="icons.PRINTER" />
               </template>
@@ -91,21 +91,8 @@ export default {
   },
 
   methods: {
-    callPrint() {
-      const modal = document.getElementById('inspection-card');
-      const cloned = modal.cloneNode(true);
-      let section = document.getElementById('print');
-
-      if (!section) {
-        section = document.createElement('div');
-        section.id = 'print';
-        document.body.appendChild(section);
-      }
-
-      section.innerHTML = '';
-      section.appendChild(cloned);
+    print() {
       window.print();
-      document.getElementById('print').remove();
     },
     selectTemplate(template) {
       this.inspectionCard = new DefaultInspectionCard({
