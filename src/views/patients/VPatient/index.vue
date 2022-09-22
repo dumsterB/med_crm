@@ -24,13 +24,17 @@ import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDr
 import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 import { Treatment } from '@/models/Treatment.model';
 
+import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
 import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 import CreateTreatmentModal from '@/components/treatments/CreateTreatmentModal/index.vue';
 
 export default {
   name: 'VPatient',
-  components: {},
+  components: { LayoutByUserRole },
+  props: {
+    id: [Number, String],
+  },
   data() {
     return {
       /** @type Array<Appointment> */
