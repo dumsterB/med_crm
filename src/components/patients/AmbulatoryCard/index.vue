@@ -1,5 +1,4 @@
 <!--  TODO: перебиравть поля циклом когда будут известны все поля и их типы  -->
-
 <template>
   <ElCard id="ambulatory" class="ambulatory-card" shadow="never">
     <h1 class="ambulatory-card__title">{{ $t('Base.AmbulatoryCard') }}</h1>
@@ -78,7 +77,7 @@
         {{ $t('Base.SaveChanges') }}
       </ElButton>
 
-      <ElButton text @click="callPrint">
+      <ElButton text @click="print">
         <template #icon>
           <UiIcon :icon="icons.PRINTER" />
         </template>
@@ -129,22 +128,10 @@ export default {
   },
 
   methods: {
-    callPrint() {
-      const modal = document.getElementById('ambulatory');
-      let cloned = modal.cloneNode(true);
-      let section = document.getElementById('print');
-
-      if (!section) {
-        section = document.createElement('div');
-        section.id = 'print';
-        document.body.appendChild(section);
-      }
-
-      section.innerHTML = '';
-      section.appendChild(cloned);
+    print() {
       window.print();
-      document.getElementById('print').remove();
     },
+
     async saveChanges() {
       if (this.loading) return;
       this.loading = true;
