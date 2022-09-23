@@ -11,11 +11,16 @@
 <script>
 import PatientsSearch from '@/components/patients/PatientsSearch/index.vue';
 import LayoutUserDropdown from '@/components/layouts/assets/LayoutUserDropdown/index.vue';
-import LayoutLanguageSwitcher from "@/components/layouts/assets/LayoutLanguageSwitcher/index.vue";
-import LayoutNotificationHeader from "@/components/layouts/assets/LayoutNotificationHeader/index.vue";
+import LayoutLanguageSwitcher from '@/components/layouts/assets/LayoutLanguageSwitcher/index.vue';
+import LayoutNotificationHeader from '@/components/layouts/assets/LayoutNotificationHeader/index.vue';
 export default {
   name: 'RegistryHeader',
-  components: { LayoutUserDropdown, PatientsSearch, LayoutLanguageSwitcher,LayoutNotificationHeader },
+  components: {
+    LayoutUserDropdown,
+    PatientsSearch,
+    LayoutLanguageSwitcher,
+    LayoutNotificationHeader,
+  },
 };
 </script>
 
