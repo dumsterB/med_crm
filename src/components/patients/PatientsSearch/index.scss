@@ -3,10 +3,17 @@
 
   &__form {
     .el-input {
-      border-radius: var(--border-radius-large) !important;
-    }
-  }
+      border-radius: var(--border-radius-medium) !important;
 
+    }
+
+  }
+  .el-input--large .el-input__wrapper{
+    border: 0.5px solid #E5E7EC!important;
+  }
+  .el-input__wrapper{
+    background-color: white;
+  }
   &__popover {
     position: absolute;
     bottom: 0;

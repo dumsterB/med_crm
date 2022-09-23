@@ -21,3 +21,6 @@ export const TIMETABLE_NAV = 'TIMETABLE_NAV';
 export const CALENDAR_NAV = 'CALENDAR_NAV';
 export const PATIENTS_NAV = 'PATIENTS_NAV';
 export const LOGO_CIRCLE = 'LOGO_CIRCLE';
+export const RUSSIAN = 'RUSSIAN';
+export const NOTIFICATION = 'NOTIFICATION';
+export const UZBEKISTAN = 'UZBEKISTAN';

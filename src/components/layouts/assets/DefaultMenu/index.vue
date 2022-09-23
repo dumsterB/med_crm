@@ -13,7 +13,6 @@
           :to="route.path">
           <UiIcon :icon="route.icon" class="default-menu-nav__item-icon" />
           <span>{{ route.title }}</span>
-
         </router-link>
       </slot>
     </nav>

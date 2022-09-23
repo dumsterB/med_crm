@@ -1,0 +1,22 @@
+.layout-content-language{
+    width: 105px;
+    height: 35px;
+    border: 0.5px solid #E5E7EC;
+    border-radius: 16px;
+  &-dropdawn{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px 5px 10px;
+  }
+  &__text{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    color: #535A70;
+  }
+  &__icon{
+    margin-top: 3px;
+  }
+}

@@ -4,11 +4,16 @@
   gap: 10px;
 
   &__search {
-    width: 60%;
+    width: 30%;
     margin-right: auto;
   }
   &-dropdown{
     display: flex;
     gap: 15px;
+  }
+  &__divider{
+    border: 1px solid #E5E7EC;
+    transform: rotate(90deg);
+    width: 25px;
   }
 }
