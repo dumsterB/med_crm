@@ -39,7 +39,7 @@ export default {
           text: this.$t('Base.Queue'),
         },
         [PATIENTS_ROUTE.name]: {
-          icon: icons.PATIENTS_NAV,
+          icon: icons.USER_TAG,
           text: this.$t('Base.Patients'),
         },
         [DOCTORS_TEMPLATES_ROUTE.name]: {

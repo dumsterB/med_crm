@@ -28,7 +28,7 @@ export default {
           text: this.$t('Views.Dashboard.Title'),
         },
         [PATIENTS_ROUTE.name]: {
-          icon: icons.PATIENTS_NAV,
+          icon: icons.USER_TAG,
           text: this.$t('Base.Patients'),
         },
         [APPOINTMENTS_ROUTE.name]: {
