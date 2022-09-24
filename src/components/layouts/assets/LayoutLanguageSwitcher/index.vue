@@ -4,7 +4,7 @@
       <span class="el-dropdown-link">
         <div class="layout-content-language-dropdown">
           <UiIcon class="layout-content-language__icon" :icon="`${lang.icon}`" />
-          <span class="layout-content-language__text">{{lang.label}}</span>
+          <span class="layout-content-language__text">{{ lang.label }}</span>
         </div>
       </span>
       <template #dropdown>
@@ -57,7 +57,7 @@ export default {
     lang: {
       get() {
         let currentLang = I18nService.getLocale();
-        return this.locales.find(ell=>ell.locale == currentLang)
+        return this.locales.find((ell) => ell.locale == currentLang);
       },
       set(locale) {
         I18nService.setLocale(locale);
@@ -71,9 +71,7 @@ export default {
     },
   },
   methods: {
-    handleCommand(event) {
-
-    },
+    handleCommand(event) {},
   },
   setup: () => ({
     icons,
