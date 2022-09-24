@@ -4,8 +4,15 @@
   gap: 10px;
 
   &__search {
-    width: 30%;
+    width: 250px;
+  }
+  &__scan{
+    height: 40px;
+  }
+  &-left-content{
     margin-right: auto;
+    display: flex;
+    gap: 20px;
   }
   &-dropdown{
     display: flex;

@@ -24,3 +24,4 @@ export const LOGO_CIRCLE = 'LOGO_CIRCLE';
 export const RUSSIAN = 'RUSSIAN';
 export const NOTIFICATION = 'NOTIFICATION';
 export const UZBEKISTAN = 'UZBEKISTAN';
+export const SCAN = 'SCAN';

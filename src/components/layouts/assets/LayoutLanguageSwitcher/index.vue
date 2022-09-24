@@ -1,30 +1,23 @@
 <template>
   <div class="layout-content-language">
-    <el-dropdown @command="handleCommand">
+    <ElDropdown @command="setLocale">
       <span class="el-dropdown-link">
         <div class="layout-content-language-dropdown">
-          <UiIcon class="layout-content-language__icon" :icon="`${lang.icon}`" />
-          <span class="layout-content-language__text">{{ lang.label }}</span>
+          <UiIcon class="layout-content-language__icon" :icon="getCurrentLocale.icon" />
+          <span class="layout-content-language__text">{{ getCurrentLocale.label }}</span>
         </div>
       </span>
       <template #dropdown>
-        <el-dropdown-menu>
-          <el-dropdown-item>
+        <ElDropdownMenu>
+          <ElDropdownItem :command="locale" v-for="locale of languages" :key="locale.locale">
             <div class="layout-content-language-dropdown">
-              <UiIcon class="layout-content-language__icon" :icon="icons.RUSSIAN" />
-              <span class="layout-content-language__text">Русский</span>
-            </div></el-dropdown-item
-          >
-          <el-dropdown-item>
-            <div class="layout-content-language-dropdown">
-              <UiIcon class="layout-content-language__icon" :icon="icons.UZBEKISTAN" />
-              <span class="layout-content-language__text">Узбекский</span>
-            </div></el-dropdown-item
-          >
-        </el-dropdown-menu>
+              <UiIcon class="layout-content-language__icon" v-if="locale.icon" :icon="locale.icon" />
+              <span class="layout-content-language__text">{{ locale.label }}</span>
+            </div>
+          </ElDropdownItem>
+        </ElDropdownMenu>
       </template>
-    </el-dropdown>
-    <div></div>
+    </ElDropdown>
   </div>
 </template>
 
@@ -39,30 +32,26 @@ export default {
   currentLanguage: 'icons.RUSSIAN',
   data() {
     return {
-      locales: [
+      languages: [
         {
           locale: 'ru',
-          icon: 'icons.RUSSIAN',
+          icon: icons.RUSSIAN,
           label: 'Русский',
         },
         {
           locale: 'uz',
-          icon: 'icons.UZBEKISTAN',
-          label: 'Узбекский',
+          icon: icons.UZBEKISTAN,
+          label: 'Uzbekcha',
         },
       ],
     };
   },
   computed: {
-    lang: {
-      get() {
-        let currentLang = I18nService.getLocale();
-        return this.locales.find((ell) => ell.locale == currentLang);
-      },
-      set(locale) {
-        I18nService.setLocale(locale);
-      },
+    getCurrentLocale() {
+      let currentLang = I18nService.getLocale();
+      return this.languages.find((ell) => ell.locale == currentLang);
     },
+
     locales() {
       return Object.keys(LOCALES).map((key) => ({
         label: LOCALES[key].label,
@@ -71,7 +60,9 @@ export default {
     },
   },
   methods: {
-    handleCommand(event) {},
+    setLocale(locale) {
+      I18nService.setLocale(locale.locale);
+    },
   },
   setup: () => ({
     icons,
