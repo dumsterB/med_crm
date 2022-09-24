@@ -12,7 +12,7 @@
     padding-right: 10px;
   }
   &__logo-сircle{
-    margin-top: 10px;
+    margin-top: 25px;
     margin-right: 10px;
   }
   &__logo {
@@ -20,11 +20,12 @@
     max-width: 80%;
     height: auto;
     max-height: 35px;
+    margin-top: 10px;
     //max-height: 1.17em;
   }
 
   &__nav {
-    margin-top: var(--padding-y);
+    margin-top: 20px;
   }
   &-nav {
     display: flex;

@@ -1,7 +1,8 @@
 <template>
   <div class="patients-search">
     <form class="patients-search__form" @submit.prevent="throttleSearch">
-      <ElInput v-model="queryWord.value" :placeholder="$t('InputLabel')"> </ElInput>
+      <ElInput v-model="queryWord.value" :placeholder="$t('InputLabel')">
+      </ElInput>
     </form>
 
     <PatientsSearchPopover
@@ -14,6 +15,7 @@
 </template>
 
 <script>
+import * as icons from '@/enums/icons.enum.js';
 import { mapState, mapActions } from 'vuex';
 import { throttle, debounce } from 'lodash';
 import { useSearch } from '@/hooks/query';
@@ -30,6 +32,7 @@ export default {
 
   setup: () => ({
     queryWord: useSearch(),
+    icons:icons
   }),
   data() {
     return {

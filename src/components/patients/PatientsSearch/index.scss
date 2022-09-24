@@ -4,14 +4,13 @@
   &__form {
     .el-input {
       border-radius: var(--border-radius-medium) !important;
-
     }
-
   }
-  .el-input--large .el-input__wrapper{
-    border: 0.5px solid #E5E7EC!important;
+  .el-input--large .el-input__wrapper {
+    border: 1px solid #e5e7ec !important;
+    box-shadow: none !important;
   }
-  .el-input__wrapper{
+  .el-input__wrapper {
     background-color: white;
   }
   &__popover {
