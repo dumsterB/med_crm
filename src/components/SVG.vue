@@ -4,13 +4,13 @@
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     style="display: none">
-    <symbol :id="$options.icons.LOGOUT" viewBox="0 0 24 20" fill="none">
+    <symbol :id="icons.LOGOUT" viewBox="0 0 24 20" fill="none">
       <path
         d="M17.0711 17.0708C17.4616 16.6803 17.4616 16.0471 17.0711 15.6566C16.6805 15.2661 16.0474 15.2661 15.6569 15.6566L17.0711 17.0708ZM15.6569 4.3429C16.0474 4.73343 16.6805 4.73343 17.0711 4.3429C17.4616 3.95238 17.4616 3.31921 17.0711 2.92869L15.6569 4.3429ZM20.7474 6.33564C20.3805 5.92285 19.7484 5.88567 19.3357 6.25259C18.9229 6.61951 18.8857 7.25158 19.2526 7.66436L20.7474 6.33564ZM22.6667 10L23.4141 10.6644C23.7509 10.2855 23.7509 9.71452 23.4141 9.33564L22.6667 10ZM19.2526 12.3356C18.8857 12.7484 18.9229 13.3805 19.3357 13.7474C19.7484 14.1143 20.3805 14.0771 20.7474 13.6644L19.2526 12.3356ZM22.5 11C23.0523 11 23.5 10.5523 23.5 10C23.5 9.44771 23.0523 9 22.5 9V11ZM10 9C9.44773 9 9.00002 9.44771 9.00002 10C9.00002 10.5523 9.44773 11 10 11V9ZM2.92893 2.92869C-0.976311 6.83393 -0.976311 13.1656 2.92893 17.0708L4.34315 15.6566C1.21895 12.5324 1.21895 7.4671 4.34315 4.3429L2.92893 2.92869ZM2.92893 17.0708C6.83418 20.9761 13.1658 20.9761 17.0711 17.0708L15.6569 15.6566C12.5327 18.7808 7.46734 18.7808 4.34315 15.6566L2.92893 17.0708ZM17.0711 2.92869C13.1658 -0.976555 6.83418 -0.976555 2.92893 2.92869L4.34315 4.3429C7.46734 1.21871 12.5327 1.21871 15.6569 4.3429L17.0711 2.92869ZM19.2526 7.66436L21.9193 10.6644L23.4141 9.33564L20.7474 6.33564L19.2526 7.66436ZM21.9193 9.33564L19.2526 12.3356L20.7474 13.6644L23.4141 10.6644L21.9193 9.33564ZM22.5 9H10V11H22.5V9Z"
         fill="currentColor" />
     </symbol>
 
-    <symbol :id="$options.icons.DASHBOARD" viewBox="0 0 23 24" fill="none">
+    <symbol :id="icons.DASHBOARD" viewBox="0 0 23 24" fill="none">
       <path
         d="M20.2718 15.8158C19.6608 17.3283 18.689 18.6683 17.4412 19.719C16.1935 20.7697 14.7076 21.4992 13.1132 21.8439C11.5189 22.1886 9.86436 22.1381 8.294 21.6967C6.72363 21.2553 5.28509 20.4364 4.1038 19.3115C2.92252 18.1865 2.03436 16.7897 1.51676 15.2428C0.99917 13.6959 0.867859 12.0458 1.13428 10.4365C1.4007 8.82717 2.05677 7.30746 3.04527 6.00986C4.03377 4.71227 5.3247 3.67619 6.80548 2.99197M15.8268 1.83095C15.0768 1.52028 14.2935 1.30281 13.4944 1.18204C12.6753 1.05824 12 1.74132 12 2.56975L12 9.56975C12 10.3982 12.6716 11.0697 13.5 11.0697L20.5 11.0698C21.3284 11.0698 22.0115 10.3945 21.8877 9.57536C21.7669 8.77628 21.5495 7.99296 21.2388 7.24292C20.7363 6.02966 19.9997 4.92727 19.0711 3.99868C18.1425 3.0701 17.0401 2.3335 15.8268 1.83095Z"
         stroke="currentColor"
@@ -18,7 +18,7 @@
         stroke-linecap="round" />
     </symbol>
 
-    <symbol :id="$options.icons.USER_TAG" viewBox="0 0 24 24" fill="none">
+    <symbol :id="icons.USER_TAG" viewBox="0 0 24 24" fill="none">
       <path
         d="M18 18.86H17.24C16.44 18.86 15.68 19.17 15.12 19.73L13.41 21.42C12.63 22.19 11.36 22.19 10.58 21.42L8.87 19.73C8.31 19.17 7.54 18.86 6.75 18.86H6C4.34 18.86 3 17.53 3 15.89V4.97998C3 3.33998 4.34 2.01001 6 2.01001H18C19.66 2.01001 21 3.33998 21 4.97998V15.89C21 17.52 19.66 18.86 18 18.86Z"
         stroke="currentColor"
@@ -40,7 +40,7 @@
         stroke-linejoin="round" />
     </symbol>
 
-    <symbol :id="$options.icons.NOTE" viewBox="0 0 24 24" fill="none">
+    <symbol :id="icons.NOTE" viewBox="0 0 24 24" fill="none">
       <path
         d="M8 2V5"
         stroke="currentColor"
@@ -91,7 +91,7 @@
         stroke-linejoin="round" />
     </symbol>
 
-    <symbol :id="$options.icons.BOARD" viewBox="0 0 24 24" fill="none">
+    <symbol :id="icons.BOARD" viewBox="0 0 24 24" fill="none">
       <path
         d="M21.9292 6.76001L18.5592 20.29C18.3192 21.3 17.4192 22 16.3792 22H3.23915C1.72915 22 0.649169 20.5199 1.09917 19.0699L5.30916 5.55005C5.59916 4.61005 6.46917 3.95996 7.44917 3.95996H19.7492C20.6992 3.95996 21.4892 4.53997 21.8192 5.33997C22.0092 5.76997 22.0492 6.26001 21.9292 6.76001Z"
         stroke="currentColor"
@@ -134,7 +134,7 @@
         stroke-linejoin="round" />
     </symbol>
 
-    <symbol :id="$options.icons.SEARCH" viewBox="0 0 24 24" fill="none">
+    <symbol :id="icons.SEARCH" viewBox="0 0 24 24" fill="none">
       <path
         d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
         stroke="currentColor"
@@ -149,7 +149,7 @@
         stroke-linejoin="round" />
     </symbol>
 
-    <symbol :id="$options.icons.BELL" viewBox="0 0 26 23" fill="none">
+    <symbol :id="icons.BELL" viewBox="0 0 26 23" fill="none">
       <path
         d="M20.3333 8.01449C20.3333 6.15413 19.5607 4.36997 18.1855 3.0545C16.8102 1.73902 14.9449 1 13 1C11.0551 1 9.18982 1.73902 7.81455 3.0545C6.43928 4.36997 5.66667 6.15413 5.66667 8.01449C5.66667 13.9484 3.21304 16.809 1.86406 17.9333C1.6615 18.1021 1.79337 18.5362 2.05706 18.5362H8.52214C8.6391 18.5362 8.74073 18.6154 8.77521 18.7271C8.99911 19.4529 9.99866 22 13 22C16.0013 22 17.0009 19.4529 17.2248 18.7271C17.2593 18.6154 17.3609 18.5362 17.4779 18.5362H23.9429C24.2066 18.5362 24.3385 18.1021 24.1359 17.9333C22.787 16.809 20.3333 13.9484 20.3333 8.01449Z"
         stroke="currentColor"
@@ -158,7 +158,7 @@
         stroke-linejoin="round" />
     </symbol>
 
-    <symbol :id="$options.icons.FILTER" viewBox="0 0 22 22" fill="none">
+    <symbol :id="icons.FILTER" viewBox="0 0 22 22" fill="none">
       <path
         d="M20.168 5.95831H14.668"
         stroke="currentColor"
@@ -203,7 +203,7 @@
         stroke-linejoin="round" />
     </symbol>
 
-    <symbol :id="$options.icons.CHEVRON_DOWN" viewBox="0 0 18 9" fill="none">
+    <symbol :id="icons.CHEVRON_DOWN" viewBox="0 0 18 9" fill="none">
       <path
         d="M16.2583 1.20416L10.2816 7.18083C9.57578 7.88666 8.42078 7.88666 7.71495 7.18083L1.73828 1.20416"
         stroke="currentColor"
@@ -213,25 +213,25 @@
         stroke-linejoin="round" />
     </symbol>
 
-    <symbol :id="$options.icons.PLUS" fill="currentColor" viewBox="0 0 24 24" fill-rule="evenodd">
+    <symbol :id="icons.PLUS" fill="currentColor" viewBox="0 0 24 24" fill-rule="evenodd">
       <path
         fill-rule="evenodd"
         d="M 11 2 L 11 11 L 2 11 L 2 13 L 11 13 L 11 22 L 13 22 L 13 13 L 22 13 L 22 11 L 13 11 L 13 2 Z" />
     </symbol>
 
-    <symbol :id="$options.icons.DOUBLE_CHECKER" viewBox="0 0 14 9" fill="none">
+    <symbol :id="icons.DOUBLE_CHECKER" viewBox="0 0 14 9" fill="none">
       <path
         d="M10.5128 1.08422L9.69029 0.261719L5.99195 3.96005L6.81445 4.78255L10.5128 1.08422ZM12.9861 0.261719L6.81445 6.43339L4.37612 4.00089L3.55362 4.82339L6.81445 8.08422L13.8145 1.08422L12.9861 0.261719ZM0.251953 4.82339L3.51279 8.08422L4.33529 7.26172L1.08029 4.00089L0.251953 4.82339Z"
         fill="currentColor" />
     </symbol>
 
-    <symbol :id="$options.icons.PROVIDED" viewBox="0 0 12 12" fill="none">
+    <symbol :id="icons.PROVIDED" viewBox="0 0 12 12" fill="none">
       <path
         d="M5.41602 1.96268V0.166016C2.49935 0.457682 0.166016 2.97185 0.166016 5.99935C0.166016 9.02685 2.49935 11.541 5.41602 11.8327V10.036C3.66602 9.75602 1.91602 8.05268 1.91602 5.99935C1.91602 3.94602 3.66602 2.24268 5.41602 1.96268ZM10.0652 5.41602H11.8327C11.5585 2.49935 9.49935 0.440182 6.58268 0.166016V1.96268C8.33268 2.21352 9.81435 3.66602 10.0652 5.41602ZM6.58268 10.036V11.8327C9.49935 11.5585 11.5585 9.49935 11.8327 6.58268H10.0652C9.81435 8.33268 8.33268 9.78518 6.58268 10.036Z"
         fill="currentColor" />
     </symbol>
 
-    <symbol :id="$options.icons.CANCELED_ROUND" viewBox="0 0 12 12" fill="none">
+    <symbol :id="icons.CANCELED_ROUND" viewBox="0 0 12 12" fill="none">
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"
@@ -239,7 +239,7 @@
         fill="currentColor" />
     </symbol>
 
-    <symbol :id="$options.icons.CANCELED_ROUND" viewBox="0 0 12 12" fill="none">
+    <symbol :id="icons.CANCELED_ROUND" viewBox="0 0 12 12" fill="none">
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"
@@ -247,7 +247,7 @@
         fill="currentColor" />
     </symbol>
 
-    <symbol :id="$options.icons.TRASH" viewBox="0 0 14 16" fill="none">
+    <symbol :id="icons.TRASH" viewBox="0 0 14 16" fill="none">
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"
@@ -255,7 +255,7 @@
         fill="currentColor" />
     </symbol>
 
-    <symbol :id="$options.icons.RELOAD" viewBox="0 0 17 17" fill="none">
+    <symbol :id="icons.RELOAD" viewBox="0 0 17 17" fill="none">
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"
@@ -263,7 +263,7 @@
         fill="#54C2B6" />
     </symbol>
 
-    <symbol :id="$options.icons.BACK_ARROW" viewBox="0 0 5 9" fill="none">
+    <symbol :id="icons.BACK_ARROW" viewBox="0 0 5 9" fill="none">
       <path
         d="M3.5 1.5L1.5 4.49988L3.5 7.5"
         stroke="white"
@@ -271,7 +271,7 @@
         stroke-linecap="round" />
     </symbol>
 
-    <symbol :id="$options.icons.CHEVRON_LEFT" viewBox="0 0 22 23" fill="none">
+    <symbol :id="icons.CHEVRON_LEFT" viewBox="0 0 22 23" fill="none">
       <path
         d="M13.7959 18.7798L7.81923 12.8031C7.1134 12.0973 7.1134 10.9423 7.81923 10.2364L13.7959 4.25977"
         stroke="currentColor"
@@ -281,12 +281,41 @@
         stroke-linejoin="round" />
     </symbol>
 
-    <symbol :id="$options.icons.CHEVRON_RIGHT" viewBox="0 0 22 23" fill="none">
+    <symbol :id="icons.CHEVRON_RIGHT" viewBox="0 0 22 23" fill="none">
       <path
         d="M8.2041 4.2593L14.1808 10.236C14.8866 10.9418 14.8866 12.0968 14.1808 12.8026L8.2041 18.7793"
         stroke="currentColor"
         stroke-width="1.5"
         stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+    </symbol>
+
+    <symbol :id="icons.WALLET_OUTLINE" viewBox="0 0 18 17" fill="none">
+      <path
+        d="M16.7117 10.4164H13.4731C12.2839 10.4157 11.3201 9.45253 11.3193 8.26337C11.3193 7.07422 12.2839 6.11108 13.4731 6.11035H16.7117"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        d="M13.8396 8.2144H13.5903"
+        stroke="white"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M5.59852 1.2998H12.5133C14.8318 1.2998 16.7114 3.17941 16.7114 5.49794V11.2396C16.7114 13.5581 14.8318 15.4377 12.5133 15.4377H5.59852C3.28 15.4377 1.40039 13.5581 1.40039 11.2396V5.49794C1.40039 3.17941 3.28 1.2998 5.59852 1.2998Z"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        d="M5.0285 4.92998H9.34766"
+        stroke="currentColor"
+        stroke-width="1.5"
         stroke-linecap="round"
         stroke-linejoin="round" />
     </symbol>
@@ -298,6 +327,8 @@ import * as icons from '@/enums/icons.enum';
 
 export default {
   name: 'SVG',
-  icons: icons,
+  setup: () => ({
+    icons: icons,
+  }),
 };
 </script>
