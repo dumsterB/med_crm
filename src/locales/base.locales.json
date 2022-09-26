@@ -13,6 +13,7 @@
       "BloodTransfusion": "Переливание крови",
       "CallToReception": "Вызвать на прием",
       "Cancel": "Отменить",
+      "CashRegister": "Касса",
       "ChangeLang": "Сменить язык",
       "ClinicalExamination": "Диспансеризация",
       "ColDays": "Кол. дней",
@@ -63,6 +64,7 @@
       "Settings": "Настройки",
       "SignUp": "Регистрация",
       "Skip": "Пропустить",
+      "StatePrice": "Стоимость",
       "Status": "Статус",
       "Sum": "сум",
       "SurgicalIntervention": "Хирургические вмешательста",
@@ -71,8 +73,7 @@
       "Template": "Шаблон",
       "Templates": "Шаблоны",
       "Time": "Время",
-      "WriteText": "Напишите текст...",
-      "StatePrice": "Стоимость"
+      "WriteText": "Напишите текст..."
     }
   },
   "uz": {
@@ -89,6 +90,7 @@
       "BloodTransfusion": "Qon quyish",
       "CallToReception": "Qabul qilish",
       "Cancel": "Qaytish",
+      "CashRegister": "Kassa",
       "ChangeLang": "Tilni ozgartirish",
       "ClinicalExamination": "Dispanser ko'rigi",
       "ColDays": "Kunlar Miqdori",
@@ -139,6 +141,7 @@
       "Settings": "Sozlamalar",
       "SignUp": "Ro'yxatdan o'tish",
       "Skip": "O'tkazib yuborish",
+      "StatePrice": "Narxi",
       "Status": "holat",
       "Sum": "som",
       "SurgicalIntervention": "Jarrohlik aralashuvlar",
@@ -147,8 +150,7 @@
       "Template": "Namuna",
       "Templates": "Namunalar",
       "Time": "Vaqt",
-      "WriteText": "Matn yozing...",
-      "StatePrice": "Narxi"
+      "WriteText": "Matn yozing..."
     }
   }
 }
