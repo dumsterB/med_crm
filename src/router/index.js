@@ -1,11 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { setComponentInRoutesByViewsFolder } from '@/utils/router.utils';
-import { routes as authRoutes } from './auth.routes.js';
-import { routes as patientsRoutes } from './patients.routes';
-import { routes as dashboardRoutes, DASHBOARD_ROUTE } from './dashboard.routes';
-import { routes as doctorsRoutes, DOCTORS_QUEUE_ROUTE } from './doctors.routes';
-import { routes as appointmentsRoutes } from './appointments.routes';
-import { routes as treatmentsRoutes } from './treatments.routes';
+import { DASHBOARD_ROUTE } from './dashboard.routes';
+import { DOCTORS_QUEUE_ROUTE } from './doctors.routes';
 
 import { onlyLoggedInMiddleware } from '@/middlewares/onlyLoggedIn.middleware';
 import { Store } from '@/store';
@@ -22,12 +18,7 @@ const router = createRouter({
 
     ...setComponentInRoutesByViewsFolder({
       routes: [
-        ...authRoutes,
-        ...patientsRoutes,
-        ...dashboardRoutes,
-        ...doctorsRoutes,
-        ...appointmentsRoutes,
-        ...treatmentsRoutes,
+        ..._getRoutes(),
 
         {
           path: '/404',
@@ -53,6 +44,8 @@ router.beforeEach((to, from, next) => {
 });
 export { router as Router };
 
+// Assets
+
 function _redirectCurrentPageByUserRole(to, from, next) {
   switch (Store.state.auth.user.role) {
     case User.enum.roles.Manager:
@@ -60,4 +53,12 @@ function _redirectCurrentPageByUserRole(to, from, next) {
     case User.enum.roles.Doctor:
       return next(DOCTORS_QUEUE_ROUTE);
   }
+}
+
+function _getRoutes() {
+  const routesModules = import.meta.glob('@/router/**/*.routes.js', { eager: true });
+  return Object.keys(routesModules).reduce(
+    (acc, key) => [...acc, ...routesModules[key].routes],
+    []
+  );
 }
