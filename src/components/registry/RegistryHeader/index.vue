@@ -2,7 +2,6 @@
   <div class="registry-header">
     <div class="registry-header-left-content">
       <PatientsSearch  class="registry-header__search" />
-      <LayoutScanHeader class="registry-header__scan"></LayoutScanHeader>
     </div>
     <LayoutLanguageSwitcher></LayoutLanguageSwitcher>
     <LayoutNotificationHeader></LayoutNotificationHeader>
@@ -14,7 +13,7 @@
 <script>
 import PatientsSearch from '@/components/patients/PatientsSearch/index.vue';
 import LayoutUserDropdown from '@/components/layouts/assets/LayoutUserDropdown/index.vue';
-import LayoutLanguageSwitcher from '@/components/layouts/assets/LayoutLanguageSwitcher/index.vue';
+import LayoutLanguageSwitcher from '@/components/layouts/assets/LangSelect/index.vue';
 import LayoutNotificationHeader from '@/components/layouts/assets/LayoutNotificationHeader/index.vue';
 import LayoutScanHeader from '@/components/layouts/assets/layoutScanHeader/index.vue';
 export default {

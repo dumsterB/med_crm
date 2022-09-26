@@ -1,6 +1,6 @@
 <template>
   <div class="layout-content-notification">
-    <div class="layout-content-notification__item">
+    <div @click="scanHandler" class="layout-content-notification__item">
       <UiIcon :icon="icons.NOTIFICATION" />
     </div>
   </div>
@@ -14,6 +14,11 @@ export default {
   setup: () => ({
     icons,
   }),
+  methods:{
+    scanHandler(){
+
+    }
+  }
 };
 </script>
 

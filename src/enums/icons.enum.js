@@ -25,3 +25,4 @@ export const RUSSIAN = 'RUSSIAN';
 export const NOTIFICATION = 'NOTIFICATION';
 export const UZBEKISTAN = 'UZBEKISTAN';
 export const SCAN = 'SCAN';
+export const PRINTER = 'PRINTER';

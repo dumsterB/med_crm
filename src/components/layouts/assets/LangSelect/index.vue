@@ -11,7 +11,10 @@
         <ElDropdownMenu>
           <ElDropdownItem :command="locale" v-for="locale of languages" :key="locale.locale">
             <div class="layout-content-language-dropdown">
-              <UiIcon class="layout-content-language__icon" v-if="locale.icon" :icon="locale.icon" />
+              <UiIcon
+                class="layout-content-language__icon"
+                v-if="locale.icon"
+                :icon="locale.icon" />
               <span class="layout-content-language__text">{{ locale.label }}</span>
             </div>
           </ElDropdownItem>

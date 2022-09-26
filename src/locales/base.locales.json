@@ -5,6 +5,7 @@
       "Actions": "Действия",
       "Allergy": "Аллергия",
       "AmbulatoryCard": "Амбулаторная карта",
+      "InspectationCard": "Карта осмотра",
       "Appoint": "Назначить",
       "Appointment": "Запись",
       "Attach": "Привязать",
@@ -72,8 +73,9 @@
       "Templates": "Шаблоны",
       "Time": "Время",
       "WriteText": "Напишите текст...",
+      "ScanBracelet": "Сканер браслета",
       "StatePrice": "Стоимость",
-      "ScanBracelet": "Сканер браслета"
+      "Print": "Распечатать"
     }
   },
   "uz": {
@@ -82,6 +84,7 @@
       "Actions": "Harakatlar",
       "Allergy": "Allergiya",
       "AmbulatoryCard": "Ambulatoriya kartasi",
+      "InspectationCard": "Tekshirish kartasi",
       "Appoint": "Tayinlash",
       "Appointment": "Yozuv",
       "Attach": "Bog'lash",
@@ -149,6 +152,7 @@
       "Templates": "Namunalar",
       "Time": "Vaqt",
       "WriteText": "Matn yozing...",
+      "Print": "chop etish",
       "StatePrice": "Narxi",
       "ScanBracelet": "Brasleti skaneri"
     }

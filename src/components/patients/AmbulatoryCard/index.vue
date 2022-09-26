@@ -1,13 +1,13 @@
 <!--  TODO: перебиравть поля циклом когда будут известны все поля и их типы  -->
-
 <template>
-  <ElCard class="ambulatory-card" shadow="never">
+  <ElCard class="ambulatory-card printer__block printer__doc" shadow="never">
+    <h1 class="printer__title">{{ $t('Base.AmbulatoryCard') }}</h1>
     <ElForm label-position="top">
       <ElFormItem :label="$t('User.FullName')">
         <ElInput v-model="localPatient.name" />
       </ElFormItem>
       <ElFormItem :label="$t('User.Birthdate')">
-        <ElDatePicker v-model="localPatient.birthdate" />
+        <ElDatePicker class="ambulatory-card__date-picker" v-model="localPatient.birthdate" />
       </ElFormItem>
 
       <ElFormItem :label="$t('User.Phone')">
@@ -76,11 +76,19 @@
       <ElButton type="primary" :loading="loading" @click="saveChanges">
         {{ $t('Base.SaveChanges') }}
       </ElButton>
+
+      <ElButton text @click="print">
+        <template #icon>
+          <UiIcon :icon="icons.PRINTER" />
+        </template>
+        {{ $t('Base.Print') }}
+      </ElButton>
     </div>
   </ElCard>
 </template>
 
 <script>
+import * as icons from '@/enums/icons.enum.js';
 import { AmbulatoryCard } from '@/models/AmbulatoryCard.model';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
@@ -120,6 +128,10 @@ export default {
   },
 
   methods: {
+    print() {
+      window.print();
+    },
+
     async saveChanges() {
       if (this.loading) return;
       this.loading = true;
@@ -148,6 +160,9 @@ export default {
       this.loading = false;
     },
   },
+  setup: () => ({
+    icons,
+  }),
 };
 </script>
 
