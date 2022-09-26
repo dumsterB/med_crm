@@ -4,11 +4,11 @@
   flex-direction: column;
   gap: 10px;
   background-color: var(--bg-container-color);
-
   &-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: white;
     padding: 10px 14px;
     gap: 10px;
 
@@ -17,6 +17,9 @@
       align-items: center;
       gap: 10px;
       margin-left: auto;
+    }
+    &__img {
+      height: 40px;
     }
   }
   &__content {

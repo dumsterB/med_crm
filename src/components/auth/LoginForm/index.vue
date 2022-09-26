@@ -1,33 +1,55 @@
 <template>
   <form class="login-form" @submit.prevent="submitHandler">
-    <img class="login-form__image" src="@/assets/images/logo.svg" alt="logo" />
-    <ElInput v-model="email" :placeholder="$t('Base.Login')" name="email" type="email" required />
-    <ElInput
-      v-model="password"
-      :placeholder="$t('Base.Password')"
-      name="password"
-      type="password"
-      required
-      show-password />
+    <div class="login-form-content">
+      <div class="login-form-info">
+        <img class="login-form__image" src="@/assets/images/logo.svg" alt="logo" />
+        <p class="login-form-info__title">Авторизация!</p>
+        <p class="login-form-info__text">Войдите в личный кабинет, для записи пациентов на прием</p>
+      </div>
+      <ElInput
+        class="login-form-content__input"
+        v-model="email"
+        :placeholder="$t('Base.Login')"
+        name="email"
+        type="email"
+        required>
+        <template #prepend>
+          <UiIcon :icon="$options.icons.TRASH" />
+        </template>
+      </ElInput>
+      <ElInput
+        v-model="password"
+        :placeholder="$t('Base.Password')"
+        name="password"
+        type="password"
+        required
+        show-password>
+        <template #prepend>
+          <UiIcon :icon="$options.icons.TRASH" />
+        </template>
+      </ElInput>
 
-    <div class="login-form__actions">
-      <ElButton type="primary" :loading="loading" native-type="submit">
-        {{ $t('LogIn') }}
-      </ElButton>
+      <div class="login-form__actions">
+        <ElButton type="primary" :loading="loading" native-type="submit">
+          {{ $t('LogIn') }}
+        </ElButton>
 
-      <router-link :to="FORGOT_PASSWORD_ROUTE.path">
-        <ElButton text> {{ $t('ForgotPassword') }}</ElButton>
-      </router-link>
+        <router-link :to="FORGOT_PASSWORD_ROUTE.path">
+          <ElButton text> {{ $t('ForgotPassword') }}</ElButton>
+        </router-link>
+      </div>
     </div>
   </form>
 </template>
 
 <script>
+import * as icons from '@/enums/icons.enum.js';
 import { FORGOT_PASSWORD_ROUTE } from '@/router/auth.routes';
 import { DASHBOARD_ROUTE } from '@/router/dashboard.routes';
 
 export default {
   name: 'LoginForm',
+  icons: icons,
   data() {
     return {
       loading: false,
