@@ -1,7 +1,11 @@
 <template>
   <div class="doctors-header">
-    <PatientsSearch class="doctors-header__search" />
-
+    <div class="doctors-header-left-content">
+      <PatientsSearch  class="doctors-header__search" />
+      <LayoutScanHeader class="doctors-header__scan"></LayoutScanHeader>
+    </div>
+    <LayoutLanguageSwitcher></LayoutLanguageSwitcher>
+    <LayoutNotificationHeader></LayoutNotificationHeader>
     <RouterLink
       v-if="showActiveAppointmentPageLink"
       class="doctors-header__appointment-btn"
@@ -24,10 +28,12 @@ import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 
 import PatientsSearch from '@/components/patients/PatientsSearch/index.vue';
 import LayoutUserDropdown from '@/components/layouts/assets/LayoutUserDropdown/index.vue';
-
+import LayoutScanHeader from "@/components/layouts/assets/layoutScanHeader/index.vue";
+import LayoutLanguageSwitcher from "@/components/layouts/assets/LayoutLanguageSwitcher/index.vue";
+import LayoutNotificationHeader from "@/components/layouts/assets/LayoutNotificationHeader/index.vue";
 export default {
   name: 'RegistryHeader',
-  components: { LayoutUserDropdown, PatientsSearch },
+  components: { LayoutUserDropdown, PatientsSearch, LayoutScanHeader, LayoutLanguageSwitcher, LayoutNotificationHeader },
   computed: {
     ...mapGetters({
       user: 'user/user',

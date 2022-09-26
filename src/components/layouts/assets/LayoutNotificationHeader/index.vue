@@ -8,7 +8,6 @@
 
 <script>
 import * as icons from '@/enums/icons.enum.js';
-import './index.scss';
 
 export default {
   name: 'index',
@@ -18,4 +17,4 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" src="./index.scss" />

@@ -1,12 +1,11 @@
 <template>
   <div class="layout-content-scan">
     <UiIcon :icon="icons.SCAN" />
-    <span class="layout-content-scan__text">Сканер браслета</span>
+    <span class="layout-content-scan__text">{{$t('Base.ScanBracelet')}}</span>
   </div>
 </template>
 
 <script>
-import './index.scss';
 import * as icons from '@/enums/icons.enum.js';
 
 export default {
@@ -17,4 +16,5 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" src="./index.scss" />
+<i18n src="@/locales/base.locales.json" />

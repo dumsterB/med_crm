@@ -23,7 +23,6 @@
 
 <script>
 import * as icons from '@/enums/icons.enum.js';
-import './index.scss';
 import { I18nService } from '@/services/i18n.service';
 import { LOCALES } from '@/config/i18n.config';
 
@@ -70,4 +69,4 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" src="./index.scss" />

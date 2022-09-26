@@ -5,7 +5,19 @@
   gap: 10px;
 
   &__search {
-    width: 60%;
+    width: 250px;
+  }
+  &__scan{
+    height: 40px;
+  }
+  &-left-content{
+    margin-right: auto;
+    display: flex;
+    gap: 20px;
+  }
+  &-dropdown{
+    display: flex;
+    gap: 15px;
   }
   &__appointment-btn {
     margin-right: auto;
