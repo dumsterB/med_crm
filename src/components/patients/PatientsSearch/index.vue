@@ -4,9 +4,16 @@
       <form class="patients-search__form" @submit.prevent="throttleSearch">
         <ElInput v-model="queryWord.value" :placeholder="$t('InputLabel')"> </ElInput>
       </form>
-      <div class="layout-content-scan">
+      <div class="patients-content-scan" @click="scanHandler">
         <UiIcon :icon="icons.SCAN" />
         <span class="layout-content-scan__text">{{ $t('Base.ScanBracelet') }}</span>
+      </div>
+    </div>
+    <div class="patients-scanner-container">
+      <div v-show="!isLoading">
+        <video poster="data:image/gif,AAAA" ref="scanner"></video>
+        <div class="overlay-element"></div>
+        <div class="laser"></div>
       </div>
     </div>
     <PatientsSearchPopover
@@ -19,6 +26,7 @@
 </template>
 
 <script>
+import { BrowserMultiFormatReader, Exception } from '@zxing/library';
 import * as icons from '@/enums/icons.enum.js';
 import { mapState, mapActions } from 'vuex';
 import { throttle, debounce } from 'lodash';
@@ -42,6 +50,11 @@ export default {
     return {
       isOpenPopover: false,
       throttleSearch: null, // void
+      isLoading: true,
+      result: null,
+      codeReader: new BrowserMultiFormatReader(),
+      isMediaStreamAPISupported:
+        navigator && navigator.mediaDevices && 'enumerateDevices' in navigator.mediaDevices,
     };
   },
   computed: {
@@ -72,7 +85,17 @@ export default {
       setLoading: 'patients/setLoading',
       setData: 'patients/setData',
     }),
-
+    scanHandler() {
+      this.start();
+    },
+    start() {
+      this.codeReader.decodeFromVideoDevice(undefined, this.$refs.scanner, (result, err) => {
+        if (result) {
+          this.$emit('decode', result.text);
+          this.result = result.text;
+        }
+      });
+    },
     async search() {
       if (this.isDisabledByPatientsPages || this.loading) return;
       this.setLoading(true);
@@ -106,6 +129,17 @@ export default {
   },
   mounted() {
     this.throttleSearch = debounce(this.search, 100);
+    if (!this.isMediaStreamAPISupported) {
+      throw new Exception('Media Stream API is not supported');
+      return;
+    }
+    this.$refs.scanner.oncanplay = (event) => {
+      this.isLoading = false;
+      this.$emit('loaded');
+    };
+  },
+  beforeUnmount() {
+    this.codeReader.reset();
   },
 };
 </script>

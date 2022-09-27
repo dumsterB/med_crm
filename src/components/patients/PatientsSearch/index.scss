@@ -23,12 +23,12 @@
 
     transform: translateY(calc(100% + 10px));
   }
-  &-scan-and-header{
+  &-scan-and-header {
     display: flex;
   }
 }
 
-.layout-content-scan {
+.patients-content-scan {
   border: 1px solid #40ccbd;
   padding: 10px 10px 5px 5px;
   display: flex;
@@ -36,11 +36,20 @@
   border-radius: 6px;
   margin: auto;
   cursor: pointer;
-  &__text{
+  &__text {
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
-    color: #40CCBD;
+    color: #40ccbd;
     margin-left: 10px;
   }
+}
+.patients-scanner-container video {
+  position: absolute;
+  left: 50%;
+  margin-left: -20px;
+  text-align: center;
+  z-index: 9;
+  height: 400px;
+  width: 500px;
 }
