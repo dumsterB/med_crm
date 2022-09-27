@@ -14,7 +14,7 @@
         type="email"
         required>
         <template #prepend>
-          <UiIcon :icon="$options.icons.TRASH" />
+          <UiIcon :icon="$options.icons.MESSAGE_LOGIN" />
         </template>
       </ElInput>
       <ElInput
@@ -25,17 +25,17 @@
         required
         show-password>
         <template #prepend>
-          <UiIcon :icon="$options.icons.TRASH" />
+          <UiIcon :icon="$options.icons.LOCK_PASSWORD" />
         </template>
       </ElInput>
 
       <div class="login-form__actions">
-        <ElButton type="primary" :loading="loading" native-type="submit">
+        <ElButton  type="primary" class="login-form__actions-submit" :loading="loading" native-type="submit">
           {{ $t('LogIn') }}
         </ElButton>
 
         <router-link :to="FORGOT_PASSWORD_ROUTE.path">
-          <ElButton text> {{ $t('ForgotPassword') }}</ElButton>
+          <ElButton text class="login-form__actions-forgot"> {{ $t('ForgotPassword') }}</ElButton>
         </router-link>
       </div>
     </div>

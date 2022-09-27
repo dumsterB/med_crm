@@ -11,8 +11,8 @@
     text-align: center;
     gap: 40px;
     display: grid;
-    &__input{
-
+    &__input {
+      background: white !important;
     }
   }
 
@@ -44,11 +44,32 @@
     flex-direction: column;
     gap: 10px;
 
+    &-forgot {
+      color: #40ccbd !important;
+    }
+    &-submit {
+      background: linear-gradient(87.24deg, #40ccbd -1.13%, rgba(65, 210, 195, 0.59) 118.25%);
+      border-radius: 12px;
+      border: none !important;
+      padding: 18px 25px;
+    }
     & > a {
       display: flex;
     }
     .el-button {
       flex: 1;
     }
+  }
+  .el-input {
+    --el-input-bg-color: var(--bg-color) !important;
+  }
+  .el-input-group__prepend {
+    background-color: white;
+  }
+  .el-input--large {
+    --el-input-height: 50px;
+  }
+  .el-input-group__append,
+  .el-input-group__prepend {
   }
 }
