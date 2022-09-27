@@ -26,3 +26,4 @@ export const NOTIFICATION = 'NOTIFICATION';
 export const UZBEKISTAN = 'UZBEKISTAN';
 export const SCAN = 'SCAN';
 export const PRINTER = 'PRINTER';
+export const WALLET_OUTLINE = 'WALLET_OUTLINE';

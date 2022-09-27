@@ -1,15 +1,16 @@
 import { LOCALES } from '@/config/i18n.config';
-import * as localesModules from '@/locales/index';
 
 /**
  * Загружает все файлы из @/locales и возвращает объект для i18n
  * @return {object}
  */
 export function loadGlobalLocales() {
+  const localesModules = import.meta.glob('@/locales/**/*.locales.json', { eager: true });
   const locales = _generateLocalesEmptyObject();
 
   for (let moduleKey in localesModules) {
-    const module = localesModules[moduleKey];
+    const module = localesModules[moduleKey].default;
+
     Object.keys(module).forEach((langKey) => {
       locales[langKey] = {
         ...locales[langKey],
