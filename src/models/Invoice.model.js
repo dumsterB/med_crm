@@ -1,0 +1,53 @@
+import { CRUDModel } from '@/models/CRUD.model';
+
+/**
+ * @class Invoice
+ * @extends CRUDModel
+ */
+export class Invoice extends CRUDModel {
+  static modelName = 'invoice';
+  static tableName = 'invoices';
+
+  /**
+   * @param {object} [payload]
+   * @param {string} payload.status
+   * @param {number} payload.user_id
+   * @param {User} payload.user
+   * @param {number} payload.clinic_id
+   * @param {Clinic} payload.clinic
+   * @param {number} payload.appointment_id
+   * @param {Appointment} payload.appointment
+   *
+   * @param {Array<InvoicePaymentSubject>} payload.payment_subjects
+   * @param {Array<number>} payload.transactions_ids
+   * @param {Array<Transaction>} payload.transactions
+   * @param {string|Date} payload.created_at
+   */
+  constructor(payload) {
+    super(payload);
+
+    this.status = payload?.status ?? null;
+    this.user_id = payload?.user_id ?? null;
+    this.user = payload?.user ?? null;
+    this.clinic_id = payload?.clinic_id ?? null;
+    this.clinic = payload?.clinic ?? null;
+    this.appointment_id = payload?.appointment_id ?? null;
+    this.appointment = payload?.appointment ?? null;
+
+    this.payment_subjects = payload?.payment_subjects ?? [];
+    this.transactions_ids = payload?.transactions_ids ?? [];
+    this.transactions = payload?.transactions ?? [];
+
+    this.created_at = payload?.created_at ?? null;
+  }
+
+  static enum = {
+    statuses: {
+      Paid: 'paid',
+      PartiallyPaid: 'partially_paid',
+      NotPaid: 'not_paid',
+      Refund: 'refund',
+      Canceled: 'canceled',
+    },
+  };
+}
