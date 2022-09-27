@@ -40,6 +40,7 @@ import { Invoice } from '@/models/Invoice.model';
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
 import SelectInvoiceStatus from '@/components/invoices/SelectInvoiceStatus/index.vue';
+import CreateOrPayInvoiceModal from '@/components/invoices/CreateOrPayInvoiceModal/index.vue';
 
 export default {
   name: 'VCash',
@@ -125,7 +126,12 @@ export default {
       this.setLoading(false);
     },
 
-    createInvoice() {},
+    async createInvoice() {
+      const action = await this.$store.dispatch(
+        'modalAndDrawer/openModal',
+        CreateOrPayInvoiceModal
+      );
+    },
   },
 };
 </script>
