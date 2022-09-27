@@ -72,7 +72,8 @@
       "Templates": "Шаблоны",
       "Time": "Время",
       "WriteText": "Напишите текст...",
-      "StatePrice": "Стоимость"
+      "StatePrice": "Стоимость",
+      "Call": "Позванить"
     }
   },
   "uz": {
@@ -148,7 +149,8 @@
       "SetTreatment": "Davolashni tayinlash",
       "TableTreatment": "Davolash jadvali",
       "WriteText": "Matn yozing...",
-      "StatePrice": "Narxi"
+      "StatePrice": "Narxi",
+      "Call": "Qongiroq qilish"
     }
   }
 }
