@@ -13,9 +13,9 @@
         name="email"
         type="email"
         required>
-        <template #prepend>
-          <UiIcon :icon="$options.icons.MESSAGE_LOGIN" />
-        </template>
+<!--        <template #prepend>-->
+<!--          <UiIcon :icon="$options.icons.MESSAGE_LOGIN" />-->
+<!--        </template>-->
       </ElInput>
       <ElInput
         v-model="password"
@@ -24,9 +24,9 @@
         type="password"
         required
         show-password>
-        <template #prepend>
-          <UiIcon :icon="$options.icons.LOCK_PASSWORD" />
-        </template>
+<!--        <template #prepend>-->
+<!--          <UiIcon :icon="$options.icons.LOCK_PASSWORD" />-->
+<!--        </template>-->
       </ElInput>
 
       <div class="login-form__actions">

@@ -541,20 +541,8 @@
     </symbol>
 
     <symbol :id="icons.MESSAGE_LOGIN" fill="none">
-      <path
-        d="M17.9024 9.3324L13.4591 12.9454C12.6196 13.6114 11.4384 13.6114 10.5989 12.9454L6.11816 9.3324"
-        stroke="#CBCED9"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round" />
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M16.9089 21.4808C19.9502 21.4892 22 18.9904 22 15.9192V9.05085C22 5.97966 19.9502 3.48083 16.9089 3.48083H7.09114C4.04979 3.48083 2 5.97966 2 9.05085V15.9192C2 18.9904 4.04979 21.4892 7.09114 21.4808H16.9089Z"
-        stroke="#CBCED9"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round" />
+        <path d="M16.9024 7.3324L12.4591 10.9454C11.6196 11.6114 10.4384 11.6114 9.59895 10.9454L5.11816 7.3324" stroke="#CBCED9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.9089 19.4808C18.9502 19.4892 21 16.9904 21 13.9192V7.05085C21 3.97966 18.9502 1.48083 15.9089 1.48083H6.09114C3.04979 1.48083 1 3.97966 1 7.05085V13.9192C1 16.9904 3.04979 19.4892 6.09114 19.4808H15.9089Z" stroke="#CBCED9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </symbol>
 
     <symbol :id="icons.LOCK_PASSWORD" fill="none">
