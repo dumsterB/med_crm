@@ -8,6 +8,8 @@
         :start-placeholder="$t('DateAndTime.StartDate')"
         :end-placeholder="$t('DateAndTime.EndDate')" />
 
+      <SelectInvoiceStatus v-model="status.value" />
+
       <template #actions>
         <ElButton type="primary" @click="createInvoice">
           <template #icon> <UiIcon :icon="icons.PLUS" /> </template>
@@ -37,10 +39,11 @@ import { Invoice } from '@/models/Invoice.model';
 
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
+import SelectInvoiceStatus from '@/components/invoices/SelectInvoiceStatus/index.vue';
 
 export default {
   name: 'VCash',
-  components: { LayoutContentHeader, LayoutRegistry },
+  components: { SelectInvoiceStatus, LayoutContentHeader, LayoutRegistry },
   setup: () => ({
     perPage: usePerPage(),
     page: usePage(),
@@ -49,10 +52,8 @@ export default {
     endAt: useQuery({ field: 'end_at' }),
 
     icons: icons,
+    Invoice,
   }),
-  data() {
-    return {};
-  },
   computed: {
     ...mapState({
       loading: (state) => state.invoices.loading,
