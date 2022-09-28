@@ -13,6 +13,8 @@
       :placeholder="placeholder || $t('Base.PleaseInput')"
       :clearable="clearable"
       :no-data-text="$t('Base.NoData')"
+      :collapse-tags="collapseTags"
+      :collapse-tags-tooltip="collapseTagsTooltip"
       @visible-change="getItems"
       @update:model-value="$emit('update:modelValue', $event)"
       @change="selectHandler"
@@ -77,12 +79,14 @@ export default {
       default: 'id',
     },
 
+    showCreateOption: Boolean,
     multiple: Boolean,
     required: Boolean,
     disabled: Boolean,
     placeholder: String,
     clearable: Boolean,
-    showCreateOption: Boolean,
+    collapseTags: Boolean,
+    collapseTagsTooltip: Boolean,
   },
   data() {
     return {
