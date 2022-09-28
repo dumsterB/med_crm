@@ -2,7 +2,7 @@
   <UiModelsAutocompleteSearch
     :model-value="modelValue"
     :model-for-use="Patient"
-    v-bind="$props"
+    v-bind="$attrs"
     @update:model-value="$emit('update:modelValue', $event)"
     @select="$emit('select', $event)" />
 </template>
