@@ -2,6 +2,7 @@ html,
 body {
   --_el-color-primay: #409eff;
   --el-color-primary: var(--primary-color);
+  --el-dialog-header-bg-color: #ffffff;
 }
 .el-input {
   --el-input-bg-color: var(--bg-inputs-color);
@@ -42,9 +43,11 @@ body {
   &__header {
     width: 100%;
   }
-  &__body {
+  &__body,
+  &__footer {
     background-color: var(--bg-container-color);
   }
+
   overflow: hidden;
 }
 
