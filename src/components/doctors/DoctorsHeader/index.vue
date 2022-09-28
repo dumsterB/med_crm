@@ -3,7 +3,7 @@
     <div class="doctors-header-left-content">
       <PatientsSearch class="doctors-header__search" />
     </div>
-    <LayoutSelect></LayoutSelect>
+    <LangSelect></LangSelect>
     <NotificationsDrawer></NotificationsDrawer>
 
     <RouterLink
@@ -29,7 +29,7 @@ import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 
 import PatientsSearch from '@/components/patients/PatientsSearch/index.vue';
 import LayoutUserDropdown from '@/components/layouts/assets/LayoutUserDropdown/index.vue';
-import LayoutSelect from '@/components/layouts/assets/LangSelect/index.vue';
+import LangSelect from '@/components/layouts/assets/LangSelect/index.vue';
 import NotificationsDrawer from '@/components/NotificationsDrawer/index.vue';
 
 export default {
@@ -37,7 +37,7 @@ export default {
   components: {
     LayoutUserDropdown,
     PatientsSearch,
-    LayoutSelect,
+    LangSelect,
     NotificationsDrawer,
   },
   computed: {
