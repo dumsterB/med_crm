@@ -1,21 +1,21 @@
 <template>
-  <div class="layout-content-language">
+  <div class="lang-select">
     <ElDropdown @command="setLocale">
       <span class="el-dropdown-link">
-        <div class="layout-content-language-dropdown">
-          <UiIcon class="layout-content-language__icon" :icon="getCurrentLocale.icon" />
-          <span class="layout-content-language__text">{{ getCurrentLocale.label }}</span>
+        <div class="lang-select-dropdown">
+          <UiIcon class="lang-select__icon" :icon="getCurrentLocale.icon" />
+          <span class="lang-select__text">{{ getCurrentLocale.label }}</span>
         </div>
       </span>
       <template #dropdown>
         <ElDropdownMenu>
           <ElDropdownItem :command="locale" v-for="locale of languages" :key="locale.locale">
-            <div class="layout-content-language-dropdown">
+            <div class="lang-select-dropdown">
               <UiIcon
-                class="layout-content-language__icon"
+                class="lang-select__icon"
                 v-if="locale.icon"
                 :icon="locale.icon" />
-              <span class="layout-content-language__text">{{ locale.label }}</span>
+              <span class="lang-select__text">{{ locale.label }}</span>
             </div>
           </ElDropdownItem>
         </ElDropdownMenu>

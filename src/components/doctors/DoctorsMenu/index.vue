@@ -12,7 +12,7 @@ import {
 } from '@/router/doctors.routes';
 import { PATIENTS_ROUTE } from '@/router/patients.routes';
 import DefaultMenu from '@/components/layouts/assets/DefaultMenu/index.vue';
-import {TIMETABLE_NAV} from "@/enums/icons.enum.js";
+import { TIMETABLE_NAV } from '@/enums/icons.enum.js';
 
 export default {
   name: 'DoctorsMenu',

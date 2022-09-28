@@ -3,8 +3,8 @@
     <div class="registry-header-left-content">
       <PatientsSearch class="registry-header__search" />
     </div>
-    <LayoutLanguageSwitcher></LayoutLanguageSwitcher>
-    <LayoutNotificationHeader></LayoutNotificationHeader>
+    <LangSelect></LangSelect>
+    <NotificationsHeader></NotificationsHeader>
 
     <ElDivider direction="vertical" />
     <LayoutUserDropdown />
@@ -14,15 +14,16 @@
 <script>
 import PatientsSearch from '@/components/patients/PatientsSearch/index.vue';
 import LayoutUserDropdown from '@/components/layouts/assets/LayoutUserDropdown/index.vue';
-import LayoutLanguageSwitcher from '@/components/layouts/assets/LangSelect/index.vue';
-import LayoutNotificationHeader from '@/components/layouts/assets/LayoutNotificationHeader/index.vue';
+import LangSelect from '@/components/layouts/assets/LangSelect/index.vue';
+import NotificationsHeader from '@/components/NotificationsDrawer/index.vue';
+
 export default {
   name: 'RegistryHeader',
   components: {
+    LangSelect,
     LayoutUserDropdown,
     PatientsSearch,
-    LayoutLanguageSwitcher,
-    LayoutNotificationHeader,
+    NotificationsHeader,
   },
 };
 </script>

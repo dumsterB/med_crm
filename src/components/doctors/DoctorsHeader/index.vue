@@ -3,8 +3,8 @@
     <div class="doctors-header-left-content">
       <PatientsSearch class="doctors-header__search" />
     </div>
-    <LayoutLanguageSwitcher></LayoutLanguageSwitcher>
-    <LayoutNotificationHeader></LayoutNotificationHeader>
+    <LayoutSelect></LayoutSelect>
+    <NotificationsDrawer></NotificationsDrawer>
 
     <RouterLink
       v-if="showActiveAppointmentPageLink"
@@ -29,15 +29,16 @@ import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 
 import PatientsSearch from '@/components/patients/PatientsSearch/index.vue';
 import LayoutUserDropdown from '@/components/layouts/assets/LayoutUserDropdown/index.vue';
-import LayoutLanguageSwitcher from '@/components/layouts/assets/LangSelect/index.vue';
-import LayoutNotificationHeader from '@/components/layouts/assets/LayoutNotificationHeader/index.vue';
+import LayoutSelect from '@/components/layouts/assets/LangSelect/index.vue';
+import NotificationsDrawer from '@/components/NotificationsDrawer/index.vue';
+
 export default {
   name: 'RegistryHeader',
   components: {
     LayoutUserDropdown,
     PatientsSearch,
-    LayoutLanguageSwitcher,
-    LayoutNotificationHeader,
+    LayoutSelect,
+    NotificationsDrawer,
   },
   computed: {
     ...mapGetters({
