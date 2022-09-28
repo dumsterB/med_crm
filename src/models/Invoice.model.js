@@ -11,6 +11,7 @@ export class Invoice extends CRUDModel {
   /**
    * @param {object} [payload]
    * @param {string} payload.status
+   * @param {number} payload.discount
    * @param {number} payload.user_id
    * @param {User} payload.user
    * @param {number} payload.clinic_id
@@ -27,6 +28,7 @@ export class Invoice extends CRUDModel {
     super(payload);
 
     this.status = payload?.status ?? null;
+    this.discount = payload?.discount ?? 0;
     this.user_id = payload?.user_id ?? null;
     this.user = payload?.user ?? null;
     this.clinic_id = payload?.clinic_id ?? null;
