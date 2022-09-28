@@ -13,7 +13,7 @@ export class InvoicePaymentSubject {
   constructor(payload) {
     this.description = payload?.description ?? null;
     this.count = payload?.count ?? 1;
-    this.discount = payload?.discount ?? null;
+    this.discount = payload?.discount ?? 0;
     this.type = payload?.type ?? null;
     this.subject = payload?.subject ?? null;
   }
