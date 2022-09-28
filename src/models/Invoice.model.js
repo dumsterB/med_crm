@@ -19,6 +19,7 @@ export class Invoice extends CRUDModel {
    * @param {number} payload.appointment_id
    * @param {Appointment} payload.appointment
    *
+   * @param {Array<object>} payload.subjects  {group_service_id: number}, {service_id: number}
    * @param {Array<InvoicePaymentSubject>} payload.payment_subjects
    * @param {Array<number>} payload.transactions_ids
    * @param {Array<Transaction>} payload.transactions
@@ -36,6 +37,7 @@ export class Invoice extends CRUDModel {
     this.appointment_id = payload?.appointment_id ?? null;
     this.appointment = payload?.appointment ?? null;
 
+    this.subjects = payload?.subjects || []; // only for create
     this.payment_subjects = payload?.payment_subjects ?? [];
     this.transactions_ids = payload?.transactions_ids ?? [];
     this.transactions = payload?.transactions ?? [];
