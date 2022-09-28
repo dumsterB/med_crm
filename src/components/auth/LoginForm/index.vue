@@ -23,7 +23,11 @@
       </ElInput>
 
       <div class="login-form__actions">
-        <ElButton  type="primary" class="login-form__actions-submit" :loading="loading" native-type="submit">
+        <ElButton
+          type="primary"
+          class="login-form__actions-submit"
+          :loading="loading"
+          native-type="submit">
           {{ $t('LogIn') }}
         </ElButton>
 
