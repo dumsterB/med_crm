@@ -1,5 +1,6 @@
 <template>
   <ElButton class="scan-bracelet-and-redirect-button" type="primary" plain @click="startScan">
+    <template #icon> <UiIcon :icon="icons.SCAN" /> </template>
     {{ text }}
 
     <input
@@ -12,6 +13,7 @@
 </template>
 
 <script>
+import * as icons from '@/enums/icons.enum.js';
 import { Patient } from '@/models/Patient.model';
 import { PATIENT_ROUTE } from '@/router/patients.routes';
 
@@ -60,6 +62,9 @@ export default {
       this.data = '';
     },
   },
+  setup: () => ({
+    icons,
+  }),
 };
 </script>
 
