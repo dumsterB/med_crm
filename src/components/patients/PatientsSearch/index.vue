@@ -1,17 +1,9 @@
 <template>
   <div class="patients-search">
     <form class="patients-search__form" @submit.prevent="throttleSearch">
-      <ElInput v-model="queryWord.value" :placeholder="$t('InputLabel')">
-        <template #append>
-          <UiIcon :icon="icons.SEARCH" />
-        </template>
-      </ElInput>
+      <ElInput v-model="queryWord.value" :placeholder="$t('InputLabel')" />
     </form>
-
-    <!--    <div class="patients-content-scan" @click="scanHandler">
-      <UiIcon :icon="icons.SCAN" />
-      <span class="layout-content-scan__text">{{ $t('Base.ScanBracelet') }}</span>
-    </div>-->
+    <ScanBraceletAndRedirectButton />
 
     <PatientsSearchPopover
       v-show="isOpenPopover"
@@ -25,7 +17,7 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
-import { debounce, throttle } from 'lodash';
+import { throttle } from 'lodash';
 
 import { useSearch } from '@/hooks/query';
 import { SEARCH } from '@/enums/icons.enum';
@@ -33,10 +25,11 @@ import { PATIENTS_ROUTE } from '@/router/patients.routes';
 import { Patient } from '@/models/Patient.model';
 
 import PatientsSearchPopover from './PatientsSearchPopover/index.vue';
+import ScanBraceletAndRedirectButton from '@/components/scanner/ScanBraceletAndRedirectButton/index.vue';
 
 export default {
   name: 'PatientsSearch',
-  components: { PatientsSearchPopover },
+  components: { ScanBraceletAndRedirectButton, PatientsSearchPopover },
   icons: { SEARCH },
 
   setup: () => ({
