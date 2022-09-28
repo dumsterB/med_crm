@@ -3,17 +3,17 @@
     <template #reference>
       <div class="layout-user-dropdown__reference layout-user-dropdown-reference">
         <UiUserAvatarInfo :user="user" secondary-field-key="email" />
-        <UiIcon class="layout-user-dropdown-reference__icon" :icon="icons.CHEVRON_DOWN" />
+<!--        <UiIcon class="layout-user-dropdown-reference__icon" :icon="icons.CHEVRON_DOWN" />-->
       </div>
     </template>
 
-    <div class="layout-user-dropdown__content layout-user-dropdown-content">
-      <div class="layout-user-dropdown-part">
-        <div class="layout-user-dropdown-part__title">{{ $t('Base.ChangeLang') }}</div>
+<!--    <div class="layout-user-dropdown__content layout-user-dropdown-content">-->
+<!--      <div class="layout-user-dropdown-part">-->
+<!--        <div class="layout-user-dropdown-part__title">{{ $t('Base.ChangeLang') }}</div>-->
 
-        <LangSelect class="layout-user-dropdown-part__value" />
-      </div>
-    </div>
+<!--        <LangSelect class="layout-user-dropdown-part__value" />-->
+<!--      </div>-->
+<!--    </div>-->
   </ElPopover>
 </template>
 

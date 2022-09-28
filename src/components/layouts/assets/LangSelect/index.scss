@@ -1,0 +1,22 @@
+.lang-select {
+  width: 108px;
+  height: 35px;
+  border: 1px solid #e5e7ec;
+  border-radius: 16px;
+  &-dropdown {
+    display: flex;
+    padding: 5px 10px 5px 10px;
+  }
+  &__text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    color: #535a70;
+    margin-left: 6px;
+  }
+  &__icon {
+    margin-top: 3px;
+  }
+}

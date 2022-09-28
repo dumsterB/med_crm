@@ -1,14 +1,9 @@
 <template>
   <div class="patients-search">
     <form class="patients-search__form" @submit.prevent="throttleSearch">
-      <ElInput v-model="queryWord.value" :placeholder="$t('InputLabel')">
-        <template #append>
-          <ElButton type="primary" native-type="submit" :loading="loading">
-            {{ $t('Base.Search') }}
-          </ElButton>
-        </template>
-      </ElInput>
+      <ElInput v-model="queryWord.value" :placeholder="$t('InputLabel')" />
     </form>
+    <ScanBraceletAndRedirectButton />
 
     <PatientsSearchPopover
       v-show="isOpenPopover"
@@ -21,26 +16,31 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import { throttle, debounce } from 'lodash';
+import * as icons from '@/enums/icons.enum.js';
+import { throttle } from 'lodash';
+
 import { useSearch } from '@/hooks/query';
 import { SEARCH } from '@/enums/icons.enum';
-import { Patient } from '@/models/Patient.model';
 import { PATIENTS_ROUTE } from '@/router/patients.routes';
+import { Patient } from '@/models/Patient.model';
 
 import PatientsSearchPopover from './PatientsSearchPopover/index.vue';
+import ScanBraceletAndRedirectButton from '@/components/scanner/ScanBraceletAndRedirectButton/index.vue';
 
 export default {
   name: 'PatientsSearch',
-  components: { PatientsSearchPopover },
+  components: { ScanBraceletAndRedirectButton, PatientsSearchPopover },
   icons: { SEARCH },
 
   setup: () => ({
     queryWord: useSearch(),
+    icons: icons,
   }),
   data() {
     return {
       isOpenPopover: false,
       throttleSearch: null, // void
+      isLoading: true,
     };
   },
   computed: {
@@ -71,6 +71,10 @@ export default {
       setLoading: 'patients/setLoading',
       setData: 'patients/setData',
     }),
+
+    scanHandler() {
+      this.$refs.elInput.focus();
+    },
 
     async search() {
       if (this.isDisabledByPatientsPages || this.loading) return;
@@ -104,7 +108,7 @@ export default {
     },
   },
   mounted() {
-    this.throttleSearch = debounce(this.search, 100);
+    this.throttleSearch = throttle(this.search, 100);
   },
 };
 </script>

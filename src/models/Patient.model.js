@@ -105,4 +105,15 @@ export class Patient extends User {
       patient: response.data.data,
     };
   }
+
+  /**
+   * Находит пациента по данным из браслета, которые приходят после сканирования
+   * @param {string} payload
+   * @return {Promise<Patient|User|object>}
+   */
+  static async getByBraceletPayload(payload) {
+    console.log(payload);
+    const url = new URL(payload);
+    console.log(url);
+  }
 }
