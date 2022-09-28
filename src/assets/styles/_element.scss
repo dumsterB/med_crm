@@ -9,7 +9,7 @@ body {
 .el-button--primary {
   &.is-plain {
     --el-button-bg-color: var(--secondary-color);
-    --el-button-border-color: var(--secondary-color);
+    --el-button-border-color: var(--primary-color);
   }
   &.is-disabled {
     --el-button-disabled-bg-color: var(--primary-disabled-color);
