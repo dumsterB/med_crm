@@ -12,7 +12,7 @@
     gap: 40px;
     display: grid;
     &__input {
-      background: white !important;
+      background: #ffffff !important;
     }
   }
 
@@ -64,7 +64,7 @@
     --el-input-bg-color: var(--bg-color) !important;
   }
   .el-input-group__prepend {
-    background-color: white;
+    background-color: #ffffff;
   }
 
   .el-input--large {
