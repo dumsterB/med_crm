@@ -1,21 +1,17 @@
 <template>
   <div class="patients-search">
-    <div class="patients-search-scan-and-header">
-      <form class="patients-search__form" @submit.prevent="throttleSearch">
-        <ElInput v-model="queryWord.value" :placeholder="$t('InputLabel')"> </ElInput>
-      </form>
-      <div class="patients-content-scan" @click="scanHandler">
-        <UiIcon :icon="icons.SCAN" />
-        <span class="layout-content-scan__text">{{ $t('Base.ScanBracelet') }}</span>
-      </div>
-    </div>
-    <div class="patients-scanner-container">
-      <div v-show="!isLoading">
-        <video poster="data:image/gif,AAAA" ref="scanner"></video>
-        <div class="overlay-element"></div>
-        <div class="laser"></div>
-      </div>
-    </div>
+    <form class="patients-search__form" @submit.prevent="throttleSearch">
+      <ElInput v-model="queryWord.value" :placeholder="$t('InputLabel')">
+        <template #append>
+          <UiIcon :icon="icons.SEARCH" />
+        </template>
+      </ElInput>
+    </form>
+
+    <!--    <div class="patients-content-scan" @click="scanHandler">
+      <UiIcon :icon="icons.SCAN" />
+      <span class="layout-content-scan__text">{{ $t('Base.ScanBracelet') }}</span>
+    </div>-->
 
     <PatientsSearchPopover
       v-show="isOpenPopover"
@@ -28,9 +24,8 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import { BrowserMultiFormatReader } from '@zxing/library';
 import * as icons from '@/enums/icons.enum.js';
-import { debounce } from 'lodash';
+import { debounce, throttle } from 'lodash';
 
 import { useSearch } from '@/hooks/query';
 import { SEARCH } from '@/enums/icons.enum';
@@ -53,10 +48,6 @@ export default {
       isOpenPopover: false,
       throttleSearch: null, // void
       isLoading: true,
-      result: null,
-      codeReader: new BrowserMultiFormatReader(),
-      isMediaStreamAPISupported:
-        navigator && navigator.mediaDevices && 'enumerateDevices' in navigator.mediaDevices,
     };
   },
   computed: {
@@ -87,18 +78,11 @@ export default {
       setLoading: 'patients/setLoading',
       setData: 'patients/setData',
     }),
+
     scanHandler() {
-      this.start();
+      this.$refs.elInput.focus();
     },
-    start() {
-      this.codeReader.decodeFromVideoDevice(undefined, this.$refs.scanner, (result, err) => {
-        console.log({ result, err });
-        if (result) {
-          this.$emit('decode', result.text);
-          this.result = result.text;
-        }
-      });
-    },
+
     async search() {
       if (this.isDisabledByPatientsPages || this.loading) return;
       this.setLoading(true);
@@ -131,18 +115,7 @@ export default {
     },
   },
   mounted() {
-    this.throttleSearch = debounce(this.search, 100);
-
-    if (!this.isMediaStreamAPISupported) {
-      return console.error('Media Stream API is not supported');
-    }
-    this.$refs.scanner.oncanplay = (event) => {
-      this.isLoading = false;
-      this.$emit('loaded');
-    };
-  },
-  beforeUnmount() {
-    this.codeReader.reset();
+    this.throttleSearch = throttle(this.search, 100);
   },
 };
 </script>

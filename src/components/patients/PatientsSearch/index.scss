@@ -1,12 +1,7 @@
 .patients-search {
   position: relative;
+  display: flex;
 
-  &__form {
-    width: 60%;
-    .el-input {
-      border-radius: var(--border-radius-medium) !important;
-    }
-  }
   .el-input--large .el-input__wrapper {
     border: 1px solid #e5e7ec !important;
     box-shadow: none !important;
@@ -15,6 +10,7 @@
   .el-input__wrapper {
     background-color: white;
   }
+
   &__popover {
     position: absolute;
     bottom: 0;
@@ -23,33 +19,4 @@
 
     transform: translateY(calc(100% + 10px));
   }
-  &-scan-and-header {
-    display: flex;
-  }
-}
-
-.patients-content-scan {
-  border: 1px solid #40ccbd;
-  padding: 10px 10px 5px 5px;
-  display: flex;
-  justify-content: center;
-  border-radius: 6px;
-  margin: auto;
-  cursor: pointer;
-  &__text {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-    color: #40ccbd;
-    margin-left: 10px;
-  }
-}
-.patients-scanner-container video {
-  position: absolute;
-  left: 50%;
-  margin-left: -20px;
-  text-align: center;
-  z-index: 9;
-  height: 400px;
-  width: 500px;
 }

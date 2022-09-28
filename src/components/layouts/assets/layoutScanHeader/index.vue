@@ -1,7 +1,8 @@
+<!-- TODO: delete -->
 <template>
   <div class="layout-content-scan">
     <UiIcon :icon="icons.SCAN" />
-    <span class="layout-content-scan__text">{{$t('Base.ScanBracelet')}}</span>
+    <span class="layout-content-scan__text">{{ $t('Base.ScanBracelet') }}</span>
   </div>
 </template>
 
