@@ -29,7 +29,7 @@ import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 
 import PatientsSearch from '@/components/patients/PatientsSearch/index.vue';
 import LayoutUserDropdown from '@/components/layouts/assets/LayoutUserDropdown/index.vue';
-import LangSelect from '@/components/layouts/assets/LangSelect/index.vue';
+import LangSelect from '@/components/LangSelect/index.vue';
 import NotificationsDrawer from '@/components/NotificationsDrawer/index.vue';
 
 export default {

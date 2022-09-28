@@ -14,7 +14,7 @@
 <script>
 import PatientsSearch from '@/components/patients/PatientsSearch/index.vue';
 import LayoutUserDropdown from '@/components/layouts/assets/LayoutUserDropdown/index.vue';
-import LangSelect from '@/components/layouts/assets/LangSelect/index.vue';
+import LangSelect from '@/components/LangSelect/index.vue';
 import NotificationsHeader from '@/components/NotificationsDrawer/index.vue';
 
 export default {
