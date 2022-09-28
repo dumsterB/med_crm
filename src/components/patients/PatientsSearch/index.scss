@@ -1,6 +1,8 @@
 .patients-search {
   position: relative;
   display: flex;
+  align-items: center;
+  gap: 10px;
 
   &__form {
     flex: 1;
