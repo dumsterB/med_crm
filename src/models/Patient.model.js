@@ -112,8 +112,12 @@ export class Patient extends User {
    * @return {Promise<Patient|User|object>}
    */
   static async getByBraceletPayload(payload) {
-    console.log(payload);
     const url = new URL(payload);
-    console.log(url);
+    const token = url.searchParams.get('oneTimeToken');
+
+    const { data } = await ApiService.get(
+      `${this.tableName}/getByOneTimeToken?oneTimeToken=${token}`
+    );
+    return data.data;
   }
 }
