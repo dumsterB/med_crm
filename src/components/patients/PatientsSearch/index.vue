@@ -16,6 +16,7 @@
         <div class="laser"></div>
       </div>
     </div>
+
     <PatientsSearchPopover
       v-show="isOpenPopover"
       class="patients-search__popover"
@@ -26,14 +27,15 @@
 </template>
 
 <script>
-import { BrowserMultiFormatReader, Exception } from '@zxing/library';
-import * as icons from '@/enums/icons.enum.js';
 import { mapState, mapActions } from 'vuex';
-import { throttle, debounce } from 'lodash';
+import { BrowserMultiFormatReader } from '@zxing/library';
+import * as icons from '@/enums/icons.enum.js';
+import { debounce } from 'lodash';
+
 import { useSearch } from '@/hooks/query';
 import { SEARCH } from '@/enums/icons.enum';
-import { Patient } from '@/models/Patient.model';
 import { PATIENTS_ROUTE } from '@/router/patients.routes';
+import { Patient } from '@/models/Patient.model';
 
 import PatientsSearchPopover from './PatientsSearchPopover/index.vue';
 
@@ -90,6 +92,7 @@ export default {
     },
     start() {
       this.codeReader.decodeFromVideoDevice(undefined, this.$refs.scanner, (result, err) => {
+        console.log({ result, err });
         if (result) {
           this.$emit('decode', result.text);
           this.result = result.text;
@@ -129,9 +132,9 @@ export default {
   },
   mounted() {
     this.throttleSearch = debounce(this.search, 100);
+
     if (!this.isMediaStreamAPISupported) {
-      throw new Exception('Media Stream API is not supported');
-      return;
+      return console.error('Media Stream API is not supported');
     }
     this.$refs.scanner.oncanplay = (event) => {
       this.isLoading = false;
