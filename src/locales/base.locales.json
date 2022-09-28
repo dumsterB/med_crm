@@ -75,6 +75,7 @@
       "Template": "Шаблон",
       "Templates": "Шаблоны",
       "Time": "Время",
+      "Total": "Итого",
       "WriteText": "Напишите текст..."
     }
   },
@@ -154,6 +155,7 @@
       "Template": "Namuna",
       "Templates": "Namunalar",
       "Time": "Vaqt",
+      "Total": "Jami",
       "WriteText": "Matn yozing..."
     }
   }
