@@ -127,11 +127,12 @@ export default {
       this.$emit('update:data', data.data);
     },
 
-    selectHandler(id) {
-      this.$emit(
-        'select',
-        this.items.find((elem) => elem[this.value] === id)
-      );
+    selectHandler(idOrIds) {
+      const result = this.multiple
+        ? this.items.filter((elem) => idOrIds.includes(elem[this.value]))
+        : this.items.find((elem) => elem[this.value] === idOrIds);
+
+      this.$emit('select', result);
     },
 
     createItem() {
