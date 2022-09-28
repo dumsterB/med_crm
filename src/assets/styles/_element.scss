@@ -40,6 +40,8 @@ body {
 }
 
 .el-dialog {
+  min-width: 480px;
+
   &__header {
     width: 100%;
   }
