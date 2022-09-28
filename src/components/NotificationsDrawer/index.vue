@@ -10,15 +10,13 @@
 import * as icons from '@/enums/icons.enum.js';
 
 export default {
-  name: 'index',
+  name: 'NotificationsDrawer',
   setup: () => ({
     icons,
   }),
-  methods:{
-    scanHandler(){
-
-    }
-  }
+  methods: {
+    scanHandler() {},
+  },
 };
 </script>
 
