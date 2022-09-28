@@ -9,18 +9,4 @@
     font-weight: bold;
     font-size: 1.6em;
   }
-  &__button-call{
-    background: linear-gradient(87.24deg, #40CCBD -1.13%, rgba(65, 210, 195, 0.59) 118.25%);
-    border-radius: 12px;
-    padding: 20px 25px;
-    --el-button-size: 50px;
-    border: none;
-  }
-  &__button-prev{
-    background: var(--bg-color);
-    border: 1px solid #40CCBD;
-    --el-button-size: 50px;
-    border-radius: 12px;
-    color: #40CCBD;
-  }
 }

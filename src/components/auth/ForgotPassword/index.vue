@@ -4,10 +4,10 @@
     <div class="forgot-password__title">{{ $t('Title') }}</div>
     <div class="forgot-password__content">{{ $t('Content') }}</div>
     <img  src="@/assets/images/forgot-password.svg" alt="">
-    <ElButton class="forgot-password__button-call" type="primary" @click="$emit('action:prev')">
-      {{ $t('Base.Call') }}
-    </ElButton>
-    <ElButton class="forgot-password__button-prev"  @click="$emit('action:prev')">
+<!--    <ElButton class="forgot-password__button-call" type="primary" @click="$emit('action:prev')">-->
+<!--      {{ $t('Base.Call') }}-->
+<!--    </ElButton>-->
+    <ElButton class="forgot-password__button-prev" type="primary"  @click="$emit('action:prev')">
       {{ $t('Prev') }}
     </ElButton>
   </div>

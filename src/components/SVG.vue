@@ -530,45 +530,6 @@
         fill="#404040" />
     </symbol>
 
-    <symbol :id="icons.MESSAGE_LOGIN" fill="none">
-      <path
-        d="M16.9024 7.3324L12.4591 10.9454C11.6196 11.6114 10.4384 11.6114 9.59895 10.9454L5.11816 7.3324"
-        stroke="#CBCED9"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round" />
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M15.9089 19.4808C18.9502 19.4892 21 16.9904 21 13.9192V7.05085C21 3.97966 18.9502 1.48083 15.9089 1.48083H6.09114C3.04979 1.48083 1 3.97966 1 7.05085V13.9192C1 16.9904 3.04979 19.4892 6.09114 19.4808H15.9089Z"
-        stroke="#CBCED9"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round" />
-    </symbol>
-
-    <symbol :id="icons.LOCK_PASSWORD" fill="none">
-      <path
-        d="M16.4235 9.92864V7.78164C16.4235 5.26864 14.3855 3.23064 11.8725 3.23064C9.35949 3.21964 7.31349 5.24764 7.30249 7.76164V7.78164V9.92864"
-        stroke="#CBCED9"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round" />
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M15.6832 21.7304H8.04224C5.94824 21.7304 4.25024 20.0334 4.25024 17.9384V13.6494C4.25024 11.5544 5.94824 9.85742 8.04224 9.85742H15.6832C17.7772 9.85742 19.4752 11.5544 19.4752 13.6494V17.9384C19.4752 20.0334 17.7772 21.7304 15.6832 21.7304Z"
-        stroke="#CBCED9"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round" />
-      <path
-        d="M11.8629 14.6835V16.9045"
-        stroke="#CBCED9"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round" />
-    </symbol>
   </svg>
 </template>
 

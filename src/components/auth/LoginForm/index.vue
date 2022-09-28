@@ -2,7 +2,6 @@
   <form class="login-form" @submit.prevent="submitHandler">
     <div class="login-form-content">
       <div class="login-form-info">
-        <img class="login-form__image" src="@/assets/images/logo.svg" alt="logo" />
         <p class="login-form-info__title">Авторизация!</p>
         <p class="login-form-info__text">Войдите в личный кабинет, для записи пациентов на прием</p>
       </div>
@@ -13,9 +12,6 @@
         name="email"
         type="email"
         required>
-<!--        <template #prepend>-->
-<!--          <UiIcon :icon="$options.icons.MESSAGE_LOGIN" />-->
-<!--        </template>-->
       </ElInput>
       <ElInput
         v-model="password"
@@ -24,9 +20,6 @@
         type="password"
         required
         show-password>
-<!--        <template #prepend>-->
-<!--          <UiIcon :icon="$options.icons.LOCK_PASSWORD" />-->
-<!--        </template>-->
       </ElInput>
 
       <div class="login-form__actions">
@@ -43,13 +36,11 @@
 </template>
 
 <script>
-import * as icons from '@/enums/icons.enum.js';
 import { FORGOT_PASSWORD_ROUTE } from '@/router/auth.routes';
 import { DASHBOARD_ROUTE } from '@/router/dashboard.routes';
 
 export default {
   name: 'LoginForm',
-  icons: icons,
   data() {
     return {
       loading: false,
