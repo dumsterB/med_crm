@@ -1,11 +1,12 @@
 <template>
   <div class="registry-header">
     <div class="registry-header-left-content">
-      <PatientsSearch  class="registry-header__search" />
+      <PatientsSearch class="registry-header__search" />
     </div>
     <LayoutLanguageSwitcher></LayoutLanguageSwitcher>
     <LayoutNotificationHeader></LayoutNotificationHeader>
-    <div class="registry-header__divider"></div>
+
+    <ElDivider direction="vertical" />
     <LayoutUserDropdown />
   </div>
 </template>
@@ -15,7 +16,6 @@ import PatientsSearch from '@/components/patients/PatientsSearch/index.vue';
 import LayoutUserDropdown from '@/components/layouts/assets/LayoutUserDropdown/index.vue';
 import LayoutLanguageSwitcher from '@/components/layouts/assets/LangSelect/index.vue';
 import LayoutNotificationHeader from '@/components/layouts/assets/LayoutNotificationHeader/index.vue';
-import LayoutScanHeader from '@/components/layouts/assets/layoutScanHeader/index.vue';
 export default {
   name: 'RegistryHeader',
   components: {
@@ -23,7 +23,6 @@ export default {
     PatientsSearch,
     LayoutLanguageSwitcher,
     LayoutNotificationHeader,
-    LayoutScanHeader,
   },
 };
 </script>

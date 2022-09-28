@@ -1,10 +1,11 @@
 <template>
   <div class="doctors-header">
     <div class="doctors-header-left-content">
-      <PatientsSearch  class="doctors-header__search" />
+      <PatientsSearch class="doctors-header__search" />
     </div>
     <LayoutLanguageSwitcher></LayoutLanguageSwitcher>
     <LayoutNotificationHeader></LayoutNotificationHeader>
+
     <RouterLink
       v-if="showActiveAppointmentPageLink"
       class="doctors-header__appointment-btn"
@@ -15,6 +16,7 @@
       </ElButton>
     </RouterLink>
 
+    <ElDivider direction="vertical" />
     <LayoutUserDropdown class="doctors-header__dropdown" />
   </div>
 </template>
@@ -27,12 +29,16 @@ import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 
 import PatientsSearch from '@/components/patients/PatientsSearch/index.vue';
 import LayoutUserDropdown from '@/components/layouts/assets/LayoutUserDropdown/index.vue';
-import LayoutScanHeader from "@/components/layouts/assets/layoutScanHeader/index.vue";
-import LayoutLanguageSwitcher from "@/components/layouts/assets/LangSelect/index.vue";
-import LayoutNotificationHeader from "@/components/layouts/assets/LayoutNotificationHeader/index.vue";
+import LayoutLanguageSwitcher from '@/components/layouts/assets/LangSelect/index.vue';
+import LayoutNotificationHeader from '@/components/layouts/assets/LayoutNotificationHeader/index.vue';
 export default {
   name: 'RegistryHeader',
-  components: { LayoutUserDropdown, PatientsSearch, LayoutScanHeader, LayoutLanguageSwitcher, LayoutNotificationHeader },
+  components: {
+    LayoutUserDropdown,
+    PatientsSearch,
+    LayoutLanguageSwitcher,
+    LayoutNotificationHeader,
+  },
   computed: {
     ...mapGetters({
       user: 'user/user',
