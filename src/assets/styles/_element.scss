@@ -38,6 +38,17 @@ body {
   }
 }
 
+.el-dialog {
+  &__header {
+    width: 100%;
+    box-shadow: 0px 0px 20px rgba(188, 216, 213, 0.2);
+  }
+  &__body {
+    background-color: var(--bg-container-color);
+  }
+  overflow: hidden;
+}
+
 .el-overlay-dialog {
   display: flex;
   justify-content: center;
