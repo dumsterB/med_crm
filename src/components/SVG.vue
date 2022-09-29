@@ -319,6 +319,19 @@
         stroke-linecap="round"
         stroke-linejoin="round" />
     </symbol>
+
+    <symbol :id="icons.EYE" viewBox="0 0 14 14" fill="none">
+      <path
+        d="M0.583496 7.50065C0.583496 7.50065 2.91683 2.83398 7.00016 2.83398C11.0835 2.83398 13.4168 7.50065 13.4168 7.50065C13.4168 7.50065 11.0835 12.1673 7.00016 12.1673C2.91683 12.1673 0.583496 7.50065 0.583496 7.50065Z"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        d="M7 9.25C7.9665 9.25 8.75 8.4665 8.75 7.5C8.75 6.5335 7.9665 5.75 7 5.75C6.0335 5.75 5.25 6.5335 5.25 7.5C5.25 8.4665 6.0335 9.25 7 9.25Z"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+    </symbol>
   </svg>
 </template>
 

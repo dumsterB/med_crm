@@ -17,3 +17,4 @@ export const TRASH = 'TRASH';
 export const RELOAD = 'RELOAD';
 export const BACK_ARROW = 'BACK_ARROW';
 export const WALLET_OUTLINE = 'WALLET_OUTLINE';
+export const EYE = 'EYE';
