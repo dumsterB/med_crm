@@ -332,6 +332,28 @@
         stroke-linecap="round"
         stroke-linejoin="round" />
     </symbol>
+
+    <symbol :id="icons.CANCEL" viewBox="0 0 9 9" fill="none">
+      <g clip-path="url(#clip0_652_37207)">
+        <path
+          d="M7.92868 1.07129L1.07153 7.92843"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round" />
+        <path
+          d="M1.07153 1.07129L7.92868 7.92843"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round" />
+      </g>
+      <defs>
+        <clipPath id="clip0_652_37207">
+          <rect width="8" height="8" fill="white" transform="translate(0.5 0.5)" />
+        </clipPath>
+      </defs>
+    </symbol>
   </svg>
 </template>
 
