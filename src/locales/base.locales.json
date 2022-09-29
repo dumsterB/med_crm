@@ -1,8 +1,8 @@
 {
   "ru": {
     "Base": {
-      "Absent": "Отсутствует",
       "Actions": "Действия",
+      "Absent": "Отсутствует",
       "Allergy": "Аллергия",
       "AmbulatoryCard": "Амбулаторная карта",
       "Appoint": "Назначить",
@@ -57,9 +57,9 @@
       "Reaction": "Реакция",
       "ReasonService": "Случай обслуживания",
       "SaveChanges": "Сохранить изменения",
+      "Search": "Поиск",
       "ScanBracelet": "Сканер браслета",
       "Scanning": "Сканирование ...",
-      "Search": "Поиск",
       "SelectDate": "Выберите дату",
       "Service": "Услуга",
       "Services": "Услуги",
@@ -67,7 +67,6 @@
       "Settings": "Настройки",
       "SignUp": "Регистрация",
       "Skip": "Пропустить",
-      "StatePrice": "Стоимость",
       "Status": "Статус",
       "Sum": "сум",
       "SurgicalIntervention": "Хирургические вмешательста",
@@ -76,13 +75,15 @@
       "Template": "Шаблон",
       "Templates": "Шаблоны",
       "Time": "Время",
-      "WriteText": "Напишите текст..."
+      "WriteText": "Напишите текст...",
+      "StatePrice": "Стоимость",
+      "Call": "Позванить"
     }
   },
   "uz": {
     "Base": {
-      "Absent": "Mavjud emas",
       "Actions": "Harakatlar",
+      "Absent": "Mavjud emas",
       "Allergy": "Allergiya",
       "AmbulatoryCard": "Ambulatoriya kartasi",
       "Appoint": "Tayinlash",
@@ -143,20 +144,21 @@
       "SelectDate": "Sanani tanlang",
       "Service": "Xizmat",
       "Services": "Xizmatlar",
-      "SetTreatment": "Davolashni tayinlash",
       "Settings": "Sozlamalar",
       "SignUp": "Ro'yxatdan o'tish",
       "Skip": "O'tkazib yuborish",
-      "StatePrice": "Narxi",
       "Status": "holat",
       "Sum": "som",
       "SurgicalIntervention": "Jarrohlik aralashuvlar",
       "TableReception": "Fokuslar jadvali",
-      "TableTreatment": "Davolash jadvali",
       "Template": "Namuna",
       "Templates": "Namunalar",
       "Time": "Vaqt",
-      "WriteText": "Matn yozing..."
+      "SetTreatment": "Davolashni tayinlash",
+      "TableTreatment": "Davolash jadvali",
+      "WriteText": "Matn yozing...",
+      "StatePrice": "Narxi",
+      "Call": "Qongiroq qilish"
     }
   }
 }
