@@ -49,13 +49,14 @@
 
         <!--  Birthdate  -->
         <ElFormItem :label="$t('User.Birthdate')">
-          <ElDatePicker
+          <UiDateInput v-model="patient.birthdate" />
+          <!--          <ElDatePicker
             v-model="patient.birthdate"
             type="date"
             placeholder="00.00.2000"
             format="DD.MM.YYYY"
             :value-format="FULL_DATE_FORMAT"
-            :disabled="isDisabledSecondaryInputs" />
+            :disabled="isDisabledSecondaryInputs" />-->
         </ElFormItem>
       </div>
 
