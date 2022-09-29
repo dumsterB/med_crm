@@ -17,6 +17,7 @@
       "ChangeLang": "Сменить язык",
       "ClinicalExamination": "Диспансеризация",
       "ColDays": "Кол. дней",
+      "Cost": "Стоимость",
       "Create": "Создать",
       "CreateNew": "Создать новый",
       "Dashboard": "Дашборд",
@@ -76,6 +77,7 @@
       "Templates": "Шаблоны",
       "Time": "Время",
       "Total": "Итого",
+      "View": "Посмотреть",
       "WriteText": "Напишите текст..."
     }
   },
@@ -97,6 +99,7 @@
       "ChangeLang": "Tilni ozgartirish",
       "ClinicalExamination": "Dispanser ko'rigi",
       "ColDays": "Kunlar Miqdori",
+      "Cost": "Narxi",
       "Create": "Yaratish",
       "CreateNew": "Yangi yaratish",
       "Dashboard": "Dashboard",
@@ -156,6 +159,7 @@
       "Templates": "Namunalar",
       "Time": "Vaqt",
       "Total": "Jami",
+      "View": "Korish",
       "WriteText": "Matn yozing..."
     }
   }
