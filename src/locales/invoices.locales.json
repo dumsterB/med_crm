@@ -2,6 +2,7 @@
   "ru": {
     "Invoices": {
       "Create": "Создать счёт",
+      "Number": "Номер",
       "Statuses": {
         "canceled": "Отменён",
         "not_paid": "Не оплачено",
@@ -14,6 +15,7 @@
   "uz": {
     "Invoices": {
       "Create": "Hisob yaratish",
+      "Number": "Nomer",
       "Statuses": {
         "canceled": "Bekor qilingan",
         "not_paid": "To'lanmagan",
