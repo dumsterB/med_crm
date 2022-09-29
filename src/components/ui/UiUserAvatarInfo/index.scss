@@ -11,7 +11,9 @@
     min-width: 4em;
 
     &__name {
-      font-weight: bold;
+      &_bold {
+        font-weight: bold;
+      }
     }
     &__secondary {
       color: var(--text-secondary-color);

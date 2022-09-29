@@ -7,7 +7,11 @@
       :gender="user.gender" />
 
     <div class="ui-user-avatar-info__content ui-user-avatar-info-content">
-      <span class="ui-user-avatar-info-content__name">
+      <span
+        :class="[
+          'ui-user-avatar-info-content__name',
+          { 'ui-user-avatar-info-content__name_bold': bold },
+        ]">
         {{ user.name }}
       </span>
 
@@ -41,6 +45,11 @@ export default {
       default: 'medium',
     },
     showHasTreatment: Boolean,
+    bold: {
+      // имя жирным
+      type: Boolean,
+      default: true,
+    },
   },
 };
 </script>
