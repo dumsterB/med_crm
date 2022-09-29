@@ -18,13 +18,13 @@
       </template>
     </LayoutContentHeader>
 
-    <!--    <InvoicesTable
+    <InvoicesTable
       class="v-cash-content__table"
       :items="items"
       :loading="loading"
       v-model:page="page.value"
       v-model:per-page="perPage.value"
-      :total="total" />-->
+      :total="total" />
   </LayoutRegistry>
 </template>
 
@@ -40,11 +40,12 @@ import { Invoice } from '@/models/Invoice.model';
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
 import SelectInvoiceStatus from '@/components/invoices/SelectInvoiceStatus/index.vue';
+import InvoicesTable from '@/components/invoices/InvoicesTable/index.vue';
 import CreateOrPayInvoiceModal from '@/components/invoices/CreateOrPayInvoiceModal/index.vue';
 
 export default {
   name: 'VCash',
-  components: { SelectInvoiceStatus, LayoutContentHeader, LayoutRegistry },
+  components: { InvoicesTable, SelectInvoiceStatus, LayoutContentHeader, LayoutRegistry },
   setup: () => ({
     perPage: usePerPage(),
     page: usePage(),
@@ -58,7 +59,7 @@ export default {
   computed: {
     ...mapState({
       loading: (state) => state.invoices.loading,
-      items: (state) => state.invoices.items,
+      items: (state) => state.invoices.data,
       total: (state) => state.invoices.total,
     }),
 
