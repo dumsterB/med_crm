@@ -18,10 +18,9 @@ export default {
     updateModelValue(value) {
       const formattedValue = value
         ?.replaceAll(/\D/gm, '')
-        ?.replace(
-          /^(\d{2})(\d{2})?(\d{4})?/gm,
-          (str, day, month, year) => `${day}.${month ? month + '.' : ''}${year || ''}`
-        )
+        ?.replace(/^(\d{2})(\d{0,2})(\d{0,4})/gm, (str, day, month, year) => {
+          return `${day}${month ? '.' + month : ''}${year ? '.' + year : ''}`;
+        })
         .slice(0, 10);
 
       this.$emit('update:modelValue', formattedValue);
