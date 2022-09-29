@@ -1,6 +1,7 @@
+<!-- TODO: переименовать -->
 <template>
   <div class="layout-content-notification">
-    <div @click="scanHandler" class="layout-content-notification__item">
+    <div class="layout-content-notification__item" @click="scanHandler">
       <UiIcon :icon="icons.NOTIFICATION" />
     </div>
   </div>

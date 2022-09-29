@@ -1,16 +1,19 @@
 <template>
   <ElButton class="scan-bracelet-and-redirect-button" type="primary" plain @click="startScan">
+    <template #icon> <UiIcon :icon="icons.SCAN" /> </template>
     {{ text }}
 
     <input
       class="scan-bracelet-and-redirect-button__input"
       v-model="data"
       ref="input"
-      @keydown.enter="scanHandler" />
+      @keydown.enter="scanHandler"
+      @blur="isScanning = false" />
   </ElButton>
 </template>
 
 <script>
+import * as icons from '@/enums/icons.enum.js';
 import { Patient } from '@/models/Patient.model';
 import { PATIENT_ROUTE } from '@/router/patients.routes';
 
@@ -44,13 +47,12 @@ export default {
       this.isLoading = true;
 
       const patient = await Patient.getByBraceletPayload(this.data);
-      console.log(patient);
-      // this.$router.push({
-      //   name: PATIENT_ROUTE.name,
-      //   params: {
-      //     id: patient.id,
-      //   },
-      // });
+      this.$router.push({
+        name: PATIENT_ROUTE.name,
+        params: {
+          id: patient.id,
+        },
+      });
       this.endScan();
     },
 
@@ -60,6 +62,9 @@ export default {
       this.data = '';
     },
   },
+  setup: () => ({
+    icons,
+  }),
 };
 </script>
 
