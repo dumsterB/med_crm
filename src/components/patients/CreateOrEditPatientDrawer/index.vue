@@ -52,7 +52,8 @@
           <ElDatePicker
             v-model="patient.birthdate"
             type="date"
-            :placeholder="$t('Base.SelectDate')"
+            placeholder="00.00.2000"
+            format="DD.MM.YYYY"
             :value-format="FULL_DATE_FORMAT"
             :disabled="isDisabledSecondaryInputs" />
         </ElFormItem>
