@@ -1,6 +1,7 @@
 <template>
   <div class="layout-auth">
     <ElHeader :class="['layout-auth__header', 'layout-auth-header', headerClass]">
+      <img class="layout-auth-header__img" src="@/assets/images/logo.svg" alt="">
       <div class="layout-auth-header__actions">
         <LangSelect />
       </div>
