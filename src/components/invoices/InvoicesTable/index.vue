@@ -18,12 +18,12 @@
           </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="_services_count" :label="$t('Base.Services')" />
+        <ElTableColumn prop="_services_count" :label="$t('Base.Services')" width="100px" />
         <ElTableColumn prop="_cost" :label="`${$t('Base.Cost')} (${$t('Base.Sum')})`" />
 
         <ElTableColumn prop="status" :label="$t('Base.Status')">
           <template #default="{ row }">
-            {{ row.status }}
+            <InvoiceStatusTag :status="row.status" />
           </template>
         </ElTableColumn>
 
@@ -57,9 +57,11 @@
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
 import { formatPrice } from '@/utils/price.util';
+import InvoiceStatusTag from '@/components/invoices/InvoiceStatusTag/index.vue';
 
 export default {
   name: 'InvoicesTable',
+  components: { InvoiceStatusTag },
   emits: ['update:perPage', 'update:page'],
   props: {
     /** @property {Array<Invoice|object>} items */
@@ -92,7 +94,6 @@ export default {
   methods: {
     openInvoice() {},
   },
-
   setup: () => ({
     PAGE_SIZES: PAGE_SIZES,
     icons: icons,
