@@ -4,8 +4,17 @@
     :model-value="modelValue"
     @update:model-value="$emit('update:modelValue', $event)">
     <template #header>
-      <div v-if="data.id">{{ $t('Base.Invoice') }}</div>
-      <div v-else>{{ $t('Invoices.Create') }}</div>
+      <div v-if="data?.id" class="create-or-pay-invoice-modal-header">
+        <div>{{ $t('Base.Invoice') }}:</div>
+        <div>#{{ data?.id }}</div>
+        <InvoiceStatusTag
+          class="create-or-pay-invoice-modal-header__status"
+          :status="data.status" />
+      </div>
+
+      <div v-else class="create-or-pay-invoice-modal__header">
+        {{ $t('Invoices.Create') }}
+      </div>
     </template>
 
     <ElForm
@@ -77,14 +86,18 @@
 
     <template #footer>
       <div class="create-or-pay-invoice-modal-actions">
-        <ElButton v-if="!data.id" type="primary" native-type="submit" form="create-or-pay-invoice">
+        <ElButton v-if="!data?.id" type="primary" native-type="submit" form="create-or-pay-invoice">
           {{ $t('Base.Create') }}
         </ElButton>
 
-        <ElButton v-if="!!data.id" type="primary" @click="pay"> {{ $t('Base.Pay') }} </ElButton>
+        <ElButton v-if="!!data?.id" type="primary" @click="payModalIsOpen = true">
+          {{ $t('Base.Pay') }}
+        </ElButton>
       </div>
     </template>
   </ElDialog>
+
+  <InvoicePayModal :invoice="invoice" v-model="payModalIsOpen" />
 </template>
 
 <script>
@@ -96,10 +109,17 @@ import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAct
 
 import PatientsSearchSelect from '@/components/patients/PatientsSearchSelect/index.vue';
 import UiModelsAutocompleteSearch from '@/components/ui/UiModelsAutocompleteSearch/index.vue';
+import InvoiceStatusTag from '@/components/invoices/InvoiceStatusTag/index.vue';
+import InvoicePayModal from '@/components/invoices/InvoicePayModal/index.vue';
 
 export default {
   name: 'CreateOrPayInvoiceModal',
-  components: { UiModelsAutocompleteSearch, PatientsSearchSelect },
+  components: {
+    InvoicePayModal,
+    InvoiceStatusTag,
+    UiModelsAutocompleteSearch,
+    PatientsSearchSelect,
+  },
   emits: ['update:modelValue', 'action'],
   props: {
     modelValue: Boolean,
@@ -110,6 +130,7 @@ export default {
       /** @type {Invoice} invoice */
       invoice: null,
       loading: false,
+      payModalIsOpen: false,
     };
   },
   computed: {

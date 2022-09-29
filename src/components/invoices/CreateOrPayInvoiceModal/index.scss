@@ -1,4 +1,15 @@
 .create-or-pay-invoice-modal {
+  &-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &__status {
+      margin-left: 14px;
+      font-weight: normal;
+    }
+  }
+
   &-content {
     display: flex;
     gap: 24px;
