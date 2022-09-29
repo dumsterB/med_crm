@@ -21,6 +21,7 @@
       id="create-or-pay-invoice"
       class="create-or-pay-invoice-modal__content create-or-pay-invoice-modal-content"
       @submit.prevent="submitHandler">
+      <!--  TODO: вынести в отдельный компоент, будет использоваться и при создании записи  -->
       <!--  Patient  -->
       <div class="create-or-pay-invoice-modal-part">
         <div class="create-or-pay-invoice-modal-part-header">
@@ -50,6 +51,7 @@
         </div>
       </div>
 
+      <!--  TODO: вынести в отдельный компоент, будет использоваться и при создании записи  -->
       <!--  Services  -->
       <div class="create-or-pay-invoice-modal-part">
         <div class="create-or-pay-invoice-modal-part-header">
@@ -69,7 +71,22 @@
         </div>
 
         <div class="create-or-pay-invoice-modal-part-content">
-          <UiDataList class="create-or-pay-invoice-modal__services-list" :data="[]" />
+          <ElTable class="create-or-pay-invoice-modal__services" :data="invoice.payment_subjects">
+            <ElTableColumn prop="subject.title" />
+
+            <ElTableColumn prop="price">
+              <template #default="{ row }"> 0 </template>
+            </ElTableColumn>
+
+            <ElTableColumn v-if="!data?.id" prop="actions" width="50px">
+              <template #default="{ row }">
+                <ElButton text size="small" @click="deletePaymentSubject(row)">
+                  <template #icon><UiIcon :icon="icons.CANCEL" /> </template>
+                </ElButton>
+              </template>
+            </ElTableColumn>
+          </ElTable>
+
           <ElFormItem
             class="create-or-pay-invoice-modal__discount-part"
             :label="$t('Base.Discount') + ' (%)'">
@@ -86,7 +103,12 @@
 
     <template #footer>
       <div class="create-or-pay-invoice-modal-actions">
-        <ElButton v-if="!data?.id" type="primary" native-type="submit" form="create-or-pay-invoice">
+        <ElButton
+          v-if="!data?.id"
+          type="primary"
+          native-type="submit"
+          :loading="loading"
+          form="create-or-pay-invoice">
           {{ $t('Base.Create') }}
         </ElButton>
 
@@ -101,6 +123,7 @@
 </template>
 
 <script>
+import * as icons from '@/enums/icons.enum.js';
 import { Invoice } from '@/models/Invoice.model';
 import { ServiceGroup } from '@/models/ServiceGroup.model';
 import { InvoicePaymentSubject } from '@/models/InvoicePaymentSubject.model';
@@ -189,6 +212,13 @@ export default {
 
     async pay() {},
 
+    /** @param {InvoicePaymentSubject} paymentSubject */
+    deletePaymentSubject(paymentSubject) {
+      this.invoice.payment_subjects = this.invoice.payment_subjects.filter(
+        (elem) => elem.subject.id !== paymentSubject.subject.id
+      );
+    },
+
     /** @param {Array<ServiceGroup>} items */
     selectServiceGroup(items) {
       this.invoice.subjects = items.map((item) => ({
@@ -207,6 +237,7 @@ export default {
 
   setup: () => ({
     ServiceGroup,
+    icons,
   }),
 };
 </script>

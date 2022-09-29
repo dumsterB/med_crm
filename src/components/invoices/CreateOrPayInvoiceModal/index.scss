@@ -1,4 +1,6 @@
 .create-or-pay-invoice-modal {
+  width: 1000px;
+
   &-header {
     display: flex;
     align-items: center;
@@ -74,9 +76,17 @@
     }
   }
 
-  &__services-list {
+  &__services {
     flex: 1;
+    width: auto;
+    min-width: auto !important;
     min-height: 200px;
+    height: 200px;
+    max-height: 200px;
+
+    thead {
+      display: none;
+    }
   }
 
   &__discount-part {
