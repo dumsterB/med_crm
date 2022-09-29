@@ -57,7 +57,9 @@
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
 import { formatPrice } from '@/utils/price.util';
+
 import InvoiceStatusTag from '@/components/invoices/InvoiceStatusTag/index.vue';
+import CreateOrPayInvoiceModal from '@/components/invoices/CreateOrPayInvoiceModal/index.vue';
 
 export default {
   name: 'InvoicesTable',
@@ -92,7 +94,14 @@ export default {
   },
 
   methods: {
-    openInvoice() {},
+    openInvoice(row) {
+      this.$store.dispatch('modalAndDrawer/openModal', {
+        component: CreateOrPayInvoiceModal,
+        payload: {
+          data: row,
+        },
+      });
+    },
   },
   setup: () => ({
     PAGE_SIZES: PAGE_SIZES,

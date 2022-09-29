@@ -4,7 +4,8 @@
     :model-value="modelValue"
     @update:model-value="$emit('update:modelValue', $event)">
     <template #header>
-      <span v-if="!data?.id"> {{ $t('Invoices.Create') }}</span>
+      <div v-if="data.id">{{ $t('Base.Invoice') }}</div>
+      <div v-else>{{ $t('Invoices.Create') }}</div>
     </template>
 
     <ElForm
@@ -21,6 +22,8 @@
           class="create-or-pay-invoice-modal-part-search"
           v-model="invoice.user_id"
           required
+          :default-item="invoice.user"
+          :disabled="!!invoice.id"
           @select="invoice.user = $event" />
 
         <div class="create-or-pay-invoice-modal-part-content">
@@ -33,7 +36,7 @@
           </ElFormItem>
 
           <ElFormItem class="create-or-pay-invoice-modal-notes-part" :label="$t('Base.Notes')">
-            <ElInput type="textarea" :rows="3" v-model="invoice.notes" />
+            <ElInput v-model="invoice.notes" type="textarea" :rows="3" :disabled="!!invoice.id" />
           </ElFormItem>
         </div>
       </div>
@@ -52,6 +55,7 @@
             multiple
             required
             collapse-tags
+            :disabled="!!invoice.id"
             @select="selectServiceGroup" />
         </div>
 
@@ -60,7 +64,11 @@
           <ElFormItem
             class="create-or-pay-invoice-modal__discount-part"
             :label="$t('Base.Discount') + ' (%)'">
-            <ElInput v-model="invoice.discount" type="number" placeholder="0%" />
+            <ElInput
+              v-model="invoice.discount"
+              type="number"
+              placeholder="0%"
+              :disabled="!!invoice.id" />
           </ElFormItem>
           <ElFormItem :label="$t('Base.Total')"> {{ totalPrice }} </ElFormItem>
         </div>
@@ -69,9 +77,11 @@
 
     <template #footer>
       <div class="create-or-pay-invoice-modal-actions">
-        <ElButton type="primary" native-type="submit" form="create-or-pay-invoice">
+        <ElButton v-if="!data.id" type="primary" native-type="submit" form="create-or-pay-invoice">
           {{ $t('Base.Create') }}
         </ElButton>
+
+        <ElButton v-if="!!data.id" type="primary" @click="pay"> {{ $t('Base.Pay') }} </ElButton>
       </div>
     </template>
   </ElDialog>
@@ -107,10 +117,12 @@ export default {
       return this.invoice.payment_subjects.map((elem) => elem.subject.id);
     },
     totalPrice() {
-      let sum = this.invoice.payment_subjects.reduce(
-        (acc, elem) => acc + elem.subject.services[0]?.price * elem.count,
-        0
-      );
+      let sum = this.invoice.id
+        ? this.invoice.discounted_amount
+        : this.invoice.payment_subjects.reduce(
+            (acc, elem) => acc + elem.subject.services[0]?.price * elem.count,
+            0
+          );
       sum = this.invoice.discount > 0 ? sum - sum * (this.invoice.discount / 100) : sum;
 
       return `${formatPrice({ price: sum })} ${this.$t('Base.Sum')}`;
@@ -153,6 +165,8 @@ export default {
         new GlobalModalAction({ name: 'created', data: { invoice: data.data } })
       );
     },
+
+    async pay() {},
 
     /** @param {Array<ServiceGroup>} items */
     selectServiceGroup(items) {
