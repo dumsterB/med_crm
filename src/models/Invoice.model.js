@@ -23,6 +23,10 @@ export class Invoice extends CRUDModel {
    * @param {Array<InvoicePaymentSubject>} payload.payment_subjects
    * @param {Array<number>} payload.transactions_ids
    * @param {Array<Transaction>} payload.transactions
+   *
+   * @param {number} payload.total_amount
+   * @param {number} payload.discounted_amount
+   * @param {number} payload.total_discount
    * @param {string|Date} payload.created_at
    */
   constructor(payload) {
@@ -42,6 +46,9 @@ export class Invoice extends CRUDModel {
     this.transactions_ids = payload?.transactions_ids ?? [];
     this.transactions = payload?.transactions ?? [];
 
+    this.total_amount = payload?.total_amount ?? 0;
+    this.discounted_amount = payload?.discounted_amount ?? payload?.total_amount ?? 0;
+    this.total_discount = payload?.total_discount ?? 0;
     this.created_at = payload?.created_at ?? null;
   }
 
