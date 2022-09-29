@@ -27,5 +27,4 @@ export const UZBEKISTAN = 'UZBEKISTAN';
 export const SCAN = 'SCAN';
 export const PRINTER = 'PRINTER';
 export const WALLET_OUTLINE = 'WALLET_OUTLINE';
-export const MESSAGE_LOGIN = 'MESSAGE_LOGIN';
-export const LOCK_PASSWORD = 'LOCK_PASSWORD';
+export const MALE = 'MALE';

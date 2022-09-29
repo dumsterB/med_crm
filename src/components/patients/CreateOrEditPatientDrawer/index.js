@@ -1,3 +1,4 @@
+import * as icons from '@/enums/icons.enum.js';
 import { throttle } from 'lodash';
 import { insertRouteParams } from '@/utils/router.utils';
 import { Patient } from '@/models/Patient.model';
@@ -242,5 +243,6 @@ export default {
   setup: () => ({
     FULL_DATE_FORMAT: FULL_DATE_FORMAT,
     Patient,
+    icons,
   }),
 };
