@@ -82,14 +82,14 @@ export default {
 
   watch: {
     modelValue: {
-      handler(value) {
+      handler() {
         this.transaction = new Transaction({
           amount:
             this.type === Transaction.enum.types.PayIn
               ? this.invoice.left_pay
               : this.invoice.discounted_amount - this.invoice.left_pay,
           type: this.type,
-          invoice_id: value,
+          invoice_id: this.invoice.id,
         });
       },
       immediate: true,
