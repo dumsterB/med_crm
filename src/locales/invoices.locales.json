@@ -3,6 +3,7 @@
     "Invoices": {
       "Create": "Создать счёт",
       "Number": "Номер",
+      "PaymentMethod": "Способ оплаты",
       "Statuses": {
         "canceled": "Отменён",
         "not_paid": "Не оплачено",
@@ -16,6 +17,7 @@
     "Invoices": {
       "Create": "Hisob yaratish",
       "Number": "Nomer",
+      "PaymentMethod": "Tolov usuli",
       "Statuses": {
         "canceled": "Bekor qilingan",
         "not_paid": "To'lanmagan",
