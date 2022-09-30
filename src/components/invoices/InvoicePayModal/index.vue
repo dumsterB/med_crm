@@ -12,7 +12,9 @@
       <ElFormItem>
         <div class="invoice-pay-modal__sum invoice-pay-modal-sum">
           <span>{{ $t('Base.Cost') }}: </span>
-          <span class="invoice-pay-modal-sum__value">{{ cost + ' ' + $t('Base.Sum') }}</span>
+          <span class="invoice-pay-modal-sum__value">
+            {{ cost + ' ' + $t('Base.Sum') }}
+          </span>
         </div>
       </ElFormItem>
 
@@ -64,10 +66,9 @@ export default {
       immediate: true,
     },
   },
-
   computed: {
     cost() {
-      return formatPrice({ price: this.invoice.discounted_amount });
+      return formatPrice({ price: this.invoice.left_pay });
     },
   },
 
