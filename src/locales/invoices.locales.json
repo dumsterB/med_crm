@@ -10,7 +10,9 @@
         "paid": "Оплачен",
         "partially_paid": "Часть оплачена",
         "refund": "Возврат"
-      }
+      },
+      "SuccessPayed": "Успешно оплачено",
+      "SuccessRefund": "Успешно возвращено"
     }
   },
   "uz": {
@@ -24,7 +26,9 @@
         "paid": "To'langan",
         "partially_paid": "Qismi to'langan",
         "refund": "Qaytarilgan"
-      }
+      },
+      "SuccessPayed": "Muvaffaqiyatli to'landi",
+      "SuccessRefund": "Muvaffaqiyatli qaytarildi"
     }
   }
 }
