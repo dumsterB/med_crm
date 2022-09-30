@@ -81,7 +81,7 @@ export default {
   },
 
   watch: {
-    'invoice.id': {
+    modelValue: {
       handler(value) {
         this.transaction = new Transaction({
           amount:
