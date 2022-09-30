@@ -122,14 +122,17 @@
           {{ $t('Base.Create') }}
         </ElButton>
 
-        <ElButton v-if="!!data?.id" type="primary" @click="payModalIsOpen = true">
+        <ElButton v-if="isShowPayButton" type="primary" @click="payModalIsOpen = true">
           {{ $t('Base.Pay') }}
         </ElButton>
       </div>
     </template>
   </ElDialog>
 
-  <InvoicePayModal :invoice="invoice" v-model="payModalIsOpen" />
+  <InvoicePayModal
+    :invoice="invoice"
+    v-model="payModalIsOpen"
+    @action="invoicePayModalActionHandler" />
 </template>
 
 <script>
@@ -144,6 +147,7 @@ import PatientsSearchSelect from '@/components/patients/PatientsSearchSelect/ind
 import UiModelsAutocompleteSearch from '@/components/ui/UiModelsAutocompleteSearch/index.vue';
 import InvoiceStatusTag from '@/components/invoices/InvoiceStatusTag/index.vue';
 import InvoicePayModal from '@/components/invoices/InvoicePayModal/index.vue';
+import { INVOICE_PAYED_ACTION } from '@/components/invoices/InvoicePayModal/index.enum';
 
 export default {
   name: 'CreateOrPayInvoiceModal',
@@ -180,6 +184,15 @@ export default {
       sum = this.invoice.discount > 0 ? sum - sum * (this.invoice.discount / 100) : sum;
 
       return `${formatPrice({ price: sum })} ${this.$t('Base.Sum')}`;
+    },
+
+    isShowPayButton() {
+      return (
+        !!this.invoice.id &&
+        [Invoice.enum.statuses.NotPaid, Invoice.enum.statuses.PartiallyPaid].includes(
+          this.invoice.status
+        )
+      );
     },
   },
 
@@ -220,8 +233,6 @@ export default {
       );
     },
 
-    async pay() {},
-
     /** @param {InvoicePaymentSubject} paymentSubject */
     deletePaymentSubject(paymentSubject) {
       this.invoice.payment_subjects = this.invoice.payment_subjects.filter(
@@ -243,10 +254,23 @@ export default {
           })
       );
     },
+
+    async invoicePayModalActionHandler(action) {
+      if (action.name === INVOICE_PAYED_ACTION) {
+        this.$emit(
+          'action',
+          new GlobalModalAction({
+            name: INVOICE_PAYED_ACTION,
+            data: action.data,
+          })
+        );
+      }
+    },
   },
 
   setup: () => ({
     ServiceGroup,
+    Invoice,
     icons,
   }),
 };
