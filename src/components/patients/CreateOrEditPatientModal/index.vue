@@ -86,42 +86,41 @@
     </ElForm>
     <!--  Actions  -->
     <template #footer>
-        <div class="create-patient-modal-form-actions">
-          <ElButton
-              v-show="!hasPatient"
-              type="primary"
-              class="create-patient-modal-form-actions__submit"
-              native-type="submit"
-              :loading="loading.form"
-              :disabled="hasPatient">
-            {{ $t(data?.id ? 'Base.SaveChanges' : 'Patients.AddPatient') }}
-          </ElButton>
+      <div class="create-patient-modal-form-actions">
+        <ElButton
+          v-show="!hasPatient"
+          type="primary"
+          class="create-patient-modal-form-actions__submit"
+          native-type="submit"
+          :loading="loading.form"
+          :disabled="hasPatient">
+          {{ $t(data?.id ? 'Base.SaveChanges' : 'Patients.AddPatient') }}
+        </ElButton>
 
-          <!--  hasPatient && !hasPatientFromOtherClinic  -->
-          <router-link v-show="hasPatient && !hasPatientFromOtherClinic" :to="oldPatientPageUrl">
-            <ElButton class="create-patient-modal-form-actions__submit" type="primary" plain
+        <!--  hasPatient && !hasPatientFromOtherClinic  -->
+        <router-link v-show="hasPatient && !hasPatientFromOtherClinic" :to="oldPatientPageUrl">
+          <ElButton class="create-patient-modal-form-actions__submit" type="primary" plain
             >{{ $t('GoToPatient') }}
-            </ElButton>
-          </router-link>
-          <ElButton
-              v-show="data?.id ? hasPatient : hasPatient && !hasPatientFromOtherClinic"
-              type="primary"
-              class="create-patient-modal-form-actions__submit"
-              @click="checkPhoneForRebinding">
-            {{ $t(data ? 'RebindPhone' : 'CreateNewPatient') }}
           </ElButton>
+        </router-link>
+        <ElButton
+          v-show="data?.id ? hasPatient : hasPatient && !hasPatientFromOtherClinic"
+          type="primary"
+          class="create-patient-modal-form-actions__submit"
+          @click="checkPhoneForRebinding">
+          {{ $t(data ? 'RebindPhone' : 'CreateNewPatient') }}
+        </ElButton>
 
-          <ElButton
-              v-show="hasPatientFromOtherClinic && !data"
-              type="primary"
-              class="create-patient-modal-form-actions__submit"
-              :loading="loading.attach"
-              @click="attachPatient">
-            {{ $t('Base.Attach') }}
-          </ElButton>
-        </div>
+        <ElButton
+          v-show="hasPatientFromOtherClinic && !data"
+          type="primary"
+          class="create-patient-modal-form-actions__submit"
+          :loading="loading.attach"
+          @click="attachPatient">
+          {{ $t('Base.Attach') }}
+        </ElButton>
+      </div>
     </template>
-
   </ElDialog>
 </template>
 
