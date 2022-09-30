@@ -43,6 +43,7 @@ import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader
 import SelectInvoiceStatus from '@/components/invoices/SelectInvoiceStatus/index.vue';
 import InvoicesTable from '@/components/invoices/InvoicesTable/index.vue';
 import CreateOrPayInvoiceModal from '@/components/invoices/CreateOrPayInvoiceModal/index.vue';
+import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 export default {
   name: 'VCash',
@@ -105,6 +106,7 @@ export default {
     ...mapActions({
       setLoading: 'invoices/setLoading',
       setData: 'invoices/setData',
+      createItem: 'invoices/createItem',
       editItem: 'invoices/editItem',
     }),
 
@@ -134,6 +136,10 @@ export default {
         'modalAndDrawer/openModal',
         CreateOrPayInvoiceModal
       );
+      console.log(action);
+
+      if (action instanceof GlobalModalCloseAction) return;
+      this.createItem(action.data.invoice);
     },
   },
 };
