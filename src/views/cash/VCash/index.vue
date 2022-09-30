@@ -136,7 +136,6 @@ export default {
         'modalAndDrawer/openModal',
         CreateOrPayInvoiceModal
       );
-      console.log(action);
 
       if (action instanceof GlobalModalCloseAction) return;
       this.createItem(action.data.invoice);
