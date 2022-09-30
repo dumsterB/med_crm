@@ -28,3 +28,4 @@ export const SCAN = 'SCAN';
 export const PRINTER = 'PRINTER';
 export const WALLET_OUTLINE = 'WALLET_OUTLINE';
 export const MALE = 'MALE';
+export const FEMALE = 'FEMALE';

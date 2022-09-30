@@ -80,7 +80,7 @@ import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
 
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientModal/index.vue';
 
 export default {
   name: 'PatientsTable',

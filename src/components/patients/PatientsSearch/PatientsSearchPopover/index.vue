@@ -23,7 +23,7 @@
 
 <script>
 import PatientRow from '@/components/patients/PatientRow/index.vue';
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientModal/index.vue';
 
 export default {
   name: 'PatientsSearchPopover',

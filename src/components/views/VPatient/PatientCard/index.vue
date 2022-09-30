@@ -56,7 +56,7 @@ import { User } from '@/models/User.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 import { PrinterService } from '@/services/printer.service';
 
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientModal/index.vue';
 
 export default {
   name: 'VPatientPatientCard',

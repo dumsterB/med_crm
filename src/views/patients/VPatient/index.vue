@@ -25,7 +25,7 @@ import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalMod
 import { Treatment } from '@/models/Treatment.model';
 
 import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientModal/index.vue';
 import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
 import CreateTreatmentModal from '@/components/treatments/CreateTreatmentModal/index.vue';
 

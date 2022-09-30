@@ -14,7 +14,7 @@ import { Doctor } from '@/models/Doctor.model';
 import { Service } from '@/models/Service.model';
 import { ServiceGroup } from '@/models/ServiceGroup.model';
 
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientModal/index.vue';
 import SpecialtiesSelect from '@/components/specialties/SpecialtiesSelect/index.vue';
 import DoctorsSelectByGroupService from './DoctorsSelectByGroupService/index.vue';
 import ScheduleSlotsSelect from '@/components/appointments/ScheduleSlotsSelect/index.vue';

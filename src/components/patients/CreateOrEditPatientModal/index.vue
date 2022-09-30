@@ -122,7 +122,6 @@
           </div>
         </ElFormItem>
       </ElForm>
-    <UiIcon :icon="icons.MALE" />
   </ElDialog>
 </template>
 
