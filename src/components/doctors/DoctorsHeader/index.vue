@@ -1,6 +1,10 @@
 <template>
   <div class="doctors-header">
-    <PatientsSearch class="doctors-header__search" />
+    <div class="doctors-header-left-content">
+      <PatientsSearch class="doctors-header__search" />
+    </div>
+    <LangSelect></LangSelect>
+    <NotificationsDrawer></NotificationsDrawer>
 
     <RouterLink
       v-if="showActiveAppointmentPageLink"
@@ -12,6 +16,7 @@
       </ElButton>
     </RouterLink>
 
+    <ElDivider direction="vertical" />
     <LayoutUserDropdown class="doctors-header__dropdown" />
   </div>
 </template>
@@ -24,10 +29,17 @@ import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 
 import PatientsSearch from '@/components/patients/PatientsSearch/index.vue';
 import LayoutUserDropdown from '@/components/layouts/assets/LayoutUserDropdown/index.vue';
+import LangSelect from '@/components/LangSelect/index.vue';
+import NotificationsDrawer from '@/components/NotificationsDrawer/index.vue';
 
 export default {
   name: 'RegistryHeader',
-  components: { LayoutUserDropdown, PatientsSearch },
+  components: {
+    LayoutUserDropdown,
+    PatientsSearch,
+    LangSelect,
+    NotificationsDrawer,
+  },
   computed: {
     ...mapGetters({
       user: 'user/user',

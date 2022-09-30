@@ -18,7 +18,6 @@
 
 <script>
 import { mapState } from 'vuex';
-import * as icons from '@/enums/icons.enum.js';
 import { Patient } from '@/models/Patient.model';
 import { Appointment } from '@/models/Appointment.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
@@ -32,10 +31,7 @@ import CreateTreatmentModal from '@/components/treatments/CreateTreatmentModal/i
 
 export default {
   name: 'VPatient',
-  components: {
-    LayoutByUserRole,
-  },
-  icons: icons,
+  components: { LayoutByUserRole },
   props: {
     id: [Number, String],
   },

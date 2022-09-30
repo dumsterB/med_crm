@@ -1,8 +1,8 @@
 <template>
-  <ElPopover class="layout-user-dropdown" trigger="click" placement="bottom" width="300px">
+  <UiUserAvatarInfo :user="user" secondary-field-key="email" />
+  <!--  <ElPopover class="layout-user-dropdown" trigger="click" placement="bottom" width="300px">
     <template #reference>
       <div class="layout-user-dropdown__reference layout-user-dropdown-reference">
-        <UiUserAvatarInfo :user="user" secondary-field-key="email" />
         <UiIcon class="layout-user-dropdown-reference__icon" :icon="icons.CHEVRON_DOWN" />
       </div>
     </template>
@@ -14,7 +14,7 @@
         <LangSelect class="layout-user-dropdown-part__value" />
       </div>
     </div>
-  </ElPopover>
+  </ElPopover>-->
 </template>
 
 <script>
