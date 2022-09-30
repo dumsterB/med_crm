@@ -12,7 +12,7 @@
         "refund": "Возврат"
       },
       "SuccessPayed": "Успешно оплачено",
-      "SuccessRefund": "Успешно возвращено"
+      "SuccessRefunded": "Успешно возвращено"
     }
   },
   "uz": {
@@ -28,7 +28,7 @@
         "refund": "Qaytarilgan"
       },
       "SuccessPayed": "Muvaffaqiyatli to'landi",
-      "SuccessRefund": "Muvaffaqiyatli qaytarildi"
+      "SuccessRefunded": "Muvaffaqiyatli qaytarildi"
     }
   }
 }
