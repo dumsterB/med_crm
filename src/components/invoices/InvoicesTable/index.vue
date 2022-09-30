@@ -57,6 +57,7 @@
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
 import { formatPrice } from '@/utils/price.util';
+import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 import InvoiceStatusTag from '@/components/invoices/InvoiceStatusTag/index.vue';
 import CreateOrPayInvoiceModal from '@/components/invoices/CreateOrPayInvoiceModal/index.vue';
@@ -64,7 +65,7 @@ import CreateOrPayInvoiceModal from '@/components/invoices/CreateOrPayInvoiceMod
 export default {
   name: 'InvoicesTable',
   components: { InvoiceStatusTag },
-  emits: ['update:perPage', 'update:page'],
+  emits: ['update:perPage', 'update:page', 'item:edit'],
   props: {
     /** @property {Array<Invoice|object>} items */
     items: Array,
@@ -94,13 +95,16 @@ export default {
   },
 
   methods: {
-    openInvoice(row) {
-      this.$store.dispatch('modalAndDrawer/openModal', {
+    async openInvoice(row) {
+      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
         component: CreateOrPayInvoiceModal,
         payload: {
           data: row,
         },
       });
+
+      if (action instanceof GlobalModalCloseAction) return;
+      this.$emit('item:edit', action.data.invoice);
     },
   },
   setup: () => ({

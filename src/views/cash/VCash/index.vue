@@ -24,7 +24,8 @@
       :loading="loading"
       v-model:page="page.value"
       v-model:per-page="perPage.value"
-      :total="total" />
+      :total="total"
+      @item:edit="editItem" />
   </LayoutRegistry>
 </template>
 
@@ -104,6 +105,7 @@ export default {
     ...mapActions({
       setLoading: 'invoices/setLoading',
       setData: 'invoices/setData',
+      editItem: 'invoices/editItem',
     }),
 
     async getInvoices() {
