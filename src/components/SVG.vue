@@ -530,6 +530,35 @@
         fill="currentColor" />
     </symbol>
 
+    <symbol :id="icons.WALLET_OUTLINE" viewBox="0 0 18 17" fill="none">
+      <path
+        d="M16.7117 10.4164H13.4731C12.2839 10.4157 11.3201 9.45253 11.3193 8.26337C11.3193 7.07422 12.2839 6.11108 13.4731 6.11035H16.7117"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        d="M13.8396 8.2144H13.5903"
+        stroke="white"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M5.59852 1.2998H12.5133C14.8318 1.2998 16.7114 3.17941 16.7114 5.49794V11.2396C16.7114 13.5581 14.8318 15.4377 12.5133 15.4377H5.59852C3.28 15.4377 1.40039 13.5581 1.40039 11.2396V5.49794C1.40039 3.17941 3.28 1.2998 5.59852 1.2998Z"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        d="M5.0285 4.92998H9.34766"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+    </symbol>
+
     <symbol :id="icons.EYE" viewBox="0 0 14 14" fill="none">
       <path
         d="M0.583496 7.50065C0.583496 7.50065 2.91683 2.83398 7.00016 2.83398C11.0835 2.83398 13.4168 7.50065 13.4168 7.50065C13.4168 7.50065 11.0835 12.1673 7.00016 12.1673C2.91683 12.1673 0.583496 7.50065 0.583496 7.50065Z"
