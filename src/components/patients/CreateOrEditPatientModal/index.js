@@ -10,7 +10,7 @@ import { FULL_DATE_FORMAT } from '@/config/dateAndTime.config';
 import PhoneConfirmModal from '@/components/PhoneConfirmModal/index.vue';
 
 export default {
-  name: 'CreateOrEditPatientDrawer',
+  name: 'CreateOrEditPatientModal',
   emits: ['update:modelValue', 'action'],
   props: {
     modelValue: Boolean,
@@ -153,7 +153,7 @@ export default {
 
       this.$emit(
         'action',
-        new GlobalDrawerAction({ name: 'updated', data: { patient: data.data } })
+        new GlobalModalAction({ name: 'updated', data: { patient: data.data } })
       );
       this.$notify({ type: 'success', title: this.$t('Notifications.SuccessUpdated') });
     },
@@ -167,7 +167,7 @@ export default {
         const { patient } = await Patient.attachPatient({ patient_id: this.oldPatient.id });
 
         this.$notify({ type: 'success', title: this.$t('Notifications.SuccessAttached') });
-        this.$emit('action', new GlobalDrawerAction({ name: 'attached', data: { patient } }));
+        this.$emit('action', new GlobalModalAction({ name: 'attached', data: { patient } }));
         this.goToPatient({ patientId: patient.id });
       } catch (err) {
         console.log(err);

@@ -21,7 +21,7 @@ import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDr
 import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
-import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
+import CreateOrEditAppointmentModal from '@/components/appointments/CreateOrEditAppointmentModal/index.vue';
 import SelectAppointmentInspectionTypeModal from '@/components/appointments/SelectAppointmentInspectionTypeModal/index.vue';
 import SelectOrCreateServiceCaseModal from '@/components/appointments/SelectOrCreateServiceCaseModal/index.vue';
 import SuggestControlAppointmentModal from '@/components/appointments/SuggestControlAppointmentModal/index.vue';
@@ -84,7 +84,7 @@ export default {
 
     async editAppointment() {
       const action = await this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreateOrEditAppointmentDrawer,
+        component: CreateOrEditAppointmentModal,
         payload: {
           data: this.appointment,
         },

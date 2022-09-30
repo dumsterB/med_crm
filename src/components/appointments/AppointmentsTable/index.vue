@@ -78,7 +78,7 @@ import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
 import { Appointment } from '@/models/Appointment.model';
 
-import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
+import CreateOrEditAppointmentModal from '@/components/appointments/CreateOrEditAppointmentModal/index.vue';
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 import AppointmentStartOrEndDate from '@/components/appointments/AppointmentStartOrEndDate/index.vue';
 
@@ -125,7 +125,7 @@ export default {
       });
     },
     addAppointment() {
-      this.$store.dispatch('modalAndDrawer/openDrawer', CreateOrEditAppointmentDrawer);
+      this.$store.dispatch('modalAndDrawer/openDrawer', CreateOrEditAppointmentModal);
     },
   },
   setup: () => ({

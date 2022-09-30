@@ -14,16 +14,16 @@ import { Doctor } from '@/models/Doctor.model';
 import { Service } from '@/models/Service.model';
 import { ServiceGroup } from '@/models/ServiceGroup.model';
 
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientModal/index.vue';
+import CreateOrEditPatientModal from '@/components/patients/CreateOrEditPatientModal/index.vue';
 import SpecialtiesSelect from '@/components/specialties/SpecialtiesSelect/index.vue';
 import DoctorsSelectByGroupService from './DoctorsSelectByGroupService/index.vue';
 import ScheduleSlotsSelect from '@/components/appointments/ScheduleSlotsSelect/index.vue';
 
 // TODO: написать документацию по бизнес логике
 export default {
-  name: 'CreateOrEditAppointmentDrawer',
+  name: 'CreateOrEditAppointmentModal',
   components: {
-    CreateOrEditPatientDrawer,
+    CreateOrEditPatientModal,
     SpecialtiesSelect,
     DoctorsSelectByGroupService,
     ScheduleSlotsSelect,

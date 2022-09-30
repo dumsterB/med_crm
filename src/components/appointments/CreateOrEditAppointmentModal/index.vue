@@ -1,5 +1,5 @@
 <template>
-  <ElDrawer
+  <ElDialog
     custom-class="create-appointment-drawer"
     :model-value="modelValue"
     :title="$t(`Title.${data?.id ? 'Edit' : 'Create'}`)"
@@ -147,13 +147,13 @@
       </ElFormItem>
     </ElForm>
 
-    <CreateOrEditPatientDrawer
+    <CreateOrEditPatientModal
       v-model="patientDrawer.show"
       :size="DRAWER_DEFAULT_SIZE"
       :name-or-phone="patientDrawer.nameOrPhone"
       disable-default-action
       @action="insertPatient" />
-  </ElDrawer>
+  </ElDialog>
 </template>
 
 <script src="./index.js"></script>

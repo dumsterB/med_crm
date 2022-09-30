@@ -20,7 +20,7 @@ import { Patient } from '@/models/Patient.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
 
-import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
+import CreateOrEditAppointmentModal from '@/components/appointments/CreateOrEditAppointmentModal/index.vue';
 
 export default {
   name: 'SuggestControlAppointmentModal',
@@ -38,7 +38,7 @@ export default {
 
     async createControlAppointment() {
       const action = await this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreateOrEditAppointmentDrawer,
+        component: CreateOrEditAppointmentModal,
         payload: {
           disableDefaultAction: true,
           data: {
