@@ -46,7 +46,15 @@
           </ElFormItem>
 
           <ElFormItem class="create-or-pay-invoice-modal-notes-part" :label="$t('Base.Notes')">
-            <ElInput v-model="invoice.notes" type="textarea" :rows="3" :disabled="!!invoice.id" />
+            <ElInput
+              v-model="invoice.description"
+              type="textarea"
+              :rows="3"
+              :disabled="!!invoice.id" />
+          </ElFormItem>
+
+          <ElFormItem v-if="!!invoice.id" :label="$t('DateAndTime.CreatedAt')">
+            {{ invoice.created_at }}
           </ElFormItem>
         </div>
       </div>
@@ -74,8 +82,10 @@
           <ElTable class="create-or-pay-invoice-modal__services" :data="invoice.payment_subjects">
             <ElTableColumn prop="subject.title" />
 
-            <ElTableColumn prop="price">
-              <template #default="{ row }"> 0 </template>
+            <ElTableColumn prop="subject.price">
+              <template #default="{ row }">
+                {{ row.subject.price ?? row.subject.total_amount }}
+              </template>
             </ElTableColumn>
 
             <ElTableColumn v-if="!data?.id" prop="actions" width="50px">
@@ -247,4 +257,5 @@ export default {
 <i18n src="@/locales/user.locales.json" />
 <i18n src="@/locales/invoices.locales.json" />
 <i18n src="@/locales/notifications.locales.json" />
+<i18n src="@/locales/dateAndTime.locales.json" />
 <i18n src="./index.locales.json" />
