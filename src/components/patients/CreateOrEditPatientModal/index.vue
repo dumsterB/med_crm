@@ -1,127 +1,127 @@
 <template>
   <ElDialog
-    class="create-patient-modal"
     :model-value="modelValue"
     width="550px"
     custom-class="create-patient-modal-custom"
     :title="data && data.id ? $t('Patients.EditPatient') : $t('Patients.AddPatient')"
     v-bind="$attrs"
     @update:model-value="$emit('update:modelValue', $event)">
-      <ElForm
-        class="create-patient-modal-form"
-        label-position="top"
-        ref="form"
-        @submit.prevent="submitHandler">
-        <!--  Is Children  -->
-        <ElFormItem v-show="!isChildrenSwitchIsDisabled">
-          <ElSwitch :active-text="$t('User.IsChildren')" v-model="isChildren" />
-        </ElFormItem>
+    <ElForm
+      class="create-patient-modal-form"
+      label-position="top"
+      ref="form"
+      @submit.prevent="submitHandler">
+      <!--  Is Children  -->
+      <ElFormItem v-show="!isChildrenSwitchIsDisabled">
+        <ElSwitch :active-text="$t('User.IsChildren')" v-model="isChildren" />
+      </ElFormItem>
 
-        <!--  Phone  -->
-        <ElFormItem v-if="!isChildren" :label="$t('User.Phone')">
-          <UiPhoneInput class="create-patient-modal-form__field" v-model="patient.phone" required />
-        </ElFormItem>
+      <!--  Phone  -->
+      <ElFormItem v-if="!isChildren" :label="$t('User.Phone')">
+        <UiPhoneInput class="create-patient-modal-form__field" v-model="patient.phone" required />
+      </ElFormItem>
 
-        <!--  Parent  -->
-        <ElFormItem v-if="isChildren" :label="$t('User.Parent')">
-          <UiModelsAutocompleteSearch
+      <!--  Parent  -->
+      <ElFormItem v-if="isChildren" :label="$t('User.Parent')">
+        <UiModelsAutocompleteSearch
+          class="create-patient-modal-form__field"
+          v-model="patient.parent_id"
+          :model-for-use="Patient"
+          :search-query="{ query_field: ['name', 'phone'] }"
+          :default-item="data?.parent || parent"
+          show-create-option
+          required
+          @create="createParentFlow" />
+      </ElFormItem>
+
+      <div v-show="isChildren || (hasPhoneNumber && !hasPatient)">
+        <!--  FullName  -->
+        <ElFormItem :label="$t('User.FullName') + ` (${$t('User.FullNameFormat').toLowerCase()})`">
+          <ElInput
             class="create-patient-modal-form__field"
-            v-model="patient.parent_id"
-            :model-for-use="Patient"
-            :search-query="{ query_field: ['name', 'phone'] }"
-            :default-item="data?.parent || parent"
-            show-create-option
+            v-model="patient.name"
+            minlength="3"
             required
-            @create="createParentFlow" />
+            :disabled="isDisabledSecondaryInputs"
+            pattern="[a-zA-Z\d\s]*" />
         </ElFormItem>
 
-        <div v-show="isChildren || (hasPhoneNumber && !hasPatient)">
-          <!--  FullName  -->
-          <ElFormItem
-            :label="$t('User.FullName') + ` (${$t('User.FullNameFormat').toLowerCase()})`">
-            <ElInput
-              class="create-patient-modal-form__field"
-              v-model="patient.name"
-              minlength="3"
-              required
-              :disabled="isDisabledSecondaryInputs"
-              pattern="[a-zA-Z\d\s]*" />
-          </ElFormItem>
+        <!--  Birthdate  -->
+        <ElFormItem :label="$t('User.Birthdate')">
+          <ElDatePicker
+            class="create-patient-modal-form__field"
+            v-model="patient.birthdate"
+            type="date"
+            :placeholder="$t('Base.SelectDate')"
+            :value-format="FULL_DATE_FORMAT"
+            :disabled="isDisabledSecondaryInputs" />
+        </ElFormItem>
 
-          <!--  Birthdate  -->
-          <ElFormItem :label="$t('User.Birthdate')">
-            <ElDatePicker
-              class="create-patient-modal-form__field"
-              v-model="patient.birthdate"
-              type="date"
-              :placeholder="$t('Base.SelectDate')"
-              :value-format="FULL_DATE_FORMAT"
-              :disabled="isDisabledSecondaryInputs" />
-          </ElFormItem>
+        <!--  Gender  -->
+        <ElFormItem :label="$t('User.Gender')">
+          <UiGenderSelect
+            class="create-patient-modal-form__field"
+            v-model="patient.gender"
+            required
+            :disabled="isDisabledSecondaryInputs" />
+        </ElFormItem>
+      </div>
 
-          <!--  Gender  -->
-          <ElFormItem :label="$t('User.Gender')">
-            <UiGenderSelect
-                class="create-patient-modal-form__field"
-                v-model="patient.gender"
-                required
-                :disabled="isDisabledSecondaryInputs" />
-          </ElFormItem>
-        </div>
+      <!--  OldPatient  -->
+      <ElFormItem v-show="hasPatient">
+        <div class="create-patient-modal-patient">
+          <div class="create-patient-modal-patient__title">{{ $t('PatientIsInSystem') }}</div>
 
-        <!--  OldPatient  -->
-        <ElFormItem v-show="hasPatient">
-          <div class="create-patient-modal-patient">
-            <div class="create-patient-modal-patient__title">{{ $t('PatientIsInSystem') }}</div>
-
-            <router-link
-              v-show="!hasPatientFromOtherClinic"
-              class="create-patient-modal-patient__name"
-              :to="oldPatientPageUrl">
-              {{ oldPatient?.name }}
-            </router-link>
-            <div v-show="hasPatientFromOtherClinic" class="create-patient-modal-patient__name">
-              {{ oldPatient?.name }}
-            </div>
+          <router-link
+            v-show="!hasPatientFromOtherClinic"
+            class="create-patient-modal-patient__name"
+            :to="oldPatientPageUrl">
+            {{ oldPatient?.name }}
+          </router-link>
+          <div v-show="hasPatientFromOtherClinic" class="create-patient-modal-patient__name">
+            {{ oldPatient?.name }}
           </div>
-        </ElFormItem>
-
-        <!--  Actions  -->
-        <ElFormItem>
-          <div class="create-patient-modal-form-actions">
-            <ElButton
+        </div>
+      </ElFormItem>
+    </ElForm>
+    <!--  Actions  -->
+    <template #footer>
+        <div class="create-patient-modal-form-actions">
+          <ElButton
               v-show="!hasPatient"
               type="primary"
               class="create-patient-modal-form-actions__submit"
               native-type="submit"
               :loading="loading.form"
               :disabled="hasPatient">
-              {{ $t(data?.id ? 'Base.SaveChanges' : 'Patients.AddPatient') }}
-            </ElButton>
+            {{ $t(data?.id ? 'Base.SaveChanges' : 'Patients.AddPatient') }}
+          </ElButton>
 
-            <!--  hasPatient && !hasPatientFromOtherClinic  -->
-            <router-link v-show="hasPatient && !hasPatientFromOtherClinic" :to="oldPatientPageUrl">
-              <ElButton class="create-patient-modal-form-actions__submit" type="primary" plain>{{ $t('GoToPatient') }} </ElButton>
-            </router-link>
-            <ElButton
+          <!--  hasPatient && !hasPatientFromOtherClinic  -->
+          <router-link v-show="hasPatient && !hasPatientFromOtherClinic" :to="oldPatientPageUrl">
+            <ElButton class="create-patient-modal-form-actions__submit" type="primary" plain
+            >{{ $t('GoToPatient') }}
+            </ElButton>
+          </router-link>
+          <ElButton
               v-show="data?.id ? hasPatient : hasPatient && !hasPatientFromOtherClinic"
               type="primary"
               class="create-patient-modal-form-actions__submit"
               @click="checkPhoneForRebinding">
-              {{ $t(data ? 'RebindPhone' : 'CreateNewPatient') }}
-            </ElButton>
+            {{ $t(data ? 'RebindPhone' : 'CreateNewPatient') }}
+          </ElButton>
 
-            <ElButton
+          <ElButton
               v-show="hasPatientFromOtherClinic && !data"
               type="primary"
               class="create-patient-modal-form-actions__submit"
               :loading="loading.attach"
               @click="attachPatient">
-              {{ $t('Base.Attach') }}
-            </ElButton>
-          </div>
-        </ElFormItem>
-      </ElForm>
+            {{ $t('Base.Attach') }}
+          </ElButton>
+        </div>
+    </template>
+
   </ElDialog>
 </template>
 

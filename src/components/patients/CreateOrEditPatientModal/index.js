@@ -2,7 +2,7 @@ import * as icons from '@/enums/icons.enum.js';
 import { throttle } from 'lodash';
 import { insertRouteParams } from '@/utils/router.utils';
 import { Patient } from '@/models/Patient.model';
-import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
+import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
 import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { PHONE_CONFIRM_MODAL_CONFIRMED_ACTION } from '@/components/PhoneConfirmModal/index.enum';
 import { FULL_DATE_FORMAT } from '@/config/dateAndTime.config';
@@ -122,7 +122,7 @@ export default {
         return;
       }
 
-      this.$emit('action', new GlobalDrawerAction({ name: 'created', data: { patient } }));
+      this.$emit('action', new GlobalModalAction({ name: 'created', data: { patient } }));
       if (!this.disableDefaultAction) this.goToPatient({ patientId: patient.id });
     },
 

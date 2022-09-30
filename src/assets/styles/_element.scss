@@ -45,6 +45,18 @@ body {
   }
 }
 
+.el-dialog {
+  min-width: 480px;
+
+  &__header {
+    width: 100%;
+  }
+  &__body,
+  &__footer {
+    background-color: var(--bg-container-color);
+  }
+}
+
 .el-overlay-dialog {
   display: flex;
   justify-content: center;
