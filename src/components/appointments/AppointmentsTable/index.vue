@@ -125,7 +125,7 @@ export default {
       });
     },
     addAppointment() {
-      this.$store.dispatch('modalAndDrawer/openDrawer', CreateOrEditAppointmentModal);
+      this.$store.dispatch('modalAndDrawer/openModal', CreateOrEditAppointmentModal);
     },
   },
   setup: () => ({
