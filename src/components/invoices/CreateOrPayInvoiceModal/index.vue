@@ -124,7 +124,10 @@
           {{ $t('Base.Create') }}
         </ElButton>
 
-        <ElButton v-if="isShowPayButton" type="primary" @click="payModalIsOpen = true">
+        <ElButton v-if="isShowRefundButton" type="danger" plain @click="refund">
+          {{ $t('Base.Refund') }}
+        </ElButton>
+        <ElButton v-if="isShowPayButton" type="primary" @click="pay">
           {{ $t('Base.Pay') }}
         </ElButton>
       </div>
@@ -132,8 +135,9 @@
 
     <InvoicePayOrRefundModal
       v-if="!!invoice.id"
-      :invoice="invoice"
       v-model="payModalIsOpen"
+      :invoice="invoice"
+      :type="payType"
       @action="invoicePayModalActionHandler" />
   </ElDialog>
 </template>
@@ -143,6 +147,7 @@ import * as icons from '@/enums/icons.enum.js';
 import { Invoice } from '@/models/Invoice.model';
 import { ServiceGroup } from '@/models/ServiceGroup.model';
 import { InvoicePaymentSubject } from '@/models/InvoicePaymentSubject.model';
+import { Transaction } from '@/models/Transaction.model';
 import { formatPrice } from '@/utils/price.util';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
 
@@ -150,7 +155,6 @@ import PatientsSearchSelect from '@/components/patients/PatientsSearchSelect/ind
 import UiModelsAutocompleteSearch from '@/components/ui/UiModelsAutocompleteSearch/index.vue';
 import InvoiceStatusTag from '@/components/invoices/InvoiceStatusTag/index.vue';
 import InvoicePayOrRefundModal from '@/components/invoices/InvoicePayOrRefundModal/index.vue';
-import { INVOICE_PAYED_ACTION } from '@/components/invoices/InvoicePayOrRefundModal/index.enum';
 
 export default {
   name: 'CreateOrPayInvoiceModal',
@@ -171,6 +175,7 @@ export default {
       invoice: null,
       loading: false,
       payModalIsOpen: false,
+      payType: Transaction.enum.types.PayIn,
     };
   },
   computed: {
@@ -193,6 +198,14 @@ export default {
       return (
         !!this.invoice.id &&
         [Invoice.enum.statuses.NotPaid, Invoice.enum.statuses.PartiallyPaid].includes(
+          this.invoice.status
+        )
+      );
+    },
+    isShowRefundButton() {
+      return (
+        !!this.invoice.id &&
+        [Invoice.enum.statuses.Paid, Invoice.enum.statuses.PartiallyPaid].includes(
           this.invoice.status
         )
       );
@@ -259,16 +272,18 @@ export default {
       );
     },
 
+    pay() {
+      this.payType = Transaction.enum.types.PayIn;
+      this.payModalIsOpen = true;
+    },
+    refund() {
+      this.payType = Transaction.enum.types.PayOut;
+      this.payModalIsOpen = true;
+    },
+
     async invoicePayModalActionHandler(action) {
-      if (action.name === INVOICE_PAYED_ACTION) {
-        this.$emit(
-          'action',
-          new GlobalModalAction({
-            name: INVOICE_PAYED_ACTION,
-            data: action.data,
-          })
-        );
-      }
+      this.$emit('action', action);
+      this.payModalIsOpen = false;
     },
   },
 

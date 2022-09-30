@@ -1,24 +1,27 @@
 <template>
   <ElDialog
     :model-value="modelValue"
-    :title="$t('Base.Payment')"
+    :title="title"
     custom-class="invoice-pay-or-refund-modal"
     @update:model-value="$emit('update:modelValue')">
     <ElForm
       id="invoice-pay-or-refund"
       class="invoice-pay-or-refund-modal-content"
       label-position="top"
-      @submit.prevent="pay">
+      @submit.prevent="submitHandler">
       <ElFormItem>
         <div class="invoice-pay-or-refund-modal__sum invoice-pay-or-refund-modal-sum">
-          <span>{{ $t('Base.Cost') }}: </span>
+          <span>{{ $t('Base.SumCost') }}: </span>
           <span class="invoice-pay-or-refund-modal-sum__value">
             {{ cost + ' ' + $t('Base.Sum') }}
           </span>
         </div>
       </ElFormItem>
 
-      <ElFormItem :label="$t('PatientPaySum')">
+      <ElFormItem
+        :label="
+          type === Transaction.enum.types.PayIn ? $t('PatientPaySum') : $t('PatientRefundSum')
+        ">
         <ElInput v-model="transaction.amount" />
       </ElFormItem>
 
@@ -27,7 +30,7 @@
 
     <template #footer>
       <ElButton type="primary" native-type="submit" form="invoice-pay-or-refund" :loading="loading">
-        {{ $t('Base.Pay') }}
+        {{ type === Transaction.enum.types.PayIn ? $t('Base.Pay') : $t('Base.Refund') }}
       </ElButton>
     </template>
   </ElDialog>
@@ -38,7 +41,10 @@ import { Invoice } from '@/models/Invoice.model';
 import { formatPrice } from '@/utils/price.util';
 import { Transaction } from '@/models/Transaction.model';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
-import { INVOICE_PAYED_ACTION } from '@/components/invoices/InvoicePayOrRefundModal/index.enum';
+import {
+  INVOICE_PAYED_ACTION,
+  INVOICE_REFUND_ACTION,
+} from '@/components/invoices/InvoicePayOrRefundModal/index.enum';
 
 export default {
   name: 'InvoicePayOrRefundModal',
@@ -46,6 +52,12 @@ export default {
   props: {
     modelValue: Boolean,
     invoice: [Invoice, Object],
+    type: {
+      type: String,
+      default: Transaction.enum.types.PayIn,
+      validator: (val) =>
+        [Transaction.enum.types.PayIn, Transaction.enum.types.PayOut].includes(val),
+    },
   },
   data() {
     return {
@@ -54,44 +66,67 @@ export default {
       loading: null,
     };
   },
+  computed: {
+    title() {
+      return this.$t(this.type === Transaction.enum.types.PayIn ? 'Base.Payment' : 'Base.Refund');
+    },
+    cost() {
+      return formatPrice({
+        price:
+          this.type === Transaction.enum.types.PayIn
+            ? this.invoice.left_pay
+            : this.invoice.discounted_amount - this.invoice.left_pay,
+      });
+    },
+  },
+
   watch: {
     'invoice.id': {
       handler(value) {
         this.transaction = new Transaction({
-          amount: this.invoice.left_pay,
-          type: Transaction.enum.types.PayIn,
+          amount:
+            this.type === Transaction.enum.types.PayIn
+              ? this.invoice.left_pay
+              : this.invoice.discounted_amount - this.invoice.left_pay,
+          type: this.type,
           invoice_id: value,
         });
       },
       immediate: true,
     },
   },
-  computed: {
-    cost() {
-      return formatPrice({ price: this.invoice.left_pay });
-    },
-  },
 
   methods: {
-    async pay() {
+    async submitHandler() {
       if (this.loading) return;
       this.loading = true;
 
       try {
-        const payload = await Transaction.create(this.transaction);
+        const transaction = await this.createTransaction();
         const { data } = await Invoice.findOneById(this.transaction.invoice_id);
+
+        this.$notify({
+          type: 'success',
+          title: this.$t(
+            this.type === Transaction.enum.types.PayIn
+              ? 'Invoices.SuccessPayed'
+              : 'Invoices.SuccessRefunded'
+          ),
+        });
 
         this.$emit(
           'action',
           new GlobalModalAction({
-            name: INVOICE_PAYED_ACTION,
+            name:
+              this.type === Transaction.enum.types.PayIn
+                ? INVOICE_PAYED_ACTION
+                : INVOICE_REFUND_ACTION,
             data: {
               invoice: data.data,
-              transaction: payload.data.data,
+              transaction: transaction,
             },
           })
         );
-        this.$emit('update:modelValue', false);
       } catch (err) {
         console.log(err);
         this.$notify({
@@ -102,7 +137,16 @@ export default {
 
       this.loading = false;
     },
+
+    async createTransaction() {
+      const { data } = await Transaction.create(this.transaction);
+      return data.data;
+    },
   },
+
+  setup: () => ({
+    Transaction,
+  }),
 };
 </script>
 
