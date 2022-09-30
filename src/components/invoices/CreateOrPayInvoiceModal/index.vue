@@ -4,7 +4,7 @@
     :model-value="modelValue"
     @update:model-value="$emit('update:modelValue', $event)">
     <template #header>
-      <div v-if="data?.id" class="create-or-pay-invoice-modal-header">
+      <div v-if="invoice.id" class="create-or-pay-invoice-modal-header">
         <div>{{ $t('Base.Invoice') }}:</div>
         <div>#{{ data?.id }}</div>
         <InvoiceStatusTag
@@ -12,7 +12,7 @@
           :status="data.status" />
       </div>
 
-      <div v-else class="create-or-pay-invoice-modal__header">
+      <div v-if="!invoice.id" class="create-or-pay-invoice-modal__header">
         {{ $t('Invoices.Create') }}
       </div>
     </template>
@@ -25,7 +25,9 @@
       <!--  Patient  -->
       <div class="create-or-pay-invoice-modal-part">
         <div class="create-or-pay-invoice-modal-part-header">
-          <div class="create-or-pay-invoice-modal-part-header__title">{{ $t('PatientInfo') }}</div>
+          <div class="create-or-pay-invoice-modal-part-header__title">
+            {{ $t('PatientInfo') }}
+          </div>
         </div>
 
         <PatientsSearchSelect
@@ -127,12 +129,13 @@
         </ElButton>
       </div>
     </template>
-  </ElDialog>
 
-  <InvoicePayModal
-    :invoice="invoice"
-    v-model="payModalIsOpen"
-    @action="invoicePayModalActionHandler" />
+    <InvoicePayModal
+      v-if="!!invoice.id"
+      :invoice="invoice"
+      v-model="payModalIsOpen"
+      @action="invoicePayModalActionHandler" />
+  </ElDialog>
 </template>
 
 <script>
@@ -231,6 +234,7 @@ export default {
         'action',
         new GlobalModalAction({ name: 'created', data: { invoice: data.data } })
       );
+      this.$emit('update:modelValue', false);
     },
 
     /** @param {InvoicePaymentSubject} paymentSubject */
