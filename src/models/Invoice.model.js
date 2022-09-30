@@ -27,6 +27,7 @@ export class Invoice extends CRUDModel {
    * @param {string} payload.description
    * @param {number} payload.total_amount
    * @param {number} payload.discounted_amount
+   * @param {number} payload.left_pay
    * @param {number} payload.total_discount
    * @param {string|Date} payload.created_at
    */
@@ -50,6 +51,7 @@ export class Invoice extends CRUDModel {
     this.description = payload?.description ?? null;
     this.total_amount = payload?.total_amount ?? 0;
     this.discounted_amount = payload?.discounted_amount ?? payload?.total_amount ?? 0;
+    this.left_pay = payload?.left_pay ?? 0;
     this.total_discount = payload?.total_discount ?? 0;
     this.created_at = payload?.created_at ?? null;
   }
