@@ -86,10 +86,10 @@ export default {
   name: 'PatientsTable',
   emits: ['update:perPage', 'update:page'],
   props: {
-    /**
-     * @param { Array<Patient|object> } items
-     */
     loading: Boolean,
+    /**
+     * @property { Array<Patient|object> } items
+     */
     items: Array,
     page: Number,
     perPage: Number,
