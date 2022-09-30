@@ -2,17 +2,17 @@
   <ElDialog
     :model-value="modelValue"
     :title="$t('Base.Payment')"
-    custom-class="invoice-pay-modal"
+    custom-class="invoice-pay-or-refund-modal"
     @update:model-value="$emit('update:modelValue')">
     <ElForm
-      id="invoice-pay"
-      class="invoice-pay-modal-content"
+      id="invoice-pay-or-refund"
+      class="invoice-pay-or-refund-modal-content"
       label-position="top"
       @submit.prevent="pay">
       <ElFormItem>
-        <div class="invoice-pay-modal__sum invoice-pay-modal-sum">
+        <div class="invoice-pay-or-refund-modal__sum invoice-pay-or-refund-modal-sum">
           <span>{{ $t('Base.Cost') }}: </span>
-          <span class="invoice-pay-modal-sum__value">
+          <span class="invoice-pay-or-refund-modal-sum__value">
             {{ cost + ' ' + $t('Base.Sum') }}
           </span>
         </div>
@@ -26,7 +26,7 @@
     </ElForm>
 
     <template #footer>
-      <ElButton type="primary" native-type="submit" form="invoice-pay" :loading="loading">
+      <ElButton type="primary" native-type="submit" form="invoice-pay-or-refund" :loading="loading">
         {{ $t('Base.Pay') }}
       </ElButton>
     </template>
@@ -38,10 +38,10 @@ import { Invoice } from '@/models/Invoice.model';
 import { formatPrice } from '@/utils/price.util';
 import { Transaction } from '@/models/Transaction.model';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
-import { INVOICE_PAYED_ACTION } from '@/components/invoices/InvoicePayModal/index.enum';
+import { INVOICE_PAYED_ACTION } from '@/components/invoices/InvoicePayOrRefundModal/index.enum';
 
 export default {
-  name: 'InvoicePayModal',
+  name: 'InvoicePayOrRefundModal',
   emits: ['update:modelValue', 'action'],
   props: {
     modelValue: Boolean,

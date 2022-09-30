@@ -130,7 +130,7 @@
       </div>
     </template>
 
-    <InvoicePayModal
+    <InvoicePayOrRefundModal
       v-if="!!invoice.id"
       :invoice="invoice"
       v-model="payModalIsOpen"
@@ -149,13 +149,13 @@ import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAct
 import PatientsSearchSelect from '@/components/patients/PatientsSearchSelect/index.vue';
 import UiModelsAutocompleteSearch from '@/components/ui/UiModelsAutocompleteSearch/index.vue';
 import InvoiceStatusTag from '@/components/invoices/InvoiceStatusTag/index.vue';
-import InvoicePayModal from '@/components/invoices/InvoicePayModal/index.vue';
-import { INVOICE_PAYED_ACTION } from '@/components/invoices/InvoicePayModal/index.enum';
+import InvoicePayOrRefundModal from '@/components/invoices/InvoicePayOrRefundModal/index.vue';
+import { INVOICE_PAYED_ACTION } from '@/components/invoices/InvoicePayOrRefundModal/index.enum';
 
 export default {
   name: 'CreateOrPayInvoiceModal',
   components: {
-    InvoicePayModal,
+    InvoicePayOrRefundModal,
     InvoiceStatusTag,
     UiModelsAutocompleteSearch,
     PatientsSearchSelect,
