@@ -10,10 +10,10 @@
       border-radius: 12px 12px 0px 0px;
     }
     .el-form {
-      background: var(--dialog-body-content-bg-color);
+      --dialog-body-content-bg-color: #ffffff;
+      --dialog-body-content-padding: 20px 20px 20px 20px;
       box-shadow: 0px 0px 20px rgba(188, 216, 213, 0.2);
       border-radius: 8px;
-      padding: 20px;
     }
   }
 
