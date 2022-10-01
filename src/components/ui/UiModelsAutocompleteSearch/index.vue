@@ -66,7 +66,7 @@ export default {
     // для поиска вызвается find метод этого класса
     modelForUse: [CRUDModel, Function],
 
-    defaultItem: [CRUDModel, Object],
+    defaultItem: [CRUDModel, Object, Array],
     searchQuery: Object,
     // поле для показа
     label: {
