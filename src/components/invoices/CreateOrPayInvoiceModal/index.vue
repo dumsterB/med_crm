@@ -119,7 +119,7 @@
           v-if="!data?.id"
           type="primary"
           native-type="submit"
-          :loading="loading"
+          :loading="loading.form"
           form="create-or-pay-invoice">
           {{ $t('Base.Create') }}
         </ElButton>
@@ -173,7 +173,12 @@ export default {
     return {
       /** @type {Invoice} invoice */
       invoice: null,
-      loading: false,
+      /** @type {Array<Transaction>} transactions */
+      transactions: [],
+      loading: {
+        form: false,
+        transactions: false,
+      },
       payModalIsOpen: false,
       payType: Transaction.enum.types.PayIn,
     };
@@ -213,9 +218,17 @@ export default {
   },
 
   watch: {
-    modelValue: {
+    'modelValue': {
       handler() {
         this.invoice = new Invoice(this.data || {});
+      },
+      immediate: true,
+    },
+
+    'invoice.id': {
+      handler(value) {
+        this.transactions = [];
+        if (value) this.getTransactions();
       },
       immediate: true,
     },
@@ -223,8 +236,8 @@ export default {
 
   methods: {
     async submitHandler() {
-      if (this.loading) return;
-      this.loading = true;
+      if (this.loading.form) return;
+      this.loading.form = true;
 
       try {
         await this.createInvoice();
@@ -236,7 +249,7 @@ export default {
         });
       }
 
-      this.loading = false;
+      this.loading.form = false;
     },
 
     async createInvoice() {
@@ -284,6 +297,15 @@ export default {
     async invoicePayModalActionHandler(action) {
       this.$emit('action', action);
       this.payModalIsOpen = false;
+    },
+
+    async getTransactions() {
+      this.loading.transactions = true;
+
+      const { transactions } = await Transaction.getByInvoiceId(this.invoice.id);
+      console.log(transactions);
+
+      this.loading.transactions = false;
     },
   },
 
