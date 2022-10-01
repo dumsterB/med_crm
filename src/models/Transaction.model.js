@@ -22,7 +22,7 @@ export class Transaction extends CRUDModel {
 
     this.type = payload?.type ?? null;
     this.amount = payload?.amount ?? null;
-    this.payment_type = payload?.payment_type ?? null;
+    this.payment_type = payload?.payment_type ?? Transaction.enum.paymentTypes.Cash;
     this.invoice_id = payload?.invoice_id ?? null;
     this.created_at = payload?.created_at ?? null;
   }
