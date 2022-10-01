@@ -1,6 +1,11 @@
 {
   "ru": {
     "Transactions": {
+      "PaymentTypes": {
+        "Card": "Карта",
+        "Cash": "Наличные",
+        "Online": "Перевод"
+      },
       "Types": {
         "pay_in": "Пополнение",
         "pay_out": "Возврат"
@@ -9,6 +14,11 @@
   },
   "uz": {
     "Transactions": {
+      "PaymentTypes": {
+        "Card": "Karta",
+        "Cash": "Naqd",
+        "Online": "Otkazma"
+      },
       "Types": {
         "pay_in": "??Пополнение??",
         "pay_out": "??Возврат??"
