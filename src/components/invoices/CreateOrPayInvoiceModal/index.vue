@@ -148,6 +148,7 @@
       v-model="payModalIsOpen"
       :invoice="invoice"
       :type="payType"
+      append-to-body
       @action="invoicePayModalActionHandler" />
   </ElDialog>
 </template>

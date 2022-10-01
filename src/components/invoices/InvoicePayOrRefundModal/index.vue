@@ -3,6 +3,7 @@
     :model-value="modelValue"
     :title="title"
     custom-class="invoice-pay-or-refund-modal"
+    v-bind="$attrs"
     @update:model-value="$emit('update:modelValue')">
     <ElForm
       id="invoice-pay-or-refund"
@@ -20,7 +21,7 @@
 
       <ElFormItem
         :label="$t(type === Transaction.enum.types.PayIn ? 'PatientPaySum' : 'PatientRefundSum')">
-        <ElInput v-model="transaction.amount" required />
+        <ElInput v-model.number="transaction.amount" type="number" required />
       </ElFormItem>
 
       <ElFormItem :label="$t('Invoices.PaymentMethod')">
@@ -70,6 +71,7 @@ export default {
       loading: null,
     };
   },
+
   computed: {
     title() {
       return this.$t(this.type === Transaction.enum.types.PayIn ? 'Base.Payment' : 'Base.Refund');
