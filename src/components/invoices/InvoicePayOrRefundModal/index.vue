@@ -167,4 +167,5 @@ export default {
 <i18n src="@/locales/base.locales.json" />
 <i18n src="@/locales/notifications.locales.json" />
 <i18n src="@/locales/invoices.locales.json" />
+<i18n src="@/locales/transactions.locales.json" />
 <i18n src="./index.locales.json" />
