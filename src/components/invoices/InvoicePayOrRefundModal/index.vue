@@ -19,9 +19,7 @@
       </ElFormItem>
 
       <ElFormItem
-        :label="
-          type === Transaction.enum.types.PayIn ? $t('PatientPaySum') : $t('PatientRefundSum')
-        ">
+        :label="$t(type === Transaction.enum.types.PayIn ? 'PatientPaySum' : 'PatientRefundSum')">
         <ElInput v-model="transaction.amount" required />
       </ElFormItem>
 
@@ -36,7 +34,7 @@
 
     <template #footer>
       <ElButton type="primary" native-type="submit" form="invoice-pay-or-refund" :loading="loading">
-        {{ type === Transaction.enum.types.PayIn ? $t('Base.Pay') : $t('Base.Refund') }}
+        {{ $t(type === Transaction.enum.types.PayIn ? 'Base.Pay' : 'Base.Refund') }}
       </ElButton>
     </template>
   </ElDialog>
