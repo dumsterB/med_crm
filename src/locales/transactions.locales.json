@@ -1,0 +1,18 @@
+{
+  "ru": {
+    "Transactions": {
+      "Types": {
+        "pay_in": "Пополнение",
+        "pay_out": "Возврат"
+      }
+    }
+  },
+  "uz": {
+    "Transactions": {
+      "Types": {
+        "pay_in": "??Пополнение??",
+        "pay_out": "??Возврат??"
+      }
+    }
+  }
+}
