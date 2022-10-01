@@ -25,6 +25,20 @@ export class Transaction extends CRUDModel {
     this.created_at = payload?.created_at ?? null;
   }
 
+  /**
+   * @param {number} invoiceId
+   * @return {Promise<{data: response.data, response: {response: AxiosResponse<*>, data: response.data}, transactions: Array<Transaction>}>}
+   */
+  static async getByInvoiceId(invoiceId) {
+    const response = await super.findOneById(invoiceId);
+
+    return {
+      response: response,
+      data: response.data,
+      transactions: response.data.data,
+    };
+  }
+
   static enum = {
     types: {
       PayIn: 'pay_in',
