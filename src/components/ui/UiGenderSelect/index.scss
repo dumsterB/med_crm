@@ -3,18 +3,26 @@
   display: flex;
   gap: 20px;
   &-item{
-    border: 1px solid;
+    border: 1px solid #B2B6C6;
     display: flex;
     padding: 10px;
+    color: #B2B6C6;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 10px;
+    .ui-icon{
+      margin-top: 2px;
+    }
   }
   &-active{
     border: 1px solid #40CCBD;
     border-radius: 10px;
     color: #40CCBD;
     display: flex;
-    padding: 8px;
+    padding: 10px;
     cursor: pointer;
+    .ui-icon{
+      color:#40CCBD;
+      margin-top: 2px;
+    }
   }
 }

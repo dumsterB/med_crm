@@ -31,21 +31,23 @@ export default {
   props: {
     modelValue: String,
   },
-
-  computed: {
-    genders() {
-      return Object.keys(User.enum.genders).map((key) => ({
-        label: this.$t(`User.Genders.${User.enum.genders[key]}`),
-        value: User.enum.genders[key],
-        active: false,
-      }));
-    },
+  data() {
+    return {
+      genders: [],
+    };
   },
   methods: {
     genderHandler(gender) {
+      this.genders.map(ell=>ell.active = false)
       gender.active = !gender.active;
-      console.log(gender);
     },
+  },
+  mounted() {
+    this.genders = Object.keys(User.enum.genders).map((key) => ({
+      label: this.$t(`User.Genders.${User.enum.genders[key]}`),
+      value: User.enum.genders[key],
+      active: false,
+    }));
   },
   setup: () => ({
     icons,
