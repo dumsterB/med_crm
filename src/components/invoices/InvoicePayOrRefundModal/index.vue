@@ -22,10 +22,16 @@
         :label="
           type === Transaction.enum.types.PayIn ? $t('PatientPaySum') : $t('PatientRefundSum')
         ">
-        <ElInput v-model="transaction.amount" />
+        <ElInput v-model="transaction.amount" required />
       </ElFormItem>
 
-      <ElFormItem :label="$t('Invoices.PaymentMethod')"> </ElFormItem>
+      <ElFormItem :label="$t('Invoices.PaymentMethod')">
+        <ElRadioGroup v-model="transaction.payment_type">
+          <ElRadio v-for="option in paymentTypes" :key="option.value" :label="option.value">
+            {{ option.label }}
+          </ElRadio>
+        </ElRadioGroup>
+      </ElFormItem>
     </ElForm>
 
     <template #footer>
@@ -77,6 +83,13 @@ export default {
             ? this.invoice.left_pay
             : this.invoice.discounted_amount - this.invoice.left_pay,
       });
+    },
+
+    paymentTypes() {
+      return Object.keys(Transaction.enum.paymentTypes).map((key) => ({
+        label: this.$t(`Transactions.PaymentTypes.${Transaction.enum.paymentTypes[key]}`),
+        value: Transaction.enum.paymentTypes[key],
+      }));
     },
   },
 
