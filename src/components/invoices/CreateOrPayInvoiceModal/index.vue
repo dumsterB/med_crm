@@ -90,7 +90,7 @@
               </template>
             </ElTableColumn>
 
-            <ElTableColumn v-if="!data?.id" prop="actions" width="50px">
+            <ElTableColumn v-if="!data?.id" prop="actions" width="60px">
               <template #default="{ row }">
                 <ElButton text size="small" @click="deletePaymentSubject(row)">
                   <template #icon><UiIcon :icon="icons.CANCEL" /> </template>
@@ -109,6 +109,16 @@
               :disabled="!!invoice.id" />
           </ElFormItem>
           <ElFormItem :label="$t('Base.Total')"> {{ totalPrice }} </ElFormItem>
+
+          <TransactionsTable
+            v-if="!!invoice.id"
+            v-show="transactions.length || loading.transactions"
+            class="create-or-pay-invoice-modal__transactions-table"
+            :items="transactions"
+            :loading="loading.transactions"
+            :page="1"
+            :perPage="transactions.length"
+            :total="transactions.length" />
         </div>
       </div>
     </ElForm>
@@ -155,6 +165,7 @@ import PatientsSearchSelect from '@/components/patients/PatientsSearchSelect/ind
 import UiModelsAutocompleteSearch from '@/components/ui/UiModelsAutocompleteSearch/index.vue';
 import InvoiceStatusTag from '@/components/invoices/InvoiceStatusTag/index.vue';
 import InvoicePayOrRefundModal from '@/components/invoices/InvoicePayOrRefundModal/index.vue';
+import TransactionsTable from '@/components/transactions/TransactionsTable/index.vue';
 
 export default {
   name: 'CreateOrPayInvoiceModal',
@@ -163,6 +174,7 @@ export default {
     InvoiceStatusTag,
     UiModelsAutocompleteSearch,
     PatientsSearchSelect,
+    TransactionsTable,
   },
   emits: ['update:modelValue', 'action'],
   props: {
@@ -303,7 +315,7 @@ export default {
       this.loading.transactions = true;
 
       const { transactions } = await Transaction.getByInvoiceId(this.invoice.id);
-      console.log(transactions);
+      this.transactions = transactions;
 
       this.loading.transactions = false;
     },
