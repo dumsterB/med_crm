@@ -82,6 +82,7 @@
       "Templates": "Шаблоны",
       "Time": "Время",
       "Total": "Итого",
+      "Type": "Тип",
       "View": "Посмотреть",
       "WriteText": "Напишите текст..."
     }
@@ -169,6 +170,7 @@
       "Templates": "Namunalar",
       "Time": "Vaqt",
       "Total": "Jami",
+      "Type": "Turi",
       "View": "Korish",
       "WriteText": "Matn yozing..."
     }
