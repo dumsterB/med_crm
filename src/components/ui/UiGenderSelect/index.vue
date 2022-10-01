@@ -1,15 +1,4 @@
 <template>
-  <!--  <ElSelect-->
-  <!--    class="ui-gender-select"-->
-  <!--    :model-value="modelValue"-->
-  <!--    v-bind="$attrs"-->
-  <!--    @update:model-value="$emit('update:modelValue', $event)">-->
-  <!--    <ElOption-->
-  <!--      v-for="gender in genders"-->
-  <!--      :key="gender.value"-->
-  <!--      :label="gender.label"-->
-  <!--      :value="gender.value" />-->
-  <!--  </ElSelect>-->
   <div class="ui-gender-select">
     <div
       v-for="gender of genders"
@@ -38,7 +27,7 @@ export default {
   },
   methods: {
     genderHandler(gender) {
-      this.genders.map(ell=>ell.active = false)
+      this.genders.map((ell) => (ell.active = false));
       gender.active = !gender.active;
     },
   },
