@@ -3,6 +3,7 @@
     :model-value="modelValue"
     :title="title"
     custom-class="invoice-pay-or-refund-modal"
+    v-bind="$attrs"
     @update:model-value="$emit('update:modelValue')">
     <ElForm
       id="invoice-pay-or-refund"
@@ -19,18 +20,22 @@
       </ElFormItem>
 
       <ElFormItem
-        :label="
-          type === Transaction.enum.types.PayIn ? $t('PatientPaySum') : $t('PatientRefundSum')
-        ">
-        <ElInput v-model="transaction.amount" />
+        :label="$t(type === Transaction.enum.types.PayIn ? 'PatientPaySum' : 'PatientRefundSum')">
+        <ElInput v-model.number="transaction.amount" type="number" required />
       </ElFormItem>
 
-      <ElFormItem :label="$t('Invoices.PaymentMethod')"> </ElFormItem>
+      <ElFormItem :label="$t('Invoices.PaymentMethod')">
+        <ElRadioGroup v-model="transaction.payment_type">
+          <ElRadio v-for="option in paymentTypes" :key="option.value" :label="option.value">
+            {{ option.label }}
+          </ElRadio>
+        </ElRadioGroup>
+      </ElFormItem>
     </ElForm>
 
     <template #footer>
       <ElButton type="primary" native-type="submit" form="invoice-pay-or-refund" :loading="loading">
-        {{ type === Transaction.enum.types.PayIn ? $t('Base.Pay') : $t('Base.Refund') }}
+        {{ $t(type === Transaction.enum.types.PayIn ? 'Base.Pay' : 'Base.Refund') }}
       </ElButton>
     </template>
   </ElDialog>
@@ -66,6 +71,7 @@ export default {
       loading: null,
     };
   },
+
   computed: {
     title() {
       return this.$t(this.type === Transaction.enum.types.PayIn ? 'Base.Payment' : 'Base.Refund');
@@ -77,6 +83,13 @@ export default {
             ? this.invoice.left_pay
             : this.invoice.discounted_amount - this.invoice.left_pay,
       });
+    },
+
+    paymentTypes() {
+      return Object.keys(Transaction.enum.paymentTypes).map((key) => ({
+        label: this.$t(`Transactions.PaymentTypes.${Transaction.enum.paymentTypes[key]}`),
+        value: Transaction.enum.paymentTypes[key],
+      }));
     },
   },
 
@@ -154,4 +167,5 @@ export default {
 <i18n src="@/locales/base.locales.json" />
 <i18n src="@/locales/notifications.locales.json" />
 <i18n src="@/locales/invoices.locales.json" />
+<i18n src="@/locales/transactions.locales.json" />
 <i18n src="./index.locales.json" />
