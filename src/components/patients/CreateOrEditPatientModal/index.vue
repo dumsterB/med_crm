@@ -10,6 +10,7 @@
       class="create-patient-modal-form"
       label-position="top"
       ref="form"
+      id="data"
       @submit.prevent="submitHandler">
       <!--  Is Children  -->
       <ElFormItem v-show="!isChildrenSwitchIsDisabled">
@@ -90,6 +91,7 @@
         <ElButton
           v-show="!hasPatient"
           type="primary"
+          form="data"
           class="create-patient-modal-form-actions__submit"
           native-type="submit"
           :loading="loading.form"
@@ -99,13 +101,14 @@
 
         <!--  hasPatient && !hasPatientFromOtherClinic  -->
         <router-link v-show="hasPatient && !hasPatientFromOtherClinic" :to="oldPatientPageUrl">
-          <ElButton class="create-patient-modal-form-actions__submit" type="primary" plain
+          <ElButton form="data" class="create-patient-modal-form-actions__submit" type="primary" plain
             >{{ $t('GoToPatient') }}
           </ElButton>
         </router-link>
         <ElButton
           v-show="data?.id ? hasPatient : hasPatient && !hasPatientFromOtherClinic"
           type="primary"
+          form="data"
           class="create-patient-modal-form-actions__submit"
           @click="checkPhoneForRebinding">
           {{ $t(data ? 'RebindPhone' : 'CreateNewPatient') }}
@@ -114,6 +117,7 @@
         <ElButton
           v-show="hasPatientFromOtherClinic && !data"
           type="primary"
+          form="data"
           class="create-patient-modal-form-actions__submit"
           :loading="loading.attach"
           @click="attachPatient">
