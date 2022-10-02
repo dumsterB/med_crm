@@ -29,6 +29,7 @@ export default {
     genderHandler(gender) {
       this.genders.map((ell) => (ell.active = false));
       gender.active = !gender.active;
+      this.$emit('update:modelValue', gender.value)
     },
   },
   mounted() {
