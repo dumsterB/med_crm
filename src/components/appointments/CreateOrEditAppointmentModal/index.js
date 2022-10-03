@@ -18,6 +18,7 @@ import CreateOrEditPatientModal from '@/components/patients/CreateOrEditPatientM
 import SpecialtiesSelect from '@/components/specialties/SpecialtiesSelect/index.vue';
 import DoctorsSelectByGroupService from './DoctorsSelectByGroupService/index.vue';
 import ScheduleSlotsSelect from '@/components/appointments/ScheduleSlotsSelect/index.vue';
+import PatientsSearchSelect from '@/components/patients/PatientsSearchSelect/index.vue';
 
 // TODO: написать документацию по бизнес логике
 export default {
@@ -27,6 +28,7 @@ export default {
     SpecialtiesSelect,
     DoctorsSelectByGroupService,
     ScheduleSlotsSelect,
+    PatientsSearchSelect,
   },
   emits: ['update:modelValue', 'action'],
   props: {
