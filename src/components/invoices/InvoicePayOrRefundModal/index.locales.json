@@ -1,0 +1,10 @@
+{
+  "ru": {
+    "PatientPaySum": "Заплатил пациент",
+    "PatientRefundSum": "Возвращается пациенту"
+  },
+  "uz": {
+    "PatientPaySum": "Bemor to'laydi",
+    "PatientRefundSum": "??Возвращается пациенту??"
+  }
+}

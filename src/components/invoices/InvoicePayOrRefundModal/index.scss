@@ -1,0 +1,18 @@
+.invoice-pay-or-refund-modal {
+  &-content {
+    background-color: var(--dialog-body-content-bg-color);
+    padding: var(--dialog-body-content-padding);
+    border-radius: 8px; // TODO: заменить на переменную
+  }
+
+  &-sum {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    font-weight: bold;
+
+    &__value {
+      font-size: 1.6em;
+    }
+  }
+}
