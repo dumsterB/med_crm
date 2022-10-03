@@ -1,10 +1,7 @@
 .create-patient-modal {
   &-custom {
-    border-radius: 12px;
     .el-dialog__header {
       background: var(--bg-color);
-      margin-right: 0;
-      border-radius: 12px 12px 0px 0px;
     }
     .el-form {
       background: var(--dialog-body-content-bg-color);
@@ -17,30 +14,12 @@
   &-form {
     display: flex;
     flex-direction: column;
-    .el-form-item__content,
-    .el-form-item__content > * {
-      width: 100%;
-    }
-    .el-form-item__label {
-      color: var(--lable-color);
-    }
-    &__field {
-      --el-input-bg-color: var(--bg-color) !important;
-    }
-    .el-input {
-      --el-input-bg-color: var(--bg-color) !important;
-    }
     &-actions {
       display: flex;
       flex-direction: column;
       margin: auto;
       &__submit {
-        background: linear-gradient(
-          87.24deg,
-          #40ccbd -1.13%,
-          rgba(65, 210, 195, 0.59) 118.25%
-        ) !important;
-        border-radius: 6px;
+        background: var(--button-primary-gradiend-bg);
         border: none;
         width: 50%;
         margin: auto;

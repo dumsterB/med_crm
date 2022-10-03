@@ -31,6 +31,7 @@ body {
 
 .el-button + .el-button {
   margin-left: 0;
+  border-radius: var(--el-border-radius);
 }
 
 .el-table {
@@ -47,9 +48,22 @@ body {
 
 .el-dialog {
   min-width: 480px;
+  border-radius: 12px;
 
   &__header {
     width: 100%;
+    margin-right: 0;
+    border-radius: 12px 12px 0px 0px;
+  }
+  .el-form-item__content,
+  .el-form-item__content > * {
+    width: 100%;
+  }
+  .el-form-item__label {
+    color: var(--lable-color);
+  }
+  .el-input {
+    --el-input-bg-color: var(--bg-color) !important;
   }
   &__body,
   &__footer {
