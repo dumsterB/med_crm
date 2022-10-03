@@ -4,10 +4,12 @@
       class="patients-search-select__component"
       :model-value="modelValue"
       :model-for-use="Patient"
-      :default-item="$attrs.defaultItem || scannedPatient"
+      :default-item="defaultItem || scannedPatient"
       v-bind="$attrs"
+      ref="component"
       @update:model-value="$emit('update:modelValue', $event)"
-      @select="$emit('select', $event)" />
+      @select="$emit('select', $event)"
+      @create="$emit('create', $event)" />
 
     <ScanPatientBracelet @scan:success="scanHandler" />
   </div>
@@ -25,6 +27,7 @@ export default {
   props: {
     modelValue: Number,
     withScanner: Boolean,
+    defaultItem: [Patient, Object, Array],
     // + пропсы для UiModelsAutocompleteSearch
   },
   data() {
@@ -33,8 +36,8 @@ export default {
     };
   },
   watch: {
-    modelValue(value) {
-      this.scannedPatient = null;
+    modelValue(value, oldValue) {
+      if (oldValue) this.scannedPatient = null;
     },
   },
 
@@ -43,6 +46,13 @@ export default {
       this.scannedPatient = patient;
       this.$emit('update:modelValue', patient.id);
       this.$emit('select', patient);
+    },
+
+    focus() {
+      this.$refs.component.focus();
+    },
+    blur() {
+      this.$refs.component.blur();
     },
   },
 
