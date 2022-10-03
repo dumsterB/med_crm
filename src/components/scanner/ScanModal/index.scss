@@ -1,0 +1,26 @@
+.scan-modal {
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: var(--dialog-body-content-padding);
+    background-color: var(--dialog-body-content-bg-color);
+    border-radius: var(--dialog-body-content-border-radius);
+    box-shadow: var(--dialog-body-content-box-shadow);
+
+    &__icon {
+      font-size: 7em;
+      color: var(--primary-color);
+    }
+    &__text {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    &__input {
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
+  }
+}
