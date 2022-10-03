@@ -7,21 +7,23 @@
     <template #icon> <UiIcon :icon="icons.SCAN" /> </template>
     <div v-if="!onlyIcon">{{ text }}</div>
 
-    <input
-      class="scan-patient-bracelet__input"
-      v-model="data"
-      ref="input"
-      @keydown.enter="scanHandler"
-      @blur="isScanning = false" />
+    <ScanModal
+      :model-value="modalIsOpen"
+      :text="isLoading ? $t('Base.Loading') : null"
+      @scan:success="scanHandler"
+      @update:model-value="updateModalModelValueHandler" />
   </ElButton>
 </template>
 
 <script>
 import * as icons from '@/enums/icons.enum.js';
 import { Patient } from '@/models/Patient.model';
+import ScanModal from '@/components/scanner/ScanModal/index.vue';
 
 export default {
   name: 'ScanPatientBracelet',
+  components: { ScanModal },
+  emits: ['scan:success'],
   props: {
     onlyIcon: Boolean,
   },
@@ -29,6 +31,7 @@ export default {
     return {
       isScanning: false,
       isLoading: false,
+      modalIsOpen: false,
       data: null,
     };
   },
@@ -45,22 +48,28 @@ export default {
     startScan() {
       if (this.isScanning) return;
       this.isScanning = true;
-      this.$refs.input.focus();
+      this.modalIsOpen = true;
     },
 
-    async scanHandler() {
+    async scanHandler(data) {
       if (this.isLoading) return;
       this.isLoading = true;
 
-      const patient = await Patient.getByBraceletPayload(this.data);
-      this.endScan();
+      const patient = await Patient.getByBraceletPayload(data);
       this.$emit('scan:success', { patient });
+      this.endScan();
     },
 
     endScan() {
       this.isScanning = false;
       this.isLoading = false;
+      this.modalIsOpen = false;
       this.data = '';
+    },
+
+    updateModalModelValueHandler(value) {
+      if (!value) this.endScan();
+      this.modalIsOpen = value;
     },
   },
   setup: () => ({
