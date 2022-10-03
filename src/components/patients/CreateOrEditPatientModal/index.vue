@@ -101,7 +101,7 @@
 
         <!--  hasPatient && !hasPatientFromOtherClinic  -->
         <router-link v-show="hasPatient && !hasPatientFromOtherClinic" :to="oldPatientPageUrl">
-          <ElButton form="data" class="create-patient-modal-form-actions__submit" type="primary" plain
+          <ElButton form="data" class="create-patient-modal-form-actions__submit" type="primary"
             >{{ $t('GoToPatient') }}
           </ElButton>
         </router-link>

@@ -18,11 +18,13 @@
       display: flex;
       flex-direction: column;
       margin: auto;
+      gap: 10px;
       &__submit {
         background: var(--button-primary-gradiend-bg);
         border: none;
-        width: 50%;
+        width: 50% !important;
         margin: auto;
+        display: flex;
       }
     }
   }
