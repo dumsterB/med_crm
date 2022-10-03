@@ -130,7 +130,7 @@ export default {
     },
 
     makeAppointment(payload) {
-      this.$store.dispatch('modalAndDrawer/openDrawer', {
+      this.$store.dispatch('modalAndDrawer/openModal', {
         component: CreateOrEditAppointmentModal,
         payload: {
           patient: payload,
@@ -138,7 +138,7 @@ export default {
       });
     },
     addPatient() {
-      this.$store.dispatch('modalAndDrawer/openDrawer', {
+      this.$store.dispatch('modalAndDrawer/openModal', {
         component: CreateOrEditPatientModal,
         payload: {
           nameOrPhone: this.search,
@@ -147,7 +147,7 @@ export default {
     },
 
     addChildren(payload) {
-      this.$store.dispatch('modalAndDrawer/openDrawer', {
+      this.$store.dispatch('modalAndDrawer/openModal', {
         component: CreateOrEditPatientModal,
         payload: {
           data: new Patient({ parent: payload, parent_id: payload.id }),

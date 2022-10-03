@@ -4,7 +4,7 @@
       <PatientsSearch class="registry-header__search" />
     </div>
     <LangSelect></LangSelect>
-    <NotificationsHeader></NotificationsHeader>
+    <!--    <NotificationsHeader></NotificationsHeader>-->
 
     <ElDivider direction="vertical" />
     <LayoutUserDropdown />

@@ -1,28 +1,37 @@
 <template>
-  <ElButton class="scan-bracelet-and-redirect-button" type="primary" plain @click="startScan">
+  <ElButton
+    :class="['scan-patient-bracelet', { 'scan-patient-bracelet_only-icon': onlyIcon }]"
+    type="primary"
+    plain
+    @click="startScan">
     <template #icon> <UiIcon :icon="icons.SCAN" /> </template>
-    {{ text }}
+    <div v-if="!onlyIcon">{{ text }}</div>
 
-    <input
-      class="scan-bracelet-and-redirect-button__input"
-      v-model="data"
-      ref="input"
-      @keydown.enter="scanHandler"
-      @blur="isScanning = false" />
+    <ScanModal
+      :model-value="modalIsOpen"
+      :text="isLoading ? $t('Base.Loading') : null"
+      @scan:success="scanHandler"
+      @update:model-value="updateModalModelValueHandler" />
   </ElButton>
 </template>
 
 <script>
 import * as icons from '@/enums/icons.enum.js';
 import { Patient } from '@/models/Patient.model';
-import { PATIENT_ROUTE } from '@/router/patients.routes';
+import ScanModal from '@/components/scanner/ScanModal/index.vue';
 
 export default {
-  name: 'ScanBraceletAndRedirectButton',
+  name: 'ScanPatientBracelet',
+  components: { ScanModal },
+  emits: ['scan:success'],
+  props: {
+    onlyIcon: Boolean,
+  },
   data() {
     return {
       isScanning: false,
       isLoading: false,
+      modalIsOpen: false,
       data: null,
     };
   },
@@ -39,27 +48,28 @@ export default {
     startScan() {
       if (this.isScanning) return;
       this.isScanning = true;
-      this.$refs.input.focus();
+      this.modalIsOpen = true;
     },
 
-    async scanHandler() {
+    async scanHandler(data) {
       if (this.isLoading) return;
       this.isLoading = true;
 
-      const patient = await Patient.getByBraceletPayload(this.data);
-      this.$router.push({
-        name: PATIENT_ROUTE.name,
-        params: {
-          id: patient.id,
-        },
-      });
+      const patient = await Patient.getByBraceletPayload(data);
+      this.$emit('scan:success', { patient });
       this.endScan();
     },
 
     endScan() {
       this.isScanning = false;
       this.isLoading = false;
+      this.modalIsOpen = false;
       this.data = '';
+    },
+
+    updateModalModelValueHandler(value) {
+      if (!value) this.endScan();
+      this.modalIsOpen = value;
     },
   },
   setup: () => ({

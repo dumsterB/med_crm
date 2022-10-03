@@ -3,7 +3,7 @@
     <form class="patients-search__form" @submit.prevent="throttleSearch">
       <ElInput v-model="queryWord.value" :placeholder="$t('InputLabel')" />
     </form>
-    <ScanBraceletAndRedirectButton />
+    <ScanPatientBracelet @scan:success="redirectToPatientByBracelet" />
 
     <PatientsSearchPopover
       v-show="isOpenPopover"
@@ -21,15 +21,15 @@ import { throttle } from 'lodash';
 
 import { useSearch } from '@/hooks/query';
 import { SEARCH } from '@/enums/icons.enum';
-import { PATIENTS_ROUTE } from '@/router/patients.routes';
+import { PATIENT_ROUTE, PATIENTS_ROUTE } from '@/router/patients.routes';
 import { Patient } from '@/models/Patient.model';
 
 import PatientsSearchPopover from './PatientsSearchPopover/index.vue';
-import ScanBraceletAndRedirectButton from '@/components/scanner/ScanBraceletAndRedirectButton/index.vue';
+import ScanPatientBracelet from '@/components/scanner/ScanPatientBracelet/index.vue';
 
 export default {
   name: 'PatientsSearch',
-  components: { ScanBraceletAndRedirectButton, PatientsSearchPopover },
+  components: { ScanPatientBracelet, PatientsSearchPopover },
   icons: { SEARCH },
 
   setup: () => ({
@@ -106,7 +106,17 @@ export default {
 
       this.setLoading(false);
     },
+
+    redirectToPatientByBracelet({ patient }) {
+      this.$router.push({
+        name: PATIENT_ROUTE.name,
+        params: {
+          id: patient.id,
+        },
+      });
+    },
   },
+
   mounted() {
     this.throttleSearch = throttle(this.search, 100);
   },

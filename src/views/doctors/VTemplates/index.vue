@@ -90,8 +90,8 @@ export default {
 
     async createTemplate() {
       const action = await this.$store.dispatch(
-        'modalAndDrawer/openDrawer',
-          CreateOrEditTemplateModal
+        'modalAndDrawer/openModal',
+        CreateOrEditTemplateModal
       );
       if (action instanceof GlobalDrawerCloseAction) return;
     },

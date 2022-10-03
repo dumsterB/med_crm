@@ -12,9 +12,8 @@
       <ElFormItem
         :label="$t('Base.Patient')"
         :style="{ order: this.appointmentFieldsFlexOrder.patient }">
-        <UiModelsAutocompleteSearch
+        <PatientsSearchSelect
           v-model="appointment.patient_id"
-          :model-for-use="Patient"
           :search-query="patientsOptions.searchQuery"
           :default-item="data?.patient || patient || patientDrawer.newPatient"
           :disabled="!!patient || !!data"
@@ -149,7 +148,6 @@
 
     <CreateOrEditPatientModal
       v-model="patientDrawer.show"
-      :size="DRAWER_DEFAULT_SIZE"
       :name-or-phone="patientDrawer.nameOrPhone"
       disable-default-action
       @action="insertPatient" />

@@ -4,7 +4,7 @@
       <PatientsSearch class="doctors-header__search" />
     </div>
     <LangSelect></LangSelect>
-    <NotificationsDrawer></NotificationsDrawer>
+    <!--    <NotificationsDrawer></NotificationsDrawer>-->
 
     <RouterLink
       v-if="showActiveAppointmentPageLink"

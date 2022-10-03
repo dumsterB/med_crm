@@ -44,7 +44,7 @@ export default {
 
   methods: {
     addPatient() {
-      this.$store.dispatch('modalAndDrawer/openDrawer', {
+      this.$store.dispatch('modalAndDrawer/openModal', {
         component: CreateOrEditPatientModal,
         payload: {
           nameOrPhone: this.search,

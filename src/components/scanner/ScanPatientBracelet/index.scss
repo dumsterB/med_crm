@@ -1,0 +1,11 @@
+.scan-patient-bracelet {
+  min-width: 11em;
+
+  &_only-icon {
+    min-width: auto;
+
+    & > * {
+      margin-left: 0 !important;
+    }
+  }
+}
