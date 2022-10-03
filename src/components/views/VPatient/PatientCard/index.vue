@@ -56,7 +56,7 @@ import { User } from '@/models/User.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 import { PrinterService } from '@/services/printer.service';
 
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import CreateOrEditPatientModal from '@/components/patients/CreateOrEditPatientModal/index.vue';
 
 export default {
   name: 'VPatientPatientCard',
@@ -125,7 +125,7 @@ export default {
   methods: {
     async editPatient() {
       const action = await this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreateOrEditPatientDrawer,
+        component: CreateOrEditPatientModal,
         payload: {
           data: this.data,
         },
