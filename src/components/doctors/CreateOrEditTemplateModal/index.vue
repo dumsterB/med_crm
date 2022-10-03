@@ -1,5 +1,5 @@
 <template>
-  <ElDrawer
+  <ElDialog
     custom-class="create-or-edit-template-drawer"
     :title="data?.id ? $t('Templates.Edit') : $t('Templates.Create')"
     size="50%"
@@ -22,18 +22,18 @@
         </div>
       </ElFormItem>
     </ElForm>
-  </ElDrawer>
+  </ElDialog>
 </template>
 
 <script>
 import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model';
 import { mapState } from 'vuex';
-import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
+import {GlobalModalAction} from "@/models/client/ModalAndDrawer/GlobalModalAction";
 
 import DefaultInspectionCardBaseFormItems from '@/components/appointments/DefaultInspectionCardBaseFormItems/index.vue';
 
 export default {
-  name: 'CreateOrEditTemplateDrawer',
+  name: 'CreateOrEditTemplateModal',
   components: { DefaultInspectionCardBaseFormItems },
   emits: ['update:modelValue', 'action'],
   props: {
@@ -88,7 +88,7 @@ export default {
 
       this.$emit(
         'action',
-        new GlobalDrawerAction({
+        new GlobalModalAction({
           name: 'created',
           data: { template: data.data },
         })
@@ -102,7 +102,7 @@ export default {
 
       this.$emit(
         'action',
-        new GlobalDrawerAction({
+        new GlobalModalAction({
           name: 'created',
           data: { template: data },
         })

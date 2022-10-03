@@ -79,8 +79,8 @@ import { PAGE_SIZES } from '@/config/ui.config';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
 
-import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import CreateOrEditAppointmentModal from '@/components/appointments/CreateOrEditAppointmentModal/index.vue';
+import CreateOrEditPatientModal from '@/components/patients/CreateOrEditPatientModal/index.vue';
 
 export default {
   name: 'PatientsTable',
@@ -131,7 +131,7 @@ export default {
 
     makeAppointment(payload) {
       this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreateOrEditAppointmentDrawer,
+        component: CreateOrEditAppointmentModal,
         payload: {
           patient: payload,
         },
@@ -139,7 +139,7 @@ export default {
     },
     addPatient() {
       this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreateOrEditPatientDrawer,
+        component: CreateOrEditPatientModal,
         payload: {
           nameOrPhone: this.search,
         },
@@ -148,7 +148,7 @@ export default {
 
     addChildren(payload) {
       this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreateOrEditPatientDrawer,
+        component: CreateOrEditPatientModal,
         payload: {
           data: new Patient({ parent: payload, parent_id: payload.id }),
         },

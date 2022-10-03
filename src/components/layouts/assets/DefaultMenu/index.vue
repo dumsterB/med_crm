@@ -1,7 +1,9 @@
 <template>
   <div class="default-menu">
+    <div class="default-menu-top">
     <img class="default-menu__logo" src="@/assets/images/logo.svg" alt="logo" />
-
+      <UiIcon :icon="icons.LOGO_CIRCLE" class="default-menu__logo-сircle" />
+    </div>
     <nav class="default-menu__nav default-menu-nav">
       <slot name="nav">
         <router-link
@@ -9,7 +11,7 @@
           v-for="route in navigation"
           :key="route.path"
           :to="route.path">
-          <UiIcon :icon="route.icon" />
+          <UiIcon :icon="route.icon" class="default-menu-nav__item-icon" />
           <span>{{ route.title }}</span>
         </router-link>
       </slot>

@@ -1,0 +1,9 @@
+.scan-bracelet-and-redirect-button {
+  min-width: 10em;
+
+  &__input {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+}

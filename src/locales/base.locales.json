@@ -1,8 +1,8 @@
 {
   "ru": {
     "Base": {
-      "Absent": "Отсутствует",
       "Actions": "Действия",
+      "Absent": "Отсутствует",
       "Allergy": "Аллергия",
       "AmbulatoryCard": "Амбулаторная карта",
       "Appoint": "Назначить",
@@ -32,6 +32,7 @@
       "ForgotPassword": "Заблыи пароль?",
       "FullName": "ФИО",
       "InfectiousDiseases": "Инфекционные заболевания",
+      "InspectationCard": "Карта осмотра",
       "Inspection": "Осмотр",
       "InviteByNumber": "Пригласить по номеру",
       "Loading": "Загрузка...",
@@ -50,12 +51,15 @@
       "PleaseInput": "Пожалуйста, введите",
       "PleaseSelect": "Пожалуйста выберите",
       "Price": "Цена",
+      "Print": "Распечатать",
       "QuantityDays": "Количество дней",
       "Queue": "Очередь",
       "Reaction": "Реакция",
       "ReasonService": "Случай обслуживания",
       "SaveChanges": "Сохранить изменения",
       "Search": "Поиск",
+      "ScanBracelet": "Сканер браслета",
+      "Scanning": "Сканирование ...",
       "SelectDate": "Выберите дату",
       "Service": "Услуга",
       "Services": "Услуги",
@@ -72,13 +76,14 @@
       "Templates": "Шаблоны",
       "Time": "Время",
       "WriteText": "Напишите текст...",
-      "StatePrice": "Стоимость"
+      "StatePrice": "Стоимость",
+      "Call": "Позванить"
     }
   },
   "uz": {
     "Base": {
-      "Absent": "Mavjud emas",
       "Actions": "Harakatlar",
+      "Absent": "Mavjud emas",
       "Allergy": "Allergiya",
       "AmbulatoryCard": "Ambulatoriya kartasi",
       "Appoint": "Tayinlash",
@@ -108,6 +113,7 @@
       "ForgotPassword": "Parolni unutdingizmi?",
       "FullName": "F.I.Sh",
       "InfectiousDiseases": "Yuqumli kasalliklar",
+      "InspectationCard": "Tekshirish kartasi",
       "Inspection": "Tekshirish",
       "InviteByNumber": "Telefondan ulash",
       "Loading": "Yuklanmoqda...",
@@ -126,16 +132,18 @@
       "PleaseInput": "Iltimos, kiriting",
       "PleaseSelect": "Iltimos tanlang",
       "Price": "Narxi",
+      "Print": "chop etish",
       "QuantityDays": "Kunlar miqdori",
       "Queue": "Navbat",
       "Reaction": "Reaktsiya",
       "ReasonService": "Xizmat ishi",
       "SaveChanges": "O'zgarishlarni saqlash",
+      "ScanBracelet": "Brasleti skaneri",
+      "Scanning": "Skanerlash ...",
       "Search": "Topish",
       "SelectDate": "Sanani tanlang",
       "Service": "Xizmat",
       "Services": "Xizmatlar",
-      "SetTreatment": "Davolashni tayinlash",
       "Settings": "Sozlamalar",
       "SignUp": "Ro'yxatdan o'tish",
       "Skip": "O'tkazib yuborish",
@@ -143,12 +151,14 @@
       "Sum": "som",
       "SurgicalIntervention": "Jarrohlik aralashuvlar",
       "TableReception": "Fokuslar jadvali",
-      "TableTreatment": "Davolash jadvali",
       "Template": "Namuna",
       "Templates": "Namunalar",
       "Time": "Vaqt",
+      "SetTreatment": "Davolashni tayinlash",
+      "TableTreatment": "Davolash jadvali",
       "WriteText": "Matn yozing...",
-      "StatePrice": "Narxi"
+      "StatePrice": "Narxi",
+      "Call": "Qongiroq qilish"
     }
   }
 }

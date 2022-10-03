@@ -10,3 +10,15 @@
     }
   }
 }
+@media print {
+  .default-inspection-card {
+    &-form {
+      & > * {
+        max-width: 100%;
+      }
+      &-actions {
+        display: none !important;
+      }
+    }
+  }
+}

@@ -26,7 +26,7 @@ import { ISOStringToDateAppFormat } from '@/utils/dateAndTime.utils';
 import { Appointment } from '@/models/Appointment.model.js';
 
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
-import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
+import CreateOrEditAppointmentModal from '@/components/appointments/CreateOrEditAppointmentModal/index.vue';
 import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
 
@@ -102,7 +102,7 @@ export default {
     },
 
     createAppointment() {
-      this.$store.dispatch('modalAndDrawer/openDrawer', CreateOrEditAppointmentDrawer);
+      this.$store.dispatch('modalAndDrawer/openDrawer', CreateOrEditAppointmentModal);
     },
   },
 };

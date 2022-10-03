@@ -22,3 +22,10 @@
     }
   }
 }
+@media print {
+  .v-app-treat-card-form {
+    &-actions {
+      display: none !important;
+    }
+  }
+}

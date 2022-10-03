@@ -1,10 +1,15 @@
 <template>
-  <ElCard class="default-inspection-card" shadow="never">
+  <ElCard class="default-inspection-card printer__block printer__doc" shadow="never">
     <ElForm
       class="default-inspection-card-form"
       label-position="top"
+      id="inspection-card"
       ref="form"
       @submit.prevent="submitHandler">
+      <h1 class="printer__title default-inspection-card-form__title">
+        {{ $t('Base.InspectationCard') }}
+      </h1>
+
       <ElFormItem v-show="!readonly" :label="$t('Templates.SelectTemplate')">
         <UiModelsAutocompleteSearch
           v-model="templateId"
@@ -23,8 +28,8 @@
         <div class="default-inspection-card-form-actions">
           <slot name="actions">
             <ElButton
-              v-show="!readonly && !appointment.service_case?.disease_code_codes?.length"
               data-method="toDiagnose"
+              v-show="!readonly && !appointment.service_case?.disease_code_codes?.length"
               type="warning"
               native-type="submit"
               plain>
@@ -32,11 +37,18 @@
             </ElButton>
 
             <ElButton
-              v-show="!readonly"
               data-method="endReception"
+              v-show="!readonly"
               type="primary"
               native-type="submit">
               {{ $t('Appointments.EndReception') }}
+            </ElButton>
+
+            <ElButton v-show="readonly" text @click="print">
+              <template #icon>
+                <UiIcon :icon="icons.PRINTER" />
+              </template>
+              {{ $t('Base.Print') }}
             </ElButton>
           </slot>
         </div>
@@ -46,6 +58,7 @@
 </template>
 
 <script>
+import * as icons from '@/enums/icons.enum.js';
 import { Appointment } from '@/models/Appointment.model';
 import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model';
 import { DefaultInspectionCard } from '@/models/DefaultInspectionCard.model';
@@ -81,6 +94,9 @@ export default {
   },
 
   methods: {
+    print() {
+      window.print();
+    },
     selectTemplate(template) {
       this.inspectionCard = new DefaultInspectionCard({
         ...template,
@@ -130,6 +146,7 @@ export default {
 
   setup: () => ({
     InspectionCardTemplate,
+    icons,
   }),
 };
 </script>
