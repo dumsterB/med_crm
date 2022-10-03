@@ -1,24 +1,49 @@
 <template>
-  <UiModelsAutocompleteSearch
-    :model-value="modelValue"
-    :model-for-use="Patient"
-    v-bind="$attrs"
-    @update:model-value="$emit('update:modelValue', $event)"
-    @select="$emit('select', $event)" />
+  <div class="patients-search-select">
+    <UiModelsAutocompleteSearch
+      class="patients-search-select__component"
+      :model-value="modelValue"
+      :model-for-use="Patient"
+      :default-item="$attrs.defaultItem || scannedPatient"
+      v-bind="$attrs"
+      @update:model-value="$emit('update:modelValue', $event)"
+      @select="$emit('select', $event)" />
+
+    <ScanPatientBracelet @scan:success="scanHandler" />
+  </div>
 </template>
 
 <script>
 import { Patient } from '@/models/Patient.model';
 import UiModelsAutocompleteSearch from '@/components/ui/UiModelsAutocompleteSearch/index.vue';
+import ScanPatientBracelet from '@/components/scanner/ScanPatientBracelet/index.vue';
 
 export default {
   name: 'PatientsSearchSelect',
-  components: { UiModelsAutocompleteSearch },
+  components: { ScanPatientBracelet, UiModelsAutocompleteSearch },
   emits: ['update:modelValue', 'select'],
   props: {
     modelValue: Number,
     withScanner: Boolean,
     // + пропсы для UiModelsAutocompleteSearch
+  },
+  data() {
+    return {
+      scannedPatient: null,
+    };
+  },
+  watch: {
+    modelValue(value) {
+      this.scannedPatient = null;
+    },
+  },
+
+  methods: {
+    scanHandler({ patient }) {
+      this.scannedPatient = patient;
+      this.$emit('update:modelValue', patient.id);
+      this.$emit('select', patient);
+    },
   },
 
   setup: () => ({
@@ -26,3 +51,6 @@ export default {
   }),
 };
 </script>
+
+<style lang="scss" src="./index.scss" />
+<i18n src="./index.locales.json" />
