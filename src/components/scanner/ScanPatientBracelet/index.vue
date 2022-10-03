@@ -1,7 +1,11 @@
 <template>
-  <ElButton class="scan-patient-bracelet" type="primary" plain @click="startScan">
+  <ElButton
+    :class="['scan-patient-bracelet', { 'scan-patient-bracelet_only-icon': onlyIcon }]"
+    type="primary"
+    plain
+    @click="startScan">
     <template #icon> <UiIcon :icon="icons.SCAN" /> </template>
-    {{ text }}
+    <div v-if="!onlyIcon">{{ text }}</div>
 
     <input
       class="scan-patient-bracelet__input"
@@ -18,6 +22,9 @@ import { Patient } from '@/models/Patient.model';
 
 export default {
   name: 'ScanPatientBracelet',
+  props: {
+    onlyIcon: Boolean,
+  },
   data() {
     return {
       isScanning: false,
