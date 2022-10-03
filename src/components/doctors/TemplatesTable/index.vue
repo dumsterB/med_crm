@@ -29,7 +29,7 @@
 
 <script>
 import * as icons from '@/enums/icons.enum.js';
-import CreateOrEditTemplates from '@/components/doctors/CreateOrEditTemplateDrawer/index.vue';
+import CreateOrEditTemplates from '@/components/doctors/CreateOrEditTemplateModal/index.vue';
 import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model';
 import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 

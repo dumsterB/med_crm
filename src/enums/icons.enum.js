@@ -31,3 +31,5 @@ export const MESSAGE_LOGIN = 'MESSAGE_LOGIN';
 export const LOCK_PASSWORD = 'LOCK_PASSWORD';
 export const EYE = 'EYE';
 export const CANCEL = 'CANCEL';
+export const MALE = 'MALE';
+export const FEMALE = 'FEMALE';
