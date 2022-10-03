@@ -148,7 +148,6 @@
 
     <CreateOrEditPatientModal
       v-model="patientDrawer.show"
-      :size="DRAWER_DEFAULT_SIZE"
       :name-or-phone="patientDrawer.nameOrPhone"
       disable-default-action
       @action="insertPatient" />

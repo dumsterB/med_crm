@@ -44,7 +44,7 @@ export default {
 
   methods: {
     editTemplate(payload) {
-      this.$store.dispatch('modalAndDrawer/openDrawer', {
+      this.$store.dispatch('modalAndDrawer/openModal', {
         component: CreateOrEditTemplates,
         payload: {
           data: payload,

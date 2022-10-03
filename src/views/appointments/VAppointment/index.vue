@@ -83,7 +83,7 @@ export default {
     },
 
     async editAppointment() {
-      const action = await this.$store.dispatch('modalAndDrawer/openDrawer', {
+      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
         component: CreateOrEditAppointmentModal,
         payload: {
           data: this.appointment,

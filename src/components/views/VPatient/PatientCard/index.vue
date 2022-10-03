@@ -124,7 +124,7 @@ export default {
 
   methods: {
     async editPatient() {
-      const action = await this.$store.dispatch('modalAndDrawer/openDrawer', {
+      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
         component: CreateOrEditPatientModal,
         payload: {
           data: this.data,
