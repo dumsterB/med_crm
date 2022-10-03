@@ -144,7 +144,7 @@ export default {
     },
 
     createPatient() {
-      this.$store.dispatch('modalAndDrawer/openDrawer', CreateOrEditPatientModal);
+      this.$store.dispatch('modalAndDrawer/openModal', CreateOrEditPatientModal);
     },
   },
 };
