@@ -1,5 +1,7 @@
 import { User } from '@/models/User.model';
 import { ApiService } from '@/services/api.service';
+import { I18nService } from '@/services/i18n.service';
+import { cyrillicToEng } from '@/utils/translit.util';
 
 /**
  * @class Patient
@@ -112,12 +114,21 @@ export class Patient extends User {
    * @return {Promise<Patient|User|object>}
    */
   static async getByBraceletPayload(payload) {
-    const url = new URL(payload);
-    const token = url.searchParams.get('oneTimeToken');
+    try {
+      let text = payload;
+      const textOnCyrillic = payload.match(/[а-яА-Я]/gim);
+      if (textOnCyrillic) text = cyrillicToEng(text);
 
-    const { data } = await ApiService.get(
-      `${this.tableName}/getByOneTimeToken?oneTimeToken=${token}`
-    );
-    return data.data;
+      const url = new URL(text);
+      const token = url.searchParams.get('oneTimeToken') || url.searchParams.get('onetimetoken');
+      if (!token) throw new Error(I18nService.t('Base.InvalidQrCode'));
+
+      const { data } = await ApiService.get(
+        `${this.tableName}/getByOneTimeToken?oneTimeToken=${token}`
+      );
+      return data.data;
+    } catch (err) {
+      throw new Error(I18nService.t('Base.InvalidQrCode'));
+    }
   }
 }
