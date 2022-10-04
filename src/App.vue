@@ -16,6 +16,9 @@ import { User } from '@/models/User.model';
 
 import { RouterView } from 'vue-router';
 import { ElConfigProvider } from 'element-plus';
+import { EmitterService } from '@/services/emitter.service';
+import { API_LOGOUT_EMIT } from '@/enums/emits.enum';
+
 import SVG from '@/components/SVG.vue';
 import GlobalModalsAndDrawers from '@/components/GlobalModalsAndDrawers/index.vue';
 
@@ -42,6 +45,8 @@ export default {
   created() {
     I18nService.setLocaleFromStorage();
     this.$store.dispatch('auth/checkAndSetUserAndTokenFromClientStorage');
+
+    EmitterService.on(API_LOGOUT_EMIT, () => this.$store.dispatch('auth/logout'));
   },
 };
 </script>
