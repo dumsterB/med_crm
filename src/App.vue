@@ -13,6 +13,7 @@
 import { mapState } from 'vuex';
 import { I18nService } from '@/services/i18n.service';
 import { User } from '@/models/User.model';
+import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model';
 
 import { RouterView } from 'vue-router';
 import { ElConfigProvider } from 'element-plus';
@@ -36,9 +37,22 @@ export default {
       handler() {
         if (this.user?.role === User.enum.roles.Doctor) {
           this.$store.dispatch('user/getDataFromStorage');
+          this.getDoctorTemplates();
         }
       },
       immediate: true,
+    },
+  },
+  methods: {
+    addGlobalEventListeners() {
+      EmitterService.on(API_LOGOUT_EMIT, () => this.$store.dispatch('auth/logout'));
+    },
+    async getDoctorTemplates() {
+      const { data } = await InspectionCardTemplate.find({});
+      this.$store.dispatch('templates/setData', {
+        items: data.data,
+        total: data.data.length,
+      });
     },
   },
 
@@ -46,7 +60,7 @@ export default {
     I18nService.setLocaleFromStorage();
     this.$store.dispatch('auth/checkAndSetUserAndTokenFromClientStorage');
 
-    EmitterService.on(API_LOGOUT_EMIT, () => this.$store.dispatch('auth/logout'));
+    this.addGlobalEventListeners();
   },
 };
 </script>
