@@ -7,13 +7,16 @@ body {
   --el-input-bg-color: var(--bg-inputs-color);
 }
 .el-button--primary {
+  background: var(--button-primary-gradiend-bg);
+  border: none;
+  color: var(--bg-color);
   &.is-plain {
     --el-button-bg-color: inherit;
     --el-button-border-color: var(--primary-color);
   }
   &.is-disabled {
     --el-button-disabled-bg-color: var(--primary-disabled-color);
-    --el-button-disabled-border-color: var(--primary-disabled-color);
+    --el-button-disabled-border-color: var(--primary-disabled-color)!important;
   }
 
   &:hover {
