@@ -12,6 +12,7 @@ export const DOCTORS_QUEUE_ROUTE = {
   },
 };
 
+// TODO: удалить при необходимости
 export const DOCTORS_TEMPLATES_ROUTE = {
   name: 'DOCTORS_TEMPLATE',
   path: '/templates',

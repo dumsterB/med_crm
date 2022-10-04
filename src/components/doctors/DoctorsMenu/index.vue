@@ -12,20 +12,17 @@ import {
 } from '@/router/doctors.routes';
 import { PATIENTS_ROUTE } from '@/router/patients.routes';
 import DefaultMenu from '@/components/layouts/assets/DefaultMenu/index.vue';
-import { TIMETABLE_NAV } from '@/enums/icons.enum.js';
 
 export default {
   name: 'DoctorsMenu',
   components: { DefaultMenu },
   computed: {
     navigation() {
-      return [DASHBOARD_ROUTE, DOCTORS_QUEUE_ROUTE, PATIENTS_ROUTE, DOCTORS_TEMPLATES_ROUTE].map(
-        (route) => ({
-          path: route.path,
-          title: this.routesOptionsByRouteName[route.name].text,
-          icon: this.routesOptionsByRouteName[route.name].icon,
-        })
-      );
+      return [DASHBOARD_ROUTE, DOCTORS_QUEUE_ROUTE, PATIENTS_ROUTE].map((route) => ({
+        path: route.path,
+        title: this.routesOptionsByRouteName[route.name].text,
+        icon: this.routesOptionsByRouteName[route.name].icon,
+      }));
     },
 
     routesOptionsByRouteName() {
