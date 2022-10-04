@@ -52,8 +52,7 @@ export default {
 
       if (access_token) {
         const payload = parseJwtToken(access_token);
-        // Если осталось меньше 10 минут не логиним
-        if (payload.exp <= payload.iat + 1000 * 60 * 10) return;
+        if (payload.exp <= payload.iat) return;
 
         ApiService.setToken(access_token);
         commit('SET_USER', JSON.parse(localStorage.getItem('user')));

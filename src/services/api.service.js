@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { EmitterService } from '@/services/emitter.service';
+import { API_LOGOUT_EMIT } from '@/enums/emits.enum';
 
 const instance = axios.create({
   mode: 'no-cors',
@@ -42,7 +44,8 @@ instance.interceptors.response.use(
   },
   (err) => {
     if (err?.response?.status === 401) {
-      // store.dispatch('auth/logout');
+      // В проекте нету системы di, поэтому местами пользуемся глобальным емитером
+      EmitterService.emit(API_LOGOUT_EMIT);
     }
     if (err?.response?.status === 403) {
       // store.dispatch("auth/logout");
