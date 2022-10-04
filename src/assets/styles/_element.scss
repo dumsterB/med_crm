@@ -16,7 +16,7 @@ body {
   }
   &.is-disabled {
     --el-button-disabled-bg-color: var(--primary-disabled-color);
-    --el-button-disabled-border-color: var(--primary-disabled-color)!important;
+    --el-button-disabled-border-color: var(--primary-disabled-color);
   }
 
   &:hover {
