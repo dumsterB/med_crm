@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Store } from '@/store';
 
 const instance = axios.create({
   mode: 'no-cors',
@@ -43,7 +42,7 @@ instance.interceptors.response.use(
   },
   (err) => {
     if (err?.response?.status === 401) {
-      Store.dispatch('auth/logout');
+      // store.dispatch('auth/logout');
     }
     if (err?.response?.status === 403) {
       // store.dispatch("auth/logout");
