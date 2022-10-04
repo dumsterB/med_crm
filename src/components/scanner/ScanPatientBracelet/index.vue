@@ -10,6 +10,7 @@
     <ScanModal
       :model-value="modalIsOpen"
       :text="isLoading ? $t('Base.Loading') : null"
+      ref="scanModal"
       @scan:success="scanHandler"
       @update:model-value="updateModalModelValueHandler" />
   </ElButton>
@@ -55,9 +56,17 @@ export default {
       if (this.isLoading) return;
       this.isLoading = true;
 
-      const patient = await Patient.getByBraceletPayload(data);
-      this.$emit('scan:success', { patient });
-      this.endScan();
+      try {
+        const patient = await Patient.getByBraceletPayload(data);
+        this.$emit('scan:success', { patient });
+        this.endScan();
+      } catch (err) {
+        console.log(err);
+        this.$notify({ type: 'error', title: err?.message });
+        this.$refs.scanModal.reset();
+      }
+
+      this.isLoading = false;
     },
 
     endScan() {
