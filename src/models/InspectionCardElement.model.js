@@ -1,15 +1,15 @@
 /**
- * @class InspectionCardTemplateElement
+ * @class InspectionCardElement
  */
-export class InspectionCardTemplateElement {
+export class InspectionCardElement {
   /**
-   * @typedef {object} InspectionCardTemplateElementConstructorPayload
+   * @typedef {object} InspectionCardElementConstructorPayload
    * @property {string} [id] hash
    * @property {string} [label]
    * @property {string} type
    * @property {number|string} [order = 1]
    */
-  /** @param {InspectionCardTemplateElementConstructorPayload|object} payload */
+  /** @param {InspectionCardElementConstructorPayload|object} payload */
   constructor(payload) {
     this.id = payload?.id ?? null;
     this.label = payload?.label ?? null;

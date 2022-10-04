@@ -1,8 +1,8 @@
-import { InspectionCardTemplateElement } from '@/models/InspectionCardTemplateElement.model';
+import { InspectionCardElement } from '@/models/InspectionCardElement.model';
 
-export class InspectionCardTemplateBlock extends InspectionCardTemplateElement {
+export class InspectionCardBlock extends InspectionCardElement {
   /**
-   * @typedef {InspectionCardTemplateElementConstructorPayload|object} InspectionCardTemplateBlockConstructorPayload
+   * @typedef {InspectionCardElementConstructorPayload|object} InspectionCardBlockConstructorPayload
    * @property {string} category_id
    * @property {AnswerTypesEnum} answer_type
    * @property {Array<{label: string, value: string}>} options
@@ -28,11 +28,11 @@ export class InspectionCardTemplateBlock extends InspectionCardTemplateElement {
    * @property {Array<{x: number, y: number, value: string}>} comments
    */
 
-  /** @param {InspectionCardTemplateBlockConstructorPayload|object} [payload] */
+  /** @param {InspectionCardBlockConstructorPayload|object} [payload] */
   constructor(payload) {
     super({
       ...(payload || {}),
-      type: InspectionCardTemplateElement.enum.types.Block,
+      type: InspectionCardElement.enum.types.Block,
     });
 
     this.category_id = payload?.category_id ?? null;
