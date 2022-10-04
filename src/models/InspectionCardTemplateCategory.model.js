@@ -6,7 +6,7 @@ import { InspectionCardTemplateElement } from '@/models/InspectionCardTemplateEl
  */
 export class InspectionCardTemplateCategory extends InspectionCardTemplateElement {
   /**
-   * @typedef {InspectCardTemplateElemConstructorPayload|object} InspectionCardTemplateCategoryConstructorPayload
+   * @typedef {InspectionCardTemplateElementConstructorPayload|object} InspectionCardTemplateCategoryConstructorPayload
    */
   /** @param {InspectionCardTemplateCategoryConstructorPayload} payload */
   constructor(payload) {
