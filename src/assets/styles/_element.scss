@@ -3,14 +3,22 @@ body {
   --_el-color-primay: #409eff;
   --el-color-primary: var(--primary-color);
 }
+
 .el-input {
   --el-input-bg-color: var(--bg-inputs-color);
 }
+
 .el-button--primary {
+  background: var(--button-primary-gradiend-bg);
+  color: var(--bg-color);
+  border: none;
+
   &.is-plain {
-    --el-button-bg-color: inherit;
-    --el-button-border-color: var(--primary-color);
+    background: white;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
   }
+
   &.is-disabled {
     --el-button-disabled-bg-color: var(--primary-disabled-color);
     --el-button-disabled-border-color: var(--primary-disabled-color);
