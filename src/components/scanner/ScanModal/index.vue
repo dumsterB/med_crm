@@ -42,6 +42,12 @@ export default {
       immediate: true,
     },
   },
+  methods: {
+    reset() {
+      this.data = null;
+      this.$refs.input?.focus();
+    },
+  },
 
   setup: () => ({
     icons,
