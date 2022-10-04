@@ -19,11 +19,6 @@
           @select="selectTemplate" />
       </ElFormItem>
 
-      <DefaultInspectionCardBaseFormItems
-        v-model:data="inspectionCard"
-        :readonly="readonly"
-        @change="updateInspectionCard" />
-
       <ElFormItem>
         <div class="default-inspection-card-form-actions">
           <slot name="actions">
@@ -63,11 +58,8 @@ import { Appointment } from '@/models/Appointment.model';
 import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model';
 import { DefaultInspectionCard } from '@/models/DefaultInspectionCard.model';
 
-import DefaultInspectionCardBaseFormItems from '@/components/appointments/DefaultInspectionCardBaseFormItems/index.vue';
-
 export default {
   name: 'DefaultInspectionCard',
-  components: { DefaultInspectionCardBaseFormItems },
   emits: ['update:appointment', 'appointment:provide', 'appointment:set:diagnosis'],
   props: {
     appointment: [Appointment, Object],

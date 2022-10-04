@@ -12,7 +12,7 @@
         <ElInput v-model="template.title" :placeholder="$t('Base.WriteText')" required />
       </ElFormItem>
 
-      <DefaultInspectionCardBaseFormItems v-model:data="template" />
+      <!--      <DefaultInspectionCardBaseFormItems v-model:data="template" />-->
 
       <ElFormItem>
         <div class="create-appointment-drawer-form-actions">
@@ -28,13 +28,10 @@
 <script>
 import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model';
 import { mapState } from 'vuex';
-import {GlobalModalAction} from "@/models/client/ModalAndDrawer/GlobalModalAction";
-
-import DefaultInspectionCardBaseFormItems from '@/components/appointments/DefaultInspectionCardBaseFormItems/index.vue';
+import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
 
 export default {
   name: 'CreateOrEditTemplateModal',
-  components: { DefaultInspectionCardBaseFormItems },
   emits: ['update:modelValue', 'action'],
   props: {
     data: [InspectionCardTemplate, Object],
