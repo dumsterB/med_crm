@@ -3,9 +3,11 @@ body {
   --_el-color-primay: #409eff;
   --el-color-primary: var(--primary-color);
 }
+
 .el-input {
   --el-input-bg-color: var(--bg-inputs-color);
 }
+
 .el-button--primary {
   background: var(--button-primary-gradiend-bg);
   border: none;
