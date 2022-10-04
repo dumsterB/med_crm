@@ -7,7 +7,7 @@
       ref="form"
       @submit.prevent="submitHandler">
       <h1 class="printer__title default-inspection-card-form__title">
-        {{ $t('Base.InspectationCard') }}
+        {{ $t('Base.InspectionCard') }}
       </h1>
 
       <ElFormItem v-show="!readonly" :label="$t('Templates.SelectTemplate')">
