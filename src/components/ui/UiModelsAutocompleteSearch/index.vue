@@ -55,6 +55,7 @@
 <script>
 import * as icons from '@/enums/icons.enum.js';
 import { CRUDModel } from '@/models/CRUD.model';
+import { cloneDeep } from 'lodash';
 
 export default {
   name: 'UiModelsAutocompleteSearch',
@@ -136,7 +137,7 @@ export default {
         ? this.items.filter((elem) => idOrIds.includes(elem[this.value]))
         : this.items.find((elem) => elem[this.value] === idOrIds);
 
-      this.$emit('select', result);
+      this.$emit('select', cloneDeep(result));
     },
 
     createItem() {
