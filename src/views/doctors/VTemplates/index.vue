@@ -21,7 +21,7 @@ import { mapState } from 'vuex';
 import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model.js';
 import { compareQueriesThenLoadData } from '@/utils/router.utils';
 import { usePage, usePerPage } from '@/hooks/query';
-import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
+import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
 import LayoutDoctor from '@/components/layouts/LayoutDoctor/index.vue';
@@ -94,7 +94,7 @@ export default {
         'modalAndDrawer/openModal',
         CreateOrEditTemplateModal
       );
-      if (action instanceof GlobalDrawerCloseAction) return;
+      if (action instanceof GlobalModalCloseAction) return;
     },
   },
 };

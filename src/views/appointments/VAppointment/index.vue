@@ -17,7 +17,6 @@ import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import { User } from '@/models/User.model';
 import { Appointment } from '@/models/Appointment.model';
-import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
@@ -90,7 +89,7 @@ export default {
         },
       });
 
-      if (action instanceof GlobalDrawerCloseAction) return;
+      if (action instanceof GlobalModalCloseAction) return;
       this.appointment = action.data.appointment;
     },
 

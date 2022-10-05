@@ -31,7 +31,7 @@
 import * as icons from '@/enums/icons.enum.js';
 import CreateOrEditTemplates from '@/components/doctors/CreateOrEditTemplateModal/index.vue';
 import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model';
-import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
+import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 export default {
   name: 'TemplatesTable',
@@ -55,7 +55,7 @@ export default {
     deleteTemplate(payload) {
       try {
         const action = InspectionCardTemplate.delete(payload.id);
-        if (action instanceof GlobalDrawerCloseAction) return;
+        if (action instanceof GlobalModalCloseAction) return;
         this.$store.dispatch('templates/deleteItem', payload);
       } catch (err) {
         console.log(err);

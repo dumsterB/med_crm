@@ -5,7 +5,7 @@ import { DRAWER_DEFAULT_SIZE } from '@/config/ui.config';
 import { formatPrice } from '@/utils/price.util';
 
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
-import { GlobalDrawerAction } from '@/models/client/ModalAndDrawer/GlobalDrawerAction';
+import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
 import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 import { Appointment } from '@/models/Appointment.model';
 import { User } from '@/models/User.model';
@@ -259,7 +259,7 @@ export default {
       this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessCreated') });
       this.$emit(
         'action',
-        new GlobalDrawerAction({ name: 'created', data: { appointment: data.data } })
+        new GlobalModalAction({ name: 'created', data: { appointment: data.data } })
       );
       if (!this.disableDefaultAction) this.goToAppointment(data.data.id);
     },
@@ -273,7 +273,7 @@ export default {
       this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
       this.$emit(
         'action',
-        new GlobalDrawerAction({ name: 'edited', data: { appointment: data.data } })
+        new GlobalModalAction({ name: 'edited', data: { appointment: data.data } })
       );
 
       if (!this.disableDefaultAction) this.goToAppointment(data.data.id);
