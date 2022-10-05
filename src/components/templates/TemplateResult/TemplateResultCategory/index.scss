@@ -1,0 +1,21 @@
+.template-result-category {
+  .el-card__body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  &__blocks {
+    .el-card {
+      border: none;
+    }
+
+    .template-result-block__title {
+      font-weight: 500;
+    }
+    //padding: 0 15px;
+  }
+}
