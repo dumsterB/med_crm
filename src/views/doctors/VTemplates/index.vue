@@ -1,3 +1,4 @@
+<!-- TODO: удалить или переделать -->
 <template>
   <LayoutDoctor fixHeight>
     <LayoutContentHeader>

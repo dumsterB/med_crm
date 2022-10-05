@@ -1,5 +1,5 @@
 <template>
-  <LayoutByUserRole content-class="v-appointment-content" :loading="loading.get">
+  <LayoutByUserRole content-class="v-appointment-content" :loading="loading.get" fix-height>
     <RouterView
       v-if="appointment"
       v-model:appointment="appointment"

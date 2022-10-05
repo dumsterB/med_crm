@@ -1,0 +1,15 @@
+.template-result {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .el-card {
+    border: none;
+  }
+}
+
+@media print {
+  .template-result {
+    gap: 0;
+  }
+}

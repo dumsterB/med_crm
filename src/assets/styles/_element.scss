@@ -55,44 +55,37 @@ body {
   }
 }
 
-.el-dialog {
-  min-width: 480px;
-  border-radius: 12px;
-
-  &__header {
-    width: 100%;
-    margin-right: 0;
-    border-radius: 12px 12px 0px 0px;
-  }
-  .el-form-item__content,
-  .el-form-item__content > * {
-    width: 100%;
-  }
-  .el-form-item__label {
-    color: var(--lable-color);
-  }
-  .el-input {
-    --el-input-bg-color: var(--bg-color) !important;
-  }
-  &__body,
-  &__footer {
-    background-color: var(--bg-container-color);
-  }
-}
-
 .el-overlay-dialog {
   display: flex;
   justify-content: center;
   align-items: center;
 
   .el-dialog {
+    min-width: 480px;
     margin: 0;
+    border-radius: 12px;
+
+    &__header {
+      width: 100%;
+      margin-right: 0;
+      border-radius: 12px 12px 0px 0px;
+    }
+    .el-form-item__content,
+    .el-form-item__content > * {
+      width: 100%;
+    }
+    .el-form-item__label {
+      color: var(--lable-color);
+    }
+    &__body,
+    &__footer {
+      background-color: var(--bg-container-color);
+    }
   }
 }
 .el-drawer {
   min-width: 320px !important;
 }
-
 .el-tag {
   --el-color-primary: var(--_el-color-primay);
 }
@@ -102,25 +95,33 @@ body {
     align-items: center;
   }
 }
+// input
 .el-checkbox__input.is-checked {
   .el-checkbox__inner {
     background-color: var(--primary-color);
   }
 }
+// radio
 .el-radio__input.is-checked {
   .el-radio__inner {
     background-color: var(--primary-color);
   }
 }
+// switch
 .el-switch--large.is-checked .el-switch__core {
   .el-switch__action {
     background-color: var(--bg-color);
   }
 }
-
 .el-switch--large .el-switch__core {
   background: #ecfaf8;
   .el-switch__action {
+    top: 0;
     background-color: var(--primary-color);
   }
+}
+
+// card
+.el-card {
+  --el-card-border-radius: 8px;
 }

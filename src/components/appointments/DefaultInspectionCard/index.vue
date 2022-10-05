@@ -6,25 +6,28 @@
       id="inspection-card"
       ref="form"
       @submit.prevent="submitHandler">
-      <h1 class="printer__title default-inspection-card-form__title">
-        {{ $t('Base.InspectationCard') }}
-      </h1>
+      <div class="default-inspection-card-form__content">
+        <h1 class="printer__title default-inspection-card-form__title">
+          {{ $t('Base.InspectionCard') }}
+        </h1>
 
-      <ElFormItem v-show="!readonly" :label="$t('Templates.SelectTemplate')">
-        <UiModelsAutocompleteSearch
-          v-model="templateId"
-          label="title"
-          :model-for-use="InspectionCardTemplate"
-          :disabled="readonly"
-          @select="selectTemplate" />
-      </ElFormItem>
+        <ElFormItem v-show="!readonly" :label="$t('Templates.SelectTemplate')">
+          <UiModelsAutocompleteSearch
+            v-model="templateId"
+            label="title"
+            :model-for-use="InspectionCardTemplate"
+            :disabled="readonly"
+            @select="selectTemplate" />
+        </ElFormItem>
 
-      <DefaultInspectionCardBaseFormItems
-        v-model:data="inspectionCard"
-        :readonly="readonly"
-        @change="updateInspectionCard" />
+        <TemplateResult
+          class="default-inspection-card-form__template-result"
+          v-model="inspectionCard.basic_data"
+          :readonly="readonly"
+          @change="updateInspectionCard" />
+      </div>
 
-      <ElFormItem>
+      <ElFormItem class="default-inspection-card-form__actions">
         <div class="default-inspection-card-form-actions">
           <slot name="actions">
             <ElButton
@@ -62,12 +65,11 @@ import * as icons from '@/enums/icons.enum.js';
 import { Appointment } from '@/models/Appointment.model';
 import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model';
 import { DefaultInspectionCard } from '@/models/DefaultInspectionCard.model';
-
-import DefaultInspectionCardBaseFormItems from '@/components/appointments/DefaultInspectionCardBaseFormItems/index.vue';
+import TemplateResult from '@/components/templates/TemplateResult/index.vue';
 
 export default {
   name: 'DefaultInspectionCard',
-  components: { DefaultInspectionCardBaseFormItems },
+  components: { TemplateResult },
   emits: ['update:appointment', 'appointment:provide', 'appointment:set:diagnosis'],
   props: {
     appointment: [Appointment, Object],
@@ -97,13 +99,14 @@ export default {
     print() {
       window.print();
     },
+    /** @param {InspectionCardTemplate} template */
     selectTemplate(template) {
       this.inspectionCard = new DefaultInspectionCard({
-        ...template,
-
         id: null,
         user_id: this.appointment.patient_id,
         appointment_id: this.appointment.id,
+
+        basic_data: template.basic_data,
       });
       this.updateInspectionCard();
     },
