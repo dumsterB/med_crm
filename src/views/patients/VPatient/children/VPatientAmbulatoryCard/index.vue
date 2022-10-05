@@ -18,6 +18,7 @@
     <AmbulatoryCard
       class="v-patient-ambulatory__card"
       :patient="patient"
+      :treatments="treatments"
       @update:patient="updatePatientFromAmbulatoryCard" />
   </div>
 </template>
@@ -37,6 +38,8 @@ export default {
     patient: [Patient, Object],
     /** @param {Array<Appointment|object>} appointments */
     appointments: Array,
+    /** @param {Array<Appointment|object>} treatments */
+    treatments:Array,
     /** @param {{profile: boolean, appointment: boolean}} loading */
     loading: Object,
   },

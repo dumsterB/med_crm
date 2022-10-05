@@ -30,7 +30,6 @@
       <RouterLink v-if="permissions.ambulatoryCard" :to="ambulatoryCardPageLink">
         <ElButton type="primary"> {{ $t('Base.AmbulatoryCard') }}</ElButton>
       </RouterLink>
-
       <ElButton v-if="permissions.editUser" type="primary" @click="editPatient">
         {{ $t('Base.Edit') }}
       </ElButton>
@@ -103,7 +102,7 @@ export default {
     ambulatoryCardPageLink() {
       return insertRouteParams({
         path: PATIENT_ROUTE.childrenMap.PATIENT_ROUTE_AMBULATORY_CARD._fullPath,
-        params: { id: this.data.id },
+        params: { id: this.data.id, },
       });
     },
   },
