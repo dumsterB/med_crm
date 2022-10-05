@@ -2,11 +2,14 @@
   <div class="ui-gender-select">
     <div
       v-for="gender of genders"
-      :key="gender"
-      :class="[gender.active === true ? 'ui-gender-select-active' : 'ui-gender-select-item']"
-      @click="genderHandler(gender)">
-      <UiIcon :icon="gender.value == 'man' ? icons.MALE : icons.FEMALE" />
-      {{ gender.label }}
+      :key="gender.value"
+      :class="[
+        'ui-gender-select-item',
+        { 'ui-gender-select-item_active': modelValue === gender.value },
+      ]"
+      @click="$emit('update:modelValue', gender.value)">
+      <UiIcon class="ui-gender-select-item__icon" :icon="gender.icon" />
+      <div class="ui-gender-select-item__label">{{ gender.label }}</div>
     </div>
   </div>
 </template>
@@ -20,28 +23,22 @@ export default {
   props: {
     modelValue: String,
   },
-  data() {
-    return {
-      genders: [],
-    };
-  },
-  methods: {
-    genderHandler(gender) {
-      this.genders.map((ell) => (ell.active = false));
-      gender.active = !gender.active;
-      this.$emit('update:modelValue', gender.value)
+  computed: {
+    genders() {
+      return Object.keys(User.enum.genders).map((key) => ({
+        label: this.$t(`User.Genders.${User.enum.genders[key]}`),
+        value: User.enum.genders[key],
+        icon: this.iconsByGender[User.enum.genders[key]],
+      }));
+    },
+
+    iconsByGender() {
+      return {
+        [User.enum.genders.MAN]: icons.MALE,
+        [User.enum.genders.Woman]: icons.FEMALE,
+      };
     },
   },
-  mounted() {
-    this.genders = Object.keys(User.enum.genders).map((key) => ({
-      label: this.$t(`User.Genders.${User.enum.genders[key]}`),
-      value: User.enum.genders[key],
-      active: false,
-    }));
-  },
-  setup: () => ({
-    icons,
-  }),
 };
 </script>
 
