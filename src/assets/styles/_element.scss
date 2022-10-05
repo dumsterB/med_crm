@@ -63,13 +63,14 @@ body {
   .el-form-item__label {
     color: var(--lable-color);
   }
-  .el-input {
-    --el-input-bg-color: var(--bg-color) !important;
-  }
   &__body,
   &__footer {
     background-color: var(--bg-container-color);
   }
+}
+
+.el-input {
+  --el-input-bg-color: var(--bg-color) !important;
 }
 
 .el-overlay-dialog {
