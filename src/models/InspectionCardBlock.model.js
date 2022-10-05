@@ -49,6 +49,11 @@ export class InspectionCardBlock extends InspectionCardElement {
       enable_custom_answer: payload?.meta?.enable_custom_answer ?? false,
       enable_comments: payload?.meta?.enable_comments ?? false,
     };
+
+    this.answer = {
+      value: payload?.answer?.value ?? null,
+      isCustom: payload?.answer?.isCustom ?? null,
+    };
   }
 
   static enum = {
