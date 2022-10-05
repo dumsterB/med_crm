@@ -9,12 +9,14 @@ body {
 }
 
 .el-button--primary {
-  background: var(--button-primary-gradiend-bg);
-  color: var(--bg-color);
-  border: none;
+  &:not(.is-plain),
+  &:not(.is-text) {
+    background: var(--button-primary-gradiend-bg);
+    border: none;
+  }
 
   &.is-plain {
-    background: white;
+    background: inherit;
     color: var(--primary-color);
     border: 1px solid var(--primary-color);
   }
