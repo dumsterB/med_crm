@@ -13,6 +13,7 @@ export class InspectionCardTemplate extends DefaultInspectionCard {
    * @property {string} title
    * @property {number} doctor_id
    * @property {Doctor} doctor
+   * @property {Array<InspectionCardCategory|InspectionCardBlock|object>} basic_data
    */
   /** @param {InspectionCardTemplateConstructorPayload|object} [payload] */
   constructor(payload) {
@@ -21,5 +22,6 @@ export class InspectionCardTemplate extends DefaultInspectionCard {
     this.title = payload?.title ?? '';
     this.doctor_id = payload?.doctor_id ?? null;
     this.doctor = payload?.doctor ?? null;
+    this.basic_data = payload?.basic_data ?? [];
   }
 }
