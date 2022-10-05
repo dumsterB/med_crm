@@ -56,6 +56,18 @@ export default {
       },
       immediate: true,
     },
+
+    gender: {
+      handler(value) {
+        this.avatar = {
+          url: AvatarService.getRandomAvatarUrl({
+            gender: value || User.enum.genders.MAN,
+          }),
+          bg: AvatarService.getRandomAvatarBg(),
+        };
+      },
+      immediate: true,
+    },
   },
 
   methods: {
@@ -66,13 +78,6 @@ export default {
       this.loading = false;
       this.error = true;
     },
-  },
-
-  mounted() {
-    this.avatar.url = AvatarService.getRandomAvatarUrl({
-      gender: this.gender || User.enum.genders.MAN,
-    });
-    this.avatar.bg = AvatarService.getRandomAvatarBg();
   },
 };
 </script>
