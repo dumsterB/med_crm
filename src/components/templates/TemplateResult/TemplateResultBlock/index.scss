@@ -1,0 +1,11 @@
+.template-result-block {
+  .el-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  &__title {
+    font-weight: bold;
+  }
+}
