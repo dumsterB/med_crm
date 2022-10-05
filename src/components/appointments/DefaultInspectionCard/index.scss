@@ -1,15 +1,45 @@
 .default-inspection-card {
+  flex: 1;
+  overflow-y: hidden;
+
+  .el-card__body {
+    height: 100%;
+  }
+
   &-form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+
     & > * {
       max-width: 500px;
     }
 
+    &__content {
+      flex: 1;
+    }
+
+    &__actions {
+      position: sticky;
+      position: -webkit-sticky;
+      bottom: 0px;
+      width: 100%;
+      margin-bottom: 0;
+      z-index: 999;
+      //margin: auto 0 0;
+    }
     &-actions {
       display: flex;
       gap: 10px;
     }
   }
 }
+
+.test {
+  height: 15000px;
+}
+
 @media print {
   .default-inspection-card {
     &-form {

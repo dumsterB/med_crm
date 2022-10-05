@@ -6,20 +6,22 @@
       id="inspection-card"
       ref="form"
       @submit.prevent="submitHandler">
-      <h1 class="printer__title default-inspection-card-form__title">
-        {{ $t('Base.InspectionCard') }}
-      </h1>
+      <div class="default-inspection-card-form__content">
+        <h1 class="printer__title default-inspection-card-form__title">
+          {{ $t('Base.InspectionCard') }}
+        </h1>
 
-      <ElFormItem v-show="!readonly" :label="$t('Templates.SelectTemplate')">
-        <UiModelsAutocompleteSearch
-          v-model="templateId"
-          label="title"
-          :model-for-use="InspectionCardTemplate"
-          :disabled="readonly"
-          @select="selectTemplate" />
-      </ElFormItem>
+        <ElFormItem v-show="!readonly" :label="$t('Templates.SelectTemplate')">
+          <UiModelsAutocompleteSearch
+            v-model="templateId"
+            label="title"
+            :model-for-use="InspectionCardTemplate"
+            :disabled="readonly"
+            @select="selectTemplate" />
+        </ElFormItem>
+      </div>
 
-      <ElFormItem>
+      <ElFormItem class="default-inspection-card-form__actions">
         <div class="default-inspection-card-form-actions">
           <slot name="actions">
             <ElButton
