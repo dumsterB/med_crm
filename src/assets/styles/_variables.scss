@@ -16,7 +16,7 @@ body {
   --bg-color: #ffffff;
   --bg-secondary-color: #fcfcfc;
   --bg-container-color: #f6f9f9;
-  --bg-inputs-color: #f3f7f6;
+  --bg-inputs-color: var(--bg-color);
 
   --border-radius-small: 4px;
   --border-radius-medium: 8px;
