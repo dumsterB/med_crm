@@ -1,6 +1,8 @@
 .default-inspection-card {
   flex: 1;
   overflow-y: hidden;
+  background-color: inherit;
+  border: none;
 
   .el-card__body {
     height: 100%;
@@ -10,14 +12,14 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    padding-right: 6px;
     overflow-y: auto;
-
-    & > * {
-      max-width: 500px;
-    }
 
     &__content {
       flex: 1;
+    }
+    &__template-result {
+      margin: 0 0 2px;
     }
 
     &__actions {
@@ -26,8 +28,10 @@
       bottom: 0px;
       width: 100%;
       margin-bottom: 0;
+      padding: 10px;
+      background-color: var(--el-card-bg-color);
+      border-top: 0.6px solid var(--el-card-border-color);
       z-index: 999;
-      //margin: auto 0 0;
     }
     &-actions {
       display: flex;

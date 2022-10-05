@@ -19,6 +19,12 @@
             :disabled="readonly"
             @select="selectTemplate" />
         </ElFormItem>
+
+        <TemplateResult
+          class="default-inspection-card-form__template-result"
+          v-model="inspectionCard.basic_data"
+          :editable="!readonly"
+          @change="updateInspectionCard" />
       </div>
 
       <ElFormItem class="default-inspection-card-form__actions">
@@ -59,9 +65,11 @@ import * as icons from '@/enums/icons.enum.js';
 import { Appointment } from '@/models/Appointment.model';
 import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model';
 import { DefaultInspectionCard } from '@/models/DefaultInspectionCard.model';
+import TemplateResult from '@/components/templates/TemplateResult/index.vue';
 
 export default {
   name: 'DefaultInspectionCard',
+  components: { TemplateResult },
   emits: ['update:appointment', 'appointment:provide', 'appointment:set:diagnosis'],
   props: {
     appointment: [Appointment, Object],
@@ -91,13 +99,14 @@ export default {
     print() {
       window.print();
     },
+    /** @param {InspectionCardTemplate} template */
     selectTemplate(template) {
       this.inspectionCard = new DefaultInspectionCard({
-        ...template,
-
         id: null,
         user_id: this.appointment.patient_id,
         appointment_id: this.appointment.id,
+
+        basic_data: template.basic_data,
       });
       this.updateInspectionCard();
     },
