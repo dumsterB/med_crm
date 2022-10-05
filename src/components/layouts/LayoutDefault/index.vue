@@ -6,12 +6,12 @@
 
     <ElContainer
       :class="[
-        'layout-default__main',
+        'layout-default__main ',
         { 'layout-default__main_fix-height': fixHeight },
         mainClass,
       ]">
       <ElHeader class="layout-default__header layout-default__el-header">
-        <slot name="header"> </slot>
+       <slot name="header"> </slot>
       </ElHeader>
 
       <ElMain :class="['layout-default__content', contentClass]" v-loading="loading">

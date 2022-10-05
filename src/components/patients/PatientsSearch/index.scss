@@ -1,12 +1,12 @@
 .patients-search {
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
   &__form {
-    .el-input {
-      border-radius: var(--border-radius-large) !important;
-    }
+    flex: 1;
   }
-
   &__popover {
     position: absolute;
     bottom: 0;
@@ -14,5 +14,9 @@
     right: 0;
 
     transform: translateY(calc(100% + 10px));
+  }
+
+  .el-input__wrapper {
+    background-color: white;
   }
 }

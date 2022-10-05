@@ -7,6 +7,7 @@ import * as icons from '@/enums/icons.enum.js';
 import { PATIENTS_ROUTE } from '@/router/patients.routes';
 import { DASHBOARD_ROUTE } from '@/router/dashboard.routes';
 import { APPOINTMENTS_ROUTE } from '@/router/appointments.routes';
+import { CASH_ROUTE } from '@/router/cash.routes';
 import DefaultMenu from '@/components/layouts/assets/DefaultMenu/index.vue';
 
 export default {
@@ -14,7 +15,7 @@ export default {
   components: { DefaultMenu },
   computed: {
     navigation() {
-      return [DASHBOARD_ROUTE, PATIENTS_ROUTE, APPOINTMENTS_ROUTE].map((route) => ({
+      return [DASHBOARD_ROUTE, PATIENTS_ROUTE, APPOINTMENTS_ROUTE, CASH_ROUTE].map((route) => ({
         path: route.path,
         title: this.routesOptionsByRouteName[route.name].text,
         icon: this.routesOptionsByRouteName[route.name].icon,
@@ -34,6 +35,10 @@ export default {
         [APPOINTMENTS_ROUTE.name]: {
           icon: icons.NOTE,
           text: this.$t('Views.Appointments.Title'),
+        },
+        [CASH_ROUTE.name]: {
+          icon: icons.WALLET_OUTLINE,
+          text: this.$t('Base.CashRegister'),
         },
       };
     },

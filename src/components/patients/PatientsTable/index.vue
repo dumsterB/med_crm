@@ -79,17 +79,17 @@ import { PAGE_SIZES } from '@/config/ui.config';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
 
-import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import CreateOrEditAppointmentModal from '@/components/appointments/CreateOrEditAppointmentModal/index.vue';
+import CreateOrEditPatientModal from '@/components/patients/CreateOrEditPatientModal/index.vue';
 
 export default {
   name: 'PatientsTable',
   emits: ['update:perPage', 'update:page'],
   props: {
-    /**
-     * @param { Array<Patient|object> } items
-     */
     loading: Boolean,
+    /**
+     * @property { Array<Patient|object> } items
+     */
     items: Array,
     page: Number,
     perPage: Number,
@@ -130,16 +130,16 @@ export default {
     },
 
     makeAppointment(payload) {
-      this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreateOrEditAppointmentDrawer,
+      this.$store.dispatch('modalAndDrawer/openModal', {
+        component: CreateOrEditAppointmentModal,
         payload: {
           patient: payload,
         },
       });
     },
     addPatient() {
-      this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreateOrEditPatientDrawer,
+      this.$store.dispatch('modalAndDrawer/openModal', {
+        component: CreateOrEditPatientModal,
         payload: {
           nameOrPhone: this.search,
         },
@@ -147,8 +147,8 @@ export default {
     },
 
     addChildren(payload) {
-      this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreateOrEditPatientDrawer,
+      this.$store.dispatch('modalAndDrawer/openModal', {
+        component: CreateOrEditPatientModal,
         payload: {
           data: new Patient({ parent: payload, parent_id: payload.id }),
         },

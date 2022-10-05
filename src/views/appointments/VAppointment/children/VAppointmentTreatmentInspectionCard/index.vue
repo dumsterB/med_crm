@@ -17,8 +17,14 @@
       </ElPageHeader>
     </LayoutContentHeader>
 
-    <ElCard shadow="never">
-      <ElForm class="v-app-treat-card-form" label-position="top" @submit.prevent="submitHandler">
+    <ElCard class="printer__block printer__doc" shadow="never">
+      <ElForm
+        class="v-app-treat-card-form"
+        id="treatments"
+        label-position="top"
+        @submit.prevent="submitHandler">
+        <h1 class="printer__title">{{ $t('Title') }}</h1>
+
         <ElFormItem :label="$t('Appointments.InspectionCard.Сomplaints')">
           <ElInput
             v-model="inspectionCard.complaints"
@@ -55,12 +61,19 @@
             {{ $t('Appointments.EndReception') }}
           </ElButton>
         </div>
+        <ElButton text @click="callPrint" class="v-app-treat-card-form-actions">
+          <template #icon>
+            <UiIcon :icon="icons.PRINTER" />
+          </template>
+          {{ $t('Base.Print') }}
+        </ElButton>
       </ElForm>
     </ElCard>
   </div>
 </template>
 
 <script>
+import * as icons from '@/enums/icons.enum.js';
 import { insertRouteParams } from '@/utils/router.utils';
 import { Appointment } from '@/models/Appointment.model';
 import { TreatmentInspectionCard } from '@/models/TreatmentInspectionCard.model';
@@ -127,6 +140,22 @@ export default {
   },
 
   methods: {
+    callPrint() {
+      const modal = document.getElementById('treatments');
+      const cloned = modal.cloneNode(true);
+      let section = document.getElementById('print');
+
+      if (!section) {
+        section = document.createElement('div');
+        section.id = 'print';
+        document.body.appendChild(section);
+      }
+
+      section.innerHTML = '';
+      section.appendChild(cloned);
+      window.print();
+      document.getElementById('print').remove();
+    },
     goToAppointment() {
       this.$router.push({
         name: APPOINTMENT_ROUTE.name,
@@ -189,6 +218,9 @@ export default {
       this.$emit('appointment:provide');
     },
   },
+  setup: () => ({
+    icons,
+  }),
 };
 </script>
 

@@ -1,6 +1,5 @@
 <template>
   <LayoutAuth content-class="v-forgot-password">
-    <img class="v-forgot-password__image" src="@/assets/images/forgot-password.png" alt="image" />
     <ForgotPassword class="v-forgot-password__content" @action:prev="prevHandler" />
   </LayoutAuth>
 </template>

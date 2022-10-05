@@ -24,7 +24,7 @@ import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDr
 
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
 import LayoutDoctor from '@/components/layouts/LayoutDoctor/index.vue';
-import CreateOrEditTemplateDrawer from '@/components/doctors/CreateOrEditTemplateDrawer/index.vue';
+import CreateOrEditTemplateModal from '@/components/doctors/CreateOrEditTemplateModal/index.vue';
 import TemplatesTable from '@/components/doctors/TemplatesTable/index.vue';
 
 export default {
@@ -90,8 +90,8 @@ export default {
 
     async createTemplate() {
       const action = await this.$store.dispatch(
-        'modalAndDrawer/openDrawer',
-        CreateOrEditTemplateDrawer
+        'modalAndDrawer/openModal',
+        CreateOrEditTemplateModal
       );
       if (action instanceof GlobalDrawerCloseAction) return;
     },
