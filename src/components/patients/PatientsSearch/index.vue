@@ -1,7 +1,7 @@
 <template>
   <div class="patients-search">
     <form class="patients-search__form" @submit.prevent="throttleSearch">
-      <ElInput v-model="queryWord.value" :placeholder="$t('InputLabel')" />
+      <ElInput  v-model="queryWord.value" :placeholder="$t('InputLabel')" />
     </form>
     <ScanPatientBracelet @scan:success="redirectToPatientByBracelet" />
 

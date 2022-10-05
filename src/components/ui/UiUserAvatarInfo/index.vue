@@ -28,6 +28,7 @@
       round>
       {{ $t('Patients.HasTreatment') }}
     </ElTag>
+
   </div>
 </template>
 

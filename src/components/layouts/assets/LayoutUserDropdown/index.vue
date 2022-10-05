@@ -1,5 +1,5 @@
 <template>
-  <UiUserAvatarInfo :user="user" secondary-field-key="email" />
+  <UiUserAvatarInfo class="layout-user-dropdown" :user="user" secondary-field-key="email" />
   <!--  <ElPopover class="layout-user-dropdown" trigger="click" placement="bottom" width="300px">
     <template #reference>
       <div class="layout-user-dropdown__reference layout-user-dropdown-reference">
