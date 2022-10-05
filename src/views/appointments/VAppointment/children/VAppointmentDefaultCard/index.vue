@@ -2,7 +2,10 @@
   <ElCard class="appointment-card" shadow="never" v-bind="$attrs">
     <template #header>
       <router-link class="appointment-card__header appointment-card-header" :to="patientPageLink">
-        <UiAvatar class="appointment-card-header__avatar" size="super-large" />
+        <UiAvatar
+          class="appointment-card-header__avatar"
+          size="super-large"
+          :gender="appointment.patient?.gender" />
 
         <div class="appointment-card-header__user appointment-card-header-user">
           <div class="appointment-card-header-user__name">{{ appointment.patient?.name }}</div>
