@@ -95,29 +95,33 @@ body {
     align-items: center;
   }
 }
+// input
 .el-checkbox__input.is-checked {
   .el-checkbox__inner {
     background-color: var(--primary-color);
   }
 }
+// radio
 .el-radio__input.is-checked {
   .el-radio__inner {
     background-color: var(--primary-color);
   }
 }
+// switch
 .el-switch--large.is-checked .el-switch__core {
   .el-switch__action {
     background-color: var(--bg-color);
   }
 }
-
 .el-switch--large .el-switch__core {
   background: #ecfaf8;
   .el-switch__action {
+    top: 0;
     background-color: var(--primary-color);
   }
 }
 
+// card
 .el-card {
   --el-card-border-radius: 8px;
 }
