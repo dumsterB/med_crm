@@ -83,6 +83,15 @@ body {
     background-color: var(--primary-color);
   }
 }
-.el-switch__core{
-  background: var(--primary-hover-color);
+.el-switch--large.is-checked .el-switch__core {
+  .el-switch__action {
+    background-color: var(--bg-color);
+  }
+}
+
+.el-switch--large .el-switch__core {
+  background: #ecfaf8;
+  .el-switch__action {
+    background-color: var(--primary-color);
+  }
 }
