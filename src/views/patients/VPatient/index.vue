@@ -20,7 +20,6 @@
 import { mapState } from 'vuex';
 import { Patient } from '@/models/Patient.model';
 import { Appointment } from '@/models/Appointment.model';
-import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 import { Treatment } from '@/models/Treatment.model';
 
@@ -134,7 +133,7 @@ export default {
         payload: { data: this.patient },
       });
 
-      if (action instanceof GlobalDrawerCloseAction) return;
+      if (action instanceof GlobalModalCloseAction) return;
       this.patient = action.data.patient;
     },
 

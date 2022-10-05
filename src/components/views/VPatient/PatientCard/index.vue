@@ -53,8 +53,8 @@ import { insertRouteParams } from '@/utils/router.utils';
 import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
-import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 import { PrinterService } from '@/services/printer.service';
+import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 import CreateOrEditPatientModal from '@/components/patients/CreateOrEditPatientModal/index.vue';
 
@@ -131,7 +131,7 @@ export default {
         },
       });
 
-      if (action instanceof GlobalDrawerCloseAction) return;
+      if (action instanceof GlobalModalCloseAction) return;
       this.$emit('update:data', action.data.patient);
     },
 

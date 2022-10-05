@@ -17,8 +17,8 @@
 <script>
 import { Doctor } from '@/models/Doctor.model';
 import { Patient } from '@/models/Patient.model';
-import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
+import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 import CreateOrEditAppointmentModal from '@/components/appointments/CreateOrEditAppointmentModal/index.vue';
 
@@ -49,7 +49,7 @@ export default {
           },
         },
       });
-      if (action instanceof GlobalDrawerCloseAction) return;
+      if (action instanceof GlobalModalCloseAction) return;
 
       this.$emit(
         'action',
