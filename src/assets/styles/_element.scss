@@ -102,3 +102,25 @@ body {
     align-items: center;
   }
 }
+.el-checkbox__input.is-checked {
+  .el-checkbox__inner {
+    background-color: var(--primary-color);
+  }
+}
+.el-radio__input.is-checked {
+  .el-radio__inner {
+    background-color: var(--primary-color);
+  }
+}
+.el-switch--large.is-checked .el-switch__core {
+  .el-switch__action {
+    background-color: var(--bg-color);
+  }
+}
+
+.el-switch--large .el-switch__core {
+  background: #ecfaf8;
+  .el-switch__action {
+    background-color: var(--primary-color);
+  }
+}
