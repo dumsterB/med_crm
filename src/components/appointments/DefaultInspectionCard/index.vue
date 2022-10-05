@@ -23,7 +23,7 @@
         <TemplateResult
           class="default-inspection-card-form__template-result"
           v-model="inspectionCard.basic_data"
-          :editable="!readonly"
+          :readonly="readonly"
           @change="updateInspectionCard" />
       </div>
 

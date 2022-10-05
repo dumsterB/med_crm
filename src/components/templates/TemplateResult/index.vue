@@ -6,6 +6,7 @@
         class="template-result__category"
         :category="item"
         :blocks="item.blocks"
+        :readonly="readonly"
         @update:block="updateBlock"
         @change="$emit('change')" />
 
@@ -13,6 +14,7 @@
         v-if="item.type === InspectionCardElement.enum.types.Block"
         class="template-result__block"
         :block="item"
+        :readonly="readonly"
         @update:block="updateBlock"
         @change="$emit('change')" />
     </template>
@@ -31,7 +33,7 @@ export default {
   props: {
     /** @type {Array<InspectionCardCategory|InspectionCardBlock|object>} modelValue */
     modelValue: [Array],
-    editable: Boolean,
+    readonly: Boolean,
   },
 
   computed: {

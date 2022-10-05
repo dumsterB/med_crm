@@ -7,3 +7,9 @@
     border: none;
   }
 }
+
+@media print {
+  .template-result {
+    gap: 0;
+  }
+}

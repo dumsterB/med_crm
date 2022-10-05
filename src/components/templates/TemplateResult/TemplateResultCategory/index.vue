@@ -6,6 +6,7 @@
         v-for="block in blocks"
         :key="block.id"
         :block="block"
+        :readonly="readonly"
         @update:block="$emit('update:block', $event)"
         @change="$emit('change')" />
     </div>
@@ -24,7 +25,7 @@ export default {
     category: [InspectionCardCategory, Object],
     /** @type {Array<InspectionCardBlock|object>} blocks */
     blocks: Array,
-    editable: Boolean,
+    readonly: Boolean,
   },
 };
 </script>

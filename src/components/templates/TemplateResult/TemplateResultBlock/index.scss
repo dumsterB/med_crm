@@ -2,10 +2,15 @@
   .el-card__body {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
   }
 
   &__title {
     font-weight: bold;
+  }
+
+  .el-input,
+  .el-textarea {
+    max-width: 600px;
   }
 }
