@@ -6,18 +6,13 @@
   &__search {
     width: 500px;
   }
-  &-left-content{
-    margin-right: auto;
+  &-left-content {
     display: flex;
     gap: 20px;
+    margin-right: auto;
   }
-  &-dropdown{
+  &-dropdown {
     display: flex;
     gap: 15px;
-  }
-  &__divider{
-    border: 1px solid #E5E7EC;
-    transform: rotate(90deg);
-    width: 25px;
   }
 }
