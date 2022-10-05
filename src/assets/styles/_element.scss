@@ -47,45 +47,41 @@ body {
   }
 }
 
-.el-dialog {
-  min-width: 480px;
-  border-radius: 12px;
-
-  &__header {
-    width: 100%;
-    margin-right: 0;
-    border-radius: 12px 12px 0px 0px;
-  }
-  .el-form-item__content,
-  .el-form-item__content > * {
-    width: 100%;
-  }
-  .el-form-item__label {
-    color: var(--lable-color);
-  }
-  &__body,
-  &__footer {
-    background-color: var(--bg-container-color);
-  }
-}
-
-.el-input {
-  --el-input-bg-color: var(--bg-color) !important;
-}
-
 .el-overlay-dialog {
   display: flex;
   justify-content: center;
   align-items: center;
 
   .el-dialog {
+    min-width: 480px;
     margin: 0;
+    border-radius: 12px;
+
+    &__header {
+      width: 100%;
+      margin-right: 0;
+      border-radius: 12px 12px 0px 0px;
+    }
+    .el-form-item__content,
+    .el-form-item__content > * {
+      width: 100%;
+    }
+    .el-form-item__label {
+      color: var(--lable-color);
+    }
+    &__body,
+    &__footer {
+      background-color: var(--bg-container-color);
+    }
   }
 }
 .el-drawer {
   min-width: 320px !important;
 }
 
+.el-input {
+  --el-input-bg-color: var(--bg-color) !important;
+}
 .el-tag {
   --el-color-primary: var(--_el-color-primay);
 }
