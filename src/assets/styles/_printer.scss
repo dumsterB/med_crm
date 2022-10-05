@@ -52,6 +52,14 @@
   }
   .el-input {
     --el-input-bg-color: transparent;
+    --el-input-border: none;
+    --el-input-border-color: red;
+
+    &,
+    & * {
+      border: none !important;
+      outline: none !important;
+    }
   }
   .el-form-item__label {
     font-weight: 700;
@@ -64,5 +72,16 @@
     box-shadow: none !important;
     outline: none !important;
     resize: none;
+  }
+
+  .el-checkbox {
+    display: none;
+
+    &__input {
+      display: none;
+    }
+    &.is-checked {
+      display: flex;
+    }
   }
 }
