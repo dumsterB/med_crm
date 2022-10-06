@@ -1,4 +1,6 @@
 .ambulatory {
+  gap: 20px;
+  display: grid;
   .ambulatory-patient-card {
     display: flex;
     & > * {
@@ -33,7 +35,6 @@
     }
   }
   .ambulatory-card {
-    margin-top: 10px;
     & > * {
       width: 100%;
       max-width: 800px;

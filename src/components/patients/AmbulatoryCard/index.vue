@@ -112,10 +112,15 @@
       </ElForm>
 
       <ElDivider />
-
     </ElCard>
     <ElCard class="ambulatory-patient-card">
-
+      <TreatmentsTable
+        :total="treatments?.length"
+        :perPage="treatments?.length"
+        :page="1"
+        :type="true"
+        :items="treatments"
+      />
     </ElCard>
     <div class="ambulatory-card__actions ambulatory-card-actions">
       <ElButton type="primary" :loading="loading" @click="saveChanges">
@@ -129,12 +134,17 @@
 import { AmbulatoryCard } from '@/models/AmbulatoryCard.model';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
+import TreatmentsTable from '@/components/treatments/TreatmentsTable/index.vue';
 
 export default {
   name: 'AmbulatoryCard',
   emits: ['update:patient'],
   props: {
     patient: [User, Patient, Object],
+    treatments: Array,
+  },
+  components:{
+    TreatmentsTable
   },
   data() {
     return {

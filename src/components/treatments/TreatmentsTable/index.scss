@@ -36,5 +36,8 @@
   &-actions {
     display: flex;
     gap: 6px;
+    .ui-icon__content{
+      margin-top: 2px;
+    }
   }
 }
