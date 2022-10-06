@@ -84,4 +84,15 @@
       display: flex;
     }
   }
+
+  .ui-upload {
+    .el-upload {
+      display: none;
+    }
+    .el-upload-list {
+      &__item-status-label {
+        display: none;
+      }
+    }
+  }
 }
