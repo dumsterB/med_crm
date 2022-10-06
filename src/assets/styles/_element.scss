@@ -9,8 +9,7 @@ body {
 }
 
 .el-button--primary {
-  &:not(.is-plain),
-  &:not(.is-text) {
+  &:not(&.is-plain):not(&.is-text) {
     background: var(--button-primary-gradiend-bg);
     border: none;
   }
@@ -26,13 +25,13 @@ body {
     --el-button-disabled-border-color: var(--primary-disabled-color);
   }
 
-  &:hover {
+  &:hover:not(&.is-text) {
     color: var(--el-button-hover-text-color);
     border-color: var(--el-button-hover-border-color);
     background-color: var(--el-button-hover-bg-color);
     outline: 0;
   }
-  &:focus {
+  &:focus:not(&.is-text) {
     color: var(--el-button-hover-text-color);
     border-color: var(--el-button-hover-border-color);
     background-color: var(--el-button-hover-bg-color);
