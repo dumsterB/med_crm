@@ -23,12 +23,11 @@
       @submit.prevent="submitHandler">
       <!--  TODO: вынести в отдельный компоент, будет использоваться и при создании записи  -->
       <!--  Patient  -->
-      <div class="create-or-pay-invoice-modal-part">
-        <div class="create-or-pay-invoice-modal-part-header">
-          <div class="create-or-pay-invoice-modal-part-header__title">
-            {{ $t('PatientInfo') }}
-          </div>
-        </div>
+      <ElCard
+        class="create-or-pay-invoice-modal-part"
+        shadow="never"
+        :style="{ gridRow: !invoice.id ? 'auto' : '1/3' }">
+        <template #header> {{ $t('PatientInfo') }} </template>
 
         <PatientsSearchSelect
           v-if="!invoice.id"
@@ -60,14 +59,12 @@
             {{ invoice.created_at }}
           </ElFormItem>
         </div>
-      </div>
+      </ElCard>
 
       <!--  TODO: вынести в отдельный компоент, будет использоваться и при создании записи  -->
       <!--  Services  -->
-      <div class="create-or-pay-invoice-modal-part">
-        <div class="create-or-pay-invoice-modal-part-header">
-          <div class="create-or-pay-invoice-modal-part-header__title">{{ $t('Services') }}</div>
-        </div>
+      <ElCard class="create-or-pay-invoice-modal-part" shadow="never">
+        <template #header> {{ $t('Services') }} </template>
 
         <UiModelsAutocompleteSearch
           v-if="!invoice.id"
@@ -110,18 +107,19 @@
               :disabled="!!invoice.id" />
           </ElFormItem>
           <ElFormItem :label="$t('Base.Total')"> {{ totalPrice }} </ElFormItem>
-
-          <TransactionsTable
-            v-if="!!invoice.id"
-            v-show="transactions.length || loading.transactions"
-            class="create-or-pay-invoice-modal__transactions-table"
-            :items="transactions"
-            :loading="loading.transactions"
-            :page="1"
-            :perPage="transactions.length"
-            :total="transactions.length" />
         </div>
-      </div>
+      </ElCard>
+
+      <TransactionsTable
+        v-if="!!invoice.id"
+        v-show="transactions.length || loading.transactions"
+        class="create-or-pay-invoice-modal-part create-or-pay-invoice-modal__transactions-table"
+        height="200px"
+        :items="transactions"
+        :loading="loading.transactions"
+        :page="1"
+        :perPage="transactions.length"
+        :total="transactions.length" />
     </ElForm>
 
     <template #footer>
