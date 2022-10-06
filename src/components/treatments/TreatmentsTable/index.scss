@@ -36,8 +36,10 @@
   &-actions {
     display: flex;
     gap: 6px;
-    .ui-icon__content {
+    &__icon{
       margin-top: 2px;
+      color: var(--primary-color);
+      display: flex!important;
     }
   }
 }
