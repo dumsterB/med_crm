@@ -13,32 +13,20 @@
   }
 
   &-content {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 24px;
-
-    & > * {
-      flex: 1;
-    }
   }
+
+  &__transactions-table {
+    grid-column: 2/3;
+    max-height: 200px;
+  }
+
   &-part {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-
-    &-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      &__title {
-        font-weight: bold;
-      }
-    }
-
-    &-search,
-    &-content {
-      background-color: var(--el-dialog-header-bg-color);
-      border-radius: var(--border-radius-medium);
+    border: none !important;
+    .el-card__header {
+      font-weight: bold;
     }
 
     &-content {
@@ -80,6 +68,7 @@
     flex: 1;
     width: auto;
     min-width: auto !important;
+    min-height: 200px;
     max-height: 200px;
     margin-bottom: 20px;
 
@@ -99,9 +88,5 @@
     justify-content: flex-end;
     align-items: center;
     gap: 10px;
-  }
-
-  &__transactions-table {
-    max-height: 200px;
   }
 }

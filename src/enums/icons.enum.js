@@ -33,3 +33,4 @@ export const EYE = 'EYE';
 export const CANCEL = 'CANCEL';
 export const MALE = 'MALE';
 export const FEMALE = 'FEMALE';
+export const DOWNLOAD = 'DOWNLOAD';

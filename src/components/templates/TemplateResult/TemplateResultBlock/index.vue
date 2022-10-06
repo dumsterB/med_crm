@@ -55,11 +55,20 @@
       <ElDatePicker
         v-if="block.answer_type === InspectionCardBlock.enum.answerTypes.Date"
         :model-value="block.answer?.value"
-        :disabled="block.meta.disabled || readonly"
+        :disabled="block.meta.disabled"
         value-format="DD.MM.YYYY"
         :placeholder="$t('Base.PleaseSelect')"
         @update:model-value="updateValue"
         @change="$emit('change')" />
+
+      <UiUpload
+        v-if="block.answer_type === InspectionCardBlock.enum.answerTypes.File"
+        class="template-result-block__file-upload"
+        :files="files"
+        :disabled="meta.disabled"
+        :multiple="meta.multiple"
+        @file:add="addFileHandler"
+        @file:delete="deleteFileHandler" />
     </div>
   </ElCard>
 </template>
@@ -81,6 +90,10 @@ export default {
         disabled: this.block.meta.disabled || this.readonly,
       };
     },
+
+    files() {
+      return this.block.answer?.value?.map((elem) => elem.file) || [];
+    },
   },
   methods: {
     updateValue(value) {
@@ -91,6 +104,22 @@ export default {
           isCustom: false,
         },
       });
+    },
+
+    addFileHandler(file) {
+      this.updateValue([
+        ...(this.block.answer?.value || []),
+        {
+          file: file,
+          comments: [],
+        },
+      ]);
+      setTimeout(() => this.$emit('change'));
+    },
+
+    deleteFileHandler(id) {
+      this.updateValue(this.block.answer?.value?.filter((elem) => elem.file.id !== id));
+      setTimeout(() => this.$emit('change'));
     },
   },
 
