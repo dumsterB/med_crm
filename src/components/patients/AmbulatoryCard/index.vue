@@ -119,8 +119,7 @@
         :perPage="treatments?.length"
         :page="1"
         :type="true"
-        :items="treatments"
-      />
+        :items="treatments" />
     </ElCard>
     <div class="ambulatory-card__actions ambulatory-card-actions">
       <ElButton type="primary" :loading="loading" @click="saveChanges">
@@ -143,8 +142,8 @@ export default {
     patient: [User, Patient, Object],
     treatments: Array,
   },
-  components:{
-    TreatmentsTable
+  components: {
+    TreatmentsTable,
   },
   data() {
     return {

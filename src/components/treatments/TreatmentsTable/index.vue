@@ -37,12 +37,9 @@
                 {{ $t('Treatments.CloseTreatment') }}
               </ElButton>
 
-              <ElButton
-                  v-show="type"
-                  type="primary"
-                  text
-                  @click.stop="goToTreatment(row)">
-                <UiIcon class="treatments-table-actions__icon" v-show="type" :icon="icons.EYE" />  {{ $t('Base.Open') }}
+              <ElButton v-show="type" type="primary" text @click.stop="goToTreatment(row)">
+                <UiIcon class="treatments-table-actions__icon" v-show="type" :icon="icons.EYE" />
+                {{ $t('Base.Open') }}
               </ElButton>
             </div>
           </template>
@@ -126,7 +123,7 @@ export default {
       this.$router.push({
         name: DOCTORS_TREATMENT_ROUTE.name,
         params: {
-          id: row.id,
+          id: row.id
         },
       });
     },
@@ -154,7 +151,7 @@ export default {
 
   setup: () => ({
     Treatment,
-    icons
+    icons,
   }),
 };
 </script>
