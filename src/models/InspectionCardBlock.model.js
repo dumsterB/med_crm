@@ -23,8 +23,7 @@ export class InspectionCardBlock extends InspectionCardElement {
    */
   /**
    * @typedef {Array<object>} FileAnswer
-   * @property {number} file_id
-   * @property {string} src
+   * @property {File} file // File model
    * @property {Array<{x: number, y: number, value: string}>} comments
    */
 
