@@ -1,7 +1,7 @@
 <!--  TODO: перебиравть поля циклом когда будут известны все поля и их типы  -->
 
 <template>
-  <div class="ambulatory">
+  <div class="ambulatory-cards">
     <ElCard class="ambulatory-patient-card">
       <div class="ambulatory-patient-card-info_avatar">
         <div>
@@ -118,10 +118,10 @@
         :total="treatments?.length"
         :perPage="treatments?.length"
         :page="1"
-        :type="true"
+        :action_show="true"
         :items="treatments" />
     </ElCard>
-    <div class="ambulatory-card__actions ambulatory-card-actions">
+    <div class="ambulatory-cards__actions ambulatory-cards-actions">
       <ElButton type="primary" :loading="loading" @click="saveChanges">
         {{ $t('Base.SaveChanges') }}
       </ElButton>

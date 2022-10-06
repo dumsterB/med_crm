@@ -38,7 +38,7 @@ export default {
     patient: [Patient, Object],
     /** @param {Array<Appointment|object>} appointments */
     appointments: Array,
-    /** @param {Array<Appointment|object>} treatments */
+    /** @param {Array<Treatments|object>} treatments */
     treatments:Array,
     /** @param {{profile: boolean, appointment: boolean}} loading */
     loading: Object,

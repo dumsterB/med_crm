@@ -6,7 +6,8 @@
       "EditPatient": "Изменить данные пациента",
       "HasTreatment": "На лечении",
       "MyPatients": "Мои пациенты",
-      "NoPatient": "Пациен не найден"
+      "NoPatient": "Пациен не найден",
+      "NamePatient": "Имя пациента"
     }
   },
   "uz": {
@@ -16,7 +17,8 @@
       "EditPatient": "Bemorning ma'lumotlarini o'zgartirish",
       "HasTreatment": "Davolanmoqda",
       "MyPatients": "Mening bemorlarim",
-      "NoPatient": "Bemor topilmadi"
+      "NoPatient": "Bemor topilmadi",
+      "NamePatient": "Bemorning Ismi"
     }
   }
 }
