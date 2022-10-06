@@ -31,6 +31,7 @@
         </div>
 
         <PatientsSearchSelect
+          v-if="!invoice.id"
           class="create-or-pay-invoice-modal-part-search"
           v-model="invoice.user_id"
           required
@@ -68,17 +69,17 @@
           <div class="create-or-pay-invoice-modal-part-header__title">{{ $t('Services') }}</div>
         </div>
 
-        <div class="create-or-pay-invoice-modal-part-search">
-          <UiModelsAutocompleteSearch
-            :model-value="servicesIds"
-            :model-for-use="ServiceGroup"
-            label="title"
-            multiple
-            required
-            collapse-tags
-            :disabled="!!invoice.id"
-            @select="selectServiceGroup" />
-        </div>
+        <UiModelsAutocompleteSearch
+          v-if="!invoice.id"
+          class="create-or-pay-invoice-modal-part-search"
+          :model-value="servicesIds"
+          :model-for-use="ServiceGroup"
+          label="title"
+          multiple
+          required
+          collapse-tags
+          :disabled="!!invoice.id"
+          @select="selectServiceGroup" />
 
         <div class="create-or-pay-invoice-modal-part-content">
           <ElTable class="create-or-pay-invoice-modal__services" :data="invoice.payment_subjects">
@@ -90,7 +91,7 @@
               </template>
             </ElTableColumn>
 
-            <ElTableColumn v-if="!data?.id" prop="actions" width="60px">
+            <ElTableColumn v-if="!data?.id" prop="actions" width="66px">
               <template #default="{ row }">
                 <ElButton text size="small" @click="deletePaymentSubject(row)">
                   <template #icon><UiIcon :icon="icons.CANCEL" /> </template>
