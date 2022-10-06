@@ -6,6 +6,7 @@
     :disabled="disabled"
     :drag="false"
     :auto-upload="false"
+    :on-preview="handlePreview"
     :on-change="handleChange"
     :on-remove="handleRemove"
     :before-remove="handleBeforeRemove">
@@ -23,7 +24,7 @@ import { UploadFile } from '@/models/client/UploadFile.model';
 
 export default {
   name: 'UiUpload',
-  emits: ['file:add', 'file:delete'],
+  emits: ['file:add', 'file:delete', 'file:preview'],
   props: {
     files: Array,
     multiple: Boolean,
@@ -61,7 +62,16 @@ export default {
       return false;
     },
 
-    async handlePreview(file) {},
+    async handlePreview(file) {
+      const a = document.createElement('a');
+      a.setAttribute('target', '_blank');
+      a.setAttribute('href', file.link);
+      a.setAttribute('download', file.name || 'Untitled');
+
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    },
     async handleRemove(file) {},
     async handleError(error, file, files) {},
     handleExceed(files, uploadFiles) {},
