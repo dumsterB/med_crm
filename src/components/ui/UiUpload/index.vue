@@ -43,8 +43,16 @@ export default {
 
   methods: {
     async handleChange(file, files) {
-      const { data } = await FileModel.create(file);
-      this.$emit('file:add', data.data);
+      try {
+        const { data } = await FileModel.create(file);
+        this.$emit('file:add', data.data);
+      } catch (err) {
+        console.log(err);
+        this.$notify({
+          type: 'error',
+          title: err?.response?.data?.message || this.$t('Notifications.Error'),
+        });
+      }
     },
 
     async handleBeforeRemove(file, files) {
