@@ -3,8 +3,7 @@
 <template>
   <ElCard class="ambulatory-cards printer__block printer__doc" shadow="never">
     <h1 class="printer__title">{{ $t('Base.AmbulatoryCard') }}</h1>
-    <PatientCardRow class="ambulatory-patient-card" shadow="never" :items="infoItems">
-    </PatientCardRow>
+    <PatientCardRow  shadow="never" :items="infoItems" />
     <ElCard class="ambulatory-card" shadow="never">
       <ElForm label-position="top">
         <ElFormItem :label="$t('User.PlaceResidence')">
@@ -78,7 +77,7 @@
       </div>
     </ElCard>
 
-    <ElCard class="ambulatory-patient-card">
+    <ElCard class="ambulatory-treatments-table">
       <TreatmentsTable
         :total="treatments?.length"
         :perPage="treatments?.length"
