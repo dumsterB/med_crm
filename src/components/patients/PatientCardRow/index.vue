@@ -5,7 +5,7 @@
         <div class="patient-card-info_avatar" v-if="patient.avatar">
           <UiAvatar size="large" :gender="patient.avatar"></UiAvatar>
         </div>
-          <div>
+        <div>
           <p class="patient-card-info__title">
             {{ patient.label }}
           </p>
@@ -23,7 +23,10 @@ export default {
   name: 'PatientCardRow',
   props: {
     items: Array,
-    shadow: String,
+    shadow: {
+      default: 'never',
+      type: String,
+    },
   },
 };
 </script>

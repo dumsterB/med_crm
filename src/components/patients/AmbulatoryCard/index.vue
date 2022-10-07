@@ -3,10 +3,8 @@
 <template>
   <ElCard class="ambulatory-cards printer__block printer__doc" shadow="never">
     <h1 class="printer__title">{{ $t('Base.AmbulatoryCard') }}</h1>
-    <PatientCardRow
-      class="ambulatory-patient-card"
-      shadow="never"
-      :items="infoItems"></PatientCardRow>
+    <PatientCardRow class="ambulatory-patient-card" shadow="never" :items="infoItems">
+    </PatientCardRow>
     <ElCard class="ambulatory-card" shadow="never">
       <ElForm label-position="top">
         <ElFormItem :label="$t('User.PlaceResidence')">
