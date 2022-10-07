@@ -3,45 +3,6 @@
 <template>
   <div class="ambulatory-cards">
     <PatientCardRow :patient="patient"></PatientCardRow>
-<!--    <ElCard class="ambulatory-patient-card">-->
-<!--      <div class="ambulatory-patient-card-info_avatar">-->
-<!--        <div>-->
-<!--          <UiAvatar size="large" :gender="patient.gender"></UiAvatar>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--          <p class="ambulatory-patient-card-info__title">-->
-<!--            {{ $t('Base.NamePatient') }}-->
-<!--          </p>-->
-<!--          <p class="ambulatory-patient-card-info__description">-->
-<!--            {{ patient.name }}-->
-<!--          </p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="ambulatory-patient-card-info">-->
-<!--        <p class="ambulatory-patient-card-info__title">-->
-<!--          {{ $t('User.Phone') }}-->
-<!--        </p>-->
-<!--        <p class="ambulatory-patient-card-info__description">-->
-<!--          {{ patient.phone }}-->
-<!--        </p>-->
-<!--      </div>-->
-<!--      <div class="ambulatory-patient-card-info">-->
-<!--        <p class="ambulatory-patient-card-info__title">-->
-<!--          {{ $t('User.Birthdate') }}-->
-<!--        </p>-->
-<!--        <p class="ambulatory-patient-card-info__description">-->
-<!--          {{ patient.birthdate }}-->
-<!--        </p>-->
-<!--      </div>-->
-<!--      <div class="ambulatory-patient-card-info">-->
-<!--        <p class="ambulatory-patient-card-info__title">-->
-<!--          {{ $t('User.Gender') }}-->
-<!--        </p>-->
-<!--        <p class="ambulatory-patient-card-info__description">-->
-<!--          {{ patient.gender }}-->
-<!--        </p>-->
-<!--      </div>-->
-<!--    </ElCard>-->
     <ElCard class="ambulatory-card" shadow="never">
       <ElForm label-position="top">
         <ElFormItem :label="$t('User.FullName')">

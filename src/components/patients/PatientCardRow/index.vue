@@ -45,9 +45,9 @@
 <script>
 export default {
   name: 'index',
-  props:{
-    patient: {},
-  }
+  props: {
+    patient: Object,
+  },
 };
 </script>
 
