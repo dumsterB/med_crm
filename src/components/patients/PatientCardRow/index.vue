@@ -1,6 +1,6 @@
 <template>
   <ElCard class="patient-card" :shadow="shadow">
-    <UiUserAvatarInfo class="patient-card__user" :user="patient" is-link />
+    <UiUserAvatarInfo class="patient-card__user" :user="patient" :link="patientPageLink" />
 
     <div class="patient-card__info patient-card-info" v-for="item in items" :key="item.value">
       <div class="patient-card-info__label">
@@ -19,6 +19,8 @@
 
 <script>
 import { Patient } from '@/models/Patient.model';
+import { PATIENT_ROUTE } from '@/router/patients.routes';
+import { insertRouteParams } from '@/utils/router.utils';
 
 export default {
   name: 'PatientCardRow',
@@ -29,6 +31,17 @@ export default {
     shadow: {
       default: 'never',
       type: String,
+    },
+  },
+
+  computed: {
+    patientPageLink() {
+      return insertRouteParams({
+        path: PATIENT_ROUTE.path,
+        params: {
+          id: this.patient.id,
+        },
+      });
     },
   },
 };
