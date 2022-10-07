@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['ui-user-avatar-info', { 'ui-user-avatar-info_link': isLink }]"
+    :class="['ui-user-avatar-info', { 'ui-user-avatar-info_link': !!link }]"
     @click="clickHandler">
     <UiAvatar
       class="ui-user-avatar-info__avatar"
@@ -36,7 +36,7 @@
 <script>
 import { User } from '@/models/User.model';
 import { Patient } from '@/models/Patient.model';
-import { PATIENT_ROUTE } from '@/router/patients.routes';
+// import { PATIENT_ROUTE } from '@/router/patients.routes';
 
 export default {
   name: 'UiUserAvatarInfo',
@@ -54,18 +54,13 @@ export default {
       default: true,
     },
 
-    isLink: Boolean,
+    link: String,
   },
 
   methods: {
     clickHandler() {
-      if (this.isLink) {
-        this.$router.push({
-          name: PATIENT_ROUTE.name,
-          params: {
-            id: this.user.id,
-          },
-        });
+      if (!!this.link) {
+        this.$router.push(this.link);
       }
     },
   },
