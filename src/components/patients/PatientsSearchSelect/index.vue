@@ -23,7 +23,7 @@ import ScanPatientBracelet from '@/components/scanner/ScanPatientBracelet/index.
 export default {
   name: 'PatientsSearchSelect',
   components: { ScanPatientBracelet, UiModelsAutocompleteSearch },
-  emits: ['update:modelValue', 'select'],
+  emits: ['update:modelValue', 'select', 'create'],
   props: {
     modelValue: Number,
     withScanner: Boolean,
