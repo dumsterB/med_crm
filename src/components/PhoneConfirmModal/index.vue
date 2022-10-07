@@ -63,9 +63,10 @@ export default {
     };
   },
   watch: {
-    phone: {
+    modelValue: {
       handler(value) {
-        if (value) this.sendCode();
+        if (value && this.phone) this.sendCode();
+        if (!value) this.clearInterval();
       },
       immediate: true,
     },
@@ -75,12 +76,13 @@ export default {
     createInterval() {
       this.timerCount = this.intervalTime;
       this.interval = setInterval(() => {
-        if (this.timerCount === 0) {
-          clearInterval(this.interval);
-          return (this.interval = null);
-        }
+        if (this.timerCount === 0) return this.clearInterval();
         this.timerCount--;
       }, 1000);
+    },
+    clearInterval() {
+      clearInterval(this.interval);
+      this.interval = null;
     },
 
     async handleOnComplete(value) {
@@ -111,6 +113,7 @@ export default {
 
       this.loading.check = false;
     },
+
     async sendCode() {
       if (this.loading.send) return;
       this.loading.send = true;
@@ -124,8 +127,8 @@ export default {
           title: err?.response?.data?.message || this.$t('Notifications.Error'),
         });
       }
-      this.createInterval();
 
+      this.createInterval();
       this.loading.send = false;
     },
     closeModal() {
