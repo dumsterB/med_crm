@@ -6,7 +6,7 @@
     .el-form {
       background: var(--dialog-body-content-bg-color);
       padding: var(--dialog-body-content-padding);
-      box-shadow:var(--dialog-body-content-box-shadow);
+      box-shadow: var(--dialog-body-content-box-shadow);
       border-radius: var(--dialog-body-content-border-radious);
     }
   }
@@ -14,17 +14,17 @@
   &-form {
     display: flex;
     flex-direction: column;
+
     &-actions {
       display: flex;
       flex-direction: column;
+      align-items: center;
       margin: auto;
       gap: 10px;
-      &__submit {
-        background: var(--button-primary-gradiend-bg);
-        border: none;
-        width: 50% !important;
-        margin: auto;
-        display: flex;
+
+      & > * {
+        width: 100%;
+        max-width: 20em;
       }
     }
   }
