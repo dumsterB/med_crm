@@ -50,7 +50,7 @@ export default {
       },
       isLiveQueue: true,
 
-      patientDrawer: {
+      patientModal: {
         show: false,
         nameOrPhone: null,
         newPatient: null,
@@ -307,17 +307,17 @@ export default {
       }
     },
 
-    openCreatePatientDrawer(query) {
+    openCreatePatientModal(query) {
       this.$refs.autocomplete_patient.blur();
-      this.patientDrawer.show = true;
-      this.$nextTick(() => (this.patientDrawer.nameOrPhone = query));
+      this.patientModal.show = true;
+      this.$nextTick(() => (this.patientModal.nameOrPhone = query));
     },
     insertPatient(action) {
       if (action instanceof GlobalModalCloseAction) return;
-      this.patientDrawer.show = false;
+      this.patientModal.show = false;
 
-      this.patientDrawer.newPatient = action.data.patient;
-      this.appointment.patient_id = action.data;
+      this.patientModal.newPatient = action.data.patient;
+      this.appointment.patient_id = action.data.patient.id;
     },
 
     goToAppointment(id) {

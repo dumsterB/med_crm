@@ -1,11 +1,11 @@
 <template>
   <ElDialog
-    custom-class="create-appointment-drawer"
+    custom-class="create-appointment-modal"
     :model-value="modelValue"
     :title="$t(`Title.${data?.id ? 'Edit' : 'Create'}`)"
     @update:model-value="$emit('update:modelValue', $event)">
     <ElForm
-      class="create-appointment-drawer-form"
+      class="create-appointment-modal-form"
       label-position="top"
       @submit.prevent="submitHandler">
       <!--  Patient  -->
@@ -15,13 +15,13 @@
         <PatientsSearchSelect
           v-model="appointment.patient_id"
           :search-query="patientsOptions.searchQuery"
-          :default-item="data?.patient || patient || patientDrawer.newPatient"
+          :default-item="data?.patient || patient || patientModal.newPatient"
           :disabled="!!patient || !!data"
           :placeholder="$t('User.PleaseInputNameOrPhone')"
           required
           :show-create-option="permissions.createPatient"
           ref="autocomplete_patient"
-          @create="openCreatePatientDrawer" />
+          @create="openCreatePatientModal" />
       </ElFormItem>
 
       <!--  Type  -->
@@ -138,7 +138,7 @@
       </ElFormItem>
       <!--  Actions  -->
       <ElFormItem :style="{ order: this.appointmentFieldsFlexOrder.actions }">
-        <div class="create-appointment-drawer-form-actions">
+        <div class="create-appointment-modal-form-actions">
           <ElButton type="primary" native-type="submit" :loading="loading.form">
             {{ $t(`Base.${data?.id ? 'Edit' : 'Create'}`) }}
           </ElButton>
@@ -147,8 +147,8 @@
     </ElForm>
 
     <CreateOrEditPatientModal
-      v-model="patientDrawer.show"
-      :name-or-phone="patientDrawer.nameOrPhone"
+      v-model="patientModal.show"
+      :name-or-phone="patientModal.nameOrPhone"
       disable-default-action
       @action="insertPatient" />
   </ElDialog>
