@@ -1,17 +1,9 @@
-.ambulatory-cards {
-  display: grid;
-  gap: 20px;
-  .ambulatory-card {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    & > * {
-      width: 100%;
-      max-width: 800px;
-    }
+.ambulatory-card {
+  & > * {
+    width: 100%;
+    max-width: 800px;
   }
-  &__date-picker {
-    width: 100% !important;
-  }
+
   &-actions {
     display: flex;
     gap: 20px;
@@ -31,7 +23,7 @@
       display: none;
     }
   }
-  .ambulatory-treatments-table{
+  .ambulatory-treatments-table {
     display: none;
   }
 }
