@@ -3,11 +3,14 @@
     <PatientsSearchSelect
       v-show="!hideSelect"
       class="patients-search-select-data-block__search"
+      :placeholder="$t('User.PleaseInputNameOrPhone')"
       :model-value="modelValue"
+      :search-query="searchQuery"
       :required="required"
       :disabled="disabled"
       :multiple="multiple"
       :default-item="defaultItem"
+      :show-create-option="showCreateOption"
       @update:model-value="$emit('update:modelValue', $event)"
       @select="$emit('select', $event)" />
 
@@ -39,6 +42,7 @@ export default {
     required: Boolean,
     disabled: Boolean,
     multiple: Boolean,
+    searchQuery: Object,
     showCreateOption: Boolean,
     hideSelect: Boolean,
   },
