@@ -11,7 +11,7 @@
       @select="$emit('select', $event)"
       @create="$emit('create', $event)" />
 
-    <ScanPatientBracelet @scan:success="scanHandler" />
+    <ScanPatientBracelet :disabled="disabled" @scan:success="scanHandler" />
   </div>
 </template>
 
@@ -26,6 +26,7 @@ export default {
   emits: ['update:modelValue', 'select', 'create'],
   props: {
     modelValue: Number,
+    disabled: Boolean,
     withScanner: Boolean,
     defaultItem: [Patient, Object, Array],
     // + пропсы для UiModelsAutocompleteSearch
