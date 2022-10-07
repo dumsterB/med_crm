@@ -2,6 +2,7 @@
   <ElSelect
     :model-value="serviceId"
     :placeholder="$t('Appointments.SelectDoctor')"
+    :disabled="disabled"
     @update:model-value="selectHandler">
     <ElOption
       v-for="service in services"
@@ -24,6 +25,7 @@ export default {
     appointment: [Appointment, Object],
     serviceGroup: [ServiceGroup, Object],
     required: Boolean,
+    disabled: Boolean,
   },
   computed: {
     services() {
