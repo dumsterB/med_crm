@@ -1,6 +1,6 @@
 <template>
   <ElCard class="patient-card" :shadow="shadow">
-    <UiUserAvatarInfo class="patient-card__user" :user="patient" />
+    <UiUserAvatarInfo class="patient-card__user" :user="patient" is-link />
 
     <div class="patient-card__info patient-card-info" v-for="item in items" :key="item.value">
       <div class="patient-card-info__label">
