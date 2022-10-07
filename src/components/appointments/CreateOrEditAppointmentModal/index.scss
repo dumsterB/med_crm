@@ -1,11 +1,25 @@
 .create-or-edit-appointment-modal {
+  width: 1000px;
+
+  .el-card {
+    border: none;
+    &__body {
+      display: flex; // чтобы работали order: number инлйн стили
+      flex-direction: column;
+    }
+  }
+
   &-form {
     display: flex;
-    flex-direction: column;
+    gap: 20px;
+
+    &__part {
+      flex: 1;
+    }
 
     &-actions {
       display: flex;
-      flex-direction: column;
+      justify-content: flex-end;
       gap: 10px;
       width: 100%;
 

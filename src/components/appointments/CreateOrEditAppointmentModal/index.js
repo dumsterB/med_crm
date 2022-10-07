@@ -19,6 +19,7 @@ import SpecialtiesSelect from '@/components/specialties/SpecialtiesSelect/index.
 import DoctorsSelectByGroupService from './DoctorsSelectByGroupService/index.vue';
 import ScheduleSlotsSelect from '@/components/appointments/ScheduleSlotsSelect/index.vue';
 import PatientsSearchSelect from '@/components/patients/PatientsSearchSelect/index.vue';
+import PatientsSearchSelectDataBlock from '@/components/patients/PatientsSearchSelectDataBlock/index.vue';
 
 // TODO: написать документацию по бизнес логике
 export default {
@@ -29,6 +30,7 @@ export default {
     DoctorsSelectByGroupService,
     ScheduleSlotsSelect,
     PatientsSearchSelect,
+    PatientsSearchSelectDataBlock,
   },
   emits: ['update:modelValue', 'action'],
   props: {
@@ -308,7 +310,7 @@ export default {
     },
 
     openCreatePatientModal(query) {
-      this.$refs.autocomplete_patient.blur();
+      // this.$refs.autocomplete_patient.blur();
       this.patientModal.show = true;
       this.$nextTick(() => (this.patientModal.nameOrPhone = query));
     },
