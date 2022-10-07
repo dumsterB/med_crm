@@ -1,0 +1,33 @@
+.patient-card {
+  display: flex;
+  & > * {
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+  }
+
+  &-info {
+    display: block;
+
+    &__title {
+      color: #b2b6c6;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 15px;
+      margin-bottom: -5px;
+    }
+
+    &__description {
+      color: #535a70;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 15px;
+      margin-top: 20px;
+    }
+  }
+
+  &-info_avatar {
+    display: flex;
+    gap: 20px;
+  }
+}
