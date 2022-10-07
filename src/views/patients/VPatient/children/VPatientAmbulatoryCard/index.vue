@@ -15,7 +15,7 @@
       </ElPageHeader>
     </LayoutContentHeader>
 
-    <PatientCardRow :items="infoItems" />
+    <PatientCardRow :patient="patient" :items="infoItems" />
 
     <AmbulatoryCard
       class="v-patient-ambulatory__card"
@@ -57,11 +57,6 @@ export default {
   computed: {
     infoItems() {
       return [
-        {
-          gender: this.patient.gender,
-          label: this.$t('Patients.NamePatient'),
-          value: this.patient.name || '',
-        },
         {
           label: this.$t('User.Phone'),
           value: this.patient.phone || '',
