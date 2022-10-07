@@ -3,10 +3,12 @@
 <template>
   <ElCard class="ambulatory-cards printer__block printer__doc" shadow="never">
     <h1 class="printer__title">{{ $t('Base.AmbulatoryCard') }}</h1>
-    <PatientCardRow class="ambulatory-patient-card" :patient="patient"></PatientCardRow>
+    <PatientCardRow
+      class="ambulatory-patient-card"
+      shadow="never"
+      :items="infoItems"></PatientCardRow>
     <ElCard class="ambulatory-card" shadow="never">
       <ElForm label-position="top">
-
         <ElFormItem :label="$t('User.PlaceResidence')">
           <ElInput v-model="localAmbulatoryCard.place_residence" />
         </ElFormItem>
@@ -167,6 +169,29 @@ export default {
 
     print() {
       window.print();
+    },
+  },
+  computed: {
+    infoItems() {
+      return [
+        {
+          avatar: this.patient.gender,
+          label: this.$t('Patients.NamePatient'),
+          value: this.patient.name || '',
+        },
+        {
+          label: this.$t('User.Phone'),
+          value: this.patient.phone || '',
+        },
+        {
+          label: this.$t('User.Birthdate'),
+          value: this.patient.birthdate || '',
+        },
+        {
+          label: this.$t('User.Gender'),
+          value: this.$t('User.Genders.' + this.patient.gender) || '',
+        },
+      ];
     },
   },
 
