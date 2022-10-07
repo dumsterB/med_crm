@@ -7,11 +7,7 @@
 
     <div class="v-patient-default-item__body">
       <PatientCardRow :items="patientItems" shadow="never"></PatientCardRow>
-<!--      <PatientCard-->
-<!--        :data="patient"-->
-<!--        type="horizontal"-->
-<!--        @update:data="$emit('update:patient', $event)"-->
-<!--        @create:treatment="$emit('treatment:create', $event)" />-->
+
     </div>
   </div>
 
@@ -19,7 +15,7 @@
   <div v-show="!isChildren" class="v-patient-default-item">
     <div class="v-patient-default-item__header v-patient-default-item-header">
       <div class="v-patient-default__title">{{ $t('User.Children') }}</div>
-      <ElButton type="primary" @click="$emit('patient:createChildren')">
+      <ElButton type="primary" plain @click="$emit('patient:createChildren')">
         {{ $t('User.AddChildren') }}
       </ElButton>
     </div>
@@ -45,7 +41,7 @@
   <div class="v-patient-default-item">
     <div class="v-patient-default-item__header v-patient-default-item-header">
       <div class="v-patient-default__title">{{ $t('Appointments.Appointments') }}</div>
-      <ElButton type="primary" @click="$emit('appointment:create')">
+      <ElButton type="primary" plain @click="$emit('appointment:create')">
         {{ $t('Appointments.CreateAppointment') }}
       </ElButton>
     </div>
@@ -69,7 +65,7 @@
     <div class="v-patient-default-item__header v-patient-default-item-header">
       <div class="v-patient-default__title">{{ $t('Base.TableTreatment') }}</div>
 
-      <ElButton v-show="isDoctor" type="primary" @click="$emit('treatment:create')">
+      <ElButton v-show="isDoctor" plain type="primary" @click="$emit('treatment:create')">
         {{ $t('Base.SetTreatment') }}
       </ElButton>
     </div>
