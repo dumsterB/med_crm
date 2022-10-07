@@ -8,19 +8,22 @@
       :search-query="searchQuery"
       :required="required"
       :disabled="disabled"
-      :multiple="multiple"
       :default-item="defaultItem"
       :show-create-option="showCreateOption"
       @update:model-value="$emit('update:modelValue', $event)"
-      @select="$emit('select', $event)" />
+      @select="selectHandler" />
 
     <div class="patients-search-select-data-block__content">
       <ElFormItem :label="$t('User.FullName')">
-        {{ defaultItem?.name || patient?.name || '....' }}
+        {{ patient?.name || '....' }}
       </ElFormItem>
 
       <ElFormItem :label="$t('User.Phone')">
-        {{ defaultItem?.phone || patient?.phone || '....' }}
+        {{ patient?.phone || '....' }}
+      </ElFormItem>
+
+      <ElFormItem :label="$t('User.Gender')">
+        {{ patient?.gender ? $t(`User.Genders.${patient.gender}`) : '...' }}
       </ElFormItem>
 
       <slot name="content-append"> </slot>
@@ -41,16 +44,29 @@ export default {
     defaultItem: [Patient, Object],
     required: Boolean,
     disabled: Boolean,
-    multiple: Boolean,
     searchQuery: Object,
     showCreateOption: Boolean,
     hideSelect: Boolean,
   },
-
   data() {
     return {
       patient: null,
     };
+  },
+  watch: {
+    defaultItem: {
+      handler(value) {
+        this.patient = value;
+      },
+      immediate: true,
+    },
+  },
+
+  methods: {
+    selectHandler(data) {
+      this.patient = data;
+      this.$emit('select', data);
+    },
   },
 };
 </script>
