@@ -12,6 +12,9 @@
           <p class="patient-card-info__description">
             {{ patient.value }}
           </p>
+          <div class="patient-card-info-actions">
+            <ElButton type="primary" v-if="patient.action">{{patient.text}}</ElButton>
+          </div>
         </div>
       </div>
     </ElCard>
@@ -19,6 +22,9 @@
 </template>
 
 <script>
+import {insertRouteParams} from "@/utils/router.utils";
+import {PATIENT_ROUTE} from "@/router/patients.routes";
+
 export default {
   name: 'PatientCardRow',
   props: {
@@ -28,6 +34,14 @@ export default {
       type: String,
     },
   },
+  computed:{
+    ambulatoryCardPageLink() {
+      return insertRouteParams({
+        path: PATIENT_ROUTE.childrenMap.PATIENT_ROUTE_AMBULATORY_CARD._fullPath,
+        params: { id: this.data.id, },
+      });
+    },
+  }
 };
 </script>
 

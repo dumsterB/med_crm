@@ -6,11 +6,12 @@
     </div>
 
     <div class="v-patient-default-item__body">
-      <PatientCard
-        :data="patient"
-        type="horizontal"
-        @update:data="$emit('update:patient', $event)"
-        @create:treatment="$emit('treatment:create', $event)" />
+      <PatientCardRow :items="patientItems" shadow="never"></PatientCardRow>
+<!--      <PatientCard-->
+<!--        :data="patient"-->
+<!--        type="horizontal"-->
+<!--        @update:data="$emit('update:patient', $event)"-->
+<!--        @create:treatment="$emit('treatment:create', $event)" />-->
     </div>
   </div>
 
@@ -97,6 +98,7 @@ import PatientCard from '@/components/views/VPatient/PatientCard/index.vue';
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
 import TreatmentsTable from '@/components/treatments/TreatmentsTable/index.vue';
+import PatientCardRow from '@/components/patients/PatientCardRow/index.vue';
 import { mapState } from 'vuex';
 
 export default {
@@ -113,6 +115,7 @@ export default {
     AppointmentsTable,
     PatientsTable,
     TreatmentsTable,
+    PatientCardRow,
   },
   icons: icons,
   props: {
@@ -137,6 +140,31 @@ export default {
 
     isChildren() {
       return !!this.patient.parent_id;
+    },
+    patientItems() {
+      return [
+        {
+          gender: this.patient.gender,
+          label: this.$t('Patients.NamePatient'),
+          value: this.patient.name || '',
+        },
+        {
+          label: this.$t('User.Phone'),
+          value: this.patient.phone || '',
+        },
+        {
+          label: this.$t('User.Birthdate'),
+          value: this.patient.birthdate || '',
+        },
+        {
+          label: this.$t('User.Gender'),
+          value: this.$t('User.Genders.' + this.patient.gender) || '',
+        },
+        {
+          text: this.$t('Base.AmbulatoryCard'),
+          action: true,
+        },
+      ];
     },
   },
 };
