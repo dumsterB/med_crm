@@ -11,6 +11,7 @@ import PhoneConfirmModal from '@/components/PhoneConfirmModal/index.vue';
 
 export default {
   name: 'CreateOrEditPatientModal',
+  components: { PhoneConfirmModal },
   emits: ['update:modelValue', 'action'],
   props: {
     modelValue: Boolean,
@@ -33,6 +34,7 @@ export default {
       hasPatient: false,
       hasPatientFromOtherClinic: false,
 
+      isOpenPhoneConfirmModal: false,
       isRebinding: false, // если пользователь был найден и мы успешно подтвердили код - можем создать новый акк
       code: null, // для хранения кода подтверждения при rebinding или смене номера
 
@@ -127,16 +129,11 @@ export default {
     },
 
     // проверку телефона для создания нового пациента или смены текущего номера
-    async checkPhoneForRebinding() {
-      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
-        component: PhoneConfirmModal,
-        payload: {
-          phone: this.patient.phone,
-        },
-      });
+    async checkPhoneForRebinding(action) {
       if (action.name !== PHONE_CONFIRM_MODAL_CONFIRMED_ACTION) return;
 
       this.resetHasPatient();
+      this.isOpenPhoneConfirmModal = false;
       this.isRebinding = true;
       this.code = action.data.code;
       this.patient = new Patient({ ...(this.data || {}), phone: this.patient.phone });
@@ -144,7 +141,7 @@ export default {
 
     async editPatient() {
       if (this.data.phone !== this.patient.phone && !this.isRebinding)
-        return this.checkPhoneForRebinding();
+        return (this.isOpenPhoneConfirmModal = true);
 
       const { data } = await Patient.update({
         id: this.patient.id,

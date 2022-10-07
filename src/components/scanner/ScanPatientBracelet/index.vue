@@ -3,6 +3,7 @@
     :class="['scan-patient-bracelet', { 'scan-patient-bracelet_only-icon': onlyIcon }]"
     type="primary"
     plain
+    :disabled="disabled"
     @click="startScan">
     <template #icon> <UiIcon :icon="icons.SCAN" /> </template>
     <div v-if="!onlyIcon">{{ text }}</div>
@@ -26,6 +27,7 @@ export default {
   components: { ScanModal },
   emits: ['scan:success'],
   props: {
+    disabled: Boolean,
     onlyIcon: Boolean,
   },
   data() {

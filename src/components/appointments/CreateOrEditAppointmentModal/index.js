@@ -19,6 +19,7 @@ import SpecialtiesSelect from '@/components/specialties/SpecialtiesSelect/index.
 import DoctorsSelectByGroupService from './DoctorsSelectByGroupService/index.vue';
 import ScheduleSlotsSelect from '@/components/appointments/ScheduleSlotsSelect/index.vue';
 import PatientsSearchSelect from '@/components/patients/PatientsSearchSelect/index.vue';
+import PatientsSearchSelectDataBlock from '@/components/patients/PatientsSearchSelectDataBlock/index.vue';
 
 // TODO: написать документацию по бизнес логике
 export default {
@@ -29,6 +30,7 @@ export default {
     DoctorsSelectByGroupService,
     ScheduleSlotsSelect,
     PatientsSearchSelect,
+    PatientsSearchSelectDataBlock,
   },
   emits: ['update:modelValue', 'action'],
   props: {
@@ -50,7 +52,7 @@ export default {
       },
       isLiveQueue: true,
 
-      patientDrawer: {
+      patientModal: {
         show: false,
         nameOrPhone: null,
         newPatient: null,
@@ -307,17 +309,17 @@ export default {
       }
     },
 
-    openCreatePatientDrawer(query) {
-      this.$refs.autocomplete_patient.blur();
-      this.patientDrawer.show = true;
-      this.$nextTick(() => (this.patientDrawer.nameOrPhone = query));
+    openCreatePatientModal(query) {
+      // this.$refs.autocomplete_patient.blur();
+      this.patientModal.show = true;
+      this.$nextTick(() => (this.patientModal.nameOrPhone = query));
     },
     insertPatient(action) {
       if (action instanceof GlobalModalCloseAction) return;
-      this.patientDrawer.show = false;
+      this.patientModal.show = false;
 
-      this.patientDrawer.newPatient = action.data.patient;
-      this.appointment.patient_id = action.data;
+      this.patientModal.newPatient = action.data.patient;
+      this.appointment.patient_id = action.data.patient.id;
     },
 
     goToAppointment(id) {

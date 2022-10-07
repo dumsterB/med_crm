@@ -47,8 +47,9 @@
             @change="updateInspectionCard" />
         </ElFormItem>
 
-        <div v-show="!isProvided" class="v-app-treat-card-form-actions">
+        <div class="v-app-treat-card-form-actions">
           <ElButton
+            v-show="!isProvided"
             data-method="closeTreatment"
             type="warning"
             plain
@@ -57,16 +58,23 @@
             {{ $t('Treatments.CloseTreatment') }}
           </ElButton>
 
-          <ElButton data-method="endReception" type="primary" native-type="submit">
+          <ElButton
+            v-show="!isProvided"
+            data-method="endReception"
+            type="primary"
+            native-type="submit">
             {{ $t('Appointments.EndReception') }}
           </ElButton>
+
+          <ElButton
+            v-show="isProvided"
+            class="v-app-treat-card-form-actions"
+            text
+            @click="callPrint">
+            <template #icon> <UiIcon :icon="icons.PRINTER" /> </template>
+            {{ $t('Base.Print') }}
+          </ElButton>
         </div>
-        <ElButton text @click="callPrint" class="v-app-treat-card-form-actions">
-          <template #icon>
-            <UiIcon :icon="icons.PRINTER" />
-          </template>
-          {{ $t('Base.Print') }}
-        </ElButton>
       </ElForm>
     </ElCard>
   </div>

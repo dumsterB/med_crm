@@ -6,6 +6,7 @@ import { Transaction } from '@/models/Transaction.model';
 import { formatPrice } from '@/utils/price.util';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
 
+import PatientsSearchSelectDataBlock from '@/components/patients/PatientsSearchSelectDataBlock/index.vue';
 import PatientsSearchSelect from '@/components/patients/PatientsSearchSelect/index.vue';
 import UiModelsAutocompleteSearch from '@/components/ui/UiModelsAutocompleteSearch/index.vue';
 import InvoiceStatusTag from '@/components/invoices/InvoiceStatusTag/index.vue';
@@ -19,6 +20,7 @@ export default {
     InvoiceStatusTag,
     UiModelsAutocompleteSearch,
     PatientsSearchSelect,
+    PatientsSearchSelectDataBlock,
     TransactionsTable,
   },
   emits: ['update:modelValue', 'action'],
