@@ -83,7 +83,7 @@
         :total="treatments?.length"
         :perPage="treatments?.length"
         :page="1"
-        :action_show="true"
+        :actionShow="true"
         :items="treatments" />
     </ElCard>
   </ElCard>
@@ -173,7 +173,7 @@ export default {
     infoItems() {
       return [
         {
-          avatar: this.patient.gender,
+          gender: this.patient.gender,
           label: this.$t('Patients.NamePatient'),
           value: this.patient.name || '',
         },

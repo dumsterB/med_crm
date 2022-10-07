@@ -30,15 +30,17 @@
           <template #default="{ row }">
             <div class="treatments-table-actions">
               <ElButton
-                v-show="row.status !== Treatment.enum.statuses.Closed && !action_show"
+                v-show="row.status !== Treatment.enum.statuses.Closed && !actionShow"
                 type="primary"
                 :loading="localLoading.closeTreatment && closedTreatmentId == row.id"
                 @click.stop="closeTreatment(row)">
                 {{ $t('Treatments.CloseTreatment') }}
               </ElButton>
 
-              <ElButton v-show="action_show" type="primary" text @click.stop="goToTreatment(row)">
-                <UiIcon class="treatments-table-actions__icon" v-show="type" :icon="icons.EYE" />
+              <ElButton v-show="actionShow" type="primary" text @click.stop="goToTreatment(row)">
+                <template #icon>
+                  <UiIcon :icon="icons.EYE" />
+                </template>
                 {{ $t('Base.Open') }}
               </ElButton>
             </div>
@@ -83,7 +85,7 @@ export default {
     perPage: Number,
     total: Number,
     search: String,
-    action_show: Boolean,
+    actionShow: Boolean,
   },
   data() {
     return {

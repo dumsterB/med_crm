@@ -2,8 +2,8 @@
   <div class="patient-card">
     <ElCard :shadow="shadow" class="patient-card">
       <div class="patient-card-info" v-for="patient of items">
-        <div class="patient-card-info_avatar" v-if="patient.avatar">
-          <UiAvatar size="large" :gender="patient.avatar"></UiAvatar>
+        <div class="patient-card-info_avatar" v-if="patient.gender">
+          <UiAvatar size="large" :gender="patient.gender"></UiAvatar>
         </div>
         <div>
           <p class="patient-card-info__title">

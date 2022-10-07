@@ -36,10 +36,5 @@
   &-actions {
     display: flex;
     gap: 6px;
-    &__icon{
-      color: var(--primary-color);
-      margin-right: 5px;
-      display: flex!important;
-    }
   }
 }
