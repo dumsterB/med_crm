@@ -1,3 +1,4 @@
+<!-- TODO: удалить или переделать -->
 <template>
   <LayoutDoctor fixHeight>
     <LayoutContentHeader>
@@ -20,11 +21,11 @@ import { mapState } from 'vuex';
 import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model.js';
 import { compareQueriesThenLoadData } from '@/utils/router.utils';
 import { usePage, usePerPage } from '@/hooks/query';
-import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
+import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
 import LayoutDoctor from '@/components/layouts/LayoutDoctor/index.vue';
-import CreateOrEditTemplateDrawer from '@/components/doctors/CreateOrEditTemplateDrawer/index.vue';
+import CreateOrEditTemplateModal from '@/components/doctors/CreateOrEditTemplateModal/index.vue';
 import TemplatesTable from '@/components/doctors/TemplatesTable/index.vue';
 
 export default {
@@ -90,10 +91,10 @@ export default {
 
     async createTemplate() {
       const action = await this.$store.dispatch(
-        'modalAndDrawer/openDrawer',
-        CreateOrEditTemplateDrawer
+        'modalAndDrawer/openModal',
+        CreateOrEditTemplateModal
       );
-      if (action instanceof GlobalDrawerCloseAction) return;
+      if (action instanceof GlobalModalCloseAction) return;
     },
   },
 };

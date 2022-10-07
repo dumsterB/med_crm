@@ -4,10 +4,14 @@
   gap: 10px;
 
   &__search {
-    width: 60%;
+    width: 500px;
+  }
+  &-left-content {
+    display: flex;
+    gap: 20px;
     margin-right: auto;
   }
-  &-dropdown{
+  &-dropdown {
     display: flex;
     gap: 15px;
   }

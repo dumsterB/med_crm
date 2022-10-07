@@ -1,12 +1,55 @@
 .default-inspection-card {
+  flex: 1;
+  overflow-y: hidden;
+  background-color: inherit;
+  border: none;
+
+  .el-card__body {
+    height: 100%;
+  }
+
   &-form {
-    & > * {
-      max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-right: 6px;
+    overflow-y: auto;
+
+    &__content {
+      flex: 1;
+    }
+    &__template-result {
+      margin: 0 0 2px;
     }
 
+    &__actions {
+      position: sticky;
+      position: -webkit-sticky;
+      bottom: 0px;
+      width: 100%;
+      margin-bottom: 0;
+      padding: 10px;
+      background-color: var(--el-card-bg-color);
+      border-top: 0.6px solid var(--el-card-border-color);
+      z-index: 999;
+    }
     &-actions {
       display: flex;
       gap: 10px;
+    }
+  }
+}
+
+.test {
+  height: 15000px;
+}
+
+@media print {
+  .default-inspection-card {
+    &-form {
+      &-actions {
+        display: none !important;
+      }
     }
   }
 }

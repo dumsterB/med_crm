@@ -23,7 +23,7 @@
 
 <script>
 import PatientRow from '@/components/patients/PatientRow/index.vue';
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import CreateOrEditPatientModal from '@/components/patients/CreateOrEditPatientModal/index.vue';
 
 export default {
   name: 'PatientsSearchPopover',
@@ -44,8 +44,8 @@ export default {
 
   methods: {
     addPatient() {
-      this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreateOrEditPatientDrawer,
+      this.$store.dispatch('modalAndDrawer/openModal', {
+        component: CreateOrEditPatientModal,
         payload: {
           nameOrPhone: this.search,
         },

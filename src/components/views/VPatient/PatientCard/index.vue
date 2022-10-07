@@ -33,6 +33,14 @@
       <ElButton v-if="permissions.editUser" type="primary" @click="editPatient">
         {{ $t('Base.Edit') }}
       </ElButton>
+
+      <ElButton
+        v-if="permissions.printBracelet"
+        type="primary"
+        :loading="loading.printBracelet"
+        @click="printBracelet">
+        {{ $t('Patients.PrintBracelet') }}
+      </ElButton>
     </div>
   </ElCard>
 </template>
@@ -44,9 +52,10 @@ import { insertRouteParams } from '@/utils/router.utils';
 import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
-import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
+import { PrinterService } from '@/services/printer.service';
+import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import CreateOrEditPatientModal from '@/components/patients/CreateOrEditPatientModal/index.vue';
 
 export default {
   name: 'VPatientPatientCard',
@@ -63,7 +72,11 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      loading: {
+        printBracelet: false,
+      },
+    };
   },
   computed: {
     ...mapState({
@@ -74,6 +87,7 @@ export default {
       return {
         editUser: this.user.role !== User.enum.roles.Doctor,
         ambulatoryCard: this.user.role === User.enum.roles.Doctor,
+        printBracelet: this.user.role === User.enum.roles.Manager,
       };
     },
 
@@ -109,15 +123,33 @@ export default {
 
   methods: {
     async editPatient() {
-      const action = await this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreateOrEditPatientDrawer,
+      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
+        component: CreateOrEditPatientModal,
         payload: {
           data: this.data,
         },
       });
 
-      if (action instanceof GlobalDrawerCloseAction) return;
+      if (action instanceof GlobalModalCloseAction) return;
       this.$emit('update:data', action.data.patient);
+    },
+
+    async printBracelet() {
+      if (this.loading.printBracelet) return;
+      this.loading.printBracelet = true;
+
+      try {
+        await PrinterService.printBraceletByPatientId(this.data.id);
+        this.$notify({ type: 'success', title: this.$t('Notifications.Success') });
+      } catch (err) {
+        console.log(err);
+        this.$notify({
+          type: 'error',
+          title: err?.response?.data?.message || this.$t('Notifications.Error'),
+        });
+      }
+
+      this.loading.printBracelet = false;
     },
   },
 };
@@ -126,5 +158,7 @@ export default {
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/base.locales.json" />
 <i18n src="@/locales/user.locales.json" />
+<i18n src="@/locales/patients.locales.json" />
 <i18n src="@/locales/appointments.locales.json" />
+<i18n src="@/locales/notifications.locales.json" />
 <i18n src="./index.locales.json" />

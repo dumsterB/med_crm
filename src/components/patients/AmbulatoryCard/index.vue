@@ -1,47 +1,48 @@
 <!--  TODO: перебиравть поля циклом когда будут известны все поля и их типы  -->
 
 <template>
-  <div class="ambulatory-cards">
+  <ElCard class="ambulatory-cards printer__block printer__doc" shadow="never">
+    <h1 class="printer__title">{{ $t('Base.AmbulatoryCard') }}</h1>
     <PatientCardRow :patient="patient"></PatientCardRow>
-<!--    <ElCard class="ambulatory-patient-card">-->
-<!--      <div class="ambulatory-patient-card-info_avatar">-->
-<!--        <div>-->
-<!--          <UiAvatar size="large" :gender="patient.gender"></UiAvatar>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--          <p class="ambulatory-patient-card-info__title">-->
-<!--            {{ $t('Base.NamePatient') }}-->
-<!--          </p>-->
-<!--          <p class="ambulatory-patient-card-info__description">-->
-<!--            {{ patient.name }}-->
-<!--          </p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="ambulatory-patient-card-info">-->
-<!--        <p class="ambulatory-patient-card-info__title">-->
-<!--          {{ $t('User.Phone') }}-->
-<!--        </p>-->
-<!--        <p class="ambulatory-patient-card-info__description">-->
-<!--          {{ patient.phone }}-->
-<!--        </p>-->
-<!--      </div>-->
-<!--      <div class="ambulatory-patient-card-info">-->
-<!--        <p class="ambulatory-patient-card-info__title">-->
-<!--          {{ $t('User.Birthdate') }}-->
-<!--        </p>-->
-<!--        <p class="ambulatory-patient-card-info__description">-->
-<!--          {{ patient.birthdate }}-->
-<!--        </p>-->
-<!--      </div>-->
-<!--      <div class="ambulatory-patient-card-info">-->
-<!--        <p class="ambulatory-patient-card-info__title">-->
-<!--          {{ $t('User.Gender') }}-->
-<!--        </p>-->
-<!--        <p class="ambulatory-patient-card-info__description">-->
-<!--          {{ patient.gender }}-->
-<!--        </p>-->
-<!--      </div>-->
-<!--    </ElCard>-->
+    <!--    <ElCard class="ambulatory-patient-card">-->
+    <!--      <div class="ambulatory-patient-card-info_avatar">-->
+    <!--        <div>-->
+    <!--          <UiAvatar size="large" :gender="patient.gender"></UiAvatar>-->
+    <!--        </div>-->
+    <!--        <div>-->
+    <!--          <p class="ambulatory-patient-card-info__title">-->
+    <!--            {{ $t('Base.NamePatient') }}-->
+    <!--          </p>-->
+    <!--          <p class="ambulatory-patient-card-info__description">-->
+    <!--            {{ patient.name }}-->
+    <!--          </p>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div class="ambulatory-patient-card-info">-->
+    <!--        <p class="ambulatory-patient-card-info__title">-->
+    <!--          {{ $t('User.Phone') }}-->
+    <!--        </p>-->
+    <!--        <p class="ambulatory-patient-card-info__description">-->
+    <!--          {{ patient.phone }}-->
+    <!--        </p>-->
+    <!--      </div>-->
+    <!--      <div class="ambulatory-patient-card-info">-->
+    <!--        <p class="ambulatory-patient-card-info__title">-->
+    <!--          {{ $t('User.Birthdate') }}-->
+    <!--        </p>-->
+    <!--        <p class="ambulatory-patient-card-info__description">-->
+    <!--          {{ patient.birthdate }}-->
+    <!--        </p>-->
+    <!--      </div>-->
+    <!--      <div class="ambulatory-patient-card-info">-->
+    <!--        <p class="ambulatory-patient-card-info__title">-->
+    <!--          {{ $t('User.Gender') }}-->
+    <!--        </p>-->
+    <!--        <p class="ambulatory-patient-card-info__description">-->
+    <!--          {{ patient.gender }}-->
+    <!--        </p>-->
+    <!--      </div>-->
+    <!--    </ElCard>-->
     <ElCard class="ambulatory-card" shadow="never">
       <ElForm label-position="top">
         <ElFormItem :label="$t('User.FullName')">
@@ -113,7 +114,19 @@
       </ElForm>
 
       <ElDivider />
+      <div class="ambulatory-cards__actions ambulatory-cards-actions">
+        <ElButton type="primary" :loading="loading" @click="saveChanges">
+          {{ $t('Base.SaveChanges') }}
+        </ElButton>
+        <ElButton text @click="print">
+          <template #icon>
+            <UiIcon :icon="icons.PRINTER" />
+          </template>
+          {{ $t('Base.Print') }}
+        </ElButton>
+      </div>
     </ElCard>
+
     <ElCard class="ambulatory-patient-card">
       <TreatmentsTable
         :total="treatments?.length"
@@ -122,30 +135,27 @@
         :action_show="true"
         :items="treatments" />
     </ElCard>
-    <div class="ambulatory-cards__actions ambulatory-cards-actions">
-      <ElButton type="primary" :loading="loading" @click="saveChanges">
-        {{ $t('Base.SaveChanges') }}
-      </ElButton>
-    </div>
-  </div>
+  </ElCard>
 </template>
 
 <script>
+import * as icons from '@/enums/icons.enum.js';
 import { AmbulatoryCard } from '@/models/AmbulatoryCard.model';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
 import TreatmentsTable from '@/components/treatments/TreatmentsTable/index.vue';
-import PatientCardRow from "../PatientCardRow/index.vue";
+import PatientCardRow from '../PatientCardRow/index.vue';
 
 export default {
   name: 'AmbulatoryCard',
   emits: ['update:patient'],
+  components: {
+    TreatmentsTable,
+    PatientCardRow,
+  },
   props: {
     patient: [User, Patient, Object],
     treatments: Array,
-  },
-  components: {
-    TreatmentsTable, PatientCardRow
   },
   data() {
     return {
@@ -203,7 +213,15 @@ export default {
 
       this.loading = false;
     },
+
+    print() {
+      window.print();
+    },
   },
+
+  setup: () => ({
+    icons,
+  }),
 };
 </script>
 

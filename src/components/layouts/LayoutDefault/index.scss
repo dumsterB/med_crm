@@ -1,6 +1,6 @@
 .layout-default {
   --padding-x: 15px;
-  --padding-y: 20px;
+  --padding-y: 12px;
   --padding-medium: var(--padding-y) var(--padding-x);
 
   &__el-header {
@@ -16,6 +16,7 @@
   &__main {
     height: 100vh;
     overflow-y: auto;
+    background: #f6f9f9;
 
     &_fix-height {
       overflow-y: hidden;
@@ -24,6 +25,8 @@
   &__header {
     padding: var(--padding-medium);
     background-color: var(--bg-color);
+    margin: 15px 15px 0px 15px;
+    border-radius: 8px;
   }
   &__content {
     display: flex;

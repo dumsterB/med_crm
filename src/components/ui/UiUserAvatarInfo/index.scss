@@ -1,7 +1,7 @@
 .ui-user-avatar-info {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 
   &__avatar {
   }
@@ -12,11 +12,11 @@
 
     &__name {
       &_bold {
-        font-weight: bold;
+        font-weight: 500;
       }
     }
     &__secondary {
-      color: var(--text-secondary-color);
+      color: #90a4ae;
       font-size: 0.85em;
     }
   }

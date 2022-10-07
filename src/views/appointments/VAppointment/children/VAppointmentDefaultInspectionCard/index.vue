@@ -1,26 +1,14 @@
 <template>
   <div class="v-app-ins-card">
     <LayoutContentHeader>
-      <!--  TODO: заменить на ElPageHeader  -->
-      <div class="v-app-ins-card-header">
-        <RouterLink :to="appointmentDefaultCardPageLink">
-          <ElButton text>
-            <template #icon>
-              <UiIcon :icon="icons.CHEVRON_LEFT" />
-            </template>
-            {{ $t('Base.Back') }}
-          </ElButton>
-        </RouterLink>
-
-        <div class="v-app-ins-card-header-info">
-          <span>{{ $t('Base.Inspection') }}:</span>
-          <RouterLink :to="patientPageLink">
-            <ElButton type="primary" text>
-              {{ appointment.patient?.name }}
-            </ElButton>
-          </RouterLink>
-        </div>
-      </div>
+      <ElPageHeader
+        class="v-app-ins-card-header"
+        :title="$t('Base.Back')"
+        @back="goToAppointmentDefaultCard">
+        <template #content>
+          {{ $t('Base.InspectionCard') }}
+        </template>
+      </ElPageHeader>
     </LayoutContentHeader>
 
     <DefaultInspectionCard
@@ -85,6 +73,12 @@ export default {
           return this.$router.push(this.appointmentDefaultCardPageLink);
       },
       immediate: true,
+    },
+  },
+
+  methods: {
+    goToAppointmentDefaultCard() {
+      this.$router.push(this.appointmentDefaultCardPageLink);
     },
   },
 

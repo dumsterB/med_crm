@@ -33,6 +33,7 @@
         }
       },
       "EndAt": "Конец в",
+      "EndDate": "Конец",
       "Months": {
         "0": {
           "Full": "Январь",
@@ -85,6 +86,7 @@
       },
       "SelectDate": "Выберите дату",
       "StartAt": "Начало в",
+      "StartDate": "Начало",
       "Time": "Время"
     }
   },
@@ -122,6 +124,7 @@
         }
       },
       "EndAt": "Tugashi",
+      "EndDate": "??Конец??",
       "Months": {
         "0": {
           "Full": "Yanvar",
@@ -174,6 +177,7 @@
       },
       "SelectDate": "Sanani tanlang",
       "StartAt": "Boshlanishi",
+      "StartDate": "??Начало??",
       "Time": "Vaqt"
     }
   }

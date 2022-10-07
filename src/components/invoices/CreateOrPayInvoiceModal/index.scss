@@ -1,0 +1,92 @@
+.create-or-pay-invoice-modal {
+  width: 1000px;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &__status {
+      margin-left: 14px;
+      font-weight: normal;
+    }
+  }
+
+  &-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  &__transactions-table {
+    grid-column: 2/3;
+    max-height: 200px;
+  }
+
+  &-part {
+    border: none !important;
+    .el-card__header {
+      font-weight: bold;
+    }
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 15px;
+
+      .el-form-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .el-form-item {
+        display: flex;
+        justify-content: space-between;
+
+        &__content {
+          display: flex;
+          justify-content: flex-end;
+          text-align: right;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  &-notes-part {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .el-form-item {
+      &__label {
+        justify-content: flex-start;
+      }
+    }
+  }
+
+  &__services {
+    flex: 1;
+    width: auto;
+    min-width: auto !important;
+    min-height: 200px;
+    max-height: 200px;
+    margin-bottom: 20px;
+
+    thead {
+      display: none;
+    }
+  }
+
+  &__discount-part {
+    .el-input {
+      max-width: 100px;
+    }
+  }
+
+  &-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+  }
+}

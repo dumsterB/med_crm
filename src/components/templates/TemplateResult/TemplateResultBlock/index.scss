@@ -1,0 +1,19 @@
+.template-result-block {
+  .el-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__title {
+    font-weight: bold;
+  }
+
+  &__file-upload {
+    max-width: 400px;
+  }
+  .el-input,
+  .el-textarea {
+    max-width: 600px;
+  }
+}

@@ -1,30 +1,38 @@
 <template>
-  <ElCard class="default-inspection-card" shadow="never">
+  <ElCard class="default-inspection-card printer__block printer__doc" shadow="never">
     <ElForm
       class="default-inspection-card-form"
       label-position="top"
+      id="inspection-card"
       ref="form"
       @submit.prevent="submitHandler">
-      <ElFormItem v-show="!readonly" :label="$t('Templates.SelectTemplate')">
-        <UiModelsAutocompleteSearch
-          v-model="templateId"
-          label="title"
-          :model-for-use="InspectionCardTemplate"
-          :disabled="readonly"
-          @select="selectTemplate" />
-      </ElFormItem>
+      <div class="default-inspection-card-form__content">
+        <h1 class="printer__title default-inspection-card-form__title">
+          {{ $t('Base.InspectionCard') }}
+        </h1>
 
-      <DefaultInspectionCardBaseFormItems
-        v-model:data="inspectionCard"
-        :readonly="readonly"
-        @change="updateInspectionCard" />
+        <ElFormItem v-show="!readonly" :label="$t('Templates.SelectTemplate')">
+          <UiModelsAutocompleteSearch
+            v-model="templateId"
+            label="title"
+            :model-for-use="InspectionCardTemplate"
+            :disabled="readonly"
+            @select="selectTemplate" />
+        </ElFormItem>
 
-      <ElFormItem>
+        <TemplateResult
+          class="default-inspection-card-form__template-result"
+          v-model="inspectionCard.basic_data"
+          :readonly="readonly"
+          @change="updateInspectionCard" />
+      </div>
+
+      <ElFormItem class="default-inspection-card-form__actions">
         <div class="default-inspection-card-form-actions">
           <slot name="actions">
             <ElButton
-              v-show="!readonly && !appointment.service_case?.disease_code_codes?.length"
               data-method="toDiagnose"
+              v-show="!readonly && !appointment.service_case?.disease_code_codes?.length"
               type="warning"
               native-type="submit"
               plain>
@@ -32,11 +40,18 @@
             </ElButton>
 
             <ElButton
-              v-show="!readonly"
               data-method="endReception"
+              v-show="!readonly"
               type="primary"
               native-type="submit">
               {{ $t('Appointments.EndReception') }}
+            </ElButton>
+
+            <ElButton v-show="readonly" text @click="print">
+              <template #icon>
+                <UiIcon :icon="icons.PRINTER" />
+              </template>
+              {{ $t('Base.Print') }}
             </ElButton>
           </slot>
         </div>
@@ -46,15 +61,15 @@
 </template>
 
 <script>
+import * as icons from '@/enums/icons.enum.js';
 import { Appointment } from '@/models/Appointment.model';
 import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model';
 import { DefaultInspectionCard } from '@/models/DefaultInspectionCard.model';
-
-import DefaultInspectionCardBaseFormItems from '@/components/appointments/DefaultInspectionCardBaseFormItems/index.vue';
+import TemplateResult from '@/components/templates/TemplateResult/index.vue';
 
 export default {
   name: 'DefaultInspectionCard',
-  components: { DefaultInspectionCardBaseFormItems },
+  components: { TemplateResult },
   emits: ['update:appointment', 'appointment:provide', 'appointment:set:diagnosis'],
   props: {
     appointment: [Appointment, Object],
@@ -81,13 +96,17 @@ export default {
   },
 
   methods: {
+    print() {
+      window.print();
+    },
+    /** @param {InspectionCardTemplate} template */
     selectTemplate(template) {
       this.inspectionCard = new DefaultInspectionCard({
-        ...template,
-
         id: null,
         user_id: this.appointment.patient_id,
         appointment_id: this.appointment.id,
+
+        basic_data: template.basic_data,
       });
       this.updateInspectionCard();
     },
@@ -130,6 +149,7 @@ export default {
 
   setup: () => ({
     InspectionCardTemplate,
+    icons,
   }),
 };
 </script>

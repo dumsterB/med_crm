@@ -8,6 +8,7 @@ import specialties from '@/store/specialties';
 import appointments from '@/store/appointments';
 import templates from '@/store/templates';
 import treatments from '@/store/treatments';
+import invoices from '@/store/invoices';
 
 export const Store = createStore({
   state: {},
@@ -35,5 +36,6 @@ export const Store = createStore({
     appointments,
     templates,
     treatments,
+    invoices,
   },
 });

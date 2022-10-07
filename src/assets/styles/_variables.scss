@@ -2,7 +2,7 @@ html,
 body {
   --container-width: 1700px;
 
-  --primary-color: #54c2b6;
+  --primary-color: #40CCBD;
   --primary-hover-color: #89d0c7;
   --primary-dark-color: #357b73;
   --primary-disabled-color: #78dbd0;
@@ -11,12 +11,26 @@ body {
   --text-color: #404d61;
   --text-secondary-color: #6e7191;
 
+  --lable-color: #b2b6c6;
+
   --bg-color: #ffffff;
   --bg-secondary-color: #fcfcfc;
-  --bg-container-color: #f4fafa;
-  --bg-inputs-color: #f3f7f6;
+  --bg-container-color: #f6f9f9;
+  --bg-inputs-color: var(--bg-color);
 
   --border-radius-small: 4px;
   --border-radius-medium: 8px;
   --border-radius-large: 12px;
+
+  --dialog-body-content-bg-color: #ffffff;
+  --dialog-body-content-padding: 20px 20px 20px 20px;
+  --dialog-body-content-border-radius: 8px;
+  --dialog-body-content-box-shadow: 0px 0px 20px rgba(188, 216, 213, 0.2);
+
+  --button-primary-gradiend-bg: linear-gradient(
+    87.24deg,
+    #40ccbd -1.13%,
+    rgba(65, 210, 195, 0.59) 118.25%
+  );
+
 }

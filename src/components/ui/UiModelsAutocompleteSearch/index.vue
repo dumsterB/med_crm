@@ -13,6 +13,8 @@
       :placeholder="placeholder || $t('Base.PleaseInput')"
       :clearable="clearable"
       :no-data-text="$t('Base.NoData')"
+      :collapse-tags="collapseTags"
+      :collapse-tags-tooltip="collapseTagsTooltip"
       @visible-change="getItems"
       @update:model-value="$emit('update:modelValue', $event)"
       @change="selectHandler"
@@ -53,6 +55,7 @@
 <script>
 import * as icons from '@/enums/icons.enum.js';
 import { CRUDModel } from '@/models/CRUD.model';
+import { cloneDeep } from 'lodash';
 
 export default {
   name: 'UiModelsAutocompleteSearch',
@@ -64,7 +67,7 @@ export default {
     // для поиска вызвается find метод этого класса
     modelForUse: [CRUDModel, Function],
 
-    defaultItem: [CRUDModel, Object],
+    defaultItem: [CRUDModel, Object, Array],
     searchQuery: Object,
     // поле для показа
     label: {
@@ -77,12 +80,14 @@ export default {
       default: 'id',
     },
 
+    showCreateOption: Boolean,
     multiple: Boolean,
     required: Boolean,
     disabled: Boolean,
     placeholder: String,
     clearable: Boolean,
-    showCreateOption: Boolean,
+    collapseTags: Boolean,
+    collapseTagsTooltip: Boolean,
   },
   data() {
     return {
@@ -127,11 +132,12 @@ export default {
       this.$emit('update:data', data.data);
     },
 
-    selectHandler(id) {
-      this.$emit(
-        'select',
-        this.items.find((elem) => elem[this.value] === id)
-      );
+    selectHandler(idOrIds) {
+      const result = this.multiple
+        ? this.items.filter((elem) => idOrIds.includes(elem[this.value]))
+        : this.items.find((elem) => elem[this.value] === idOrIds);
+
+      this.$emit('select', cloneDeep(result));
     },
 
     createItem() {

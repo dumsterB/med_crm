@@ -1,0 +1,98 @@
+.printer__block {
+}
+.printer__doc {
+}
+
+.printer__title {
+  display: none;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 1.9em;
+  font-weight: 800;
+  visibility: visible !important;
+}
+
+@media print {
+  *,
+  *::after,
+  *::before {
+    position: static !important;
+    visibility: hidden;
+  }
+
+  .printer__block,
+  .printer__block * {
+    visibility: visible !important;
+  }
+  .printer__block {
+    display: block;
+    position: absolute !important;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  .printer__doc,
+  .printer__doc * {
+    border-color: transparent;
+  }
+
+  .printer__title {
+    display: block;
+  }
+
+  .el-loading-parent--relative {
+    position: static !important;
+  }
+  .el-card__body {
+    max-width: 100% !important;
+  }
+
+  .el-input__prefix {
+    display: none !important;
+  }
+  .el-input {
+    --el-input-bg-color: transparent;
+    --el-input-border: none;
+    --el-input-border-color: red;
+
+    &,
+    & * {
+      border: none !important;
+      outline: none !important;
+    }
+  }
+  .el-form-item__label {
+    font-weight: 700;
+  }
+  .el-input__wrapper {
+    box-shadow: none;
+    background: transparent !important;
+  }
+  .el-textarea__inner {
+    box-shadow: none !important;
+    outline: none !important;
+    resize: none;
+  }
+
+  .el-checkbox {
+    display: none;
+
+    &__input {
+      display: none;
+    }
+    &.is-checked {
+      display: flex;
+    }
+  }
+
+  .ui-upload {
+    .el-upload {
+      display: none;
+    }
+    .el-upload-list {
+      &__item-status-label {
+        display: none;
+      }
+    }
+  }
+}

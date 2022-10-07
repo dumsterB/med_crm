@@ -40,7 +40,7 @@ import { Doctor } from '@/models/Doctor.model';
 
 import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
+import CreateOrEditPatientModal from '@/components/patients/CreateOrEditPatientModal/index.vue';
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
 
 export default {
@@ -144,7 +144,7 @@ export default {
     },
 
     createPatient() {
-      this.$store.dispatch('modalAndDrawer/openDrawer', CreateOrEditPatientDrawer);
+      this.$store.dispatch('modalAndDrawer/openModal', CreateOrEditPatientModal);
     },
   },
 };

@@ -18,23 +18,21 @@ export default {
   components: { DefaultMenu },
   computed: {
     navigation() {
-      return [DASHBOARD_ROUTE, DOCTORS_QUEUE_ROUTE, PATIENTS_ROUTE, DOCTORS_TEMPLATES_ROUTE].map(
-        (route) => ({
-          path: route.path,
-          title: this.routesOptionsByRouteName[route.name].text,
-          icon: this.routesOptionsByRouteName[route.name].icon,
-        })
-      );
+      return [DASHBOARD_ROUTE, DOCTORS_QUEUE_ROUTE, PATIENTS_ROUTE].map((route) => ({
+        path: route.path,
+        title: this.routesOptionsByRouteName[route.name].text,
+        icon: this.routesOptionsByRouteName[route.name].icon,
+      }));
     },
 
     routesOptionsByRouteName() {
       return {
         [DASHBOARD_ROUTE.name]: {
-          icon: icons.DASHBOARD,
+          icon: icons.DASHBOARD_NAV,
           text: this.$t('Base.Dashboard'),
         },
         [DOCTORS_QUEUE_ROUTE.name]: {
-          icon: icons.NOTE,
+          icon: icons.TIMETABLE_NAV,
           text: this.$t('Base.Queue'),
         },
         [PATIENTS_ROUTE.name]: {
