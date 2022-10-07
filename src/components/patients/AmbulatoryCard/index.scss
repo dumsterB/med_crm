@@ -1,7 +1,9 @@
 .ambulatory-cards {
-  gap: 20px;
   display: grid;
+  gap: 20px;
   .ambulatory-card {
+    margin-top: 20px;
+    margin-bottom: 20px;
     & > * {
       width: 100%;
       max-width: 800px;

@@ -3,19 +3,9 @@
 <template>
   <ElCard class="ambulatory-cards printer__block printer__doc" shadow="never">
     <h1 class="printer__title">{{ $t('Base.AmbulatoryCard') }}</h1>
-    <PatientCardRow :patient="patient"></PatientCardRow>
+    <PatientCardRow class="ambulatory-patient-card" :patient="patient"></PatientCardRow>
     <ElCard class="ambulatory-card" shadow="never">
       <ElForm label-position="top">
-        <ElFormItem :label="$t('User.FullName')">
-          <ElInput v-model="localPatient.name" />
-        </ElFormItem>
-        <ElFormItem :label="$t('User.Birthdate')">
-          <ElDatePicker v-model="localPatient.birthdate" />
-        </ElFormItem>
-
-        <ElFormItem :label="$t('User.Phone')">
-          <UiPhoneInput v-model="localPatient.phone" />
-        </ElFormItem>
 
         <ElFormItem :label="$t('User.PlaceResidence')">
           <ElInput v-model="localAmbulatoryCard.place_residence" />

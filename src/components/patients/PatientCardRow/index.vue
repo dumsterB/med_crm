@@ -1,52 +1,54 @@
 <template>
   <div class="patient-card">
     <ElCard class="patient-card">
-      <div class="patient-card-info_avatar">
-        <div>
-          <UiAvatar size="large" :gender="patient.gender"></UiAvatar>
+      <div class="patient-card-info" v-for="(item, i) of infoItems" :key="i">
+        <div class="patient-card-info_avatar" v-if="item.avatar">
+          <div>
+            <UiAvatar size="large" :gender="item.avatar"></UiAvatar>
+          </div>
         </div>
         <div>
           <p class="patient-card-info__title">
-            {{ $t('Patients.NamePatient') }}
+            {{ item.label }}
           </p>
           <p class="patient-card-info__description">
-            {{ patient.name }}
+            {{ item.value }}
           </p>
         </div>
-      </div>
-      <div class="patient-card-info">
-        <p class="patient-card-info__title">
-          {{ $t('User.Phone') }}
-        </p>
-        <p class="patient-card-info__description">
-          {{ patient.phone }}
-        </p>
-      </div>
-      <div class="patient-card-info">
-        <p class="patient-card-info__title">
-          {{ $t('User.Birthdate') }}
-        </p>
-        <p class="patient-card-info__description">
-          {{ patient.birthdate }}
-        </p>
-      </div>
-      <div class="patient-card-info">
-        <p class="patient-card-info__title">
-          {{ $t('User.Gender') }}
-        </p>
-        <p class="patient-card-info__description">
-          {{ patient.gender }}
-        </p>
       </div>
     </ElCard>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'index',
   props: {
     patient: Object,
+  },
+  computed: {
+    infoItems() {
+      return [
+        {
+          avatar: this.patient.gender,
+          label: this.$t('Patients.NamePatient'),
+          value: this.patient.name || '',
+        },
+        {
+          label: this.$t('User.Phone'),
+          value: this.patient.phone || '',
+        },
+        {
+          label: this.$t('User.Birthdate'),
+          value: this.patient.birthdate || '',
+        },
+        {
+          label: this.$t('User.Gender'),
+          value: this.$t('User.Genders.' + this.patient.gender)  || '',
+        },
+      ];
+    },
   },
 };
 </script>

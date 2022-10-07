@@ -37,8 +37,8 @@
     display: flex;
     gap: 6px;
     &__icon{
-      margin-top: 2px;
       color: var(--primary-color);
+      margin-right: 5px;
       display: flex!important;
     }
   }
