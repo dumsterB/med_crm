@@ -110,7 +110,7 @@
           type="primary"
           form="data"
           class="create-patient-modal-form-actions__submit"
-          @click="checkPhoneForRebinding">
+          @click="isOpenPhoneConfirmModal = true">
           {{ $t(data ? 'RebindPhone' : 'CreateNewPatient') }}
         </ElButton>
 
@@ -125,6 +125,12 @@
         </ElButton>
       </div>
     </template>
+
+    <PhoneConfirmModal
+      v-model="isOpenPhoneConfirmModal"
+      :phone="this.patient.phone"
+      append-to-body
+      @action="checkPhoneForRebinding" />
   </ElDialog>
 </template>
 
