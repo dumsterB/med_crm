@@ -1,11 +1,11 @@
 <template>
   <ElDialog
-    custom-class="create-appointment-modal"
+    custom-class="create-or-edit-appointment-modal"
     :model-value="modelValue"
     :title="$t(`Title.${data?.id ? 'Edit' : 'Create'}`)"
     @update:model-value="$emit('update:modelValue', $event)">
     <ElForm
-      class="create-appointment-modal-form"
+      class="create-or-edit-appointment-modal-form"
       label-position="top"
       @submit.prevent="submitHandler">
       <!--  Patient  -->
@@ -138,7 +138,7 @@
       </ElFormItem>
       <!--  Actions  -->
       <ElFormItem :style="{ order: this.appointmentFieldsFlexOrder.actions }">
-        <div class="create-appointment-modal-form-actions">
+        <div class="create-or-edit-appointment-modal-form-actions">
           <ElButton type="primary" native-type="submit" :loading="loading.form">
             {{ $t(`Base.${data?.id ? 'Edit' : 'Create'}`) }}
           </ElButton>
