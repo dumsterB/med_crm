@@ -30,11 +30,18 @@
           <template #default="{ row }">
             <div class="treatments-table-actions">
               <ElButton
-                v-show="row.status !== Treatment.enum.statuses.Closed"
+                v-show="row.status !== Treatment.enum.statuses.Closed && !actionShow"
                 type="primary"
                 :loading="localLoading.closeTreatment && closedTreatmentId == row.id"
                 @click.stop="closeTreatment(row)">
                 {{ $t('Treatments.CloseTreatment') }}
+              </ElButton>
+
+              <ElButton v-show="actionShow" type="primary" text @click.stop="goToTreatment(row)">
+                <template #icon>
+                  <UiIcon :icon="icons.EYE" />
+                </template>
+                {{ $t('Base.Open') }}
               </ElButton>
             </div>
           </template>
@@ -58,12 +65,12 @@
 </template>
 
 <script>
+import * as icons from '@/enums/icons.enum.js';
 import { mapState } from 'vuex';
 import { PAGE_SIZES } from '@/config/ui.config';
 import { DOCTORS_TREATMENT_ROUTE } from '@/router/treatments.routes';
 import { Treatment } from '@/models/Treatment.model';
 import { User } from '@/models/User.model';
-
 import TreatmentStatusTag from '@/components/treatments/TreatmentStatusTag/index.vue';
 
 export default {
@@ -78,6 +85,7 @@ export default {
     perPage: Number,
     total: Number,
     search: String,
+    actionShow: Boolean,
   },
   data() {
     return {
@@ -117,7 +125,7 @@ export default {
       this.$router.push({
         name: DOCTORS_TREATMENT_ROUTE.name,
         params: {
-          id: row.id,
+          id: row.id
         },
       });
     },
@@ -145,6 +153,7 @@ export default {
 
   setup: () => ({
     Treatment,
+    icons,
   }),
 };
 </script>

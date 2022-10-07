@@ -6,6 +6,7 @@
       "EditPatient": "Изменить данные пациента",
       "HasTreatment": "На лечении",
       "MyPatients": "Мои пациенты",
+      "NamePatient": "Имя пациента",
       "NoPatient": "Пациен не найден",
       "PrintBracelet": "Распечатать браслет"
     }
@@ -17,6 +18,7 @@
       "EditPatient": "Bemorning ma'lumotlarini o'zgartirish",
       "HasTreatment": "Davolanmoqda",
       "MyPatients": "Mening bemorlarim",
+      "NamePatient": "Bemorning Ismi",
       "NoPatient": "Bemor topilmadi",
       "PrintBracelet": "Braslet chiqarish"
     }

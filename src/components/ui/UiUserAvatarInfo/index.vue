@@ -1,5 +1,7 @@
 <template>
-  <div class="ui-user-avatar-info">
+  <div
+    :class="['ui-user-avatar-info', { 'ui-user-avatar-info_link': !!link }]"
+    @click="clickHandler">
     <UiAvatar
       class="ui-user-avatar-info__avatar"
       :image="user.avatar"
@@ -28,13 +30,13 @@
       round>
       {{ $t('Patients.HasTreatment') }}
     </ElTag>
-
   </div>
 </template>
 
 <script>
 import { User } from '@/models/User.model';
 import { Patient } from '@/models/Patient.model';
+// import { PATIENT_ROUTE } from '@/router/patients.routes';
 
 export default {
   name: 'UiUserAvatarInfo',
@@ -50,6 +52,16 @@ export default {
       // имя жирным
       type: Boolean,
       default: true,
+    },
+
+    link: String,
+  },
+
+  methods: {
+    clickHandler() {
+      if (!!this.link) {
+        this.$router.push(this.link);
+      }
     },
   },
 };

@@ -2,18 +2,8 @@
 <template>
   <ElCard class="ambulatory-card printer__block printer__doc" shadow="never">
     <h1 class="printer__title">{{ $t('Base.AmbulatoryCard') }}</h1>
+
     <ElForm label-position="top">
-      <ElFormItem :label="$t('User.FullName')">
-        <ElInput v-model="localPatient.name" />
-      </ElFormItem>
-      <ElFormItem :label="$t('User.Birthdate')">
-        <ElDatePicker class="ambulatory-card__date-picker" v-model="localPatient.birthdate" />
-      </ElFormItem>
-
-      <ElFormItem :label="$t('User.Phone')">
-        <UiPhoneInput v-model="localPatient.phone" />
-      </ElFormItem>
-
       <ElFormItem :label="$t('User.PlaceResidence')">
         <ElInput v-model="localAmbulatoryCard.place_residence" />
       </ElFormItem>
@@ -128,10 +118,6 @@ export default {
   },
 
   methods: {
-    print() {
-      window.print();
-    },
-
     async saveChanges() {
       if (this.loading) return;
       this.loading = true;
@@ -158,6 +144,10 @@ export default {
       }
 
       this.loading = false;
+    },
+
+    print() {
+      window.print();
     },
   },
   setup: () => ({
