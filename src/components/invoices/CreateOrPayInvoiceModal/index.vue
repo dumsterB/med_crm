@@ -26,7 +26,7 @@
       <ElCard
         class="create-or-pay-invoice-modal-part"
         shadow="never"
-        :style="{ gridRow: !invoice.id ? 'auto' : '1/3' }">
+        :style="{ gridRow: invoice.id && invoice.transactions_ids.length ? '1/3' : 'auto' }">
         <template #header> {{ $t('PatientInfo') }} </template>
 
         <PatientsSearchSelectDataBlock
