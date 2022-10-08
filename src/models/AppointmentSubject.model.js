@@ -1,3 +1,5 @@
+import { uniqueId } from 'lodash';
+
 /**
  * @class AppointmentSubject
  */
@@ -13,6 +15,7 @@ export class AppointmentSubject {
    * @param {string} payload.end_at
    */
   constructor(payload) {
+    this._id = uniqueId(); // only for front
     this.group_service_ids = payload?.group_service_ids ?? [];
     this.group_services = payload?.group_services ?? [];
 
