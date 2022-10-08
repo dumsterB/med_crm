@@ -1,0 +1,29 @@
+.create-appointment-subject {
+  --gap: 14px;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+
+  &-part {
+    display: flex;
+    gap: var(--gap);
+  }
+
+  &__services {
+    flex: 0.6;
+  }
+  &__doctor {
+    flex: 0.4;
+  }
+
+  &__date-type {
+    flex-wrap: nowrap;
+    font-size: 0.9em;
+  }
+
+  &__submit {
+    min-width: 10em;
+    margin-left: auto;
+  }
+}
