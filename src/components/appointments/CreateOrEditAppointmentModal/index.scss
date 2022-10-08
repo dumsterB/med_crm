@@ -1,20 +1,36 @@
 .create-or-edit-appointment-modal {
-  width: 1000px;
+  width: 90%;
+  min-width: 1000px;
+  max-width: 1400px;
 
   .el-card {
     border: none;
-    &__body {
-      display: flex; // чтобы работали order: number инлйн стили
-      flex-direction: column;
-    }
   }
 
   &-form {
-    display: flex;
+    display: grid;
+    grid-template-columns: 3.5fr 7fr;
+    grid-template-rows: auto auto auto;
     gap: 20px;
 
-    &__part {
-      flex: 1;
+    &__patient-part {
+      grid-row: 1/4;
+    }
+    &__add-part {
+      height: max-content;
+
+      .el-card__body {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+    &__table-part {
+      grid-row: 2/3;
+    }
+
+    &__table {
+      border-top: 1px solid var(--el-border-color);
     }
 
     &-actions {
