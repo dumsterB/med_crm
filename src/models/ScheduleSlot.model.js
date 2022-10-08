@@ -21,43 +21,7 @@ export class ScheduleSlot extends CRUDModel {
     this.available = payload?.available ?? null;
   }
 
-  /**
-   * @param {number} serviceId
-   * @param {Date|string} from
-   * @param {Date|string} to
-   * @return {Promise<{response: AxiosResponse<*>, data: response.data}>}
-   */
-  static async getSlotsByServiceIds({ serviceIds, from, to }) {
-    const urlWithQuery = mergeOrCreateQuery({
-      url: 'schedule/slots',
-      query: {
-        service_id: serviceIds[0], // TODO: убрать
-        from,
-        to,
-      },
-    });
-
-    const response = await ApiService.get(urlWithQuery);
-    return { response, data: response.data };
-  }
-
-  /**
-   * @param {number} groupServiceId
-   * @param {Date|string} from
-   * @param {Date|string} to
-   * @return {Promise<{response: AxiosResponse<*>, data: response.data}>}
-   */
-  static async getSlotsByGroupServiceId({ groupServiceId, from, to }) {
-    const urlWithQuery = mergeOrCreateQuery({
-      url: 'schedule/slots/byGroup',
-      query: {
-        group_service_id: groupServiceId,
-        from,
-        to,
-      },
-    });
-
-    const response = await ApiService.get(urlWithQuery);
-    return { response, data: response.data };
+  static async get() {
+    return;
   }
 }
