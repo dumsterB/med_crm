@@ -31,7 +31,7 @@
 
       <AppointmentSubjectsTable
         class="create-or-edit-appointment-modal-form__table-part"
-        :items="appointment.subjects"
+        :items="appointment.appointments"
         @item:remove="removeSubject" />
     </ElForm>
 

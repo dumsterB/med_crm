@@ -126,12 +126,12 @@ export default {
 
     /** @param {AppointmentSubject} subject */
     addSubject(subject) {
-      this.appointment.subjects.push(subject);
+      this.appointment.appointments.push(subject);
     },
 
     /** @param {AppointmentSubject} subject */
     removeSubject(subject) {
-      this.appointment.subjects = this.appointment.subjects.filter(
+      this.appointment.appointments = this.appointment.subjects.filter(
         (elem) => elem._id !== subject._id
       );
     },
