@@ -29,6 +29,7 @@
       "RecordOnTime": "На время",
       "RecordingSource": "Источник записи",
       "SelectDoctor": "Выберите доктора",
+      "SelectServices": "Выберите услуги",
       "SelectStatus": "Выберите статус",
       "StartDate": "Дата приёма",
       "StartDateAndTime": "Время и дата приёма",
@@ -68,7 +69,6 @@
         "Recommendations": "Tavsiyalar",
         "Сomplaints": "Shikoyatlar"
       },
-      "RecordOnTime": "Vaqtga",
       "InspectionTypes": {
         "full": "To'liq tekshirish",
         "treatment": "Davolash jurnalini ko'rib chiqish"
@@ -77,8 +77,10 @@
       "PatientCome": "Bemor tashrif buyurdi",
       "PatientNotCome": "Bemor tashrif buyurmadi",
       "PhonePatient": "Bemorning telefon raqami",
+      "RecordOnTime": "Vaqtga",
       "RecordingSource": "Qabulga yozuv manbai",
       "SelectDoctor": "Shifokorni tanlang",
+      "SelectServices": "Xizmatlarni tanlang",
       "SelectStatus": "Statusni tanlang",
       "StartDate": "Qabul sanansi",
       "StartDateAndTime": "Qabul sanasi va vaqti",
