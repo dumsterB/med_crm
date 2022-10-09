@@ -166,9 +166,6 @@ export default {
     },
 
     async startFullProvideFlow() {
-      const success = await this.selectOrCreateServiceCase();
-      if (!success) return;
-
       this.$router.push({
         name: APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_INSPECTION_CARD.name,
         params: {
@@ -186,29 +183,6 @@ export default {
           id: this.appointment.id,
         },
       });
-    },
-
-    /**
-     * Возращает
-     *   true - если успешно установлен service_case,
-     *   false - модалка закрылась и нужно приостановить текщий flow
-     * @return {Promise<boolean>}
-     */
-    async selectOrCreateServiceCase() {
-      if (this.appointment.service_case_id) return true;
-
-      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
-        component: SelectOrCreateServiceCaseModal,
-        payload: {
-          userId: this.appointment.patient_id,
-          appointmentId: this.appointment.id,
-        },
-      });
-      if (!(action instanceof GlobalModalCloseAction)) {
-        this.appointment = action.data.appointment;
-      }
-
-      return !(action instanceof GlobalModalCloseAction);
     },
 
     /**
@@ -234,7 +208,7 @@ export default {
     },
 
     async setDiagnosis() {
-      if (this.appointment.service_case?.disease_code_codes?.length) return;
+      if (this.appointment.disease_code_codes?.length) return;
 
       const action = await this.$store.dispatch('modalAndDrawer/openModal', {
         component: SetDiagnosisModal,
