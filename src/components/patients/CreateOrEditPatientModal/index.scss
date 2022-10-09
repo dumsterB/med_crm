@@ -1,6 +1,6 @@
-.create-patient-modal {
-  &-custom {
-    .el-form {
+.create-or-edit-patient-modal {
+  &__content {
+    .create-or-edit-patient__content {
       background: var(--dialog-body-content-bg-color);
       padding: var(--dialog-body-content-padding);
       box-shadow: var(--dialog-body-content-box-shadow);
