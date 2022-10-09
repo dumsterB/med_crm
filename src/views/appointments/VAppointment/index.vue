@@ -17,6 +17,7 @@ import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import { User } from '@/models/User.model';
 import { Appointment } from '@/models/Appointment.model';
+import { InspectionCard } from '@/models/InspectionCard.model';
 import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
@@ -150,7 +151,10 @@ export default {
     },
 
     async startDoctorProvideFlow() {
-      if (!this.appointment.patient.has_treatment || this.appointment.service_case_id)
+      if (
+        !this.appointment.patient.has_treatment ||
+        this.appointment.inspection_card?.type === InspectionCard.enum.types.Default
+      )
         return this.startFullProvideFlow();
       if (this.appointment.treatment_id) return this.startTreatmentProvideFlow();
 
