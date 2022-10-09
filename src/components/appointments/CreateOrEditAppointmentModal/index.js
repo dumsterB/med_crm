@@ -192,7 +192,7 @@ export default {
 
     /** @param {AppointmentSubject} subject */
     removeSubject(subject) {
-      this.appointment.appointments = this.appointment.subjects.filter(
+      this.appointment.appointments = this.appointment.appointments.filter(
         (elem) => elem._id !== subject._id
       );
     },
