@@ -50,7 +50,7 @@ export default {
       let sum = this.invoice.id
         ? this.invoice.discounted_amount
         : this.invoice.payment_subjects.reduce(
-            (acc, elem) => acc + (elem.subject.price ?? elem.subject.total_amount) * elem.count,
+            (acc, elem) => acc + elem.subject.price * elem.count,
             0
           );
       sum = this.invoice.discount > 0 ? sum - sum * (this.invoice.discount / 100) : sum;

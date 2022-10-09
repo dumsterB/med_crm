@@ -95,7 +95,9 @@
               v-model="invoice.discount"
               type="number"
               placeholder="0%"
-              :disabled="!!invoice.id" />
+              :disabled="!!invoice.id"
+              min="0"
+              max="100" />
           </ElFormItem>
           <ElFormItem :label="$t('Base.Total')"> {{ totalPrice }} </ElFormItem>
         </div>
