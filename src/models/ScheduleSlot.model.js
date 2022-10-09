@@ -21,7 +21,10 @@ export class ScheduleSlot extends CRUDModel {
     this.available = payload?.available ?? null;
   }
 
-  static async get() {
-    return;
+  static async get(payload) {
+    return super.find({
+      _url: 'schedule/slots/byGroup',
+      ...payload,
+    });
   }
 }
