@@ -126,6 +126,11 @@
           {{ $t('Base.Create') }}
         </ElButton>
 
+        <ElButton v-if="!!invoice.id" text :loading="loading.print" @click="print">
+          <template #icon> <UiIcon :icon="icons.PRINTER" /> </template>
+          <span> {{ $t('Base.Print') }} </span>
+        </ElButton>
+
         <ElButton v-if="isShowRefundButton" type="danger" plain @click="refund">
           {{ $t('Base.Refund') }}
         </ElButton>

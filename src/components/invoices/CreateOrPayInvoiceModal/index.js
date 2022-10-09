@@ -4,6 +4,7 @@ import { ServiceGroup } from '@/models/ServiceGroup.model';
 import { InvoicePaymentSubject } from '@/models/InvoicePaymentSubject.model';
 import { Transaction } from '@/models/Transaction.model';
 import { formatPrice } from '@/utils/price.util';
+import { PrinterService } from '@/services/printer.service';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
 
 import PatientsSearchSelectDataBlock from '@/components/patients/PatientsSearchSelectDataBlock/index.vue';
@@ -37,6 +38,7 @@ export default {
       loading: {
         form: false,
         transactions: false,
+        print: false,
       },
       payModalIsOpen: false,
       payType: Transaction.enum.types.PayIn,
@@ -165,6 +167,23 @@ export default {
       this.transactions = transactions;
 
       this.loading.transactions = false;
+    },
+
+    async print() {
+      if (this.loading.print) return;
+      this.loading.print = true;
+
+      try {
+        await PrinterService.printInvoiceById(this.invoice.id);
+      } catch (err) {
+        console.log(err);
+        this.$notify({
+          type: 'error',
+          title: err?.response?.data?.message || this.$t('Notifications.Error'),
+        });
+      }
+
+      this.loading.print = false;
     },
   },
 
