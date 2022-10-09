@@ -118,10 +118,12 @@ export default {
 
     dependencies: {
       handler() {
-        this.slot.start_at = null;
-        this.slot.end_at = null;
-        this.date = null;
+        this.slot = {
+          start_at: null,
+          end_at: null,
+        };
         this.slots = [];
+        this.date = null;
       },
       deep: true,
     },
