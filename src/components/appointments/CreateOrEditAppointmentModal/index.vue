@@ -33,6 +33,15 @@
         class="create-or-edit-appointment-modal-form__table-part"
         :items="appointment.appointments"
         @item:remove="removeSubject" />
+
+      <ElCard class="create-or-edit-appointment-modal-form__cost-part" shadow="never">
+        <ElFormItem :label="$t('Base.Discount') + ' (%)'">
+          <ElInput v-model="appointment.discount" type="number" min="0" max="100" />
+        </ElFormItem>
+        <ElFormItem :label="$t('Base.Total')">
+          {{ discountedCost }}
+        </ElFormItem>
+      </ElCard>
     </ElForm>
 
     <!--  Actions  -->

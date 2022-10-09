@@ -2,7 +2,8 @@ import { markRaw } from 'vue';
 import { mapState } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
 
-import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
+import { APPOINTMENTS_ROUTE } from '@/router/appointments.routes';
+import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
 import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 import { Appointment } from '@/models/Appointment.model';
@@ -16,6 +17,7 @@ import CreateOrEditPatientModal from '@/components/patients/CreateOrEditPatientM
 import PatientsSearchSelectDataBlock from '@/components/patients/PatientsSearchSelectDataBlock/index.vue';
 import CreateAppointmentSubject from './CreateAppointmentSubject/index.vue';
 import AppointmentSubjectsTable from './AppointmentSubjectsTable/index.vue';
+import CreateOrPayInvoiceModal from '@/components/invoices/CreateOrPayInvoiceModal/index.vue';
 
 // TODO: написать документацию по бизнес логике
 export default {
@@ -66,6 +68,22 @@ export default {
         },
       };
     },
+
+    cost() {
+      return this.appointment.appointments.reduce((acc, elem) => {
+        const servicesCost = elem.group_services.reduce(
+          (acc, groupService) => acc + groupService.price,
+          0
+        );
+
+        return acc + servicesCost;
+      }, 0);
+    },
+    discountedCost() {
+      return this.appointment.discount > 0
+        ? this.cost - this.cost * (this.appointment.discount / 100)
+        : this.cost;
+    },
   },
 
   watch: {
@@ -99,29 +117,67 @@ export default {
     },
 
     async createAppointment() {
+      if (!this.validate()) return;
+
       const { data } = await Appointment.create(this.appointment);
 
       this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessCreated') });
       this.$emit(
         'action',
-        new GlobalModalAction({ name: 'created', data: { appointment: data.data } })
+        new GlobalModalAction({
+          name: 'created',
+          data: { appointments: data.data.appointments, invoice: data.data.invoice },
+        })
       );
-      if (!this.disableDefaultAction) this.goToAppointment(data.data.id);
+
+      if (!this.disableDefaultAction) {
+        this.$router.push(
+          this.user.role === User.enum.roles.Doctor
+            ? DOCTORS_QUEUE_ROUTE.path
+            : APPOINTMENTS_ROUTE.path
+        );
+
+        if (this.user.role === User.enum.roles.Manager) {
+          this.$store.dispatch('modalAndDrawer/openModal', {
+            component: CreateOrPayInvoiceModal,
+            payload: {
+              data: data.data.invoice,
+            },
+          });
+        }
+      }
     },
 
     async editAppointment() {
-      const { data } = await Appointment.update({
-        id: this.appointment.id,
-        payload: this.appointment,
-      });
+      // const { data } = await Appointment.update({
+      //   id: this.appointment.id,
+      //   payload: this.appointment,
+      // });
+      //
+      // this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
+      // this.$emit(
+      //   'action',
+      //   new GlobalModalAction({ name: 'edited', data: { appointments: data.data } })
+      // );
+      //
+      // if (!this.disableDefaultAction) {
+      // }
+    },
 
-      this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
-      this.$emit(
-        'action',
-        new GlobalModalAction({ name: 'edited', data: { appointment: data.data } })
-      );
+    /**
+     * Доролнительная проверка
+     * @return {boolean} если успешно true
+     */
+    validate() {
+      if (!this.appointment.appointments.length) {
+        this.$notify({
+          type: 'error',
+          title: this.$t('NotAppointmentsError'),
+        });
+        return false;
+      }
 
-      if (!this.disableDefaultAction) this.goToAppointment(data.data.id);
+      return true;
     },
 
     /** @param {AppointmentSubject} subject */
@@ -146,15 +202,6 @@ export default {
 
       this.patientModal.newPatient = action.data.patient;
       this.appointment.patient_id = action.data.patient.id;
-    },
-
-    goToAppointment(id) {
-      this.$router.push({
-        name: APPOINTMENT_ROUTE.name,
-        params: {
-          id: id,
-        },
-      });
     },
   },
 
