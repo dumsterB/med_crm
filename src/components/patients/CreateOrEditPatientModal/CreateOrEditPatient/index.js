@@ -92,6 +92,11 @@ export default {
   },
 
   methods: {
+    submit() {
+      const button = this.$refs.actions.querySelector("button[type='submit']");
+      button.click();
+    },
+
     async submitHandler() {
       if (this.loading.form) return;
       this.loading.form = true;
