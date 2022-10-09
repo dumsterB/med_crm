@@ -1,9 +1,9 @@
 <template>
   <ElForm
+    id="create-or-edit-patient"
     class="create-or-edit-patient"
     label-position="top"
     ref="form"
-    id="data"
     @submit.prevent="submitHandler">
     <div class="create-or-edit-patient__content">
       <!--  Is Children  -->
@@ -86,10 +86,11 @@
       <ElButton
         v-show="!hasPatient"
         type="primary"
-        form="data"
+        form="create-or-edit-patient"
         native-type="submit"
         :loading="loading.form"
-        :disabled="hasPatient">
+        :disabled="hasPatient"
+        ref="submit">
         {{ $t(data?.id ? 'Base.SaveChanges' : 'Patients.AddPatient') }}
       </ElButton>
 
