@@ -1,9 +1,9 @@
 <template>
   <ElTable :data="itemsWithPayload">
-    <ElTableColumn prop="group_services" :label="$t('Base.Services')"> test </ElTableColumn>
-    <ElTableColumn prop="_price" :label="$t('Base.SumCost')" />
+    <ElTableColumn prop="_title" :label="$t('Base.Services')" />
+    <ElTableColumn prop="_price" :label="$t('Base.SumCost')" width="110px" />
     <ElTableColumn prop="doctor.name" :label="$t('Base.Doctor')" />
-    <ElTableColumn prop="start_at" :label="$t('Appointments.StartDate')" />
+    <ElTableColumn prop="start_at" :label="$t('Appointments.StartDate')" width="150px" />
 
     <ElTableColumn prop="actions" width="70px">
       <template #default="{ row }">
@@ -17,6 +17,7 @@
 
 <script>
 import * as icons from '@/enums/icons.enum.js';
+import { formatPrice } from '@/utils/price.util';
 
 export default {
   name: 'AppointmentSubjectsTable',
@@ -30,10 +31,13 @@ export default {
       return this.items.map((subject) => ({
         ...subject,
 
-        _price: subject.group_services?.reduce(
-          (acc, groupService) => acc + (groupService.price ?? 0),
-          0
-        ),
+        _title: subject.group_services?.map((elem) => elem.title)?.join(', \r\n'),
+        _price: formatPrice({
+          price: subject.group_services?.reduce(
+            (acc, groupService) => acc + (groupService.price ?? 0),
+            0
+          ),
+        }),
       }));
     },
   },
