@@ -49,11 +49,36 @@
           </template>
         </ElTableColumn>
 
-        <!--        <ElTableColumn prop="appointment.resource" :label="$t('Appointments.RecordingSource')">
-          {{ $t('Base.NoData') }}
-        </ElTableColumn>-->
-
         <ElTableColumn prop="created_at" :label="$t('DateAndTime.CreatedAt')" />
+
+        <!--  При необходимости добавить проверку на роль пользователя  -->
+        <ElTableColumn prop="actions" :label="$t('Base.Actions')" width="380px">
+          <template #default="{ row }">
+            <div class="appointments-table__actions-row">
+              <ElButton
+                v-if="row.status === Appointment.enum.statuses.Approved"
+                type="primary"
+                @click.stop="updateAppointmentStatus(row.id, Appointment.enum.statuses.InProgress)">
+                {{ $t('Appointments.CallToReception') }}
+              </ElButton>
+
+              <ElButton
+                v-if="row.status === Appointment.enum.statuses.InProgress"
+                type="primary"
+                @click.stop="updateAppointmentStatus(row.id, Appointment.enum.statuses.Provided)">
+                {{ $t('Appointments.EndReception') }}
+              </ElButton>
+
+              <ElButton
+                v-if="row.status !== Appointment.enum.statuses.Canceled"
+                type="danger"
+                plain
+                @click.stop="updateAppointmentStatus(row.id, Appointment.enum.statuses.Canceled)">
+                {{ $t('Appointments.CancelReception') }}
+              </ElButton>
+            </div>
+          </template>
+        </ElTableColumn>
       </ElTable>
     </ElScrollbar>
 
@@ -85,7 +110,7 @@ import AppointmentStartOrEndDate from '@/components/appointments/AppointmentStar
 export default {
   name: 'AppointmentsTable',
   components: { AppointmentStartOrEndDate, AppointmentStatusTag },
-  emits: ['update:perPage', 'update:page'],
+  emits: ['update:perPage', 'update:page', 'item:edit'],
   props: {
     /** @property { Array<Appointment|object> } items */
     items: Array,
@@ -113,10 +138,7 @@ export default {
 
   methods: {
     getTableRowClassName(row) {
-      if (row.row.status === Appointment.enum.statuses.InProgress) {
-        return `appointment-${Appointment.enum.statuses.InProgress}`;
-      }
-      return '';
+      return `appointment_${row.row.status}`;
     },
     goToAppointment(payload) {
       this.$router.push({
@@ -126,6 +148,22 @@ export default {
     },
     addAppointment() {
       this.$store.dispatch('modalAndDrawer/openModal', CreateOrEditAppointmentModal);
+    },
+
+    async updateAppointmentStatus(id, status) {
+      try {
+        const { data } = await Appointment.updateStatus({
+          id: id,
+          status: status,
+        });
+        this.$emit('item:edit', data.data);
+      } catch (err) {
+        console.log(err);
+        this.$notify({
+          type: 'error',
+          title: err?.response?.data?.message || this.$t('Notifications.Error'),
+        });
+      }
     },
   },
   setup: () => ({
@@ -140,3 +178,4 @@ export default {
 <i18n src="@/locales/patients.locales.json" />
 <i18n src="@/locales/dateAndTime.locales.json" />
 <i18n src="@/locales/appointments.locales.json" />
+<i18n src="@/locales/notifications.locales.json" />
