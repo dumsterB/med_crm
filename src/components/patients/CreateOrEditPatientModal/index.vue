@@ -7,6 +7,7 @@
     v-bind="$attrs"
     @update:model-value="$emit('update:modelValue', $event)">
     <CreateOrEditPatient
+      class="create-or-edit-patient-modal__content"
       :model-value="modelValue"
       :name-or-phome="nameOrPhone"
       :data="data"
