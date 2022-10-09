@@ -10,7 +10,7 @@ import { FULL_DATE_FORMAT } from '@/config/dateAndTime.config';
 import PhoneConfirmModal from '@/components/PhoneConfirmModal/index.vue';
 
 export default {
-  name: 'CreateOrEditPatientModal',
+  name: 'CreateOrEditPatient',
   components: { PhoneConfirmModal },
   emits: ['update:modelValue', 'action'],
   props: {

@@ -1,14 +1,6 @@
 {
   "ru": {
-    "CreateNewPatient": "Создать нового пациента",
-    "GoToPatient": "Перейти к карте пациента",
-    "PatientIsInSystem": "Пациент есть в системе",
-    "RebindPhone": "Отвязать от этого аккаунта"
   },
   "uz": {
-    "CreateNewPatient": "Yangi bemormi yaratish",
-    "GoToPatient": "Bemor kartasiga utish",
-    "PatientIsInSystem": "Bemor tizimda bor",
-    "RebindPhone": "Shu akkuntdan uzish"
   }
 }

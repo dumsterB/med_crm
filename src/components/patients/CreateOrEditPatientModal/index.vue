@@ -2,135 +2,37 @@
   <ElDialog
     :model-value="modelValue"
     width="550px"
-    custom-class="create-patient-modal-custom"
+    custom-class="create-or-edit-patient-modal"
     :title="data && data.id ? $t('Patients.EditPatient') : $t('Patients.AddPatient')"
     v-bind="$attrs"
     @update:model-value="$emit('update:modelValue', $event)">
-    <ElForm
-      class="create-patient-modal-form"
-      label-position="top"
-      ref="form"
-      id="data"
-      @submit.prevent="submitHandler">
-      <!--  Is Children  -->
-      <ElFormItem v-show="!isChildrenSwitchIsDisabled">
-        <ElSwitch :active-text="$t('User.IsChildren')" v-model="isChildren" />
-      </ElFormItem>
-
-      <!--  Phone  -->
-      <ElFormItem v-if="!isChildren" :label="$t('User.Phone')">
-        <UiPhoneInput class="create-patient-modal-form__field" v-model="patient.phone" required />
-      </ElFormItem>
-
-      <!--  Parent  -->
-      <ElFormItem v-if="isChildren" :label="$t('User.Parent')">
-        <UiModelsAutocompleteSearch
-          class="create-patient-modal-form__field"
-          v-model="patient.parent_id"
-          :model-for-use="Patient"
-          :search-query="{ query_field: ['name', 'phone'] }"
-          :default-item="data?.parent || parent"
-          show-create-option
-          required
-          @create="createParentFlow" />
-      </ElFormItem>
-
-      <div v-show="isChildren || (hasPhoneNumber && !hasPatient)">
-        <!--  FullName  -->
-        <ElFormItem :label="$t('User.FullName') + ` (${$t('User.FullNameFormat').toLowerCase()})`">
-          <ElInput
-            class="create-patient-modal-form__field"
-            v-model="patient.name"
-            minlength="3"
-            required
-            :disabled="isDisabledSecondaryInputs"
-            pattern="[a-zA-Z\d\s]*" />
-        </ElFormItem>
-
-        <!--  Birthdate  -->
-        <ElFormItem :label="$t('User.Birthdate')">
-          <ElDatePicker
-            class="create-patient-modal-form__field"
-            v-model="patient.birthdate"
-            type="date"
-            :placeholder="$t('Base.SelectDate')"
-            :value-format="FULL_DATE_FORMAT"
-            :disabled="isDisabledSecondaryInputs" />
-        </ElFormItem>
-
-        <!--  Gender  -->
-        <ElFormItem :label="$t('User.Gender')">
-          <UiGenderSelect
-            class="create-patient-modal-form__field"
-            v-model="patient.gender"
-            required
-            :disabled="isDisabledSecondaryInputs" />
-        </ElFormItem>
-      </div>
-
-      <!--  OldPatient  -->
-      <ElFormItem v-show="hasPatient">
-        <div class="create-patient-modal-patient">
-          <div class="create-patient-modal-patient__title">{{ $t('PatientIsInSystem') }}</div>
-
-          <router-link
-            v-show="!hasPatientFromOtherClinic"
-            class="create-patient-modal-patient__name"
-            :to="oldPatientPageUrl">
-            {{ oldPatient?.name }}
-          </router-link>
-          <div v-show="hasPatientFromOtherClinic" class="create-patient-modal-patient__name">
-            {{ oldPatient?.name }}
-          </div>
-        </div>
-      </ElFormItem>
-    </ElForm>
-    <!--  Actions  -->
-    <template #footer>
-      <div class="create-patient-modal-form-actions">
-        <ElButton
-          v-show="!hasPatient"
-          type="primary"
-          form="data"
-          native-type="submit"
-          :loading="loading.form"
-          :disabled="hasPatient">
-          {{ $t(data?.id ? 'Base.SaveChanges' : 'Patients.AddPatient') }}
-        </ElButton>
-
-        <!--  hasPatient && !hasPatientFromOtherClinic  -->
-        <router-link v-show="hasPatient && !hasPatientFromOtherClinic" :to="oldPatientPageUrl">
-          <ElButton type="primary">{{ $t('GoToPatient') }} </ElButton>
-        </router-link>
-
-        <ElButton
-          v-show="data?.id ? hasPatient : hasPatient && !hasPatientFromOtherClinic"
-          type="primary"
-          form="data"
-          @click="isOpenPhoneConfirmModal = true">
-          {{ $t(data ? 'RebindPhone' : 'CreateNewPatient') }}
-        </ElButton>
-
-        <ElButton
-          v-show="hasPatientFromOtherClinic && !data"
-          type="primary"
-          form="data"
-          :loading="loading.attach"
-          @click="attachPatient">
-          {{ $t('Base.Attach') }}
-        </ElButton>
-      </div>
-    </template>
-
-    <PhoneConfirmModal
-      v-model="isOpenPhoneConfirmModal"
-      :phone="this.patient.phone"
-      append-to-body
-      @action="checkPhoneForRebinding" />
+    <CreateOrEditPatient
+      :model-value="modelValue"
+      :name-or-phome="nameOrPhone"
+      :data="data"
+      :disabled-default-action="disableDefaultAction"
+      @update:model-value="$emit('update:modelValue', $event)"
+      @action="$emit('action', $event)" />
   </ElDialog>
 </template>
 
-<script src="./index.js" />
+<script>
+import CreateOrEditPatient from './CreateOrEditPatient/index.vue';
+import { Patient } from '@/models/Patient.model';
+
+export default {
+  name: 'CreateOrEditPatientModal',
+  components: { CreateOrEditPatient },
+  emits: ['update:modelValue', 'action'],
+  props: {
+    modelValue: Boolean,
+    nameOrPhone: String,
+    data: [Patient, Object],
+
+    disableDefaultAction: Boolean, // отключаем дефолтное поведение после создания
+  },
+};
+</script>
 
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/base.locales.json" />
