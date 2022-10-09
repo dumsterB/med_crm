@@ -14,7 +14,8 @@
       v-model:page="page.value"
       v-model:per-page="perPage.value"
       :total="total"
-      :search="search.value" />
+      :search="search.value"
+      @item:edit="editItem" />
   </LayoutByUserRole>
 </template>
 
@@ -24,6 +25,7 @@ import { usePage, usePerPage, useSearch } from '@/hooks/query';
 import { compareQueriesThenLoadData } from '@/utils/router.utils';
 import { ISOStringToDateAppFormat } from '@/utils/dateAndTime.utils';
 import { Appointment } from '@/models/Appointment.model.js';
+import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import CreateOrEditAppointmentModal from '@/components/appointments/CreateOrEditAppointmentModal/index.vue';
@@ -76,6 +78,8 @@ export default {
     ...mapActions({
       setLoading: 'appointments/setLoading',
       setData: 'appointments/setData',
+      createItem: 'appointments/createItem',
+      editItem: 'appointments/editItem',
     }),
 
     async getAppointments() {
@@ -101,8 +105,14 @@ export default {
       this.setLoading(false);
     },
 
-    createAppointment() {
-      this.$store.dispatch('modalAndDrawer/openModal', CreateOrEditAppointmentModal);
+    async createAppointment() {
+      const action = await this.$store.dispatch(
+        'modalAndDrawer/openModal',
+        CreateOrEditAppointmentModal
+      );
+
+      if (action instanceof GlobalModalCloseAction) return;
+      action.data?.appointments.forEach((appointment) => this.createItem(appointment));
     },
   },
 };
