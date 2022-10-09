@@ -82,15 +82,14 @@
     </div>
 
     <!--  Actions  -->
-    <div class="create-or-edit-patient-actions">
+    <div class="create-or-edit-patient-actions" ref="actions">
       <ElButton
         v-show="!hasPatient"
         type="primary"
         form="create-or-edit-patient"
         native-type="submit"
         :loading="loading.form"
-        :disabled="hasPatient"
-        ref="submit">
+        :disabled="hasPatient">
         {{ $t(data?.id ? 'Base.SaveChanges' : 'Patients.AddPatient') }}
       </ElButton>
 
@@ -102,7 +101,6 @@
       <ElButton
         v-show="data?.id ? hasPatient : hasPatient && !hasPatientFromOtherClinic"
         type="primary"
-        form="data"
         @click="isOpenPhoneConfirmModal = true">
         {{ $t(data ? 'RebindPhone' : 'CreateNewPatient') }}
       </ElButton>
@@ -110,7 +108,6 @@
       <ElButton
         v-show="hasPatientFromOtherClinic && !data"
         type="primary"
-        form="data"
         :loading="loading.attach"
         @click="attachPatient">
         {{ $t('Base.Attach') }}

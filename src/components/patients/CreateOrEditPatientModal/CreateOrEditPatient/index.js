@@ -81,6 +81,7 @@ export default {
     'isChildren': {
       handler() {
         this.patient.phone = null;
+        this.resetHasPatient();
       },
     },
 
@@ -92,11 +93,6 @@ export default {
   },
 
   methods: {
-    submit() {
-      const button = this.$refs.actions.querySelector("button[type='submit']");
-      button.click();
-    },
-
     async submitHandler() {
       if (this.loading.form) return;
       this.loading.form = true;
@@ -112,6 +108,22 @@ export default {
       }
 
       this.loading.form = false;
+    },
+
+    customValidate() {
+      const button = this.$refs.actions.querySelector("button[type='submit']");
+
+      if (this.hasPatient) {
+        this.$notify({ type: 'error', title: this.$t('Patients.PatientAlreadyExists') });
+        return false;
+      }
+      if (this.isChildren ? !this.patient?.parent_id : !this.patient.phone || !this.patient.name) {
+        button.click();
+        this.$notify({ type: 'error', title: this.$t('Notifications.FillRequiredFields') });
+        return false;
+      }
+
+      return true;
     },
 
     async createPatient() {
