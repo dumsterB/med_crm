@@ -30,20 +30,11 @@
       <ElFormItem class="default-inspection-card-form__actions">
         <div class="default-inspection-card-form-actions">
           <slot name="actions">
-            <ElButton
-              data-method="toDiagnose"
-              v-show="!readonly && !appointment.service_case?.disease_code_codes?.length"
-              type="warning"
-              native-type="submit"
-              plain>
+            <ElButton v-show="isShowSetDiagnoseButton" type="warning" plain @click="toDiagnose">
               {{ $t('Appointments.ToDiagnose') }}
             </ElButton>
 
-            <ElButton
-              data-method="endReception"
-              v-show="!readonly"
-              type="primary"
-              native-type="submit">
+            <ElButton v-show="!readonly" type="primary" native-type="submit">
               {{ $t('Appointments.EndReception') }}
             </ElButton>
 
@@ -80,6 +71,16 @@ export default {
       templateId: null,
       inspectionCard: null,
     };
+  },
+  computed: {
+    isShowSetDiagnoseButton() {
+      return (
+        (!this.readonly &&
+          !!this.appointment.inspection_card &&
+          !this.appointment.inspection_card?.disease_code_codes?.length) ||
+        true
+      );
+    },
   },
   watch: {
     'appointment.id': {
@@ -134,9 +135,8 @@ export default {
       }
     },
 
-    submitHandler(event) {
-      const methodName = event.submitter.dataset.method;
-      this[methodName]();
+    submitHandler() {
+      this.endReception();
     },
 
     toDiagnose() {

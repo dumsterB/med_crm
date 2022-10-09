@@ -22,7 +22,6 @@ import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalMod
 import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
 import CreateOrEditAppointmentModal from '@/components/appointments/CreateOrEditAppointmentModal/index.vue';
 import SelectAppointmentInspectionTypeModal from '@/components/appointments/SelectAppointmentInspectionTypeModal/index.vue';
-import SelectOrCreateServiceCaseModal from '@/components/appointments/SelectOrCreateServiceCaseModal/index.vue';
 import SuggestControlAppointmentModal from '@/components/appointments/SuggestControlAppointmentModal/index.vue';
 import SelectTreatmentModal from '@/components/appointments/SelectTreatmentModal/index.vue';
 import SuggestTreatmentModal from '@/components/appointments/SuggestTreatmentModal/index.vue';
@@ -219,7 +218,6 @@ export default {
 
       if (!(action instanceof GlobalModalCloseAction)) {
         this.appointment = action.data.appointment;
-        await this.provideAppointment();
       }
     },
 

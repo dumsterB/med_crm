@@ -7,6 +7,7 @@ import { Appointment } from '@/models/Appointment.model';
 
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
+import { InspectionCard } from '@/models/InspectionCard.model';
 
 export default {
   name: 'VAppointmentDefaultCard',
@@ -72,9 +73,10 @@ export default {
 
   methods: {
     goToInspectionCard() {
-      const path = this.appointment.service_case_id
-        ? APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_INSPECTION_CARD._fullPath
-        : APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_TREATMENT_CARD._fullPath;
+      const path =
+        this.appointment.inspection_card.type === InspectionCard.enum.types.Default
+          ? APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_INSPECTION_CARD._fullPath
+          : APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_TREATMENT_CARD._fullPath;
 
       this.$router.push(
         insertRouteParams({
