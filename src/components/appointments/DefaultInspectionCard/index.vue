@@ -75,10 +75,9 @@ export default {
   computed: {
     isShowSetDiagnoseButton() {
       return (
-        (!this.readonly &&
-          !!this.appointment.inspection_card &&
-          !this.appointment.inspection_card?.disease_code_codes?.length) ||
-        true
+        !this.readonly &&
+        !!this.appointment.inspection_card &&
+        !this.appointment.inspection_card?.disease_code_codes?.length
       );
     },
   },
