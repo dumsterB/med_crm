@@ -3,6 +3,7 @@
     "Appointments": {
       "Appointments": "Записи",
       "AppointmentsTc": "{n} записей | {n} запись | {n} записей",
+      "CallToReception": "Вызвать на прием",
       "CancelReception": "Отменить запись",
       "CreateAppointment": "Создать запись",
       "EditReception": "Редактировать прием",
@@ -55,6 +56,7 @@
     "Appointments": {
       "Appointments": "Qabulga yozuvlar",
       "AppointmentsTc": "{n} yozuvlar | {n} yozuv | {n} yozuvlar",
+      "CallToReception": "Qabul qilish",
       "CancelReception": "Qabulga yozuvni bekor qilish",
       "CreateAppointment": "Qabulga yozuvni yaratish",
       "EditReception": "Qabulga yozuvni tahrirlash",
