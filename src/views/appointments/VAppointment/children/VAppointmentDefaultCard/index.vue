@@ -81,7 +81,7 @@
         {{ $t('Appointments.EndReception') }}
       </ElButton>
 
-      <ElButton
+      <!--      <ElButton
         v-if="
           user.role === User.enum.roles.Manager &&
           appointment.status === Appointment.enum.statuses.Approved
@@ -90,7 +90,7 @@
         plain
         @click="$emit('appointment:edit')">
         {{ $t('Appointments.EditReception') }}
-      </ElButton>
+      </ElButton>-->
 
       <ElButton
         v-if="
