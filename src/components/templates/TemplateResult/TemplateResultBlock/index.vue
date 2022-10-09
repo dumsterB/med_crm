@@ -25,7 +25,7 @@
       <!--  Select  -->
       <ElSelect
         v-if="block.answer_type === InspectionCardBlock.enum.answerTypes.Select"
-        :model-value="block.answer?.value"
+        :model-value="value"
         v-bind="meta"
         @update:modelValue="updateValue"
         @select="$emit('change')">
@@ -39,7 +39,7 @@
       <!--  Checkbox  -->
       <ElCheckboxGroup
         v-if="block.answer_type === InspectionCardBlock.enum.answerTypes.Checkbox"
-        :model-value="block.answer?.value || []"
+        :model-value="value || []"
         @update:model-value="updateValue"
         @change="$emit('change')">
         <ElCheckbox
@@ -61,6 +61,7 @@
         @update:model-value="updateValue"
         @change="$emit('change')" />
 
+      <!--  File  -->
       <UiUpload
         v-if="block.answer_type === InspectionCardBlock.enum.answerTypes.File"
         class="template-result-block__file-upload"
@@ -69,6 +70,16 @@
         :multiple="meta.multiple"
         @file:add="addFileHandler"
         @file:delete="deleteFileHandler" />
+
+      <!--  Custom Answer  -->
+      <ElInput
+        v-if="block.meta.enable_custom_answer"
+        :model-value="customValue"
+        type="textarea"
+        :placeholder="$t('Templates.OtherAnswer')"
+        :rows="4"
+        @update:model-value="updateCustomValue"
+        @change="$emit('change')" />
     </div>
   </ElCard>
 </template>
@@ -94,16 +105,31 @@ export default {
     files() {
       return this.block.answer?.value?.map((elem) => elem.file) || [];
     },
+
+    value() {
+      return (this.block.type === InspectionCardBlock.enum.answerTypes.Checkbox ||
+        this.block.meta.multiple) &&
+        this.block.answer.isCustom
+        ? []
+        : this.block.answer.value;
+    },
+    customValue() {
+      return !this.block.answer.isCustom ? null : this.block.answer.value;
+    },
   },
   methods: {
-    updateValue(value) {
+    updateValue(value, isCustom = false) {
       this.$emit('update:block', {
         ...this.block,
         answer: {
           value: value,
-          isCustom: false,
+          isCustom: isCustom,
         },
       });
+    },
+
+    updateCustomValue(value) {
+      this.updateValue(value, true);
     },
 
     addFileHandler(file) {
@@ -131,3 +157,4 @@ export default {
 
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/base.locales.json" />
+<i18n src="@/locales/templates.locales.json" />
