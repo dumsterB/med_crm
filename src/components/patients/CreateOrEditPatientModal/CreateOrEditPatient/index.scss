@@ -3,13 +3,6 @@
   flex-direction: column;
   gap: 20px;
 
-  &__content {
-    background: var(--dialog-body-content-bg-color);
-    padding: var(--dialog-body-content-padding);
-    box-shadow: var(--dialog-body-content-box-shadow);
-    border-radius: var(--dialog-body-content-border-radious);
-  }
-
   &-actions {
     display: flex;
     flex-direction: column;
