@@ -10,6 +10,7 @@
       :disabled="disabled"
       :default-item="defaultItem"
       :show-create-option="showCreateOption"
+      ref="select"
       @update:model-value="$emit('update:modelValue', $event)"
       @select="selectHandler"
       @create="$emit('create', $event)" />
@@ -67,6 +68,13 @@ export default {
     selectHandler(data) {
       this.patient = data;
       this.$emit('select', data);
+    },
+
+    focus() {
+      this.$refs.select.focus();
+    },
+    blur() {
+      this.$refs.select.blur();
     },
   },
 };
