@@ -93,11 +93,11 @@ export default {
         },
 
         slots: {
-          dependencies: [
-            this.subject.group_service_ids,
-            this.subject.doctor_id,
-            this.subject.start_at,
-          ],
+          dependencies: [this.subject.group_service_ids, this.subject.doctor_id],
+          searchQuery: {
+            group_service_ids: this.subject.group_service_ids,
+            doctor_id: this.subject.doctor_id,
+          },
         },
       };
     },
