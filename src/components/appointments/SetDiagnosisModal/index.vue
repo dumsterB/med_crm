@@ -52,6 +52,7 @@ export default {
           payload: { ...this.appointment.inspection_card, disease_code_codes: this.codes },
         });
 
+        this.$notify({ type: 'success', title: this.$t('Notifications.SuccessAttached') });
         this.$emit(
           'action',
           new GlobalModalAction({
