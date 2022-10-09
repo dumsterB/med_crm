@@ -44,7 +44,7 @@ export default {
       },
 
       patientPart: {
-        show: true,
+        show: false,
         nameOrPhone: null,
         newPatient: null,
       },
