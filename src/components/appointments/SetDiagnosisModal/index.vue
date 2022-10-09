@@ -6,7 +6,7 @@
     @update:model-value="$emit('update:modelValue', $event)">
     <ElForm class="set-diagnosis-modal-form" label-position="top" @submit.prevent="submitHandler">
       <ElFormItem>
-        <MultipleSelectDiseaseCode v-model:codes="codes" required />
+        <MultipleSelectDiseaseCode v-model="codes" required @select="fullCodes = $event" />
       </ElFormItem>
 
       <ElButton
@@ -22,8 +22,8 @@
 
 <script>
 import { Appointment } from '@/models/Appointment.model';
-import { ServiceCase } from '@/models/ServiceCase.model';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
+import { InspectionCard } from '@/models/InspectionCard.model';
 import MultipleSelectDiseaseCode from '@/components/deseaseСode/MultipleSelectDiseaseCode/index.vue';
 
 export default {
@@ -37,6 +37,7 @@ export default {
   data() {
     return {
       codes: [],
+      fullCodes: [],
       loading: false,
     };
   },
@@ -46,12 +47,9 @@ export default {
       this.loading = true;
 
       try {
-        const { data } = await ServiceCase.update({
-          id: this.appointment.service_case_id,
-          payload: new ServiceCase({
-            ...this.appointment.service_case,
-            disease_code_codes: this.codes,
-          }),
+        const { data } = await InspectionCard.update({
+          id: this.appointment.inspection_card_id,
+          payload: { ...this.appointment.inspection_card, disease_code_codes: this.codes },
         });
 
         this.$emit(
@@ -59,8 +57,7 @@ export default {
           new GlobalModalAction({
             name: 'created',
             data: {
-              appointment: { ...this.appointment, service_case: data.data },
-              service_case: data.data,
+              appointment: { ...this.appointment, inspection_card: data.data },
             },
           })
         );
