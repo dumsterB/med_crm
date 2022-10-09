@@ -35,7 +35,7 @@ export default {
     fileList() {
       return this.files.map((file) => ({
         ...file,
-        name: file.name ?? 'Untitled',
+        name: file.filename ?? file.name ?? 'Untitled',
         status: UploadFile.enum.statuses.Success,
       }));
     },
@@ -45,7 +45,7 @@ export default {
     async handleChange(file, files) {
       try {
         const { data } = await FileModel.create(file);
-        this.$emit('file:add', data.data);
+        this.$emit('file:add', data.data[0]);
       } catch (err) {
         console.log(err);
         this.$notify({
