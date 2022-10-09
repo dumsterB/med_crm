@@ -52,7 +52,7 @@
         <ElTableColumn prop="created_at" :label="$t('DateAndTime.CreatedAt')" />
 
         <!--  При необходимости добавить проверку на роль пользователя  -->
-        <ElTableColumn prop="actions" :label="$t('Base.Actions')" width="380px">
+        <ElTableColumn v-if="isManager" prop="actions" :label="$t('Base.Actions')" width="380px">
           <template #default="{ row }">
             <div class="appointments-table__actions-row">
               <ElButton
@@ -98,10 +98,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
 import { Appointment } from '@/models/Appointment.model';
+import { User } from '@/models/User.model';
 
 import CreateOrEditAppointmentModal from '@/components/appointments/CreateOrEditAppointmentModal/index.vue';
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
@@ -123,6 +125,14 @@ export default {
   icons: icons,
 
   computed: {
+    ...mapState({
+      user: (state) => state.auth.user,
+    }),
+
+    isManager() {
+      return this.user.role === User.enum.roles.Manager;
+    },
+
     pageCount() {
       return Math.ceil(this.total / this.perPage);
     },
