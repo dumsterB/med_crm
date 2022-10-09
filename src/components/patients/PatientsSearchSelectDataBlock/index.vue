@@ -11,7 +11,8 @@
       :default-item="defaultItem"
       :show-create-option="showCreateOption"
       @update:model-value="$emit('update:modelValue', $event)"
-      @select="selectHandler" />
+      @select="selectHandler"
+      @create="$emit('create', $event)" />
 
     <div class="patients-search-select-data-block__content">
       <ElFormItem :label="$t('User.FullName')">
@@ -38,7 +39,7 @@ import PatientsSearchSelect from '@/components/patients/PatientsSearchSelect/ind
 export default {
   name: 'PatientsSearchSelectDataBlock',
   components: { PatientsSearchSelect },
-  emits: ['update:modelValue', 'select'],
+  emits: ['update:modelValue', 'select', 'create'],
   props: {
     modelValue: Number,
     defaultItem: [Patient, Object],
