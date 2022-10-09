@@ -5,9 +5,8 @@
       <div class="v-patient-default__title">{{ $t('Title') }}</div>
     </div>
 
-    <div class="v-patient-default-item__body">
-      <PatientCardRow :items="patientItems" shadow="never"></PatientCardRow>
-
+    <div class="v-patient-default-item__body" v-loading="loading.profile">
+      <PatientCardRow  :items="patientItems" shadow="never"></PatientCardRow>
     </div>
   </div>
 
@@ -25,15 +24,16 @@
       v-show="!patient.childrens?.length"
       :description="$t('Base.NoData')" />
 
-    <div class="v-patient-default-item__body" v-if="patient.childrens?.length">
-      <PatientsTable
-        :total="patient?.childrens?.length"
-        :perPage="patient?.childrens?.length"
-        :page="1"
-        background
-        hide-on-single-page
-        layout="prev, pager, next, sizes"
-        :items="patient.childrens"></PatientsTable>
+    <div class="v-patient-default-item__body" v-loading="loading.profile">
+        <PatientsTable
+            :total="patient?.childrens?.length"
+            :perPage="patient?.childrens?.length"
+            :page="1"
+            v-if="patient?.childrens?.length"
+            background
+            hide-on-single-page
+            layout="prev, pager, next, sizes"
+            :items="patient.childrens"></PatientsTable>
     </div>
   </div>
 
@@ -51,9 +51,10 @@
       v-show="!appointments?.length && !loading.appointment"
       :description="$t('Base.NoData')" />
 
-    <div class="v-patient-default-item__body" v-if="appointments?.length">
+    <div class="v-patient-default-item__body" v-loading="loading.appointment" >
       <AppointmentsTable
         :total="appointments?.length"
+        v-if="appointments?.length"
         :perPage="appointments?.length"
         :page="1"
         :items="appointments" />
@@ -75,9 +76,10 @@
       v-show="!treatments?.length && !loading.treatments"
       :description="$t('Base.NoData')" />
 
-    <div class="v-patient-default-item__body" v-if="treatments?.length">
+    <div class="v-patient-default-item__body" v-loading="loading.treatments">
       <TreatmentsTable
         :total="treatments?.length"
+        v-if="treatments?.length"
         :perPage="treatments?.length"
         :page="1"
         :items="treatments"

@@ -1,6 +1,5 @@
 <template>
   <LayoutByUserRole
-    :loading="loading.profile || loading.appointment || loading.treatments"
     content-class="v-patient-content">
     <RouterView
       v-if="patient"
