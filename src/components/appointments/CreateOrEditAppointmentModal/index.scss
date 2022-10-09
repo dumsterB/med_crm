@@ -7,6 +7,12 @@
     border: none;
   }
 
+  &__create-patient {
+    button[type='submit'] {
+      display: none;
+    }
+  }
+
   &-form {
     display: grid;
     grid-template-columns: 3.5fr 7fr;

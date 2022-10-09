@@ -5,7 +5,6 @@ import * as icons from '@/enums/icons.enum.js';
 import { APPOINTMENTS_ROUTE } from '@/router/appointments.routes';
 import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
-import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 import { Appointment } from '@/models/Appointment.model';
 import { User } from '@/models/User.model';
 import { Patient } from '@/models/Patient.model';
@@ -13,7 +12,7 @@ import { Doctor } from '@/models/Doctor.model';
 import { Service } from '@/models/Service.model';
 import { ServiceGroup } from '@/models/ServiceGroup.model';
 
-import CreateOrEditPatientModal from '@/components/patients/CreateOrEditPatientModal/index.vue';
+import CreateOrEditPatient from '@/components/patients/CreateOrEditPatientModal/CreateOrEditPatient/index.vue';
 import PatientsSearchSelectDataBlock from '@/components/patients/PatientsSearchSelectDataBlock/index.vue';
 import CreateAppointmentSubject from './CreateAppointmentSubject/index.vue';
 import AppointmentSubjectsTable from './AppointmentSubjectsTable/index.vue';
@@ -23,7 +22,7 @@ import CreateOrPayInvoiceModal from '@/components/invoices/CreateOrPayInvoiceMod
 export default {
   name: 'CreateOrEditAppointmentModal',
   components: {
-    CreateOrEditPatientModal,
+    CreateOrEditPatient,
     PatientsSearchSelectDataBlock,
     CreateAppointmentSubject,
     AppointmentSubjectsTable,
@@ -44,8 +43,8 @@ export default {
         form: false,
       },
 
-      patientModal: {
-        show: false,
+      patientPart: {
+        show: true,
         nameOrPhone: null,
         newPatient: null,
       },
@@ -118,6 +117,7 @@ export default {
 
     async createAppointment() {
       if (!this.validate()) return;
+      if (this.patientPart.show) await this.$refs.create_or_edit_patient.createPatient();
 
       const { data } = await Appointment.create(this.appointment);
 
@@ -169,6 +169,11 @@ export default {
      * @return {boolean} если успешно true
      */
     validate() {
+      if (this.patientPart.show) {
+        const isValidatePatient = this.$refs.create_or_edit_patient.customValidate();
+        if (!isValidatePatient) return false;
+      }
+
       if (!this.appointment.appointments.length) {
         this.$notify({
           type: 'error',
@@ -192,16 +197,17 @@ export default {
       );
     },
 
-    openCreatePatientModal(query) {
-      this.patientModal.show = true;
-      this.$nextTick(() => (this.patientModal.nameOrPhone = query));
+    startCreatePatientFlow(query) {
+      this.$refs.autocomplete_patient.blur();
+      this.patientPart.show = true;
+      this.$nextTick(() => (this.patientPart.nameOrPhone = query));
     },
     insertPatient(action) {
-      if (action instanceof GlobalModalCloseAction) return;
-      this.patientModal.show = false;
-
-      this.patientModal.newPatient = action.data.patient;
+      this.appointment.patient = action.data.patient;
       this.appointment.patient_id = action.data.patient.id;
+      this.patientPart.show = false;
+      this.patientPart.nameOrPhone = null;
+      this.patientPart.newPatient = action.data.patient;
     },
   },
 

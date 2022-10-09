@@ -13,15 +13,24 @@
       <ElCard class="create-or-edit-appointment-modal-form__patient-part" shadow="never">
         <template #header> {{ $t('Base.Patient') }} </template>
         <PatientsSearchSelectDataBlock
+          v-show="!patientPart.show"
           v-model="appointment.patient_id"
           :search-query="patientsOptions.searchQuery"
-          :default-item="data?.patient || patient || patientModal.newPatient"
+          :default-item="data?.patient || patient || patientPart.newPatient"
           :disabled="!!patient || !!data?.patient_id"
           :hide-select="!!patient || !!data?.patient_id"
-          required
+          :required="!patientPart.show"
           :show-create-option="permissions.createPatient"
           ref="autocomplete_patient"
-          @create="openCreatePatientModal" />
+          @create="startCreatePatientFlow" />
+
+        <CreateOrEditPatient
+          v-if="patientPart.show"
+          class="create-or-edit-appointment-modal__create-patient"
+          :name-or-phone="patientPart.nameOrPhone"
+          disable-default-action
+          @action="insertPatient"
+          ref="create_or_edit_patient" />
       </ElCard>
 
       <ElCard class="create-or-edit-appointment-modal-form__add-part" shadow="never">
@@ -58,12 +67,6 @@
         </div>
       </ElFormItem>
     </template>
-
-    <CreateOrEditPatientModal
-      v-model="patientModal.show"
-      :name-or-phone="patientModal.nameOrPhone"
-      disable-default-action
-      @action="insertPatient" />
   </ElDialog>
 </template>
 
