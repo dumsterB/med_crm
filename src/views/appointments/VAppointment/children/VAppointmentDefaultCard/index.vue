@@ -62,7 +62,7 @@
         type="primary"
         :loading="loading[Appointment.enum.statuses.InProgress]"
         @click="$emit('status:update', Appointment.enum.statuses.InProgress)">
-        {{ $t('Appointments.PatientCome') }}
+        {{ $t('Appointments.StartAppointment') }}
       </ElButton>
       <ElButton
         v-if="appointment.status === Appointment.enum.statuses.Waiting"
@@ -70,7 +70,7 @@
         plain
         :loading="loading[Appointment.enum.statuses.Canceled]"
         @click="$emit('status:update', Appointment.enum.statuses.Canceled)">
-        {{ $t('Appointments.PatientNotCome') }}
+        {{ $t('Appointments.CancelReception') }}
       </ElButton>
 
       <ElButton
