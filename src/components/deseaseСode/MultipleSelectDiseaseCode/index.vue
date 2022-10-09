@@ -5,7 +5,7 @@
       :model-for-use="DiseaseCode"
       label="title"
       value="code"
-      :required="required && !codes.length"
+      :required="required && !modelValue.length"
       ref="autocomplete"
       @select="selectCode">
       <template #default="{ label, item }">
@@ -33,12 +33,13 @@
 
 <script>
 import { DiseaseCode } from '@/models/DiseasesCode.model';
+import { cloneDeep } from 'lodash';
 
 export default {
   name: 'MultipleSelectDiseaseCode',
-  emits: ['update:codes'],
+  emits: ['update:modelValue', 'select'],
   props: {
-    codes: [Array],
+    modelValue: [Array],
     required: Boolean,
   },
   data() {
@@ -54,7 +55,8 @@ export default {
       this.code = code.code;
 
       this.localFullCodes = [...this.localFullCodes, code];
-      this.$emit('update:codes', [...new Set([...this.codes, code.code])]);
+      this.$emit('update:modelValue', [...new Set([...this.modelValue, code.code])]);
+      this.$emit('select', cloneDeep(code));
 
       setTimeout(() => {
         this.code = null;
