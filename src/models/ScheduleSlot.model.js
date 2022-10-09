@@ -1,6 +1,4 @@
 import { CRUDModel } from '@/models/CRUD.model';
-import { ApiService } from '@/services/api.service';
-import { mergeOrCreateQuery } from '@/utils/http.util';
 
 /**
  * @class ScheduleSlot
