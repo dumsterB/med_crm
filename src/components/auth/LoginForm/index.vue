@@ -41,7 +41,6 @@
 
 <script>
 import { FORGOT_PASSWORD_ROUTE } from '@/router/auth.routes';
-import { DASHBOARD_ROUTE } from '@/router/dashboard.routes';
 
 export default {
   name: 'LoginForm',
@@ -63,7 +62,7 @@ export default {
 
       try {
         await this.$store.dispatch('auth/logIn', { email: this.email, password: this.password });
-        this.$router.push(DASHBOARD_ROUTE.path);
+        this.$router.push('/');
       } catch (err) {
         console.log(err);
         this.$notify({ title: err?.response?.data?.message || 'Error', type: 'error' });
