@@ -49,7 +49,7 @@
                 multiple
                 collapse-tags
                 collapse-tags-tooltip
-                :default-item="appointment.inspection_card.disease_codes"
+                :default-item="appointment.inspection_card?.disease_codes"
                 @select="updateInspectionCard" />
             </TemplateResultBlock>
           </template>
