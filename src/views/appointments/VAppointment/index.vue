@@ -223,15 +223,6 @@ export default {
 
     async startAfterProvideFlow() {
       const successControlAppointment = await this.suggestControlAppointment();
-
-      if (!this.appointment.treatment_id) {
-        const successTreatment = await this.suggestTreatment();
-
-        if (successTreatment) {
-          await this.createTreatment();
-        }
-      }
-
       this.$router.push(DOCTORS_QUEUE_ROUTE.path);
     },
 
@@ -247,36 +238,6 @@ export default {
         payload: {
           doctor: this.appointment.doctor,
           patient: this.appointment.patient,
-        },
-      });
-
-      return !(action instanceof GlobalModalCloseAction);
-    },
-
-    /**
-     * Возращает
-     *   true - нужно создать лечение
-     *   false - модалка закрылась или выбрали "пропустить"
-     * @return {Promise<boolean>}
-     */
-    async suggestTreatment() {
-      if (this.appointment.treatment_id) return false;
-
-      const action = await this.$store.dispatch('modalAndDrawer/openModal', SuggestTreatmentModal);
-      return !(action instanceof GlobalModalCloseAction);
-    },
-
-    /**
-     * Возращает
-     *   true - если создано лечение
-     *   false - модалка закрылась(отмена)
-     * @return {Promise<boolean>}
-     */
-    async createTreatment() {
-      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
-        component: CreateTreatmentModal,
-        payload: {
-          appointment: this.appointment,
         },
       });
 
