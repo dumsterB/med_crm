@@ -8,8 +8,6 @@
         <template #content>
           <div class="v-patient-ambulatory-header-info">
             <div>{{ $t('Base.AmbulatoryCard') }}</div>
-
-            <ElButton type="primary" text @click="goToPatient"> {{ patient.name }} </ElButton>
           </div>
         </template>
       </ElPageHeader>
