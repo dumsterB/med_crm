@@ -39,7 +39,7 @@
           :readonly="readonly"
           @change="updateInspectionCard">
           <template #footer>
-            <ElFormItem :label="$t('Appointments.SelectDiagnosis')">
+            <TemplateResultBlock :block="{ label: $t('Appointments.SelectDiagnosis') }">
               <DiseaseCodeSelect
                 v-model="inspectionCard.disease_code_codes"
                 required
@@ -48,7 +48,7 @@
                 collapse-tags-tooltip
                 :default-item="appointment.inspection_card.disease_codes"
                 @select="updateInspectionCard" />
-            </ElFormItem>
+            </TemplateResultBlock>
           </template>
         </TemplateResult>
       </div>
@@ -86,10 +86,11 @@ import { DiseaseCode } from '@/models/DiseasesCode.model';
 import TemplateResult from '@/components/templates/TemplateResult/index.vue';
 import PatientCardRow from '@/components/patients/PatientCardRow/index.vue';
 import DiseaseCodeSelect from '@/components/deseaseСode/DiseaseCodeSelect/index.vue';
+import TemplateResultBlock from '@/components/templates/TemplateResult/TemplateResultBlock/index.vue';
 
 export default {
   name: 'DefaultInspectionCard',
-  components: { DiseaseCodeSelect, PatientCardRow, TemplateResult },
+  components: { TemplateResultBlock, DiseaseCodeSelect, PatientCardRow, TemplateResult },
   emits: ['update:appointment', 'appointment:provide'],
   props: {
     appointment: [Appointment, Object],
