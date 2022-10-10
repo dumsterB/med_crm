@@ -22,7 +22,6 @@ import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalMod
 import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
 import CreateOrEditAppointmentModal from '@/components/appointments/CreateOrEditAppointmentModal/index.vue';
 import SelectAppointmentInspectionTypeModal from '@/components/appointments/SelectAppointmentInspectionTypeModal/index.vue';
-import SuggestControlAppointmentModal from '@/components/appointments/SuggestControlAppointmentModal/index.vue';
 import SelectTreatmentModal from '@/components/appointments/SelectTreatmentModal/index.vue';
 
 export default {
@@ -207,39 +206,12 @@ export default {
     },
 
     async provideAppointment() {
-      this.$router.push({
-        name: APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_DEFAULT_CARD.name,
-        params: {
-          id: this.appointment.id,
-        },
-      });
-
       await this.updateStatus(Appointment.enum.statuses.Provided, { forceUpdate: true });
-      // иначе не открываются модалки по след. флоу
-      setTimeout(async () => this.startAfterProvideFlow());
+      this.startAfterProvideFlow();
     },
 
     async startAfterProvideFlow() {
-      const successControlAppointment = await this.suggestControlAppointment();
       this.$router.push(DOCTORS_QUEUE_ROUTE.path);
-    },
-
-    /**
-     * Возращает
-     *   true - если успешно создан контрольынй приём
-     *   false - модалка закрылась или выбрали "пропустить"
-     * @return {Promise<boolean>}
-     */
-    async suggestControlAppointment() {
-      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
-        component: SuggestControlAppointmentModal,
-        payload: {
-          doctor: this.appointment.doctor,
-          patient: this.appointment.patient,
-        },
-      });
-
-      return !(action instanceof GlobalModalCloseAction);
     },
   },
 

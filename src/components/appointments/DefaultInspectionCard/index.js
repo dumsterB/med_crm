@@ -13,6 +13,7 @@ import PatientCardRow from '@/components/patients/PatientCardRow/index.vue';
 import DiseaseCodeSelect from '@/components/deseaseСode/DiseaseCodeSelect/index.vue';
 import TemplateResultBlock from '@/components/templates/TemplateResult/TemplateResultBlock/index.vue';
 import CreateTreatmentModal from '@/components/treatments/CreateTreatmentModal/index.vue';
+import CreateOrEditAppointmentModal from '@/components/appointments/CreateOrEditAppointmentModal/index.vue';
 
 export default {
   name: 'DefaultInspectionCard',
@@ -127,6 +128,18 @@ export default {
         payload: {
           userId: this.appointment.patient_id,
           appointment: this.appointment,
+        },
+      });
+
+      if (action instanceof GlobalModalCloseAction) return;
+    },
+
+    async setControlAppointment() {
+      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
+        component: CreateOrEditAppointmentModal,
+        payload: {
+          disableDefaultAction: true,
+          patient: this.appointment.patient,
         },
       });
 

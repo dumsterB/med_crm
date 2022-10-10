@@ -11,6 +11,7 @@
           {{ $t('Base.InspectionCard') }}
         </h1>
 
+        <!--  PatientCard  -->
         <PatientCardRow
           class="default-inspection-card-form__patient"
           :patient="appointment.patient"
@@ -22,6 +23,7 @@
           </template>
         </PatientCardRow>
 
+        <!--  Select template  -->
         <ElFormItem v-show="!readonly" :label="$t('Templates.SelectTemplate')">
           <UiModelsAutocompleteSearch
             v-model="templateId"
@@ -33,6 +35,7 @@
             @select="selectTemplate" />
         </ElFormItem>
 
+        <!--  Template & Diagnosis  -->
         <TemplateResult
           class="default-inspection-card-form__template-result"
           v-model="inspectionCard.basic_data"
@@ -53,18 +56,19 @@
         </TemplateResult>
       </div>
 
+      <!--  Actions  -->
       <ElFormItem class="default-inspection-card-form__actions">
         <div class="default-inspection-card-form-actions">
-          <ElButton
-            v-show="!readonly && !appointment.treatment_id"
-            type="primary"
-            plain
-            @click="setTreatment">
+          <ElButton v-show="!readonly" type="primary" native-type="submit">
+            {{ $t('Appointments.EndReception') }}
+          </ElButton>
+
+          <ElButton v-show="!readonly" type="warning" plain @click="setTreatment">
             {{ $t('Base.SetTreatment') }}
           </ElButton>
 
-          <ElButton v-show="!readonly" type="primary" native-type="submit">
-            {{ $t('Appointments.EndReception') }}
+          <ElButton v-show="!readonly" type="primary" plain @click="setControlAppointment">
+            {{ $t('Appointments.SetControlAppointment') }}
           </ElButton>
 
           <ElButton v-show="readonly" text @click="print">
