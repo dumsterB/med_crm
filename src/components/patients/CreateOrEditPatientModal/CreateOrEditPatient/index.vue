@@ -34,11 +34,12 @@
         <ElFormItem :label="$t('User.FullName') + ` (${$t('User.FullNameFormat').toLowerCase()})`">
           <ElInput
             class="create-or-edit-patient__field"
-            v-model="patient.name"
+            :model-value="patient.name"
             minlength="3"
             required
             :disabled="isDisabledSecondaryInputs"
-            pattern="[a-zA-Z\d\s]*" />
+            pattern="[a-zA-Z\d\s]*"
+            @update:modelValue="patient.name = onlyLatinFormatter($event)" />
         </ElFormItem>
 
         <!--  Birthdate  -->

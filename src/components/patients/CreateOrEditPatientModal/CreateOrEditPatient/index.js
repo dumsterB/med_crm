@@ -1,6 +1,7 @@
 import * as icons from '@/enums/icons.enum.js';
 import { throttle } from 'lodash';
 import { insertRouteParams } from '@/utils/router.utils';
+import { onlyLatinFormatter } from '@/utils/formatters.util';
 import { Patient } from '@/models/Patient.model';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
 import { PATIENT_ROUTE } from '@/router/patients.routes';
@@ -259,5 +260,6 @@ export default {
     FULL_DATE_FORMAT: FULL_DATE_FORMAT,
     Patient,
     icons,
+    onlyLatinFormatter,
   }),
 };
