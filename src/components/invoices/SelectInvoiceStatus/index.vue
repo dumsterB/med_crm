@@ -4,6 +4,7 @@
     :multiple="multiple"
     collapse-tags
     :placeholder="$t('Placeholder')"
+    v-bind="$attrs"
     @update:model-value="$emit('update:modelValue', $event)">
     <ElOption
       v-for="option in options"

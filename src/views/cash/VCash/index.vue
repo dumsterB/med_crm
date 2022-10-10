@@ -8,7 +8,7 @@
         :start-placeholder="$t('DateAndTime.StartDate')"
         :end-placeholder="$t('DateAndTime.EndDate')" />
 
-      <SelectInvoiceStatus v-model="status.value" />
+      <SelectInvoiceStatus clearable v-model="status.value" />
 
       <template #actions>
         <ElButton type="primary" @click="createInvoice">
