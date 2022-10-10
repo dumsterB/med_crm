@@ -141,7 +141,7 @@ export default {
             ![Appointment.enum.statuses.InProgress, Appointment.enum.statuses.Provided].includes(
               value
             )) ||
-          this.appointment.inspection_card.type === InspectionCard.enum.types.Default
+          this.appointment.inspection_card?.type === InspectionCard.enum.types.Default
         )
           return this.goToAppointment();
       },
