@@ -95,11 +95,10 @@ import { User } from '@/models/User.model';
 
 import CreateOrEditAppointmentModal from '@/components/appointments/CreateOrEditAppointmentModal/index.vue';
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
-import AppointmentStartOrEndDate from '@/components/appointments/AppointmentStartOrEndDate/index.vue';
 
 export default {
   name: 'AppointmentsTable',
-  components: { AppointmentStartOrEndDate, AppointmentStatusTag },
+  components: { AppointmentStatusTag },
   emits: ['update:perPage', 'update:page', 'item:edit'],
   props: {
     /** @type { Array<Appointment|object> } items */
