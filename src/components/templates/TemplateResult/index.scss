@@ -1,7 +1,7 @@
 .template-result {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  background-color: var(--el-card-bg-color);
 
   .el-card {
     border: none;
