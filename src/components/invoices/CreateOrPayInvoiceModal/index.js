@@ -55,7 +55,10 @@ export default {
             (acc, elem) => acc + elem.subject.price * elem.count,
             0
           );
-      sum = this.invoice.discount > 0 ? sum - sum * (this.invoice.discount / 100) : sum;
+      sum =
+        !this.invoice.id && this.invoice.discount > 0
+          ? sum - sum * (this.invoice.discount / 100)
+          : sum;
 
       return `${formatPrice({ price: sum })} ${this.$t('Base.Sum')}`;
     },
