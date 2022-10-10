@@ -59,7 +59,12 @@
               </ElButton>
 
               <ElButton
-                v-if="row.status !== Appointment.enum.statuses.Canceled"
+                v-if="
+                  ![
+                    Appointment.enum.statuses.Canceled,
+                    Appointment.enum.statuses.Provided,
+                  ].includes(row.status)
+                "
                 type="danger"
                 plain
                 @click.stop="updateAppointmentStatus(row.id, Appointment.enum.statuses.Canceled)">
