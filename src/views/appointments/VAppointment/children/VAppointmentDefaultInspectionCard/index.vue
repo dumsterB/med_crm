@@ -61,7 +61,7 @@ export default {
             ![Appointment.enum.statuses.InProgress, Appointment.enum.statuses.Provided].includes(
               value
             )) ||
-          this.appointment.inspection_card.type === InspectionCard.enum.types.Treatment // TODO: удалить после объединения
+          this.appointment.inspection_card?.type === InspectionCard.enum.types.Treatment // TODO: удалить после объединения
         )
           this.goToAppointmentDefaultCard();
       },
