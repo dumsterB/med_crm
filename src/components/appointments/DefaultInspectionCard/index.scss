@@ -3,6 +3,10 @@
   background-color: inherit;
   border: none;
 
+  & > .el-card__body {
+    padding: 0;
+  }
+
   &-form {
     display: flex;
     flex-direction: column;
@@ -11,6 +15,13 @@
 
     &__content {
       flex: 1;
+    }
+    &__patient {
+      margin-bottom: 20px;
+
+      .patient-card__info__value {
+        white-space: pre-line;
+      }
     }
 
     &-actions {
@@ -27,6 +38,12 @@
 @media print {
   .default-inspection-card {
     &-form {
+      &__patient {
+        .patient-card-actions {
+          display: none;
+        }
+      }
+
       &-actions {
         display: none !important;
       }

@@ -11,6 +11,17 @@
           {{ $t('Base.InspectionCard') }}
         </h1>
 
+        <PatientCardRow
+          class="default-inspection-card-form__patient"
+          :patient="appointment.patient"
+          :items="patientCardItems">
+          <template #actions>
+            <router-link :to="patientAmbulatoryCardPageLink">
+              <ElButton type="primary"> {{ $t('Base.AmbulatoryCard') }} </ElButton>
+            </router-link>
+          </template>
+        </PatientCardRow>
+
         <ElFormItem v-show="!readonly" :label="$t('Templates.SelectTemplate')">
           <UiModelsAutocompleteSearch
             v-model="templateId"
@@ -56,14 +67,18 @@
 <script>
 import { mapState } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
+import { insertRouteParams } from '@/utils/router.utils';
 import { Appointment } from '@/models/Appointment.model';
 import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model';
 import { DefaultInspectionCard } from '@/models/DefaultInspectionCard.model';
+import { PATIENT_ROUTE } from '@/router/patients.routes';
+
 import TemplateResult from '@/components/templates/TemplateResult/index.vue';
+import PatientCardRow from '@/components/patients/PatientCardRow/index.vue';
 
 export default {
   name: 'DefaultInspectionCard',
-  components: { TemplateResult },
+  components: { PatientCardRow, TemplateResult },
   emits: ['update:appointment', 'appointment:provide', 'appointment:set:diagnosis'],
   props: {
     appointment: [Appointment, Object],
@@ -80,6 +95,29 @@ export default {
     ...mapState({
       templates: (state) => state.templates.data,
     }),
+
+    patientAmbulatoryCardPageLink() {
+      return insertRouteParams({
+        path: PATIENT_ROUTE.childrenMap.PATIENT_ROUTE_AMBULATORY_CARD._fullPath,
+        params: {
+          id: this.appointment.patient_id,
+        },
+      });
+    },
+    patientCardItems() {
+      let servicesText = this.appointment.services.map((service) => service.title).join(',\n');
+
+      return [
+        {
+          label: this.$t('Base.Services'),
+          value: servicesText,
+        },
+        {
+          label: this.$t('Appointments.StartDate'),
+          value: this.appointment.start_at,
+        },
+      ];
+    },
 
     isShowSetDiagnoseButton() {
       return (
