@@ -2,10 +2,9 @@
   <ElDialog
     custom-class="treatment-modal"
     :model-value="modelValue"
+    :title="$t('Base.SetTreatment')"
     width="500px"
     @update:modelValue="$emit('update:modelValue')">
-    <p class="treatment-modal__title">{{ $t('Base.SetTreatment') }}</p>
-
     <ElForm class="treatment-modal-form" label-position="top" @submit.prevent="createTreatment">
       <ElInput
         class="treatment-modal__input"
@@ -14,14 +13,18 @@
         :placeholder="$t('Base.Naming')" />
       <ElInput
         class="treatment-modal__input"
-        required
         v-model="price"
-        :placeholder="$t('Base.Price')" />
+        :placeholder="$t('Base.Price')"
+        required
+        type="number"
+        min="0" />
       <ElInput
         class="treatment-modal__input"
         v-model="duration"
+        :placeholder="$t('Base.QuantityDays')"
         required
-        :placeholder="$t('Base.QuantityDays')" />
+        type="number"
+        min="1" />
 
       <ElButton
         class="treatment-modal-submit"
