@@ -29,11 +29,11 @@ export default {
       return {
         [DASHBOARD_ROUTE.name]: {
           icon: icons.DASHBOARD_NAV,
-          text: this.$t('Base.Dashboard'),
+          text: this.$t('Base.CalendarAppointments'),
         },
         [DOCTORS_QUEUE_ROUTE.name]: {
           icon: icons.TIMETABLE_NAV,
-          text: this.$t('Base.Queue'),
+          text: this.$t('Base.QueueForToday'),
         },
         [PATIENTS_ROUTE.name]: {
           icon: icons.USER_TAG,
