@@ -39,6 +39,7 @@
           </template>
         </ElTableColumn>
 
+
         <!--        <ElTableColumn prop="created_at" :label="$t('DateAndTime.CreatedAt')" />-->
 
         <ElTableColumn v-if="isManager" prop="actions" :label="$t('Base.Actions')" width="380px">
