@@ -40,7 +40,7 @@
               <ElButton
                 v-if="row.status === Appointment.enum.statuses.Approved"
                 type="primary"
-                @click="callToReception(row)">
+                @click.stop="callToReception(row)">
                 {{ $t('Base.CallToReception') }}
               </ElButton>
             </div>
@@ -118,6 +118,7 @@ export default {
 <style lang="scss" src="./index.scss" />
 <i18n src="./index.locales.json" />
 <i18n src="@/locales/base.locales.json" />
+<i18n src="@/locales/notifications.locales.json" />
 <i18n src="@/locales/dateAndTime.locales.json" />
 <i18n src="@/locales/user.locales.json" />
 <i18n src="@/locales/patients.locales.json" />
