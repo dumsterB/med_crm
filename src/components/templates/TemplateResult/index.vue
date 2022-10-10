@@ -18,6 +18,8 @@
         @update:block="updateBlock"
         @change="$emit('change')" />
     </template>
+
+    <slot name="footer"></slot>
   </div>
 </template>
 

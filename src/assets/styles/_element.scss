@@ -122,6 +122,17 @@ body {
   }
 }
 
+// select
+.el-select {
+  &-dropdown {
+    &__item {
+      height: auto;
+      padding: 6px 32px 6px 20px;
+      line-height: 1.5em;
+    }
+  }
+}
+
 // card
 .el-card {
   --el-card-border-radius: 8px;

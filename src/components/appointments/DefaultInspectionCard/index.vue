@@ -37,16 +37,25 @@
           class="default-inspection-card-form__template-result"
           v-model="inspectionCard.basic_data"
           :readonly="readonly"
-          @change="updateInspectionCard" />
+          @change="updateInspectionCard">
+          <template #footer>
+            <ElFormItem :label="$t('Appointments.SelectDiagnosis')">
+              <DiseaseCodeSelect
+                v-model="inspectionCard.disease_code_codes"
+                required
+                multiple
+                collapse-tags
+                collapse-tags-tooltip
+                :default-item="appointment.inspection_card.disease_codes"
+                @select="updateInspectionCard" />
+            </ElFormItem>
+          </template>
+        </TemplateResult>
       </div>
 
       <ElFormItem class="default-inspection-card-form__actions">
         <div class="default-inspection-card-form-actions">
           <slot name="actions">
-            <ElButton v-show="isShowSetDiagnoseButton" type="warning" plain @click="toDiagnose">
-              {{ $t('Appointments.ToDiagnose') }}
-            </ElButton>
-
             <ElButton v-show="!readonly" type="primary" native-type="submit">
               {{ $t('Appointments.EndReception') }}
             </ElButton>
@@ -67,19 +76,21 @@
 <script>
 import { mapState } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
+import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { insertRouteParams } from '@/utils/router.utils';
 import { Appointment } from '@/models/Appointment.model';
 import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model';
 import { DefaultInspectionCard } from '@/models/DefaultInspectionCard.model';
-import { PATIENT_ROUTE } from '@/router/patients.routes';
+import { DiseaseCode } from '@/models/DiseasesCode.model';
 
 import TemplateResult from '@/components/templates/TemplateResult/index.vue';
 import PatientCardRow from '@/components/patients/PatientCardRow/index.vue';
+import DiseaseCodeSelect from '@/components/deseaseСode/DiseaseCodeSelect/index.vue';
 
 export default {
   name: 'DefaultInspectionCard',
-  components: { PatientCardRow, TemplateResult },
-  emits: ['update:appointment', 'appointment:provide', 'appointment:set:diagnosis'],
+  components: { DiseaseCodeSelect, PatientCardRow, TemplateResult },
+  emits: ['update:appointment', 'appointment:provide'],
   props: {
     appointment: [Appointment, Object],
     readonly: Boolean,
@@ -118,14 +129,6 @@ export default {
         },
       ];
     },
-
-    isShowSetDiagnoseButton() {
-      return (
-        !this.readonly &&
-        !!this.appointment.inspection_card &&
-        !this.appointment.inspection_card?.disease_code_codes?.length
-      );
-    },
   },
   watch: {
     'appointment.id': {
@@ -151,6 +154,7 @@ export default {
     print() {
       window.print();
     },
+
     /** @param {InspectionCardTemplate} template */
     selectTemplate(template) {
       this.inspectionCard = new DefaultInspectionCard({
@@ -187,19 +191,16 @@ export default {
     },
 
     submitHandler() {
+      this.$emit('appointment:provide');
       this.endReception();
     },
 
-    toDiagnose() {
-      this.$emit('appointment:set:diagnosis');
-    },
-    endReception() {
-      this.$emit('appointment:provide');
-    },
+    endReception() {},
   },
 
   setup: () => ({
     InspectionCardTemplate,
+    DiseaseCode,
     icons,
   }),
 };
