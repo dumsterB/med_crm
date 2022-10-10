@@ -23,7 +23,7 @@
 import { mapState, mapActions } from 'vuex';
 import { usePage, usePerPage, useSearch } from '@/hooks/query';
 import { compareQueriesThenLoadData } from '@/utils/router.utils';
-import { ISOStringToDateAppFormat } from '@/utils/dateAndTime.utils';
+import { getCurrentDate, ISOStringToDateAppFormat } from '@/utils/dateAndTime.utils';
 import { Appointment } from '@/models/Appointment.model.js';
 import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
@@ -112,7 +112,12 @@ export default {
       );
 
       if (action instanceof GlobalModalCloseAction) return;
-      action.data?.appointments.forEach((appointment) => this.createItem(appointment));
+
+      const currentDate = getCurrentDate();
+      action.data.appointments.forEach((appointment) => {
+        if (!appointment.start_at || appointment.start_at.split(' ')[0] === currentDate)
+          this.createItem(appointment);
+      });
     },
   },
 };
