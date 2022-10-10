@@ -28,6 +28,9 @@ export default {
       templateId: null,
       activeTemplate: null,
       inspectionCard: null,
+      loading: {
+        provide: false,
+      },
     };
   },
   computed: {
@@ -80,6 +83,7 @@ export default {
 
   methods: {
     submitHandler() {
+      this.loading.provide = true;
       this.$emit('appointment:provide');
     },
 

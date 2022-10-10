@@ -59,7 +59,11 @@
       <!--  Actions  -->
       <ElFormItem class="default-inspection-card-form__actions">
         <div class="default-inspection-card-form-actions">
-          <ElButton v-show="!readonly" type="primary" native-type="submit">
+          <ElButton
+            v-show="!readonly"
+            type="primary"
+            native-type="submit"
+            :loading="loading.provide">
             {{ $t('Appointments.EndReception') }}
           </ElButton>
 
