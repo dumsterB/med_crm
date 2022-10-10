@@ -6,6 +6,11 @@
   .el-form-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+
+    &__label {
+      margin-bottom: 0 !important;
+    }
 
     &__content {
       display: flex;
