@@ -80,14 +80,6 @@
         @click="$emit('status:update', Appointment.enum.statuses.Provided)">
         {{ $t('Appointments.EndReception') }}
       </ElButton>
-      <ElButton
-        type="danger"
-        plain
-        v-if="appointment.status === Appointment.enum.statuses.Provided"
-        :loading="loading[Appointment.enum.statuses.Canceled]"
-        @click="$emit('status:update', Appointment.enum.statuses.Canceled)">
-        {{ $t('Appointments.CancelReception') }}
-      </ElButton>
       <!--      <ElButton
         v-if="
           user.role === User.enum.roles.Manager &&
