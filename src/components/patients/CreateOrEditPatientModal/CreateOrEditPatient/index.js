@@ -182,7 +182,8 @@ export default {
 
         this.$notify({ type: 'success', title: this.$t('Notifications.SuccessAttached') });
         this.$emit('action', new GlobalModalAction({ name: 'attached', data: { patient } }));
-        this.goToPatient({ patientId: patient.id });
+        if (!this.disableDefaultAction)
+          this.goToPatient({ patient: patient, patientId: patient.id });
       } catch (err) {
         console.log(err);
         this.$notify({
