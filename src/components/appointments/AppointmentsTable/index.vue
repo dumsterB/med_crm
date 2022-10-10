@@ -4,7 +4,7 @@
       <ElTable
         v-loading="loading"
         class="appointments-table"
-        :data="items"
+        :data="itemsWithPayload"
         ref="elTable"
         :row-class-name="getTableRowClassName"
         @row-click="goToAppointment">
@@ -27,18 +27,8 @@
           </template>
         </ElTableColumn>
 
-        <ElTableColumn width="150px" prop="start_at" :label="$t('DateAndTime.StartAt')">
-          <template #default="{ row }">
-            <AppointmentStartOrEndDate :date="row.start_at" />
-          </template>
-        </ElTableColumn>
-        <ElTableColumn width="100px" prop="end_at" :label="$t('DateAndTime.EndAt')">
-          <template #default="{ row }">
-            <AppointmentStartOrEndDate v-if="row.end_at" :date="row.end_at" show-only-time />
-          </template>
-        </ElTableColumn>
-
-        <!--        <ElTableColumn prop="service.title" :label="$t('Base.ReasonService')" />-->
+        <ElTableColumn width="110px" prop="_start_at" :label="$t('DateAndTime.StartAt')" />
+        <ElTableColumn width="100px" prop="_end_at" :label="$t('DateAndTime.EndAt')" />
 
         <ElTableColumn prop="patient.name" :label="$t('Base.Patient')" />
         <ElTableColumn prop="patient.phone" :label="$t('Appointments.PhonePatient')" />
@@ -99,7 +89,6 @@
 <script>
 import { mapState } from 'vuex';
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
-import * as icons from '@/enums/icons.enum.js';
 import { PAGE_SIZES } from '@/config/ui.config';
 import { Appointment } from '@/models/Appointment.model';
 import { User } from '@/models/User.model';
@@ -113,7 +102,7 @@ export default {
   components: { AppointmentStartOrEndDate, AppointmentStatusTag },
   emits: ['update:perPage', 'update:page', 'item:edit'],
   props: {
-    /** @property { Array<Appointment|object> } items */
+    /** @type { Array<Appointment|object> } items */
     items: Array,
     loading: Boolean,
     page: Number,
@@ -121,7 +110,6 @@ export default {
     total: Number,
     search: String,
   },
-  icons: icons,
 
   computed: {
     ...mapState({
@@ -137,6 +125,14 @@ export default {
     },
     pageSizes() {
       return PAGE_SIZES;
+    },
+
+    itemsWithPayload() {
+      return this.items.map((elem) => ({
+        ...elem,
+        _start_at: elem.start_at?.split(' ')[1],
+        _end_at: elem.end_at?.split(' ')[1],
+      }));
     },
   },
   watch: {
