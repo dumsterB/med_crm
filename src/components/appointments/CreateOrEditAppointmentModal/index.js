@@ -88,9 +88,7 @@ export default {
   watch: {
     modelValue: {
       handler() {
-        this.appointment = new Appointment(
-          this.data || { patient_id: this.patient?.id || null, doctor_id: this.user.doctor_id }
-        );
+        this.appointment = new Appointment(this.data || { patient_id: this.patient?.id || null });
       },
       immediate: true,
       deep: true,
