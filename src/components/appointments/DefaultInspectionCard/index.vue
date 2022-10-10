@@ -16,7 +16,9 @@
             v-model="templateId"
             label="title"
             :model-for-use="InspectionCardTemplate"
+            :required="!appointment.inspection_card_id"
             :disabled="readonly"
+            :default-item="activeTemplate"
             @select="selectTemplate" />
         </ElFormItem>
 
@@ -52,6 +54,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
 import { Appointment } from '@/models/Appointment.model';
 import { InspectionCardTemplate } from '@/models/InspectionCardTemplate.model';
@@ -69,10 +72,15 @@ export default {
   data() {
     return {
       templateId: null,
+      activeTemplate: null,
       inspectionCard: null,
     };
   },
   computed: {
+    ...mapState({
+      templates: (state) => state.templates.data,
+    }),
+
     isShowSetDiagnoseButton() {
       return (
         !this.readonly &&
@@ -90,6 +98,12 @@ export default {
             appointment_id: this.appointment.id,
           }
         );
+
+        if (!this.appointment.inspection_card_id && this.templates.length) {
+          this.templateId = this.templates[0].id;
+          this.activeTemplate = this.templates[0];
+          this.selectTemplate(this.templates[0]);
+        }
       },
       immediate: true,
     },
