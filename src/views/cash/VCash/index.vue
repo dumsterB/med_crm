@@ -58,11 +58,6 @@ export default {
     icons: icons,
     Invoice,
   }),
-  data() {
-    return {
-      debounceGetInvoices: null,
-    };
-  },
   computed: {
     ...mapState({
       loading: (state) => state.invoices.loading,
@@ -98,7 +93,7 @@ export default {
           query: value,
           oldQuery: oldValue,
           resetPage: this.page.reset,
-          getData: this.debounceGetInvoices || this.getInvoices,
+          getData: this.getInvoices,
           fieldsForResetPage: ['status', 'start_at', 'end_at'],
         });
       },
@@ -116,13 +111,14 @@ export default {
     }),
 
     async getInvoices() {
+      if (this.queryWatchers.start_at && !this.queryWatchers.end_at) return;
       this.setLoading(true);
 
       try {
         const { data } = await Invoice.find(this.queryWatchers);
         this.setData({
           items: data.data,
-          total: data.meta.total,
+          total: +data.meta.total,
           overwriteDataState: true,
         });
       } catch (err) {
@@ -145,10 +141,6 @@ export default {
       if (action instanceof GlobalModalCloseAction) return;
       this.createItem(action.data.invoice);
     },
-  },
-
-  mounted() {
-    this.debounceGetInvoices = debounce(this.getInvoices, 300);
   },
 };
 </script>
