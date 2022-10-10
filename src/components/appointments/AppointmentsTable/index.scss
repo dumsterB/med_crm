@@ -16,7 +16,7 @@
 .appointments-table {
   width: auto;
   height: 100%;
-  min-width: calc(var(--container-width) / 1);
+  min-width: calc(var(--container-width) / 1.22);
   overflow-x: auto;
 
   tr:hover {

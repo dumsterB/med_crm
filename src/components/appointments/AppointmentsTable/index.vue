@@ -49,9 +49,8 @@
           </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="created_at" :label="$t('DateAndTime.CreatedAt')" />
+        <!--        <ElTableColumn prop="created_at" :label="$t('DateAndTime.CreatedAt')" />-->
 
-        <!--  При необходимости добавить проверку на роль пользователя  -->
         <ElTableColumn v-if="isManager" prop="actions" :label="$t('Base.Actions')" width="380px">
           <template #default="{ row }">
             <div class="appointments-table__actions-row">
