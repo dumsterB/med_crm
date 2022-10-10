@@ -74,7 +74,7 @@ export default {
   methods: {
     goToInspectionCard() {
       const path =
-        this.appointment.inspection_card.type === InspectionCard.enum.types.Default
+        this.appointment.inspection_card?.type === InspectionCard.enum.types.Default
           ? APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_INSPECTION_CARD._fullPath
           : APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_TREATMENT_CARD._fullPath;
 
