@@ -92,10 +92,7 @@
       </ElButton>-->
 
       <ElButton
-        v-if="
-          user.role === User.enum.roles.Doctor &&
-          appointment.status === Appointment.enum.statuses.Provided
-        "
+        v-if="isDoctor && appointment.status === Appointment.enum.statuses.Provided"
         type="primary"
         @click="goToInspectionCard">
         {{ $t('GoToDefaultInspectionCard') }}

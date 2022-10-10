@@ -2,12 +2,13 @@ import { mapState } from 'vuex';
 import { insertRouteParams } from '@/utils/router.utils';
 import { formatPrice } from '@/utils/price.util';
 import { PATIENT_ROUTE } from '@/router/patients.routes';
+import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import { User } from '@/models/User.model';
 import { Appointment } from '@/models/Appointment.model';
+import { InspectionCard } from '@/models/InspectionCard.model';
+import { NOT_REDIRECT } from '@/enums/query.enum';
 
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
-import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
-import { InspectionCard } from '@/models/InspectionCard.model';
 
 export default {
   name: 'VAppointmentDefaultCard',
@@ -28,6 +29,10 @@ export default {
     ...mapState({
       user: (state) => state.auth.user,
     }),
+
+    isDoctor() {
+      return this.user.role === User.enum.roles.Doctor;
+    },
 
     patientPageLink() {
       return insertRouteParams({
@@ -71,6 +76,15 @@ export default {
     },
   },
 
+  watch: {
+    'appointment.id': {
+      handler(value) {
+        this.redirectToInspectionCardIfNeeded();
+      },
+      immediate: true,
+    },
+  },
+
   methods: {
     goToInspectionCard() {
       const path =
@@ -84,6 +98,16 @@ export default {
           params: { id: this.appointment.id },
         })
       );
+    },
+
+    redirectToInspectionCardIfNeeded() {
+      if (
+        this.appointment.status === Appointment.enum.statuses.InProgress &&
+        this.isDoctor &&
+        !this.$route.query[NOT_REDIRECT]
+      ) {
+        this.goToInspectionCard();
+      }
     },
   },
 
