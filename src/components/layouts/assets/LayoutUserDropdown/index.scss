@@ -1,26 +1,7 @@
 .layout-user-dropdown {
-  &-reference {
-    display: flex;
-    align-items: center;
-    gap: 14px;
+  text-align: right;
 
-    &:hover {
-      cursor: pointer;
-    }
-
-    &__icon {
-      font-size: 0.9em;
-    }
-  }
-
-  &-part {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-
-    &__title {
-      font-weight: bold;
-    }
+  .ui-user-avatar-info__avatar {
+    order: 10;
   }
 }

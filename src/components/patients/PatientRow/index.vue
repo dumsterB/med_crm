@@ -4,7 +4,7 @@
     @click="goToPatient">
     <td>
       <div class="patient-row__main">
-        <UiAvatar :img="patient.avatar" />
+        <UiAvatar :img="patient.avatar" :gender="patient.gender" />
         <span>{{ patient.name }}</span>
       </div>
     </td>

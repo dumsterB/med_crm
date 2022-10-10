@@ -17,8 +17,14 @@
       </ElPageHeader>
     </LayoutContentHeader>
 
-    <ElCard shadow="never">
-      <ElForm class="v-app-treat-card-form" label-position="top" @submit.prevent="submitHandler">
+    <ElCard class="printer__block printer__doc" shadow="never">
+      <ElForm
+        class="v-app-treat-card-form"
+        id="treatments"
+        label-position="top"
+        @submit.prevent="submitHandler">
+        <h1 class="printer__title">{{ $t('Title') }}</h1>
+
         <ElFormItem :label="$t('Appointments.InspectionCard.Сomplaints')">
           <ElInput
             v-model="inspectionCard.complaints"
@@ -41,8 +47,9 @@
             @change="updateInspectionCard" />
         </ElFormItem>
 
-        <div v-show="!isProvided" class="v-app-treat-card-form-actions">
+        <div class="v-app-treat-card-form-actions">
           <ElButton
+            v-show="!isProvided"
             data-method="closeTreatment"
             type="warning"
             plain
@@ -51,8 +58,21 @@
             {{ $t('Treatments.CloseTreatment') }}
           </ElButton>
 
-          <ElButton data-method="endReception" type="primary" native-type="submit">
+          <ElButton
+            v-show="!isProvided"
+            data-method="endReception"
+            type="primary"
+            native-type="submit">
             {{ $t('Appointments.EndReception') }}
+          </ElButton>
+
+          <ElButton
+            v-show="isProvided"
+            class="v-app-treat-card-form-actions"
+            text
+            @click="callPrint">
+            <template #icon> <UiIcon :icon="icons.PRINTER" /> </template>
+            {{ $t('Base.Print') }}
           </ElButton>
         </div>
       </ElForm>
@@ -61,14 +81,17 @@
 </template>
 
 <script>
+import * as icons from '@/enums/icons.enum.js';
 import { insertRouteParams } from '@/utils/router.utils';
 import { Appointment } from '@/models/Appointment.model';
 import { TreatmentInspectionCard } from '@/models/TreatmentInspectionCard.model';
+import { Treatment } from '@/models/Treatment.model';
+import { InspectionCard } from '@/models/InspectionCard.model';
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import { PATIENT_ROUTE } from '@/router/patients.routes';
+import { NOT_REDIRECT } from '@/enums/query.enum';
 
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
-import { Treatment } from '@/models/Treatment.model';
 
 export default {
   name: 'VAppointmentTreatmentInspectionCard',
@@ -118,7 +141,7 @@ export default {
             ![Appointment.enum.statuses.InProgress, Appointment.enum.statuses.Provided].includes(
               value
             )) ||
-          this.appointment.service_case_id
+          this.appointment.inspection_card?.type === InspectionCard.enum.types.Default
         )
           return this.goToAppointment();
       },
@@ -127,12 +150,14 @@ export default {
   },
 
   methods: {
+    callPrint() {
+      window.print();
+    },
     goToAppointment() {
       this.$router.push({
         name: APPOINTMENT_ROUTE.name,
-        params: {
-          id: this.appointment.id,
-        },
+        params: { id: this.appointment.id },
+        query: { [NOT_REDIRECT]: 1 },
       });
     },
 
@@ -189,6 +214,9 @@ export default {
       this.$emit('appointment:provide');
     },
   },
+  setup: () => ({
+    icons,
+  }),
 };
 </script>
 

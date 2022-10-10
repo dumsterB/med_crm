@@ -18,24 +18,19 @@
 
 <script>
 import { mapState } from 'vuex';
-import * as icons from '@/enums/icons.enum.js';
 import { Patient } from '@/models/Patient.model';
 import { Appointment } from '@/models/Appointment.model';
-import { GlobalDrawerCloseAction } from '@/models/client/ModalAndDrawer/GlobalDrawerCloseAction';
 import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 import { Treatment } from '@/models/Treatment.model';
 
 import LayoutByUserRole from '@/components/layouts/LayoutByUserRole/index.vue';
-import CreateOrEditPatientDrawer from '@/components/patients/CreateOrEditPatientDrawer/index.vue';
-import CreateOrEditAppointmentDrawer from '@/components/appointments/CreateOrEditAppointmentDrawer/index.vue';
+import CreateOrEditPatientModal from '@/components/patients/CreateOrEditPatientModal/index.vue';
+import CreateOrEditAppointmentModal from '@/components/appointments/CreateOrEditAppointmentModal/index.vue';
 import CreateTreatmentModal from '@/components/treatments/CreateTreatmentModal/index.vue';
 
 export default {
   name: 'VPatient',
-  components: {
-    LayoutByUserRole,
-  },
-  icons: icons,
+  components: { LayoutByUserRole },
   props: {
     id: [Number, String],
   },
@@ -108,8 +103,8 @@ export default {
     },
 
     createAppointment() {
-      this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreateOrEditAppointmentDrawer,
+      this.$store.dispatch('modalAndDrawer/openModal', {
+        component: CreateOrEditAppointmentModal,
         payload: {
           patient: this.patient,
         },
@@ -133,18 +128,18 @@ export default {
     },
 
     async editPatient() {
-      const action = await this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreateOrEditPatientDrawer,
+      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
+        component: CreateOrEditPatientModal,
         payload: { data: this.patient },
       });
 
-      if (action instanceof GlobalDrawerCloseAction) return;
+      if (action instanceof GlobalModalCloseAction) return;
       this.patient = action.data.patient;
     },
 
     createChildren() {
-      this.$store.dispatch('modalAndDrawer/openDrawer', {
-        component: CreateOrEditPatientDrawer,
+      this.$store.dispatch('modalAndDrawer/openModal', {
+        component: CreateOrEditPatientModal,
         payload: {
           data: new Patient({ parent: this.patient, parent_id: this.patient.id }),
         },

@@ -17,6 +17,7 @@ export class ServiceGroup extends CRUDModel {
     super(payload);
 
     this.title = payload?.title ?? null;
+    this.price = payload?.price ?? 0;
     this.clinic_id = payload?.clinic_id ?? null;
     this.clinic = payload?.clinic ?? null;
     this.services = payload?.services ?? null;

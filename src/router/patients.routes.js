@@ -34,6 +34,9 @@ export const PATIENT_ROUTE = {
       path: 'ambulatory-card',
       _fullPath: '/patients/:id/ambulatory-card',
       component: 'VPatientAmbulatoryCard',
+      meta: {
+        title: I18nService.t('Base.AmbulatoryCard'),
+      },
     },
   },
 };

@@ -5,12 +5,15 @@
   gap: 10px;
 
   &__search {
-    width: 60%;
+    width: 500px;
   }
-  &__appointment-btn {
+  &-left-content {
+    display: flex;
+    gap: 20px;
     margin-right: auto;
   }
-  &__dropdown {
-    margin-left: auto;
+  &-dropdown {
+    display: flex;
+    gap: 15px;
   }
 }

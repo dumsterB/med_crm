@@ -32,6 +32,8 @@ export class Appointment extends CRUDModel {
    * @property {number} inspection_card_id
    * @property {DefaultInspectionCard|TreatmentInspectionCard|InspectionCard} inspection_card
    *
+   * @property {Array<AppointmentSubject>} appointments
+   * @property {number} discount
    * @property {Date|string} start_at - format DD.MM.YY hh:mm
    * @property {Date|string} end_at
    * @property {string} status
@@ -59,6 +61,8 @@ export class Appointment extends CRUDModel {
     this.inspection_card_id = payload?.inspection_card_id ?? null;
     this.inspection_card = payload?.inspection_card ?? null;
 
+    this.appointments = payload?.appointments ?? []; // only for create
+    this.discount = payload?.discount ?? 0;
     this.start_at = payload?.start_at ?? null;
     this.end_at = payload?.end_at ?? null;
     this.status = payload?.status ?? null;
@@ -66,14 +70,9 @@ export class Appointment extends CRUDModel {
     this.cancel_description = payload?.cancel_description ?? null;
   }
 
-  /**
-   * @param {object} payload
-   * @return {Promise<{data: response.data, response: AxiosResponse<*>}>}
-   */
+  /** @override */
   static async create(payload) {
-    return super.create(payload, {
-      url: !payload.service_ids?.length ? `${this.tableName}/create/byGroup` : null,
-    });
+    return super.create(payload, { url: `${Appointment.tableName}/create/byGroup` });
   }
 
   static async getStatistic({ startAt, endAt, doctorsId }) {
@@ -149,10 +148,6 @@ export class Appointment extends CRUDModel {
   }
 
   static enum = {
-    types: {
-      Doctor: 'doctor',
-      Service: 'service',
-    },
     statuses: {
       Created: 'created',
       Approved: 'approved',

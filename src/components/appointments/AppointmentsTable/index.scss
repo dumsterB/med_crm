@@ -16,7 +16,7 @@
 .appointments-table {
   width: auto;
   height: 100%;
-  min-width: calc(var(--container-width) / 1.4);
+  min-width: calc(var(--container-width) / 1.22);
   overflow-x: auto;
 
   tr:hover {
@@ -36,8 +36,13 @@
       font-weight: normal;
     }
   }
+  &__actions-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
 }
 
-.el-table .appointment-in_progress {
+.el-table .appointment_in_progress {
   --el-table-tr-bg-color: #e7f5f2 !important;
 }

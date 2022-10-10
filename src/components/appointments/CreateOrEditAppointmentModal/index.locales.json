@@ -1,0 +1,16 @@
+{
+  "ru": {
+    "NotAppointmentsError": "Добавьте записи",
+    "Title": {
+      "Create": "Записать на приёмы",
+      "Edit": "Редактировать запись"
+    }
+  },
+  "uz": {
+    "NotAppointmentsError": "Xizmatlarni qoshing",
+    "Title": {
+      "Create": "Xizmatga ro'yxatdan o'tkazish",
+      "Edit": "Xabarni ozgartirish"
+    }
+  }
+}

@@ -1,3 +1,30 @@
 .ui-gender-select {
+  display: flex;
   width: 100%;
+
+  &-item {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    gap: 6px;
+    padding: 10px 16px;
+    color: var(--text-color);
+
+    border: 2px solid transparent;
+    border-radius: 10px;
+    &:hover {
+      cursor: pointer;
+    }
+
+    // что-то не так с иконками
+    &__icon {
+      position: relative;
+      top: 5px;
+    }
+
+    &_active {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+  }
 }

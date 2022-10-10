@@ -1,0 +1,24 @@
+.transactions-table-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+
+  &__scrollbar {
+    height: auto;
+  }
+  &__pagination {
+    align-self: flex-end;
+  }
+}
+
+.transactions-table {
+  width: auto;
+  height: 100%;
+  overflow-x: auto;
+
+  tr:hover {
+    cursor: pointer;
+  }
+}

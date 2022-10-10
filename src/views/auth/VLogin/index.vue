@@ -1,6 +1,5 @@
 <template>
   <LayoutAuth content-class="v-login">
-    <img class="v-login__image" src="@/assets/images/doctors.png" alt="doctors" />
     <LoginForm class="v-login__content" />
   </LayoutAuth>
 </template>

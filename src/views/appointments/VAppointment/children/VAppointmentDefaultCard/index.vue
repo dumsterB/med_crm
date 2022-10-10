@@ -2,7 +2,10 @@
   <ElCard class="appointment-card" shadow="never" v-bind="$attrs">
     <template #header>
       <router-link class="appointment-card__header appointment-card-header" :to="patientPageLink">
-        <UiAvatar class="appointment-card-header__avatar" size="super-large" />
+        <UiAvatar
+          class="appointment-card-header__avatar"
+          size="super-large"
+          :gender="appointment.patient?.gender" />
 
         <div class="appointment-card-header__user appointment-card-header-user">
           <div class="appointment-card-header-user__name">{{ appointment.patient?.name }}</div>
@@ -59,7 +62,7 @@
         type="primary"
         :loading="loading[Appointment.enum.statuses.InProgress]"
         @click="$emit('status:update', Appointment.enum.statuses.InProgress)">
-        {{ $t('Appointments.PatientCome') }}
+        {{ $t('Appointments.StartAppointment') }}
       </ElButton>
       <ElButton
         v-if="appointment.status === Appointment.enum.statuses.Waiting"
@@ -67,7 +70,7 @@
         plain
         :loading="loading[Appointment.enum.statuses.Canceled]"
         @click="$emit('status:update', Appointment.enum.statuses.Canceled)">
-        {{ $t('Appointments.PatientNotCome') }}
+        {{ $t('Appointments.CancelReception') }}
       </ElButton>
 
       <ElButton
@@ -77,8 +80,7 @@
         @click="$emit('status:update', Appointment.enum.statuses.Provided)">
         {{ $t('Appointments.EndReception') }}
       </ElButton>
-
-      <ElButton
+      <!--      <ElButton
         v-if="
           user.role === User.enum.roles.Manager &&
           appointment.status === Appointment.enum.statuses.Approved
@@ -87,13 +89,10 @@
         plain
         @click="$emit('appointment:edit')">
         {{ $t('Appointments.EditReception') }}
-      </ElButton>
+      </ElButton>-->
 
       <ElButton
-        v-if="
-          user.role === User.enum.roles.Doctor &&
-          appointment.status === Appointment.enum.statuses.Provided
-        "
+        v-if="isDoctor && appointment.status === Appointment.enum.statuses.Provided"
         type="primary"
         @click="goToInspectionCard">
         {{ $t('GoToDefaultInspectionCard') }}

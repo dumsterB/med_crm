@@ -6,7 +6,10 @@
       "EditPatient": "Изменить данные пациента",
       "HasTreatment": "На лечении",
       "MyPatients": "Мои пациенты",
-      "NoPatient": "Пациен не найден"
+      "NamePatient": "Имя пациента",
+      "NoPatient": "Пациен не найден",
+      "PatientAlreadyExists": "Пациент уже существует",
+      "PrintBracelet": "Распечатать браслет"
     }
   },
   "uz": {
@@ -16,7 +19,10 @@
       "EditPatient": "Bemorning ma'lumotlarini o'zgartirish",
       "HasTreatment": "Davolanmoqda",
       "MyPatients": "Mening bemorlarim",
-      "NoPatient": "Bemor topilmadi"
+      "NamePatient": "Bemorning Ismi",
+      "NoPatient": "Bemor topilmadi",
+      "PatientAlreadyExists": "Bemor mavjud",
+      "PrintBracelet": "Braslet chiqarish"
     }
   }
 }

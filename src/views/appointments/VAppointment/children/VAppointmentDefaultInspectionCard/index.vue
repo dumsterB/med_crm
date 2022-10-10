@@ -1,26 +1,14 @@
 <template>
   <div class="v-app-ins-card">
     <LayoutContentHeader>
-      <!--  TODO: заменить на ElPageHeader  -->
-      <div class="v-app-ins-card-header">
-        <RouterLink :to="appointmentDefaultCardPageLink">
-          <ElButton text>
-            <template #icon>
-              <UiIcon :icon="icons.CHEVRON_LEFT" />
-            </template>
-            {{ $t('Base.Back') }}
-          </ElButton>
-        </RouterLink>
-
-        <div class="v-app-ins-card-header-info">
-          <span>{{ $t('Base.Inspection') }}:</span>
-          <RouterLink :to="patientPageLink">
-            <ElButton type="primary" text>
-              {{ appointment.patient?.name }}
-            </ElButton>
-          </RouterLink>
-        </div>
-      </div>
+      <ElPageHeader
+        class="v-app-ins-card-header"
+        :title="$t('Base.Back')"
+        @back="goToAppointmentDefaultCard">
+        <template #content>
+          {{ $t('Base.InspectionCard') }}
+        </template>
+      </ElPageHeader>
     </LayoutContentHeader>
 
     <DefaultInspectionCard
@@ -38,6 +26,8 @@ import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { insertRouteParams } from '@/utils/router.utils';
 import { Appointment } from '@/models/Appointment.model';
+import { InspectionCard } from '@/models/InspectionCard.model';
+import { NOT_REDIRECT } from '@/enums/query.enum';
 
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
 import DefaultInspectionCard from '@/components/appointments/DefaultInspectionCard/index.vue';
@@ -52,15 +42,6 @@ export default {
   computed: {
     isProvided() {
       return this.appointment.status === Appointment.enum.statuses.Provided;
-    },
-
-    appointmentDefaultCardPageLink() {
-      return insertRouteParams({
-        path: APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_DEFAULT_CARD._fullPath,
-        params: {
-          id: this.appointment.id,
-        },
-      });
     },
 
     patientPageLink() {
@@ -80,11 +61,21 @@ export default {
             ![Appointment.enum.statuses.InProgress, Appointment.enum.statuses.Provided].includes(
               value
             )) ||
-          this.appointment.treatment_id
+          this.appointment.inspection_card?.type === InspectionCard.enum.types.Treatment // TODO: удалить после объединения
         )
-          return this.$router.push(this.appointmentDefaultCardPageLink);
+          this.goToAppointmentDefaultCard();
       },
       immediate: true,
+    },
+  },
+
+  methods: {
+    goToAppointmentDefaultCard() {
+      this.$router.push({
+        name: APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_DEFAULT_CARD.name,
+        params: { id: this.appointment.id },
+        query: { [NOT_REDIRECT]: 1 },
+      });
     },
   },
 

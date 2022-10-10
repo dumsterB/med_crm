@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { setComponentInRoutesByViewsFolder } from '@/utils/router.utils';
-import { DASHBOARD_ROUTE } from './dashboard.routes';
+import { APPOINTMENTS_ROUTE } from '@/router/appointments.routes';
 import { DOCTORS_QUEUE_ROUTE } from './doctors.routes';
 
 import { onlyLoggedInMiddleware } from '@/middlewares/onlyLoggedIn.middleware';
@@ -49,7 +49,7 @@ export { router as Router };
 function _redirectCurrentPageByUserRole(to, from, next) {
   switch (Store.state.auth.user.role) {
     case User.enum.roles.Manager:
-      return next(DASHBOARD_ROUTE.path);
+      return next(APPOINTMENTS_ROUTE.path);
     case User.enum.roles.Doctor:
       return next(DOCTORS_QUEUE_ROUTE);
   }

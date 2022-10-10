@@ -3,4 +3,24 @@
     width: 100%;
     max-width: 800px;
   }
+
+  &-actions {
+    display: flex;
+    gap: 20px;
+  }
+}
+
+@media print {
+  .ambulatory-card {
+    & > * {
+      max-width: 100%;
+    }
+
+    .el-card__body {
+      max-width: 100% !important;
+    }
+    .ambulatory-card__actions {
+      display: none;
+    }
+  }
 }

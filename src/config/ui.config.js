@@ -12,4 +12,4 @@ export const PAGE_SIZES = [
 export const DRAWER_DEFAULT_DIRECTION = 'rtl';
 export const DRAWER_DEFAULT_SIZE = '480px';
 
-export const DEFAULT_PRICE_DELIMITER = '.';
+export const DEFAULT_PRICE_DELIMITER = ' ';

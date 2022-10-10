@@ -1,12 +1,52 @@
 .default-inspection-card {
+  flex: 1;
+  background-color: inherit;
+  border: none;
+
+  & > .el-card__body {
+    padding: 0;
+  }
+
   &-form {
-    & > * {
-      max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-right: 6px;
+
+    &__content {
+      flex: 1;
+    }
+    &__patient {
+      margin-bottom: 20px;
+
+      .patient-card__info__value {
+        white-space: pre-line;
+      }
     }
 
     &-actions {
       display: flex;
       gap: 10px;
+    }
+  }
+}
+
+.test {
+  height: 15000px;
+}
+
+@media print {
+  .default-inspection-card {
+    &-form {
+      &__patient {
+        .patient-card-actions {
+          display: none;
+        }
+      }
+
+      &-actions {
+        display: none !important;
+      }
     }
   }
 }

@@ -1,0 +1,30 @@
+.create-or-edit-patient {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    gap: 10px;
+    width: 100%;
+
+    & > * {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+
+  &-patient {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+
+    &__name {
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+  }
+}

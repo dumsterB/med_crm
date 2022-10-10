@@ -1,0 +1,10 @@
+.v-cash {
+  &-content {
+    &-header {
+      .layout-content-header-main {
+        display: flex;
+        gap: 10px;
+      }
+    }
+  }
+}

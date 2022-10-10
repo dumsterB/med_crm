@@ -1,0 +1,25 @@
+.patient-card {
+  .el-card {
+    &__body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+
+  &-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    &__label {
+      color: var(--text-light-color);
+      font-size: 0.9em;
+    }
+
+    &__value {
+      font-weight: 500;
+    }
+  }
+}

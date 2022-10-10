@@ -2,6 +2,7 @@
   "ru": {
     "Notifications": {
       "Error": "Ошибка",
+      "FillRequiredFields": "Заполните все обязательные поля",
       "NumberIsBusy": "Этот номер занят",
       "SuccessAttached": "Успешно привязано",
       "SuccessCreated": "Успешно создано",
@@ -10,6 +11,7 @@
   },
   "uz": {
     "Error": "Xato",
+    "FillRequiredFields": "Barcha kerakli maydonlarni to'ldiring",
     "NumberIsBusy": "Ushbu raqam band",
     "SuccessCreated": "Muvaffaqiyatli ulandi",
     "SuccessAttached": "Muvaffaqiyatli yaratildi",

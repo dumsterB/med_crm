@@ -1,0 +1,34 @@
+{
+  "ru": {
+    "Invoices": {
+      "Create": "Создать счёт",
+      "Number": "Номер",
+      "PaymentMethod": "Способ оплаты",
+      "Statuses": {
+        "canceled": "Отменён",
+        "not_paid": "Не оплачено",
+        "paid": "Оплачен",
+        "partially_paid": "Часть оплачена",
+        "refund": "Возврат"
+      },
+      "SuccessPayed": "Успешно оплачено",
+      "SuccessRefunded": "Успешно возвращено"
+    }
+  },
+  "uz": {
+    "Invoices": {
+      "Create": "Hisob yaratish",
+      "Number": "Nomer",
+      "PaymentMethod": "Tolov usuli",
+      "Statuses": {
+        "canceled": "Bekor qilingan",
+        "not_paid": "To'lanmagan",
+        "paid": "To'langan",
+        "partially_paid": "Qismi to'langan",
+        "refund": "Qaytarilgan"
+      },
+      "SuccessPayed": "Muvaffaqiyatli to'landi",
+      "SuccessRefunded": "Muvaffaqiyatli qaytarildi"
+    }
+  }
+}
