@@ -1,7 +1,10 @@
 <template>
   <div class="patients-search">
     <form class="patients-search__form" @submit.prevent="throttleSearch">
-      <ElInput  v-model="queryWord.value" :placeholder="$t('InputLabel')" />
+      <ElInput
+        :model-value="queryWord.value"
+        :placeholder="$t('InputLabel')"
+        @update:model-value="updateValue" />
     </form>
     <ScanPatientBracelet @scan:success="redirectToPatientByBracelet" />
 
@@ -18,6 +21,7 @@
 import { mapState, mapActions } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
 import { throttle } from 'lodash';
+import { onlyLatinFormatter } from '@/utils/formatters.util';
 
 import { useSearch } from '@/hooks/query';
 import { SEARCH } from '@/enums/icons.enum';
@@ -114,6 +118,10 @@ export default {
           id: patient.id,
         },
       });
+    },
+
+    updateValue(value) {
+      this.queryWord.value = onlyLatinFormatter(value);
     },
   },
 
