@@ -92,7 +92,9 @@
       "Total": "Итого",
       "Type": "Тип",
       "View": "Посмотреть",
-      "WriteText": "Напишите текст..."
+      "WriteText": "Напишите текст...",
+      "QueueForToday": "Очередь на сегодня",
+      "CalendarAppointments": "Календарь приемов"
     }
   },
   "uz": {
@@ -188,7 +190,9 @@
       "Total": "Jami",
       "Type": "Turi",
       "View": "Korish",
-      "WriteText": "Matn yozing..."
+      "WriteText": "Matn yozing...",
+      "QueueForToday": "Bugunga navbat",
+      "CalendarAppointments": "Qabullar taqvimi"
     }
   }
 }

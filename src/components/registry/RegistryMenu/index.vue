@@ -15,7 +15,7 @@ export default {
   components: { DefaultMenu },
   computed: {
     navigation() {
-      return [DASHBOARD_ROUTE, PATIENTS_ROUTE, APPOINTMENTS_ROUTE, CASH_ROUTE].map((route) => ({
+      return [APPOINTMENTS_ROUTE, DASHBOARD_ROUTE, PATIENTS_ROUTE, CASH_ROUTE].map((route) => ({
         path: route.path,
         title: this.routesOptionsByRouteName[route.name].text,
         icon: this.routesOptionsByRouteName[route.name].icon,
@@ -24,6 +24,10 @@ export default {
 
     routesOptionsByRouteName() {
       return {
+        [APPOINTMENTS_ROUTE.name]: {
+          icon: icons.NOTE,
+          text: this.$t('Views.Appointments.Title'),
+        },
         [DASHBOARD_ROUTE.name]: {
           icon: icons.DASHBOARD,
           text: this.$t('Views.Dashboard.Title'),
@@ -31,10 +35,6 @@ export default {
         [PATIENTS_ROUTE.name]: {
           icon: icons.USER_TAG,
           text: this.$t('Base.Patients'),
-        },
-        [APPOINTMENTS_ROUTE.name]: {
-          icon: icons.NOTE,
-          text: this.$t('Views.Appointments.Title'),
         },
         [CASH_ROUTE.name]: {
           icon: icons.WALLET_OUTLINE,

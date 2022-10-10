@@ -80,7 +80,6 @@
         @click="$emit('status:update', Appointment.enum.statuses.Provided)">
         {{ $t('Appointments.EndReception') }}
       </ElButton>
-
       <!--      <ElButton
         v-if="
           user.role === User.enum.roles.Manager &&
