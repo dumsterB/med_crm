@@ -58,6 +58,11 @@ export default {
     icons: icons,
     Invoice,
   }),
+  data() {
+    return {
+      debounceGetInvoices: null,
+    };
+  },
   computed: {
     ...mapState({
       loading: (state) => state.invoices.loading,
@@ -80,8 +85,8 @@ export default {
         return [this.startAt.value, this.endAt.value];
       },
       set(value) {
-        this.startAt.value = value[0].toISOString();
-        this.endAt.value = value[1].toISOString();
+        this.startAt.value = value ? value[0].toISOString() : null;
+        setTimeout(() => (this.endAt.value = value ? value[1].toISOString() : value));
       },
     },
   },
@@ -93,7 +98,7 @@ export default {
           query: value,
           oldQuery: oldValue,
           resetPage: this.page.reset,
-          getData: debounce(this.getInvoices, 300),
+          getData: this.debounceGetInvoices || this.getInvoices,
           fieldsForResetPage: ['status', 'start_at', 'end_at'],
         });
       },
@@ -140,6 +145,10 @@ export default {
       if (action instanceof GlobalModalCloseAction) return;
       this.createItem(action.data.invoice);
     },
+  },
+
+  mounted() {
+    this.debounceGetInvoices = debounce(this.getInvoices, 300);
   },
 };
 </script>
