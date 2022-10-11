@@ -19,20 +19,6 @@
       gap: 16px;
     }
 
-    &-body {
-    }
-    &-body_grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-gap: 20px;
-
-      @media (max-width: 1300px) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      @media (max-width: 960px) {
-        grid-template-columns: 1fr;
-      }
-    }
     &-empty {
       height: 150px;
     }

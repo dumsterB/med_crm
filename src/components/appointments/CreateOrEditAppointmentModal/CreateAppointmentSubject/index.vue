@@ -77,7 +77,7 @@ export default {
   },
   computed: {
     ...mapState({
-      user: 'auth/user',
+      user: (state) => state.auth.user,
     }),
 
     options() {
@@ -104,6 +104,12 @@ export default {
   },
 
   watch: {
+    'user.doctor_id': {
+      handler(value) {
+        this.subject = new AppointmentSubject({ ...this.subject, doctor_id: value });
+      },
+      immediate: true,
+    },
     'subject.doctor_id': {
       handler() {
         this.subject.group_service_ids = [];
@@ -118,7 +124,7 @@ export default {
     },
 
     reset() {
-      this.subject = new AppointmentSubject();
+      this.subject = new AppointmentSubject({ doctor_id: this.user.doctor_id });
       this.isLiveQueue = true;
     },
 

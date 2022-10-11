@@ -5,6 +5,8 @@
         v-model="date"
         type="daterange"
         unlink-panels
+        format="DD.MM.YY"
+        value-format="DD.MM.YY"
         :start-placeholder="$t('DateAndTime.StartDate')"
         :end-placeholder="$t('DateAndTime.EndDate')" />
 
@@ -32,7 +34,6 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
-import { debounce } from 'lodash';
 import { compareQueriesThenLoadData } from '@/utils/router.utils';
 import { useQuery } from '@/hooks/useQuery.hook';
 import { usePage, usePerPage } from '@/hooks/query';
@@ -80,8 +81,8 @@ export default {
         return [this.startAt.value, this.endAt.value];
       },
       set(value) {
-        this.startAt.value = value ? value[0].toISOString() : null;
-        setTimeout(() => (this.endAt.value = value ? value[1].toISOString() : value));
+        this.startAt.value = value ? value[0] : null;
+        setTimeout(() => (this.endAt.value = value ? value[1] : null));
       },
     },
   },

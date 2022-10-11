@@ -53,6 +53,12 @@ body {
 
   &__header-wrapper {
     overflow: visible;
+    border-bottom: 1px solid #e5e7ec;
+    border-top: 1px solid #e5e7ec;
+  }
+
+  &__empty-block {
+    max-height: 200px;
   }
 }
 
