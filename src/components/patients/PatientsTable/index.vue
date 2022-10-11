@@ -5,6 +5,8 @@
         class="patients-table"
         :data="items"
         v-loading="loading"
+        :height="height"
+        :max-height="maxHeight"
         ref="elTable"
         @row-click="goToPatient">
         <template #empty>
@@ -95,6 +97,9 @@ export default {
     perPage: Number,
     total: Number,
     search: String,
+
+    height: String,
+    maxHeight: String,
   },
   icons: icons,
   computed: {

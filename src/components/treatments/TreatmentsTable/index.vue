@@ -5,6 +5,8 @@
         class="treatments-table"
         :data="items"
         v-loading="loading"
+        :height="height"
+        :max-height="maxHeight"
         ref="elTable"
         @row-click="goToTreatment">
         <template #empty>
@@ -85,6 +87,9 @@ export default {
     perPage: Number,
     total: Number,
     search: String,
+
+    height: String,
+    maxHeight: String,
     actionShow: Boolean,
   },
   data() {
@@ -125,7 +130,7 @@ export default {
       this.$router.push({
         name: DOCTORS_TREATMENT_ROUTE.name,
         params: {
-          id: row.id
+          id: row.id,
         },
       });
     },
