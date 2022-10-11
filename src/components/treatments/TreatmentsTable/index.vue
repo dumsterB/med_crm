@@ -5,8 +5,7 @@
         class="treatments-table"
         :data="items"
         v-loading="loading"
-        :height="height"
-        :max-height="maxHeight"
+        v-bind="$attrs"
         ref="elTable"
         @row-click="goToTreatment">
         <template #empty>
@@ -88,8 +87,6 @@ export default {
     total: Number,
     search: String,
 
-    height: String,
-    maxHeight: String,
     actionShow: Boolean,
   },
   data() {

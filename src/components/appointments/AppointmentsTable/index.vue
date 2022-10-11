@@ -7,8 +7,7 @@
         :data="itemsWithPayload"
         ref="elTable"
         :row-class-name="getTableRowClassName"
-        :height="height"
-        :max-height="maxHeight"
+        v-bind="$attrs"
         @row-click="goToAppointment">
         <template #empty>
           <div class="appointments-table__empty appointments-table-empty">
@@ -115,9 +114,6 @@ export default {
     perPage: Number,
     total: Number,
     search: String,
-
-    height: String,
-    maxHeight: String,
   },
 
   computed: {
