@@ -38,7 +38,6 @@
             v-show="!loading"
             class="ui-models-autocomplete-search-empty__create"
             type="primary"
-            text
             size="default"
             @click="createItem">
             <template #icon> <UiIcon :icon="icons.PLUS" /> </template>

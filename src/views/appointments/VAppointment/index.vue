@@ -176,7 +176,7 @@ export default {
       if (!success) return;
 
       this.$router.push({
-        name: APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_TREATMENT_CARD.name,
+        name: APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_INSPECTION_CARD.name,
         params: {
           id: this.appointment.id,
         },

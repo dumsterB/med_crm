@@ -24,4 +24,10 @@ export class InspectionCardTemplate extends DefaultInspectionCard {
     this.doctor = payload?.doctor ?? null;
     this.basic_data = payload?.basic_data ?? [];
   }
+
+  static async getTreatmentTemplate() {
+    return await super.find({
+      _url: `${this.tableName}/treatment`,
+    });
+  }
 }

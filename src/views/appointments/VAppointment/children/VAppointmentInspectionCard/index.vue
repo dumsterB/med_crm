@@ -11,7 +11,7 @@
       </ElPageHeader>
     </LayoutContentHeader>
 
-    <DefaultInspectionCard
+    <InspectionCardComponent
       :appointment="appointment"
       :readonly="isProvided"
       @update:appointment="$emit('update:appointment', $event)"
@@ -30,12 +30,12 @@ import { InspectionCard } from '@/models/InspectionCard.model';
 import { NOT_REDIRECT } from '@/enums/query.enum';
 
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
-import DefaultInspectionCard from '@/components/appointments/DefaultInspectionCard/index.vue';
+import InspectionCardComponent from '@/components/appointments/InspectionCard/index.vue';
 
 export default {
-  name: 'VAppointmentDefaultInspectionCard',
+  name: 'VAppointmentInspectionCard',
   emits: ['update:appointment', 'appointment:provide', 'appointment:set:diagnosis'],
-  components: { DefaultInspectionCard, LayoutContentHeader },
+  components: { InspectionCardComponent, LayoutContentHeader },
   props: {
     appointment: [Appointment, Object],
   },

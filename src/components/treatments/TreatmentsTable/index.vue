@@ -85,6 +85,7 @@ export default {
     perPage: Number,
     total: Number,
     search: String,
+
     actionShow: Boolean,
   },
   data() {
@@ -125,7 +126,7 @@ export default {
       this.$router.push({
         name: DOCTORS_TREATMENT_ROUTE.name,
         params: {
-          id: row.id
+          id: row.id,
         },
       });
     },
