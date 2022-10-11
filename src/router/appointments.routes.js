@@ -35,7 +35,7 @@ export const APPOINTMENT_ROUTE = {
       name: 'APPOINTMENT_INSPECTION_CARD',
       path: 'inspection-card',
       _fullPath: '/appointments/:id/inspection-card',
-      component: 'VAppointmentDefaultInspectionCard',
+      component: 'VAppointmentInspectionCard',
       beforeEnter: [onlyDoctorMiddleware],
     },
   },

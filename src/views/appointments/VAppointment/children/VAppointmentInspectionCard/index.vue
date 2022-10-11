@@ -33,7 +33,7 @@ import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader
 import DefaultInspectionCard from '@/components/appointments/DefaultInspectionCard/index.vue';
 
 export default {
-  name: 'VAppointmentDefaultInspectionCard',
+  name: 'VAppointmentInspectionCard',
   emits: ['update:appointment', 'appointment:provide', 'appointment:set:diagnosis'],
   components: { DefaultInspectionCard, LayoutContentHeader },
   props: {
