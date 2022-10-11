@@ -48,10 +48,15 @@ export default {
       EmitterService.on(API_LOGOUT_EMIT, () => this.$store.dispatch('auth/logout'));
     },
     async getDoctorTemplates() {
-      const { data } = await InspectionCardTemplate.find({});
-      this.$store.dispatch('templates/setData', {
-        items: data.data,
-        total: data.data.length,
+      InspectionCardTemplate.find({}).then((response) => {
+        this.$store.dispatch('templates/setData', {
+          items: response.data.data,
+          total: response.data.data.length,
+        });
+      });
+
+      InspectionCardTemplate.getTreatmentTemplate().then((response) => {
+        this.$store.dispatch('templates/setTreatmentTemplate', response.data.data);
       });
     },
   },

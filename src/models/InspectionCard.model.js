@@ -13,6 +13,7 @@ export class InspectionCard extends CRUDModel {
    * @typedef {object} InspectionCardConstructorPayload
    * @property {string} type
    * @property {string} status
+   * @property {Array<InspectionCardCategory|InspectionCardBlock|object>} basic_data
    * @property {Array<string>} disease_code_codes
    * @property {Array<DiseaseCode>} disease_codes
    * @property {number} appointment_id
@@ -26,6 +27,7 @@ export class InspectionCard extends CRUDModel {
 
     this.type = payload?.type || null;
     this.status = payload?.status || null;
+    this.basic_data = payload?.basic_data ?? [];
     this.disease_code_codes = payload?.disease_code_codes ?? [];
     this.disease_codes = payload?.disease_codes ?? [];
 
