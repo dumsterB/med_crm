@@ -38,7 +38,7 @@
         :perPage="patient?.childrens?.length"
         :page="1"
         hide-on-single-page
-        height="500px"
+        max-height="500px"
         layout="prev, pager, next, sizes" />
     </div>
   </div>
