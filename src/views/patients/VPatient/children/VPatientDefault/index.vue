@@ -6,7 +6,7 @@
     </div>
 
     <div class="v-patient-default-item__body" v-loading="loading.profile">
-      <PatientCardRow  :items="patientItems" shadow="never"></PatientCardRow>
+      <PatientCardRow :items="patientItems" shadow="never"></PatientCardRow>
     </div>
   </div>
 
@@ -25,15 +25,15 @@
       :description="$t('Base.NoData')" />
 
     <div class="v-patient-default-item__body" v-loading="loading.profile">
-        <PatientsTable
-            :total="patient?.childrens?.length"
-            :perPage="patient?.childrens?.length"
-            :page="1"
-            v-if="patient?.childrens?.length"
-            background
-            hide-on-single-page
-            layout="prev, pager, next, sizes"
-            :items="patient.childrens"></PatientsTable>
+      <PatientsTable
+        :total="patient?.childrens?.length"
+        :perPage="patient?.childrens?.length"
+        :page="1"
+        v-if="patient?.childrens?.length"
+        background
+        hide-on-single-page
+        layout="prev, pager, next, sizes"
+        :items="patient.childrens"></PatientsTable>
     </div>
   </div>
 
@@ -51,7 +51,7 @@
       v-show="!appointments?.length && !loading.appointment"
       :description="$t('Base.NoData')" />
 
-    <div class="v-patient-default-item__body" v-loading="loading.appointment" >
+    <div class="v-patient-default-item__body" v-loading="loading.appointment">
       <AppointmentsTable
         :total="appointments?.length"
         v-if="appointments?.length"
