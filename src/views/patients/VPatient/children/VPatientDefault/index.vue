@@ -32,14 +32,14 @@
 
     <div class="v-patient-default-item__body" v-loading="loading.profile">
       <PatientsTable
+        v-if="patient?.childrens?.length"
+        :items="patient.childrens"
         :total="patient?.childrens?.length"
         :perPage="patient?.childrens?.length"
         :page="1"
-        v-if="patient?.childrens?.length"
-        background
         hide-on-single-page
-        layout="prev, pager, next, sizes"
-        :items="patient.childrens"></PatientsTable>
+        height="500px"
+        layout="prev, pager, next, sizes" />
     </div>
   </div>
 
@@ -59,11 +59,12 @@
 
     <div class="v-patient-default-item__body" v-loading="loading.appointment">
       <AppointmentsTable
-        :total="appointments?.length"
         v-if="appointments?.length"
+        :items="appointments"
+        :total="appointments?.length"
         :perPage="appointments?.length"
         :page="1"
-        :items="appointments" />
+        max-height="500px" />
     </div>
   </div>
 
@@ -89,6 +90,7 @@
         :perPage="treatments?.length"
         :page="1"
         :items="treatments"
+        max-height="500px"
         @item:update="$emit('treatment:updated', $event)" />
     </div>
   </div>
