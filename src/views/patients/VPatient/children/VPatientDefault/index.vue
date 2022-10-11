@@ -30,17 +30,17 @@
       v-show="!patient.childrens?.length"
       :description="$t('Base.NoData')" />
 
-    <div class="v-patient-default-item__body" v-loading="loading.profile">
-      <PatientsTable
-        v-if="patient?.childrens?.length"
-        :items="patient.childrens"
-        :total="patient?.childrens?.length"
-        :perPage="patient?.childrens?.length"
-        :page="1"
-        hide-on-single-page
-        max-height="500px"
-        layout="prev, pager, next, sizes" />
-    </div>
+    <PatientsTable
+      v-if="patient?.childrens?.length || loading.profile"
+      :items="patient.childrens"
+      :loaing="loading.profile"
+      :total="patient?.childrens?.length"
+      :perPage="patient?.childrens?.length"
+      :page="1"
+      hide-on-single-page
+      :loading="loading.profile"
+      max-height="500px"
+      layout="prev, pager, next, sizes" />
   </div>
 
   <!--  Appointments  -->
@@ -57,15 +57,14 @@
       v-show="!appointments?.length && !loading.appointment"
       :description="$t('Base.NoData')" />
 
-    <div class="v-patient-default-item__body" v-loading="loading.appointment">
-      <AppointmentsTable
-        v-if="appointments?.length"
-        :items="appointments"
-        :total="appointments?.length"
-        :perPage="appointments?.length"
-        :page="1"
-        max-height="500px" />
-    </div>
+    <AppointmentsTable
+      v-if="appointments?.length || loading.appointment"
+      :items="appointments"
+      :total="appointments?.length"
+      :perPage="appointments?.length"
+      :page="1"
+      :loading="loading.appointment"
+      max-height="500px" />
   </div>
 
   <!--  Treatments  -->
@@ -83,16 +82,15 @@
       v-show="!treatments?.length && !loading.treatments"
       :description="$t('Base.NoData')" />
 
-    <div class="v-patient-default-item__body" v-loading="loading.treatments">
-      <TreatmentsTable
-        :total="treatments?.length"
-        v-if="treatments?.length"
-        :perPage="treatments?.length"
-        :page="1"
-        :items="treatments"
-        max-height="500px"
-        @item:update="$emit('treatment:updated', $event)" />
-    </div>
+    <TreatmentsTable
+      v-if="treatments?.length || loading.treatments"
+      :items="treatments"
+      :total="treatments?.length"
+      :perPage="treatments?.length"
+      :page="1"
+      :loading="loading.treatments"
+      max-height="500px"
+      @item:update="$emit('treatment:updated', $event)" />
   </div>
 </template>
 
