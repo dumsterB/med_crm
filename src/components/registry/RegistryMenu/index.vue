@@ -15,7 +15,7 @@ export default {
   components: { DefaultMenu },
   computed: {
     navigation() {
-      return [APPOINTMENTS_ROUTE, DASHBOARD_ROUTE, PATIENTS_ROUTE, CASH_ROUTE].map((route) => ({
+      return [APPOINTMENTS_ROUTE, DASHBOARD_ROUTE, CASH_ROUTE].map((route) => ({
         path: route.path,
         title: this.routesOptionsByRouteName[route.name].text,
         icon: this.routesOptionsByRouteName[route.name].icon,
