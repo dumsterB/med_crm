@@ -2,6 +2,15 @@
   <ElForm class="create-appointment-subject" @submit.prevent="createSubject">
     <div class="create-appointment-subject__part create-appointment-subject-part">
       <!--  GroupService  -->
+      <!--  Doctor  -->
+      <UiModelsAutocompleteSearch
+        class="create-appointment-subject__doctor"
+        v-model="subject.doctor_id"
+        :modelForUse="Doctor"
+        :defaultItem="user?.doctor"
+        :placeholder="$t('Appointments.SelectDoctor')"
+        @select="subject.doctor = $event" />
+
       <UiModelsAutocompleteSearch
         class="create-appointment-subject__services"
         v-model="subject.group_service_ids"
@@ -16,16 +25,6 @@
         @select="subject.group_services = $event">
         <template #default="{ item }"> {{ generateLabel(item) }} </template>
       </UiModelsAutocompleteSearch>
-
-      <!--  Doctor  -->
-      <UiModelsAutocompleteSearch
-        class="create-appointment-subject__doctor"
-        v-model="subject.doctor_id"
-        :modelForUse="Doctor"
-        :defaultItem="user?.doctor"
-        :placeholder="$t('Appointments.SelectDoctor')"
-        :disabled="!subject.group_service_ids.length"
-        @select="subject.doctor = $event" />
     </div>
 
     <div class="create-appointment-subject__part create-appointment-subject-part">
@@ -89,6 +88,7 @@ export default {
             query_type: null,
             query_operator: null,
             some_services: true,
+            doctor_id: this.subject.doctor_id,
           },
         },
 
@@ -109,6 +109,11 @@ export default {
         this.subject = new AppointmentSubject({ ...this.subject, doctor_id: value });
       },
       immediate: true,
+    },
+    'subject.doctor_id': {
+      handler() {
+        this.subject.group_service_ids = [];
+      },
     },
   },
 
