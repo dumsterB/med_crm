@@ -24,7 +24,7 @@
         </PatientCardRow>
 
         <!--  Select template  -->
-        <ElFormItem v-show="!readonly" :label="$t('Templates.SelectTemplate')">
+        <ElFormItem v-show="!readonly && !isTreatment" :label="$t('Templates.SelectTemplate')">
           <UiModelsAutocompleteSearch
             v-model="templateId"
             label="title"
@@ -42,7 +42,9 @@
           :readonly="readonly"
           @change="updateInspectionCard">
           <template #footer>
-            <TemplateResultBlock :block="{ label: $t('Appointments.SelectDiagnosis') }">
+            <TemplateResultBlock
+              v-if="!isTreatment"
+              :block="{ label: $t('Appointments.SelectDiagnosis') }">
               <DiseaseCodeSelect
                 v-model="inspectionCard.disease_code_codes"
                 required
@@ -67,7 +69,7 @@
             {{ $t('Appointments.EndReception') }}
           </ElButton>
 
-          <ElButton v-show="!readonly" type="warning" plain @click="setTreatment">
+          <ElButton v-show="!readonly && !isTreatment" type="warning" plain @click="setTreatment">
             {{ $t('Base.SetTreatment') }}
           </ElButton>
 

@@ -14,6 +14,8 @@ import DiseaseCodeSelect from '@/components/deseaseСode/DiseaseCodeSelect/index
 import TemplateResultBlock from '@/components/templates/TemplateResult/TemplateResultBlock/index.vue';
 import CreateTreatmentModal from '@/components/treatments/CreateTreatmentModal/index.vue';
 import CreateOrEditAppointmentModal from '@/components/appointments/CreateOrEditAppointmentModal/index.vue';
+import { InspectionCard } from '@/models/InspectionCard.model';
+import { TreatmentInspectionCard } from '@/models/TreatmentInspectionCard.model';
 
 export default {
   name: 'InspectionCard',
@@ -36,7 +38,15 @@ export default {
   computed: {
     ...mapState({
       templates: (state) => state.templates.data,
+      treatmentTemplate: (state) => state.templates.treatmentTemplate,
     }),
+
+    isTreatment() {
+      return (
+        this.appointment.inspectionCard?.type === InspectionCard.enum.types.Treatment ||
+        !!this.appointment.treatment_id
+      );
+    },
 
     patientAmbulatoryCardPageLink() {
       return insertRouteParams({
@@ -64,18 +74,16 @@ export default {
   watch: {
     'appointment.id': {
       handler() {
-        this.inspectionCard = new DefaultInspectionCard(
+        const currentClass = this.isTreatment ? TreatmentInspectionCard : DefaultInspectionCard;
+
+        this.inspectionCard = new currentClass(
           this.appointment?.inspection_card || {
             user_id: this.appointment.patient_id,
             appointment_id: this.appointment.id,
           }
         );
 
-        if (!this.appointment.inspection_card_id && this.templates.length) {
-          this.templateId = this.templates[0].id;
-          this.activeTemplate = this.templates[0];
-          this.selectTemplate(this.templates[0]);
-        }
+        this.selectDefaultTemplateIfNeeded();
       },
       immediate: true,
     },
@@ -101,6 +109,17 @@ export default {
         basic_data: template.basic_data,
       });
       this.updateInspectionCard();
+    },
+
+    selectDefaultTemplateIfNeeded() {
+      if (this.isTreatment && !this.appointment.inspection_card_id) {
+        this.selectTemplate(this.treatmentTemplate);
+      }
+      if (!this.isTreatment && !this.appointment.inspection_card_id && this.templates.length) {
+        this.templateId = this.templates[0].id;
+        this.activeTemplate = this.templates[0];
+        this.selectTemplate(this.templates[0]);
+      }
     },
 
     async updateInspectionCard() {
