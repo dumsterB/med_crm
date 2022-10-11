@@ -38,13 +38,6 @@ export const APPOINTMENT_ROUTE = {
       component: 'VAppointmentDefaultInspectionCard',
       beforeEnter: [onlyDoctorMiddleware],
     },
-    APPOINTMENT_ROUTE_TREATMENT_CARD: {
-      name: 'APPOINTMENT_TREATMENT_CARD',
-      path: 'treatment-card',
-      _fullPath: '/appointments/:id/treatment-card',
-      component: 'VAppointmentTreatmentInspectionCard',
-      beforeEnter: [onlyDoctorMiddleware],
-    },
   },
   children: [], // утилита сама подставит сюда роуты из childrenMap
 };

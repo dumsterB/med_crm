@@ -78,7 +78,7 @@ export default {
 
   watch: {
     'appointment.id': {
-      handler(value) {
+      handler() {
         this.redirectToInspectionCardIfNeeded();
       },
       immediate: true,
@@ -87,14 +87,14 @@ export default {
 
   methods: {
     goToInspectionCard() {
-      const path =
-        this.appointment.inspection_card?.type === InspectionCard.enum.types.Default
-          ? APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_INSPECTION_CARD._fullPath
-          : APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_TREATMENT_CARD._fullPath;
+      // const path =
+      //   this.appointment.inspection_card?.type === InspectionCard.enum.types.Default
+      //     ? APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_INSPECTION_CARD._fullPath
+      //     : APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_TREATMENT_CARD._fullPath;
 
       this.$router.push(
         insertRouteParams({
-          path: path,
+          path: APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_INSPECTION_CARD._fullPath,
           params: { id: this.appointment.id },
         })
       );
