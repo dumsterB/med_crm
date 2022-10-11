@@ -7,7 +7,6 @@
         :data="itemsWithPayload"
         ref="elTable"
         :row-class-name="getTableRowClassName"
-        v-bind="$attrs"
         @row-click="goToAppointment">
         <template #empty>
           <div class="appointments-table__empty appointments-table-empty">
