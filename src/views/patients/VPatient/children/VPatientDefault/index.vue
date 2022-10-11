@@ -5,12 +5,14 @@
       <div class="v-patient-default__title">{{ $t('Title') }}</div>
     </div>
 
-    <div class="v-patient-default-item__body">
-      <PatientCard
-        :data="patient"
-        type="horizontal"
-        @update:data="$emit('update:patient', $event)"
-        @create:treatment="$emit('treatment:create', $event)" />
+    <div class="v-patient-default-item__body" v-loading="loading.profile">
+      <PatientCardRow :patient="patient" :items="patientItems" shadow="never">
+        <template #actions>
+          <router-link :to="patientAmbulatoryCardPageLink">
+            <ElButton type="primary">{{ $t('Base.AmbulatoryCard') }}</ElButton>
+          </router-link>
+        </template>
+      </PatientCardRow>
     </div>
   </div>
 
@@ -18,7 +20,7 @@
   <div v-show="!isChildren" class="v-patient-default-item">
     <div class="v-patient-default-item__header v-patient-default-item-header">
       <div class="v-patient-default__title">{{ $t('User.Children') }}</div>
-      <ElButton type="primary" @click="$emit('patient:createChildren')">
+      <ElButton type="primary" plain @click="$emit('patient:createChildren')">
         {{ $t('User.AddChildren') }}
       </ElButton>
     </div>
@@ -28,15 +30,16 @@
       v-show="!patient.childrens?.length"
       :description="$t('Base.NoData')" />
 
-    <div class="v-patient-default-item__body" v-if="patient.childrens?.length">
+    <div class="v-patient-default-item__body" v-loading="loading.profile">
       <PatientsTable
+        v-if="patient?.childrens?.length"
+        :items="patient.childrens"
         :total="patient?.childrens?.length"
         :perPage="patient?.childrens?.length"
         :page="1"
-        background
         hide-on-single-page
-        layout="prev, pager, next, sizes"
-        :items="patient.childrens"></PatientsTable>
+        height="500px"
+        layout="prev, pager, next, sizes" />
     </div>
   </div>
 
@@ -44,7 +47,7 @@
   <div class="v-patient-default-item">
     <div class="v-patient-default-item__header v-patient-default-item-header">
       <div class="v-patient-default__title">{{ $t('Appointments.Appointments') }}</div>
-      <ElButton type="primary" @click="$emit('appointment:create')">
+      <ElButton type="primary" plain @click="$emit('appointment:create')">
         {{ $t('Appointments.CreateAppointment') }}
       </ElButton>
     </div>
@@ -54,12 +57,14 @@
       v-show="!appointments?.length && !loading.appointment"
       :description="$t('Base.NoData')" />
 
-    <div class="v-patient-default-item__body" v-if="appointments?.length">
+    <div class="v-patient-default-item__body" v-loading="loading.appointment">
       <AppointmentsTable
+        v-if="appointments?.length"
+        :items="appointments"
         :total="appointments?.length"
         :perPage="appointments?.length"
         :page="1"
-        :items="appointments" />
+        max-height="500px" />
     </div>
   </div>
 
@@ -68,7 +73,7 @@
     <div class="v-patient-default-item__header v-patient-default-item-header">
       <div class="v-patient-default__title">{{ $t('Base.TableTreatment') }}</div>
 
-      <ElButton v-show="isDoctor" type="primary" @click="$emit('treatment:create')">
+      <ElButton v-show="isDoctor" plain type="primary" @click="$emit('treatment:create')">
         {{ $t('Base.SetTreatment') }}
       </ElButton>
     </div>
@@ -78,26 +83,30 @@
       v-show="!treatments?.length && !loading.treatments"
       :description="$t('Base.NoData')" />
 
-    <div class="v-patient-default-item__body" v-if="treatments?.length">
+    <div class="v-patient-default-item__body" v-loading="loading.treatments">
       <TreatmentsTable
         :total="treatments?.length"
+        v-if="treatments?.length"
         :perPage="treatments?.length"
         :page="1"
         :items="treatments"
+        max-height="500px"
         @item:update="$emit('treatment:updated', $event)" />
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
+import { insertRouteParams } from '@/utils/router.utils';
+import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { Patient } from '@/models/Patient.model';
 
-import PatientCard from '@/components/views/VPatient/PatientCard/index.vue';
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
 import TreatmentsTable from '@/components/treatments/TreatmentsTable/index.vue';
-import { mapState } from 'vuex';
+import PatientCardRow from '@/components/patients/PatientCardRow/index.vue';
 
 export default {
   name: 'VPatientDefault',
@@ -109,10 +118,10 @@ export default {
     'treatment:updated',
   ],
   components: {
-    PatientCard,
     AppointmentsTable,
     PatientsTable,
     TreatmentsTable,
+    PatientCardRow,
   },
   icons: icons,
   props: {
@@ -137,6 +146,34 @@ export default {
 
     isChildren() {
       return !!this.patient.parent_id;
+    },
+    patientItems() {
+      return [
+        {
+          label: this.$t('User.Phone'),
+          value: this.patient.phone || '',
+        },
+        {
+          label: this.$t('User.Birthdate'),
+          value: this.patient.birthdate || '',
+        },
+        {
+          label: this.$t('User.Gender'),
+          value: this.$t('User.Genders.' + this.patient.gender) || '',
+        },
+        {
+          text: this.$t('Base.AmbulatoryCard'),
+          action: true,
+        },
+      ];
+    },
+    patientAmbulatoryCardPageLink() {
+      return insertRouteParams({
+        path: PATIENT_ROUTE.childrenMap.PATIENT_ROUTE_AMBULATORY_CARD._fullPath,
+        params: {
+          id: this.patient.id,
+        },
+      });
     },
   },
 };
