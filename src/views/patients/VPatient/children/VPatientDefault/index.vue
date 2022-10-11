@@ -6,7 +6,13 @@
     </div>
 
     <div class="v-patient-default-item__body" v-loading="loading.profile">
-      <PatientCardRow :items="patientItems" shadow="never"></PatientCardRow>
+      <PatientCardRow :patient="patient" :items="patientItems" shadow="never">
+        <template #actions>
+          <router-link :to="patientAmbulatoryCardPageLink">
+            <ElButton type="primary">{{ $t('Base.AmbulatoryCard') }}</ElButton>
+          </router-link>
+        </template>
+      </PatientCardRow>
     </div>
   </div>
 
@@ -89,15 +95,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
+import { insertRouteParams } from '@/utils/router.utils';
+import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { Patient } from '@/models/Patient.model';
 
-import PatientCard from '@/components/views/VPatient/PatientCard/index.vue';
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
 import TreatmentsTable from '@/components/treatments/TreatmentsTable/index.vue';
 import PatientCardRow from '@/components/patients/PatientCardRow/index.vue';
-import { mapState } from 'vuex';
 
 export default {
   name: 'VPatientDefault',
@@ -109,7 +116,6 @@ export default {
     'treatment:updated',
   ],
   components: {
-    PatientCard,
     AppointmentsTable,
     PatientsTable,
     TreatmentsTable,
@@ -142,11 +148,6 @@ export default {
     patientItems() {
       return [
         {
-          gender: this.patient.gender,
-          label: this.$t('Patients.NamePatient'),
-          value: this.patient.name || '',
-        },
-        {
           label: this.$t('User.Phone'),
           value: this.patient.phone || '',
         },
@@ -163,6 +164,14 @@ export default {
           action: true,
         },
       ];
+    },
+    patientAmbulatoryCardPageLink() {
+      return insertRouteParams({
+        path: PATIENT_ROUTE.childrenMap.PATIENT_ROUTE_AMBULATORY_CARD._fullPath,
+        params: {
+          id: this.patient.id,
+        },
+      });
     },
   },
 };
