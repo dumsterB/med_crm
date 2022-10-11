@@ -1,6 +1,4 @@
 import { CRUDModel } from '@/models/CRUD.model';
-import { ApiService } from '@/services/api.service';
-import { mergeOrCreateQuery } from '@/utils/http.util';
 
 /**
  * @class ScheduleSlot
@@ -21,43 +19,10 @@ export class ScheduleSlot extends CRUDModel {
     this.available = payload?.available ?? null;
   }
 
-  /**
-   * @param {number} serviceId
-   * @param {Date|string} from
-   * @param {Date|string} to
-   * @return {Promise<{response: AxiosResponse<*>, data: response.data}>}
-   */
-  static async getSlotsByServiceIds({ serviceIds, from, to }) {
-    const urlWithQuery = mergeOrCreateQuery({
-      url: 'schedule/slots',
-      query: {
-        service_id: serviceIds[0], // TODO: убрать
-        from,
-        to,
-      },
+  static async get(payload) {
+    return super.find({
+      _url: 'schedule/slots/byGroup',
+      ...payload,
     });
-
-    const response = await ApiService.get(urlWithQuery);
-    return { response, data: response.data };
-  }
-
-  /**
-   * @param {number} groupServiceId
-   * @param {Date|string} from
-   * @param {Date|string} to
-   * @return {Promise<{response: AxiosResponse<*>, data: response.data}>}
-   */
-  static async getSlotsByGroupServiceId({ groupServiceId, from, to }) {
-    const urlWithQuery = mergeOrCreateQuery({
-      url: 'schedule/slots/byGroup',
-      query: {
-        group_service_id: groupServiceId,
-        from,
-        to,
-      },
-    });
-
-    const response = await ApiService.get(urlWithQuery);
-    return { response, data: response.data };
   }
 }

@@ -26,39 +26,30 @@
       <ElCard
         class="create-or-pay-invoice-modal-part"
         shadow="never"
-        :style="{ gridRow: !invoice.id ? 'auto' : '1/3' }">
+        :style="{ gridRow: invoice.id && invoice.transactions_ids.length ? '1/3' : 'auto' }">
         <template #header> {{ $t('PatientInfo') }} </template>
 
-        <PatientsSearchSelect
-          v-if="!invoice.id"
-          class="create-or-pay-invoice-modal-part-search"
+        <PatientsSearchSelectDataBlock
           v-model="invoice.user_id"
           required
-          :default-item="invoice.user"
           :disabled="!!invoice.id"
-          @select="invoice.user = $event" />
+          :hide-select="!!invoice.id"
+          :default-item="invoice.user"
+          @select="invoice.user = $event">
+          <template #content-append>
+            <ElFormItem class="create-or-pay-invoice-modal-notes-part" :label="$t('Base.Notes')">
+              <ElInput
+                v-model="invoice.description"
+                type="textarea"
+                :rows="3"
+                :disabled="!!invoice.id" />
+            </ElFormItem>
 
-        <div class="create-or-pay-invoice-modal-part-content">
-          <ElFormItem :label="$t('User.FullName')">
-            {{ invoice.user?.name || '....' }}
-          </ElFormItem>
-
-          <ElFormItem :label="$t('User.Phone')">
-            {{ invoice.user?.phone || '....' }}
-          </ElFormItem>
-
-          <ElFormItem class="create-or-pay-invoice-modal-notes-part" :label="$t('Base.Notes')">
-            <ElInput
-              v-model="invoice.description"
-              type="textarea"
-              :rows="3"
-              :disabled="!!invoice.id" />
-          </ElFormItem>
-
-          <ElFormItem v-if="!!invoice.id" :label="$t('DateAndTime.CreatedAt')">
-            {{ invoice.created_at }}
-          </ElFormItem>
-        </div>
+            <ElFormItem v-if="!!invoice.id" :label="$t('DateAndTime.CreatedAt')">
+              {{ invoice.created_at }}
+            </ElFormItem>
+          </template>
+        </PatientsSearchSelectDataBlock>
       </ElCard>
 
       <!--  TODO: вынести в отдельный компоент, будет использоваться и при создании записи  -->
@@ -104,7 +95,9 @@
               v-model="invoice.discount"
               type="number"
               placeholder="0%"
-              :disabled="!!invoice.id" />
+              :disabled="!!invoice.id"
+              min="0"
+              max="100" />
           </ElFormItem>
           <ElFormItem :label="$t('Base.Total')"> {{ totalPrice }} </ElFormItem>
         </div>
@@ -131,6 +124,11 @@
           :loading="loading.form"
           form="create-or-pay-invoice">
           {{ $t('Base.Create') }}
+        </ElButton>
+
+        <ElButton v-if="!!invoice.id" text :loading="loading.print" @click="print">
+          <template #icon> <UiIcon :icon="icons.PRINTER" /> </template>
+          <span> {{ $t('Base.Print') }} </span>
         </ElButton>
 
         <ElButton v-if="isShowRefundButton" type="danger" plain @click="refund">

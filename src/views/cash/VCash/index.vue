@@ -8,7 +8,7 @@
         :start-placeholder="$t('DateAndTime.StartDate')"
         :end-placeholder="$t('DateAndTime.EndDate')" />
 
-      <SelectInvoiceStatus v-model="status.value" />
+      <SelectInvoiceStatus clearable v-model="status.value" />
 
       <template #actions>
         <ElButton type="primary" @click="createInvoice">
@@ -80,8 +80,8 @@ export default {
         return [this.startAt.value, this.endAt.value];
       },
       set(value) {
-        this.startAt.value = value[0].toISOString();
-        this.endAt.value = value[1].toISOString();
+        this.startAt.value = value ? value[0].toISOString() : null;
+        setTimeout(() => (this.endAt.value = value ? value[1].toISOString() : value));
       },
     },
   },
@@ -93,7 +93,7 @@ export default {
           query: value,
           oldQuery: oldValue,
           resetPage: this.page.reset,
-          getData: debounce(this.getInvoices, 300),
+          getData: this.getInvoices,
           fieldsForResetPage: ['status', 'start_at', 'end_at'],
         });
       },
@@ -111,13 +111,14 @@ export default {
     }),
 
     async getInvoices() {
+      if (this.queryWatchers.start_at && !this.queryWatchers.end_at) return;
       this.setLoading(true);
 
       try {
         const { data } = await Invoice.find(this.queryWatchers);
         this.setData({
           items: data.data,
-          total: data.meta.total,
+          total: +data.meta.total,
           overwriteDataState: true,
         });
       } catch (err) {

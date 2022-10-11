@@ -1,90 +1,79 @@
 <!--  TODO: перебиравть поля циклом когда будут известны все поля и их типы  -->
-
 <template>
-  <ElCard class="ambulatory-cards printer__block printer__doc" shadow="never">
+  <ElCard class="ambulatory-card printer__block printer__doc" shadow="never">
     <h1 class="printer__title">{{ $t('Base.AmbulatoryCard') }}</h1>
-    <PatientCardRow  shadow="never" :items="infoItems" />
-    <ElCard class="ambulatory-card" shadow="never">
-      <ElForm label-position="top">
-        <ElFormItem :label="$t('User.PlaceResidence')">
-          <ElInput v-model="localAmbulatoryCard.place_residence" />
-        </ElFormItem>
 
-        <ElFormItem :label="$t('User.StudyWork')">
-          <ElInput v-model="localAmbulatoryCard.study_work" />
-        </ElFormItem>
+    <ElForm label-position="top">
+      <ElFormItem :label="$t('User.PlaceResidence')">
+        <ElInput v-model="localAmbulatoryCard.place_residence" />
+      </ElFormItem>
 
-        <ElFormItem :label="$t('Base.ClinicalExamination')">
-          <ElInput v-model="localAmbulatoryCard.clinical_examination" />
-        </ElFormItem>
+      <ElFormItem :label="$t('User.StudyWork')">
+        <ElInput v-model="localAmbulatoryCard.study_work" />
+      </ElFormItem>
 
-        <ElFormItem :label="$t('User.PlaceTreatment')">
-          <ElInput v-model="localAmbulatoryCard.place_treatment" />
-        </ElFormItem>
+      <ElFormItem :label="$t('Base.ClinicalExamination')">
+        <ElInput v-model="localAmbulatoryCard.clinical_examination" />
+      </ElFormItem>
 
-        <ElFormItem :label="$t('User.BloodTypeRhFactor')">
-          <ElInput v-model="localAmbulatoryCard.blood_type_rh_factor" />
-        </ElFormItem>
+      <ElFormItem :label="$t('User.PlaceTreatment')">
+        <ElInput v-model="localAmbulatoryCard.place_treatment" />
+      </ElFormItem>
 
-        <ElFormItem :label="$t('Base.Allergy')">
-          <ElInput v-model="localAmbulatoryCard.allergy" />
-        </ElFormItem>
+      <ElFormItem :label="$t('User.BloodTypeRhFactor')">
+        <ElInput v-model="localAmbulatoryCard.blood_type_rh_factor" />
+      </ElFormItem>
 
-        <ElFormItem :label="$t('Base.Reaction')">
-          <ElInput v-model="localAmbulatoryCard.reaction" />
-        </ElFormItem>
+      <ElFormItem :label="$t('Base.Allergy')">
+        <ElInput v-model="localAmbulatoryCard.allergy" />
+      </ElFormItem>
 
-        <ElFormItem :label="$t('Base.BloodTransfusion')">
-          <ElInput v-model="localAmbulatoryCard.blood_transfusion" />
-        </ElFormItem>
+      <ElFormItem :label="$t('Base.Reaction')">
+        <ElInput v-model="localAmbulatoryCard.reaction" />
+      </ElFormItem>
 
-        <ElFormItem :label="$t('Base.SurgicalIntervention')">
-          <ElInput v-model="localAmbulatoryCard.surgical_intervention" />
-        </ElFormItem>
+      <ElFormItem :label="$t('Base.BloodTransfusion')">
+        <ElInput v-model="localAmbulatoryCard.blood_transfusion" />
+      </ElFormItem>
 
-        <ElFormItem :label="$t('Base.Diabetes')">
-          <ElInput v-model="localAmbulatoryCard.diabetes" />
-        </ElFormItem>
+      <ElFormItem :label="$t('Base.SurgicalIntervention')">
+        <ElInput v-model="localAmbulatoryCard.surgical_intervention" />
+      </ElFormItem>
 
-        <ElFormItem :label="$t('Base.InfectiousDiseases')">
-          <ElInput v-model="localAmbulatoryCard.infectious_diseases" />
-        </ElFormItem>
+      <ElFormItem :label="$t('Base.Diabetes')">
+        <ElInput v-model="localAmbulatoryCard.diabetes" />
+      </ElFormItem>
 
-        <ElFormItem :label="$t('User.Height')">
-          <ElInput v-model="localAmbulatoryCard.height" />
-        </ElFormItem>
+      <ElFormItem :label="$t('Base.InfectiousDiseases')">
+        <ElInput v-model="localAmbulatoryCard.infectious_diseases" />
+      </ElFormItem>
 
-        <ElFormItem :label="$t('User.Weight')">
-          <ElInput v-model="localAmbulatoryCard.weight" />
-        </ElFormItem>
+      <ElFormItem :label="$t('User.Height')">
+        <ElInput v-model="localAmbulatoryCard.height" />
+      </ElFormItem>
 
-        <ElFormItem :label="$t('Base.Fluorography')">
-          <ElInput v-model="localAmbulatoryCard.fluorography" />
-        </ElFormItem>
-      </ElForm>
+      <ElFormItem :label="$t('User.Weight')">
+        <ElInput v-model="localAmbulatoryCard.weight" />
+      </ElFormItem>
 
-      <ElDivider />
-      <div class="ambulatory-cards__actions ambulatory-cards-actions">
-        <ElButton type="primary" :loading="loading" @click="saveChanges">
-          {{ $t('Base.SaveChanges') }}
-        </ElButton>
-        <ElButton text @click="print">
-          <template #icon>
-            <UiIcon :icon="icons.PRINTER" />
-          </template>
-          {{ $t('Base.Print') }}
-        </ElButton>
-      </div>
-    </ElCard>
+      <ElFormItem :label="$t('Base.Fluorography')">
+        <ElInput v-model="localAmbulatoryCard.fluorography" />
+      </ElFormItem>
+    </ElForm>
 
-    <ElCard class="ambulatory-treatments-table">
-      <TreatmentsTable
-        :total="treatments?.length"
-        :perPage="treatments?.length"
-        :page="1"
-        :actionShow="true"
-        :items="treatments" />
-    </ElCard>
+    <ElDivider />
+    <div class="ambulatory-card__actions ambulatory-card-actions">
+      <ElButton type="primary" :loading="loading" @click="saveChanges">
+        {{ $t('Base.SaveChanges') }}
+      </ElButton>
+
+      <ElButton text @click="print">
+        <template #icon>
+          <UiIcon :icon="icons.PRINTER" />
+        </template>
+        {{ $t('Base.Print') }}
+      </ElButton>
+    </div>
   </ElCard>
 </template>
 
@@ -93,19 +82,12 @@ import * as icons from '@/enums/icons.enum.js';
 import { AmbulatoryCard } from '@/models/AmbulatoryCard.model';
 import { Patient } from '@/models/Patient.model';
 import { User } from '@/models/User.model';
-import TreatmentsTable from '@/components/treatments/TreatmentsTable/index.vue';
-import PatientCardRow from '../PatientCardRow/index.vue';
 
 export default {
   name: 'AmbulatoryCard',
   emits: ['update:patient'],
-  components: {
-    TreatmentsTable,
-    PatientCardRow,
-  },
   props: {
     patient: [User, Patient, Object],
-    treatments: Array,
   },
   data() {
     return {
@@ -168,30 +150,6 @@ export default {
       window.print();
     },
   },
-  computed: {
-    infoItems() {
-      return [
-        {
-          gender: this.patient.gender,
-          label: this.$t('Patients.NamePatient'),
-          value: this.patient.name || '',
-        },
-        {
-          label: this.$t('User.Phone'),
-          value: this.patient.phone || '',
-        },
-        {
-          label: this.$t('User.Birthdate'),
-          value: this.patient.birthdate || '',
-        },
-        {
-          label: this.$t('User.Gender'),
-          value: this.$t('User.Genders.' + this.patient.gender) || '',
-        },
-      ];
-    },
-  },
-
   setup: () => ({
     icons,
   }),

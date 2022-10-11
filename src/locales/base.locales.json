@@ -3,6 +3,7 @@
     "Base": {
       "Absent": "Отсутствует",
       "Actions": "Действия",
+      "Add": "Добавить",
       "Allergy": "Аллергия",
       "AmbulatoryCard": "Амбулаторная карта",
       "Appoint": "Назначить",
@@ -91,13 +92,16 @@
       "Total": "Итого",
       "Type": "Тип",
       "View": "Посмотреть",
-      "WriteText": "Напишите текст..."
+      "WriteText": "Напишите текст...",
+      "QueueForToday": "Очередь на сегодня",
+      "CalendarAppointments": "Календарь приемов"
     }
   },
   "uz": {
     "Base": {
       "Absent": "Mavjud emas",
       "Actions": "Harakatlar",
+      "Add": "Qoshish",
       "Allergy": "Allergiya",
       "AmbulatoryCard": "Ambulatoriya kartasi",
       "Appoint": "Tayinlash",
@@ -107,7 +111,6 @@
       "Back": "Orqaga",
       "BloodTransfusion": "Qon quyish",
       "Call": "Qongiroq qilish",
-      "Download": "Yuklash",
       "CallToReception": "Qabul qilish",
       "Cancel": "Qaytish",
       "CashRegister": "Kassa",
@@ -126,14 +129,15 @@
       "Doctor": "Shifokor",
       "DoctorFullName": "Shifokor FIO",
       "DoctorsSchedule": "Shifokorlar jadvali",
+      "Download": "Yuklash",
       "Edit": "Tahrirlash",
       "EndTreatment": "Davolanishni tugating",
       "Fluorography": "Florografiya",
       "ForgotPassword": "Parolni unutdingizmi?",
       "FullName": "F.I.Sh",
       "InfectiousDiseases": "Yuqumli kasalliklar",
-      "InspectionCard": "Tekshirish kartasi",
       "Inspection": "Tekshirish",
+      "InspectionCard": "Tekshirish kartasi",
       "InvalidQrCode": "??Невалидный qr код??",
       "InviteByNumber": "Telefondan ulash",
       "Invoice": "??Счёт??",
@@ -156,7 +160,7 @@
       "PleaseInput": "Iltimos, kiriting",
       "PleaseSelect": "Iltimos tanlang",
       "Price": "Narxi",
-      "Print": "chop etish",
+      "Print": "Chop etish",
       "QuantityDays": "Kunlar miqdori",
       "Queue": "Navbat",
       "Reaction": "Reaktsiya",
@@ -186,7 +190,9 @@
       "Total": "Jami",
       "Type": "Turi",
       "View": "Korish",
-      "WriteText": "Matn yozing..."
+      "WriteText": "Matn yozing...",
+      "QueueForToday": "Bugunga navbat",
+      "CalendarAppointments": "Qabullar taqvimi"
     }
   }
 }

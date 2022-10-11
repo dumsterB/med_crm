@@ -8,6 +8,11 @@
   &__title {
     font-weight: bold;
   }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 
   &__file-upload {
     max-width: 400px;

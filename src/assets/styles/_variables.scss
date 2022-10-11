@@ -2,7 +2,7 @@ html,
 body {
   --container-width: 1700px;
 
-  --primary-color: #40CCBD;
+  --primary-color: #40ccbd;
   --primary-hover-color: #89d0c7;
   --primary-dark-color: #357b73;
   --primary-disabled-color: #78dbd0;
@@ -10,6 +10,7 @@ body {
 
   --text-color: #404d61;
   --text-secondary-color: #6e7191;
+  --text-light-color: #90a4ae;
 
   --lable-color: #b2b6c6;
 
@@ -32,5 +33,4 @@ body {
     #40ccbd -1.13%,
     rgba(65, 210, 195, 0.59) 118.25%
   );
-
 }

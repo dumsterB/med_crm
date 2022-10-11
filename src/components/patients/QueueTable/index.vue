@@ -24,11 +24,7 @@
         </ElTableColumn>
         <ElTableColumn prop="patient.age" :label="$t('User.Age')"></ElTableColumn>
         <ElTableColumn prop="patient.phone" :label="$t('User.Phone')"></ElTableColumn>
-        <ElTableColumn prop="start_at" :label="$t('Base.Time')">
-          <template #default="{ row }">
-            <AppointmentStartOrEndDate :date="row.start_at" />
-          </template>
-        </ElTableColumn>
+        <ElTableColumn prop="_start_at" :label="$t('DateAndTime.StartAt')" />
 
         <ElTableColumn prop="status" :label="$t('Appointments.Statuses.Status')">
           <template #default="{ row }">
@@ -44,7 +40,7 @@
               <ElButton
                 v-if="row.status === Appointment.enum.statuses.Approved"
                 type="primary"
-                @click="callToReception(row)">
+                @click.stop="callToReception(row)">
                 {{ $t('Base.CallToReception') }}
               </ElButton>
             </div>
@@ -57,23 +53,33 @@
 
 <script>
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
-import AppointmentStartOrEndDate from '@/components/appointments/AppointmentStartOrEndDate/index.vue';
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import { Appointment } from '@/models/Appointment.model';
 
 export default {
   name: 'QueueTable',
-  components: { AppointmentStartOrEndDate, AppointmentStatusTag },
+  components: { AppointmentStatusTag },
   props: {
-    /** @param { Array<Queues|object> } items */
+    /** @type { Array<Appointment|object> } items */
     items: Array,
     loading: Boolean,
   },
+  computed: {
+    itemsWithPayload() {
+      return this.items.map((elem) => ({
+        ...elem,
+        _start_at: elem.start_at.split(' ')[1],
+        _end_at: elem.end_at.split(' ')[1],
+      }));
+    },
+  },
+
   watch: {
     loading() {
       this.$refs.elTable.scrollTo({ top: 0, behavior: 'smooth' });
     },
   },
+
   methods: {
     async callToReception(payload) {
       try {
@@ -112,6 +118,8 @@ export default {
 <style lang="scss" src="./index.scss" />
 <i18n src="./index.locales.json" />
 <i18n src="@/locales/base.locales.json" />
+<i18n src="@/locales/notifications.locales.json" />
+<i18n src="@/locales/dateAndTime.locales.json" />
 <i18n src="@/locales/user.locales.json" />
 <i18n src="@/locales/patients.locales.json" />
 <i18n src="@/locales/appointments.locales.json" />

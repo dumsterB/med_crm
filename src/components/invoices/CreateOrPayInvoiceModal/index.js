@@ -4,8 +4,10 @@ import { ServiceGroup } from '@/models/ServiceGroup.model';
 import { InvoicePaymentSubject } from '@/models/InvoicePaymentSubject.model';
 import { Transaction } from '@/models/Transaction.model';
 import { formatPrice } from '@/utils/price.util';
+import { PrinterService } from '@/services/printer.service';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
 
+import PatientsSearchSelectDataBlock from '@/components/patients/PatientsSearchSelectDataBlock/index.vue';
 import PatientsSearchSelect from '@/components/patients/PatientsSearchSelect/index.vue';
 import UiModelsAutocompleteSearch from '@/components/ui/UiModelsAutocompleteSearch/index.vue';
 import InvoiceStatusTag from '@/components/invoices/InvoiceStatusTag/index.vue';
@@ -19,6 +21,7 @@ export default {
     InvoiceStatusTag,
     UiModelsAutocompleteSearch,
     PatientsSearchSelect,
+    PatientsSearchSelectDataBlock,
     TransactionsTable,
   },
   emits: ['update:modelValue', 'action'],
@@ -35,6 +38,7 @@ export default {
       loading: {
         form: false,
         transactions: false,
+        print: false,
       },
       payModalIsOpen: false,
       payType: Transaction.enum.types.PayIn,
@@ -48,10 +52,13 @@ export default {
       let sum = this.invoice.id
         ? this.invoice.discounted_amount
         : this.invoice.payment_subjects.reduce(
-            (acc, elem) => acc + (elem.subject.price ?? elem.subject.total_amount) * elem.count,
+            (acc, elem) => acc + elem.subject.price * elem.count,
             0
           );
-      sum = this.invoice.discount > 0 ? sum - sum * (this.invoice.discount / 100) : sum;
+      sum =
+        !this.invoice.id && this.invoice.discount > 0
+          ? sum - sum * (this.invoice.discount / 100)
+          : sum;
 
       return `${formatPrice({ price: sum })} ${this.$t('Base.Sum')}`;
     },
@@ -163,6 +170,23 @@ export default {
       this.transactions = transactions;
 
       this.loading.transactions = false;
+    },
+
+    async print() {
+      if (this.loading.print) return;
+      this.loading.print = true;
+
+      try {
+        await PrinterService.printInvoiceById(this.invoice.id);
+      } catch (err) {
+        console.log(err);
+        this.$notify({
+          type: 'error',
+          title: err?.response?.data?.message || this.$t('Notifications.Error'),
+        });
+      }
+
+      this.loading.print = false;
     },
   },
 

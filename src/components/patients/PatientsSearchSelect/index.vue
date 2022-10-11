@@ -11,7 +11,7 @@
       @select="$emit('select', $event)"
       @create="$emit('create', $event)" />
 
-    <ScanPatientBracelet @scan:success="scanHandler" />
+    <ScanPatientBracelet :disabled="disabled" @scan:success="scanHandler" />
   </div>
 </template>
 
@@ -23,9 +23,10 @@ import ScanPatientBracelet from '@/components/scanner/ScanPatientBracelet/index.
 export default {
   name: 'PatientsSearchSelect',
   components: { ScanPatientBracelet, UiModelsAutocompleteSearch },
-  emits: ['update:modelValue', 'select'],
+  emits: ['update:modelValue', 'select', 'create'],
   props: {
     modelValue: Number,
+    disabled: Boolean,
     withScanner: Boolean,
     defaultItem: [Patient, Object, Array],
     // + пропсы для UiModelsAutocompleteSearch

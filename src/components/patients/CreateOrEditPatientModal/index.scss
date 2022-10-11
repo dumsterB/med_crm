@@ -1,42 +1,10 @@
-.create-patient-modal {
-  &-custom {
-    .el-dialog__header {
-      background: var(--bg-color);
-    }
-    .el-form {
+.create-or-edit-patient-modal {
+  &__content {
+    .create-or-edit-patient__content {
       background: var(--dialog-body-content-bg-color);
       padding: var(--dialog-body-content-padding);
-      box-shadow:var(--dialog-body-content-box-shadow);
+      box-shadow: var(--dialog-body-content-box-shadow);
       border-radius: var(--dialog-body-content-border-radious);
-    }
-  }
-
-  &-form {
-    display: flex;
-    flex-direction: column;
-    &-actions {
-      display: flex;
-      flex-direction: column;
-      margin: auto;
-      gap: 10px;
-      &__submit {
-        background: var(--button-primary-gradiend-bg);
-        border: none;
-        width: 50% !important;
-        margin: auto;
-        display: flex;
-      }
-    }
-  }
-
-  &-patient {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-
-    &__name {
-      font-size: 1.1em;
-      font-weight: bold;
     }
   }
 }

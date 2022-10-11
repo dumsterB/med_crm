@@ -42,8 +42,7 @@ export default {
     endAt: [Date, String],
     defaultStartAt: [Date, String],
     defaultEndAt: [Date, String],
-    serviceIds: Array,
-    groupServiceId: [Number, String],
+    searchQuery: Object,
     disabled: Boolean,
     required: Boolean,
     dependencies: [Array, Object], // при изменении сбрасываем startAt, endAt
@@ -119,10 +118,12 @@ export default {
 
     dependencies: {
       handler() {
-        this.slot.start_at = null;
-        this.slot.end_at = null;
-        this.date = null;
+        this.slot = {
+          start_at: null,
+          end_at: null,
+        };
         this.slots = [];
+        this.date = null;
       },
       deep: true,
     },
@@ -131,25 +132,15 @@ export default {
   methods: {
     async getSlots() {
       this.loading = true;
-      this.serviceIds.length ? await this.getSlotsByService() : await this.getSlotsByGroupService();
-      this.loading = false;
-    },
 
-    async getSlotsByService() {
-      const { data } = await ScheduleSlot.getSlotsByServiceIds({
-        serviceIds: this.serviceIds,
+      const { data } = await ScheduleSlot.get({
+        ...this.searchQuery,
         from: `${this.date} 00:00`,
         to: `${this.date} 23:59`,
       });
       this.slots = data.data;
-    },
-    async getSlotsByGroupService() {
-      const { data } = await ScheduleSlot.getSlotsByGroupServiceId({
-        groupServiceId: this.groupServiceId,
-        from: `${this.date} 00:00`,
-        to: `${this.date} 23:59`,
-      });
-      this.slots = data.data;
+
+      this.loading = false;
     },
   },
 

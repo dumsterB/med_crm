@@ -1,156 +1,72 @@
 <template>
   <ElDialog
-    custom-class="create-appointment-drawer"
+    custom-class="create-or-edit-appointment-modal"
     :model-value="modelValue"
     :title="$t(`Title.${data?.id ? 'Edit' : 'Create'}`)"
     @update:model-value="$emit('update:modelValue', $event)">
     <ElForm
-      class="create-appointment-drawer-form"
+      id="create-or-edit-appointment"
+      class="create-or-edit-appointment-modal-form"
       label-position="top"
       @submit.prevent="submitHandler">
       <!--  Patient  -->
-      <ElFormItem
-        :label="$t('Base.Patient')"
-        :style="{ order: this.appointmentFieldsFlexOrder.patient }">
-        <PatientsSearchSelect
+      <ElCard class="create-or-edit-appointment-modal-form__patient-part" shadow="never">
+        <template #header> {{ $t('Base.Patient') }} </template>
+        <PatientsSearchSelectDataBlock
+          v-show="!patientPart.show"
           v-model="appointment.patient_id"
           :search-query="patientsOptions.searchQuery"
-          :default-item="data?.patient || patient || patientDrawer.newPatient"
-          :disabled="!!patient || !!data"
-          :placeholder="$t('User.PleaseInputNameOrPhone')"
-          required
+          :default-item="data?.patient || patient || patientPart.newPatient"
+          :disabled="!!patient || !!data?.patient_id"
+          :hide-select="!!patient || !!data?.patient_id"
+          :required="!patientPart.show"
           :show-create-option="permissions.createPatient"
           ref="autocomplete_patient"
-          @create="openCreatePatientDrawer" />
-      </ElFormItem>
+          @create="startCreatePatientFlow" />
 
-      <!--  Type  -->
-      <ElFormItem
-        v-show="!data?.id"
-        :label="$t('SelectType')"
-        :style="{ order: this.appointmentFieldsFlexOrder.type }">
-        <ElRadioGroup v-model="appointmentType">
-          <ElRadio :label="appointmentTypesEnum.Doctor">
-            {{ $t(`Appointments.Types.${appointmentTypesEnum.Doctor}`) }}
-          </ElRadio>
-          <ElRadio :label="appointmentTypesEnum.Service">
-            {{ $t(`Appointments.Types.${appointmentTypesEnum.Service}`) }}
-          </ElRadio>
-        </ElRadioGroup>
-      </ElFormItem>
+        <CreateOrEditPatient
+          v-if="patientPart.show"
+          class="create-or-edit-appointment-modal__create-patient"
+          :name-or-phone="patientPart.nameOrPhone"
+          disable-default-action
+          @action="insertPatient"
+          ref="create_or_edit_patient" />
+      </ElCard>
 
-      <!--  Specialty  -->
-      <!--      <ElFormItem
-        v-show="specialtiesOptions.isShow"
-        :label="$t('SelectSpecialty')"
-        :style="{ order: this.appointmentFieldsFlexOrder.specialty }">
-        <SpecialtiesSelect
-          v-model="appointment.specialty_id"
-          :disabled="specialtiesOptions.isDisabled"
-          :required="specialtiesOptions.isRequired" />
-      </ElFormItem>-->
+      <ElCard class="create-or-edit-appointment-modal-form__add-part" shadow="never">
+        <!--        <template #header> {{ $t('Appointments.Appointments') }} </template>-->
+        <CreateAppointmentSubject @subject:create="addSubject" />
+      </ElCard>
 
-      <!--  GroupService  -->
-      <ElFormItem
-        v-show="groupServicesOptions.isShow"
-        :label="$t('SelectService')"
-        :style="{ order: this.appointmentFieldsFlexOrder.groupService }">
-        <UiModelsAutocompleteSearch
-          v-model="appointment.group_service_ids"
-          label="title"
-          :modelForUse="ServiceGroup"
-          :searchQuery="groupServicesOptions.searchQuery"
-          :disabled="groupServicesOptions.isDisabled"
-          :required="groupServicesOptions.isRequired"
-          multiple
-          @update:data="groupServices = $event">
-          <template #default="{ item }"> {{ generateServiceOptionLabel(item) }} </template>
-        </UiModelsAutocompleteSearch>
-      </ElFormItem>
+      <AppointmentSubjectsTable
+        class="create-or-edit-appointment-modal-form__table-part"
+        :items="appointment.appointments"
+        @item:remove="removeSubject" />
 
-      <!--  Doctor and Service when has GroupService  -->
-      <ElFormItem
-        v-show="doctorsAndServicesOptions.isShow"
-        :label="$t('SelectDoctor')"
-        :style="{ order: this.appointmentFieldsFlexOrder.doctor }">
-        <DoctorsSelectByGroupService
-          v-model:appointment="appointment"
-          :service-group="currentGroupService"
-          :required="doctorsAndServicesOptions.isRequired" />
-      </ElFormItem>
+      <ElCard class="create-or-edit-appointment-modal-form__cost-part" shadow="never">
+        <ElFormItem :label="$t('Base.Discount') + ' (%)'">
+          <ElInput v-model="appointment.discount" type="number" min="0" max="100" />
+        </ElFormItem>
+        <ElFormItem :label="$t('Base.Total')">
+          {{ discountedCost }}
+        </ElFormItem>
+      </ElCard>
+    </ElForm>
 
-      <!--  Doctor  -->
-      <ElFormItem
-        v-show="doctorsOptions.isShow"
-        :label="$t('SelectDoctor')"
-        :style="{ order: this.appointmentFieldsFlexOrder.doctor }">
-        <UiModelsAutocompleteSearch
-          v-model="appointment.doctor_id"
-          :modelForUse="Doctor"
-          :defaultItem="data?.doctor || user?.doctor"
-          :searchQuery="doctorsOptions.searchQuery"
-          :disabled="doctorsOptions.isDisabled"
-          :required="doctorsOptions.isRequired" />
-      </ElFormItem>
-
-      <!--  Service  -->
-      <ElFormItem
-        v-show="servicesOptions.isShow"
-        :label="$t('SelectService')"
-        :style="{ order: this.appointmentFieldsFlexOrder.service }">
-        <UiModelsAutocompleteSearch
-          v-model="appointment.service_ids"
-          label="title"
-          :defaultItem="data?.services"
-          :modelForUse="Service"
-          :searchQuery="servicesOptions.searchQuery"
-          :disabled="servicesOptions.isDisabled"
-          :required="servicesOptions.isRequired"
-          multiple>
-          <template #default="{ item }"> {{ generateServiceOptionLabel(item) }} </template>
-        </UiModelsAutocompleteSearch>
-      </ElFormItem>
-
-      <!--  Select Date type  -->
-      <ElFormItem
-        v-show="dateTypeOptions.isShow"
-        :style="{ order: this.appointmentFieldsFlexOrder.dateType }">
-        <ElRadioGroup v-model="isLiveQueue">
-          <ElRadio :label="true"> {{ $t('Appointments.LiveQueue') }} </ElRadio>
-          <ElRadio :label="false"> {{ $t('Appointments.RecordOnTime') }} </ElRadio>
-        </ElRadioGroup>
-      </ElFormItem>
-
-      <!--  Date  -->
-      <ElFormItem
-        v-show="slotsOptions.isShow"
-        :label="$t('DateAndTime.SelectDate')"
-        :style="{ order: this.appointmentFieldsFlexOrder.date }">
-        <ScheduleSlotsSelect
-          v-model:start-at="appointment.start_at"
-          v-model:end-at="appointment.end_at"
-          :default-start-at="data?.start_at"
-          :default-end-at="data?.end_at"
-          :disabled="slotsOptions.isDisabled"
-          :service-ids="appointment.service_ids"
-          :group-service-id="appointment.group_service_id"
-          :dependencies="slotsOptions.dependencies" />
-      </ElFormItem>
-      <!--  Actions  -->
-      <ElFormItem :style="{ order: this.appointmentFieldsFlexOrder.actions }">
-        <div class="create-appointment-drawer-form-actions">
-          <ElButton type="primary" native-type="submit" :loading="loading.form">
+    <!--  Actions  -->
+    <template #footer>
+      <ElFormItem>
+        <div class="create-or-edit-appointment-modal-form-actions">
+          <ElButton
+            type="primary"
+            native-type="submit"
+            form="create-or-edit-appointment"
+            :loading="loading.form">
             {{ $t(`Base.${data?.id ? 'Edit' : 'Create'}`) }}
           </ElButton>
         </div>
       </ElFormItem>
-    </ElForm>
-
-    <CreateOrEditPatientModal
-      v-model="patientDrawer.show"
-      :name-or-phone="patientDrawer.nameOrPhone"
-      disable-default-action
-      @action="insertPatient" />
+    </template>
   </ElDialog>
 </template>
 

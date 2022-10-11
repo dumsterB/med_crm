@@ -120,7 +120,18 @@ body {
   background: #ecfaf8;
   .el-switch__action {
     top: 0;
-    background-color: var(--primary-color);
+    background-color: var(--el-border-color);
+  }
+}
+
+// select
+.el-select {
+  &-dropdown {
+    &__item {
+      height: auto;
+      padding: 6px 32px 6px 20px;
+      line-height: 1.5em;
+    }
   }
 }
 

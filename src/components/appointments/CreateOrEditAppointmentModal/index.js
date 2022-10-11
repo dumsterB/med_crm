@@ -1,12 +1,10 @@
 import { markRaw } from 'vue';
 import { mapState } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
-import { DRAWER_DEFAULT_SIZE } from '@/config/ui.config';
-import { formatPrice } from '@/utils/price.util';
 
-import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
+import { APPOINTMENTS_ROUTE } from '@/router/appointments.routes';
+import { DOCTORS_QUEUE_ROUTE } from '@/router/doctors.routes';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
-import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 import { Appointment } from '@/models/Appointment.model';
 import { User } from '@/models/User.model';
 import { Patient } from '@/models/Patient.model';
@@ -14,21 +12,20 @@ import { Doctor } from '@/models/Doctor.model';
 import { Service } from '@/models/Service.model';
 import { ServiceGroup } from '@/models/ServiceGroup.model';
 
-import CreateOrEditPatientModal from '@/components/patients/CreateOrEditPatientModal/index.vue';
-import SpecialtiesSelect from '@/components/specialties/SpecialtiesSelect/index.vue';
-import DoctorsSelectByGroupService from './DoctorsSelectByGroupService/index.vue';
-import ScheduleSlotsSelect from '@/components/appointments/ScheduleSlotsSelect/index.vue';
-import PatientsSearchSelect from '@/components/patients/PatientsSearchSelect/index.vue';
+import CreateOrEditPatient from '@/components/patients/CreateOrEditPatientModal/CreateOrEditPatient/index.vue';
+import PatientsSearchSelectDataBlock from '@/components/patients/PatientsSearchSelectDataBlock/index.vue';
+import CreateAppointmentSubject from './CreateAppointmentSubject/index.vue';
+import AppointmentSubjectsTable from './AppointmentSubjectsTable/index.vue';
+import CreateOrPayInvoiceModal from '@/components/invoices/CreateOrPayInvoiceModal/index.vue';
 
 // TODO: написать документацию по бизнес логике
 export default {
   name: 'CreateOrEditAppointmentModal',
   components: {
-    CreateOrEditPatientModal,
-    SpecialtiesSelect,
-    DoctorsSelectByGroupService,
-    ScheduleSlotsSelect,
-    PatientsSearchSelect,
+    CreateOrEditPatient,
+    PatientsSearchSelectDataBlock,
+    CreateAppointmentSubject,
+    AppointmentSubjectsTable,
   },
   emits: ['update:modelValue', 'action'],
   props: {
@@ -42,15 +39,11 @@ export default {
     return {
       /** @type Appointment */
       appointment: null,
-      appointmentType: Appointment.enum.types.Doctor,
-      /** @type {Array<ServiceGroup>} */
-      groupServices: [],
       loading: {
         form: false,
       },
-      isLiveQueue: true,
 
-      patientDrawer: {
+      patientPart: {
         show: false,
         nameOrPhone: null,
         newPatient: null,
@@ -67,24 +60,6 @@ export default {
         createPatient: this.user.role === User.enum.roles.Manager,
       };
     },
-
-    appointmentFields() {
-      return Object.keys(this.appointment);
-    },
-    appointmentFieldsFlexOrder() {
-      return {
-        patient: 1,
-        type: 2,
-        specialty: 3,
-        groupService: 4,
-        doctor: 5,
-        service: 6,
-        dateType: 7,
-        date: 8,
-        actions: 9,
-      };
-    },
-
     patientsOptions() {
       return {
         searchQuery: {
@@ -93,144 +68,29 @@ export default {
       };
     },
 
-    specialtiesOptions() {
-      return {
-        isShow: this.appointmentType === this.appointmentTypesEnum.Doctor && !this.data,
-        isDisabled: !this.appointment.patient_id,
-        isRequired: false,
-      };
-    },
+    cost() {
+      return this.appointment.appointments.reduce((acc, elem) => {
+        const servicesCost = elem.group_services.reduce(
+          (acc, groupService) => acc + groupService.price,
+          0
+        );
 
-    groupServicesOptions() {
-      return {
-        isShow: this.appointmentType === this.appointmentTypesEnum.Service,
-        isDisabled:
-          this.appointmentType === this.appointmentTypesEnum.Service
-            ? !this.appointment.patient_id
-            : true,
-        isRequired: this.appointmentType === this.appointmentTypesEnum.Service,
-        searchQuery: {
-          query_field: null,
-          query_type: null,
-          query_operator: null,
-          some_services: true,
-        },
-      };
+        return acc + servicesCost;
+      }, 0);
     },
-    // если выбрано больше одной группы услуг, компонент DoctorsSelectByGroupService скрывается
-    currentGroupService() {
-      return this.appointment.group_service_ids.length
-        ? this.groupServices.find((elem) => elem.id === this.appointment.group_service_ids[0])
-        : null;
-    },
-
-    doctorsAndServicesOptions() {
-      return {
-        isShow:
-          this.appointmentType === this.appointmentTypesEnum.Service &&
-          this.appointment.group_service_ids.length < 2,
-        // isRequired: this.appointmentType === this.appointmentTypesEnum.Service,
-        isRequired: false,
-      };
-    },
-
-    doctorsOptions() {
-      return {
-        isShow: this.appointmentType === this.appointmentTypesEnum.Doctor,
-        isDisabled:
-          this.appointmentType === this.appointmentTypesEnum.Doctor
-            ? !this.appointment.patient_id
-            : false,
-        isRequired: this.appointmentType === this.appointmentTypesEnum.Doctor,
-        searchQuery: {
-          specialties_id: this.appointment.specialty_id ? [this.appointment.specialty_id] : null,
-        },
-      };
-    },
-
-    servicesOptions() {
-      return {
-        isShow: this.appointmentType === this.appointmentTypesEnum.Doctor,
-        isDisabled:
-          this.appointmentType === this.appointmentTypesEnum.Doctor && !this.appointment.doctor_id,
-        isRequired: this.appointmentType === this.appointmentTypesEnum.Doctor,
-        searchQuery: {
-          doctorId: this.appointment.doctor_id,
-          query_field: null,
-          query_type: null,
-          query_operator: null,
-        },
-      };
-    },
-
-    dateTypeOptions() {
-      return {
-        isShow:
-          !this.data?.id &&
-          this.appointment.service_ids.length < 2 &&
-          this.appointment.group_service_ids.length < 2,
-      };
-    },
-
-    slotsOptions() {
-      return {
-        isShow:
-          !this.isLiveQueue &&
-          this.appointment.service_ids.length < 2 &&
-          this.appointment.group_service_ids.length < 2,
-        isDisabled:
-          this.appointmentType === this.appointmentTypesEnum.Doctor
-            ? !this.appointment.service_ids.length
-            : !this.appointment.group_service_id,
-        // при изменении этих значений сбрасывается start_at, end_at
-        dependencies: {
-          type: this.appointmentType,
-          groupServiceIds: this.appointment.group_service_ids,
-          serviceIds: this.appointment.service_ids,
-          doctorId: this.appointment.doctor_id,
-          isLiveQueue: this.isLiveQueue,
-        },
-      };
+    discountedCost() {
+      return this.appointment.discount > 0
+        ? this.cost - this.cost * (this.appointment.discount / 100)
+        : this.cost;
     },
   },
 
   watch: {
-    'modelValue': {
+    modelValue: {
       handler() {
-        this.appointment = new Appointment(
-          this.data || { patient_id: this.patient?.id || null, doctor_id: this.user.doctor_id }
-        );
+        this.appointment = new Appointment(this.data || { patient_id: this.patient?.id || null });
       },
       immediate: true,
-      deep: true,
-    },
-
-    'appointmentType': {
-      handler(value) {
-        if (this.appointment.service_ids.length) this.appointment.service_ids = [];
-        if (this.appointment.doctor_id) this.appointment.doctor_id = this.user.doctor_id || null;
-      },
-    },
-    'appointment.specialty_id': {
-      handler(value, oldValue) {
-        this.appointmentWatcherHandler({ field: 'specialty_id', value, oldValue });
-      },
-    },
-    'appointment.group_service_ids': {
-      handler(value, oldValue) {
-        this.appointmentWatcherHandler({ field: 'group_service_ids', value, oldValue });
-      },
-      deep: true,
-    },
-    'appointment.doctor_id': {
-      handler(value, oldValue) {
-        this.appointmentWatcherHandler({ field: 'doctor_id', value, oldValue });
-      },
-    },
-    'appointment.service_ids': {
-      handler(value, oldValue) {
-        this.appointmentWatcherHandler({ field: 'service_ids', value, oldValue });
-      },
       deep: true,
     },
   },
@@ -254,87 +114,98 @@ export default {
     },
 
     async createAppointment() {
+      if (!this.validate()) return;
+      if (this.patientPart.show) await this.$refs.create_or_edit_patient.createPatient();
+
       const { data } = await Appointment.create(this.appointment);
 
       this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessCreated') });
       this.$emit(
         'action',
-        new GlobalModalAction({ name: 'created', data: { appointment: data.data } })
-      );
-      if (!this.disableDefaultAction) this.goToAppointment(data.data.id);
-    },
-
-    async editAppointment() {
-      const { data } = await Appointment.update({
-        id: this.appointment.id,
-        payload: this.appointment,
-      });
-
-      this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
-      this.$emit(
-        'action',
-        new GlobalModalAction({ name: 'edited', data: { appointment: data.data } })
+        new GlobalModalAction({
+          name: 'created',
+          data: { appointments: data.data.appointments, invoice: data.data.invoice },
+        })
       );
 
-      if (!this.disableDefaultAction) this.goToAppointment(data.data.id);
-    },
+      if (!this.disableDefaultAction) {
+        this.$router.push(
+          this.user.role === User.enum.roles.Doctor
+            ? DOCTORS_QUEUE_ROUTE.path
+            : APPOINTMENTS_ROUTE.path
+        );
 
-    appointmentWatcherHandler({ field, value, oldValue }) {
-      if (value === oldValue) return;
-
-      switch (field) {
-        case 'specialty_id': {
-          if (this.appointment.doctor_id) this.appointment.doctor_id = null;
-          break;
-        }
-        case 'group_service_ids': {
-          if (this.appointment.doctor_id) this.appointment.doctor_id = null;
-          break;
-        }
-        case 'doctor_id': {
-          // appointment.type === Service используется компонент который сразу обновляет два поля doctor_id, service_id
-          if (
-            this.appointmentType !== this.appointmentTypesEnum.Service &&
-            this.appointment.service_ids.length
-          ) {
-            this.appointment.service_ids = [];
-          }
-          break;
-        }
-        case 'service_id': {
-          break;
+        if (this.user.role === User.enum.roles.Manager) {
+          this.$store.dispatch('modalAndDrawer/openModal', {
+            component: CreateOrPayInvoiceModal,
+            payload: {
+              data: data.data.invoice,
+            },
+          });
         }
       }
     },
 
-    openCreatePatientDrawer(query) {
+    async editAppointment() {
+      // const { data } = await Appointment.update({
+      //   id: this.appointment.id,
+      //   payload: this.appointment,
+      // });
+      //
+      // this.$notify({ type: 'success', title: this.$i18n.t('Notifications.SuccessUpdated') });
+      // this.$emit(
+      //   'action',
+      //   new GlobalModalAction({ name: 'edited', data: { appointments: data.data } })
+      // );
+      //
+      // if (!this.disableDefaultAction) {
+      // }
+    },
+
+    /**
+     * Доролнительная проверка
+     * @return {boolean} если успешно true
+     */
+    validate() {
+      if (this.patientPart.show) {
+        const isValidatePatient = this.$refs.create_or_edit_patient.customValidate();
+        if (!isValidatePatient) return false;
+      }
+
+      if (!this.appointment.appointments.length) {
+        this.$notify({
+          type: 'error',
+          title: this.$t('NotAppointmentsError'),
+        });
+        return false;
+      }
+
+      return true;
+    },
+
+    /** @param {AppointmentSubject} subject */
+    addSubject(subject) {
+      this.appointment.appointments.push(subject);
+    },
+
+    /** @param {AppointmentSubject} subject */
+    removeSubject(subject) {
+      this.appointment.appointments = this.appointment.appointments.filter(
+        (elem) => elem._id !== subject._id
+      );
+    },
+
+    startCreatePatientFlow(query) {
       this.$refs.autocomplete_patient.blur();
-      this.patientDrawer.show = true;
-      this.$nextTick(() => (this.patientDrawer.nameOrPhone = query));
+      this.patientPart.show = true;
+      this.$nextTick(() => (this.patientPart.nameOrPhone = query));
     },
     insertPatient(action) {
-      if (action instanceof GlobalModalCloseAction) return;
-      this.patientDrawer.show = false;
-
-      this.patientDrawer.newPatient = action.data.patient;
-      this.appointment.patient_id = action.data;
-    },
-
-    goToAppointment(id) {
-      this.$router.push({
-        name: APPOINTMENT_ROUTE.name,
-        params: {
-          id: id,
-        },
-      });
-    },
-
-    /** @param {Service|ServiceGroup|object} service */
-    generateServiceOptionLabel(service) {
-      const title = service.title;
-      const price = service.price ?? (service.services?.length ? service.services[0].price : 0);
-
-      return `${title} - ${formatPrice({ price: price })} ${this.$t('Base.Sum')}`;
+      this.appointment.patient = action.data.patient;
+      this.appointment.patient_id = action.data.patient.id;
+      this.patientPart.show = false;
+      this.patientPart.nameOrPhone = null;
+      this.patientPart.newPatient = action.data.patient;
     },
   },
 
@@ -344,8 +215,6 @@ export default {
     Doctor: markRaw(Doctor),
     Service: markRaw(Service),
     ServiceGroup: markRaw(ServiceGroup),
-    appointmentTypesEnum: markRaw(Appointment.enum.types),
     icons,
-    DRAWER_DEFAULT_SIZE,
   }),
 };

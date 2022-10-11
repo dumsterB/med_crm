@@ -62,7 +62,7 @@ export default {
 
     async logout({ commit, dispatch }) {
       commit('LOGOUT');
-      await Router.push(LOGIN_ROUTE);
+      await Router.push(LOGIN_ROUTE.path);
       ApiService.removeToken();
       localStorage.removeItem(enums.ACCESS_TOKEN_KEY);
       localStorage.removeItem(enums.USER_KEY);

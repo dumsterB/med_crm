@@ -13,6 +13,17 @@ export class PrinterService {
   }
 
   /**
+   * @param {number|string} invoiceId
+   * @return {Promise<any>}
+   */
+  static async printInvoiceById(invoiceId) {
+    const { data } = await ApiService.post('printer/printInvoice', { invoice_id: invoiceId });
+    const { printer_address, task } = data;
+
+    return this.print({ printerAddress: printer_address, task: task });
+  }
+
+  /**
    * @param {object} payload
    * @param {string} payload.printerAddress
    * @param {string} payload.task

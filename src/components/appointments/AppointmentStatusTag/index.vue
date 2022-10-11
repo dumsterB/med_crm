@@ -6,7 +6,6 @@
 
 <script>
 import { Appointment } from '@/models/Appointment.model';
-import * as icons from '@/enums/icons.enum';
 
 export default {
   name: 'AppointmentStatusTag',

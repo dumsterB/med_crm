@@ -47,8 +47,9 @@
             @change="updateInspectionCard" />
         </ElFormItem>
 
-        <div v-show="!isProvided" class="v-app-treat-card-form-actions">
+        <div class="v-app-treat-card-form-actions">
           <ElButton
+            v-show="!isProvided"
             data-method="closeTreatment"
             type="warning"
             plain
@@ -57,16 +58,23 @@
             {{ $t('Treatments.CloseTreatment') }}
           </ElButton>
 
-          <ElButton data-method="endReception" type="primary" native-type="submit">
+          <ElButton
+            v-show="!isProvided"
+            data-method="endReception"
+            type="primary"
+            native-type="submit">
             {{ $t('Appointments.EndReception') }}
           </ElButton>
+
+          <ElButton
+            v-show="isProvided"
+            class="v-app-treat-card-form-actions"
+            text
+            @click="callPrint">
+            <template #icon> <UiIcon :icon="icons.PRINTER" /> </template>
+            {{ $t('Base.Print') }}
+          </ElButton>
         </div>
-        <ElButton text @click="callPrint" class="v-app-treat-card-form-actions">
-          <template #icon>
-            <UiIcon :icon="icons.PRINTER" />
-          </template>
-          {{ $t('Base.Print') }}
-        </ElButton>
       </ElForm>
     </ElCard>
   </div>
@@ -77,11 +85,13 @@ import * as icons from '@/enums/icons.enum.js';
 import { insertRouteParams } from '@/utils/router.utils';
 import { Appointment } from '@/models/Appointment.model';
 import { TreatmentInspectionCard } from '@/models/TreatmentInspectionCard.model';
+import { Treatment } from '@/models/Treatment.model';
+import { InspectionCard } from '@/models/InspectionCard.model';
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import { PATIENT_ROUTE } from '@/router/patients.routes';
+import { NOT_REDIRECT } from '@/enums/query.enum';
 
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
-import { Treatment } from '@/models/Treatment.model';
 
 export default {
   name: 'VAppointmentTreatmentInspectionCard',
@@ -131,7 +141,7 @@ export default {
             ![Appointment.enum.statuses.InProgress, Appointment.enum.statuses.Provided].includes(
               value
             )) ||
-          this.appointment.service_case_id
+          this.appointment.inspection_card?.type === InspectionCard.enum.types.Default
         )
           return this.goToAppointment();
       },
@@ -146,9 +156,8 @@ export default {
     goToAppointment() {
       this.$router.push({
         name: APPOINTMENT_ROUTE.name,
-        params: {
-          id: this.appointment.id,
-        },
+        params: { id: this.appointment.id },
+        query: { [NOT_REDIRECT]: 1 },
       });
     },
 

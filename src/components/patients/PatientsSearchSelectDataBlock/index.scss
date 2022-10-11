@@ -1,0 +1,22 @@
+.patients-search-select-data-block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .el-form-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__label {
+      margin-bottom: 0 !important;
+    }
+
+    &__content {
+      display: flex;
+      justify-content: flex-end;
+      text-align: right;
+      font-weight: bold;
+    }
+  }
+}

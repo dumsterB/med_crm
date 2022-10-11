@@ -1,38 +1,25 @@
 .patient-card {
-  display: flex;
-  padding: 5px;
-  & > * {
-    width: 100%;
-    justify-content: space-between;
-    display: flex;
+  .el-card {
+    &__body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
   }
 
   &-info {
     display: flex;
+    flex-direction: column;
+    gap: 8px;
 
-    &__title {
-      color: var(--lable-color);
-      font-weight: 400;
-      font-size: 15px;
-      line-height: 15px;
+    &__label {
+      color: var(--text-light-color);
+      font-size: 0.9em;
     }
 
-    &__description {
-      color: var(--text-secondary-color);
-      font-weight: 400;
-      font-size: 15px;
-      line-height: 15px;
-      margin-top: 10px;
+    &__value {
+      font-weight: 500;
     }
-    &-actions{
-      margin-top: -10px;
-    }
-  }
-
-  &-info_avatar {
-    display: flex;
-    gap: 20px;
-    margin-right: 20px;
-    margin-top: -5px;
   }
 }

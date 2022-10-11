@@ -1,19 +1,13 @@
 {
   "ru": {
-    "SelectDoctor": "Выберите доктора",
-    "SelectService": "Выберите услугу",
-    "SelectSpecialty": "Выберите специальность",
-    "SelectType": "Выберите тип записи",
+    "NotAppointmentsError": "Добавьте записи",
     "Title": {
-      "Create": "Записать на услугу",
+      "Create": "Записать на приёмы",
       "Edit": "Редактировать запись"
     }
   },
   "uz": {
-    "SelectDoctor": "Shifokorni tanlang",
-    "SelectService": "Xizmatni tanlang",
-    "SelectSpecialty": "Mutaxassislikni tanlang",
-    "SelectType": "Xabar turini tanlang",
+    "NotAppointmentsError": "Xizmatlarni qoshing",
     "Title": {
       "Create": "Xizmatga ro'yxatdan o'tkazish",
       "Edit": "Xabarni ozgartirish"

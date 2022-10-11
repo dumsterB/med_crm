@@ -1,6 +1,7 @@
 import * as icons from '@/enums/icons.enum.js';
 import { throttle } from 'lodash';
 import { insertRouteParams } from '@/utils/router.utils';
+import { onlyLatinFormatter } from '@/utils/formatters.util';
 import { Patient } from '@/models/Patient.model';
 import { GlobalModalAction } from '@/models/client/ModalAndDrawer/GlobalModalAction';
 import { PATIENT_ROUTE } from '@/router/patients.routes';
@@ -10,7 +11,8 @@ import { FULL_DATE_FORMAT } from '@/config/dateAndTime.config';
 import PhoneConfirmModal from '@/components/PhoneConfirmModal/index.vue';
 
 export default {
-  name: 'CreateOrEditPatientModal',
+  name: 'CreateOrEditPatient',
+  components: { PhoneConfirmModal },
   emits: ['update:modelValue', 'action'],
   props: {
     modelValue: Boolean,
@@ -33,6 +35,7 @@ export default {
       hasPatient: false,
       hasPatientFromOtherClinic: false,
 
+      isOpenPhoneConfirmModal: false,
       isRebinding: false, // если пользователь был найден и мы успешно подтвердили код - можем создать новый акк
       code: null, // для хранения кода подтверждения при rebinding или смене номера
 
@@ -79,6 +82,7 @@ export default {
     'isChildren': {
       handler() {
         this.patient.phone = null;
+        this.resetHasPatient();
       },
     },
 
@@ -107,6 +111,22 @@ export default {
       this.loading.form = false;
     },
 
+    customValidate() {
+      const button = this.$refs.actions.querySelector("button[type='submit']");
+
+      if (this.hasPatient) {
+        this.$notify({ type: 'error', title: this.$t('Patients.PatientAlreadyExists') });
+        return false;
+      }
+      if (this.isChildren ? !this.patient?.parent_id : !this.patient.phone || !this.patient.name) {
+        button.click();
+        this.$notify({ type: 'error', title: this.$t('Notifications.FillRequiredFields') });
+        return false;
+      }
+
+      return true;
+    },
+
     async createPatient() {
       const { patient } = this.isRebinding
         ? await Patient.rebinding({ patient: this.patient, code: this.code })
@@ -127,16 +147,11 @@ export default {
     },
 
     // проверку телефона для создания нового пациента или смены текущего номера
-    async checkPhoneForRebinding() {
-      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
-        component: PhoneConfirmModal,
-        payload: {
-          phone: this.patient.phone,
-        },
-      });
+    async checkPhoneForRebinding(action) {
       if (action.name !== PHONE_CONFIRM_MODAL_CONFIRMED_ACTION) return;
 
       this.resetHasPatient();
+      this.isOpenPhoneConfirmModal = false;
       this.isRebinding = true;
       this.code = action.data.code;
       this.patient = new Patient({ ...(this.data || {}), phone: this.patient.phone });
@@ -144,7 +159,7 @@ export default {
 
     async editPatient() {
       if (this.data.phone !== this.patient.phone && !this.isRebinding)
-        return this.checkPhoneForRebinding();
+        return (this.isOpenPhoneConfirmModal = true);
 
       const { data } = await Patient.update({
         id: this.patient.id,
@@ -168,7 +183,8 @@ export default {
 
         this.$notify({ type: 'success', title: this.$t('Notifications.SuccessAttached') });
         this.$emit('action', new GlobalModalAction({ name: 'attached', data: { patient } }));
-        this.goToPatient({ patientId: patient.id });
+        if (!this.disableDefaultAction)
+          this.goToPatient({ patient: patient, patientId: patient.id });
       } catch (err) {
         console.log(err);
         this.$notify({
@@ -244,5 +260,6 @@ export default {
     FULL_DATE_FORMAT: FULL_DATE_FORMAT,
     Patient,
     icons,
+    onlyLatinFormatter,
   }),
 };

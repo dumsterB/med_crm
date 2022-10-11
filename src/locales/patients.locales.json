@@ -8,6 +8,7 @@
       "MyPatients": "Мои пациенты",
       "NamePatient": "Имя пациента",
       "NoPatient": "Пациен не найден",
+      "PatientAlreadyExists": "Пациент уже существует",
       "PrintBracelet": "Распечатать браслет"
     }
   },
@@ -20,6 +21,7 @@
       "MyPatients": "Mening bemorlarim",
       "NamePatient": "Bemorning Ismi",
       "NoPatient": "Bemor topilmadi",
+      "PatientAlreadyExists": "Bemor mavjud",
       "PrintBracelet": "Braslet chiqarish"
     }
   }

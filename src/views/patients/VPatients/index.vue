@@ -112,7 +112,7 @@ export default {
       const payload = {
         per_page: this.perPage.value,
         page: this.page.value,
-        search: this.search.value,
+        search: this.search.value?.trim(),
         query_type: 'ILIKE',
         query_operator: 'OR',
         query_field: ['name', 'phone'],

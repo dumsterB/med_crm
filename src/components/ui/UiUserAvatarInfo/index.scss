@@ -3,6 +3,12 @@
   align-items: center;
   gap: 15px;
 
+  &_link {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
   &__avatar {
   }
   &-content {
