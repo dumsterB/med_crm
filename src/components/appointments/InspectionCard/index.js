@@ -16,7 +16,7 @@ import CreateTreatmentModal from '@/components/treatments/CreateTreatmentModal/i
 import CreateOrEditAppointmentModal from '@/components/appointments/CreateOrEditAppointmentModal/index.vue';
 
 export default {
-  name: 'DefaultInspectionCard',
+  name: 'InspectionCard',
   components: { TemplateResultBlock, DiseaseCodeSelect, PatientCardRow, TemplateResult },
   emits: ['update:appointment', 'appointment:provide'],
   props: {
