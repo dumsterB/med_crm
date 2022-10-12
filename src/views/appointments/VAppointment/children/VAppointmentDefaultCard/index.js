@@ -52,6 +52,10 @@ export default {
           value: Appointment.getStartTime(this.appointment.start_at || ''),
         },
         {
+          label: this.$t('Base.Payment'),
+          value: this.appointment.invoice?.status || '',
+        },
+        {
           label: this.$t('Base.Doctor'),
           value: this.appointment.doctor?.name,
         },

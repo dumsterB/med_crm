@@ -32,11 +32,13 @@
 
         <ElTableColumn prop="patient.name" :label="$t('Base.Patient')" />
         <ElTableColumn prop="patient.phone" :label="$t('Appointments.PhonePatient')" />
-        <ElTableColumn :label="$t('Base.Payment')">
+
+        <ElTableColumn :label="$t('Base.Payment')" >
           <template #default="{ row }">
-            <InvoiceStatusTag :status="row.status"></InvoiceStatusTag>
+            <InvoiceStatusTag v-if="row.invoice" :status="row.invoice.status"></InvoiceStatusTag>
           </template>
         </ElTableColumn>
+
         <ElTableColumn prop="status" :label="$t('Appointments.Statuses.Status')">
           <template #default="{ row }">
             <AppointmentStatusTag :status="row.status" />
