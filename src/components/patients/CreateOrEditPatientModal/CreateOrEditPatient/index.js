@@ -124,7 +124,13 @@ export default {
         this.$notify({ type: 'error', title: this.$t('Patients.PatientAlreadyExists') });
         return false;
       }
-      if (this.isChildren ? !this.patient?.parent_id : !this.patient.phone || !this.patient.name) {
+
+      const isPatientErrors = !this.patient.name || (!this.isChildren && !this.patient.phone);
+      const isChildrenErrors =
+        this.isChildren &&
+        (this.patient.parent_id ? false : !this.patient.parent.phone || !this.patient.parent.name);
+
+      if (isPatientErrors || isChildrenErrors) {
         button.click();
         this.$notify({ type: 'error', title: this.$t('Notifications.FillRequiredFields') });
         return false;

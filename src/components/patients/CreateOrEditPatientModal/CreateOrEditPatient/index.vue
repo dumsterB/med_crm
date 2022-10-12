@@ -12,12 +12,12 @@
       </ElFormItem>
 
       <!--  Phone  -->
-      <ElFormItem :label="$t('User.Phone')">
+      <ElFormItem :label="$t(isChildren ? 'ParentPhone' : 'User.Phone')">
         <UiPhoneInput class="create-or-edit-patient__field" v-model="phone" required />
       </ElFormItem>
 
       <!--  Parent  -->
-      <ElFormItem v-if="isChildren" v-show="hasPhoneNumber" :label="$t('User.Parent')">
+      <ElFormItem v-if="isChildren" v-show="hasPhoneNumber" :label="$t('ParentFullName')">
         <ElInput
           :model-value="patient.parent.name"
           required
