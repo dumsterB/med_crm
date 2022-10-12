@@ -149,19 +149,15 @@ export default {
       return [
         {
           label: this.$t('User.Phone'),
-          value: this.patient.phone || '',
+          value: this.patient.phone,
         },
         {
           label: this.$t('User.Birthdate'),
-          value: this.patient.birthdate || '',
+          value: this.patient.birthdate,
         },
         {
           label: this.$t('User.Gender'),
-          value: this.$t('User.Genders.' + this.patient.gender) || '',
-        },
-        {
-          text: this.$t('Base.AmbulatoryCard'),
-          action: true,
+          value: this.patient.gender ? this.$t('User.Genders.' + this.patient.gender) : null,
         },
       ];
     },
