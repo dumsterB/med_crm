@@ -108,7 +108,12 @@ export default {
     'user.doctor_id': {
       handler(value) {
         if (this.setDefaultMyDoctor) {
-          this.subject = new AppointmentSubject({ ...this.subject, doctor_id: value });
+          this.subject = new AppointmentSubject({
+            ...this.subject,
+
+            doctor_id: value,
+            doctor: this.user.doctor,
+          });
         }
       },
       immediate: true,
@@ -129,6 +134,7 @@ export default {
     reset() {
       this.subject = new AppointmentSubject({
         doctor_id: this.setDefaultMyDoctor ? this.user.doctor_id : null,
+        doctor: this.setDefaultMyDoctor ? this.user.doctor : null,
       });
       this.isLiveQueue = true;
     },
