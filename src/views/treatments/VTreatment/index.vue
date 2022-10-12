@@ -18,14 +18,7 @@
       @treatment:update="treatment = $event" />
     <div class="v-patient-default__title">{{ $t('Base.TableReception') }}</div>
 
-    <ElEmpty
-      class="v-patient-treatment-item-empty"
-      v-show="!receptions?.length && !loading.reception"
-      :description="$t('Base.NoData')" />
-    <AppointmentsByTreatmentTable
-      v-if="receptions?.length"
-      :data="receptions"
-      :loading="loading.reception" />
+    <AppointmentsByTreatmentTable :data="receptions" :loading="loading.reception" />
   </LayoutDoctor>
 </template>
 
