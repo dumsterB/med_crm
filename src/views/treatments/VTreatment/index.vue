@@ -16,7 +16,7 @@
       :data="treatment"
       :loading="loading.treatment"
       @treatment:update="treatment = $event" />
-    <div class="v-patient-default__title">{{ $t('Base.TableReception') }}</div>
+    <div class="v-patient-default__title">{{ $t('Base.TreatmentJournal') }}</div>
 
     <AppointmentsByTreatmentTable :data="receptions" :loading="loading.reception" />
   </LayoutDoctor>
