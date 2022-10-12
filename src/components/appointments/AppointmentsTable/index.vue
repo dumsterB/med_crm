@@ -18,7 +18,7 @@
         </template>
 
         <!--        <ElTableColumn class-name="appointments-table__id" width="60" prop="id" label="ID" />-->
-        <ElTableColumn prop="doctor.name" :label="$t('Appointments.Types.doctor')" width="300px">
+        <ElTableColumn prop="doctor.name" :label="$t('Appointments.Types.doctor')" width="250px">
           <template #default="{ row }">
             <UiUserAvatarInfo
               class="appointments-table__doctor"
@@ -32,7 +32,11 @@
 
         <ElTableColumn prop="patient.name" :label="$t('Base.Patient')" />
         <ElTableColumn prop="patient.phone" :label="$t('Appointments.PhonePatient')" />
-
+        <ElTableColumn :label="$t('Base.Payment')">
+          <template #default="{ row }">
+            <InvoiceStatusTag :status="row.status"></InvoiceStatusTag>
+          </template>
+        </ElTableColumn>
         <ElTableColumn prop="status" :label="$t('Appointments.Statuses.Status')">
           <template #default="{ row }">
             <AppointmentStatusTag :status="row.status" />
@@ -98,12 +102,13 @@ import { PAGE_SIZES } from '@/config/ui.config';
 import { Appointment } from '@/models/Appointment.model';
 import { User } from '@/models/User.model';
 
+import InvoiceStatusTag from '@/components/invoices/InvoiceStatusTag/index.vue';
 import CreateOrEditAppointmentModal from '@/components/appointments/CreateOrEditAppointmentModal/index.vue';
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 
 export default {
   name: 'AppointmentsTable',
-  components: { AppointmentStatusTag },
+  components: { AppointmentStatusTag, InvoiceStatusTag },
   emits: ['update:perPage', 'update:page', 'item:edit'],
   props: {
     /** @type { Array<Appointment|object> } items */
