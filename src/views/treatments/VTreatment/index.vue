@@ -53,7 +53,7 @@ export default {
       /** @type {Treatment} */
       treatment: null,
       /** @type {Array<Appointment>} */
-      receptions: null,
+      receptions: [],
     };
   },
   computed: {
