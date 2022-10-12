@@ -1,7 +1,6 @@
 <template>
   <ElForm class="create-appointment-subject" @submit.prevent="createSubject">
     <div class="create-appointment-subject__part create-appointment-subject-part">
-      <!--  GroupService  -->
       <!--  Doctor  -->
       <UiModelsAutocompleteSearch
         class="create-appointment-subject__doctor"
@@ -9,8 +8,10 @@
         :modelForUse="Doctor"
         :defaultItem="user?.doctor"
         :placeholder="$t('Appointments.SelectDoctor')"
+        clearable
         @select="subject.doctor = $event" />
 
+      <!--  GroupService  -->
       <UiModelsAutocompleteSearch
         class="create-appointment-subject__services"
         v-model="subject.group_service_ids"
