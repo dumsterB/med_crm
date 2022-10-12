@@ -12,6 +12,7 @@
       "Authorization": "Авторизация",
       "Back": "Назад",
       "BloodTransfusion": "Переливание крови",
+      "CalendarAppointments": "Календарь приемов",
       "Call": "Позвонить",
       "CallToReception": "Вызвать на прием",
       "Cancel": "Отменить",
@@ -65,6 +66,7 @@
       "Print": "Распечатать",
       "QuantityDays": "Количество дней",
       "Queue": "Очередь",
+      "QueueForToday": "Очередь на сегодня",
       "Reaction": "Реакция",
       "ReasonService": "Случай обслуживания",
       "Refund": "Возврат",
@@ -84,17 +86,15 @@
       "Sum": "сум",
       "SumCost": "Сумма",
       "SurgicalIntervention": "Хирургические вмешательста",
-      "TableReception": "Таблица приемов",
       "TableTreatment": "Дневники лечений",
       "Template": "Шаблон",
       "Templates": "Шаблоны",
       "Time": "Время",
       "Total": "Итого",
+      "TreatmentJournal": "Дневние лечения",
       "Type": "Тип",
       "View": "Посмотреть",
-      "WriteText": "Напишите текст...",
-      "QueueForToday": "Очередь на сегодня",
-      "CalendarAppointments": "Календарь приемов"
+      "WriteText": "Напишите текст..."
     }
   },
   "uz": {
@@ -110,6 +110,7 @@
       "Authorization": "Kirish",
       "Back": "Orqaga",
       "BloodTransfusion": "Qon quyish",
+      "CalendarAppointments": "Qabullar taqvimi",
       "Call": "Qongiroq qilish",
       "CallToReception": "Qabul qilish",
       "Cancel": "Qaytish",
@@ -163,6 +164,7 @@
       "Print": "Chop etish",
       "QuantityDays": "Kunlar miqdori",
       "Queue": "Navbat",
+      "QueueForToday": "Bugunga navbat",
       "Reaction": "Reaktsiya",
       "ReasonService": "Xizmat ishi",
       "Refund": "Qaytarish",
@@ -182,17 +184,15 @@
       "Sum": "som",
       "SumCost": "??Сумма??",
       "SurgicalIntervention": "Jarrohlik aralashuvlar",
-      "TableReception": "Fokuslar jadvali",
       "TableTreatment": "Davolash jurnali",
       "Template": "Namuna",
       "Templates": "Namunalar",
       "Time": "Vaqt",
       "Total": "Jami",
+      "TreatmentJournal": "Davolash jurnali",
       "Type": "Turi",
       "View": "Korish",
-      "WriteText": "Matn yozing...",
-      "QueueForToday": "Bugunga navbat",
-      "CalendarAppointments": "Qabullar taqvimi"
+      "WriteText": "Matn yozing..."
     }
   }
 }
