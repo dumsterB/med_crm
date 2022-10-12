@@ -3,7 +3,7 @@
     <ElScrollbar class="reception-table-wrapper__scrollbar">
       <ElTable
         class="reception-table"
-        :data="data"
+        :data="dataWithPayload"
         v-loading="loading"
         ref="elTable"
         @row-click="goToReception">
@@ -12,6 +12,14 @@
         </template>
 
         <ElTableColumn prop="start_at" :label="$t('Appointments.StartDate')"></ElTableColumn>
+
+        <ElTableColumn
+          v-for="label in inspectionCardAnswerColumnsLabel"
+          :key="label"
+          :label="label">
+          <template #default="{ row }"> {{ row[label] }} </template>
+        </ElTableColumn>
+
         <ElTableColumn :label="$t('Base.Status')">
           <template #default="{ row }">
             <AppointmentStatusTag :status="row.status" />
@@ -37,18 +45,40 @@
 import * as icons from '@/enums/icons.enum.js';
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
+import { flattenDeep } from 'lodash';
 
 export default {
   name: 'AppointmentsByTreatmentTable',
-  components: {
-    AppointmentStatusTag,
-  },
+  components: { AppointmentStatusTag },
   props: {
-    data: {
-      type: Array,
-    },
+    /** @type {Array<Appointment|object>} data */
+    data: Array,
     loading: Boolean,
   },
+  computed: {
+    // TODO: вынести в отдельную утилиту
+    dataWithPayload() {
+      return this.data.map((elem) => {
+        const returnElem = { ...elem };
+
+        this.inspectionCardAnswerColumnsLabel.forEach((label) => {
+          const block = elem.inspection_card.basic_data.find((elem) => elem.label === label);
+          returnElem[label] = block?.answer?.value;
+        });
+
+        return returnElem;
+      });
+    },
+
+    inspectionCardAnswerColumnsLabel() {
+      const allAnswers = this.data.map((elem) => elem.inspection_card.basic_data);
+      const columns = flattenDeep(allAnswers);
+      const labels = columns.map((elem) => elem.label);
+
+      return Array.from(new Set(labels));
+    },
+  },
+
   methods: {
     goToReception(row) {
       this.$router.push({
