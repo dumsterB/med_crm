@@ -8,9 +8,7 @@
         ref="elTable"
         @row-click="goToReception">
         <template #empty>
-          <div class="reception-table__empty reception-table-empty">
-            <span>{{ $t('Base.NoData') }}</span>
-          </div>
+          <ElEmpty :description="$t('Base.NoData')" />
         </template>
 
         <ElTableColumn prop="start_at" :label="$t('Appointments.StartDate')"></ElTableColumn>
