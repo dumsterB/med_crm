@@ -16,6 +16,7 @@ import CreateTreatmentModal from '@/components/treatments/CreateTreatmentModal/i
 import CreateOrEditAppointmentModal from '@/components/appointments/CreateOrEditAppointmentModal/index.vue';
 import { InspectionCard } from '@/models/InspectionCard.model';
 import { TreatmentInspectionCard } from '@/models/TreatmentInspectionCard.model';
+import { Treatment } from '@/models/Treatment.model';
 
 export default {
   name: 'InspectionCard',
@@ -32,6 +33,7 @@ export default {
       inspectionCard: null,
       loading: {
         provide: false,
+        closeTreatment: false,
       },
     };
   },
@@ -69,6 +71,20 @@ export default {
           value: this.appointment.start_at,
         },
       ];
+    },
+
+    actionsOptions() {
+      return {
+        setTreatment: {
+          isShow: !this.readonly && !this.isTreatment,
+        },
+        closeTreatment: {
+          isShow:
+            !this.readonly &&
+            this.appointment.treatment_id &&
+            this.appointment.treatment.status === Treatment.enum.statuses.Created,
+        },
+      };
     },
   },
   watch: {
@@ -154,6 +170,26 @@ export default {
         },
       });
     },
+    async closeTreatment() {
+      if (this.loading.closeTreatment) return;
+      this.loading.closeTreatment = true;
+
+      try {
+        const { data } = await Treatment.close(this.appointment.treatment_id);
+        this.$emit('update:appointment', {
+          ...this.appointment,
+          treatment: data.data,
+        });
+      } catch (err) {
+        console.log(err);
+        this.$notify({
+          type: 'error',
+          title: err?.response?.data?.message || this.$t('Notifications.Error'),
+        });
+      }
+
+      this.loading.closeTreatment = false;
+    },
 
     async setControlAppointment() {
       this.$store.dispatch('modalAndDrawer/openModal', {
@@ -164,8 +200,7 @@ export default {
         },
       });
     },
-
-    setExamination() {
+    async setExamination() {
       this.$store.dispatch('modalAndDrawer/openModal', {
         component: CreateOrEditAppointmentModal,
         payload: {

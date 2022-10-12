@@ -68,8 +68,19 @@
             {{ $t('Appointments.EndReception') }}
           </ElButton>
 
-          <ElButton v-show="!readonly && !isTreatment" type="warning" plain @click="setTreatment">
+          <ElButton
+            v-show="actionsOptions.setTreatment.isShow"
+            type="warning"
+            plain
+            @click="setTreatment">
             {{ $t('Base.SetTreatment') }}
+          </ElButton>
+          <ElButton
+            v-show="actionsOptions.closeTreatment.isShow"
+            type="warning"
+            plain
+            @click="closeTreatment">
+            {{ $t('Treatments.CloseTreatment') }}
           </ElButton>
 
           <ElDivider direction="vertical" class="default-inspection-card-form-actions__divider" />
@@ -100,4 +111,5 @@
 <i18n src="@/locales/appointments.locales.json" />
 <i18n src="@/locales/notifications.locales.json" />
 <i18n src="@/locales/templates.locales.json" />
+<i18n src="@/locales/treatments.locales.json" />
 <i18n src="./index.locales.json" />
