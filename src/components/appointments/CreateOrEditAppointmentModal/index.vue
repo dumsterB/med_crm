@@ -35,7 +35,9 @@
 
       <ElCard class="create-or-edit-appointment-modal-form__add-part" shadow="never">
         <!--        <template #header> {{ $t('Appointments.Appointments') }} </template>-->
-        <CreateAppointmentSubject @subject:create="addSubject" />
+        <CreateAppointmentSubject
+          :set-default-my-doctor="setDefaultMyDoctor"
+          @subject:create="addSubject" />
       </ElCard>
 
       <AppointmentSubjectsTable
