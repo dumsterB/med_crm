@@ -47,7 +47,6 @@
               :block="{ label: $t('Appointments.SelectDiagnosis') }">
               <DiseaseCodeSelect
                 v-model="inspectionCard.disease_code_codes"
-                required
                 multiple
                 collapse-tags
                 collapse-tags-tooltip

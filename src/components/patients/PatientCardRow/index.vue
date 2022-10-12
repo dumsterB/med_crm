@@ -7,7 +7,7 @@
         <slot name="label" :item="item">{{ item.label }}</slot>
       </div>
       <div class="patient-card-info__value">
-        <slot name="value" :item="item">{{ item.value }}</slot>
+        <slot name="value" :item="item">{{ item.value ?? '...' }}</slot>
       </div>
     </div>
 

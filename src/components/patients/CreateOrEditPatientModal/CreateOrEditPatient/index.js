@@ -1,5 +1,5 @@
-import * as icons from '@/enums/icons.enum.js';
 import { throttle } from 'lodash';
+import * as icons from '@/enums/icons.enum.js';
 import { insertRouteParams } from '@/utils/router.utils';
 import { onlyLatinFormatter } from '@/utils/formatters.util';
 import { Patient } from '@/models/Patient.model';
@@ -39,19 +39,21 @@ export default {
       isRebinding: false, // если пользователь был найден и мы успешно подтвердили код - можем создать новый акк
       code: null, // для хранения кода подтверждения при rebinding или смене номера
 
-      // если не найшли такого родителя - создайм сначала его
-      parent: null,
-      isSwitchTypeOnChildren: false,
-
       throttleCheckHasPatient: null,
     };
   },
   computed: {
-    hasPhoneNumber() {
-      return !!this.patient.phone;
+    phone: {
+      get() {
+        return this.isChildren ? this.patient.parent?.phone : this.patient.phone;
+      },
+      set(value) {
+        if (this.isChildren) this.patient.parent.phone = value;
+        else this.patient.phone = value;
+      },
     },
-    isDisabledSecondaryInputs() {
-      return this.isChildren ? !this.patient.parent_id : !this.hasPhoneNumber;
+    hasPhoneNumber() {
+      return !!this.phone;
     },
 
     oldPatientPageUrl() {
@@ -66,29 +68,33 @@ export default {
   },
 
   watch: {
-    'modelValue': {
+    modelValue: {
       handler() {
         this.patient = new Patient(this.data || {});
         if (this.data?.parent_id) this.isChildren = true;
       },
       immediate: true,
     },
-    'nameOrPhone': {
+    nameOrPhone: {
       handler() {
         this.nameOrPhoneWatcherHandler();
       },
       immediate: true,
     },
-    'isChildren': {
-      handler() {
+    isChildren: {
+      handler(value) {
         this.patient.phone = null;
         this.resetHasPatient();
+
+        if (value) {
+          this.patient = new Patient({ ...this.patient, parent: new Patient() });
+        }
       },
     },
 
-    'patient.phone': {
+    phone: {
       handler() {
-        this.patientPhoneWatcherHandler();
+        this.phoneWatcherHandler();
       },
     },
   },
@@ -130,17 +136,9 @@ export default {
     async createPatient() {
       const { patient } = this.isRebinding
         ? await Patient.rebinding({ patient: this.patient, code: this.code })
-        : await Patient.create(this.patient);
+        : await Patient.create(this.patient, this.isChildren);
 
       this.$notify({ type: 'success', title: this.$t('Notifications.SuccessCreated') });
-      if (this.isSwitchTypeOnChildren) {
-        this.parent = patient;
-        this.isChildren = true;
-        this.isSwitchTypeOnChildren = false;
-        this.patient = new Patient({ parent_id: patient.id });
-
-        return;
-      }
 
       this.$emit('action', new GlobalModalAction({ name: 'created', data: { patient } }));
       if (!this.disableDefaultAction) this.goToPatient({ patientId: patient.id });
@@ -197,19 +195,31 @@ export default {
     },
 
     async checkHasPatient() {
-      this.resetHasPatient();
-      const { patient, attach_clinic } = await Patient.checkPatient({ phone: this.patient.phone });
+      if (this.isChildren) this.resetPatientParent();
+      else this.resetHasPatient();
+
+      const { patient, attach_clinic } = await Patient.checkPatient({ phone: this.phone });
       if (!patient) return;
 
-      this.oldPatient = patient;
-      this.hasPatient = true;
-      this.hasPatientFromOtherClinic = !attach_clinic;
+      if (this.isChildren && patient) {
+        this.patient.parent_id = patient.id;
+        this.patient.parent = patient;
+      }
+      if (!this.isChildren) {
+        this.oldPatient = patient;
+        this.hasPatient = true;
+        this.hasPatientFromOtherClinic = !attach_clinic;
+      }
     },
     resetHasPatient() {
       this.isRebinding = false;
       this.oldPatient = null;
       this.hasPatient = false;
       this.hasPatientFromOtherClinic = false;
+    },
+    resetPatientParent() {
+      this.patient.parent_id = null;
+      this.patient.parent.name = null;
     },
 
     goToPatient({ patientId }) {
@@ -221,27 +231,13 @@ export default {
       });
     },
 
-    createParentFlow(query) {
-      this.isSwitchTypeOnChildren = true;
-      this.isChildren = false;
-
-      const isName = this.queryIsName(query);
-      // после смены isChildren сбрасывается patient.phone
-      this.$nextTick(() => {
-        this.patient = new Patient({
-          name: isName ? query : '',
-          phone: !isName ? query : null,
-        });
-      });
-    },
-
     nameOrPhoneWatcherHandler() {
       if (!this.nameOrPhone) return;
 
       const isName = this.queryIsName(this.nameOrPhone);
       isName ? (this.patient.name = this.nameOrPhone) : (this.patient.phone = this.nameOrPhone);
     },
-    patientPhoneWatcherHandler() {
+    phoneWatcherHandler() {
       if (!this.hasPhoneNumber) return;
       this.throttleCheckHasPatient();
     },
@@ -253,7 +249,7 @@ export default {
   mounted() {
     this.throttleCheckHasPatient = throttle(this.checkHasPatient, 300);
     // Не запускаем при редактировании
-    if (!this.data) this.patientPhoneWatcherHandler();
+    if (!this.data) this.phoneWatcherHandler();
   },
 
   setup: () => ({
