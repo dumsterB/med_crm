@@ -68,6 +68,7 @@ export default {
   components: { ScheduleSlotsSelect },
   props: {
     appointment: [Appointment, Object],
+    setDefaultMyDoctor: Boolean,
   },
   data() {
     return {
@@ -106,7 +107,9 @@ export default {
   watch: {
     'user.doctor_id': {
       handler(value) {
-        this.subject = new AppointmentSubject({ ...this.subject, doctor_id: value });
+        if (this.setDefaultMyDoctor) {
+          this.subject = new AppointmentSubject({ ...this.subject, doctor_id: value });
+        }
       },
       immediate: true,
     },
@@ -124,7 +127,9 @@ export default {
     },
 
     reset() {
-      this.subject = new AppointmentSubject({ doctor_id: this.user.doctor_id });
+      this.subject = new AppointmentSubject({
+        doctor_id: this.setDefaultMyDoctor ? this.user.doctor_id : null,
+      });
       this.isLiveQueue = true;
     },
 
