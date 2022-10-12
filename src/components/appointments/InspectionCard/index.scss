@@ -12,7 +12,9 @@
     flex-direction: column;
     gap: 20px;
     padding-right: 6px;
-
+    &__template-result .template-result-block {
+      width: 50%;
+    }
     &__content {
       flex: 1;
     }
