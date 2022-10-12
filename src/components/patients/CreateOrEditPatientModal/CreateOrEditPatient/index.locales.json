@@ -2,12 +2,16 @@
   "ru": {
     "CreateNewPatient": "Создать нового пациента",
     "GoToPatient": "Перейти к карте пациента",
+    "ParentFullName": "ФИО родителя",
+    "ParentPhone": "Номер родителя",
     "PatientIsInSystem": "Пациент есть в системе",
     "RebindPhone": "Отвязать от этого аккаунта"
   },
   "uz": {
     "CreateNewPatient": "Yangi bemormi yaratish",
     "GoToPatient": "Bemor kartasiga utish",
+    "ParentFullName": "Ota-onasi-ni F.I.Sh",
+    "ParentPhone": "Ota-ona nomeri",
     "PatientIsInSystem": "Bemor tizimda bor",
     "RebindPhone": "Shu akkuntdan uzish"
   }
