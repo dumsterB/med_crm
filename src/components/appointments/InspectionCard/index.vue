@@ -72,8 +72,13 @@
             {{ $t('Base.SetTreatment') }}
           </ElButton>
 
+          <ElDivider direction="vertical" class="default-inspection-card-form-actions__divider" />
+
           <ElButton v-show="!readonly" type="primary" plain @click="setControlAppointment">
             {{ $t('Appointments.SetControlAppointment') }}
+          </ElButton>
+          <ElButton v-show="!readonly" type="primary" plain @click="setExamination">
+            {{ $t('Appointments.SetExamination') }}
           </ElButton>
 
           <ElButton v-show="readonly" text @click="print">

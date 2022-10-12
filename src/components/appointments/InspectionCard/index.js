@@ -146,27 +146,34 @@ export default {
     },
 
     async setTreatment() {
-      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
+      this.$store.dispatch('modalAndDrawer/openModal', {
         component: CreateTreatmentModal,
         payload: {
           userId: this.appointment.patient_id,
           appointment: this.appointment,
         },
       });
-
-      if (action instanceof GlobalModalCloseAction) return;
     },
 
     async setControlAppointment() {
-      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
+      this.$store.dispatch('modalAndDrawer/openModal', {
         component: CreateOrEditAppointmentModal,
         payload: {
           disableDefaultAction: true,
           patient: this.appointment.patient,
         },
       });
+    },
 
-      if (action instanceof GlobalModalCloseAction) return;
+    setExamination() {
+      this.$store.dispatch('modalAndDrawer/openModal', {
+        component: CreateOrEditAppointmentModal,
+        payload: {
+          disableDefaultAction: true,
+          patient: this.appointment.patient,
+          setDefaultMyDoctor: false,
+        },
+      });
     },
   },
 
