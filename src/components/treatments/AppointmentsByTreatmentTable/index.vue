@@ -23,7 +23,10 @@
         <ElTableColumn prop="actions" width="200" :label="$t('Base.Actions')">
           <template #default>
             <div class="reception-table-actions">
-              <ElButton type="primary"> {{ $t('Base.Open') }} </ElButton>
+              <ElButton type="primary" text>
+                <template #icon> <UiIcon :icon="icons.EYE" /> </template>
+                {{ $t('Base.Open') }}
+              </ElButton>
             </div>
           </template>
         </ElTableColumn>
@@ -33,8 +36,9 @@
 </template>
 
 <script>
-import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
+import * as icons from '@/enums/icons.enum.js';
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
+import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
 
 export default {
   name: 'AppointmentsByTreatmentTable',
@@ -57,6 +61,10 @@ export default {
       });
     },
   },
+
+  setup: () => ({
+    icons,
+  }),
 };
 </script>
 
