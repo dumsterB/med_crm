@@ -5,7 +5,6 @@ import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import { User } from '@/models/User.model';
 import { Appointment } from '@/models/Appointment.model';
-import { InspectionCard } from '@/models/InspectionCard.model';
 import { NOT_REDIRECT } from '@/enums/query.enum';
 
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
@@ -52,12 +51,12 @@ export default {
           value: Appointment.getStartTime(this.appointment.start_at || ''),
         },
         {
-          label: this.$t('Base.Payment'),
-          value: this.appointment.invoice?.status || '',
-        },
-        {
           label: this.$t('Base.Doctor'),
           value: this.appointment.doctor?.name,
+        },
+        {
+          label: this.$t('Base.Payment'),
+          value: this.$t(`Invoices.Statuses.${this.appointment.invoice?.status}`),
         },
         {
           label: this.$t('Base.StatePrice'),
