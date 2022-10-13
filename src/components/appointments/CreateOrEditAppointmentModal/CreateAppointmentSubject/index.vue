@@ -5,6 +5,7 @@
       <UiModelsAutocompleteSearch
         class="create-appointment-subject__doctor"
         v-model="subject.doctor_id"
+        clearable
         :modelForUse="Doctor"
         :defaultItem="user?.doctor"
         :placeholder="$t('Appointments.SelectDoctor')"

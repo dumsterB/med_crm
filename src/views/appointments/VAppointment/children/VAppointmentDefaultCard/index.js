@@ -55,6 +55,10 @@ export default {
           value: this.appointment.doctor?.name,
         },
         {
+          label: this.$t('Base.Payment'),
+          value: this.$t(`Invoices.Statuses.${this.appointment.invoice?.status}`),
+        },
+        {
           label: this.$t('Base.StatePrice'),
           value:
             formatPrice({
