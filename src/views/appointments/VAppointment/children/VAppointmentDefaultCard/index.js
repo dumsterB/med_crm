@@ -86,7 +86,7 @@ export default {
 
   methods: {
     goToInspectionCard() {
-      this.$router.push(
+      this.$router.replace(
         insertRouteParams({
           path: APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_INSPECTION_CARD._fullPath,
           params: { id: this.appointment.id },
