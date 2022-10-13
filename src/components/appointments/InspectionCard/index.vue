@@ -92,10 +92,8 @@
             {{ $t('Appointments.SetExamination') }}
           </ElButton>
 
-          <ElButton v-show="readonly" text @click="print">
-            <template #icon>
-              <UiIcon :icon="icons.PRINTER" />
-            </template>
+          <ElButton text @click="print">
+            <template #icon> <UiIcon :icon="icons.PRINTER" /> </template>
             {{ $t('Base.Print') }}
           </ElButton>
         </div>
