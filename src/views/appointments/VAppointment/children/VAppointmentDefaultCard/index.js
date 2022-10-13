@@ -86,7 +86,7 @@ export default {
 
   methods: {
     goToInspectionCard() {
-      this.$router.push(
+      this.$router.replace(
         insertRouteParams({
           path: APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_INSPECTION_CARD._fullPath,
           params: { id: this.appointment.id },
@@ -96,12 +96,13 @@ export default {
 
     redirectToInspectionCardIfNeeded() {
       if (
-        this.appointment.status === Appointment.enum.statuses.InProgress &&
         this.isDoctor &&
+        [Appointment.enum.statuses.InProgress, Appointment.enum.statuses.Provided].includes(
+          this.appointment.status
+        ) &&
         !this.$route.query[NOT_REDIRECT]
-      ) {
+      )
         this.goToInspectionCard();
-      }
     },
   },
 
