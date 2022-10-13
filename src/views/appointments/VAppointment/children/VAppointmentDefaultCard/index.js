@@ -5,7 +5,6 @@ import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { APPOINTMENT_ROUTE } from '@/router/appointments.routes';
 import { User } from '@/models/User.model';
 import { Appointment } from '@/models/Appointment.model';
-import { InspectionCard } from '@/models/InspectionCard.model';
 import { NOT_REDIRECT } from '@/enums/query.enum';
 
 import AppointmentStatusTag from '@/components/appointments/AppointmentStatusTag/index.vue';
@@ -87,12 +86,7 @@ export default {
 
   methods: {
     goToInspectionCard() {
-      // const path =
-      //   this.appointment.inspection_card?.type === InspectionCard.enum.types.Default
-      //     ? APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_INSPECTION_CARD._fullPath
-      //     : APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_TREATMENT_CARD._fullPath;
-
-      this.$router.push(
+      this.$router.replace(
         insertRouteParams({
           path: APPOINTMENT_ROUTE.childrenMap.APPOINTMENT_ROUTE_INSPECTION_CARD._fullPath,
           params: { id: this.appointment.id },
@@ -102,12 +96,13 @@ export default {
 
     redirectToInspectionCardIfNeeded() {
       if (
-        this.appointment.status === Appointment.enum.statuses.InProgress &&
         this.isDoctor &&
+        [Appointment.enum.statuses.InProgress, Appointment.enum.statuses.Provided].includes(
+          this.appointment.status
+        ) &&
         !this.$route.query[NOT_REDIRECT]
-      ) {
+      )
         this.goToInspectionCard();
-      }
     },
   },
 

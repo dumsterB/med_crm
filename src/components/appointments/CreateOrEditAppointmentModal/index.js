@@ -33,7 +33,12 @@ export default {
     patient: [Patient, User, Object],
     data: [Appointment, Object],
 
-    disableDefaultAction: Boolean, // отключаем дефолтное поведение после создания
+    disableDefaultAction: Boolean, // отключаем дефолтное поведение после создания//
+    setDefaultMyDoctor: {
+      // для автоматического выбора врача, если мы с аккаунта врача
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
