@@ -41,7 +41,7 @@
           v-model="inspectionCard.basic_data"
           :readonly="readonly"
           @change="updateInspectionCard">
-          <template #footer>
+          <!--          <template #footer>
             <TemplateResultBlock
               v-if="!isTreatment"
               :block="{ label: $t('Appointments.SelectDiagnosis') }">
@@ -53,7 +53,7 @@
                 :default-item="appointment.inspection_card?.disease_codes"
                 @select="updateInspectionCard" />
             </TemplateResultBlock>
-          </template>
+          </template>-->
         </TemplateResult>
       </div>
 
