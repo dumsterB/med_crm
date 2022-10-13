@@ -96,12 +96,13 @@ export default {
 
     redirectToInspectionCardIfNeeded() {
       if (
-        this.appointment.status === Appointment.enum.statuses.InProgress &&
         this.isDoctor &&
+        [Appointment.enum.statuses.InProgress, Appointment.enum.statuses.Provided].includes(
+          this.appointment.status
+        ) &&
         !this.$route.query[NOT_REDIRECT]
-      ) {
+      )
         this.goToInspectionCard();
-      }
     },
   },
 
