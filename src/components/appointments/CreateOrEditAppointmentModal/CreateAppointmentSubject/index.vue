@@ -9,7 +9,6 @@
         :modelForUse="Doctor"
         :defaultItem="user?.doctor"
         :placeholder="$t('Appointments.SelectDoctor')"
-        clearable
         @select="subject.doctor = $event" />
 
       <!--  GroupService  -->
