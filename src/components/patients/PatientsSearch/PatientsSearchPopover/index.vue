@@ -5,7 +5,9 @@
       class="patients-search-popover__no-data patients-search-popover-no-data">
       <div class="patients-search-popover-no-data__title">{{ $t('Patients.NoPatient') }}</div>
       <div class="patients-search-popover-no-data__actions">
-        <ElButton type="primary" @click="addPatient"> {{ $t('Patients.AddPatient') }} </ElButton>
+        <ElButton v-if="isManager" type="primary" @click="addPatient">
+          {{ $t('Patients.AddPatient') }}
+        </ElButton>
       </div>
     </div>
 
@@ -22,6 +24,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import { User } from '@/models/User.model';
 import PatientRow from '@/components/patients/PatientRow/index.vue';
 import CreateOrEditPatientModal from '@/components/patients/CreateOrEditPatientModal/index.vue';
 
@@ -37,8 +41,15 @@ export default {
     search: String,
   },
   computed: {
+    ...mapState({
+      user: (state) => state.auth.user,
+    }),
+
     hasPatients() {
       return !!this.patients.length;
+    },
+    isManager() {
+      return this.user.role === User.enum.roles.Manager;
     },
   },
 
