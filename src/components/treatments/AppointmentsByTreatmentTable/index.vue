@@ -5,7 +5,7 @@
         class="reception-table"
         :data="dataWithPayload"
         v-loading="loading"
-        :empty-text="t('Base.NoData')"
+        :empty-text="$t('Base.NoData')"
         ref="elTable"
         @row-click="goToReception">
         <!--        <template #empty>
