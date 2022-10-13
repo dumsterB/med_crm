@@ -5,11 +5,12 @@
         class="reception-table"
         :data="dataWithPayload"
         v-loading="loading"
+        :empty-text="t('Base.NoData')"
         ref="elTable"
         @row-click="goToReception">
-        <template #empty>
+        <!--        <template #empty>
           <ElEmpty :description="$t('Base.NoData')" />
-        </template>
+        </template>-->
 
         <ElTableColumn prop="start_at" :label="$t('Appointments.StartDate')"></ElTableColumn>
 
