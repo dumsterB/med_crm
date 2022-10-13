@@ -77,6 +77,9 @@ body {
       margin-right: 0;
       border-radius: 12px 12px 0px 0px;
     }
+    .el-dialog__footer{
+      border-radius: 12px;
+    }
     .el-form-item__content,
     .el-form-item__content > * {
       width: 100%;
