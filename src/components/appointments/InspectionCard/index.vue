@@ -41,7 +41,7 @@
           v-model="inspectionCard.basic_data"
           :readonly="readonly"
           @change="updateInspectionCard">
-          <template #footer>
+          <!--          <template #footer>
             <TemplateResultBlock
               v-if="!isTreatment"
               :block="{ label: $t('Appointments.SelectDiagnosis') }">
@@ -53,7 +53,7 @@
                 :default-item="appointment.inspection_card?.disease_codes"
                 @select="updateInspectionCard" />
             </TemplateResultBlock>
-          </template>
+          </template>-->
         </TemplateResult>
       </div>
 
@@ -92,10 +92,8 @@
             {{ $t('Appointments.SetExamination') }}
           </ElButton>
 
-          <ElButton v-show="readonly" text @click="print">
-            <template #icon>
-              <UiIcon :icon="icons.PRINTER" />
-            </template>
+          <ElButton text @click="print">
+            <template #icon> <UiIcon :icon="icons.PRINTER" /> </template>
             {{ $t('Base.Print') }}
           </ElButton>
         </div>

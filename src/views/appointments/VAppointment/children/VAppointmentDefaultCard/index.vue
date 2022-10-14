@@ -106,4 +106,5 @@
 <style lang="scss" src="./index.scss" />
 <i18n src="@/locales/base.locales.json" />
 <i18n src="@/locales/appointments.locales.json" />
+<i18n src="@/locales/invoices.locales.json" />
 <i18n src="./index.locales.json" />

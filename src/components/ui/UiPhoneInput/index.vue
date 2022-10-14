@@ -18,9 +18,6 @@ export default {
   props: {
     modelValue: String,
   },
-  data() {
-    return {};
-  },
   computed: {
     phone() {
       const phoneExcludePrefix = this.modelValue?.replace(this.prefix, '');
@@ -32,6 +29,16 @@ export default {
           }`;
         }
       );
+    },
+  },
+  watch: {
+    modelValue: {
+      handler(value) {
+        if (value && value.length && !value.match(/\+998/gi)) {
+          this.$emit('update:modelValue', this.prefix + value);
+        }
+      },
+      immediate: true,
     },
   },
 

@@ -252,7 +252,7 @@ export default {
     },
   },
 
-  mounted() {
+  created() {
     this.throttleCheckHasPatient = throttle(this.checkHasPatient, 300);
     // Не запускаем при редактировании
     if (!this.data) this.phoneWatcherHandler();
