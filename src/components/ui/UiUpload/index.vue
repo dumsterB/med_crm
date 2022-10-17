@@ -46,7 +46,7 @@ export default {
   methods: {
     async handleChange(file, files) {
       try {
-        const { data } = await FileModel.create(file, this.value, this.name);
+        const { data } = await FileModel.create(file);
         this.$emit('file:add', data.data[0]);
       } catch (err) {
         console.log(err);

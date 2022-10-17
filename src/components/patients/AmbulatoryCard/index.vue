@@ -66,7 +66,6 @@
           :files="files"
           name="patient_documents"
           :multiple="files"
-          :value="patient.id"
           @file:add="addFileHandler"
           @file:delete="deleteFileHandler" />
       </ElFormItem>
