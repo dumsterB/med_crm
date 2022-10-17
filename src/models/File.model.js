@@ -29,7 +29,7 @@ export class File extends CRUDModel {
    */
   static async create(file) {
     const formData = new FormData();
-    formData.append('files', file.raw);
+    formData.append('file', file.raw);
 
     const response = await ApiService.post(`${this.tableName}/create`, formData);
     return {

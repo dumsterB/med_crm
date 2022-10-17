@@ -25,7 +25,7 @@ export class Patient extends User {
     this.role = User.enum.roles.Patient;
     this.ambulatory_card = payload?.ambulatory_card || null;
     this.has_treatment = payload?.has_treatment ?? true;
-    this.patient_documents = payload?.patient_documents ?? null;
+    this.documents = payload?.documents ?? [];
   }
 
   static async create(payload) {
@@ -110,8 +110,9 @@ export class Patient extends User {
   }
 
   /**
-   * Загружает картинку который приходит в res
-   * @param {Object} payload
+   * Прикрепляем файл к пациенту
+   * @param {string} payload.patient_id
+   * @param {string} payload.file_id
    * @return {Promise<{data: any}>}
    */
   static async upload(payload) {

@@ -30,8 +30,6 @@ export default {
     multiple: Boolean,
     disabled: Boolean,
     drag: Boolean,
-    name: Boolean,
-    value: Boolean,
   },
   computed: {
     fileList() {
