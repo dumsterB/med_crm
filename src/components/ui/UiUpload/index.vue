@@ -30,6 +30,8 @@ export default {
     multiple: Boolean,
     disabled: Boolean,
     drag: Boolean,
+    name: Boolean,
+    value: Boolean,
   },
   computed: {
     fileList() {
@@ -44,7 +46,7 @@ export default {
   methods: {
     async handleChange(file, files) {
       try {
-        const { data } = await FileModel.create(file);
+        const { data } = await FileModel.create(file, this.value, this.name);
         this.$emit('file:add', data.data[0]);
       } catch (err) {
         console.log(err);

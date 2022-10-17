@@ -59,6 +59,17 @@
       <ElFormItem :label="$t('Base.Fluorography')">
         <ElInput v-model="localAmbulatoryCard.fluorography" />
       </ElFormItem>
+
+      <ElFormItem :label="$t('Base.PatientDocument')">
+        <UiUpload
+          class="template-result-block__file-upload"
+          :files="files"
+          name="patient_documents"
+          :multiple="files"
+          :value="patient.id"
+          @file:add="addFileHandler"
+          @file:delete="deleteFileHandler" />
+      </ElFormItem>
     </ElForm>
 
     <ElDivider />
@@ -97,6 +108,7 @@ export default {
       localAmbulatoryCard: null,
 
       loading: false,
+      files: [],
     };
   },
 
@@ -144,6 +156,9 @@ export default {
       }
 
       this.loading = false;
+    },
+    addFileHandler(file) {
+      console.log(file)
     },
 
     print() {

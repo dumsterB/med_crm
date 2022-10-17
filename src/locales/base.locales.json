@@ -94,7 +94,8 @@
       "View": "Посмотреть",
       "WriteText": "Напишите текст...",
       "QueueForToday": "Очередь на сегодня",
-      "CalendarAppointments": "Календарь приемов"
+      "CalendarAppointments": "Календарь приемов",
+      "PatientDocument": "Документы пациента",
     }
   },
   "uz": {
@@ -192,7 +193,8 @@
       "View": "Korish",
       "WriteText": "Matn yozing...",
       "QueueForToday": "Bugunga navbat",
-      "CalendarAppointments": "Qabullar taqvimi"
+      "CalendarAppointments": "Qabullar taqvimi",
+      "PatientDocument": "Bemor hujjatlari"
     }
   }
 }

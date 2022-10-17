@@ -27,9 +27,10 @@ export class File extends CRUDModel {
    * @param {UploadFile|object} file
    * @return {Promise<void>}
    */
-  static async create(file) {
+  static async create(file, value, name) {
     const formData = new FormData();
-    formData.append('files[]', file.raw);
+    formData.append(name, file.raw);
+    formData.append('patientId', value);
 
     const response = await ApiService.post(`${this.tableName}/create`, formData);
     return {
