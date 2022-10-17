@@ -5,7 +5,7 @@
       class="patients-search-select-data-block__search"
       :placeholder="$t('User.PleaseInputNameOrPhone')"
       :model-value="modelValue"
-      :search-query="searchQuery"
+      :search-query="query"
       :required="required"
       :disabled="disabled"
       :default-item="defaultItem"
@@ -55,6 +55,15 @@ export default {
       patient: null,
     };
   },
+  computed: {
+    query() {
+      return {
+        query_field: ['name', 'phone'],
+        ...(this.searchQuery ?? {}),
+      };
+    },
+  },
+
   watch: {
     defaultItem: {
       handler(value) {
