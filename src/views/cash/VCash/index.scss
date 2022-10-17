@@ -4,6 +4,10 @@
       .layout-content-header-main {
         display: flex;
         gap: 10px;
+
+        & > * {
+          flex: 1;
+        }
       }
     }
   }
