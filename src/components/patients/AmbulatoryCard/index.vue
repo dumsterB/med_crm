@@ -157,7 +157,7 @@ export default {
       this.loading = false;
     },
     addFileHandler(file) {
-      console.log(file)
+      Patient.upload({ patient_id: this.patient.id, file_id: file.id });
     },
 
     print() {

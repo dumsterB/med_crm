@@ -39,7 +39,6 @@ export class AmbulatoryCard {
     this.weight = payload?.weight ?? null;
     this.fluorography = payload?.fluorography ?? null;
     this.treatment_diary = payload?.treatment_diary ?? null;
-    this.patient_document = payload?.patient_document ?? null;
   }
 
   /**
@@ -49,14 +48,6 @@ export class AmbulatoryCard {
    */
   static async save(patientId, payload) {
     const response = await ApiService.put(`/patients/${patientId}/card`, payload);
-    return { response, data: response.data };
-  }
-
-  static async upload(patientId, payload) {
-    const response = await ApiService.post(`files/create`, {
-      patientId: patientId,
-      files: payload,
-    });
     return { response, data: response.data };
   }
 }

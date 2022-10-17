@@ -25,6 +25,7 @@ export class Patient extends User {
     this.role = User.enum.roles.Patient;
     this.ambulatory_card = payload?.ambulatory_card || null;
     this.has_treatment = payload?.has_treatment ?? true;
+    this.patient_documents = payload?.patient_documents ?? null;
   }
 
   static async create(payload) {
@@ -105,6 +106,22 @@ export class Patient extends User {
       response: response,
       data: response.data,
       patient: response.data.data,
+    };
+  }
+
+  /**
+   * Загружает картинку который приходит в res
+   * @param {Object} payload
+   * @return {Promise<{data: any}>}
+   */
+  static async upload(payload) {
+    const response = await ApiService.post(`patients/${payload.patient_id}/files/attach`, {
+      file_id: payload.file_id,
+    });
+    return {
+      response: response,
+      data: response.data,
+      patient_documents: response.data.data,
     };
   }
 
