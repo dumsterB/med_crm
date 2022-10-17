@@ -115,14 +115,14 @@ export class Patient extends User {
    * @param {string} payload.file_id
    * @return {Promise<{data: any}>}
    */
-  static async upload(payload) {
-    const response = await ApiService.post(`patients/${payload.patient_id}/files/attach`, {
+  static async attachFile(payload) {
+    const response = await ApiService.post(`${this.tableName}/${payload.patient_id}/files/attach`, {
       file_id: payload.file_id,
     });
     return {
       response: response,
       data: response.data,
-      patient_documents: response.data.data,
+      documents: response.data.data,
     };
   }
 

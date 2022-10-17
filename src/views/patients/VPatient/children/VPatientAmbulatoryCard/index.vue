@@ -19,7 +19,8 @@
       class="v-patient-ambulatory__card"
       :patient="patient"
       :treatments="treatments"
-      @update:patient="updatePatientFromAmbulatoryCard" />
+      @update:patient="$emit('update:patient', $event)"
+      @update:patient:redirect="updatePatientFromAmbulatoryCardAndRedirect" />
 
     <TreatmentsTable
       :items="treatments"
@@ -81,7 +82,7 @@ export default {
       });
     },
 
-    updatePatientFromAmbulatoryCard(patient) {
+    updatePatientFromAmbulatoryCardAndRedirect(patient) {
       this.$emit('update:patient', patient);
       this.goToPatient();
     },

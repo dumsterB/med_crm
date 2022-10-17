@@ -58,14 +58,13 @@
 
       <ElFormItem :label="$t('Base.Fluorography')">
         <ElInput v-model="localAmbulatoryCard.fluorography" />
+        {{ patient.documents }}
       </ElFormItem>
 
       <ElFormItem :label="$t('Base.PatientDocument')">
         <UiUpload
           class="template-result-block__file-upload"
-          :files="files"
-          name="patient_documents"
-          :multiple="files"
+          :files="patient.documents || []"
           @file:add="addFileHandler"
           @file:delete="deleteFileHandler" />
       </ElFormItem>
@@ -107,7 +106,6 @@ export default {
       localAmbulatoryCard: null,
 
       loading: false,
-      files: [],
     };
   },
 
@@ -138,6 +136,7 @@ export default {
           id: this.patient.id,
           payload: this.localPatient,
         });
+
         const payloadFromCard = await AmbulatoryCard.save(
           this.patient.id,
           this.localAmbulatoryCard
@@ -156,8 +155,9 @@ export default {
 
       this.loading = false;
     },
-    addFileHandler(file) {
-      Patient.upload({ patient_id: this.patient.id, file_id: file.id });
+    async addFileHandler(file) {
+      const { data } = await Patient.attachFile({ patient_id: this.patient.id, file_id: file.id });
+      this.$emit('update:patient', data.data);
     },
 
     print() {
