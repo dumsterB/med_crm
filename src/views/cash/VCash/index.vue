@@ -101,7 +101,7 @@ export default {
     },
 
     doctorFromRoute() {
-      return null;
+      return this.doctorId.value ? { id: this.doctorId.value, name: this.doctorName.value } : null;
     },
   },
 
