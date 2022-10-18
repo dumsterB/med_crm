@@ -36,6 +36,14 @@
       </template>
     </LayoutContentHeader>
 
+    <div class="v-cash-content__statistic">
+      <UiSimpleStatisticCard
+        v-for="item in statisticCards"
+        :key="item.key"
+        :label="item.label"
+        :value="item.value" />
+    </div>
+
     <InvoicesTable
       class="v-cash-content__table"
       :items="items"
@@ -53,6 +61,7 @@ import * as icons from '@/enums/icons.enum.js';
 import { compareQueriesThenLoadData } from '@/utils/router.utils';
 import { mergeOrCreateQuery } from '@/utils/http.util';
 import { deleteEmptyValueKeys } from '@/utils/object.util';
+import { formatPrice } from '@/utils/price.util';
 import { useQuery } from '@/hooks/useQuery.hook';
 import { usePage, usePerPage } from '@/hooks/query';
 import { Invoice } from '@/models/Invoice.model';
@@ -109,6 +118,16 @@ export default {
       };
     },
 
+    statisticCards() {
+      return Invoice.enum.StatisticKeys.map((key) => ({
+        key: key,
+        label: this.$t(`Invoices.Statistic.${key}`),
+        value: ['amount', 'refund_amount'].includes(key)
+          ? formatPrice({ price: this.statistic.data[key] })
+          : this.statistic.data[key],
+      }));
+    },
+
     date: {
       get() {
         return [this.startAt.value, this.endAt.value];
@@ -118,10 +137,10 @@ export default {
         setTimeout(() => (this.endAt.value = value ? value[1] : null));
       },
     },
-
     doctorFromRoute() {
       return this.doctorId.value ? { id: this.doctorId.value, name: this.doctorName.value } : null;
     },
+
     exportDataURL() {
       return mergeOrCreateQuery({
         url: Invoice.exportDataURL,
