@@ -56,11 +56,6 @@ export class Invoice extends CRUDModel {
     this.created_at = payload?.created_at ?? null;
   }
 
-  /** @typedef {object} InvoiceStatistic
-   *  @property {number} count
-   *  @property {number} amount
-   *  @property {number} refund_amount
-   */
   /**
    * @param {object} payload
    * @return {Promise<{statistic: InvoiceStatistic, data: response.data, response: AxiosResponse<any>}>}
@@ -88,5 +83,12 @@ export class Invoice extends CRUDModel {
       Refund: 'refund',
       Canceled: 'canceled',
     },
+
+    /** @typedef {object} InvoiceStatistic
+     *  @property {number} count
+     *  @property {number} amount
+     *  @property {number} refund_amount
+     */
+    StatisticKeys: ['count', 'amount', 'refund_amount'],
   };
 }
