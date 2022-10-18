@@ -63,7 +63,7 @@ export default {
     perPage: usePerPage(),
     page: usePage(),
     status: useQuery({ field: 'status' }),
-    doctorId: useQuery({ field: 'doctor_id' }),
+    doctorId: useQuery({ field: 'doctor_id', valueIsNumber: true }),
     doctorName: useQuery({ field: 'doctor_name' }),
     startAt: useQuery({ field: 'start_at' }),
     endAt: useQuery({ field: 'end_at' }),
@@ -101,7 +101,9 @@ export default {
     },
 
     doctorFromRoute() {
-      return this.doctorId.value ? { id: this.doctorId.value, name: this.doctorName.value } : null;
+      return this.doctorId.value && this.doctorName.value
+        ? { id: this.doctorId.value, name: this.doctorName.value }
+        : null;
     },
   },
 
