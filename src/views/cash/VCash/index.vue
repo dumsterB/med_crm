@@ -40,6 +40,7 @@
       <UiSimpleStatisticCard
         v-for="item in statisticCards"
         :key="item.key"
+        v-loading="statistic.loading"
         :label="item.label"
         :value="item.value"
         :icon="item.icon" />
@@ -227,7 +228,7 @@ export default {
       const { statistic } = await Invoice.getStatistic(this.queryWatchers);
       this.statistic.data = statistic;
 
-      this.statistic.loading = true;
+      this.statistic.loading = false;
     },
 
     async createInvoice() {
