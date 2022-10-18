@@ -10,7 +10,7 @@ const instance = axios.create({
   },
 });
 
-instance.getToken = () => instance.defaults.headers.common.Authorization;
+instance.getToken = () => instance.defaults.headers.common.Authorization?.split(' ')[1];
 instance.setToken = (token) => {
   instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
