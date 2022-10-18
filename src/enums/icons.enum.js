@@ -34,3 +34,5 @@ export const CANCEL = 'CANCEL';
 export const MALE = 'MALE';
 export const FEMALE = 'FEMALE';
 export const DOWNLOAD = 'DOWNLOAD';
+export const CASH_CHECK = 'CASH_CHECK';
+export const CASH_REFUND = 'CASH_REFUND';
