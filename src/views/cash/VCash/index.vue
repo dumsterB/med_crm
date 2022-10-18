@@ -41,7 +41,8 @@
         v-for="item in statisticCards"
         :key="item.key"
         :label="item.label"
-        :value="item.value" />
+        :value="item.value"
+        :icon="item.icon" />
     </div>
 
     <InvoicesTable
@@ -119,13 +120,30 @@ export default {
     },
 
     statisticCards() {
-      return Invoice.enum.StatisticKeys.map((key) => ({
-        key: key,
-        label: this.$t(`Invoices.Statistic.${key}`),
-        value: ['amount', 'refund_amount'].includes(key)
+      const iconsByKey = {
+        [Invoice.enum.StatisticKeys.Count]: icons.BOARD,
+        [Invoice.enum.StatisticKeys.Amount]: icons.CASH_CHECK,
+        [Invoice.enum.StatisticKeys.RefundAmount]: icons.CASH_REFUND,
+      };
+
+      return Object.keys(Invoice.enum.StatisticKeys).map((enumKey) => {
+        const key = Invoice.enum.StatisticKeys[enumKey];
+        const label = this.$t(`Invoices.Statistic.${key}`);
+        const value = [
+          Invoice.enum.StatisticKeys.Amount,
+          Invoice.enum.StatisticKeys.RefundAmount,
+        ].includes(key)
           ? formatPrice({ price: this.statistic.data[key] })
-          : this.statistic.data[key],
-      }));
+          : this.statistic.data[key];
+        const icon = iconsByKey[key];
+
+        return {
+          key: key,
+          label: label,
+          value: value,
+          icon: icon,
+        };
+      });
     },
 
     date: {
