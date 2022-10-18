@@ -156,11 +156,11 @@ export default {
       const { data } = await Patient.attachFile({ patient_id: this.patient.id, file_id: file.id });
       this.$emit('update:patient', data.data);
     },
-    async deleteFileHandler(file) {
+    async deleteFileHandler(fileId) {
       this.$emit('update:patient', {
         ...this.patient,
-        files_ids: this.patient.files_ids?.filter((id) => id !== file.id),
-        files: this.patient.files?.filter((elem) => elem.id !== file.id),
+        files_ids: this.patient.files_ids?.filter((id) => id !== fileId),
+        files: this.patient.files?.filter((elem) => elem.id !== fileId),
       });
     },
 
