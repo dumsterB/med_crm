@@ -15,17 +15,19 @@ export class Patient extends User {
    * @typedef {UserConstructorPayload|object} PatientConstructorPayload
    * @property {AmbulatoryCard} ambulatory_card
    * @property {boolean} has_treatment
+   * @property {Array<number>} files_ids
+   * @property {Array<File>} files
    */
-  /**
-   * @param {PatientConstructorPayload} [payload]
-   */
+  /** @param {PatientConstructorPayload} [payload] */
   constructor(payload) {
     super(payload);
 
     this.role = User.enum.roles.Patient;
     this.ambulatory_card = payload?.ambulatory_card || null;
     this.has_treatment = payload?.has_treatment ?? true;
-    this.documents = payload?.documents ?? [];
+
+    this.files_ids = payload?.files_ids ?? [];
+    this.files = payload?.files ?? [];
   }
 
   static async create(payload) {
@@ -36,7 +38,7 @@ export class Patient extends User {
   /**
    * Проверяет существование пациента
    * @param {string} phone
-   * @return {Promise<|{data: any, response: AxiosResponse<any>, patient: Patient, attach_clinic: boolean}>}
+   * @return {Promise<{data: any, response: AxiosResponse<any>, patient: Patient, attach_clinic: boolean}>}
    */
   static async checkPatient({ phone }) {
     try {
@@ -61,7 +63,7 @@ export class Patient extends User {
 
   /**
    * Привязка пациента к нашей клинике
-   * @param {string} patient_id
+   * @param {number|string} patient_id
    * @return {Promise<{data: any, response: AxiosResponse<any>, patient: Patient}>}
    */
   static async attachPatient({ patient_id }) {
