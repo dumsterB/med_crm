@@ -59,6 +59,14 @@
       <ElFormItem :label="$t('Base.Fluorography')">
         <ElInput v-model="localAmbulatoryCard.fluorography" />
       </ElFormItem>
+
+      <ElFormItem :label="$t('Base.PatientDocument')">
+        <UiUpload
+          class="template-result-block__file-upload"
+          :files="patient.files || []"
+          @file:add="addFileHandler"
+          @file:delete="deleteFileHandler" />
+      </ElFormItem>
     </ElForm>
 
     <ElDivider />
@@ -127,14 +135,12 @@ export default {
           id: this.patient.id,
           payload: this.localPatient,
         });
+
         const payloadFromCard = await AmbulatoryCard.save(
           this.patient.id,
           this.localAmbulatoryCard
         );
-
-        this.$emit('update:patient', {
-          ...payloadFromCard.data.data,
-        });
+        this.$emit('update:patient:redirect', payloadFromCard.data.data);
       } catch (err) {
         console.log(err);
         this.$notify({
@@ -144,6 +150,18 @@ export default {
       }
 
       this.loading = false;
+    },
+
+    async addFileHandler(file) {
+      const { data } = await Patient.attachFile({ patient_id: this.patient.id, file_id: file.id });
+      this.$emit('update:patient', data.data);
+    },
+    async deleteFileHandler(fileId) {
+      this.$emit('update:patient', {
+        ...this.patient,
+        files_ids: this.patient.files_ids?.filter((id) => id !== fileId),
+        files: this.patient.files?.filter((elem) => elem.id !== fileId),
+      });
     },
 
     print() {

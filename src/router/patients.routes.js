@@ -1,5 +1,6 @@
 import { onlyLoggedInMiddleware } from '@/middlewares/onlyLoggedIn.middleware';
 import { I18nService } from '@/services/i18n.service';
+import { onlyDoctorMiddleware } from '@/middlewares/onlyDoctor.middleware';
 
 export const PATIENTS_ROUTE = {
   name: 'PATIENTS',
@@ -34,6 +35,7 @@ export const PATIENT_ROUTE = {
       path: 'ambulatory-card',
       _fullPath: '/patients/:id/ambulatory-card',
       component: 'VPatientAmbulatoryCard',
+      beforeEnter: [onlyDoctorMiddleware],
       meta: {
         title: I18nService.t('Base.AmbulatoryCard'),
       },

@@ -15,16 +15,19 @@ export class Patient extends User {
    * @typedef {UserConstructorPayload|object} PatientConstructorPayload
    * @property {AmbulatoryCard} ambulatory_card
    * @property {boolean} has_treatment
+   * @property {Array<number>} files_ids
+   * @property {Array<File>} files
    */
-  /**
-   * @param {PatientConstructorPayload} [payload]
-   */
+  /** @param {PatientConstructorPayload} [payload] */
   constructor(payload) {
     super(payload);
 
     this.role = User.enum.roles.Patient;
     this.ambulatory_card = payload?.ambulatory_card || null;
     this.has_treatment = payload?.has_treatment ?? true;
+
+    this.files_ids = payload?.files_ids ?? [];
+    this.files = payload?.files ?? [];
   }
 
   /**
@@ -41,7 +44,7 @@ export class Patient extends User {
   /**
    * Проверяет существование пациента
    * @param {string} phone
-   * @return {Promise<|{data: any, response: AxiosResponse<any>, patient: Patient, attach_clinic: boolean}>}
+   * @return {Promise<{data: any, response: AxiosResponse<any>, patient: Patient, attach_clinic: boolean}>}
    */
   static async checkPatient({ phone }) {
     try {
@@ -66,7 +69,7 @@ export class Patient extends User {
 
   /**
    * Привязка пациента к нашей клинике
-   * @param {string} patient_id
+   * @param {number|string} patient_id
    * @return {Promise<{data: any, response: AxiosResponse<any>, patient: Patient}>}
    */
   static async attachPatient({ patient_id }) {
@@ -111,6 +114,23 @@ export class Patient extends User {
       response: response,
       data: response.data,
       patient: response.data.data,
+    };
+  }
+
+  /**
+   * Прикрепляем файл к пациенту
+   * @param {string} payload.patient_id
+   * @param {string} payload.file_id
+   * @return {Promise<{data: any}>}
+   */
+  static async attachFile(payload) {
+    const response = await ApiService.post(`${this.tableName}/${payload.patient_id}/files/attach`, {
+      file_id: payload.file_id,
+    });
+    return {
+      response: response,
+      data: response.data,
+      documents: response.data.data,
     };
   }
 
