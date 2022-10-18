@@ -66,15 +66,15 @@ export class Invoice extends CRUDModel {
    * @return {Promise<{statistic: InvoiceStatistic, data: response.data, response: AxiosResponse<any>}>}
    */
   static async getStatistic(payload) {
-    const object = super.find({
+    const object = await super.find({
       _url: `statistics/${this.tableName}`,
       ...payload,
     });
 
     return {
       response: object.response,
-      data: object.response.data,
-      statistic: object.response.data,
+      data: object.data,
+      statistic: object.data.data,
     };
   }
 
