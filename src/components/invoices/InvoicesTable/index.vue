@@ -12,11 +12,13 @@
           <template #default="{ row }"> #{{ row.id }} </template>
         </ElTableColumn>
 
-        <ElTableColumn prop="user" :label="$t('Base.Patient')">
+        <ElTableColumn prop="user" :label="$t('Base.Patient')" width="230px">
           <template #default="{ row }">
             <UiUserAvatarInfo :user="row.user" :bold="false" />
           </template>
         </ElTableColumn>
+
+        <ElTableColumn prop="appointment.doctor.name" :label="$t('Base.Doctor')" width="230px" />
 
         <ElTableColumn prop="_services_count" :label="$t('Base.Services')" width="100px" />
         <ElTableColumn prop="_cost" :label="`${$t('Base.Cost')} (${$t('Base.Sum')})`" />
