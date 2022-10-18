@@ -22,7 +22,7 @@
         @select="selectDoctor" />
 
       <template #actions>
-        <a :href="exportDataURL" download target="_blank">
+        <a :href="exportDataURL" download>
           <ElButton plain text>
             <template #icon> <UiIcon :icon="icons.DOWNLOAD" /> </template>
             {{ $t('Base.Download') }}
