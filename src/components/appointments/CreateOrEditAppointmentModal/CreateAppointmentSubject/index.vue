@@ -6,8 +6,8 @@
         class="create-appointment-subject__doctor"
         v-model="subject.doctor_id"
         clearable
-        :modelForUse="Doctor"
-        :defaultItem="user?.doctor"
+        :model-for-use="Doctor"
+        :default-item="user?.doctor"
         :placeholder="$t('Appointments.SelectDoctor')"
         @select="subject.doctor = $event" />
 
@@ -17,8 +17,8 @@
         v-model="subject.group_service_ids"
         label="title"
         :placeholder="$t('Appointments.SelectServices')"
-        :modelForUse="ServiceGroup"
-        :searchQuery="options.groupServices.searchQuery"
+        :model-for-use="ServiceGroup"
+        :search-query="options.groupServices.searchQuery"
         required
         multiple
         collapse-tags

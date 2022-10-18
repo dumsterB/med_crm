@@ -29,7 +29,7 @@ export function useQuery({
   const value = computed({
     get() {
       const value = (field ? route.query[field] : route.query) ?? defaultValue;
-      return valueIsNumber ? +value : value;
+      return valueIsNumber && value !== null && value !== undefined ? +value : value;
     },
     set(value) {
       if (field) {
