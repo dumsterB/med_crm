@@ -56,6 +56,8 @@ export class Invoice extends CRUDModel {
     this.created_at = payload?.created_at ?? null;
   }
 
+  static exportDataURL = import.meta.env.VITE_API_URL + `exports/${this.tableName}`;
+
   static enum = {
     statuses: {
       Paid: 'paid',
