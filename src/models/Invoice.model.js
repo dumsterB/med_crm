@@ -56,6 +56,28 @@ export class Invoice extends CRUDModel {
     this.created_at = payload?.created_at ?? null;
   }
 
+  /** @typedef {object} InvoiceStatistic
+   *  @property {number} count
+   *  @property {number} amount
+   *  @property {number} refund_amount
+   */
+  /**
+   * @param {object} payload
+   * @return {Promise<{statistic: InvoiceStatistic, data: response.data, response: AxiosResponse<any>}>}
+   */
+  static async getStatistic(payload) {
+    const object = super.find({
+      _url: `statistics/${this.tableName}`,
+      ...payload,
+    });
+
+    return {
+      response: object.response,
+      data: object.response.data,
+      statistic: object.response.data,
+    };
+  }
+
   static exportDataURL = import.meta.env.VITE_API_URL + `exports/${this.tableName}`;
 
   static enum = {
