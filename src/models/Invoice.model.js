@@ -89,6 +89,10 @@ export class Invoice extends CRUDModel {
      *  @property {number} amount
      *  @property {number} refund_amount
      */
-    StatisticKeys: ['count', 'amount', 'refund_amount'],
+    StatisticKeys: {
+      Count: 'count',
+      Amount: 'amount',
+      RefundAmount: 'refund_amount',
+    },
   };
 }
