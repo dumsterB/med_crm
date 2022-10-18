@@ -7,7 +7,7 @@
 
     <div class="v-patient-default-item__body" v-loading="loading.profile">
       <PatientCardRow :patient="patient" :items="patientItems" shadow="never">
-        <template #actions>
+        <template #actions v-if="isDoctor">
           <router-link :to="patientAmbulatoryCardPageLink">
             <ElButton type="primary">{{ $t('Base.AmbulatoryCard') }}</ElButton>
           </router-link>
