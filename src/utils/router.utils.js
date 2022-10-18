@@ -72,13 +72,17 @@ export function compareQueriesThenLoadData({
   getData,
 }) {
   const defaultFieldsForReset = [PER_PAGE, SEARCH];
+  const _fieldsForResetPage = [...defaultFieldsForReset, ...fieldsForResetPage];
+  const queryKeys = Object.keys(query);
 
-  [...defaultFieldsForReset, ...fieldsForResetPage].forEach((key) => {
-    if (query && oldQuery && query[key] !== oldQuery[key]) {
+  for (let i = 0; i < queryKeys.length; i++) {
+    if (query && oldQuery && query[_fieldsForResetPage[i]] !== oldQuery[_fieldsForResetPage[i]]) {
       resetPage();
       return setTimeout(() => getData());
     }
-  });
 
-  getData();
+    if (!oldQuery || query[queryKeys[i]] !== oldQuery[queryKeys[i]]) {
+      return getData();
+    }
+  }
 }
