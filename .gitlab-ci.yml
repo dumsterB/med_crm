@@ -32,7 +32,7 @@ build front prod:
   stage: build
   image: node:16
   variables:
-    VITE_API_URL: $PROD_PROTOCOL://$PROD_SERVER/api/mis
+    VITE_API_URL: $PROD_PROTOCOL://$PROD_SERVER/api/mis/
   only:
     - main
   script:
