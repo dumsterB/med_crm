@@ -22,6 +22,13 @@
         @select="selectDoctor" />
 
       <template #actions>
+        <a :href="exportDataURL" download target="_blank">
+          <ElButton plain text>
+            <template #icon> <UiIcon :icon="icons.DOWNLOAD" /> </template>
+            {{ $t('Base.Download') }}
+          </ElButton>
+        </a>
+
         <ElButton type="primary" @click="createInvoice">
           <template #icon> <UiIcon :icon="icons.PLUS" /> </template>
           {{ $t('Invoices.Create') }}
@@ -44,11 +51,14 @@
 import { mapActions, mapState } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
 import { compareQueriesThenLoadData } from '@/utils/router.utils';
+import { mergeOrCreateQuery } from '@/utils/http.util';
+import { deleteEmptyValueKeys } from '@/utils/object.util';
 import { useQuery } from '@/hooks/useQuery.hook';
 import { usePage, usePerPage } from '@/hooks/query';
 import { Invoice } from '@/models/Invoice.model';
 import { Doctor } from '@/models/Doctor.model';
 import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
+import { ApiService } from '@/services/api.service';
 
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
@@ -102,6 +112,15 @@ export default {
 
     doctorFromRoute() {
       return this.doctorId.value ? { id: this.doctorId.value, name: this.doctorName.value } : null;
+    },
+    exportDataURL() {
+      return mergeOrCreateQuery({
+        url: Invoice.exportDataURL,
+        query: deleteEmptyValueKeys({
+          ...this.queryWatchers,
+          token: ApiService.getToken(),
+        }), // per_page, page будут игнорироваться на бэке
+      });
     },
   },
 
@@ -165,11 +184,16 @@ export default {
       this.doctorId.value = doctor?.id;
       setTimeout(() => (this.doctorName.value = doctor?.name));
     },
+
+    exportData() {
+      Invoice.export();
+    },
   },
 };
 </script>
 
 <style lang="scss" src="./index.scss" />
+<i18n src="@/locales/base.locales.json" />
 <i18n src="@/locales/dateAndTime.locales.json" />
 <i18n src="@/locales/notifications.locales.json" />
 <i18n src="@/locales/invoices.locales.json" />
