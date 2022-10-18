@@ -37,6 +37,10 @@
           :default-item="invoice.user"
           @select="invoice.user = $event">
           <template #content-append>
+            <ElFormItem v-if="!!invoice.appointment" :label="$t('Base.Doctor')">
+              {{ invoice.appointment?.doctor?.name ?? '...' }}
+            </ElFormItem>
+
             <ElFormItem class="create-or-pay-invoice-modal-notes-part" :label="$t('Base.Notes')">
               <ElInput
                 v-model="invoice.description"
