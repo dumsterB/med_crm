@@ -82,6 +82,15 @@ export default {
     Invoice,
     Doctor,
   }),
+  data() {
+    return {
+      statistic: {
+        loading: false,
+        /** @type {InvoiceStatistic} data */
+        data: {},
+      },
+    };
+  },
   computed: {
     ...mapState({
       loading: (state) => state.invoices.loading,
@@ -131,7 +140,7 @@ export default {
           query: value,
           oldQuery: oldValue,
           resetPage: this.page.reset,
-          getData: this.getInvoices,
+          getData: this.getInvoicesAndStatistic,
           fieldsForResetPage: ['status', 'start_at', 'end_at', 'doctor_id'],
         });
       },
@@ -147,6 +156,11 @@ export default {
       createItem: 'invoices/createItem',
       editItem: 'invoices/editItem',
     }),
+
+    async getInvoicesAndStatistic() {
+      this.getInvoices();
+      this.getStatistic();
+    },
 
     async getInvoices() {
       if (this.queryWatchers.start_at && !this.queryWatchers.end_at) return;
@@ -168,6 +182,15 @@ export default {
       }
 
       this.setLoading(false);
+    },
+
+    async getStatistic() {
+      this.statistic.loading = true;
+
+      const { statistic } = await Invoice.getStatistic(this.queryWatchers);
+      this.statistic.data = statistic;
+
+      this.statistic.loading = true;
     },
 
     async createInvoice() {
