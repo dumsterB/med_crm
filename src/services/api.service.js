@@ -10,12 +10,14 @@ const instance = axios.create({
   },
 });
 
+instance.getToken = () => instance.defaults.headers.common.Authorization?.split(' ')[1];
 instance.setToken = (token) => {
   instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 instance.removeToken = () => {
   delete instance.defaults.headers.common.Authorization;
 };
+
 instance.setLocale = (locale) => {
   instance.defaults.headers.common.Lang = locale;
 };

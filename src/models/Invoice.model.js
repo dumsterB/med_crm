@@ -56,6 +56,25 @@ export class Invoice extends CRUDModel {
     this.created_at = payload?.created_at ?? null;
   }
 
+  /**
+   * @param {object} payload
+   * @return {Promise<{statistic: InvoiceStatistic, data: response.data, response: AxiosResponse<any>}>}
+   */
+  static async getStatistic(payload) {
+    const object = await super.find({
+      _url: `statistics/${this.tableName}`,
+      ...payload,
+    });
+
+    return {
+      response: object.response,
+      data: object.data,
+      statistic: object.data.data,
+    };
+  }
+
+  static exportDataURL = import.meta.env.VITE_API_URL + `exports/${this.tableName}`;
+
   static enum = {
     statuses: {
       Paid: 'paid',
@@ -63,6 +82,17 @@ export class Invoice extends CRUDModel {
       NotPaid: 'not_paid',
       Refund: 'refund',
       Canceled: 'canceled',
+    },
+
+    /** @typedef {object} InvoiceStatistic
+     *  @property {number} count
+     *  @property {number} amount
+     *  @property {number} refund_amount
+     */
+    StatisticKeys: {
+      Count: 'count',
+      Amount: 'amount',
+      RefundAmount: 'refund_amount',
     },
   };
 }

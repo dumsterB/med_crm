@@ -11,5 +11,14 @@
         }
       }
     }
+
+    &__statistic {
+      display: flex;
+      gap: 20px;
+
+      & > * {
+        flex: 1;
+      }
+    }
   }
 }
