@@ -41,20 +41,19 @@
           v-model="inspectionCard.basic_data"
           :readonly="readonly"
           @change="updateInspectionCard">
-          <template #footer>
+          <!--          <template #footer>
             <TemplateResultBlock
               v-if="!isTreatment"
               :block="{ label: $t('Appointments.SelectDiagnosis') }">
               <DiseaseCodeSelect
                 v-model="inspectionCard.disease_code_codes"
-                required
                 multiple
                 collapse-tags
                 collapse-tags-tooltip
                 :default-item="appointment.inspection_card?.disease_codes"
                 @select="updateInspectionCard" />
             </TemplateResultBlock>
-          </template>
+          </template>-->
         </TemplateResult>
       </div>
 
@@ -69,18 +68,32 @@
             {{ $t('Appointments.EndReception') }}
           </ElButton>
 
-          <ElButton v-show="!readonly && !isTreatment" type="warning" plain @click="setTreatment">
+          <ElButton
+            v-show="actionsOptions.setTreatment.isShow"
+            type="warning"
+            plain
+            @click="setTreatment">
             {{ $t('Base.SetTreatment') }}
           </ElButton>
+          <ElButton
+            v-show="actionsOptions.closeTreatment.isShow"
+            type="warning"
+            plain
+            @click="closeTreatment">
+            {{ $t('Treatments.CloseTreatment') }}
+          </ElButton>
+
+          <ElDivider direction="vertical" class="default-inspection-card-form-actions__divider" />
 
           <ElButton v-show="!readonly" type="primary" plain @click="setControlAppointment">
             {{ $t('Appointments.SetControlAppointment') }}
           </ElButton>
+          <ElButton v-show="!readonly" type="primary" plain @click="setExamination">
+            {{ $t('Appointments.SetExamination') }}
+          </ElButton>
 
-          <ElButton v-show="readonly" text @click="print">
-            <template #icon>
-              <UiIcon :icon="icons.PRINTER" />
-            </template>
+          <ElButton text @click="print">
+            <template #icon> <UiIcon :icon="icons.PRINTER" /> </template>
             {{ $t('Base.Print') }}
           </ElButton>
         </div>
@@ -96,4 +109,5 @@
 <i18n src="@/locales/appointments.locales.json" />
 <i18n src="@/locales/notifications.locales.json" />
 <i18n src="@/locales/templates.locales.json" />
+<i18n src="@/locales/treatments.locales.json" />
 <i18n src="./index.locales.json" />

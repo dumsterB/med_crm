@@ -9,7 +9,7 @@
     <CreateOrEditPatient
       class="create-or-edit-patient-modal__content"
       :model-value="modelValue"
-      :name-or-phome="nameOrPhone"
+      :name-or-phone="nameOrPhone"
       :data="data"
       :disabled-default-action="disableDefaultAction"
       @update:model-value="$emit('update:modelValue', $event)"

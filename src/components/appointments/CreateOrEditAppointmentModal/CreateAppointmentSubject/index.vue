@@ -1,24 +1,24 @@
 <template>
   <ElForm class="create-appointment-subject" @submit.prevent="createSubject">
     <div class="create-appointment-subject__part create-appointment-subject-part">
-      <!--  GroupService  -->
       <!--  Doctor  -->
       <UiModelsAutocompleteSearch
         class="create-appointment-subject__doctor"
         v-model="subject.doctor_id"
         clearable
-        :modelForUse="Doctor"
-        :defaultItem="user?.doctor"
+        :model-for-use="Doctor"
+        :default-item="user?.doctor"
         :placeholder="$t('Appointments.SelectDoctor')"
         @select="subject.doctor = $event" />
 
+      <!--  GroupService  -->
       <UiModelsAutocompleteSearch
         class="create-appointment-subject__services"
         v-model="subject.group_service_ids"
         label="title"
         :placeholder="$t('Appointments.SelectServices')"
-        :modelForUse="ServiceGroup"
-        :searchQuery="options.groupServices.searchQuery"
+        :model-for-use="ServiceGroup"
+        :search-query="options.groupServices.searchQuery"
         required
         multiple
         collapse-tags
@@ -69,6 +69,7 @@ export default {
   components: { ScheduleSlotsSelect },
   props: {
     appointment: [Appointment, Object],
+    setDefaultMyDoctor: Boolean,
   },
   data() {
     return {
@@ -107,7 +108,14 @@ export default {
   watch: {
     'user.doctor_id': {
       handler(value) {
-        this.subject = new AppointmentSubject({ ...this.subject, doctor_id: value });
+        if (this.setDefaultMyDoctor) {
+          this.subject = new AppointmentSubject({
+            ...this.subject,
+
+            doctor_id: value,
+            doctor: this.user.doctor,
+          });
+        }
       },
       immediate: true,
     },
@@ -125,7 +133,10 @@ export default {
     },
 
     reset() {
-      this.subject = new AppointmentSubject({ doctor_id: this.user.doctor_id });
+      this.subject = new AppointmentSubject({
+        doctor_id: this.setDefaultMyDoctor ? this.user.doctor_id : null,
+        doctor: this.setDefaultMyDoctor ? this.user.doctor : null,
+      });
       this.isLiveQueue = true;
     },
 

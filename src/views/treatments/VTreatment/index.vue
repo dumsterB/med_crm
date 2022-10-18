@@ -16,16 +16,9 @@
       :data="treatment"
       :loading="loading.treatment"
       @treatment:update="treatment = $event" />
-    <div class="v-patient-default__title">{{ $t('Base.TableReception') }}</div>
+    <div class="v-patient-default__title">{{ $t('Base.TreatmentJournal') }}</div>
 
-    <ElEmpty
-      class="v-patient-treatment-item-empty"
-      v-show="!receptions?.length && !loading.reception"
-      :description="$t('Base.NoData')" />
-    <AppointmentsByTreatmentTable
-      v-if="receptions?.length"
-      :data="receptions"
-      :loading="loading.reception" />
+    <AppointmentsByTreatmentTable :data="receptions" :loading="loading.reception" />
   </LayoutDoctor>
 </template>
 
@@ -60,7 +53,7 @@ export default {
       /** @type {Treatment} */
       treatment: null,
       /** @type {Array<Appointment>} */
-      receptions: null,
+      receptions: [],
     };
   },
   computed: {

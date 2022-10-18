@@ -3,6 +3,11 @@
   <div class="v-patient-default__item v-patient-default-item">
     <div class="v-patient-default-item__header v-patient-default-item-header">
       <div class="v-patient-default__title">{{ $t('Title') }}</div>
+      <div class="v-patient-default_-actions">
+        <ElButton type="primary" plain @click="editPatient">
+          {{ $t('Patients.EditPatient') }}
+        </ElButton>
+      </div>
     </div>
 
     <div class="v-patient-default-item__body" v-loading="loading.profile">
@@ -96,15 +101,16 @@
 
 <script>
 import { mapState } from 'vuex';
-import * as icons from '@/enums/icons.enum.js';
 import { insertRouteParams } from '@/utils/router.utils';
 import { PATIENT_ROUTE } from '@/router/patients.routes';
 import { Patient } from '@/models/Patient.model';
+import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
 import PatientsTable from '@/components/patients/PatientsTable/index.vue';
 import TreatmentsTable from '@/components/treatments/TreatmentsTable/index.vue';
 import PatientCardRow from '@/components/patients/PatientCardRow/index.vue';
+import CreateOrEditPatientModal from '@/components/patients/CreateOrEditPatientModal/index.vue';
 
 export default {
   name: 'VPatientDefault',
@@ -121,7 +127,6 @@ export default {
     TreatmentsTable,
     PatientCardRow,
   },
-  icons: icons,
   props: {
     patient: [Patient, Object],
 
@@ -149,19 +154,15 @@ export default {
       return [
         {
           label: this.$t('User.Phone'),
-          value: this.patient.phone || '',
+          value: this.patient.phone,
         },
         {
           label: this.$t('User.Birthdate'),
-          value: this.patient.birthdate || '',
+          value: this.patient.birthdate,
         },
         {
           label: this.$t('User.Gender'),
-          value: this.$t('User.Genders.' + this.patient.gender) || '',
-        },
-        {
-          text: this.$t('Base.AmbulatoryCard'),
-          action: true,
+          value: this.patient.gender ? this.$t('User.Genders.' + this.patient.gender) : null,
         },
       ];
     },
@@ -172,6 +173,20 @@ export default {
           id: this.patient.id,
         },
       });
+    },
+  },
+
+  methods: {
+    async editPatient() {
+      const action = await this.$store.dispatch('modalAndDrawer/openModal', {
+        component: CreateOrEditPatientModal,
+        payload: {
+          data: this.patient,
+        },
+      });
+
+      if (action instanceof GlobalModalCloseAction) return;
+      this.$emit('update:patient', action.data.patient);
     },
   },
 };

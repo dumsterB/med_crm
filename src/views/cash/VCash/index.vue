@@ -2,6 +2,7 @@
   <LayoutRegistry content-class="v-cash-content">
     <LayoutContentHeader class="v-cash-content__header v-cash-content-header">
       <ElDatePicker
+        class="v-cash-content-header__date"
         v-model="date"
         type="daterange"
         unlink-panels
@@ -10,7 +11,15 @@
         :start-placeholder="$t('DateAndTime.StartDate')"
         :end-placeholder="$t('DateAndTime.EndDate')" />
 
-      <SelectInvoiceStatus clearable v-model="status.value" />
+      <SelectInvoiceStatus class="v-cash-content-header__status" clearable v-model="status.value" />
+      <UiModelsAutocompleteSearch
+        class="v-cash-content-header__doctor"
+        :model-value="doctorId.value"
+        :model-for-use="Doctor"
+        :default-item="doctorFromRoute"
+        :placeholder="$t('Appointments.SelectDoctor')"
+        clearable
+        @select="selectDoctor" />
 
       <template #actions>
         <ElButton type="primary" @click="createInvoice">
@@ -38,13 +47,14 @@ import { compareQueriesThenLoadData } from '@/utils/router.utils';
 import { useQuery } from '@/hooks/useQuery.hook';
 import { usePage, usePerPage } from '@/hooks/query';
 import { Invoice } from '@/models/Invoice.model';
+import { Doctor } from '@/models/Doctor.model';
+import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
 import SelectInvoiceStatus from '@/components/invoices/SelectInvoiceStatus/index.vue';
 import InvoicesTable from '@/components/invoices/InvoicesTable/index.vue';
 import CreateOrPayInvoiceModal from '@/components/invoices/CreateOrPayInvoiceModal/index.vue';
-import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 export default {
   name: 'VCash',
@@ -53,11 +63,14 @@ export default {
     perPage: usePerPage(),
     page: usePage(),
     status: useQuery({ field: 'status' }),
+    doctorId: useQuery({ field: 'doctor_id', valueIsNumber: true }),
+    doctorName: useQuery({ field: 'doctor_name' }),
     startAt: useQuery({ field: 'start_at' }),
     endAt: useQuery({ field: 'end_at' }),
 
     icons: icons,
     Invoice,
+    Doctor,
   }),
   computed: {
     ...mapState({
@@ -73,6 +86,7 @@ export default {
         status: this.status.value,
         start_at: this.startAt.value,
         end_at: this.endAt.value,
+        doctor_id: this.doctorId.value,
       };
     },
 
@@ -85,6 +99,12 @@ export default {
         setTimeout(() => (this.endAt.value = value ? value[1] : null));
       },
     },
+
+    doctorFromRoute() {
+      return this.doctorId.value && this.doctorName.value
+        ? { id: this.doctorId.value, name: this.doctorName.value }
+        : null;
+    },
   },
 
   watch: {
@@ -95,7 +115,7 @@ export default {
           oldQuery: oldValue,
           resetPage: this.page.reset,
           getData: this.getInvoices,
-          fieldsForResetPage: ['status', 'start_at', 'end_at'],
+          fieldsForResetPage: ['status', 'start_at', 'end_at', 'doctor_id'],
         });
       },
       immediate: true,
@@ -142,6 +162,11 @@ export default {
       if (action instanceof GlobalModalCloseAction) return;
       this.createItem(action.data.invoice);
     },
+
+    selectDoctor(doctor) {
+      this.doctorId.value = doctor?.id;
+      setTimeout(() => (this.doctorName.value = doctor?.name));
+    },
   },
 };
 </script>
@@ -150,4 +175,5 @@ export default {
 <i18n src="@/locales/dateAndTime.locales.json" />
 <i18n src="@/locales/notifications.locales.json" />
 <i18n src="@/locales/invoices.locales.json" />
+<i18n src="@/locales/appointments.locales.json" />
 <i18n src="./index.locales.json" />

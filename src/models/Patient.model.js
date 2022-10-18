@@ -30,9 +30,15 @@ export class Patient extends User {
     this.files = payload?.files ?? [];
   }
 
-  static async create(payload) {
-    const url = payload?.parent_id ? `${this.tableName}/child` : null;
-    return super.create(payload, { url });
+  /**
+   * @param {object} payload
+   * @param {boolean} isChildren
+   * @return {Promise<{data: response.data, response: AxiosResponse<*>}>}
+   */
+  static async create(payload, isChildren = false) {
+    return super.create(payload, {
+      url: isChildren || payload?.parent_id ? `${this.tableName}/child` : null,
+    });
   }
 
   /**

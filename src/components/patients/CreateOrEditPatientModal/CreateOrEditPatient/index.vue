@@ -12,24 +12,20 @@
       </ElFormItem>
 
       <!--  Phone  -->
-      <ElFormItem v-if="!isChildren" :label="$t('User.Phone')">
-        <UiPhoneInput class="create-or-edit-patient__field" v-model="patient.phone" required />
+      <ElFormItem :label="$t(isChildren ? 'ParentPhone' : 'User.Phone')">
+        <UiPhoneInput class="create-or-edit-patient__field" v-model="phone" required />
       </ElFormItem>
 
       <!--  Parent  -->
-      <ElFormItem v-if="isChildren" :label="$t('User.Parent')">
-        <UiModelsAutocompleteSearch
-          class="create-or-edit-patient__field"
-          v-model="patient.parent_id"
-          :model-for-use="Patient"
-          :search-query="{ query_field: ['name', 'phone'] }"
-          :default-item="data?.parent || parent"
-          show-create-option
+      <ElFormItem v-if="isChildren" v-show="hasPhoneNumber" :label="$t('ParentFullName')">
+        <ElInput
+          :model-value="patient.parent.name"
           required
-          @create="createParentFlow" />
+          :disabled="!!patient.parent_id"
+          @update:model-value="patient.parent.name = onlyLatinFormatter($event)" />
       </ElFormItem>
 
-      <div v-show="isChildren || (hasPhoneNumber && !hasPatient)">
+      <div v-show="hasPhoneNumber && !hasPatient">
         <!--  FullName  -->
         <ElFormItem :label="$t('User.FullName') + ` (${$t('User.FullNameFormat').toLowerCase()})`">
           <ElInput
@@ -37,7 +33,6 @@
             :model-value="patient.name"
             minlength="3"
             required
-            :disabled="isDisabledSecondaryInputs"
             pattern="[a-zA-Z\d\s]*"
             @update:modelValue="patient.name = onlyLatinFormatter($event)" />
         </ElFormItem>
@@ -50,17 +45,12 @@
             type="date"
             placeholder="00.00.2000"
             format="DD.MM.YYYY"
-            :value-format="FULL_DATE_FORMAT"
-            :disabled="isDisabledSecondaryInputs" />-->
+            :value-format="FULL_DATE_FORMAT" />-->
         </ElFormItem>
 
         <!--  Gender  -->
         <ElFormItem :label="$t('User.Gender')">
-          <UiGenderSelect
-            class="create-or-edit-patient__field"
-            v-model="patient.gender"
-            required
-            :disabled="isDisabledSecondaryInputs" />
+          <UiGenderSelect class="create-or-edit-patient__field" v-model="patient.gender" required />
         </ElFormItem>
       </div>
 
