@@ -47,6 +47,7 @@ export default {
     addGlobalEventListeners() {
       EmitterService.on(API_LOGOUT_EMIT, () => this.$store.dispatch('auth/logout'));
     },
+
     async getDoctorTemplates() {
       InspectionCardTemplate.find({}).then((response) => {
         this.$store.dispatch('templates/setData', {

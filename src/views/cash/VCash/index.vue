@@ -22,12 +22,29 @@
         @select="selectDoctor" />
 
       <template #actions>
+        <a :href="exportDataURL" download>
+          <ElButton plain text>
+            <template #icon> <UiIcon :icon="icons.DOWNLOAD" /> </template>
+            {{ $t('Base.Download') }}
+          </ElButton>
+        </a>
+
         <ElButton type="primary" @click="createInvoice">
           <template #icon> <UiIcon :icon="icons.PLUS" /> </template>
           {{ $t('Invoices.Create') }}
         </ElButton>
       </template>
     </LayoutContentHeader>
+
+    <div class="v-cash-content__statistic">
+      <UiSimpleStatisticCard
+        v-for="item in statisticCards"
+        :key="item.key"
+        v-loading="statistic.loading"
+        :label="item.label"
+        :value="item.value"
+        :icon="item.icon" />
+    </div>
 
     <InvoicesTable
       class="v-cash-content__table"
@@ -44,11 +61,15 @@
 import { mapActions, mapState } from 'vuex';
 import * as icons from '@/enums/icons.enum.js';
 import { compareQueriesThenLoadData } from '@/utils/router.utils';
+import { mergeOrCreateQuery } from '@/utils/http.util';
+import { deleteEmptyValueKeys } from '@/utils/object.util';
+import { formatPrice } from '@/utils/price.util';
 import { useQuery } from '@/hooks/useQuery.hook';
 import { usePage, usePerPage } from '@/hooks/query';
 import { Invoice } from '@/models/Invoice.model';
 import { Doctor } from '@/models/Doctor.model';
 import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
+import { ApiService } from '@/services/api.service';
 
 import LayoutRegistry from '@/components/layouts/LayoutRegistry/index.vue';
 import LayoutContentHeader from '@/components/layouts/assets/LayoutContentHeader/index.vue';
@@ -72,6 +93,15 @@ export default {
     Invoice,
     Doctor,
   }),
+  data() {
+    return {
+      statistic: {
+        loading: false,
+        /** @type {InvoiceStatistic} data */
+        data: {},
+      },
+    };
+  },
   computed: {
     ...mapState({
       loading: (state) => state.invoices.loading,
@@ -90,6 +120,33 @@ export default {
       };
     },
 
+    statisticCards() {
+      const iconsByKey = {
+        [Invoice.enum.StatisticKeys.Count]: icons.BOARD,
+        [Invoice.enum.StatisticKeys.Amount]: icons.CASH_CHECK,
+        [Invoice.enum.StatisticKeys.RefundAmount]: icons.CASH_REFUND,
+      };
+
+      return Object.keys(Invoice.enum.StatisticKeys).map((enumKey) => {
+        const key = Invoice.enum.StatisticKeys[enumKey];
+        const label = this.$t(`Invoices.Statistic.${key}`);
+        const value = [
+          Invoice.enum.StatisticKeys.Amount,
+          Invoice.enum.StatisticKeys.RefundAmount,
+        ].includes(key)
+          ? formatPrice({ price: this.statistic.data[key] })
+          : this.statistic.data[key];
+        const icon = iconsByKey[key];
+
+        return {
+          key: key,
+          label: label,
+          value: value,
+          icon: icon,
+        };
+      });
+    },
+
     date: {
       get() {
         return [this.startAt.value, this.endAt.value];
@@ -99,11 +156,20 @@ export default {
         setTimeout(() => (this.endAt.value = value ? value[1] : null));
       },
     },
-
     doctorFromRoute() {
       return this.doctorId.value && this.doctorName.value
         ? { id: this.doctorId.value, name: this.doctorName.value }
         : null;
+    },
+
+    exportDataURL() {
+      return mergeOrCreateQuery({
+        url: Invoice.exportDataURL,
+        query: deleteEmptyValueKeys({
+          ...this.queryWatchers,
+          token: ApiService.getToken(),
+        }), // per_page, page будут игнорироваться на бэке
+      });
     },
   },
 
@@ -114,7 +180,7 @@ export default {
           query: value,
           oldQuery: oldValue,
           resetPage: this.page.reset,
-          getData: this.getInvoices,
+          getData: this.getInvoicesAndStatistic,
           fieldsForResetPage: ['status', 'start_at', 'end_at', 'doctor_id'],
         });
       },
@@ -130,6 +196,11 @@ export default {
       createItem: 'invoices/createItem',
       editItem: 'invoices/editItem',
     }),
+
+    async getInvoicesAndStatistic() {
+      this.getInvoices();
+      this.getStatistic();
+    },
 
     async getInvoices() {
       if (this.queryWatchers.start_at && !this.queryWatchers.end_at) return;
@@ -153,6 +224,15 @@ export default {
       this.setLoading(false);
     },
 
+    async getStatistic() {
+      this.statistic.loading = true;
+
+      const { statistic } = await Invoice.getStatistic(this.queryWatchers);
+      this.statistic.data = statistic;
+
+      this.statistic.loading = false;
+    },
+
     async createInvoice() {
       const action = await this.$store.dispatch(
         'modalAndDrawer/openModal',
@@ -167,11 +247,16 @@ export default {
       this.doctorId.value = doctor?.id;
       setTimeout(() => (this.doctorName.value = doctor?.name));
     },
+
+    exportData() {
+      Invoice.export();
+    },
   },
 };
 </script>
 
 <style lang="scss" src="./index.scss" />
+<i18n src="@/locales/base.locales.json" />
 <i18n src="@/locales/dateAndTime.locales.json" />
 <i18n src="@/locales/notifications.locales.json" />
 <i18n src="@/locales/invoices.locales.json" />

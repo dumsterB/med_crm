@@ -21,8 +21,6 @@
       id="create-or-pay-invoice"
       class="create-or-pay-invoice-modal__content create-or-pay-invoice-modal-content"
       @submit.prevent="submitHandler">
-      <!--  TODO: вынести в отдельный компоент, будет использоваться и при создании записи  -->
-      <!--  Patient  -->
       <ElCard
         class="create-or-pay-invoice-modal-part"
         shadow="never"
@@ -37,6 +35,10 @@
           :default-item="invoice.user"
           @select="invoice.user = $event">
           <template #content-append>
+            <ElFormItem v-if="!!invoice.appointment" :label="$t('Base.Doctor')">
+              {{ invoice.appointment?.doctor?.name ?? '...' }}
+            </ElFormItem>
+
             <ElFormItem class="create-or-pay-invoice-modal-notes-part" :label="$t('Base.Notes')">
               <ElInput
                 v-model="invoice.description"

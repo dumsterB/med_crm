@@ -4,6 +4,11 @@
       "Create": "Создать счёт",
       "Number": "Номер",
       "PaymentMethod": "Способ оплаты",
+      "Statistic": {
+        "count": "Количество записей",
+        "amount": "Общая сумма",
+        "refund_amount": "Сумма возврата"
+      },
       "Statuses": {
         "canceled": "Отменён",
         "not_paid": "Не оплачено",
@@ -20,6 +25,11 @@
       "Create": "Hisob yaratish",
       "Number": "Nomer",
       "PaymentMethod": "Tolov usuli",
+      "Statistic": {
+        "count": "??Количество записей??",
+        "amount": "??Общая сумма??",
+        "refund_amount": "??Сумма возврата??"
+      },
       "Statuses": {
         "canceled": "Bekor qilingan",
         "not_paid": "To'lanmagan",

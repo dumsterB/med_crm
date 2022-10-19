@@ -47,7 +47,7 @@ export default {
     },
 
     async checkAndSetUserAndTokenFromClientStorage({ commit }) {
-      const access_token = localStorage.getItem('access_token');
+      const access_token = localStorage.getItem(enums.ACCESS_TOKEN_KEY);
       if (!access_token) return;
 
       if (access_token) {
