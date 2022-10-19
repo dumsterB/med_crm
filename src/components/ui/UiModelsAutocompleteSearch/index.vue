@@ -5,7 +5,7 @@
       :model-value="modelValue"
       remote
       filterable
-      @input="event => event.target.value = onlyLatinFormatter(event.target.value)"
+      @input="(event) => (event.target.value = onlyLatinFormatter(event.target.value))"
       reserve-keyword
       :remote-method="getItems"
       :loading="loading"
@@ -17,6 +17,7 @@
       :no-data-text="$t('Base.NoData')"
       :collapse-tags="collapseTags"
       :collapse-tags-tooltip="collapseTagsTooltip"
+      @update:model-value="$emit('update:modelValue', $event)"
       @visible-change="getItems"
       @change="selectHandler"
       ref="component">
@@ -95,7 +96,7 @@ export default {
       query: '',
       items: [],
       loading: false,
-      fieldValue:'',
+      fieldValue: '',
     };
   },
   watch: {
@@ -114,8 +115,8 @@ export default {
   },
 
   methods: {
-    valueHandler(event){
-      return event.target.value = onlyLatinFormatter()
+    valueHandler(event) {
+      return (event.target.value = onlyLatinFormatter());
     },
     async getItems(query) {
       this.loading = true;
@@ -159,7 +160,7 @@ export default {
 
   setup: () => ({
     icons,
-    onlyLatinFormatter
+    onlyLatinFormatter,
   }),
 };
 </script>
