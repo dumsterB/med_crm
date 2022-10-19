@@ -3,7 +3,7 @@
   <div class="v-patient-default__item v-patient-default-item">
     <div class="v-patient-default-item__header v-patient-default-item-header">
       <div class="v-patient-default__title">{{ $t('Title') }}</div>
-      <div class="v-patient-default_-actions">
+      <div class="v-patient-default__actions">
         <ElButton type="primary" plain @click="editPatient">
           {{ $t('Patients.EditPatient') }}
         </ElButton>
@@ -13,7 +13,15 @@
     <div class="v-patient-default-item__body" v-loading="loading.profile">
       <PatientCardRow :patient="patient" :items="patientItems" shadow="never">
         <template #actions>
-          <router-link :to="patientAmbulatoryCardPageLink">
+          <ElButton
+            v-if="isManager"
+            type="primary"
+            :loading="braceletLoading"
+            @click="printBracelet">
+            {{ $t('Patients.PrintBracelet') }}
+          </ElButton>
+
+          <router-link v-if="isDoctor" :to="patientAmbulatoryCardPageLink">
             <ElButton type="primary">{{ $t('Base.AmbulatoryCard') }}</ElButton>
           </router-link>
         </template>
@@ -103,7 +111,9 @@
 import { mapState } from 'vuex';
 import { insertRouteParams } from '@/utils/router.utils';
 import { PATIENT_ROUTE } from '@/router/patients.routes';
+import { PrinterService } from '@/services/printer.service';
 import { Patient } from '@/models/Patient.model';
+import { User } from '@/models/User.model';
 import { GlobalModalCloseAction } from '@/models/client/ModalAndDrawer/GlobalModalCloseAction';
 
 import AppointmentsTable from '@/components/appointments/AppointmentsTable/index.vue';
@@ -138,13 +148,21 @@ export default {
     /** @param {{profile: boolean, appointment: boolean}} loading */
     loading: Object,
   },
+  data() {
+    return {
+      braceletLoading: false,
+    };
+  },
   computed: {
     ...mapState({
       user: (state) => state.auth.user,
     }),
 
     isDoctor() {
-      return !!this.user.doctor_id;
+      return this.user.role === User.enum.roles.Doctor;
+    },
+    isManager() {
+      return this.user.role === User.enum.roles.Manager;
     },
 
     isChildren() {
@@ -188,6 +206,23 @@ export default {
       if (action instanceof GlobalModalCloseAction) return;
       this.$emit('update:patient', action.data.patient);
     },
+
+    async printBracelet() {
+      if (this.braceletLoading) return;
+      this.braceletLoading = true;
+
+      try {
+        await PrinterService.printBraceletByPatientId(this.patient.id);
+      } catch (err) {
+        console.log(err);
+        this.$notify({
+          type: 'error',
+          title: err?.response?.data?.message || this.$t('Notifications.Error'),
+        });
+      }
+
+      this.braceletLoading = false;
+    },
   },
 };
 </script>
@@ -197,4 +232,5 @@ export default {
 <i18n src="@/locales/patients.locales.json" />
 <i18n src="@/locales/user.locales.json" />
 <i18n src="@/locales/appointments.locales.json" />
+<i18n src="@/locales/notifications.locales.json" />
 <i18n src="./index.locales.json" />
