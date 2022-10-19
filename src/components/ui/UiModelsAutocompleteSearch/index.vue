@@ -5,6 +5,7 @@
       :model-value="modelValue"
       remote
       filterable
+      @input="event => event.target.value = onlyLatinFormatter(event.target.value)"
       reserve-keyword
       :remote-method="getItems"
       :loading="loading"
@@ -12,11 +13,11 @@
       :disabled="disabled"
       :placeholder="placeholder || $t('Base.PleaseInput')"
       :clearable="clearable"
+      :value-key="fieldValue"
       :no-data-text="$t('Base.NoData')"
       :collapse-tags="collapseTags"
       :collapse-tags-tooltip="collapseTagsTooltip"
       @visible-change="getItems"
-      @update:model-value="$emit('update:modelValue', $event)"
       @change="selectHandler"
       ref="component">
       <ElOption
@@ -52,6 +53,7 @@
 </template>
 
 <script>
+import { onlyLatinFormatter } from '@/utils/formatters.util';
 import * as icons from '@/enums/icons.enum.js';
 import { CRUDModel } from '@/models/CRUD.model';
 import { cloneDeep } from 'lodash';
@@ -93,6 +95,7 @@ export default {
       query: '',
       items: [],
       loading: false,
+      fieldValue:'',
     };
   },
   watch: {
@@ -111,6 +114,9 @@ export default {
   },
 
   methods: {
+    valueHandler(event){
+      return event.target.value = onlyLatinFormatter()
+    },
     async getItems(query) {
       this.loading = true;
 
@@ -153,6 +159,7 @@ export default {
 
   setup: () => ({
     icons,
+    onlyLatinFormatter
   }),
 };
 </script>
