@@ -12,7 +12,6 @@
       :disabled="disabled"
       :placeholder="placeholder || $t('Base.PleaseInput')"
       :clearable="clearable"
-      :value-key="fieldValue"
       :no-data-text="$t('Base.NoData')"
       :collapse-tags="collapseTags"
       :collapse-tags-tooltip="collapseTagsTooltip"
@@ -96,7 +95,6 @@ export default {
       query: '',
       items: [],
       loading: false,
-      fieldValue: '',
     };
   },
   watch: {
