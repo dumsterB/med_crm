@@ -27,7 +27,7 @@
           </template>
         </ElTableColumn>
 
-        <ElTableColumn width="110px" prop="_start_at" :label="$t('DateAndTime.StartAt')" />
+        <ElTableColumn width="140px" prop="start_at" :label="$t('DateAndTime.StartAt')" />
         <ElTableColumn width="100px" prop="_end_at" :label="$t('DateAndTime.EndAt')" />
 
         <ElTableColumn prop="patient.name" :label="$t('Base.Patient')" />
