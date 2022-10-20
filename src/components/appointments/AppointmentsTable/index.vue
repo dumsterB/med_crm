@@ -33,7 +33,7 @@
         <ElTableColumn prop="patient.name" :label="$t('Base.Patient')" />
         <ElTableColumn prop="patient.phone" :label="$t('Appointments.PhonePatient')" />
 
-        <ElTableColumn :label="$t('Base.Payment')" >
+        <ElTableColumn :label="$t('Base.Payment')">
           <template #default="{ row }">
             <InvoiceStatusTag v-if="row.invoice" :status="row.invoice.status"></InvoiceStatusTag>
           </template>
