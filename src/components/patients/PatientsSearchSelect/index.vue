@@ -5,6 +5,7 @@
       :model-value="modelValue"
       :model-for-use="Patient"
       :default-item="defaultItem || scannedPatient"
+      :formatter="onlyLatinFormatter"
       v-bind="$attrs"
       ref="component"
       @update:model-value="$emit('update:modelValue', $event)"
@@ -16,6 +17,7 @@
 </template>
 
 <script>
+import { onlyLatinFormatter } from '@/utils/formatters.util';
 import { Patient } from '@/models/Patient.model';
 import UiModelsAutocompleteSearch from '@/components/ui/UiModelsAutocompleteSearch/index.vue';
 import ScanPatientBracelet from '@/components/scanner/ScanPatientBracelet/index.vue';
@@ -59,6 +61,7 @@ export default {
 
   setup: () => ({
     Patient: Patient,
+    onlyLatinFormatter,
   }),
 };
 </script>

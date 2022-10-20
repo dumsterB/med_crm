@@ -21,8 +21,6 @@
       id="create-or-pay-invoice"
       class="create-or-pay-invoice-modal__content create-or-pay-invoice-modal-content"
       @submit.prevent="submitHandler">
-      <!--  TODO: вынести в отдельный компоент, будет использоваться и при создании записи  -->
-      <!--  Patient  -->
       <ElCard
         class="create-or-pay-invoice-modal-part"
         shadow="never"
