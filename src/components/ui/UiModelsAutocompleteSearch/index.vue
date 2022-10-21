@@ -15,8 +15,9 @@
       :no-data-text="$t('Base.NoData')"
       :collapse-tags="collapseTags"
       :collapse-tags-tooltip="collapseTagsTooltip"
-      @visible-change="getItems"
+      @input="inputHandler"
       @update:model-value="$emit('update:modelValue', $event)"
+      @visible-change="getItems"
       @change="selectHandler"
       ref="component">
       <ElOption
@@ -79,6 +80,7 @@ export default {
       default: 'id',
     },
 
+    formatter: Function, // formatter for input
     showCreateOption: Boolean,
     multiple: Boolean,
     required: Boolean,
@@ -111,6 +113,11 @@ export default {
   },
 
   methods: {
+    /** @param {InputEvent} event */
+    inputHandler(event) {
+      if (this.formatter) event.target.value = this.formatter(event.target.value);
+    },
+
     async getItems(query) {
       this.loading = true;
 
