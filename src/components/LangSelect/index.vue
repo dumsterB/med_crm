@@ -57,4 +57,9 @@ export default {
 };
 </script>
 
+<style scoped>
+.el-dropdown-menu{
+  padding: 2px!important;
+}
+</style>
 <style lang="scss" src="./index.scss" />
